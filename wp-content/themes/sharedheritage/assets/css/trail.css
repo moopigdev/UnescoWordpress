@@ -1,0 +1,205 @@
+/*
+ * Trail page — taxonomy-trail.php · Figma "Desktop - 1501" (DESIGN-SPEC §4.4 · §3.6).
+ * Desktop 1440: cover [160,150 1120×497.228] · heading block [160,677.2 1120×112] · grid 5×3 tiles 184 gap 50
+ * from y=829.2 · Back [160,1536] · page height 1632. Below 1168px the content width is the viewport minus 24px margins.
+ */
+
+.sh-trail__cover,
+.sh-trail__intro,
+.sh-trail__grid-wrap,
+.sh-trail__back {
+	padding-inline: max(var(--sh-tablet-margin), calc((100% - var(--sh-container)) / 2));
+}
+
+/* ---- Cover: Frame 12685 — image 1120×497.228, bottom rule #DEE2E6 2px across the full 1440 ---- */
+.sh-trail__cover {
+	position: relative;
+}
+
+.sh-trail__cover::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 2px;
+	background: var(--sh-color-neutral-300);
+}
+
+.sh-trail__cover--empty {
+	display: none;
+}
+
+.sh-trail__cover-frame {
+	position: relative;
+	overflow: hidden;
+	aspect-ratio: 1120 / 497.228;
+}
+
+.sh-trail__cover-img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	object-fit: cover;
+}
+
+/* Figma imageTransform of the 1920×1080 original: scale .93628 × .73896 · offset .03490, .12503 */
+.sh-trail__cover-frame--figma-crop .sh-trail__cover-img {
+	top: -16.9193%;
+	left: -3.7271%;
+	width: 106.8089%;
+	height: 135.3243%;
+	object-fit: fill;
+}
+
+/* ---- Heading: Frame 12683 — row · gap 30 · padding 10/0 · centred · 30 below the cover ---- */
+.sh-trail__intro {
+	display: flex;
+	align-items: center;
+	gap: var(--sh-space-30);
+	min-height: 112px;
+	padding-block: var(--sh-space-10);
+	margin-top: var(--sh-space-30);
+}
+
+.sh-trail__title {
+	flex: 0 0 auto;
+	max-width: 100%;
+}
+
+.sh-trail__desc {
+	flex: 1 1 0;
+	min-width: 0;
+	font: var(--sh-type-side-nav);
+	line-height: 23px; /* Figma renders this text on a 23px pitch (4 lines = the 92px text box), not the 22.5px style value */
+	color: var(--sh-color-neutral-900);
+}
+
+.sh-trail__desc p + p {
+	margin-top: var(--sh-space-10);
+}
+
+/* ---- Grid: Frame 114472 — 5 columns × 184, gap 50, 40 below the heading ---- */
+.sh-trail__grid-wrap {
+	margin-top: var(--sh-space-40);
+}
+
+.sh-trail__grid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: var(--sh-tile-gap);
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.sh-trail__empty {
+	padding-block: var(--sh-space-30);
+}
+
+/* Tile (§3.6): 184 square · fill = trail tile colour + image · hover → 210 (+14.13% box, 0.3s ease-in-out) */
+.sh-trail-tile {
+	position: relative;
+	display: block;
+	aspect-ratio: 1;
+	text-decoration: none;
+	color: var(--sh-color-neutral-900);
+}
+
+.sh-trail-tile__box {
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	background: var(--sh-trail-tile-bg, var(--sh-color-tile-elephant));
+	transition: inset var(--sh-duration-tile) var(--sh-ease);
+}
+
+.sh-trail-tile__img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	object-fit: cover;
+}
+
+.sh-trail-tile__img--hover {
+	opacity: 0;
+	transition: opacity var(--sh-duration-tile) var(--sh-ease);
+}
+
+.sh-trail-tile__name {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--sh-space-10);
+	font: var(--sh-type-timeline-meta);
+	text-align: center;
+}
+
+/* (210 − 184) / 2 / 184 = 7.0652% */
+.sh-trail-tile:hover,
+.sh-trail-tile:focus-visible {
+	z-index: 2;
+}
+
+.sh-trail-tile:hover .sh-trail-tile__box,
+.sh-trail-tile:focus-visible .sh-trail-tile__box {
+	inset: -7.0652%;
+}
+
+.sh-trail-tile:hover .sh-trail-tile__img--hover,
+.sh-trail-tile:focus-visible .sh-trail-tile__img--hover {
+	opacity: 1;
+}
+
+.sh-trail-tile:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 4px;
+}
+
+/* ---- Back: [160,1536] — 54.772 below the grid (1481.228 → 1536) · 46 below to the frame end 1632 ---- */
+.sh-trail__back {
+	margin-top: calc(1536px - 1481.228px);
+	padding-bottom: calc(1632px - 1586px);
+}
+
+/* ---- Fluid below the full 1440 layout (D5: responsive as appropriate) ---- */
+@media (max-width: 1167px) {
+	.sh-trail__grid {
+		gap: var(--sh-space-20);
+	}
+}
+
+@media (max-width: 899px) {
+	.sh-trail__intro {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--sh-space-10);
+	}
+}
+
+@media (max-width: 767px) {
+	.sh-trail__grid {
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--sh-space-15);
+	}
+}
+
+@media (max-width: 480px) {
+	.sh-trail__grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--sh-space-16);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sh-trail-tile__box,
+	.sh-trail-tile__img--hover {
+		transition: none;
+	}
+}
