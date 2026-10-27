@@ -1,51 +1,232 @@
 /*
  * Design tokens — Shared Heritage
  *
- * TODO(design-extract): ALL VALUES BELOW ARE PLACEHOLDERS, not from Figma.
- * Replace with real tokens from docs/DESIGN-SPEC.md ("Tokens": colours for 3 themes,
- * typography, spacing, radius) once design-extract delivers (blocked on O-1).
- * Variable names may change at that point; pages should only use --sh-* variables from this file.
+ * Source: docs/DESIGN-SPEC.md §2 (values copied from Figma, not rounded) + design/layout/comp-*.md.
+ * Pages use only --sh-* variables from this file (docs/CONVENTIONS.md).
+ *
+ * Fonts:
+ *   - Barlow Condensed (400/500/600/700) and Roboto Flex (400): self-hosted OFL woff2 (latin subset)
+ *     in assets/fonts/<family>/ — see the OFL.txt next to each file.
+ *   - Komet: paid font, files pending from the owner (D6 / P-205). Its @font-face rules are printed
+ *     by inc/fonts.php only for files that exist in assets/fonts/komet/ (no 404 while missing).
+ *     Figma lists Komet weights as 400=Light 500=Regular 600=Medium 700=Bold 800=Heavy; DESIGN-SPEC
+ *     §2.2 says the PostScript name decides, so the CSS weights below follow the PostScript names
+ *     (Light 300 · Regular 400 · Medium 500 · Bold 700 · Heavy 800) and inc/fonts.php registers
+ *     each Komet file under that weight.
  */
 
+/* ---- Self-hosted OFL fonts ---------------------------------------------------------------- */
+@font-face {
+	font-family: "Barlow Condensed";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("../fonts/barlow-condensed/BarlowCondensed-Regular-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Barlow Condensed";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("../fonts/barlow-condensed/BarlowCondensed-Medium-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Barlow Condensed";
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url("../fonts/barlow-condensed/BarlowCondensed-SemiBold-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Barlow Condensed";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("../fonts/barlow-condensed/BarlowCondensed-Bold-latin.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Roboto Flex";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("../fonts/roboto-flex/RobotoFlex-Regular-latin.woff2") format("woff2");
+}
+
 :root {
-	/* TODO(design-extract) colour — neutral placeholders */
-	--sh-color-bg: #ffffff;
-	--sh-color-surface: #f4f4f4;
-	--sh-color-text: #1a1a1a;
-	--sh-color-text-muted: #5c5c5c;
-	--sh-color-border: #d9d9d9;
-	--sh-color-accent: #1a1a1a;
+	/* ---- Colour · neutral (§2.1 "Neutral 2/…") ---- */
+	--sh-color-neutral-900: #212529;
+	--sh-color-neutral-800: #343a40;
+	--sh-color-neutral-700: #495057;
+	--sh-color-neutral-600: #6c757d;
+	--sh-color-neutral-500: #adb5bd;
+	--sh-color-neutral-400: #ced4da;
+	--sh-color-neutral-300: #dee2e6;
+	--sh-color-neutral-200: #e9ecef;
+	--sh-color-neutral-100: #f8f9fa;
+	--sh-color-black: #000000;
+	--sh-color-white: #ffffff;
 
-	/* TODO(design-extract) 3 colour themes (DESIGN-SPEC "สี (3 ธีม)") — placeholders */
-	--sh-theme-1: #8a8a8a;
-	--sh-theme-2: #6e6e6e;
-	--sh-theme-3: #525252;
+	/* ---- Colour · brand / accent (§2.1) ---- */
+	--sh-color-unesco-blue: #0069b4;
+	--sh-color-accent: #d65f47;                       /* Read more hover · map active · popup */
+	--sh-color-accent-glow: rgba(214, 95, 71, 0.4);   /* Back button glow ellipse #D65F47 @40% */
+	--sh-color-accent-tint: rgba(214, 95, 71, 0.2);   /* zone-nav active fill #D65F47 @20% */
+	--sh-color-detail-title-red: #d75f47;             /* Detail title (frame 1479) */
+	--sh-color-header-rule: #aacfd8;                  /* Header #1 bottom stroke */
+	--sh-color-cream: #f1f1e5;                        /* Frame 12789 / 114477 (hidden in pages) */
+	--sh-color-map-bg: #f2f2f2;                       /* map Frame 12655 fill (§4.2/§4.7) */
+	--sh-color-back-bg: rgba(0, 0, 0, 0.1);           /* Back button fill #000000 @10% */
 
-	/* TODO(design-extract) typography — system fonts until Figma fonts are known */
-	--sh-font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-	--sh-font-heading: var(--sh-font-body);
-	--sh-font-size-sm: 0.875rem;
-	--sh-font-size-base: 1rem;
-	--sh-font-size-lg: 1.25rem;
-	--sh-font-size-xl: 2rem;
-	--sh-line-height-body: 1.5;
-	--sh-line-height-heading: 1.2;
-	--sh-font-weight-regular: 400;
-	--sh-font-weight-bold: 700;
+	/* ---- Colour · zones (§2.1 — active / inactive band) ---- */
+	--sh-color-zone-1: #14705e;
+	--sh-color-zone-1-soft: #d0e2df;
+	--sh-color-zone-2: #d6a2ba;
+	--sh-color-zone-2-soft: #efdae3;
+	--sh-color-zone-3: #e6553d;
+	--sh-color-zone-3-soft: #f5bbb1;
+	--sh-color-zone-4: #ec7966;
+	--sh-color-zone-4-soft: #faddd8;
+	--sh-color-zone-5: #4bbaa3;
+	--sh-color-zone-5-soft: #b7e3da;
+	--sh-color-zone-1-cover: #a4927a;
 
-	/* TODO(design-extract) spacing */
-	--sh-space-1: 0.25rem;
-	--sh-space-2: 0.5rem;
-	--sh-space-3: 1rem;
-	--sh-space-4: 1.5rem;
-	--sh-space-5: 2rem;
-	--sh-space-6: 3rem;
+	/* ---- Colour · trail tiles 184×184 (§2.1) ---- */
+	--sh-color-tile-green: #7eb7a6;
+	--sh-color-tile-beige: #dedcc3;
+	--sh-color-tile-salmon: #f1ada0;
+	--sh-color-tile-mauve: #cfa5ba;
+	--sh-color-tile-elephant: #e1dec6;
 
-	/* TODO(design-extract) radius */
-	--sh-radius-sm: 2px;
-	--sh-radius-md: 4px;
+	/* ---- Colour · timeline trail-icon groups 35×35 (§2.1) ---- */
+	--sh-color-trail-group-green: #168e73;
+	--sh-color-trail-group-red: #e7553c;
+	--sh-color-trail-group-mustard: #c3bc85;
+	--sh-color-trail-group-purple: #b36f94;
 
-	/* TODO(design-extract) layout — Figma frames are 1440 wide */
-	--sh-container-max: 1440px;
-	--sh-gutter: var(--sh-space-4);
+	/* ---- Colour · semantic aliases ---- */
+	--sh-color-bg: var(--sh-color-white);             /* page background = #FFFFFF on every page */
+	--sh-color-text: var(--sh-color-neutral-900);
+	--sh-color-text-strong: var(--sh-color-black);    /* Home body / lead text #000000 */
+	--sh-color-text-ui: var(--sh-color-neutral-800);  /* nav · Back · caption */
+
+	/* ---- Typography · families (§2.2) ---- */
+	--sh-font-komet: "Komet", "Segoe UI", "Avenir Next", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+	--sh-font-barlow-condensed: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+	--sh-font-roboto-flex: "Roboto Flex", Roboto, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+
+	/* ---- Typography · weights (Komet by PostScript name; Barlow/Roboto as in Figma) ---- */
+	--sh-fw-komet-light: 300;    /* Komet-Light   (Figma 400) */
+	--sh-fw-komet-regular: 400;  /* Komet-Regular (Figma 500) */
+	--sh-fw-komet-medium: 500;   /* Komet-Medium  (Figma 600) */
+	--sh-fw-komet-bold: 700;     /* Komet-Bold    (Figma 700) */
+	--sh-fw-komet-heavy: 800;    /* Komet-Heavy   (Figma 800) */
+	--sh-fw-regular: 400;        /* Barlow Condensed Regular · Roboto Flex Regular */
+	--sh-fw-medium: 500;         /* Barlow Condensed Medium */
+	--sh-fw-semibold: 600;       /* Barlow Condensed SemiBold */
+	--sh-fw-bold: 700;           /* Barlow Condensed Bold */
+
+	/*
+	 * ---- Typography · levels (§2.2) — CSS `font` shorthand: weight size/line-height family ----
+	 * letter-spacing 0 and text-transform none on every level (Figma ls=0, case=ORIGINAL).
+	 * Utility classes .sh-t-* in base.css apply these together with the level colour.
+	 */
+	--sh-type-page-title: var(--sh-fw-komet-heavy) 36px/45px var(--sh-font-komet);
+	--sh-type-section-title: var(--sh-fw-komet-heavy) 34px/42.5px var(--sh-font-komet);
+	--sh-type-detail-title: var(--sh-fw-komet-heavy) 40px/50px var(--sh-font-komet);
+	--sh-type-card-title: var(--sh-fw-komet-heavy) 20px/25px var(--sh-font-komet);
+	--sh-type-lead: var(--sh-fw-komet-regular) 20px/22px var(--sh-font-komet);
+	--sh-type-body-home: var(--sh-fw-komet-regular) 18px/22px var(--sh-font-komet);
+	--sh-type-body: var(--sh-fw-komet-regular) 18px/24px var(--sh-font-komet);
+	--sh-type-reflection: var(--sh-fw-komet-regular) 20px/24px var(--sh-font-komet);
+	--sh-type-caption: var(--sh-fw-komet-light) 18px/24px var(--sh-font-komet);
+	--sh-type-caption-bold: var(--sh-fw-komet-bold) 18px/24px var(--sh-font-komet);
+	--sh-type-collection: var(--sh-fw-komet-regular) 20px/25px var(--sh-font-komet);
+	--sh-type-collection-bold: var(--sh-fw-komet-bold) 20px/25px var(--sh-font-komet);
+	--sh-type-collection-barlow: var(--sh-fw-semibold) 20px/24px var(--sh-font-barlow-condensed);
+	--sh-type-metadata: var(--sh-fw-komet-bold) 24px/30px var(--sh-font-komet);
+	--sh-type-metadata-medium: var(--sh-fw-komet-medium) 24px/30px var(--sh-font-komet);
+	--sh-type-timeline-meta: var(--sh-fw-komet-regular) 14px/24px var(--sh-font-komet);
+	--sh-type-nav: var(--sh-fw-komet-medium) 14px/17.5px var(--sh-font-komet);
+	--sh-type-read-more-home: var(--sh-fw-komet-regular) 16px/22px var(--sh-font-komet);
+	--sh-type-read-more-home-hover: var(--sh-fw-komet-bold) 16px/22px var(--sh-font-komet);
+	--sh-type-read-more: var(--sh-fw-regular) 20px/22px var(--sh-font-barlow-condensed);
+	--sh-type-read-more-hover: var(--sh-fw-bold) 20px/22px var(--sh-font-barlow-condensed);
+	--sh-type-back: var(--sh-fw-regular) 20px/23.4375px var(--sh-font-roboto-flex);
+	--sh-type-map-number: var(--sh-fw-semibold) 14px/16.8px var(--sh-font-barlow-condensed);
+	--sh-type-popup-title: var(--sh-fw-semibold) 16px/19.2px var(--sh-font-barlow-condensed);
+	--sh-type-popup-body: var(--sh-fw-regular) 14px/16.8px var(--sh-font-barlow-condensed);
+	--sh-type-side-nav: var(--sh-fw-komet-regular) 18px/22.5px var(--sh-font-komet);
+	--sh-type-zone-nav: var(--sh-fw-medium) 20px/24px var(--sh-font-barlow-condensed);
+	--sh-type-zone-nav-active: var(--sh-fw-bold) 20px/24px var(--sh-font-barlow-condensed);
+	--sh-letter-spacing: 0;
+
+	/* ---- Spacing (§2.3 — gaps used in Figma; "multiples of 5 or 10") ---- */
+	--sh-space-1: 1px;
+	--sh-space-5: 5px;
+	--sh-space-10: 10px;
+	--sh-space-12: 12px;
+	--sh-space-15: 15px;
+	--sh-space-16: 16px;
+	--sh-space-20: 20px;
+	--sh-space-22: 22px;
+	--sh-space-25: 25px;
+	--sh-space-30: 30px;
+	--sh-space-40: 40px;
+	--sh-space-50: 50px;
+	--sh-space-60: 60px;
+	--sh-space-80: 80px;
+	--sh-space-100: 100px;
+
+	/* ---- Layout grid (§2.3) ---- */
+	--sh-frame-width: 1440px;           /* Figma desktop frame */
+	--sh-container: 1120px;             /* 6 cols × 170 + 5 gutters × 20 */
+	--sh-page-offset: 160px;            /* left/right margin at 1440 */
+	--sh-grid-columns: 6;
+	--sh-grid-column: 170px;
+	--sh-grid-gutter: 20px;
+	--sh-tablet-margin: 24px;           /* style guide tablet 768: margin 24 · gutter 20 · 6 cols */
+	--sh-tablet-gutter: 20px;
+
+	/* ---- Fixed component sizes (§2.3 / §3) ---- */
+	--sh-header-top-height: 86px;       /* Header #1 */
+	--sh-header-nav-height: 64px;       /* Header #02 */
+	--sh-header-height: 150px;          /* content starts at y=150 */
+	--sh-header-nav-gap: 30px;          /* Frame 12653 gap */
+	--sh-header-rule-width: 1.5px;      /* Header #1 bottom stroke, INSIDE */
+	--sh-tile-size: 184px;
+	--sh-tile-size-hover: 210px;
+	--sh-tile-gap: 50px;
+	--sh-back-width: 115px;
+	--sh-back-height: 50px;
+	--sh-detail-panel-gap: 22px;
+
+	/* ---- Radius / border (§2.4) ---- */
+	--sh-radius-card: 22px;             /* intro/home/zone banner image cards */
+	--sh-radius-back: 5px;              /* Back button */
+	--sh-radius-popup: 4px;             /* map popup · zone-nav item */
+	--sh-radius-map-pin: 20px;          /* map number 34×34 */
+	--sh-border-trail-frame: 1px solid var(--sh-color-neutral-300);
+	--sh-border-navigator-dot: 2px solid var(--sh-color-neutral-500);
+
+	/* ---- Shadow (§2.1 "Drop Shadow/100" · "/200") ---- */
+	--sh-shadow-100: 0 1px 4px 0 rgba(12, 12, 13, 0.05);
+	--sh-shadow-200: 0 1px 4px 0 rgba(12, 12, 13, 0.05), 0 1px 4px 0 rgba(12, 12, 13, 0.1);
+
+	/* ---- Opacity (§2.4) ---- */
+	--sh-opacity-back-bg: 0.1;
+	--sh-opacity-glow: 0.4;
+	--sh-opacity-tint: 0.2;
+
+	/* ---- Motion (§2.4 / §6.1 — Figma prototype timings) ---- */
+	--sh-ease: ease-in-out;
+	--sh-duration-tile: 0.3s;           /* trail tile hover (smart animate, ease-in-out) */
+	--sh-duration-card: 0.4s;           /* zone card / Back hover */
+	--sh-duration-nav: 0.3s;            /* page nav dissolve 0.3–0.4s */
+	--sh-duration-scroll: 0.3s;         /* navigator scroll-to 0.3–0.5s */
+	--sh-duration-footprint-step: 0.1s; /* footprint animation after-timeout */
+	--sh-duration-footprint-fade: 0.4s; /* footprint animation smart-animate */
 }
