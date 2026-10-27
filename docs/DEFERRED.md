@@ -146,12 +146,12 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [komet-fonts] [2026-10-27] `font-display: swap` + ไม่มี `<link rel=preload>` สำหรับ woff2 → หัวข้อ Heavy/Regular เห็น fallback แวบแรก (FOUT) บนเน็ตช้า · เสนอ preload Komet-Regular + Komet-Heavy (ไฟล์ละ ~43KB) ใน `inc/fonts.php` (ไฟล์ core) · ตอนนี้ไม่ทำเพราะอยู่นอกขอบเขตงานนี้
 - [komet-fonts/reviewer] [2026-10-27] DESIGN-SPEC §4.6 (~บรรทัด 214) เขียนคำอธิบาย trail "Komet 18/24" แต่กรอบ Figma สูง 92 = 4×23 · หน้าจริงใช้ line-height 23 ตรงกรอบ → แก้ถ้อยคำ spec
 - [deploy-purge] [2026-10-27] ล้าง page cache ของ LiteSpeed server จาก wp-cli ต้องผ่าน HTTP (ที่เก็บอยู่นอก wp-content บน shared host) — staging ไม่มี DNS จึงต้อง purge เองใน wp-admin › LiteSpeed Cache › Toolbox › Purge All หรือ hPanel หลัง deploy · ตอน DNS ชี้แล้ว `litespeed-purge all` น่าจะผ่านเอง · script ไม่ลบไฟล์ใต้ wp-content/litespeed/ (จะทำให้ page cache ที่ค้างอ้าง CSS/JS 404) · ทดสอบกับ server จริงไม่ได้ (sim ด้วย wp ปลอม)
-<<<<<<< HEAD
 - [orchestrator] [2026-10-27] production: `.webm` ถูกส่งเป็น `Content-Type: text/plain` (`.mov` = video/quicktime ถูก) · Chrome เล่นได้ แต่ Firefox/บาง browser อาจไม่เล่น → เพิ่ม `AddType video/webm .webm` ใน .htaccess (ต้องขออนุมัติเพราะแก้ config บน prod) · ตรวจ iPhone/Safari ตามที่เจ้าของจะทดสอบ · ✅ แก้บน prod แล้ว 2026-10-28 (บล็อก .htaccess "SharedHeritage MIME") · **ยังไม่อยู่ใน scripts/deploy** → staging/เว็บใหม่ต้องใส่เอง หรือเพิ่มขั้นใน remote.sh post
-=======
 - [design-timeline-v2] [2026-10-27] วัดค่า mini-map/ลูกศร/ภาพใต้เส้น/เส้นประแดงของ Slides ไว้ใน DESIGN-SPEC §4.5b.6 แต่ไม่ทำ (เจ้าของสั่ง layout = zone 4) — เติมเมื่อเจ้าของให้เพิ่ม
 - [design-timeline-v2] [2026-10-27] ยังไม่ได้ตรวจ 1–2 เฟรมสุดท้ายของแต่ละรอบ (เช่น 38→39, 53→54) ว่าเป็นการเลื่อนกี่ px ต่อก้าว — ภาพ Slides ความละเอียดต่ำ (432–486 กว้าง) · เสนอให้เจ้าของ export Slides เป็นวิดีโอ/GIF จะอ่านระยะเวลาจริงได้
 - [design-timeline-v2] [2026-10-27] seed `timeline-elephant.json` ยังเก็บ illustration_order เดิม — ไม่แก้ (importer อ่านอยู่) · ข้อมูลใหม่อยู่ `timeline-elephant-v2.json` ให้ core ตัดสินว่าจะยกเข้า importer หรือไม่
 - [design-timeline-v2/reviewer] [2026-10-28] รอบแรกเขียนจุด ⌀ 11–12 raster/y 803 → แก้ในสเปกแล้วเป็น ⌀ ≈14–15 raster (≈38–40 frame) · y ≈806 ±3 · `raster_px_to_frame_y` ใช้ 2.77713 ทั้ง seed และสเปก · เหลือ: ศูนย์กลางจากการวัดแต่ละจุดต่างกัน 803–810 (จุดใน raster วางไม่เท่ากัน) — ปุ่ม 44×44 ครอบคลุม ไม่แก้ต่อ
 - [design-timeline-v2] [2026-10-28] ชื่อ/metadata ใน Slides วัดสีเต็มจากพิกเซลเข้มสุดของภาพความละเอียดต่ำ (≈#080808/#3B3B3B) — ใช้ token `#212529` · ถ้าต้องการค่าจริง ต้อง export Slides ความละเอียดสูง
->>>>>>> wt/design
+- [reviewer design-timeline-v2 r2] [2026-10-28] DESIGN-SPEC §4.5b.3 ยังเขียน "แถวการ์ดไป `card_frame_x`" (หลวม) — จุดยึดจริง = กึ่งกลางภาพตาม §6.4b · เก็บกวาด
+- [reviewer design-timeline-v2 r2] [2026-10-28] §4.5b.7 ("ต้องขอก็ต่อเมื่อเลือก C") และ P-220 ("ถ้าเลือก B/C") ยังมีประโยคเงื่อนไข B/C หลัง D24 — เก็บกวาด
+- [reviewer design-timeline-v2 r2] [2026-10-28] seed v2 `object_scale_evidence` อ้าง "slides 31→34" (ประวัติ ไม่กระทบ)
