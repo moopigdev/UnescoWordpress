@@ -1,0 +1,491 @@
+{
+ "_meta": {
+  "_source": {
+   "figma_file_key": "EhcqSXTMEArlrfSGUQVCwl",
+   "lastModified": "2026-10-27T09:48:30Z",
+   "extracted_by": "design-extract",
+   "pages": "Page 2 Version #Final 01092026 (elephant detail frames) + Page 2.1 ALL GIF trails (all trails)"
+  },
+  "note": "17 trails ตาม \"Action Trails\" (670:9724) + ข้อความหน้าแรก \"17 interconnected trails\" · ชื่อ Serpent(2.1)=Naga(tile) · มีคำอธิบายเฉพาะ Elephant ใน Figma"
+ },
+ "trails": [
+  {
+   "slug": "rooster",
+   "name": "Rooster",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 1,
+   "figma": {
+    "icon_tile_component_set": "670:9576",
+    "zone_grid_tile_component_set": "Chicken",
+    "section_in_page_2_1": "Rooster"
+   },
+   "tile_bg": {
+    "group": "green",
+    "hex": "#7EB7A6"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "ayam-ayam-bernaga",
+    "bronze-cock-standing-on-the-coop",
+    "domestic-chicken",
+    "lawi-ayam-cock-feather-dagger",
+    "pending",
+    "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+    "sulang",
+    "tempayan-large-earthen-storage-jars",
+    "tin-ingots-in-the-shape-of-chicken",
+    "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs"
+   ],
+   "object_count": 10
+  },
+  {
+   "slug": "turtle",
+   "name": "Turtle",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 2,
+   "figma": {
+    "icon_tile_component_set": "670:9583",
+    "zone_grid_tile_component_set": "Turtle",
+    "section_in_page_2_1": "Turtle"
+   },
+   "tile_bg": {
+    "group": "mauve",
+    "hex": "#CFA5BA"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "koffo-cloth",
+    "the-dragon-head-tortoise-and-crane-ornament",
+    "tin-ingots-in-the-shape-of-chicken-2",
+    "traditional-maritime-boxes-in-horse-and-turtle-design",
+    "zoomorphic-lime-container"
+   ],
+   "object_count": 5
+  },
+  {
+   "slug": "deer",
+   "name": "Deer",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 3,
+   "figma": {
+    "icon_tile_component_set": "670:9588",
+    "zone_grid_tile_component_set": "Deer",
+    "section_in_page_2_1": "Deer Trails"
+   },
+   "tile_bg": {
+    "group": "beige",
+    "hex": "#DEDCC3"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "greater-mousedeer",
+    "kijang-gold-coins",
+    "nang-talung-puppetry-deer"
+   ],
+   "object_count": 3
+  },
+  {
+   "slug": "dragon",
+   "name": "Dragon",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 4,
+   "figma": {
+    "icon_tile_component_set": "670:9593",
+    "zone_grid_tile_component_set": "Dragon",
+    "section_in_page_2_1": "Dragon Trails"
+   },
+   "tile_bg": {
+    "group": "salmon",
+    "hex": "#F1ADA0"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "ayam-ayam-bernaga",
+    "the-dragon-head-tortoise-and-crane-ornament",
+    "bedil-cannon-with-dragon-motif",
+    "blackened-brass-ritual-holy-water-vessel",
+    "canang",
+    "dragon-shaped-mother-of-pearl-inlaid-incense-tray",
+    "flintlock-firearm",
+    "large-tile-with-dragons",
+    "sunda-pangolin"
+   ],
+   "object_count": 9
+  },
+  {
+   "slug": "fish",
+   "name": "Fish",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 5,
+   "figma": {
+    "icon_tile_component_set": "670:9598",
+    "zone_grid_tile_component_set": "Fish",
+    "section_in_page_2_1": "Fish Trails"
+   },
+   "tile_bg": {
+    "group": "mauve",
+    "hex": "#CFA5BA"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "jar-decorated-with-fish-and-a-beast",
+    "rostrum-of-the-largetooth-sawfish",
+    "skeleton-of-singapore-s-first-recorded-sperm-whale",
+    "spotted-white-eagle-ray-bone",
+    "stingray-barb-dagger",
+    "sukhothai-celadon-bowl-fragment-with-fish-design",
+    "vessel-in-the-form-of-a-fish",
+    "wooden-chalk-line-reels"
+   ],
+   "object_count": 8
+  },
+  {
+   "slug": "hornbill",
+   "name": "Hornbill",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 6,
+   "figma": {
+    "icon_tile_component_set": "670:9603",
+    "zone_grid_tile_component_set": "Hornbill",
+    "section_in_page_2_1": "hornbill"
+   },
+   "tile_bg": {
+    "group": "green",
+    "hex": "#7EB7A6"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "sulang",
+    "badau",
+    "calapa-with-bird-motif",
+    "copper-pot",
+    "iban-s-hornbill-image",
+    "kalimantan-war-helmet",
+    "oriental-pied-hornbill-and-rhinoceros-hornbill"
+   ],
+   "object_count": 7
+  },
+  {
+   "slug": "horse",
+   "name": "Horse",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 7,
+   "figma": {
+    "icon_tile_component_set": "670:9658",
+    "zone_grid_tile_component_set": "Horse",
+    "section_in_page_2_1": "Horse Trails"
+   },
+   "tile_bg": {
+    "group": "beige",
+    "hex": "#DEDCC3"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs",
+    "cast-brass-tabletop-horse-shaped-lighter",
+    "dastar-head-cloth-with-horse-motif",
+    "liturgical-pulpit-covers",
+    "nang-talung-puppetry-horse",
+    "oracle-bone",
+    "traditional-maritime-boxes-in-horse-design"
+   ],
+   "object_count": 7
+  },
+  {
+   "slug": "naga",
+   "name": "Naga",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 8,
+   "figma": {
+    "icon_tile_component_set": "670:9608",
+    "zone_grid_tile_component_set": "Serpent",
+    "section_in_page_2_1": "Serpent"
+   },
+   "tile_bg": {
+    "group": "salmon",
+    "hex": "#F1ADA0"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "blackened-brass-ritual-holy-water-vessel",
+    "flintlock-firearm",
+    "wooden-chalk-line-reels",
+    "a-sandstone-lintel-depicting-vishnu-anantashayana",
+    "balinese-naga-corbels",
+    "bencha-for-water-pouring-tradition",
+    "embossed-brass-basin-with-mythical-animal-motifs",
+    "flintlock-firearm-2",
+    "langguai-with-frog-and-snake-motifs",
+    "naga-motifs-on-a-kolek-boat-in-the-style-of-southern-thailand",
+    "naga-headed-walking-stick",
+    "naga-shaped-carved-wooden-corbel",
+    "statue-of-shiva"
+   ],
+   "object_count": 13
+  },
+  {
+   "slug": "water-bird",
+   "name": "Water bird",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 9,
+   "figma": {
+    "icon_tile_component_set": "670:9613",
+    "zone_grid_tile_component_set": "Waterbird",
+    "section_in_page_2_1": "Water bird"
+   },
+   "tile_bg": {
+    "group": "green",
+    "hex": "#7EB7A6"
+   },
+   "in_zone_grid_frame_1472_1474": false,
+   "object_slugs": [
+    "the-dragon-head-tortoise-and-crane-ornament",
+    "gold-swan-commemorative-fan-for-the-cremation-of-mom-suphab-kridakorn",
+    "bangau-and-okok",
+    "blue-and-white-dish-with-flattened-foliate-rim-decorated-with-a-pale-b",
+    "celadon-glazed-kendi-in-goose-form",
+    "common-kingfisher",
+    "hamsa-bird-water-container",
+    "keris-pekaka",
+    "offering-vessel-in-the-form-of-a-hinta-bird",
+    "ng-s-n-drum"
+   ],
+   "object_count": 10
+  },
+  {
+   "slug": "makara",
+   "name": "Makara",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 10,
+   "figma": {
+    "icon_tile_component_set": "670:9618",
+    "zone_grid_tile_component_set": "Makara",
+    "section_in_page_2_1": "Makara"
+   },
+   "tile_bg": {
+    "group": "mauve",
+    "hex": "#CFA5BA"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "jar-decorated-with-fish-and-a-beast",
+    "estuarine-crocodile",
+    "makara-palanquin-ornament"
+   ],
+   "object_count": 3
+  },
+  {
+   "slug": "lion",
+   "name": "Lion",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 11,
+   "figma": {
+    "icon_tile_component_set": "670:9653",
+    "zone_grid_tile_component_set": "Lion",
+    "section_in_page_2_1": "Lion"
+   },
+   "tile_bg": {
+    "group": "beige",
+    "hex": "#DEDCC3"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "embossed-brass-basin-with-mythical-animal-motifs",
+    "antique-chinese-blue-and-white-porcelain-pillow",
+    "balinese-singha",
+    "gold-sheathed-lion-shaped-betel-nut-cutter",
+    "monk-s-alms-bowl",
+    "singabarong-cloth"
+   ],
+   "object_count": 6
+  },
+  {
+   "slug": "seashell",
+   "name": "Seashell",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 12,
+   "figma": {
+    "icon_tile_component_set": "670:9623",
+    "zone_grid_tile_component_set": "Seashell",
+    "section_in_page_2_1": "Seashell"
+   },
+   "tile_bg": {
+    "group": "mauve",
+    "hex": "#CFA5BA"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "dragon-shaped-mother-of-pearl-inlaid-incense-tray",
+    "monk-s-alms-bowl",
+    "bronze-drum-ng-s-n-drum",
+    "chanap",
+    "containers-with-mother-of-pearl-inlay",
+    "cowrie-shells",
+    "giant-clams",
+    "kalung",
+    "mother-of-pearl-furniture-depicting-animals",
+    "neptune-cup-sponge",
+    "phra-upagutta-enshrined-in-a-conch-shell",
+    "sacred-conch-shell",
+    "shell-beads-blood-cockle",
+    "unglazed-stoneware-conches"
+   ],
+   "object_count": 14
+  },
+  {
+   "slug": "buffalo",
+   "name": "Buffalo",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 13,
+   "figma": {
+    "icon_tile_component_set": "670:9628",
+    "zone_grid_tile_component_set": "Buffalo",
+    "section_in_page_2_1": "Buffalo Trails"
+   },
+   "tile_bg": {
+    "group": "beige",
+    "hex": "#DEDCC3"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "monk-s-alms-bowl",
+    "buffalo-shaped-water-container",
+    "calapa-with-buffalo-shape",
+    "perminaken",
+    "sumatran-serow"
+   ],
+   "object_count": 5
+  },
+  {
+   "slug": "phoenix",
+   "name": "Phonix",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 14,
+   "figma": {
+    "icon_tile_component_set": "670:9633",
+    "zone_grid_tile_component_set": "Phoenix",
+    "section_in_page_2_1": "Phoenix"
+   },
+   "tile_bg": {
+    "group": "salmon",
+    "hex": "#F1ADA0"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+    "blue-and-white-qinghua-porcelain-plate",
+    "covered-box-decorated-with-phoenixes",
+    "kam-cheng",
+    "offering-dish",
+    "pending-2",
+    "porcelain-plate-depicting-phoenix",
+    "tiga-negeri-cloth"
+   ],
+   "object_count": 8
+  },
+  {
+   "slug": "bird",
+   "name": "Bird",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 15,
+   "figma": {
+    "icon_tile_component_set": "670:9648",
+    "zone_grid_tile_component_set": "Bird 1",
+    "section_in_page_2_1": "Bird Trails"
+   },
+   "tile_bg": {
+    "group": "green",
+    "hex": "#7EB7A6"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "batik-hokokai-long-cloth",
+    "betel-box-set-of-sultan-abdul-samad",
+    "garment-for-buddhist-prostration-featuring-garuda-and-peacock-motifs",
+    "green-peafowl",
+    "kalakati",
+    "noken",
+    "pending-3",
+    "quail-shaped-silver-casket"
+   ],
+   "object_count": 8
+  },
+  {
+   "slug": "garuda",
+   "name": "Garuda",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 16,
+   "figma": {
+    "icon_tile_component_set": "670:9638",
+    "zone_grid_tile_component_set": "Garuda",
+    "section_in_page_2_1": "Garuda Trails"
+   },
+   "tile_bg": {
+    "group": "salmon",
+    "hex": "#F1ADA0"
+   },
+   "in_zone_grid_frame_1472_1474": true,
+   "object_slugs": [
+    "liturgical-pulpit-covers",
+    "embossed-brass-basin-with-mythical-animal-motifs",
+    "garment-for-buddhist-prostration-featuring-garuda-and-peacock-motifs",
+    "garuda-sculptures",
+    "sandstone-garuda"
+   ],
+   "object_count": 5
+  },
+  {
+   "slug": "elephant",
+   "name": "Elephan",
+   "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
+   "order_home_icons": 17,
+   "figma": {
+    "icon_tile_component_set": "670:9643",
+    "zone_grid_tile_component_set": null,
+    "section_in_page_2_1": "Elephan"
+   },
+   "tile_bg": {
+    "group": "beige",
+    "hex": "#E0DEC9"
+   },
+   "in_zone_grid_frame_1472_1474": false,
+   "object_slugs": [
+    "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs",
+    "embossed-brass-basin-with-mythical-animal-motifs",
+    "bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the",
+    "elephant-and-mahout-kendi",
+    "elephant-leg-bone",
+    "elephant-molar-coconut-grater",
+    "elephant-shaped-relic-containers",
+    "ganesha",
+    "gringsing",
+    "hand-carved-ivory-and-metal-opium-pipe",
+    "ivory-fire-piston-ivory-fire-syringe",
+    "patola-cloth",
+    "pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king",
+    "singhasari-ganesha",
+    "siwaih",
+    "tin-ingot-in-the-shape-of-an-elephant"
+   ],
+   "object_count": 16,
+   "title_on_trail_page": "Elephant’s Trail",
+   "description": "Elephants have lived alongside the peoples of South-East Asia for millennia, shaping forests and contributing to livelihoods, beliefs and artistic traditions. Across the region, communities have interpreted the elephant in various ways but have nevertheless created a shared heritage rooted in long-term relationships between people, animals and the environments they inhabit.",
+   "trail_page_frame": "796:1795 (Desktop - 1501)",
+   "trail_cover_node": "796:1799",
+   "timeline_page_frame": "670:1551 (Desktop - zone 4)"
+  },
+  {
+   "slug": "etc",
+   "name": "Etc.",
+   "not_a_trail": true,
+   "note": "section \"Etc.\" ใน Page 2.1 = วัตถุที่ยังไม่ได้จัดเข้า trail (4 ชิ้น) — ไม่อยู่ใน 17 trails ของหน้าแรก",
+   "object_slugs": [
+    "dastar-head-cloth-with-horse-motif",
+    "liturgical-pulpit-covers",
+    "kain-hinggi-kombu",
+    "mother-of-pearl-furniture"
+   ],
+   "object_count": 4
+  }
+ ]
+}

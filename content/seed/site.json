@@ -1,0 +1,148 @@
+{
+ "_meta": {
+  "_source": {
+   "figma_file_key": "EhcqSXTMEArlrfSGUQVCwl",
+   "lastModified": "2026-10-27T09:48:30Z",
+   "extracted_by": "design-extract",
+   "pages": "Page 2 Version #Final 01092026 (elephant detail frames) + Page 2.1 ALL GIF trails (all trails)"
+  }
+ },
+ "brand": {
+  "logos": [
+   "UNESCO (vector, #0069B4)",
+   "TEMASEK FOUNDATION (raster)",
+   "SHARED HERITAGE · MUSEUMS IN SOUTH-EAST ASIA (raster)"
+  ],
+  "header_component": "670:1057 Header #1 (component set) / 670:1142 Header #02 (component set)",
+  "note": "โลโก้ UNESCO ส่งออกเป็น SVG แล้ว: design/assets/svg/unesco-logo.svg · โลโก้ TEMASEK FOUNDATION + SHARED HERITAGE ฝังในภาพพื้น Header #1 (imageRef 709572bf…, ไฟล์ design/assets/709572bf7eca….jpg) ไม่มีไฟล์แยก"
+ },
+ "nav_primary": [
+  "Main Page",
+  "Shared Heritage Framework",
+  "Museums and Partnership",
+  "Index",
+  "Events and Activities"
+ ],
+ "nav_utility": [
+  "Visit",
+  "Exhibition and Events",
+  "Art",
+  "Research",
+  "About",
+  "Contact"
+ ],
+ "nav_note": "nav_utility (Header #1 บนสุด, Visit…Contact) อยู่ใน header ที่เป็น instance ของเว็บ UNESCO · nav_primary (Header #02) = เมนูหลักของเว็บนี้ · ปลายทางลิงก์: ON_CLICK ใน Figma ทุกรายการชี้ไป Main Page (670:1152) ทั้งหมด = prototype ยังไม่กำหนดปลายทางจริง",
+ "labels": {
+  "read_more": "Read more >>",
+  "back": "Back",
+  "zone_prefix": "ZONE"
+ },
+ "home": {
+  "hero": {
+   "cover_node": "670:9367",
+   "cover_size": "1120x466",
+   "text_in_image": [
+    "ALONG ANIMAL TRAILS",
+    "Creations that Bind South-East Asia"
+   ],
+   "note": "ข้อความ hero อยู่ในภาพ raster (ไม่มี text node) — อ่านจากภาพ frames/home-1470.png · ต้องได้ไฟล์ภาพ/ข้อความจากเจ้าของ (P-2xx)"
+  },
+  "introduction": {
+   "title": "Introduction",
+   "title_node": "670:9372",
+   "paragraphs": [
+    {
+     "node": "670:9373",
+     "text": "What comes to mind when you look at the title of this digital exhibition? Where do you think it takes place? \nTake a guess at the kinds of images and objects we're about to uncover."
+    },
+    {
+     "node": "670:9374",
+     "text": "To get started, let’s dive into the exhibition’s rich Southeast Asian roots, which will serve as our map before we explore how it weaves together animals, nature, and culture."
+    }
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_note": "วงกลมลายเส้นด้านซ้าย = ภาพ (Frame 12684 เห็นเป็นรูปทรงกลมกับมังกร)"
+  },
+  "zone_cards": [
+   {
+    "zone": 1,
+    "node": "I670:9480;670:9416",
+    "text": "Animals in Nature \n& Ecological Wisdom"
+   },
+   {
+    "zone": 2,
+    "node": "I670:9481;670:9428",
+    "text": "Beyond the Visible: \nAnimal Lore & Cosmic Order"
+   },
+   {
+    "zone": 3,
+    "node": "I670:9482;670:9435",
+    "text": "Material Cultures: \nAnimals in Craft & Ritual"
+   }
+  ],
+  "trails_section": {
+   "title": "Trails",
+   "title_node": "I886:1787;886:1761",
+   "tagline": "Step beyond traditional gallery walls and dive into the animal trails!",
+   "tagline_node": "I886:1787;886:1762",
+   "paragraph_1": "In this borderless digital world, Southeast Asia’s nature and culture collide across 121 incredible exhibits—from 2nd-century BCE artifacts to modern finds. Journey through 11 natural species and 5 mythical creatures spanning 5 dynamic zones and 17 interconnected trails.",
+   "paragraph_1_node": "I886:1787;886:1763",
+   "paragraph_2": "Forget rigid physical galleries! Here, you can explore the deeper meanings of animals, peoples and places across multiple zones simultaneously, revealing how nature shapes human culture—and vice versa—in one seamless view. Ready to explore? Hop onto the trail of your favorite animal, and keep your eyes peeled as you leap between zones of the exhibition. Your adventure begins now!",
+   "paragraph_2_node": "I886:1787;886:1767",
+   "read_more_label": "Read more >>",
+   "note": "ใน frame หน้าแรก paragraph_1/2 ซ่อนอยู่หลัง \"Read more >>\" (component Read more 3 → 886:1771) · ตัวเลข 121/11/5/17 ดู P-2xx (หน้า Introduction บอก 119)"
+  },
+  "zone_cards_lower": [
+   {
+    "zone": 4,
+    "node": "I670:9534;670:9464",
+    "text": "Animal Trails: \nReflections & Interpretation"
+   },
+   {
+    "zone": 5,
+    "node": "I670:9537;670:9520",
+    "text": "The Curious Minds’s Play Zone"
+   }
+  ],
+  "side_navigator": {
+   "dots": [
+    {
+     "order": 1,
+     "node": "871:2240",
+     "scroll_target": "670:9368",
+     "target_name": "Introduction (Frame 12685)"
+    },
+    {
+     "order": 2,
+     "node": "871:2241",
+     "scroll_target": "670:9479",
+     "target_name": "Zone 1-3 cards (Zone 123)"
+    },
+    {
+     "order": 3,
+     "node": "871:2242",
+     "scroll_target": "886:1795",
+     "target_name": "Trails (Frame All trails)"
+    },
+    {
+     "order": 4,
+     "node": "871:2247",
+     "scroll_target": "670:9541",
+     "target_name": "Zone 4-5 cards (Frame 12792)"
+    }
+   ],
+   "container": "871:2239 Navigator [176,587 30x150]",
+   "style": "วงกลม 30x30 พื้น #FFFFFF stroke #ADB5BD 2px inside · gap 10 · ไม่มี icon/ข้อความ",
+   "interaction": "ON_CLICK -> SCROLL_TO (scroll-animate 0.3s) ตาม interactions ใน figma-file.json",
+   "note": "ตามหมายเหตุ Figma 929:1597 + ภาพ annot-navigator.png · navigator เก่า 670:9542 (วงกลม 58px ป้าย Intro/Zone/Trails) ไม่ใช้"
+  },
+  "zone_tabs": [
+   "ZONE 1",
+   "ZONE 2",
+   "ZONE 3",
+   "ZONE 4",
+   "ZONE 5"
+  ],
+  "zone_tabs_note": "ข้อความ \"ZONE n\" ในแถบสีอยู่ในภาพ (ไม่มี text node)"
+ }
+}
