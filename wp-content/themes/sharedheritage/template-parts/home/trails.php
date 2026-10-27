@@ -90,7 +90,9 @@ while ( $sh_n < count( $sh_trails ) ) {
 					<ul class="sh-home-trails__row">
 						<?php
 						foreach ( $sh_row as $sh_trail ) :
-							$sh_link = get_term_link( $sh_trail );
+							// D15: link only trails that have published objects (empty trail = same visuals, no <a>).
+							$sh_link = sh_trail_objects( $sh_trail ) ? get_term_link( $sh_trail ) : '';
+							$sh_el   = ( '' !== $sh_link && ! is_wp_error( $sh_link ) ) ? 'a' : 'span';
 							$sh_def  = sh_home_img(
 								(int) sh_get_term( 'sh_icon_home', $sh_trail ),
 								array(
@@ -109,10 +111,10 @@ while ( $sh_n < count( $sh_trails ) ) {
 							);
 							?>
 							<li class="sh-home-trail">
-								<a class="sh-home-trail__link" href="<?php echo esc_url( is_wp_error( $sh_link ) ? '' : $sh_link ); ?>">
+								<<?php echo 'a' === $sh_el ? 'a' : 'span'; ?> class="sh-home-trail__link"<?php echo 'a' === $sh_el ? ' href="' . esc_url( $sh_link ) . '"' : ''; ?>>
 									<?php echo sh_home_kses( $sh_def ) . sh_home_kses( $sh_hov ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in sh_home_img() + kses. ?>
 									<span class="screen-reader-text"><?php echo esc_html( $sh_trail->name ); ?></span>
-								</a>
+								</<?php echo 'a' === $sh_el ? 'a' : 'span'; ?>>
 							</li>
 						<?php endforeach; ?>
 					</ul>
