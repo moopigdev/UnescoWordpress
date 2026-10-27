@@ -50,3 +50,4 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [core-contract/reviewer] [2026-10-27] `sh_layout` รับ JSON array (เช่น `[1,2]`) ทั้งที่เอกสาร/ข้อความ validation บอก "JSON object"
 - [core-contract/reviewer] [2026-10-27] จำนวน attachment ใน CONTENT-MODEL §12 (179) เก่า — วัดได้ 183→189 หลัง design-dev เพิ่มภาพ hero
 - [core-contract/reviewer] [2026-10-27] `timeline_item` ไม่ public แต่อ่านผ่าน REST ได้โดยไม่ login (ตรงเอกสาร · เป็นข้อมูลที่หน้าแสดงอยู่แล้ว)
+- [trail-page] [2026-10-27] ภาพ cover ใน Figma ครอปด้วย imageTransform จากต้นฉบับ 1920×1080 (ไม่มีข้อมูลครอปในฟิลด์) — template ใช้ครอปเฉพาะภาพ 16:9 ที่ตรงต้นฉบับ ภาพอื่น object-fit:cover · ถ้าต้องการให้แม่นทุกภาพ → core-contract ครอปตอน import · Read more >> ของหน้า trail (797:1883) ถูกซ่อนใน Figma จึงไม่แสดง
