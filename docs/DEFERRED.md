@@ -46,3 +46,7 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [core-contract] [2026-10-27] หน้าแผนที่ (intro) ไม่มีพิกัดหมุด `pins[]` ใน seed — intro-page ต้องการหมุดบนแผนที่ต้องให้ design-dev ดึงพิกัดหมุด 34×34 จาก `670:1596` ก่อน แล้วเพิ่มฟิลด์ใน core
 - [core-contract] [2026-10-27] เมนู `Utility` (seed `nav_utility`) สร้างแล้วแต่ theme ยังไม่มี location `utility` (Header #1 ที่แสดงจริงซ่อนเมนูนี้ — DEFERRED design-extract/reviewer §3.1) · ลิงก์เมนูทั้งหมดยกเว้น "Main Page" เป็น `#` (P-211)
 - [core-contract] [2026-10-27] ACF AJAX validation ของ `sh_layout` (JSON) ทดสอบผ่านฟอร์ม submit จริงเท่านั้น (บันทึกถูก · JSON ผิดไม่ถูกบันทึก) — ยังไม่ได้ทดสอบข้อความแจ้งเตือนในเบราว์เซอร์จริง
+- [core-contract/reviewer] [2026-10-27] CPT object/timeline_item ใช้ `capability_type post` → author publish วัตถุได้ · contributor สร้าง draft + แก้ meta ของ draft ตัวเองได้ (พฤติกรรม WP ปกติ ไม่ใช่รั่ว) · ถ้าต้องการให้เฉพาะ editor/admin จัดการ → แยก capability (ขั้น 3 role ทีม UNESCO)
+- [core-contract/reviewer] [2026-10-27] `sh_layout` รับ JSON array (เช่น `[1,2]`) ทั้งที่เอกสาร/ข้อความ validation บอก "JSON object"
+- [core-contract/reviewer] [2026-10-27] จำนวน attachment ใน CONTENT-MODEL §12 (179) เก่า — วัดได้ 183→189 หลัง design-dev เพิ่มภาพ hero
+- [core-contract/reviewer] [2026-10-27] `timeline_item` ไม่ public แต่อ่านผ่าน REST ได้โดยไม่ login (ตรงเอกสาร · เป็นข้อมูลที่หน้าแสดงอยู่แล้ว)
