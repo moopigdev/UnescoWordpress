@@ -1,0 +1,51 @@
+/*
+ * Design tokens — Shared Heritage
+ *
+ * TODO(design-extract): ALL VALUES BELOW ARE PLACEHOLDERS, not from Figma.
+ * Replace with real tokens from docs/DESIGN-SPEC.md ("Tokens": colours for 3 themes,
+ * typography, spacing, radius) once design-extract delivers (blocked on O-1).
+ * Variable names may change at that point; pages should only use --sh-* variables from this file.
+ */
+
+:root {
+	/* TODO(design-extract) colour — neutral placeholders */
+	--sh-color-bg: #ffffff;
+	--sh-color-surface: #f4f4f4;
+	--sh-color-text: #1a1a1a;
+	--sh-color-text-muted: #5c5c5c;
+	--sh-color-border: #d9d9d9;
+	--sh-color-accent: #1a1a1a;
+
+	/* TODO(design-extract) 3 colour themes (DESIGN-SPEC "สี (3 ธีม)") — placeholders */
+	--sh-theme-1: #8a8a8a;
+	--sh-theme-2: #6e6e6e;
+	--sh-theme-3: #525252;
+
+	/* TODO(design-extract) typography — system fonts until Figma fonts are known */
+	--sh-font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--sh-font-heading: var(--sh-font-body);
+	--sh-font-size-sm: 0.875rem;
+	--sh-font-size-base: 1rem;
+	--sh-font-size-lg: 1.25rem;
+	--sh-font-size-xl: 2rem;
+	--sh-line-height-body: 1.5;
+	--sh-line-height-heading: 1.2;
+	--sh-font-weight-regular: 400;
+	--sh-font-weight-bold: 700;
+
+	/* TODO(design-extract) spacing */
+	--sh-space-1: 0.25rem;
+	--sh-space-2: 0.5rem;
+	--sh-space-3: 1rem;
+	--sh-space-4: 1.5rem;
+	--sh-space-5: 2rem;
+	--sh-space-6: 3rem;
+
+	/* TODO(design-extract) radius */
+	--sh-radius-sm: 2px;
+	--sh-radius-md: 4px;
+
+	/* TODO(design-extract) layout — Figma frames are 1440 wide */
+	--sh-container-max: 1440px;
+	--sh-gutter: var(--sh-space-4);
+}
