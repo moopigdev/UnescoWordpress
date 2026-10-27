@@ -58,6 +58,7 @@ case "$RDIR" in ''|/*|*..*) sh_die "SH_DEPLOY_REMOTE_DIR ต้อง relative �
 if [ -n "$SH_STAGING_WP_PATH" ] && [ "${SH_STAGING_WP_PATH%/}" = "${SH_PRODUCTION_WP_PATH%/}" ]; then
   sh_die "SH_STAGING_WP_PATH = SH_PRODUCTION_WP_PATH — staging ต้องเป็นคนละ WP"
 fi
+if [ "$ENV" = staging ]; then sh_guard_staging_target; fi   # F1: staging ห้ามชี้ไป production (URL host · WP path) — ก่อนเชื่อมต่อ
 
 SSH=(ssh -p "$PORT" -i "$KEY" -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o ConnectTimeout=20)
 RSH="ssh -p $PORT -i $KEY -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=accept-new"
@@ -157,7 +158,7 @@ PY
   fi
 fi
 
-RARGS=(--env="$ENV" --path="$WP_PATH" --url="$URL" --dir="$RDIR" --ts="$TS" --import="$IMPORT")
+RARGS=(--env="$ENV" --path="$WP_PATH" --url="$URL" --prod-url="$SH_PRODUCTION_URL" --dir="$RDIR" --ts="$TS" --import="$IMPORT")
 
 echo "-- 1. preflight (อ่านอย่างเดียว)"
 set +e; remote preflight "${RARGS[@]}"; rc=$?; set -e

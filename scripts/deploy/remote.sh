@@ -14,13 +14,14 @@
 set -euo pipefail
 
 PHASE="${1:-}"; [ $# -gt 0 ] && shift
-DRY=0; ENV=""; WP_PATH=""; URL=""; DIR="sh-deploy"; TS=""; IMPORT=0
+DRY=0; ENV=""; WP_PATH=""; URL=""; PROD_URL=""; DIR="sh-deploy"; TS=""; IMPORT=0
 for a in "$@"; do
   case "$a" in
     --dry-run) DRY=1 ;;
     --env=*) ENV="${a#*=}" ;;
     --path=*) WP_PATH="${a#*=}" ;;
     --url=*) URL="${a#*=}" ;;
+    --prod-url=*) PROD_URL="${a#*=}" ;;
     --dir=*) DIR="${a#*=}" ;;
     --ts=*) TS="${a#*=}" ;;
     --import=*) IMPORT="${a#*=}" ;;
@@ -30,6 +31,13 @@ done
 
 fail() { echo "remote[$PHASE]: ✗ $*" >&2; exit 1; }
 say() { echo "remote[$PHASE]: $*"; }
+# host ของ URL แบบ normalize (เหมือน sh_url_host ใน lib.sh — ไฟล์นี้รันเดี่ยวบน server)
+url_host() {
+  local u="$1"
+  u="${u#*://}"; u="${u%%/*}"; u="${u%%\?*}"; u="${u%%#*}"; u="${u##*@}"; u="${u%%:*}"; u="${u%.}"
+  u="$(printf '%s' "$u" | tr '[:upper:]' '[:lower:]')"
+  printf '%s\n' "${u#www.}"
+}
 show() { local a out=""; for a in "$@"; do out="$out $(printf '%q' "$a")"; done; printf '  [remote]%s\n' "$out"; }
 # R = คำสั่งที่เขียน/เปลี่ยนสถานะ · dry-run = พิมพ์อย่างเดียว
 R() { if [ "$DRY" = 1 ]; then show "$@"; else "$@"; fi; }
@@ -81,6 +89,14 @@ preflight)
   [ "$DRY" = 1 ] || command -v wp >/dev/null || fail "ไม่พบ wp-cli บน server"
   R "${WP[@]}" --skip-plugins --skip-themes core is-installed
   got="$(V "${WP[@]}" --skip-plugins --skip-themes option get siteurl)"
+  if [ "$ENV" = staging ]; then   # F1: siteurl จริงของ staging ต้องไม่ใช่ host production (ตรวจก่อนข้ออื่น)
+    [ -n "$PROD_URL" ] || fail "staging ต้องมี --prod-url (กันส่งผิด production) · หยุดโดยไม่แตะอะไร"
+    if [ "$DRY" = 1 ]; then
+      echo "  [remote]   staging: host ของ siteurl ต้องไม่ใช่ host ของ $PROD_URL (เท่ากัน = หยุด)"
+    elif [ "$(url_host "$got")" = "$(url_host "$PROD_URL")" ]; then
+      fail "siteurl ของ $WP_PATH = $got คือ production ($PROD_URL) — staging ห้ามเขียน production · หยุดโดยไม่แตะอะไร"
+    fi
+  fi
   if [ "$DRY" = 1 ]; then
     echo "  [remote]   ต้องเท่ากับ $URL (ไม่ตรง = หยุด · กันส่งผิด site)"
   elif [ "${got%/}" != "${URL%/}" ]; then

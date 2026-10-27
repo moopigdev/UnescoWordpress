@@ -6,7 +6,7 @@ Business plan · **live สาธารณะ** · WP เปล่า (0 page ·
 ## การเข้าถึง (2026-10-27)
 - hPanel: บัญชี it.bgk@unesco.org (เราเป็นผู้ร่วมงาน) · staging = `staging.sharedheritage.net` (สร้าง 2026-10-27 · คัดลอกจาก prod · WP + DB แยก)
 - SSH: port 65002 · user u972755030 · host 156.67.222.233 · คีย์ `~/.ssh/sharedheritage_hostinger` (ed25519 เฉพาะงานนี้ · ไม่มี passphrase · อยู่นอก repo) · เจ้าของต้องเปิด SSH + เพิ่ม public key ใน hPanel ก่อน
-- ครั้งแรกที่ต่อ SSH: script ใช้ `StrictHostKeyChecking=accept-new` (จำ host key ครั้งแรก) → เทียบ fingerprint กับที่ hPanel แสดงก่อนรันจริง (`ssh-keygen -F '[156.67.222.233]:65002'`)
+- ครั้งแรกที่ต่อ SSH: script ใช้ `StrictHostKeyChecking=accept-new` (จำ host key ครั้งแรก) → เทียบ fingerprint ก่อนรันจริง: `ssh-keygen -l -F '[156.67.222.233]:65002'` ต้องได้ `ED25519 SHA256:NOwtpIZ2NzL3jgjGNSu9vzFc/RXp1gbQycagapZHaEs` (ไม่ตรง = หยุด · ลบด้วย `ssh-keygen -R '[156.67.222.233]:65002'` แล้วถามเจ้าของ)
 
 ## กติกา (hook บังคับ)
 1. **staging ก่อนเสมอ** (`scripts/deploy.sh staging`) — ต้องมี staging ใน hPanel + SSH/key ก่อน (O-6, เจ้าของทำ/อนุญาต)
@@ -25,7 +25,7 @@ scripts/deploy.sh [staging|production] [--dry-run] [--discover] [--no-import]   
 
 **config** `scripts/deploy/hosts.env` (คัดลอกจาก `hosts.env.example` · gitignored · ไม่มีความลับ) · ลำดับ: env ของ shell > `hosts.env` > `hosts.env.example` · อ่านแบบ KEY=VALUE (ไม่ source) เฉพาะ key ที่รู้จัก
 - `SH_DEPLOY_SSH_{HOST,PORT,USER,KEY}` · `SH_DEPLOY_REMOTE_DIR` (default `sh-deploy` — relative กับ home บน server = นอก webroot: `tmp-*` · `backups/` · `logs/`)
-- `SH_STAGING_URL` / `SH_STAGING_WP_PATH` · `SH_PRODUCTION_URL` / `SH_PRODUCTION_WP_PATH` (WP path = absolute · ยังไม่รู้ → `--discover`) · `SH_DESIGN_ASSETS` / `SH_MEDIA_OUT` (ว่าง = `Unesco/design/assets` · `Unesco/media/out`)
+- `SH_STAGING_URL` / `SH_STAGING_WP_PATH` · `SH_PRODUCTION_URL` / `SH_PRODUCTION_WP_PATH` (WP path = absolute · ค่าจริงอยู่ใน example แล้ว · ยืนยันด้วย `--discover`) · **production ต้องตั้งเสมอแม้ deploy staging** — `staging` หยุดก่อนเชื่อมต่อถ้า host ของ staging URL = host production (ไม่สน scheme · `www.` · ตัวพิมพ์ · slash ท้าย) · prod URL/path ว่าง · staging path = prod path หรือครอบ prod path (staging เป็นโฟลเดอร์ลูกของ prod `public_html/staging` = ปกติของ Hostinger) · และ preflight บน server หยุดถ้า siteurl จริงของ staging เป็น host production · `SH_DESIGN_ASSETS` / `SH_MEDIA_OUT` (ว่าง = `Unesco/design/assets` · `Unesco/media/out`)
 
 **ลำดับที่ script ทำ** (ไฟล์ฝั่ง server = `scripts/deploy/remote.sh` ส่งทาง `ssh … bash -s -- <phase>` · ไม่ต้องติดตั้งอะไรบน server นอกจาก wp-cli ของ Hostinger)
 0. local: config ครบ · key มีจริง · production: `deploy-approved` + **tree ต้องสะอาด** (wp-content · scripts/import · content) · import: ภาพทุกไฟล์ที่ `image-map.json` "files" อ้างต้องมีใน design/assets

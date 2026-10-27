@@ -53,5 +53,29 @@ sh_require_approval() {
   sh_say "อนุมัติ production: $(head -3 "$f" | tr '\n' ' ')"
 }
 
+# host ของ URL แบบ normalize (F1): ตัด scheme · user@ · :port · path/?/# · จุดท้าย · ตัวพิมพ์เล็ก · ตัด www. นำหน้า
+sh_url_host() {
+  local u="$1"
+  u="${u#*://}"; u="${u%%/*}"; u="${u%%\?*}"; u="${u%%#*}"; u="${u##*@}"; u="${u%%:*}"; u="${u%.}"
+  u="$(printf '%s' "$u" | tr '[:upper:]' '[:lower:]')"
+  printf '%s\n' "${u#www.}"
+}
+
+# sh_guard_staging_target (F1) — staging ต้องไม่ชี้ไป production · เรียกก่อนเชื่อมต่อใดๆ · ไม่ผ่าน = exit 1
+# ใช้ SH_STAGING_URL SH_PRODUCTION_URL SH_STAGING_WP_PATH SH_PRODUCTION_WP_PATH
+sh_guard_staging_target() {
+  local sh ph sp pp
+  [ -n "$SH_PRODUCTION_URL" ] || sh_die "SH_PRODUCTION_URL ว่าง — staging ต้องรู้ URL production เพื่อกันส่งผิด (ใส่ใน hosts.env)"
+  [ -n "$SH_PRODUCTION_WP_PATH" ] || sh_die "SH_PRODUCTION_WP_PATH ว่าง — staging ต้องรู้ path production เพื่อกันส่งผิด (ใส่ใน hosts.env)"
+  sh="$(sh_url_host "$SH_STAGING_URL")"; ph="$(sh_url_host "$SH_PRODUCTION_URL")"
+  [ -n "$sh" ] && [ -n "$ph" ] || sh_die "อ่าน host จาก SH_STAGING_URL / SH_PRODUCTION_URL ไม่ได้"
+  [ "$sh" != "$ph" ] || sh_die "SH_STAGING_URL ($SH_STAGING_URL) เป็น host เดียวกับ production ($SH_PRODUCTION_URL) — staging ห้ามชี้ไป production"
+  pp="${SH_PRODUCTION_WP_PATH%/}"; sp="${SH_STAGING_WP_PATH%/}"
+  [ -n "$sp" ] || return 0   # ยังไม่ตั้ง → deploy.sh จัดการ (dry-run ใช้ placeholder · real run หยุด)
+  [ "$sp" != "$pp" ] || sh_die "SH_STAGING_WP_PATH = SH_PRODUCTION_WP_PATH ($pp) — staging ต้องเป็นคนละ WP"
+  # staging เป็น parent ของ production = ครอบ prod ทั้งก้อน → ห้าม · staging เป็น child ของ prod (public_html/staging ของ Hostinger) = ปกติ
+  case "$pp/" in "$sp/"*) sh_die "SH_STAGING_WP_PATH ($sp) ครอบ SH_PRODUCTION_WP_PATH ($pp) — staging ห้ามเป็น parent ของ production" ;; esac
+}
+
 # พิมพ์คำสั่งแบบ copy-paste ได้ (quote ทุก argument)
 sh_show() { local a out=""; for a in "$@"; do out="$out $(printf '%q' "$a")"; done; printf '  $%s\n' "$out"; }
