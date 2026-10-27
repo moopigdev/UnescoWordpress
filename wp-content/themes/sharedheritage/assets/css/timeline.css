@@ -40,7 +40,7 @@
 
 .sh-tl__fit {
 	position: relative;
-	height: calc(723px * var(--k));
+	height: calc(var(--stage-h, 723px) * var(--k)); /* --stage-h > 723 only when a metadata block runs past y_rel 699 */
 }
 
 .sh-tl__stage {
@@ -48,7 +48,7 @@
 	top: 0;
 	left: 50%;
 	width: 1440px;
-	height: 723px;
+	height: var(--stage-h, 723px);
 	margin-left: -720px;
 	transform: scale(var(--k));
 	transform-origin: 50% 0;

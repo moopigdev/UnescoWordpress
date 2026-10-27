@@ -146,6 +146,13 @@
 					t.style.setProperty( '--tw', w + 'px' );
 				}
 			} );
+			// Metadata longer than the 7 lines the 723 stage was drawn for: the stage grows downwards (page scrolls).
+			var metaH = 0;
+			infos.forEach( function ( info ) {
+				var m = info.querySelector( '.sh-tl__meta' );
+				metaH = Math.max( metaH, m ? m.offsetHeight : 0 );
+			} );
+			s.setProperty( '--stage-h', Math.max( 723, Math.ceil( 496 + metaH + 24 ) ) + 'px' );
 			return;
 		}
 		var mini = root.querySelector( '[data-sh-tl-mini]' );
@@ -204,6 +211,15 @@
 				}
 			}
 			if ( dots[ i ] ) {
+				// Roving tabindex: only the ● nearest the centre is a Tab stop (the others may be off screen); ← → move.
+				var stop = idx === clamp( Math.round( c ), 1, N );
+				if ( last[ 'r' + i ] !== stop ) {
+					last[ 'r' + i ] = stop;
+					dots[ i ].tabIndex = stop ? 0 : -1;
+					if ( stop && document.activeElement && document.activeElement.hasAttribute( 'data-sh-tl-dot' ) && root.contains( document.activeElement ) ) {
+						dots[ i ].focus( { preventScroll: true } );
+					}
+				}
 				var cur = Math.abs( c - idx ) < 0.5;
 				if ( last[ 'd' + i ] !== cur ) {
 					last[ 'd' + i ] = cur;
