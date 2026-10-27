@@ -135,8 +135,7 @@
 .sh-intro__arrow--next svg { left: 22.7px; }
 
 .sh-intro__arrow:focus-visible,
-.sh-intro__pin:focus-visible,
-.sh-intro__popup-close:focus-visible {
+.sh-intro__pin:focus-visible {
 	outline: 2px solid var(--sh-color-neutral-800);
 	outline-offset: 2px;
 }
@@ -173,50 +172,6 @@
 	color: var(--sh-color-accent);
 }
 
-/* Popup [681,63 336×h] → right 103 · fill #D65F47 · radius 4 · padding 12 · gap 10 · close 24×24 at (305,7) */
-.sh-intro__popup {
-	position: absolute;
-	top: 63px;
-	right: 103px;
-	z-index: 3;
-	display: flex;
-	flex-direction: column;
-	gap: var(--sh-space-10);
-	width: 336px;
-	max-width: calc(100% - 2 * var(--sh-space-10));
-	padding: var(--sh-space-12);
-	border-radius: var(--sh-radius-popup);
-	background: var(--sh-color-accent);
-}
-
-.sh-intro__popup[hidden] {
-	display: none;
-}
-
-.sh-intro__popup-close {
-	position: absolute;
-	top: 7px;
-	left: 305px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 24px;
-	height: 24px;
-	padding: 0;
-	border: 0;
-	background: none;
-	color: var(--sh-color-black);
-	cursor: pointer;
-}
-
-.sh-intro__popup-close svg {
-	max-width: none;
-}
-
-.sh-intro__popup-title {
-	padding-right: 20px;
-}
-
 /* ---- Back [160,3055]: 89 below the slide text ---- */
 .sh-intro__back {
 	margin-top: 89px;
@@ -228,22 +183,6 @@
 	.sh-intro__section--knowing .sh-intro__body { min-height: 288px; }
 	.sh-intro__section--knowing .sh-intro__row { min-height: 287px; }
 	.sh-intro__section--intro .sh-intro__row { min-height: 284px; }
-}
-
-/*
- * ---- Below the full 1120 map (<1168): the map is too short for a 350–460px popup (and overflow:hidden would clip it
- * and cover the › button) → popup becomes a centred overlay, 336 wide (F1). Mobile (<768) widens it below. ----
- */
-@media (max-width: 1167px) {
-	.sh-intro__popup {
-		position: fixed;
-		top: 50%;
-		right: auto;
-		left: 50%;
-		max-height: 80vh;
-		overflow-y: auto;
-		transform: translate(-50%, -50%);
-	}
 }
 
 /* ---- Mobile (<768): stacked ---- */
@@ -282,24 +221,6 @@
 
 	.sh-intro__arrow--prev svg { left: 10px; }
 	.sh-intro__arrow--next svg { left: 21px; }
-
-	/* map is only ~190px tall: popup becomes a centred overlay */
-	.sh-intro__popup {
-		position: fixed;
-		top: 50%;
-		right: var(--sh-tablet-margin);
-		left: var(--sh-tablet-margin);
-		width: auto;
-		max-width: none;
-		max-height: 80vh;
-		overflow-y: auto;
-		transform: translateY(-50%);
-	}
-
-	.sh-intro__popup-close {
-		left: auto;
-		right: 7px;
-	}
 
 	.sh-intro__back {
 		margin-top: var(--sh-space-40);
