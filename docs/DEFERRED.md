@@ -71,3 +71,12 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [intro-page/reviewer] [2026-10-27] popup 2 ใน Figma (`670:1618`) มี 2 ย่อหน้า แต่ข้อความ slide 2 มี 3 → popup สูง 442.7 vs 284 · ถ้าต้องตรงต้องมีฟิลด์ข้อความ popup แยก (core/CONTENT-MODEL)
 - [intro-page/reviewer] [2026-10-27] class `.sh-intro__popup-title` (intro.css) ไม่มีใน markup
 - [intro-page/reviewer] [2026-10-27] ช่วง 768–1167 popup เป็น overlay กลางจอ ไม่มี backdrop ไม่ผูกกับแผนที่ → อาจทับปุ่มเลข 1 บางส่วนตามตำแหน่ง scroll (ปิดแล้วกดได้ปกติ)
+- [zone-page] [2026-10-27] tile กริด zone 3 ใบ (garuda · hornbill · ใบสุดท้ายแถว 3 ขวา = ภาพ JPEG `8428e71b` `4ce4a412` `e3622bd1`) ฝัง ICC profile Apple (Display P3) → Chrome แปลงสีให้อิ่มกว่า Figma (เช่น พื้นเห็น `#FDA99D` แทน `#F1ADA0` · `#6CB9A5` แทน `#7EB7A6`) — แก้ที่ภาพ (แปลงเป็น sRGB/ตัด profile ตอน import หรือ media-dev) ไม่ใช่ CSS
+- [zone-page] [2026-10-27] ภาพ cover/banner/tile นำเข้าโดยไม่มี sub-size (ต้นฉบับ 4096px/ใหญ่ถึงหลาย MB) → หน้า zone โหลดหนัก (cover 4096×1503 + banner + 15 tile 1064² + 15 hover 1378² lazy) · ต้องบีบ/ย่อบน server (`SH_IMPORT_SUBSIZES=1`) · template ใช้ `wp_get_attachment_image()` ได้ srcset อัตโนมัติเมื่อมี sub-size
+- [zone-page] [2026-10-27] offset ต่อ zone ใน `zone.css` (`[data-zone="2|3"]`: banner สูง +1px · ปุ่ม Back/ความสูงหน้า zone 3 สั้นกว่า 17px) มาจาก frame 1472–1474 จริง ไม่มีฟิลด์ใน CONTENT-MODEL — zone ใหม่ใช้ค่าของ zone 1
+- [zone-page] [2026-10-27] banner (ภาพ ZONE 1–5) ครอปด้วย imageTransform ของ Figma (4096×965 → 1120×166) ฝังใน CSS · ใช้เมื่อภาพที่อัปโหลดมีสัดส่วน ≈ 4096:965 (±1%) · ถ้า admin อัปโหลดภาพที่ครอปแล้ว (สัดส่วนอื่น) → fill เต็มกรอบ ไม่ครอป · `/zone/zone-4/` redirect (302) ไปหน้า Timeline ตาม `sh_link_page`
+- [zone-page] [2026-10-27] มือถือ (≤767): ภาพ banner ป้าย ZONE 1–5 (raster) ถูกขยายกว้าง 840px เลื่อนแนวนอนในกล่องเอง (เริ่มที่ zone ปัจจุบัน · `zone.js`) เพื่อให้ตัวอักษร ≥14px · ปุ่ม Back กว้าง 115.58px vs Figma 115 (ฟอนต์ Roboto Flex ใน core — ไม่ใช่ไฟล์ zone)
+- [zone-page/reviewer] [2026-10-27] banner ที่ admin อัปโหลดสัดส่วนไม่ใช่ ~4096:965 → `object-fit: fill` บิด (ทดสอบ 4096×1503 ใน 1120×166) · พิจารณา `cover`
+- [zone-page/reviewer] [2026-10-27] ป้าย ZONE ในภาพ banner ที่ 768–~830px ≈13px (ประมาณ · ก้ำกึ่ง) · ให้แถบ `min-width: 840px` ทุกขนาดจะแก้ได้
+- [zone-page/reviewer] [2026-10-27] tile hover เป็น overlay ขยายไม่ดัน layout ต่างจาก auto-layout ใน Figma — ให้เจ้าของดูด้วยตา
+- [zone-page/reviewer] [2026-10-27] ช่วง ~600–767px cover สูงคงที่ 205 ภาพตามสเกล ~264 → วัตถุตกแต่งบน/ล่างถูกครอปมากขึ้น (ความสวยงาม · เจ้าของดู)
