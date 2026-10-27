@@ -3,7 +3,8 @@
  * Detail page of one object (CPT `object`) — DESIGN-SPEC §4.8 · §6.3 · CONTENT-MODEL §2.
  *
  * Geometry comes from the object's `sh_layout` (sh_object_layout(): Figma frame bboxes at 1440):
- * hero box · panel y/h/padding · panel columns · Back button y. Everything is passed to the parts as
+ * hero box · panel y/h/padding · panel columns (text_col / image_col, §4.8.1) · Back button y.
+ * The panel parts also read text_blocks · caption · images from the same layout (D17: hero_bg not drawn). Everything is passed to the parts as
  * numbers (px at the 1440 frame) and turned into CSS custom properties; assets/css/detail.css scales
  * them with the viewport (1px at ≥1440). Objects without a layout fall back to the "standard" frame
  * of §4.8 (hero [0,150 1440×810] · panel y=960 · padding 60/60 · gap 22).
@@ -90,6 +91,25 @@ while ( have_posts() ) :
 		}
 	}
 
+	/*
+	 * Inner panel keys (DESIGN-SPEC §4.8.1 · P-161): text_col / image_col boxes win over the derivation above.
+	 * text_col.padding_top = where the first block starts inside the column (1510·1503·1483·1484 = 30).
+	 */
+	$sh_text_pad = 0.0;
+	if ( isset( $sh_layout['text_col'] ) && is_array( $sh_layout['text_col'] ) ) {
+		$sh_box = isset( $sh_layout['text_col']['bbox'] ) ? $sh_bbox( $sh_layout['text_col']['bbox'] ) : null;
+		if ( $sh_box ) {
+			$sh_text_col = $sh_box;
+			$sh_text_pad = max( 0.0, $sh_num( $sh_layout['text_col']['padding_top'] ?? null, 0.0 ) );
+		}
+	}
+	if ( isset( $sh_layout['image_col'] ) && is_array( $sh_layout['image_col'] ) ) {
+		$sh_box = isset( $sh_layout['image_col']['bbox'] ) ? $sh_bbox( $sh_layout['image_col']['bbox'] ) : null;
+		if ( $sh_box ) {
+			$sh_media_col = $sh_box;
+		}
+	}
+
 	// Back button: distance below the lowest column (Figma places it under the panel content; may be
 	// slightly negative, e.g. 1484 Back sits 2px inside the image column box).
 	$sh_cols_bottom = $sh_panel_y + $sh_pad_top;
@@ -120,6 +140,7 @@ while ( have_posts() ) :
 		'tail'         => $sh_tail,
 		'gap'          => $sh_gap,
 		'text_col'     => $sh_text_col,
+		'text_pad'     => $sh_text_pad,
 		'text_nodes'   => $sh_text_nodes,
 		'media_col'    => $sh_media_col,
 		'back_gap'     => $sh_back_gap,
@@ -143,6 +164,7 @@ while ( have_posts() ) :
 			array(
 				'post_id'  => $sh_id,
 				'geometry' => $sh_geometry,
+				'layout'   => $sh_layout,
 			)
 		);
 		?>

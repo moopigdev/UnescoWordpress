@@ -55,7 +55,7 @@
 	align-items: flex-start;
 }
 
-/* Text column: title → metadata → caption, gap = layout panel_gap. */
+/* Text column: width/min-height = layout column · generic mode: gap = panel_gap. */
 .sh-detail__text {
 	display: flex;
 	flex: none;
@@ -66,7 +66,40 @@
 	min-height: calc(var(--sh-d-text-h, 0) * var(--sh-d-u));
 }
 
-/* Image column at its layout x/width/height · gap = panel_gap. */
+/* Layout text_blocks (§4.8.1): column padding-top, then each block's own gap_before. */
+.sh-detail__text--blocks {
+	gap: 0;
+	padding-top: calc(var(--sh-d-text-pad, 0) * var(--sh-d-u));
+}
+
+.sh-detail__block {
+	width: 100%;
+	margin: 0;
+	font-family: var(--sh-d-ff, var(--sh-font-komet));
+	font-weight: var(--sh-d-fw, var(--sh-fw-komet-regular));
+	font-size: calc(var(--sh-d-fs, 18) * 1px);
+	line-height: calc(var(--sh-d-lh, 24) * 1px);
+	letter-spacing: var(--sh-letter-spacing);
+	white-space: pre-line;
+}
+
+.sh-detail__text--blocks > .sh-detail__block + .sh-detail__block {
+	margin-top: calc(var(--sh-d-bgap, 0) * var(--sh-d-u));
+}
+
+.sh-detail__row,
+.sh-detail__line {
+	display: block;
+}
+
+/* Figma bullet list: indent 1.5em per level, disc marker outside (1493 plain_meta lines). */
+.sh-detail__line--bullet {
+	display: list-item;
+	margin-left: calc(var(--sh-d-indent, 1) * 1.5em);
+	list-style: disc outside;
+}
+
+/* Image column at its layout x/width/height. */
 .sh-detail__media {
 	display: flex;
 	flex-direction: column;
@@ -81,12 +114,27 @@
 	margin-left: calc((var(--sh-d-media-x, 761) - var(--sh-d-text-w, 739)) * var(--sh-d-u));
 }
 
-/* Images share the column box and are contained (no crop/stretch — Figma's crops are not in the data). */
-.sh-detail__panel--cols .sh-detail__image {
+/* Extra image fields (no layout images[]): share the column box, contained, at the bottom. */
+.sh-detail__panel--cols .sh-detail__media:not(.sh-detail__media--placed) .sh-detail__image {
 	flex: 1 1 0;
 	min-height: 0;
 	object-fit: contain;
-	object-position: 50% 100%; /* Figma columns pad their images from the top (80/100) → sit at the bottom */
+	object-position: 50% 100%;
+}
+
+/* Layout images[]: pre-cropped to their bbox → drawn at the bbox (later ones on top). */
+.sh-detail__media--placed {
+	position: relative;
+	display: block;
+}
+
+.sh-detail__media--placed .sh-detail__image {
+	position: absolute;
+	top: calc(var(--sh-d-img-y, 0) * var(--sh-d-u));
+	left: calc(var(--sh-d-img-x, 0) * var(--sh-d-u));
+	width: calc(var(--sh-d-img-w, 0) * var(--sh-d-u));
+	max-width: none;
+	height: calc(var(--sh-d-img-h, 0) * var(--sh-d-u));
 }
 
 .sh-detail__panel:not(.sh-detail__panel--cols) .sh-detail__cols {
@@ -112,37 +160,44 @@
 	background: color-mix(in srgb, var(--sh-color-white) 10%, transparent); /* Button Back fill #FFFFFF@10% (964:2114) */
 }
 
-/* ---- Type (§2.2) ---- */
-/* Title 36/45 Heavy — Figma text boxes are auto-width with manual line breaks: may run past a narrow column. */
+/* ---- Title — Figma auto-width text boxes may run past a narrow column ---- */
 .sh-detail__title {
 	position: relative;
 	z-index: 1; /* drawn over an image column it may run into */
-	width: max-content;
-	max-width: calc(1120 * var(--sh-d-u));
-	font: var(--sh-type-page-title);
 	color: var(--sh-d-title, var(--sh-color-neutral-900));
 	white-space: pre-line;
 	overflow-wrap: anywhere;
 }
 
-/* Metadata block: label Komet-Bold · value Komet-Regular · 20/25 (1503/1504) or 24/30 (1468/1476). */
-.sh-detail__meta {
+.sh-detail__title:not(.sh-detail__block),
+.sh-detail__title--auto {
+	width: max-content;
+	max-width: calc(1120 * var(--sh-d-u));
+}
+
+.sh-detail__title:not(.sh-detail__block) {
+	font: var(--sh-type-page-title);
+}
+
+/* ---- Generic text (no text_blocks): §2.2 levels ---- */
+/* Metadata block: label Komet-Bold · value Komet-Regular · 20/25, or 24/30 when lines are direct panel children. */
+.sh-detail__meta-block {
 	margin: 0;
 	font: var(--sh-type-collection-bold);
 	color: var(--sh-d-meta, inherit);
 }
 
-.sh-detail__panel--meta-lg .sh-detail__meta {
+.sh-detail__panel--meta-lg .sh-detail__meta-block {
 	font: var(--sh-type-metadata);
 }
 
-.sh-detail__meta dt,
-.sh-detail__meta dd {
+.sh-detail__meta-block dt,
+.sh-detail__meta-block dd {
 	display: inline;
 	margin: 0;
 }
 
-.sh-detail__meta dd {
+.sh-detail__meta-block dd {
 	font-weight: var(--sh-fw-komet-regular);
 }
 
@@ -157,15 +212,15 @@
 }
 
 /* Caption 18/24 Komet-Light · "Caption:" Komet-Bold · paragraphs separated by one blank line. */
-.sh-detail__caption {
+.sh-detail__caption-generic {
 	font: var(--sh-type-caption);
 }
 
-.sh-detail__caption p + p {
+.sh-detail__caption-generic p + p {
 	margin-top: 24px; /* one empty 24px line between paragraphs (Figma "\n\n") */
 }
 
-.sh-detail__caption .sh-detail__caption-label {
+.sh-detail__caption-generic .sh-detail__caption-label {
 	font: var(--sh-type-caption-bold);
 }
 
@@ -220,9 +275,30 @@
 		flex: none;
 	}
 
-	.sh-detail__text,
+	/* Placed crops stack at their own ratio (no frame to place them in). */
+	.sh-detail__media--placed {
+		display: flex;
+	}
+
+	.sh-detail__media--placed .sh-detail__image {
+		position: static;
+		width: min(100%, calc(var(--sh-d-img-w, 0) * 1px));
+		height: auto;
+		aspect-ratio: var(--sh-d-img-w, 1) / var(--sh-d-img-h, 1);
+	}
+
+	.sh-detail__text:not(.sh-detail__text--blocks),
 	.sh-detail__media {
 		gap: var(--sh-space-22);
+	}
+
+	/* Block gaps keep their Figma px (not scaled down with the frame). */
+	.sh-detail__text--blocks {
+		padding-top: 0;
+	}
+
+	.sh-detail__text--blocks > .sh-detail__block + .sh-detail__block {
+		margin-top: calc(var(--sh-d-bgap, 0) * 1px);
 	}
 
 	.sh-detail__panel--cols .sh-detail__media,
@@ -245,12 +321,15 @@
 		padding-block: var(--sh-space-30);
 	}
 
-	.sh-detail__title {
+	.sh-detail__text .sh-detail__title {
 		font-size: 28px; /* 36px headings overflow 375–430 screens; no mobile frame (D5) */
 		line-height: 35px;
 	}
 
-	.sh-detail__panel--meta-lg .sh-detail__meta {
-		font: var(--sh-type-collection-bold);
+	.sh-detail__text .sh-detail__meta,
+	.sh-detail__text .sh-detail__plain,
+	.sh-detail__panel--meta-lg .sh-detail__meta-block {
+		font-size: 20px;
+		line-height: 25px;
 	}
 }
