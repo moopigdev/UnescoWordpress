@@ -125,7 +125,7 @@
 	}
 
 	/*
-	 * Desktop: a title that needs more than 2 lines at 340 (Pod Duang: 3 lines would reach the mini-map) is widened
+	 * Desktop: a title that needs more than 2 lines at 280 (Pod Duang: 3 lines would reach the mini-map) is widened
 	 * to fit 2 lines [P · DEFERRED]. Tablet / mobile: the line sits under the tallest "title + 19 + active object".
 	 */
 	function fitTitles() {
@@ -141,7 +141,7 @@
 				}
 				t.style.removeProperty( '--tw' );
 				var lh = parseFloat( window.getComputedStyle( t ).lineHeight ) || 22;
-				for ( var w = 340, n = 0; t.offsetHeight > 2 * lh + 1 && n < 12; n++ ) {
+				for ( var w = 280, n = 0; t.offsetHeight > 2 * lh + 1 && n < 12; n++ ) {
 					w += 20;
 					t.style.setProperty( '--tw', w + 'px' );
 				}
@@ -231,11 +231,18 @@
 				}
 			}
 		}
+		// D18: an arrow is hidden (visibility) at its end; keep keyboard focus on the arrow that is still available.
 		if ( prevBtn ) {
 			prevBtn.disabled = c <= 1 + 1e-6;
+			if ( prevBtn.disabled && document.activeElement === prevBtn && nextBtn && ! nextBtn.disabled ) {
+				nextBtn.focus( { preventScroll: true } );
+			}
 		}
 		if ( nextBtn ) {
 			nextBtn.disabled = c >= N - 1e-6;
+			if ( nextBtn.disabled && document.activeElement === nextBtn && prevBtn && ! prevBtn.disabled ) {
+				prevBtn.focus( { preventScroll: true } );
+			}
 		}
 		root.classList.toggle( 'is-moving', !! ( tween || ( drag && drag.moved ) || wheelPending ) );
 	}

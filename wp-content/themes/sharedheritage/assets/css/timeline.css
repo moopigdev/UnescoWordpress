@@ -142,7 +142,7 @@
 }
 
 .sh-tl__mini-item {
-	--mwe: calc(var(--mw) * 1px);
+	--mwe: min(calc(var(--mw) * 1px), calc(38px * var(--ar))); /* never taller than 38 (F2) */
 	position: absolute;
 	top: 0;
 	left: calc(var(--m0) + var(--mp) * (var(--i) - 1));
@@ -215,8 +215,7 @@
 }
 
 .sh-tl__arrow:disabled {
-	opacity: 0.3;
-	cursor: default;
+	visibility: hidden; /* D18: hidden at either end (not focusable) */
 }
 
 .sh-tl__arrow:focus-visible {
@@ -297,13 +296,13 @@ html:not(.sh-js) .sh-tl__arrow {
 	will-change: transform;
 }
 
-/* Title: bottom = top of the (growing) object − 19 · max 340 wide · Komet-Heavy 18/22. */
+/* Title: bottom = top of the (growing) object − 19 · max 280 wide · Komet-Heavy 18/22. */
 .sh-tl__title {
 	position: absolute;
 	bottom: calc(var(--rwe) / var(--ar) * var(--grow) + 19px);
 	left: 0;
 	width: max-content;
-	max-width: calc(var(--tw, 340px) * var(--tr)); /* --tw: timeline.js widens a title that needs > 2 lines */
+	max-width: calc(var(--tw, 280px) * var(--tr)); /* --tw: timeline.js widens a title that needs > 2 lines */
 	margin: 0;
 	font-family: var(--sh-font-komet);
 	font-size: calc(18px * var(--tr));
@@ -386,7 +385,7 @@ html:not(.sh-js) .sh-tl__arrow {
 	border-radius: 50%;
 }
 
-/* ---- Under the line: one object's photo (centre x 720 · top y_rel 389) + metadata (x 907 · line-box 496) ---- */
+/* ---- Under the line: one object's photo (centre x 720 · centre y_rel 561) + metadata (x 907 · line-box 496) ---- */
 .sh-tl__below {
 	position: absolute;
 	inset: 0;
@@ -409,7 +408,7 @@ html:not(.sh-js) .sh-tl__arrow {
 
 .sh-tl__photo {
 	position: absolute;
-	top: 389px;
+	top: calc(561px - var(--pwe) / var(--ar) / 2); /* box ≤ 320×265 centred at x 720 · y_rel 561 */
 	left: calc(720px - var(--pwe) / 2);
 	display: block;
 	width: var(--pwe);
@@ -560,7 +559,7 @@ html:not(.sh-js) .sh-tl__arrow {
 /*
  * ---- Mobile < 768 (§4.5c.6) — icons scroll in one row · mini-map full width, 48 high · pitch 62vw ·
  * rest ≤ 46cqw × 120 (spec ≤ 52vw; 46 keeps the widest centre object ×1.52 clear of its neighbour, DEFERRED) ·
- * title 16/20 · photo ≤ 70vw × 240 · metadata full width (padding 20) 14/20 · arrows 36 high on the edges.
+ * title 16/20 · photo ≤ 70vw × 240 · metadata full width (padding 20) 14/20 · no ‹ › (D18).
  */
 @media (max-width: 767.98px) {
 	.sh-tl {
@@ -603,19 +602,7 @@ html:not(.sh-js) .sh-tl__arrow {
 	}
 
 	.sh-tl__arrow {
-		left: 22px;
-		width: 44px;
-		height: 44px;
-	}
-
-	.sh-tl__arrow--next {
-		right: 22px;
-		left: auto;
-	}
-
-	.sh-tl__arrow svg {
-		width: 18.75px;
-		height: 36px;
+		display: none; /* D18: no ‹ › on mobile — drag/swipe, mini-map, dots, keys */
 	}
 
 	.sh-tl__info {
