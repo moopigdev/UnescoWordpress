@@ -1119,7 +1119,7 @@
   }
  ],
  "v3": {
-  "decision": "D26",
+  "decision": "D26 + D27",
   "source": "Slides 31–54 + annot-zone4-ref-1..3 (= owner-ref-before/transition/active) — ค่า [R] วัดที่ ref-3 ×1440/1424 · y_rel นับจากเส้นล่าง header ใน Slides (86.5)",
   "stage": {
    "design_width": 1440,
@@ -1214,13 +1214,38 @@
     260,
     180
    ],
-   "active_scale": 1.35,
+   "active_scale": {
+    "default": 1.35,
+    "max_active_width_px": 400,
+    "rule": "s_i = min(1.35, 400 / rest_width)",
+    "wide_items_scale": 1.25
+   },
    "base_gap_above_line": 2,
    "rest_treatment": "ภาพสี sh_thumbnail เล็ก opacity 0.6 ไม่ทำเทา ไม่มี sh_line_art (D26 ล่าสุด)",
    "rest_opacity": {
     "value": 0.6,
     "label": "[P]",
     "why": "นักออกแบบ: จางเล็กน้อย 0.5–0.7 · ค่าเฉลี่ยลายเส้นใน Slides 159–175 ; ภาพสีเฉลี่ย≈100 ที่ 0.6 → ≈162"
+   },
+   "wide_contain_box": {
+    "box": [
+     320,
+     180
+    ],
+    "when": "width/height > 3",
+    "items": [
+     11,
+     13,
+     14,
+     15
+    ]
+   },
+   "min_gap_checked_px": {
+    "active_vs_rest_neighbour": 16.6,
+    "mid_scroll": 16.6,
+    "rest_vs_rest": 56.6,
+    "minimap": 3.6,
+    "pitch": 376.6
    }
   },
   "title": {
@@ -1264,7 +1289,7 @@
   "reveal_fn": {
    "photo_meta_title": "p^2.5",
    "color_layer": "ไม่มี (ภาพใบเดียว: opacity = 0.6 + 0.4·p)",
-   "scale": "1+0.35p",
+   "scale": "1+(s_i-1)p",
    "p": "clamp(1-|d|/188,0,1)",
    "settle_ms": 400,
    "object_opacity": "0.6+0.4p"
@@ -1280,11 +1305,16 @@
    {
     "card_order": 1,
     "key": "elephant leg bone",
-    "trimmed_px": "1360×720",
+    "ratio": 1.89,
+    "contain_box": [
+     260,
+     180
+    ],
     "rest_px": [
      260,
      138
     ],
+    "active_scale": 1.35,
     "active_px": [
      351,
      186
@@ -1296,16 +1326,22 @@
     "photo_px": [
      340,
      180
-    ]
+    ],
+    "trimmed_src": "1360×720"
    },
    {
     "card_order": 2,
     "key": "singhasari ganesha",
-    "trimmed_px": "1340×1885",
+    "ratio": 0.71,
+    "contain_box": [
+     260,
+     180
+    ],
     "rest_px": [
      128,
      180
     ],
+    "active_scale": 1.35,
     "active_px": [
      173,
      243
@@ -1317,16 +1353,22 @@
     "photo_px": [
      230,
      324
-    ]
+    ],
+    "trimmed_src": "1340×1885"
    },
    {
     "card_order": 3,
     "key": "ganesha",
-    "trimmed_px": "1563×1878",
+    "ratio": 0.83,
+    "contain_box": [
+     260,
+     180
+    ],
     "rest_px": [
      150,
      180
     ],
+    "active_scale": 1.35,
     "active_px": [
      202,
      243
@@ -1338,19 +1380,25 @@
     "photo_px": [
      270,
      324
-    ]
+    ],
+    "trimmed_src": "1563×1878"
    },
    {
     "card_order": 4,
     "key": "elephant molar",
-    "trimmed_px": "767×383",
+    "ratio": 2.0,
+    "contain_box": [
+     260,
+     180
+    ],
     "rest_px": [
      260,
      130
     ],
+    "active_scale": 1.35,
     "active_px": [
      351,
-     176
+     175
     ],
     "minimap_px": [
      48,
@@ -1359,16 +1407,22 @@
     "photo_px": [
      340,
      170
-    ]
+    ],
+    "trimmed_src": "767×383"
    },
    {
     "card_order": 5,
     "key": "embossed brass",
-    "trimmed_px": "1343×960",
+    "ratio": 1.4,
+    "contain_box": [
+     260,
+     180
+    ],
     "rest_px": [
      252,
      180
     ],
+    "active_scale": 1.35,
     "active_px": [
      340,
      243
@@ -1380,16 +1434,22 @@
     "photo_px": [
      340,
      243
-    ]
+    ],
+    "trimmed_src": "1343×960"
    },
    {
     "card_order": 6,
     "key": "ivory fire piston",
-    "trimmed_px": "group 174×152",
+    "ratio": 1.14,
+    "contain_box": [
+     260,
+     180
+    ],
     "rest_px": [
      206,
      180
     ],
+    "active_scale": 1.35,
     "active_px": [
      278,
      243
@@ -1401,18 +1461,24 @@
     "photo_px": [
      340,
      297
-    ]
+    ],
+    "trimmed_src": "group 174×152"
    },
    {
     "card_order": 7,
     "key": "elephant and mahout",
-    "trimmed_px": "1401×2203",
+    "ratio": 0.64,
+    "contain_box": [
+     260,
+     180
+    ],
     "rest_px": [
      114,
      180
     ],
+    "active_scale": 1.35,
     "active_px": [
-     154,
+     155,
      243
     ],
     "minimap_px": [
@@ -1422,16 +1488,22 @@
     "photo_px": [
      206,
      324
-    ]
+    ],
+    "trimmed_src": "1401×2203"
    },
    {
     "card_order": 8,
     "key": "patola",
-    "trimmed_px": "611×580",
+    "ratio": 1.05,
+    "contain_box": [
+     260,
+     180
+    ],
     "rest_px": [
      190,
      180
     ],
+    "active_scale": 1.35,
     "active_px": [
      256,
      243
@@ -1443,16 +1515,22 @@
     "photo_px": [
      340,
      323
-    ]
+    ],
+    "trimmed_src": "611×580"
    },
    {
     "card_order": 9,
     "key": "elephant shaped relic",
-    "trimmed_px": "group 180×150",
+    "ratio": 1.2,
+    "contain_box": [
+     260,
+     180
+    ],
     "rest_px": [
      216,
      180
     ],
+    "active_scale": 1.35,
     "active_px": [
      292,
      243
@@ -1464,16 +1542,22 @@
     "photo_px": [
      340,
      283
-    ]
+    ],
+    "trimmed_src": "group 180×150"
    },
    {
     "card_order": 10,
     "key": "pod duang",
-    "trimmed_px": "226×226",
+    "ratio": 1.0,
+    "contain_box": [
+     260,
+     180
+    ],
     "rest_px": [
      180,
      180
     ],
+    "active_scale": 1.35,
     "active_px": [
      243,
      243
@@ -1485,19 +1569,25 @@
     "photo_px": [
      324,
      324
-    ]
+    ],
+    "trimmed_src": "226×226"
    },
    {
     "card_order": 11,
     "key": "hand carved ivory",
-    "trimmed_px": "2017×270",
-    "rest_px": [
-     260,
-     35
+    "ratio": 7.47,
+    "contain_box": [
+     320,
+     180
     ],
+    "rest_px": [
+     320,
+     43
+    ],
+    "active_scale": 1.25,
     "active_px": [
-     351,
-     47
+     400,
+     54
     ],
     "minimap_px": [
      48,
@@ -1506,19 +1596,25 @@
     "photo_px": [
      340,
      46
-    ]
+    ],
+    "trimmed_src": "2017×270"
    },
    {
     "card_order": 12,
     "key": "tin ingot",
-    "trimmed_px": "954×637",
+    "ratio": 1.5,
+    "contain_box": [
+     260,
+     180
+    ],
     "rest_px": [
      260,
      174
     ],
+    "active_scale": 1.35,
     "active_px": [
      351,
-     235
+     234
     ],
     "minimap_px": [
      48,
@@ -1527,19 +1623,25 @@
     "photo_px": [
      340,
      227
-    ]
+    ],
+    "trimmed_src": "954×637"
    },
    {
     "card_order": 13,
     "key": "wooden cold press",
-    "trimmed_px": "936×287",
-    "rest_px": [
-     260,
-     80
+    "ratio": 3.26,
+    "contain_box": [
+     320,
+     180
     ],
+    "rest_px": [
+     320,
+     98
+    ],
+    "active_scale": 1.25,
     "active_px": [
-     351,
-     108
+     400,
+     123
     ],
     "minimap_px": [
      48,
@@ -1548,19 +1650,25 @@
     "photo_px": [
      340,
      104
-    ]
+    ],
+    "trimmed_src": "936×287"
    },
    {
     "card_order": 14,
     "key": "siwaih",
-    "trimmed_px": "981×252",
-    "rest_px": [
-     260,
-     67
+    "ratio": 3.89,
+    "contain_box": [
+     320,
+     180
     ],
+    "rest_px": [
+     320,
+     82
+    ],
+    "active_scale": 1.25,
     "active_px": [
-     351,
-     90
+     400,
+     103
     ],
     "minimap_px": [
      48,
@@ -1569,19 +1677,25 @@
     "photo_px": [
      340,
      87
-    ]
+    ],
+    "trimmed_src": "981×252"
    },
    {
     "card_order": 15,
     "key": "bas relief of a royal",
-    "trimmed_px": "4096×1270",
-    "rest_px": [
-     260,
-     81
+    "ratio": 3.23,
+    "contain_box": [
+     320,
+     180
     ],
+    "rest_px": [
+     320,
+     99
+    ],
+    "active_scale": 1.25,
     "active_px": [
-     351,
-     109
+     400,
+     124
     ],
     "minimap_px": [
      48,
@@ -1590,7 +1704,8 @@
     "photo_px": [
      340,
      105
-    ]
+    ],
+    "trimmed_src": "4096×1270"
    }
   ],
   "groups": {
@@ -1650,6 +1765,36 @@
    }
   },
   "fields_added": [],
-  "sh_line_art": "cancelled"
+  "sh_line_art": "cancelled",
+  "links": {
+   "detail": "/object/<slug>/",
+   "clickable": [
+    "title (ชิ้นกลาง p>=0.5)",
+    "under-line photo (ชิ้นกลาง p>=0.5)"
+   ],
+   "no_read_more": true,
+   "non_center_click": "scroll to center",
+   "reflection": "hidden (D16)"
+  },
+  "back_button": {
+   "component": "Button Back B1 §3.3",
+   "x": 160,
+   "y_rel": [
+    649,
+    699
+   ],
+   "size": [
+    115,
+    50
+   ]
+  },
+  "stage_fit": {
+   "formula": "k = clamp(min(W/1440,(innerHeight-headerH-24)/723),k_min,1)",
+   "k_min": 0.62,
+   "min_font_px": 12,
+   "applies_from_width": 1280,
+   "transform": "scale(k) origin top-center",
+   "line_and_bg": "full viewport width"
+  }
  }
 }
