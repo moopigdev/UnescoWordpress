@@ -50,3 +50,8 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [core-contract/reviewer] [2026-10-27] `sh_layout` รับ JSON array (เช่น `[1,2]`) ทั้งที่เอกสาร/ข้อความ validation บอก "JSON object"
 - [core-contract/reviewer] [2026-10-27] จำนวน attachment ใน CONTENT-MODEL §12 (179) เก่า — วัดได้ 183→189 หลัง design-dev เพิ่มภาพ hero
 - [core-contract/reviewer] [2026-10-27] `timeline_item` ไม่ public แต่อ่านผ่าน REST ได้โดยไม่ login (ตรงเอกสาร · เป็นข้อมูลที่หน้าแสดงอยู่แล้ว)
+- [detail-page] [2026-10-27] caption ใช้ `--sh-type-caption` (Komet-Light → weight 300) — ระหว่างรอ Komet (D6) ฟอนต์ fallback บน macOS (Avenir Next) ที่ 300 บางมากจนอ่านยากบนแผงสีเข้ม/กลาง (เช่น 1510 พื้น `#B3B3B3`) · Figma Komet-Light หนาใกล้ Regular — ปรับที่ tokens (core) หรือหายเองเมื่อได้ไฟล์ Komet
+- [detail-page] [2026-10-27] hero ที่เป็นวิดีโอของเจ้าของ (ganesha · singhasari · kendi · molar · relic · tin · bas-relief) เนื้อภาพ/จังหวะไม่ตรงเฟรม GIF ใน Figma (เช่น ganesha.webm มี 2 องค์สลับ) — เป็นเนื้อหา media ไม่ใช่ layout · กรอบ hero ตรง bbox ทุกชิ้น
+- [detail-page] [2026-10-27] Back บนแผงเข้ม (Pod Duang `#363638`): Figma ใช้พื้น `#FFFFFF`@10% แต่ตัวอักษร/ลูกศรยัง `#343A40` → contrast ต่ำมาก (ทำตาม Figma) · ถ้าต้องการอ่านง่ายให้ component Back รับสีตัวอักษร (core)
+- [detail-page] [2026-10-27] มือถือ (<768) ชื่อวัตถุ 28/35 · metadata 20/25 (Figma ไม่มี frame มือถือ · 36px ล้นจอ 375) · <1024 แผงเรียงคอลัมน์เดียว ภาพตามสัดส่วนจริง — ให้เจ้าของดูด้วยตา
+- [detail-page] [2026-10-27] ไม่มีภาพ/วิดีโอ hero → ไม่แสดงกรอบ hero (แผงต่อจาก header) แทนการเว้นที่ว่างขาว 810px — ถ้าอยากคงช่องว่างตาม Figma แก้ที่ `template-parts/detail/hero.php`
