@@ -1,0 +1,311 @@
+/*
+ * Introduction page (Figma Desktop - 1471 · DESIGN-SPEC §4.2 / §4.7). Auto-enqueued for page-intro.php.
+ * Geometry at 1440 (y from the page top): cover 150 · Introduction row 656 · body 960 · Knowing row 1380 · body 1687 ·
+ * map 2015 (1120×620) · slide text 2655 · Back 3055 · frame end 3186. Only --sh-* tokens + Figma values from the spec.
+ */
+
+.sh-intro {
+	/* frame end 3186 − Back bottom 3105 */
+	padding-bottom: 81px;
+}
+
+.sh-intro__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/*
+ * Picture crops = Figma imageTransform of each fill (STRETCH of a sub-rect ≡ cover + vertical anchor):
+ * cover 1013:1275 → bottom (100%) · Introduction 670:1221 → 32.4% · Knowing 670:1236 → 43.5% ·
+ * map 670:1596 → cover zoomed ×1.0196 about the centre (x/y scale 0.9808/0.9652, centred).
+ */
+
+/* ---- Cover [160,150 1120×466] ---- */
+.sh-intro__cover {
+	aspect-ratio: 1120 / 466;
+	overflow: hidden;
+}
+
+.sh-intro__cover .sh-intro__img {
+	object-position: 50% 100%;
+}
+
+/* ---- Introduction (Frame 12685) / Knowing (Frame 12717): padding 20 · gap 20 · 20 between frames ---- */
+.sh-intro__section {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sh-space-20);
+	margin-top: var(--sh-space-20);
+	padding-block: var(--sh-space-20);
+}
+
+.sh-intro__row {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--sh-space-22);
+}
+
+.sh-intro__wrap,
+.sh-intro__text {
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+/*
+ * Picture card 549×284 · radius 22 · Drop Shadow/200 (0 1px 4px #0C0C0D@5% + @10%). The pictures are transparent PNGs
+ * on a fill-less frame, so the shadow follows the artwork (filter), not the box — as in the Figma render.
+ */
+.sh-intro__wrap {
+	filter: drop-shadow(0 1px 4px rgba(12, 12, 13, 0.05)) drop-shadow(0 1px 4px rgba(12, 12, 13, 0.1));
+}
+
+.sh-intro__card {
+	aspect-ratio: 549 / 284;
+	overflow: hidden;
+	border-radius: var(--sh-radius-card);
+}
+
+.sh-intro__section--intro .sh-intro__card .sh-intro__img { object-position: 50% 32.4%; }
+.sh-intro__section--knowing .sh-intro__card .sh-intro__img { object-position: 50% 43.5%; }
+
+/* Text column (Frame 12683): padding-top 10 · gap 20 */
+.sh-intro__text,
+.sh-intro__slide {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sh-space-20);
+	padding-top: var(--sh-space-10);
+}
+
+.sh-intro__slide {
+	margin-top: var(--sh-space-20);
+}
+
+.sh-intro__slide[hidden] {
+	display: none;
+}
+
+/* Long body: a blank line (24px) between paragraphs; single line breaks come from <br>. */
+.sh-intro__body-p + .sh-intro__body-p {
+	margin-top: 24px;
+}
+
+/* ---- Map slider (Frame 12767): map 1120×620 · gap 20 to the slide text ---- */
+.sh-intro__map-section {
+	margin-top: var(--sh-space-20);
+}
+
+.sh-intro__map {
+	position: relative;
+	aspect-ratio: 1120 / 620;
+	overflow: hidden;
+	background: var(--sh-color-map-bg);
+}
+
+.sh-intro__map .sh-intro__img {
+	transform: scale(1.0196);
+}
+
+/* Arrows 60×80, vertically centred; chevron 18.41×31.82 #343A40 (offset from the button: left 18.9 · right 22.7 · top 24.1). */
+.sh-intro__arrow {
+	position: absolute;
+	top: 50%;
+	z-index: 2;
+	width: 60px;
+	height: 80px;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--sh-color-neutral-800);
+	cursor: pointer;
+	transform: translateY(-50%);
+}
+
+.sh-intro__arrow svg {
+	position: absolute;
+	top: 24.1px;
+	max-width: none;
+}
+
+.sh-intro__arrow--prev { left: 0; }
+.sh-intro__arrow--next { right: 0; }
+.sh-intro__arrow--prev svg { left: 18.9px; transform: scaleX(-1); }
+.sh-intro__arrow--next svg { left: 22.7px; }
+
+.sh-intro__arrow:focus-visible,
+.sh-intro__pin:focus-visible,
+.sh-intro__popup-close:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 2px;
+}
+
+/* Number buttons [932,22 166×34] → top 22 · right 22 · 34×34 · gap 10 · fill #DEE2E6 · radius 20 */
+.sh-intro__pins {
+	position: absolute;
+	top: 22px;
+	right: 22px;
+	z-index: 2;
+	display: flex;
+	gap: var(--sh-space-10);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sh-intro__pin {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 34px;
+	height: 34px;
+	padding: 0;
+	border: 1px solid transparent;
+	border-radius: var(--sh-radius-map-pin);
+	background: var(--sh-color-neutral-300);
+	cursor: pointer;
+}
+
+/* Active: stroke #D65F47 1 inside + number #D65F47 */
+.sh-intro__pin.is-active {
+	border-color: var(--sh-color-accent);
+	color: var(--sh-color-accent);
+}
+
+/* Popup [681,63 336×h] → right 103 · fill #D65F47 · radius 4 · padding 12 · gap 10 · close 24×24 at (305,7) */
+.sh-intro__popup {
+	position: absolute;
+	top: 63px;
+	right: 103px;
+	z-index: 3;
+	display: flex;
+	flex-direction: column;
+	gap: var(--sh-space-10);
+	width: 336px;
+	max-width: calc(100% - 2 * var(--sh-space-10));
+	padding: var(--sh-space-12);
+	border-radius: var(--sh-radius-popup);
+	background: var(--sh-color-accent);
+}
+
+.sh-intro__popup[hidden] {
+	display: none;
+}
+
+.sh-intro__popup-close {
+	position: absolute;
+	top: 7px;
+	left: 305px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--sh-color-black);
+	cursor: pointer;
+}
+
+.sh-intro__popup-close svg {
+	max-width: none;
+}
+
+.sh-intro__popup-title {
+	padding-right: 20px;
+}
+
+/* ---- Back [160,3055]: 89 below the slide text ---- */
+.sh-intro__back {
+	margin-top: 89px;
+}
+
+/* ---- Desktop 1440: keep Figma block heights (15 / 12 lines of body at 24px) ---- */
+@media (min-width: 1168px) {
+	.sh-intro__section--intro .sh-intro__body { min-height: 360px; }
+	.sh-intro__section--knowing .sh-intro__body { min-height: 288px; }
+	.sh-intro__section--knowing .sh-intro__row { min-height: 287px; }
+	.sh-intro__section--intro .sh-intro__row { min-height: 284px; }
+}
+
+/*
+ * ---- Below the full 1120 map (<1168): the map is too short for a 350–460px popup (and overflow:hidden would clip it
+ * and cover the › button) → popup becomes a centred overlay, 336 wide (F1). Mobile (<768) widens it below. ----
+ */
+@media (max-width: 1167px) {
+	.sh-intro__popup {
+		position: fixed;
+		top: 50%;
+		right: auto;
+		left: 50%;
+		max-height: 80vh;
+		overflow-y: auto;
+		transform: translate(-50%, -50%);
+	}
+}
+
+/* ---- Mobile (<768): stacked ---- */
+@media (max-width: 767px) {
+	.sh-intro__row {
+		flex-direction: column;
+		gap: var(--sh-space-20);
+	}
+
+	.sh-intro__wrap,
+	.sh-intro__text {
+		flex: none;
+		width: 100%;
+	}
+
+	.sh-intro__text,
+	.sh-intro__slide {
+		padding-top: 0;
+	}
+
+	.sh-intro__pins {
+		top: 10px;
+		right: 10px;
+	}
+
+	.sh-intro__arrow {
+		width: 44px;
+		height: 60px;
+	}
+
+	.sh-intro__arrow svg {
+		top: 14px;
+		width: 13px;
+		height: auto;
+	}
+
+	.sh-intro__arrow--prev svg { left: 10px; }
+	.sh-intro__arrow--next svg { left: 21px; }
+
+	/* map is only ~190px tall: popup becomes a centred overlay */
+	.sh-intro__popup {
+		position: fixed;
+		top: 50%;
+		right: var(--sh-tablet-margin);
+		left: var(--sh-tablet-margin);
+		width: auto;
+		max-width: none;
+		max-height: 80vh;
+		overflow-y: auto;
+		transform: translateY(-50%);
+	}
+
+	.sh-intro__popup-close {
+		left: auto;
+		right: 7px;
+	}
+
+	.sh-intro__back {
+		margin-top: var(--sh-space-40);
+	}
+
+	.sh-intro {
+		padding-bottom: var(--sh-space-40);
+	}
+}

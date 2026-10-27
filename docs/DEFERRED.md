@@ -67,3 +67,7 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [home-page/reviewer] [2026-10-27] ไอคอน trail: alt = ชื่อ trail + screen-reader-text ชื่อเดียวกัน → screen reader อ่านซ้ำ
 - [home-page/reviewer] [2026-10-27] seek walking 0.001 ทำให้ webm โหลดทั้งไฟล์ตอน first paint (ตอนนี้ 24KB ไม่มีปัญหา) · ถ้าไฟล์ใหญ่ขึ้นให้ seek หลังเข้าจอ
 - [home-page/reviewer] [2026-10-27] WP core emoji script อ้าง s.w.org (ภายนอก) → core-chrome ปิด emoji script
+- [intro-page] [2026-10-27] แผนที่ intro: ไม่มีพิกัดหมุด → ปุ่มเลข 1–4 ทำหน้าที่เป็นหมุด (คลิก = เปลี่ยน slide + เปิด popup ตำแหน่ง Figma `[681,63]`) · ถ้าต้องมีหมุดบนภาพ ต้องมีฟิลด์พิกัดใน core · ลูกศร ‹ › วนรอบ (Figma ไม่ระบุว่าวน/หยุดที่ปลาย) · `Read more >>` ทั้ง 3 จุดของ 1471 เป็น `visible:false` ใน Figma → ไม่แสดง (body ยาวแสดงทั้งหมด ตาม frame)
+- [intro-page/reviewer] [2026-10-27] popup 2 ใน Figma (`670:1618`) มี 2 ย่อหน้า แต่ข้อความ slide 2 มี 3 → popup สูง 442.7 vs 284 · ถ้าต้องตรงต้องมีฟิลด์ข้อความ popup แยก (core/CONTENT-MODEL)
+- [intro-page/reviewer] [2026-10-27] class `.sh-intro__popup-title` (intro.css) ไม่มีใน markup
+- [intro-page/reviewer] [2026-10-27] ช่วง 768–1167 popup เป็น overlay กลางจอ ไม่มี backdrop ไม่ผูกกับแผนที่ → อาจทับปุ่มเลข 1 บางส่วนตามตำแหน่ง scroll (ปิดแล้วกดได้ปกติ)
