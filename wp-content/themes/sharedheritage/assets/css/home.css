@@ -1,0 +1,428 @@
+/*
+ * Home (front-page.php) — Figma "Desktop - 1470" 670:1152 · DESIGN-SPEC §4.1 · tokens only (--sh-*).
+ * Desktop 1440 geometry (container 1120 at x=160): hero 150–616 · intro 616–1168 · zones 1198–1751 ·
+ * trails 1766–2543 · zone 4/5 2575–2935 · frame ends 3222. Tablet/mobile = responsive (D5, no frame).
+ */
+
+.sh-home {
+	padding-bottom: 60px; /* mobile/tablet: breathing room; desktop restores the Figma tail below */
+}
+
+/* ---- 1 · Hero cover [160,150 1120×466] ---- */
+/*
+ * Figma image fills 670:9367 / 670:9370 / 885:1201 are STRETCH fills with an imageTransform (a crop of the original
+ * file). The originals are imported whole, so the crop is reproduced here: the <img> is placed inside its box at
+ * left/top/width/height = share of the box (x = -tx/a · w = 1/a · y = -ty/d · h = 1/d, values from figma-file.json).
+ * If the owner replaces one of these images with a picture already cut to the box size, remove its --sh-crop-* (DEFERRED).
+ */
+.sh-home-hero__frame,
+.sh-home-intro__card,
+.sh-home-zonebar__box {
+	position: relative;
+	overflow: hidden;
+}
+
+.sh-home-hero__img,
+.sh-home-intro__img,
+.sh-home-zonebar__img {
+	position: absolute;
+	left: calc(var(--sh-crop-x) * 100%);
+	top: calc(var(--sh-crop-y) * 100%);
+	width: calc(var(--sh-crop-w) * 100%);
+	height: calc(var(--sh-crop-h) * 100%);
+	max-width: none;
+}
+
+.sh-home-hero__frame {
+	aspect-ratio: 1120 / 466;
+}
+
+.sh-home-hero__img {
+	--sh-crop-x: 0;
+	--sh-crop-y: -0.0943787;
+	--sh-crop-w: 1;
+	--sh-crop-h: 1.0943367;
+}
+
+/* ---- 2 · Introduction (padding 40/40 · gap 22) ---- */
+.sh-home-intro {
+	padding-block: var(--sh-space-40);
+}
+
+.sh-home-intro__row {
+	display: grid;
+	grid-template-columns: 551fr 549fr; /* 551 + gap 20 + 549 = 1120 */
+	gap: var(--sh-space-20);
+	align-items: start;
+}
+
+/*
+ * Frames 12684 / 885:1200 have radius 22 + Drop Shadow/200 but do not clip and have no fill (no `clip` in the dump):
+ * in frame 1470 the pictures keep square corners and the shadow follows the picture's alpha, so no border-radius
+ * and the same two shadows (--sh-shadow-200 values, as filter) go on the cropped picture box.
+ */
+.sh-home-intro__card,
+.sh-home-zonebar__box {
+	filter: drop-shadow(0 1px 4px rgba(12, 12, 13, 0.05)) drop-shadow(0 1px 4px rgba(12, 12, 13, 0.1));
+}
+
+.sh-home-intro__card {
+	aspect-ratio: 551 / 284;
+}
+
+.sh-home-intro__img {
+	--sh-crop-x: 0.2088498;
+	--sh-crop-y: -0.0788833;
+	--sh-crop-w: 0.580323;
+	--sh-crop-h: 1.1218216;
+}
+
+.sh-home-intro__text {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sh-space-20);
+}
+
+.sh-home-intro__text .sh-read-more-row,
+.sh-home-trails__text .sh-read-more-row {
+	font: var(--sh-type-read-more-home); /* strut = 22px so the row is 22 tall */
+}
+
+.sh-home-zonebar {
+	margin-top: var(--sh-space-22);
+}
+
+.sh-home-zonebar__box {
+	aspect-ratio: 1120 / 166;
+}
+
+.sh-home-zonebar__img {
+	--sh-crop-x: -0.0269297;
+	--sh-crop-y: -0.2361700;
+	--sh-crop-w: 1.0537154;
+	--sh-crop-h: 1.6749452;
+}
+
+/* ---- 4/6 · Zone cards ---- */
+.sh-home-zones__row {
+	display: grid;
+	align-items: start;
+}
+
+.sh-home-zones--main {
+	margin-top: 30px; /* 1168 → 1198 */
+}
+
+.sh-home-zones--main .sh-home-zones__row {
+	grid-template-columns: repeat(3, 1fr); /* 373.333 each */
+}
+
+.sh-home-zones--extra {
+	margin-top: 32px; /* trails frame gap */
+}
+
+.sh-home-zones--extra .sh-home-zones__row {
+	grid-template-columns: repeat(2, 1fr); /* 560 each */
+}
+
+.sh-home-zone {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sh-space-16);
+	color: inherit;
+	text-decoration: none;
+}
+
+.sh-home-zone__media {
+	position: relative;
+	display: block;
+	overflow: hidden;
+}
+
+.sh-home-zone--tall .sh-home-zone__media {
+	aspect-ratio: 373.333 / 487;
+}
+
+.sh-home-zone--wide .sh-home-zone__media {
+	aspect-ratio: 560 / 294;
+}
+
+.sh-home-zone__img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: fill; /* Figma STRETCH (transform ≈ identity) */
+}
+
+.sh-home-zone--wide .sh-home-zone__img {
+	object-fit: contain; /* Figma scale mode FIT on zone 4/5 */
+}
+
+.sh-home-zone__img--hover {
+	opacity: 0;
+	transition: opacity var(--sh-duration-card) var(--sh-ease);
+}
+
+.sh-home-zone:hover .sh-home-zone__img--hover,
+.sh-home-zone:focus-visible .sh-home-zone__img--hover {
+	opacity: 1;
+}
+
+.sh-home-zone:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 2px;
+}
+
+.sh-home-zone__title {
+	display: block;
+	min-height: 50px; /* two 25px lines (zone 5 is one line but its card is the same 360 tall) */
+	text-align: center;
+}
+
+.sh-home-zone__title strong {
+	font-weight: inherit;
+}
+
+.sh-home-zone__sub {
+	font-weight: var(--sh-fw-komet-regular);
+}
+
+/* ---- 5 · Trails ---- */
+.sh-home-trails {
+	margin-top: 15px; /* 1751 → 1766 */
+}
+
+.sh-home-trails__text {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sh-space-20);
+}
+
+.sh-home-trails__more {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sh-space-20);
+}
+
+/* Read more → long paragraphs (Variant2). Hidden only once JS is ready to toggle them. */
+.sh-js .sh-home-trails__more:not(.is-open) {
+	display: none;
+}
+
+.sh-home-trails__text .sh-read-more-row {
+	display: none;
+}
+
+.sh-js .sh-home-trails__text .sh-read-more-row {
+	display: block;
+}
+
+.sh-home-trails__stage {
+	display: grid;
+	margin-top: var(--sh-space-20);
+}
+
+.sh-home-trails__stage > * {
+	grid-area: 1 / 1;
+}
+
+.sh-home-trails__video {
+	align-self: center;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1120 / 630;
+	object-fit: cover;
+	pointer-events: none;
+	transition: opacity var(--sh-duration-footprint-fade) var(--sh-ease);
+}
+
+.sh-home-trails__icons {
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	gap: var(--sh-space-20);
+	transition: opacity var(--sh-duration-footprint-fade) var(--sh-ease);
+}
+
+.sh-home-trails__stage.is-armed:not(.is-revealed) .sh-home-trails__icons {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.sh-home-trails__stage.is-revealed .sh-home-trails__video {
+	opacity: 0;
+}
+
+.sh-home-trails__row {
+	display: flex;
+	justify-content: center;
+	gap: 26px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sh-home-trail {
+	flex: 0 1 165px; /* 165 at 1440; shrinks with the container between 1024 and 1199 */
+	min-width: 0;
+	aspect-ratio: 1;
+}
+
+.sh-home-trail__link {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+}
+
+.sh-home-trail__link:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 2px;
+}
+
+.sh-home-trail__img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	object-fit: cover;
+	transition: opacity var(--sh-duration-tile) var(--sh-ease);
+}
+
+/* hover 185×185 centred on the 165×165 cell (+10px each side) */
+.sh-home-trail__img--hover {
+	inset: -6.0606%;
+	width: 112.1212%;
+	height: 112.1212%;
+	z-index: 1;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.sh-home-trail__link:hover .sh-home-trail__img--hover,
+.sh-home-trail__link:focus-visible .sh-home-trail__img--hover {
+	opacity: 1;
+}
+
+.sh-home-trail__link:hover .sh-home-trail__img:not(.sh-home-trail__img--hover),
+.sh-home-trail__link:focus-visible .sh-home-trail__img:not(.sh-home-trail__img--hover) {
+	opacity: 0;
+}
+
+/* ---- Navigator [176,587 30×150] · 4 dots 30×30 gap 10 ---- */
+.sh-home-nav {
+	position: fixed;
+	top: min(587px, calc(100dvh - 170px));
+	left: calc(50% - 544px); /* 176 at 1440 */
+	z-index: 5;
+	display: none;
+	flex-direction: column;
+	gap: var(--sh-space-10);
+}
+
+.sh-home-nav__dot {
+	display: block;
+	width: 30px;
+	height: 30px;
+	border: var(--sh-border-navigator-dot);
+	border-radius: 50%;
+	background: var(--sh-color-white);
+}
+
+.sh-home-nav__dot:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 2px;
+}
+
+/* ---- Desktop ---- */
+@media (min-width: 1024px) {
+	.sh-home {
+		padding-bottom: 287px; /* 2935 → 3222 (frame tail, P-211: no footer in Figma) */
+	}
+}
+
+@media (min-width: 1200px) {
+	.sh-home-nav {
+		display: flex;
+	}
+}
+
+/* ---- Tablet: icons wrap, 4 per row. The icon grid is taller than the video here, so the stage shows the
+   video first and swaps to the icons (no empty overlay area). ---- */
+@media (max-width: 1023px) {
+	.sh-home-trails__stage.is-armed:not(.is-revealed) .sh-home-trails__icons {
+		display: none;
+	}
+
+	.sh-home-trails__stage.is-revealed .sh-home-trails__video {
+		display: none;
+	}
+
+	.sh-home-trails__icons {
+		flex-flow: row wrap;
+		justify-content: center;
+		gap: var(--sh-space-20);
+	}
+
+	.sh-home-trails__row {
+		display: contents;
+	}
+
+	.sh-home-trail {
+		flex: 0 0 calc((100% - 3 * var(--sh-space-20)) / 4);
+	}
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 767px) {
+	.sh-home-intro {
+		padding-block: var(--sh-space-25);
+	}
+
+	.sh-home-intro__row {
+		grid-template-columns: 1fr;
+	}
+
+	.sh-home-zones--main .sh-home-zones__row,
+	.sh-home-zones--extra .sh-home-zones__row {
+		grid-template-columns: 1fr;
+		row-gap: var(--sh-space-30);
+	}
+
+	.sh-home-trail {
+		flex-basis: calc((100% - 2 * var(--sh-space-20)) / 3);
+	}
+}
+
+/* Zone bar: its "ZONE n" labels live in the image → below 640px keep them readable with a scrollable strip. */
+@media (max-width: 639px) {
+	.sh-home-zonebar__scroll {
+		overflow-x: auto;
+	}
+
+	.sh-home-zonebar__box {
+		min-width: 640px;
+	}
+}
+
+@media (max-width: 479px) {
+	.sh-home-trails__icons {
+		gap: var(--sh-space-16);
+	}
+
+	.sh-home-trail {
+		flex-basis: calc((100% - var(--sh-space-16)) / 2);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sh-home-zone__img--hover,
+	.sh-home-trail__img,
+	.sh-home-trails__icons,
+	.sh-home-trails__video {
+		transition: none;
+	}
+}
