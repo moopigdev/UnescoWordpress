@@ -80,3 +80,5 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [zone-page/reviewer] [2026-10-27] ป้าย ZONE ในภาพ banner ที่ 768–~830px ≈13px (ประมาณ · ก้ำกึ่ง) · ให้แถบ `min-width: 840px` ทุกขนาดจะแก้ได้
 - [zone-page/reviewer] [2026-10-27] tile hover เป็น overlay ขยายไม่ดัน layout ต่างจาก auto-layout ใน Figma — ให้เจ้าของดูด้วยตา
 - [zone-page/reviewer] [2026-10-27] ช่วง ~600–767px cover สูงคงที่ 205 ภาพตามสเกล ~264 → วัตถุตกแต่งบน/ล่างถูกครอปมากขึ้น (ความสวยงาม · เจ้าของดู)
+- [trail-links] [2026-10-27] ข้อมูล seed ผูกวัตถุเดียวกับหลาย trail (วัตถุ id 173 → elephant+horse+rooster · id 122 → elephant+garuda+lion+naga) → ตาม D15 trail ทั้ง 6 (elephant, rooster, horse, naga, lion, garuda) มี object publish จึงลิงก์ได้ ไม่ใช่แค่ช้าง · กริด Zone 1–3 มี 5 tile ลิงก์ (rooster/horse/naga/lion/garuda) ไม่ใช่ 0 · ถ้าเจ้าของต้องการให้ลิงก์เฉพาะช้างจริง → ปรับ tagging ของสองวัตถุนั้นใน seed/admin (โค้ดไม่ต้องแก้)
+- [trail-links] [2026-10-27] performance: `sh_trail_objects()` ทำ `get_posts` เต็ม (ไม่ cache) ต่อ trail → Home 17 query · Zone 15 query/หน้า · เสนอ helper ใน core `inc/api.php` เช่น `sh_trail_ids_with_objects()` (1 query / cache ต่อ request) แล้วให้ trails.php/tile.php เรียก

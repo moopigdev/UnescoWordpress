@@ -108,6 +108,17 @@
 	background: var(--sh-tile-bg, var(--sh-color-tile-beige));
 }
 
+.sh-tile__link {
+	position: absolute;
+	inset: 0;
+	display: block;
+}
+
+.sh-tile__link:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 2px;
+}
+
 .sh-tile__img {
 	display: block;
 	width: 100%;
