@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Template file (basename without .php) -> page asset slug.
- * Taken from the ownership map in orchestrator PLAN (home/grid/timeline/detail).
+ * Route table (orchestrator PLAN, fixed): Home · Intro · Zone 1–3 · Trail · Timeline · Detail.
  * Templates not listed here use their own basename as slug (e.g. index -> index.css).
  *
  * @return array<string, string>
@@ -22,10 +22,11 @@ defined( 'ABSPATH' ) || exit;
 function sh_template_slug_map(): array {
 	$map = array(
 		'front-page'     => 'home',
-		'archive-object' => 'grid',
+		'page-intro'     => 'intro',
+		'taxonomy-zone'  => 'zone',
+		'taxonomy-trail' => 'trail',
 		'page-timeline'  => 'timeline',
 		'single-object'  => 'detail',
-		'single'         => 'detail',
 	);
 
 	/**

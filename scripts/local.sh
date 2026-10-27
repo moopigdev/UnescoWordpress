@@ -10,11 +10,15 @@
 # port: arg > $SH_PORT > $PORT > first free port in 9400..9499  (each worktree can run its own)
 # env:  SH_PHP (default 8.5 = production Hostinger) · SH_WP (default latest)
 #       SH_PLAYGROUND_VERSION (default 3.1.60 — 3.1.61 deps need node >= 24.18)
+#       SH_ACF=0 skip installing ACF (free, from wordpress.org — needs network) · SH_IMPORT=0 skip the seed import
+#       SH_IMPORT_RUNS=2 run the import twice (idempotency check: counts must not change)
+#       SH_DESIGN_ASSETS / SH_MEDIA_OUT  images / videos outside the repo (default Unesco/design/assets · Unesco/media/out)
 #
 # What it does: mounts wp-content/themes/sharedheritage (+ each entry of wp-content/mu-plugins if present),
-# activates the theme, sets /%postname%/ permalinks, WP_DEBUG + WP_DEBUG_DISPLAY on.
+# activates the theme, installs + activates ACF, sets /%postname%/ permalinks, imports content/seed
+# (scripts/import/import.php → report .playground/import-report.json), WP_DEBUG + WP_DEBUG_DISPLAY on.
 # Site is fresh on every start (data not persisted). Admin: /wp-admin  user admin / password password.
-# State (gitignored): .playground/{port,pid,server.log,blueprint.json} — scripts/smoke.sh reads .playground/port.
+# State (gitignored): .playground/{port,pid,server.log,blueprint.json,import-report.json,uploads/} — smoke.sh reads .playground/port.
 set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")/.." && pwd -P)"
@@ -75,17 +79,37 @@ else
 fi
 
 mkdir -p "$STATE"
-cat > "$STATE/blueprint.json" <<'JSON'
-{
-  "steps": [
-    { "step": "activateTheme", "themeFolderName": "sharedheritage" },
-    { "step": "runPHP", "code": "<?php require_once '/wordpress/wp-load.php'; global $wp_rewrite; $wp_rewrite->set_permalink_structure('/%postname%/'); flush_rewrite_rules( false );" }
-  ]
-}
-JSON
+# images/videos live outside the repo: Unesco/design/assets · Unesco/media/out (repo = Unesco/UnescoWordpress or Unesco/.worktrees/<wt>)
+ROOT="$(cd "$REPO/.." && pwd -P)"; [ -d "$ROOT/design" ] || ROOT="$(cd "$REPO/../.." && pwd -P)"
+ASSETS="${SH_DESIGN_ASSETS:-$ROOT/design/assets}"
+MEDIA="${SH_MEDIA_OUT:-$ROOT/media/out}"
+mkdir -p "$STATE/empty"
+[ -d "$ASSETS" ] || { echo "ไม่พบ $ASSETS — import ข้ามรูป (ตั้ง SH_DESIGN_ASSETS)" >&2; ASSETS="$STATE/empty"; }
+[ -d "$MEDIA" ] || { echo "ไม่พบ $MEDIA — import ข้ามวิดีโอ (ตั้ง SH_MEDIA_OUT)" >&2; MEDIA="$STATE/empty"; }
+rm -rf "$STATE/uploads" "$STATE/import-report.json"; mkdir -p "$STATE/uploads"   # fresh site → fresh uploads
+
+STEPS='    { "step": "activateTheme", "themeFolderName": "sharedheritage" },'
+if [ "${SH_ACF:-1}" != 0 ]; then
+  STEPS="$STEPS"'
+    { "step": "installPlugin", "pluginData": { "resource": "wordpress.org/plugins", "slug": "advanced-custom-fields" }, "options": { "activate": true } },'
+fi
+STEPS="$STEPS"'
+    { "step": "runPHP", "code": "<?php require_once '"'"'/wordpress/wp-load.php'"'"'; global $wp_rewrite; $wp_rewrite->set_permalink_structure('"'"'/%postname%/'"'"'); flush_rewrite_rules( false );" }'
+if [ "${SH_IMPORT:-1}" != 0 ]; then
+  RUNS="${SH_IMPORT_RUNS:-1}"; case "$RUNS" in ''|*[!0-9]*) RUNS=1 ;; esac
+  for _ in $(seq 1 "$RUNS"); do
+    STEPS="$STEPS"',
+    { "step": "runPHP", "code": "<?php define('"'"'SH_IMPORT_ASSETS_DIR'"'"', '"'"'/sh/assets'"'"'); define('"'"'SH_IMPORT_MEDIA_DIR'"'"', '"'"'/sh/media'"'"'); define('"'"'SH_IMPORT_REPORT'"'"', '"'"'/sh/state/import-report.json'"'"'); require_once '"'"'/wordpress/wp-load.php'"'"'; require '"'"'/sh/repo/scripts/import/import.php'"'"';" }'
+  done
+fi
+printf '{\n  "steps": [\n%s\n  ]\n}\n' "$STEPS" > "$STATE/blueprint.json"
 
 ARGS=(server --port "$PORT" --php "$PHP_VERSION" --wp "$WP_VERSION"
   --mount "$THEME:/wordpress/wp-content/themes/sharedheritage"
+  --mount "$STATE/uploads:/wordpress/wp-content/uploads"
+  --mount "$REPO/content:/sh/repo/content"
+  --mount "$REPO/scripts/import:/sh/repo/scripts/import"
+  --mount "$ASSETS:/sh/assets" --mount "$MEDIA:/sh/media" --mount "$STATE:/sh/state"
   --define-bool WP_DEBUG true --define-bool WP_DEBUG_DISPLAY true
   --blueprint "$STATE/blueprint.json")
 if [ -d "$MU" ]; then   # mount entries one by one so Playground's own mu-plugins stay visible
@@ -111,9 +135,15 @@ nohup "${CMD[@]}" > "$STATE/server.log" 2>&1 &
 PID=$!
 echo "$PID" > "$STATE/pid"
 echo "$PORT" > "$STATE/port"
-for _ in $(seq 1 120); do
+for _ in $(seq 1 300); do   # ACF download + import of ~150 MB of images take a few minutes
   code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 5 "http://127.0.0.1:$PORT/" || true)"
-  [ "$code" = 200 ] && { echo "http://127.0.0.1:$PORT"; exit 0; }
+  # the port answers before the blueprint (ACF + import) is done → also wait for Playground's "Ready!" line
+  if [ "$code" = 200 ] && grep -q 'Ready! WordPress is running' "$STATE/server.log" 2>/dev/null; then
+    if [ -s "$STATE/import-report.json" ]; then   # last run's counts (report is pretty-printed JSON)
+      { tr -d '\n' < "$STATE/import-report.json" | grep -o '"counts": {[^}]*}' | tail -1 | tr -s ' ' | sed 's/^/import: /' >&2; } || true
+    fi
+    echo "http://127.0.0.1:$PORT"; exit 0
+  fi
   kill -0 "$PID" 2>/dev/null || break
   sleep 2
 done
