@@ -83,6 +83,7 @@ Zone 4 ไม่มีหน้า zone ของตัวเอง: term `zone-
 | `sh_card_meta` | `textarea` → string | ✔ | `1232:1717` 14/24 (บรรทัดละรายการ) | "SECTION : Land\nPeriod: 20th-21st century\n…" | timeline card | ✔ |
 | `sh_thumbnail` | `image` → integer | ✔ | ภาพการ์ด `1232:1714` | `4953122e…` 300×202 | timeline card | ✔ |
 | `sh_thumbnail_2` | `image` → integer | — (การ์ด 6, 9) | ภาพที่ 2 ของการ์ด | Ivory Fire Piston `8dcebc79…` | timeline card | ✔ |
+| `sh_line_art` | `image` → integer | — (ว่างทุกรายการ · seed ไม่มีค่า) | — (D26 · ไม่มีใน Figma) | ว่าง → ใช้ภาพ `sh_thumbnail` แบบจาง/เทา | timeline แถวบน (วัตถุที่ไม่อยู่กลาง) | ✔ |
 
 ## 4. `trail` (term) — group: trail
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `trails.json`) | ใช้ในหน้า | REST |

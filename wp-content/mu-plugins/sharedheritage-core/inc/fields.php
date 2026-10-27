@@ -188,6 +188,7 @@ function sh_core_field_groups(): array {
 				$area( 'sh_card_meta', 'Card metadata', 'One line per item, e.g. "Period: 10th–11th century".', 6 ),
 				$img( 'sh_thumbnail', 'Card image' ),
 				$img( 'sh_thumbnail_2', 'Card image 2' ),
+				$img( 'sh_line_art', 'Line art (optional)', 'Shown on the timeline strip when this object is not centred. If empty, a faded/grey version of the thumbnail is used.' ),
 			),
 		),
 		'trail'         => array(
