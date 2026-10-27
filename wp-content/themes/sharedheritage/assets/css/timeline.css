@@ -1,321 +1,617 @@
 /*
- * Timeline (Zone 4) — page-timeline.php · Figma 670:1551 "Desktop - zone 4" (DESIGN-SPEC §4.5 · §6.4).
- * Coordinates are relative to the 1440 frame; .sh-tl starts under the header (y = 150).
- *   trail icons `797:2110` [0,150 725×55] pad 20/5 gap 5 · icon 35 (current 45)
- *   scroller `Frame 114443` [0,200 1440×1340.481] overflow HORIZONTAL_SCROLLING:
- *     illustration `1232:1711` 11000×791.481 · card row `Frame 114464` pad-left 500 pad-top 100, h 549
- *   Back `670:1556` [160,1476] · frame height 1582
- * Per-card geometry arrives as inline custom properties from template-parts/timeline/geometry.php.
+ * Timeline v3 (Zone 4) — page-timeline.php · D26/D27 · DESIGN-SPEC §4.5c (layout) · §6.4c (motion).
+ * Stage = 1440×723 design px under the real header (y_rel 0 = header bottom), scaled by --k (§4.5c.5).
+ * Every moving value comes from custom properties written by assets/js/timeline.js:
+ *   --c      continuous index of the object at the centre (load: 2.5 = Slides 31)
+ *   --k      stage scale · --pitch distance between objects · --line-l/--line-r time line insets
+ *   --tr/--mr  text enlargement so title ≥ 14px and metadata ≥ 12px on screen when k < 1
+ *   per object: --p (0 rest → 1 centre) · --ta title alpha · per info: --pa photo alpha · --ma metadata alpha
+ * Values not in tokens.css (Slides colours) are page-local: --tl-cream #EDEBDA [R] · --tl-mini-line #DFDFDF [R].
  */
 
 .sh-tl {
-	--tl-ill-w: 11000px;
-	--tl-ill-h: 791.481px;
-	--tl-ill-scale: 1;
+	--c: 2.5;
+	--k: 1;
+	--pitch: 376.6px;
+	--line-y: 380.2px;   /* top of the 4px line · centre y_rel 382.2 */
+	--line-l: 31px;      /* line x 31 → 1412 */
+	--line-r: 28px;
+	--arrow-y: 262px;
+	--tr: 1;
+	--mr: 1;
+	--m0: 19px;          /* mini-map slot 1 centre (658 − 639) */
+	--mp: 51.6px;
+	--mfw: 195px;
+	--tl-cream: #edebda;
+	--tl-mini-line: #dfdfdf;
+	--tl-hit: max(44px, calc(44px / var(--k)));
 	position: relative;
-	padding: 50px 0 41.519px; /* scroller at y 200 (150 + 50) · 1582 − (200 + 1340.481) below */
+	container-type: inline-size;
+	overflow: hidden;
+	background: var(--sh-color-white);
 }
 
-/* ---- Trail icon row (Frame trails 797:2110) ---- */
-.sh-tl__trails {
+@supports (overflow: clip) {
+	.sh-tl {
+		overflow: visible;
+		overflow-x: clip;
+	}
+}
+
+.sh-tl__fit {
+	position: relative;
+	height: calc(var(--stage-h, 723px) * var(--k)); /* --stage-h > 723 only when a metadata block runs past y_rel 699 */
+}
+
+.sh-tl__stage {
 	position: absolute;
 	top: 0;
-	left: 0;
-	z-index: 2;
+	left: 50%;
+	width: 1440px;
+	height: var(--stage-h, 723px);
+	margin-left: -720px;
+	transform: scale(var(--k));
+	transform-origin: 50% 0;
+}
+
+.sh-tl__stage:focus {
+	outline: none;
+}
+
+.sh-tl__stage:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: -2px;
+}
+
+.sh-tl__top {
+	position: absolute;
+	inset: 0;
+}
+
+/* ---- Trail icons ×17 · x 19.2 · y_rel 27 → 54 · 25.3×26.3 · pitch 28.3 (no enlarged icon) ---- */
+.sh-tl__trails {
+	position: absolute;
+	top: 27px;
+	left: 19.2px;
+	z-index: 6;
 	display: flex;
-	align-items: center;
-	gap: var(--sh-space-5);
-	height: 55px;
+	gap: 3px;
 	margin: 0;
-	padding: var(--sh-space-5) var(--sh-space-20);
+	padding: 0;
 	list-style: none;
 }
 
 .sh-tl__trail {
 	flex: none;
-	width: 35px;
-	height: 35px;
 }
 
-.sh-tl__trail.is-current {
-	width: 45px;
-	height: 45px;
-}
-
-.sh-tl__trail-icon {
+.sh-tl__trail-link {
 	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+	width: 25.3px;
+	height: 26.3px;
 }
 
-.sh-tl__trail-icon--empty {
-	overflow: hidden;
-	background: var(--sh-color-neutral-200);
-	font: var(--sh-type-popup-body);
-	color: transparent;
-}
-
-/* ---- Horizontal scroller ---- */
-.sh-tl__viewport {
-	overflow-x: auto;
-	overflow-y: hidden;
-	overscroll-behavior-x: contain;
-	scrollbar-width: none;
-	cursor: grab;
-}
-
-.sh-tl__viewport::-webkit-scrollbar {
-	display: none;
-}
-
-.sh-tl__viewport:focus-visible {
-	outline: 2px solid var(--sh-color-neutral-800);
-	outline-offset: -2px;
-}
-
-.sh-tl.is-dragging .sh-tl__viewport {
-	cursor: grabbing;
-	user-select: none;
-}
-
-.sh-tl__track {
-	position: relative;
-	display: grid;
-	grid-template-columns: max-content;
-	align-items: start;
-	width: max-content;
-}
-
-/* Illustration: raster 11000×791.481; the box keeps its size when the image is missing. */
-.sh-tl__ill {
-	grid-area: 1 / 1;
-	width: calc(var(--tl-ill-w) * var(--tl-ill-scale));
-	height: calc(var(--tl-ill-h) * var(--tl-ill-scale));
-	overflow: hidden;
-}
-
-.sh-tl__ill-inner {
-	width: var(--tl-ill-w);
-	height: var(--tl-ill-h);
-	transform: scale(var(--tl-ill-scale));
-	transform-origin: 0 0;
-}
-
-/* ---- Images in a fixed box (helpers.php sh_timeline_image) ---- */
-.sh-tl-img {
-	position: relative;
-	display: block;
-	flex: none;
-	width: var(--bw, 180px);
-	height: var(--bh, auto);
-	overflow: hidden;
-}
-
-.sh-tl-img__img {
+.sh-tl__trail-img {
 	width: 100%;
 	max-width: none;
 	height: 100%;
-	-webkit-user-drag: none;
-}
-
-.sh-tl-img--crop .sh-tl-img__img {
-	position: absolute;
-	top: 0;
-	left: 0;
-	transform-origin: 0 0;
-}
-
-.sh-tl-img--cover .sh-tl-img__img {
 	object-fit: cover;
 }
 
-.sh-tl-img--contain .sh-tl-img__img {
-	object-fit: contain;
+.sh-tl__trail-link:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 1px;
 }
 
-/* ---- Card row (Frame 114464) ---- */
-.sh-tl__row {
-	grid-area: 2 / 1;
-	display: flex;
-	align-items: flex-start;
-	min-height: 549px;
+/* ---- Mini-map · x 639 → 1413 · y_rel 6.5 → 71.5 · slot pitch 51.6 · frame 195×50 at 14.5 ---- */
+.sh-tl__mini {
+	--mbase: 50.5px;   /* object base y_rel 57 */
+	--mline: 52px;     /* thin line + dots centre y_rel 58.5 */
+	--mft: 8px;        /* frame y_rel 14.5 → 64.5 */
+	--mfh: 50px;
+	position: absolute;
+	top: 6.5px;
+	left: 639px;
+	z-index: 6;
+	width: 774px;
+	height: 65px;
+}
+
+.sh-tl__mini-frame {
+	position: absolute;
+	top: var(--mft);
+	left: calc(var(--m0) + var(--mp) * (var(--c) - 1) - var(--mfw) / 2);
+	width: var(--mfw);
+	height: var(--mfh);
+	background: var(--tl-cream);
+}
+
+.sh-tl__mini-line {
+	position: absolute;
+	top: calc(var(--mline) - 0.5px);
+	right: 0;
+	left: 0;
+	height: 1px;
+	background: var(--tl-mini-line);
+}
+
+.sh-tl__mini-list {
 	margin: 0;
-	padding: var(--sh-space-100) 0 0 500px;
+	padding: 0;
 	list-style: none;
 }
 
-/* Tablet (768–1439, no Figma frame): first card keeps the 500/1440 proportion of the frame. */
-@media (max-width: 1439px) {
-	.sh-tl__row {
-		padding-left: calc(500 / 1440 * 100vw);
-	}
-}
-
-.sh-tl-card {
-	--pl: 0px;
-	--pr: 0px;
-	--col: 477px;
-	--tw: 100%;
-	--mw: 100%;
-	--lh: 24px;
-	display: flex;
-	flex: none;
-	align-items: center;
-	gap: var(--sh-space-10);
-	padding: 0 var(--pr) 0 var(--pl);
-}
-
-.sh-tl-card__media {
-	display: block;
-	flex: none;
-	color: inherit;
-}
-
-.sh-tl-card--generic .sh-tl-card__media {
-	display: flex;
-	gap: var(--sh-space-10);
-}
-
-.sh-tl-card--group .sh-tl-card__media {
-	position: relative;
-	width: var(--gw);
-	height: var(--gh);
-}
-
-.sh-tl-card--group .sh-tl-img {
+.sh-tl__mini-item {
+	--mwe: min(calc(var(--mw) * 1px), calc(38px * var(--ar))); /* never taller than 38 (F2) */
 	position: absolute;
-	top: var(--by, 0);
-	left: var(--bx, 0);
+	top: 0;
+	left: calc(var(--m0) + var(--mp) * (var(--i) - 1));
+	width: 0;
+	height: 100%;
 }
 
-.sh-tl-card__text {
-	display: flex;
-	flex: none;
-	flex-direction: column;
-	gap: var(--sh-space-15);
-	width: var(--col);
+.sh-tl__mini-item::before {
+	content: "";
+	position: absolute;
+	top: calc(var(--mline) - 1.5px);
+	left: -1.5px;
+	width: 3px;
+	height: 3px;
+	border-radius: 50%;
+	background: var(--sh-color-black);
 }
 
-.sh-tl-card__title {
-	width: var(--tw);
+.sh-tl__mini-btn {
+	position: absolute;
+	top: 0;
+	bottom: calc(100% - var(--mft) - var(--mfh)); /* hit area ends with the cream frame (y_rel 64.5) */
+	left: calc(var(--mp) / -2);
+	width: var(--mp);
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
 }
 
-.sh-tl-card__title a {
-	color: inherit;
-	text-decoration: none;
+.sh-tl__mini-btn .sh-tl-pic {
+	position: absolute;
+	bottom: calc(100% - var(--mbase));
+	left: 50%;
+	width: var(--mwe);
+	height: auto;
+	aspect-ratio: var(--ar);
+	transform: translateX(-50%);
 }
 
-.sh-tl-card__title a:focus-visible {
-	outline: 2px solid var(--sh-color-neutral-800);
-	outline-offset: 2px;
-}
-
-.sh-tl-card__meta {
-	width: var(--mw);
-	line-height: var(--lh);
-	white-space: pre-line;
-}
-
-/* ---- ‹ › buttons (§6.4 item 4) — centred on the illustration ---- */
+/* ---- ‹ › 25×48 · left 27 → 52 · right 1387 → 1412 · centre y_rel 262 · hit ≥ 44×60 ---- */
 .sh-tl__arrow {
 	position: absolute;
-	top: calc(50px + var(--tl-ill-h) * var(--tl-ill-scale) / 2);
-	z-index: 3;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 44px;
-	height: 88px;
+	top: var(--arrow-y);
+	left: 39.5px;
+	z-index: 7;
+	display: grid;
+	place-items: center;
+	width: var(--tl-hit);
+	height: max(60px, calc(60px / var(--k)));
+	margin: 0;
 	padding: 0;
 	border: 0;
 	background: none;
 	color: var(--sh-color-black);
 	cursor: pointer;
-	transform: translateY(-50%);
-}
-
-.sh-tl__arrow[hidden] {
-	display: none;
-}
-
-.sh-tl__arrow--prev {
-	left: var(--sh-space-10);
+	transform: translate(-50%, -50%);
 }
 
 .sh-tl__arrow--next {
-	right: var(--sh-space-10);
+	right: 40.5px;
+	left: auto;
+	transform: translate(50%, -50%);
+}
+
+.sh-tl__arrow svg {
+	width: 25px;
+	height: 48px;
+}
+
+.sh-tl__arrow:disabled {
+	visibility: hidden; /* D18: hidden at either end (not focusable) */
 }
 
 .sh-tl__arrow:focus-visible {
 	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: -4px;
+}
+
+html:not(.sh-js) .sh-tl__arrow {
+	display: none;
+}
+
+/* ---- Track: time line (fixed) + objects and ● (move with --c) · drag area ---- */
+.sh-tl__track {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 2;
+	height: calc(var(--line-y) + 26px);
+	touch-action: pan-y;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.sh-tl__line {
+	position: absolute;
+	top: var(--line-y);
+	right: var(--line-r);
+	left: var(--line-l);
+	height: 4px;
+	background: var(--sh-color-black);
+}
+
+.sh-tl__items,
+.sh-tl__dots {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* Anchor = dot x · object base (line top − 2). */
+.sh-tl__item {
+	--p: 0;
+	--ta: 0;
+	--rwe: calc(var(--rw) * 1px);
+	--grow: calc(1 + (var(--s) - 1) * var(--p));
+	position: absolute;
+	top: calc(var(--line-y) - 2px);
+	left: 50%;
+	width: 0;
+	height: 0;
+	transform: translateX(calc((var(--i) - var(--c)) * var(--pitch)));
+}
+
+.sh-tl__item.is-center {
+	z-index: 1;
+}
+
+.sh-tl__obj {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: block;
+	width: var(--rwe);
+	aspect-ratio: var(--ar);
+	opacity: calc(0.6 + 0.4 * var(--p));
+	cursor: pointer;
+	transform: translateX(-50%) scale(var(--grow));
+	transform-origin: 50% 100%;
+}
+
+.sh-tl__item.is-center .sh-tl__obj {
+	cursor: default;
+}
+
+.sh-tl.is-moving .sh-tl__item,
+.sh-tl.is-moving .sh-tl__dot-item {
+	will-change: transform;
+}
+
+/* Title: bottom = top of the (growing) object − 19 · max 280 wide · Komet-Heavy 18/22. */
+.sh-tl__title {
+	position: absolute;
+	bottom: calc(var(--rwe) / var(--ar) * var(--grow) + 19px);
+	left: 0;
+	width: max-content;
+	max-width: calc(var(--tw, 280px) * var(--tr)); /* --tw: timeline.js widens a title that needs > 2 lines */
+	margin: 0;
+	font-family: var(--sh-font-komet);
+	font-size: calc(18px * var(--tr));
+	font-weight: var(--sh-fw-komet-heavy);
+	line-height: calc(22px * var(--tr));
+	color: var(--sh-color-neutral-900);
+	text-align: center;
+	visibility: hidden;
+	opacity: var(--ta);
+	pointer-events: none;
+	transform: translateX(-50%);
+}
+
+.sh-tl__title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.sh-tl__title a:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
 	outline-offset: 2px;
 }
 
-/* ---- Back (outside the scroller, y 1476 → 1326 under the header) ---- */
-.sh-tl__back {
-	position: absolute;
-	top: 1326px;
-	left: var(--sh-page-offset);
-	z-index: 3;
+.sh-tl__item.is-vis .sh-tl__title {
+	visibility: visible;
 }
 
-/* ---- Mobile (no Figma frame — D5): stacked cards, half-size illustration, scroll inside the box ---- */
-@media (max-width: 767px) {
+.sh-tl__item.is-center .sh-tl__title {
+	pointer-events: auto;
+}
+
+/* ● ⌀12 on the line centre · hit ≥ 44×44 on screen · drawn only inside the line's extent. */
+.sh-tl__dots {
+	position: absolute;
+	top: calc(var(--line-y) + 2px - var(--tl-hit) / 2);
+	right: var(--line-r);
+	left: var(--line-l);
+	z-index: 3;
+	height: var(--tl-hit);
+	overflow: hidden;
+}
+
+.sh-tl__dot-item {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: calc(50% + (var(--line-r) - var(--line-l)) / 2);
+	width: 0;
+	transform: translateX(calc((var(--i) - var(--c)) * var(--pitch)));
+}
+
+.sh-tl__dot {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: calc(var(--tl-hit) / -2);
+	width: var(--tl-hit);
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
+}
+
+.sh-tl__dot::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 12px;
+	height: 12px;
+	margin: -6px 0 0 -6px;
+	border-radius: 50%;
+	background: var(--sh-color-black);
+}
+
+.sh-tl__dot:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: -8px;
+	border-radius: 50%;
+}
+
+/* ---- Under the line: one object's photo (centre x 720 · centre y_rel 561) + metadata (x 907 · line-box 496) ---- */
+.sh-tl__below {
+	position: absolute;
+	inset: 0;
+	z-index: 4;
+	pointer-events: none;
+}
+
+.sh-tl__info {
+	--pa: 0;
+	--ma: 0;
+	--pwe: calc(var(--pw) * 1px);
+	position: absolute;
+	inset: 0;
+	visibility: hidden;
+}
+
+.sh-tl__info.is-vis {
+	visibility: visible;
+}
+
+.sh-tl__photo {
+	position: absolute;
+	top: calc(561px - var(--pwe) / var(--ar) / 2); /* box ≤ 320×265 centred at x 720 · y_rel 561 */
+	left: calc(720px - var(--pwe) / 2);
+	display: block;
+	width: var(--pwe);
+	aspect-ratio: var(--ar);
+	opacity: var(--pa);
+}
+
+.sh-tl__meta {
+	position: absolute;
+	top: 496px;
+	left: 907px;
+	width: calc(442px * var(--mr));
+	margin: 0;
+	font-family: var(--sh-font-komet);
+	font-size: calc(14px * var(--mr));
+	font-weight: var(--sh-fw-komet-medium);
+	line-height: calc(18.6px * var(--mr));
+	color: var(--sh-color-neutral-900);
+	opacity: var(--ma);
+}
+
+.sh-tl__info.is-center .sh-tl__photo,
+.sh-tl__info.is-vis .sh-tl__meta {
+	pointer-events: auto;
+}
+
+/* ---- Image group: trimmed crop of each image inside the group box ---- */
+.sh-tl-pic {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.sh-tl-pic__part {
+	position: absolute;
+	overflow: hidden;
+}
+
+.sh-tl-pic__img {
+	position: absolute;
+	max-width: none;
+	pointer-events: none;
+}
+
+/* ---- Back §3.3 · x 160 · y_rel 649 (unscaled component, placed with k) ---- */
+.sh-tl__back {
+	position: absolute;
+	top: calc(649px * var(--k));
+	left: calc(50% - 560px * var(--k));
+	z-index: 8;
+}
+
+/*
+ * ---- Tablet 768–1279 (§4.5c.6) — no stage scaling · pitch 0.2615·W · rest ≤ 0.18·W × 140 · photo ≤ 280×260 ·
+ * metadata under the photo (≤ 560) · mini-map full width under the icons. Vertical positions [P]: mini-map y 66 ·
+ * line top = mini-map bottom + 12 + tallest (title + 19 + active object), measured by timeline.js · arrows line − 120.
+ */
+@media (max-width: 1279.98px) {
 	.sh-tl {
-		--tl-ill-scale: 0.5;
-		padding: 0 0 var(--sh-space-30);
+		--k: 1;
+		--pitch: 26.15cqw;
+		--line-y: 464px;     /* default; timeline.js measures the tallest title + 19 + active object */
+		--line-l: 0px;
+		--line-r: 0px;
+		--arrow-y: calc(var(--line-y) - 120px);
 	}
 
-	.sh-tl__trails {
-		position: static;
-		flex-wrap: wrap;
+	.sh-tl__fit {
 		height: auto;
-		padding: var(--sh-space-10) var(--sh-tablet-margin);
 	}
 
-	.sh-tl__viewport {
-		scrollbar-width: thin;
+	.sh-tl__stage {
+		position: relative;
+		left: auto;
+		width: auto;
+		height: auto;
+		margin: 0;
+		transform: none;
 	}
 
-	.sh-tl__viewport::-webkit-scrollbar {
-		display: block;
-		height: 6px;
+	.sh-tl__top {
+		position: relative;
+		height: calc(var(--line-y) + 9px);
 	}
 
-	.sh-tl__viewport::-webkit-scrollbar-thumb {
-		background: var(--sh-color-neutral-400);
-	}
-
-	.sh-tl__arrow {
-		display: none;
-	}
-
-	.sh-tl__row {
-		gap: var(--sh-space-40);
-		min-height: 0;
-		padding: var(--sh-space-30) var(--sh-tablet-margin);
-	}
-
-	.sh-tl-card {
-		flex-direction: column;
-		align-items: flex-start;
-		gap: var(--sh-space-15);
-		width: 300px;
-		padding: 0;
-	}
-
-	.sh-tl-card__text {
-		width: 100%;
-	}
-
-	.sh-tl-card__title,
-	.sh-tl-card__meta {
+	.sh-tl__mini {
+		top: 66px;
+		right: 24px;
+		left: 24px;
 		width: auto;
 	}
 
+	.sh-tl__mini-item {
+		--mwe: min(calc(var(--mw) * 1px), calc(var(--mp) - 3.6px), calc(38px * var(--ar)));
+	}
+
+	.sh-tl__item {
+		--rwe: min(calc(var(--rw) * 1px), 18cqw, calc(140px * var(--ar)));
+	}
+
+	/* Narrower than 340 so the centred title never reaches the neighbours (pitch 26.15cqw · rest ≤ 18cqw). */
+	.sh-tl__title {
+		max-width: min(340px, 33cqw);
+	}
+
+	.sh-tl__below {
+		position: relative;
+		inset: auto;
+		display: grid;
+	}
+
+	.sh-tl__info {
+		--pwe: min(calc(var(--pw) * 1px), 280px, calc(260px * var(--ar)));
+		position: relative;
+		inset: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+		grid-area: 1 / 1;
+		padding: 0 24px;
+	}
+
+	.sh-tl__photo {
+		position: relative;
+		top: auto;
+		left: auto;
+	}
+
+	.sh-tl__meta {
+		position: relative;
+		top: auto;
+		left: auto;
+		width: min(560px, 100%);
+		font-size: 14px;
+		line-height: 18.6px;
+	}
+
 	.sh-tl__back {
-		position: static;
-		margin: var(--sh-space-10) var(--sh-tablet-margin) 0;
+		position: relative;
+		top: auto;
+		left: auto;
+		margin: 24px 0 24px 20px;
+	}
+}
+
+/*
+ * ---- Mobile < 768 (§4.5c.6) — icons scroll in one row · mini-map full width, 48 high · pitch 62vw ·
+ * rest ≤ 46cqw × 120 (spec ≤ 52vw; 46 keeps the widest centre object ×1.52 clear of its neighbour, DEFERRED) ·
+ * title 16/20 · photo ≤ 70vw × 240 · metadata full width (padding 20) 14/20 · no ‹ › (D18).
+ */
+@media (max-width: 767.98px) {
+	.sh-tl {
+		--pitch: 62cqw;
+		--line-y: 400px;
+	}
+
+	.sh-tl__trails {
+		top: 12px;
+		right: 0;
+		left: 0;
+		padding: 0 20px 4px;
+		overflow-x: auto;
+		scrollbar-width: none;
+	}
+
+	.sh-tl__mini {
+		--mbase: 37px;
+		--mline: 38px;
+		--mft: 6px;
+		--mfh: 37px;
+		top: 56px;
+		right: 20px;
+		left: 20px;
+		height: 48px;
+	}
+
+	.sh-tl__mini-item {
+		--mwe: min(calc(var(--mw) * 1px), calc(var(--mp) - 3.6px), calc(28px * var(--ar)));
+	}
+
+	.sh-tl__item {
+		--rwe: min(calc(var(--rw) * 1px), 46cqw, calc(120px * var(--ar)));
+	}
+
+	.sh-tl__title {
+		max-width: min(340px, 68cqw);
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	.sh-tl__arrow {
+		display: none; /* D18: no ‹ › on mobile — drag/swipe, mini-map, dots, keys */
+	}
+
+	.sh-tl__info {
+		--pwe: min(calc(var(--pw) * 1px), 70cqw, calc(240px * var(--ar)));
+		padding: 0 20px;
+	}
+
+	.sh-tl__meta {
+		width: 100%;
+		line-height: 20px;
 	}
 }
