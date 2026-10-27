@@ -19,10 +19,12 @@ function sh_setup(): void {
 		array( 'search-form', 'gallery', 'caption', 'style', 'script', 'navigation-widgets' )
 	);
 
+	// Header #02 menu (DESIGN-SPEC §3.2). Items + link targets are set in Appearance > Menus (P-211).
+	// No footer location: the Figma design has no footer (§4.1 / P-211). The Header #1 utility menu
+	// (Visit … Contact) is hidden in every Figma instance, so it is not registered (O-8 / DEFERRED).
 	register_nav_menus(
 		array(
-			'primary' => __( 'Primary navigation', 'sharedheritage' ),
-			'footer'  => __( 'Footer navigation', 'sharedheritage' ),
+			'primary' => __( 'Main menu (header)', 'sharedheritage' ),
 		)
 	);
 }
