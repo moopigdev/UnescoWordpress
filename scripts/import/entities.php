@@ -40,6 +40,16 @@ function sh_import_page( string $role, string $slug, string $title ): array {
 }
 
 /**
+ * Home "Trails" footprint video = manifest entry with usage "home-trails" (walking.webm · D12).
+ *
+ * @param array<string, mixed> $manifest media manifest.
+ * @return array{webm:int,hevc:int,poster:int,has_alpha:bool,still:int}
+ */
+function sh_imp_home_trails_video( array $manifest ): array {
+	return sh_imp_video( sh_imp_manifest_entry( $manifest, 'usage', 'home-trails' ), 'Home footprints animation' );
+}
+
+/**
  * Pages of the route table + their fields (Timeline fields are written by sh_import_timeline()).
  *
  * @param array<string, mixed> $seed     Seed files.
@@ -69,7 +79,7 @@ function sh_import_pages( array $seed, array $map, array $manifest ): array {
 	$home = $seed['site']['home'];
 	$pm   = $map['pages'];
 	if ( $pages['front']['write'] ) {
-		$video = sh_imp_video( $manifest, isset( $pm['home']['trails_video'] ) ? $pm['home']['trails_video'] : null, 'Home footprints animation' );
+		$video = sh_imp_home_trails_video( $manifest );
 		sh_imp_meta(
 			'post',
 			$pages['front']['id'],

@@ -49,11 +49,11 @@ Zone 4 ไม่มีหน้า zone ของตัวเอง: term `zone-
 | `sh_local_name` | `text` → string | — (0/15 ช้าง) | บรรทัดใน metadata (Page 2.1) | Liturgical Pulpit Covers: "Pha Hum Thammasan / …" | detail | ✔ |
 | `sh_object_biography` | `textarea` → string | — (10/15) | `Specimen/Object biography:` | "The Dutch government in Java presented this…" | detail | ✔ |
 | `sh_caption` | `textarea` → string | ✔ (14/15 — Bas-relief มีแต่ lorem P-213) | หลัง "Caption:" `670:2799` | "Carved from volcanic stone, this monumental statue…" (ย่อหน้าคั่นบรรทัดว่าง) | detail | ✔ |
-| `sh_hero_video_webm` | `file` → integer | — (7/15 มีวิดีโอ) | Frame GIF `1051:8181` (ไฟล์จริง = media manifest `out`) | Ganesha → `ganesha.webm` 1440×810 | detail hero | ✔ |
-| `sh_hero_video_hevc` | `file` → integer | — (เฉพาะ alpha 4 ไฟล์) | manifest `fallback.file` (type `hevc-alpha-mov`) | Kendi → `elephant-and-mahout-kendi.hevc.mov` | detail hero (`<source>` แรกสำหรับ Safari) | ✔ |
+| `sh_hero_video_webm` | `file` → integer | — (14/15 มีวิดีโอ) | Frame GIF `1051:8181` (ไฟล์จริง = media manifest `out` ของรายการที่ `object_slug` = slug วัตถุ · `kind: video`) | Ganesha → `ganesha.webm` 1440×810 · Leg Bone ว่าง (`kind: still`) | detail hero | ✔ |
+| `sh_hero_video_hevc` | `file` → integer | — (เฉพาะ alpha 6 ไฟล์) | manifest `fallback.file` เฉพาะ `fallback.type = hevc-alpha-mov` (`poster-only` = ไม่มี) | Kendi → `elephant-and-mahout-kendi.hevc.mov` | detail hero (`<source>` แรกสำหรับ Safari) | ✔ |
 | `sh_hero_video_has_alpha` | `true_false` → boolean | — | manifest `has_alpha` | Kendi true · Ganesha false (พื้นขาวทึบ) | detail hero | ✔ |
 | `sh_hero_poster` | `image` → integer | — (คู่กับวิดีโอ) | manifest `poster` (WebP ≤640 กว้าง) | `ganesha.poster.webp` | detail hero `poster=` | ✔ |
-| `sh_hero_image` | `image` → integer | — | เฟรม GIF แรกที่ opacity>0 ใต้ hero (`figma[].hero_images`) | Leg Bone `e79714c1…` 1320×742 · **ไม่มีไฟล์ 10/15** (P-209 เฟรม GIF ไม่ได้ดาวน์โหลด) | detail hero เมื่อไม่มีวิดีโอ | ✔ |
+| `sh_hero_image` | `image` → integer | — | manifest `still` ของรายการ `kind: still` (D13 เฟรมเดียว) · ไม่มี → เฟรม GIF แรกที่ opacity>0 ใต้ hero (`figma[].hero_images`) | Leg Bone `elephant-leg-bone.still.webp` 1320×742 · อื่น ๆ เฟรมแรก PNG (ครบ 15/15) | detail hero เมื่อไม่มีวิดีโอ | ✔ |
 | `sh_tile_image` | `image` → integer | ✔ | tile `Ele NN` default `939:775` (หน้า trail 1501 `796:1795`) | Leg Bone `70cf8ed7…` 184² | trail grid | ✔ |
 | `sh_tile_image_hover` | `image` → integer | ✔ | tile hover `939:776` | Leg Bone `e978e4de…` 210² | trail grid hover | ✔ |
 | `sh_extra_image_1` | `image` → integer | — | ภาพในแผงเนื้อหาที่แสดงจริง (ลำดับตาม Figma) | Leg Bone `1041:1452` `4953122e…` 360×589 | detail panel | ✔ |
@@ -69,6 +69,7 @@ Zone 4 ไม่มีหน้า zone ของตัวเอง: term `zone-
 | `sh_collection_color` | `color_picker` → string | — (ว่าง = text) | fill `Collection:` | Leg Bone `#F8F9FA` | detail | ✔ |
 | `sh_layout` | `textarea` → string (JSON object · ตรวจตอนบันทึก) | ✔ (ตรง 100%) | ตาราง DESIGN-SPEC §4.8 (`figma[Final].style`) | Ganesha `{"frame_id":"670:2786","panel_y":1000,"panel_h":1005,"panel_padding_top_bottom":[60,80],"hero":[{"bbox":[0,150,1440,810]…}],"back_button":[160,1887,115,50],…}` | detail (geometry) | ✔ |
 `sh_layout` keys: `frame_id frame_name frame_size hero[] back_button panel_padding_top_bottom panel_children[] panel_gap panel_node panel_bg panel_has_fill panel_y panel_h title_color collection_color caption_color meta_color` (bbox = `[x,y,w,h]` เทียบ frame 1440) · อ่านด้วย `sh_object_layout()`
+- import ส่ง seed `figma[Final].style` **ทั้งก้อน** (คีย์ที่ไม่รู้จักผ่านไปด้วย — DESIGN-SPEC §4.8 เป็นที่นิยามคีย์) · **คีย์ใดก็ได้ (ทุกระดับ) ที่ลงท้าย `_ref`** และค่าเป็นชื่อไฟล์ใน `design/assets` (มี/ไม่มีนามสกุล เช่น ภาพครอปของ design-dev `<ref>.crop-<node>.png`) หรือ imageRef ใน `image-map.json` → ค่าใน `sh_layout` กลายเป็น **attachment id (integer)** · ไม่มีไฟล์ → คงข้อความเดิม + คำเตือนใน import report (ไม่ fatal) · หน้าอ่าน: `is_int( $v )` → `wp_get_attachment_image( $v, … )`
 
 ## 3. `timeline_item` — group: timeline_item
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `timeline-elephant.json`) | ใช้ในหน้า | REST |
@@ -131,7 +132,7 @@ Zone 4 ไม่มีหน้า zone ของตัวเอง: term `zone-
 | `sh_home_trails_tagline` | `text` → string | ✔ | `I886:1787;886:1762` | "Step beyond traditional gallery walls…" | home | ✔ |
 | `sh_home_trails_paragraph_1` | `textarea` → string | ✔ | `I886:1787;886:1763` | "In this borderless digital world…" | home (หลัง Read more) | ✔ |
 | `sh_home_trails_paragraph_2` | `textarea` → string | ✔ | `I886:1787;886:1767` | "Forget rigid physical galleries!…" | home (หลัง Read more) | ✔ |
-| `sh_home_trails_video_webm` | `file` → integer | — | AAMM -01 `[160,1913 1120×630]` รอยเท้า (§6.2) = manifest `walking` | `walking.webm` 1120×630 | home | ✔ |
+| `sh_home_trails_video_webm` | `file` → integer | — | AAMM -01 `[160,1913 1120×630]` รอยเท้า (§6.2) = manifest รายการ `usage: home-trails` (`walking`) | `walking.webm` 1120×630 | home | ✔ |
 | `sh_home_trails_video_poster` | `image` → integer | — | manifest `walking.poster` | `walking.poster.webp` | home | ✔ |
 Zone cards 1–5 บนหน้าแรก = term `zone` (§5) · ไอคอน trail 17 = `sh_trails('home')` · navigator 4 จุด = พฤติกรรมหน้า (ไม่ใช่ข้อมูล)
 
@@ -149,7 +150,7 @@ Zone cards 1–5 บนหน้าแรก = term `zone` (§5) · ไอคอ
 | `sh_intro_knowing_paragraph_2` | `textarea` → string | ✔ | `670:1233` | "This exhibition suggests it is all this and more…" | intro | ✔ |
 | `sh_intro_knowing_body` | `textarea` → string | ✔ | `670:1237` | "Southeast Asia was formalised as a region…" | intro | ✔ |
 | `sh_intro_knowing_image` | `image` → integer | ✔ | `670:1236` | `74e1d6fd…` 549×284 | intro | ✔ |
-| `sh_intro_map_image` | `image` → integer | ✔ | แผนที่จริง `670:1596` (ในเฟรม 1471 เป็น placeholder P-210) | `cd63a05d…` 1120×620 | intro map | ✔ |
+| `sh_intro_map_image` | `image` → integer | ✔ | ภาพแผนที่ในเฟรม 1471 `I670:1239;670:1462` (Frame 12655 fill — P-150 · D14 ไม่ใช่ Section 11 `670:1596` `cd63a05d`) | `39907d2c…` PNG 4000×2250 (แสดง 1120×620) | intro map | ✔ |
 | `sh_intro_map_slide_1_title` | `text` → string | ✔ | `670:1479` | ": People, Places, and Shared Histories" | intro map | ✔ |
 | `sh_intro_map_slide_1_body` | `textarea` → string | ✔ | `670:1480` `670:1481` (ย่อหน้าคั่นบรรทัดว่าง) | "Southeast Asia is defined by…" | intro map + popup | ✔ |
 | `sh_intro_map_slide_2_title` | `text` → string | ✔ | `670:1501` | ": Early Centres of Power" | intro map | ✔ |
@@ -181,7 +182,7 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
 ## 10. ไม่อยู่ในสัญญา (เหตุผล)
 - DESIGN-SPEC §5.1 `timeline_card_image` + `timeline.*` ของวัตถุ → อยู่ที่ `timeline_item` (§3) เพราะหัว/ข้อความการ์ดต่างจากหน้า detail · `title_raw` → `sh_title_raw` · `detail_style.*` → `sh_panel_bg` … `sh_collection_color` · `layout` → `sh_layout`
 - `_sh_import_key` (post/term/attachment meta ซ่อน ไม่ลง REST) = ตัวชี้ของ importer สำหรับรันซ้ำ ไม่ใช่ข้อมูลหน้า
-- hero GIF หลายเฟรม (`hero_images[]` 3–24 เฟรม) → เก็บ `sh_hero_image` ภาพนิ่ง 1 ใบ + วิดีโอ (O-5 · P-209: เฟรมยังไม่ดาวน์โหลด) · `hero_still` ที่ซ่อนใน Figma ไม่ใช้
+- hero GIF หลายเฟรม (`hero_images[]` 3–24 เฟรม) → เก็บ `sh_hero_image` ภาพนิ่ง 1 ใบ + วิดีโอ (D13: media-dev ต่อเฟรมเป็น WebM) · `hero_still` ที่ซ่อนใน Figma ไม่ใช้
 - หมุดแผนที่ (`pins[]` x,y) — ไม่มีใน seed · popup ใช้ข้อความ slide เดียวกัน (DESIGN-SPEC §5.5)
 - `home.side_navigator` · `home.trails_animation_frames[12]` (ใช้วิดีโอ `walking` แทน) · `status[]` (ข้อสังเกตภายในของ seed) · `tile_bg.group` (ชื่อกลุ่ม ไม่ใช้แสดงผล)
 - ความสัมพันธ์ zone ↔ trail/object (P-212) — กริด zone ใช้ `sh_show_in_zone_grid` ตาม seed
@@ -199,9 +200,12 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
 | `sh_object_extra_images( $id )` · `sh_object_layout( $id )` · `sh_paragraphs( $text )` | id ภาพแผง · layout array · ย่อหน้า string[] |
 
 ## 12. Import (`scripts/import/`)
-- `import.php` (+ `lib.php` `media.php` `entities.php` `objects.php`) รันใน WP: local อัตโนมัติใน `scripts/local.sh` · server `SH_IMPORT_ASSETS_DIR=… SH_IMPORT_MEDIA_DIR=… wp eval-file scripts/import/import.php`
+- `import.php` (+ `lib.php` `icc.php` `media.php` `entities.php` `objects.php` `refresh.php`) รันใน WP: local อัตโนมัติใน `scripts/local.sh` · server `SH_IMPORT_ASSETS_DIR=… SH_IMPORT_MEDIA_DIR=… wp eval-file scripts/import/import.php`
 - อ่าน `content/seed/*.json` + `content/media-manifest.json` + `scripts/import/image-map.json` · ภาพจาก `Unesco/design/assets/` · วิดีโอ/poster จาก `Unesco/media/out/` (นอก repo · path จาก env/constant `SH_IMPORT_ASSETS_DIR` `SH_IMPORT_MEDIA_DIR`)
-- `image-map.json` สร้างด้วย `python3 scripts/import/build-image-map.py` จาก `design/figma-file.json` (node ใน seed → imageRef = ชื่อไฟล์ · กฎ: fill IMAGE ที่ visible ชั้นบนสุด · `missing` = ref ที่ไม่มีไฟล์) — รันใหม่เมื่อ seed/Figma เปลี่ยน
+- `image-map.json` สร้างด้วย `python3 scripts/import/build-image-map.py` จาก `design/figma-file.json` (node ใน seed → imageRef = ชื่อไฟล์ · กฎ: fill IMAGE ที่ visible ชั้นบนสุด · `missing` = ref ที่ไม่มีไฟล์) — รันใหม่เมื่อ seed/Figma/`design/assets` เปลี่ยน
+- **วิดีโอ/ภาพ hero อ่านจาก manifest ตรง (ไม่อยู่ใน image-map):** วัตถุ = รายการที่ `object_slug` = slug (`kind: video` → `out` + `poster` + HEVC เฉพาะ `fallback.type = hevc-alpha-mov` · `kind: still` → `still` เป็น `sh_hero_image`) · Home Trails = รายการ `usage: home-trails` · media-dev เพิ่มรายการใหม่ → import รอบหน้าหยิบเอง ไม่ต้องแก้โค้ด
+- **ICC → sRGB (`icc.php`):** JPEG/PNG ที่ฝัง ICC profile ที่ชื่อไม่ขึ้นต้น `sRGB` (Apple "Color LCD"/Display P3/DCI-P3 ใน `design/assets` 73 ไฟล์) → ลบ profile (JPEG APP2 · PNG iCCP+cICP+cHRM+gAMA) ตอนคัดลอก **ไม่แปลงค่าพิกเซล** — Figma วาดค่าพิกเซลดิบโดยไม่สนใจ profile · วัดแล้ว: tile `8428e71b` Figma (241,173,160) = ค่าดิบ · ถ้าแปลงสีจริงได้ (253,169,158) ≠ Figma · ไม่ re-encode (lossless) · PHP ล้วน ไม่ต้องมี GD/Imagick
 - **idempotent:** หาเดิมด้วย `_sh_import_key` (post/attachment) · slug (term) · path (page) · ชื่อ (menu) → `SH_IMPORT_MODE=missing` (default) ไม่แตะของที่มีแล้ว (ไม่ทับงานที่ admin แก้) · `overwrite` = seed ทับ
-- ผลนับ (local 2026-10-27): object 15 · timeline_item 15 · trail 17 · zone 5 · page 3 · attachment 179 · menu 2 · รอบที่ 2 สร้างใหม่ 0 · คำเตือน 10 = ภาพ hero ที่ไม่มีไฟล์ (P-209)
+- **แก้ค่าที่ importer รุ่นก่อนเขียนผิด = refresh step (`refresh.php`)** รันครั้งเดียวต่อ site (option `sh_import_refresh_done`) แม้ mode `missing` · แก้เฉพาะฟิลด์ที่ระบุ และเฉพาะเมื่อค่าเดิมว่าง หรือยังเป็น attachment ที่ importer สร้าง (มี `_sh_import_key`) — ไฟล์ที่ admin อัปโหลด/เลือกเองไม่ถูกแทน · `2026-10-27-media`: hero วัตถุ (`sh_hero_*`) · `sh_home_trails_video_*` · `sh_intro_map_image` · ICC ของไฟล์ `asset:*` ที่คัดลอกไปแล้ว (มี sub-size → สร้างใหม่) · บังคับรันซ้ำ `SH_IMPORT_REFRESH=<id>|all` · import report มี `refresh: [ids ที่รันรอบนี้]` · attachment เก่าที่เลิกใช้ (เช่น แผนที่ `cd63a05d`) ไม่ลบ
+- ผลนับ (local 2026-10-27 · core-import-refresh): object 15 · timeline_item 15 · trail 17 · zone 5 · page 3 · attachment 205 · menu 2 · ICC→sRGB 67 ไฟล์ · คำเตือน 0 · รอบที่ 2 สร้างใหม่ 0 / แก้ 0 · import เก่า→ใหม่บน site เดียวกัน: วิดีโอ 7→14 · HEVC 4→6 · แผนที่ → 39907d2c · ICC 68 · ภาพ hero ที่ admin ตั้งเองคงเดิม
 - ภาพนำเข้าโดยไม่สร้าง sub-size (ต้นฉบับใหญ่ · playground ช้า) · server ใช้ `SH_IMPORT_SUBSIZES=1`
