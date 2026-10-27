@@ -13,6 +13,7 @@ dev เขียน P-xxx ที่ §DEV เมื่อ "ทำต่อไม
 | O-5 | media: อนุญาตให้ดาวน์โหลดโฟลเดอร์ Drive (~68MB) หรือเจ้าของวางที่ `Unesco/media/src/` · วัตถุที่ไม่มี WebM ใช้ภาพนิ่งไหม · บีบ Ganesha 50MB ได้ไหม | 🔴 `media-encode` | รอ |
 | O-6 | deploy: สร้าง staging ใน hPanel + เปิด SSH/เพิ่ม key (เจ้าของทำ/อนุญาต) · เปลี่ยน theme จาก hostinger-ai-theme บน prod | ขั้น 2 | รอ |
 | O-7 | ฟิลด์: ACF ฟรี vs `register_post_meta` + meta box เอง — **แนะนำ ACF ฟรี** (เร็ว · admin UX ดีกว่า · มี dependency 1 ตัว) | `core-contract` | ✅ ตอบแล้ว 2026-10-27: **ACF ฟรี** (เจ้าของเลือกตามคำแนะนำ) |
+| O-8 | **ESCALATE design-extract (review 2/2):** F1 ไม่ผ่าน — DESIGN-SPEC §2.1:66 · §2.4:136 · §3.1:146 เขียนว่า Header #1 ไม่มีเส้นขอบ แต่จริงมีเส้นล่าง `#AACFD8` 1.5 inside ใน 21/23 instance (ทุก detail/zone/trail · ยกเว้น Home 670:9386 · Intro 699:11020) ยืนยันด้วยพิกเซล PNG · F2–F4 ผ่าน · ทางแก้ 3 บรรทัด | 🔴 `design-extract` merge → `core-contract` → ขั้น 1 | ✅ 2026-10-27: dev แก้ 3 บรรทัด → orchestrator รันสคริปต์ reviewer ยืนยัน (ไม่ใช่รอบ 3) → merge |
 
 ## §DEV — dev เปิด (P-xxx)
 ช่วงเลข: wp-dev P-100–199 · design-dev P-200–299 · media-dev P-300–399 · reviewer ไม่เปิด (ใช้ DEFERRED)
