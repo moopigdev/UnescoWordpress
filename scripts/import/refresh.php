@@ -8,6 +8,8 @@
  *   a field is rewritten only when it is empty or still points to an attachment the importer created
  *   (has _sh_import_key). A file the admin uploaded/picked from the media library is never replaced.
  * Mode "overwrite" already rewrites the fields — only the file part of a step runs (attachments are never re-copied).
+ * Step 2026-10-28-layout-refs has its own rule (text values, not attachments — see sh_import_refresh_layout_refs())
+ * and is recorded as done only when nothing is left unresolved (a run without the crop files retries next time).
  * Re-run a step on purpose: SH_IMPORT_REFRESH=<id>[,<id>] (or "all").
  *
  * @package sharedheritage-core
@@ -23,7 +25,9 @@ defined( 'ABSPATH' ) || exit;
 function sh_import_refresh_steps(): array {
 	return array(
 		// core-import-refresh 2026-10-27: hero by manifest object_slug (+ still) · ICC → sRGB · intro map 39907d2c (P-150).
-		'2026-10-27-media' => 'object hero (manifest object_slug) · Home trails video · intro map · ICC to sRGB',
+		'2026-10-27-media'       => 'object hero (manifest object_slug) · Home trails video · intro map · ICC to sRGB',
+		// deploy-crops 2026-10-28: production import ran without the design-dev crop files (not in the deploy bundle).
+		'2026-10-28-layout-refs' => 'object sh_layout *_ref still the seed file name → attachment id',
 	);
 }
 
@@ -135,6 +139,82 @@ function sh_import_refresh_media( array $seed, array $map, array $manifest, arra
 }
 
 /**
+ * Value at $path inside $data (null = no such path).
+ *
+ * @param mixed                  $data Decoded JSON.
+ * @param array<int, int|string> $path Keys.
+ * @return mixed
+ */
+function sh_imp_path_get( $data, array $path ) {
+	foreach ( $path as $k ) {
+		if ( ! is_array( $data ) || ! array_key_exists( $k, $data ) ) {
+			return null;
+		}
+		$data = $data[ $k ];
+	}
+	return $data;
+}
+
+/**
+ * Set the value at an existing $path inside $data.
+ *
+ * @param array<int|string, mixed> $data  Decoded JSON (by reference).
+ * @param array<int, int|string>   $path  Keys (must exist — check with sh_imp_path_get() first).
+ * @param mixed                    $value New value.
+ */
+function sh_imp_path_set( array &$data, array $path, $value ): void {
+	$node = &$data;
+	foreach ( $path as $k ) {
+		$node = &$node[ $k ];
+	}
+	$node = $value;
+	unset( $node );
+}
+
+/**
+ * Step 2026-10-28-layout-refs: an object whose sh_layout still holds a seed "*_ref" value as text (the import had no
+ * file for it) gets the attachment id now that the file is there. Only a value that is exactly the seed text at the
+ * same place (same key path in the Final frame style) is touched — anything an admin changed (other text · an id ·
+ * a removed/moved key · invalid JSON) stays as it is, and the rest of the layout JSON is kept as stored.
+ * Runs in every mode: overwrite already writes ids for files that exist, so it only finds what is still missing.
+ *
+ * @param array<string, mixed> $seed    Seed files.
+ * @param array<string, mixed> $map     image-map.json.
+ * @param array<string, int>   $objects slug => post id.
+ * @return int Values still text because the file is missing (each one is also an import warning).
+ */
+function sh_import_refresh_layout_refs( array $seed, array $map, array $objects ): int {
+	$left = 0;
+	foreach ( sh_import_scope_objects( $seed ) as $o ) {
+		$id     = isset( $objects[ $o['slug'] ] ) ? (int) $objects[ $o['slug'] ] : 0;
+		$layout = $id ? json_decode( (string) get_post_meta( $id, 'sh_layout', true ), true ) : null;
+		if ( ! is_array( $layout ) ) {
+			continue;
+		}
+		$changed = 0;
+		foreach ( sh_import_style_refs( (array) sh_import_final_frame( $o )['style'] ) as $ref ) {
+			list( $path, $value ) = $ref;
+			if ( sh_imp_path_get( $layout, $path ) !== $value ) {
+				continue; // Already an id, or changed by an admin.
+			}
+			$att = sh_imp_asset_ref( $map, $value, (string) $o['title'] . ' ' . substr( (string) end( $path ), 0, -4 ) );
+			if ( ! $att ) {
+				++$left;
+				continue;
+			}
+			sh_imp_path_set( $layout, $path, $att );
+			++$changed;
+			sh_imp_count( 'updated', 'layout_ref' );
+		}
+		if ( $changed ) {
+			sh_imp_meta( 'post', $id, array( 'sh_layout' => (string) wp_json_encode( $layout, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ) );
+			sh_imp_count( 'updated', 'object_layout' );
+		}
+	}
+	return $left;
+}
+
+/**
  * Run the refresh steps not yet applied on this site. Returns the ids run now.
  *
  * @param array<string, mixed>                    $seed     Seed files.
@@ -157,8 +237,12 @@ function sh_import_refresh( array $seed, array $map, array $manifest, array $obj
 		if ( '2026-10-27-media' === $step ) {
 			sh_import_refresh_media( $seed, $map, $manifest, $objects, $pages, 'overwrite' !== $cfg['mode'] );
 		}
+		$ran[] = $step;
+		if ( '2026-10-28-layout-refs' === $step && sh_import_refresh_layout_refs( $seed, $map, $objects ) > 0 ) {
+			unset( $done[ $step ] ); // Files still missing: try again on the next import.
+			continue;
+		}
 		$done[ $step ] = gmdate( 'c' );
-		$ran[]         = $step;
 	}
 	update_option( 'sh_import_refresh_done', $done, false );
 	return $ran;

@@ -155,3 +155,4 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [reviewer design-timeline-v2 r2] [2026-10-28] DESIGN-SPEC §4.5b.3 ยังเขียน "แถวการ์ดไป `card_frame_x`" (หลวม) — จุดยึดจริง = กึ่งกลางภาพตาม §6.4b · เก็บกวาด
 - [reviewer design-timeline-v2 r2] [2026-10-28] §4.5b.7 ("ต้องขอก็ต่อเมื่อเลือก C") และ P-220 ("ถ้าเลือก B/C") ยังมีประโยคเงื่อนไข B/C หลัง D24 — เก็บกวาด
 - [reviewer design-timeline-v2 r2] [2026-10-28] seed v2 `object_scale_evidence` อ้าง "slides 31→34" (ประวัติ ไม่กระทบ)
+- [deploy-crops] [2026-10-28] `deploy.sh --refresh-only` ส่ง bundle import เต็ม (ภาพ 191 ไฟล์ + media/out) แม้ step `2026-10-28-layout-refs` ใช้แค่ภาพครอป 22 ไฟล์ — ตั้งใจให้ refresh step อื่นที่ยังไม่รันมีไฟล์ครบ · ถ้าอยากลดเวลา rsync ค่อยกรองตาม step ที่ยังไม่เสร็จ
