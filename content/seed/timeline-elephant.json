@@ -1,0 +1,337 @@
+{
+ "_meta": {
+  "_source": {
+   "figma_file_key": "EhcqSXTMEArlrfSGUQVCwl",
+   "lastModified": "2026-10-27T09:48:30Z",
+   "extracted_by": "design-extract",
+   "pages": "Page 2 Version #Final 01092026 (elephant detail frames) + Page 2.1 ALL GIF trails (all trails)"
+  },
+  "note": "ลำดับ card_order = ซ้ายไปขวาในแถวการ์ดข้อมูล (ตรงกับลำดับกริดของ Elephant’s Trail) · illustration_order = ลำดับจุดบนภาพ timeline (อ่านจากภาพ raster zone4.png) — สองลำดับไม่ตรงกัน ดู P-2xx"
+ },
+ "frame": "670:1551 (Desktop - zone 4) / copy 1232:632 (Desktop - zone 6)",
+ "timeline_illustration_node": "1232:1711 (ROOM4 ele 2, 11000x791, raster)",
+ "items": [
+  {
+   "card_order": 1,
+   "key": "elephant leg bone",
+   "title": "Elephant Leg Bone (Elephas maximus indicus)",
+   "card_frame": "1232:1713",
+   "title_node": "1232:1716",
+   "meta_node": "1232:1717",
+   "meta_raw": "SECTION : Land\nPeriod: 20th-21st century\nPlace of Production / Findspot: Thailand\nDimensions: Length: 107 cm, Width: 29 cm\nCollection: National Museum Bangkok\nSpecimen / Object Biography: Received from the Ministry of Finance, Thailand.",
+   "thematic_section": "Land",
+   "period": "20th-21st century",
+   "place_of_production": "Thailand",
+   "dimensions": "Length: 107 cm, Width: 29 cm",
+   "collection": "National Museum Bangkok",
+   "object_biography": "Received from the Ministry of Finance, Thailand.",
+   "thumbnail_nodes": [
+    "1232:1714"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 14,
+   "illustration_era_label_raster": "20th–21st century"
+  },
+  {
+   "card_order": 2,
+   "key": "singhasari ganesha",
+   "title": "Singhasari Ganesha",
+   "card_frame": "1232:1719",
+   "title_node": "1232:1722",
+   "meta_node": "1232:1723",
+   "meta_raw": "SECTION : Cosmology Religion & Spirituality\nPeriod: 13th century\nPlace of Production / Findspot: Singasari Hindu-Buddhist temple complex, East Java, Indonesia\nMaterial: Andesite, Volcanic rock\nDimensions: Height: 154 cm, Length: 105 cm, Width: 72 cm\nCollection: Museum Nasional Indonesia\nOther Information / Object Biography: This statue was formerly held by the Wereldmuseum Leiden in the Netherlands. It was returned to Indonesia in September 2023",
+   "thematic_section": "Cosmology Religion & Spirituality",
+   "period": "13th century",
+   "place_of_production": "Singasari Hindu-Buddhist temple complex, East Java, Indonesia",
+   "material": "Andesite, Volcanic rock",
+   "dimensions": "Height: 154 cm, Length: 105 cm, Width: 72 cm",
+   "collection": "Museum Nasional Indonesia",
+   "object_biography": "This statue was formerly held by the Wereldmuseum Leiden in the Netherlands. It was returned to Indonesia in September 2023",
+   "thumbnail_nodes": [
+    "1232:1720"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 3,
+   "illustration_era_label_raster": "13th century"
+  },
+  {
+   "card_order": 3,
+   "key": "ganesha",
+   "title": "Ganesha",
+   "card_frame": "1232:1725",
+   "title_node": "1232:1728",
+   "meta_node": "1232:1729",
+   "meta_raw": "Section : Cosmology Reliogion & Spirituality\nPeriod:10th–11th century\nPlace of Production / Findspot :Candi Singhasari, East Java, Indonesia\nMaterial: Andesite,Volcanic rock\nDimensions: Height: 172 cm\nCollection:National Museum Bangkok \nSpecimen/Object biography: The Dutch government in Java presented this \nto King Chulalongkorn (Rama V) of Thailand during his visit in 1896.",
+   "thematic_section": "Cosmology Reliogion & Spirituality",
+   "period": "10th–11th century",
+   "place_of_production": "Candi Singhasari, East Java, Indonesia",
+   "material": "Andesite,Volcanic rock",
+   "dimensions": "Height: 172 cm",
+   "collection": "National Museum Bangkok",
+   "object_biography": "The Dutch government in Java presented this to King Chulalongkorn (Rama V) of Thailand during his visit in 1896.",
+   "thumbnail_nodes": [
+    "1232:1726"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 1,
+   "illustration_era_label_raster": "10th–11th century"
+  },
+  {
+   "card_order": 4,
+   "key": "elephant molar",
+   "title": "Elephant Molar Coconut Grater  (Dwarf Elephant Bone)",
+   "card_frame": "1232:1731",
+   "title_node": "1232:1734",
+   "meta_node": "1232:1735",
+   "meta_raw": "Section : Materials Science & Technology\nMaterial: Animal bone (specifically an elephant molar)\nDimensions: Length: 58 cm, Width: 33 cm, Height: 18 cm\nCollection: Folklore Museum, The Institute for Southern Thai Studies\nOther Information / Object Biography: Contributed by Mrs. Sriya Kongyen, \nHouse No. 21, Ranot Sub-district, Ranot District, Songkhla Province. \nData recorded on 28 January 1997. Exhibited in the Coconut Grater Room \n(Kratai Khud Maphrao Room), Folklore Museum, \nInstitute of Southern Thai Studies.",
+   "thematic_section": "Materials Science & Technology",
+   "material": "Animal bone (specifically an elephant molar)",
+   "dimensions": "Length: 58 cm, Width: 33 cm, Height: 18 cm",
+   "collection": "Folklore Museum, The Institute for Southern Thai Studies",
+   "object_biography": "Contributed by Mrs. Sriya Kongyen, House No. 21, Ranot Sub-district, Ranot District, Songkhla Province. Data recorded on 28 January 1997. Exhibited in the Coconut Grater Room (Kratai Khud Maphrao Room), Folklore Museum, Institute of Southern Thai Studies.",
+   "thumbnail_nodes": [
+    "1232:1732"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 8,
+   "illustration_era_label_raster": "19th century CE"
+  },
+  {
+   "card_order": 5,
+   "key": "embossed brass",
+   "title": "Embossed Brass Basin with Mythical Animal Motifs",
+   "card_frame": "1232:1737",
+   "title_node": "1232:1740",
+   "meta_node": "1232:1741",
+   "meta_raw": "Section : Materials Science & Technology\nMaterial: Brass alloy\nDimensions: Rim Diameter: 19 cm, Base Diameter: 11.8 cm, Height: 14 cm\nCollection: Folklore Museum, The Institute for Southern Thai Studies\nOther Information / Object Biography: Contributed by Mr. Pracha and \nMrs. Namthip Chantharadeeying. Exhibited in the Metalwork and \nMetallurgy Culture Room, Folklore Museum, Institute of Southern Thai Studies.",
+   "thematic_section": "Materials Science & Technology",
+   "material": "Brass alloy",
+   "dimensions": "Rim Diameter: 19 cm, Base Diameter: 11.8 cm, Height: 14 cm",
+   "collection": "Folklore Museum, The Institute for Southern Thai Studies",
+   "object_biography": "Contributed by Mr. Pracha and Mrs. Namthip Chantharadeeying. Exhibited in the Metalwork and Metallurgy Culture Room, Folklore Museum, Institute of Southern Thai Studies.",
+   "thumbnail_nodes": [
+    "1232:1738"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 7,
+   "illustration_era_label_raster": null
+  },
+  {
+   "card_order": 6,
+   "key": "ivory fire piston",
+   "title": "Ivory Fire Piston / Ivory Fire Syringe",
+   "card_frame": "1232:1743",
+   "title_node": "1232:1748",
+   "meta_node": "1232:1749",
+   "meta_raw": "Section : Harnessing Nature's Power\nMaterial: Ivory\nDimensions: Total Dimensions — Diameter 2.1 cm, Height 7.7 cm, Base Diameter 2.2 cm. \nCylinder (Female Component / Tua Mia) — Height 6.4 cm, Base Diameter 1.8 cm. Piston \n(Male Component / Tua Phu) — Height 5.7 cm, Upper Section Diameter 0.8 cm.\nCollection: Folklore Museum, The Institute for Southern Thai Studies\nOther Information / Object Biography: Stored in the Repository Room of the Folklore Museum,\nInstitute of Southern Thai Studies.",
+   "thematic_section": "Harnessing Nature's Power",
+   "material": "Ivory",
+   "dimensions": "Total Dimensions — Diameter 2.1 cm, Height 7.7 cm, Base Diameter 2.2 cm. Cylinder (Female Component / Tua Mia) — Height 6.4 cm, Base Diameter 1.8 cm. Piston (Male Component / Tua Phu) — Height 5.7 cm, Upper Section Diameter 0.8 cm.",
+   "collection": "Folklore Museum, The Institute for Southern Thai Studies",
+   "object_biography": "Stored in the Repository Room of the Folklore Museum, Institute of Southern Thai Studies.",
+   "thumbnail_nodes": [
+    "1232:1745",
+    "1232:1746"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 13,
+   "illustration_era_label_raster": null
+  },
+  {
+   "card_order": 7,
+   "key": "elephant and mahout",
+   "title": "Elephant and Mahout Kendi",
+   "card_frame": "1232:1751",
+   "title_node": "1232:1754",
+   "meta_node": "1232:1755",
+   "meta_raw": "Section : Ceremonies Rituals & Festivals\nPeriod: 15th–early 16th century CE\nPlace of Production / Findspot: Si Satchanalai Kiln Site, Central Thailand\nCollection: Brunei Darussalam Maritime Museum",
+   "thematic_section": "Ceremonies Rituals & Festivals",
+   "period": "15th–early 16th century CE",
+   "place_of_production": "Si Satchanalai Kiln Site, Central Thailand",
+   "collection": "Brunei Darussalam Maritime Museum",
+   "thumbnail_nodes": [
+    "1232:1752"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 4,
+   "illustration_era_label_raster": "15th–early 16th century CE"
+  },
+  {
+   "card_order": 8,
+   "key": "patola",
+   "title": "Patola Cloth (Cindai)",
+   "card_frame": "1232:1757",
+   "title_node": "1232:1760",
+   "meta_node": "1232:1761",
+   "meta_raw": "Section : Ceremonies Rituals & Festivals\nPeriod: 19th century\nPlace of Production / Findspot: Gujarat, India\nMaterial: Silk (double ikat weave)\nDimensions: Length 412 cm, Width 140 cm\nCollection: Department of Museums Malaysia \n(Jabatan Muzium Malaysia)",
+   "thematic_section": "Ceremonies Rituals & Festivals",
+   "period": "19th century",
+   "place_of_production": "Gujarat, India",
+   "material": "Silk (double ikat weave)",
+   "dimensions": "Length 412 cm, Width 140 cm",
+   "collection": "Department of Museums Malaysia (Jabatan Muzium Malaysia)",
+   "thumbnail_nodes": [
+    "1232:1758"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 12,
+   "illustration_era_label_raster": null
+  },
+  {
+   "card_order": 9,
+   "key": "elephant shaped relic",
+   "title": "Elephant-Shaped Relic Containers",
+   "card_frame": "1232:1763",
+   "title_node": "1232:1768",
+   "meta_node": "1232:1769",
+   "meta_raw": "Section : Ceremonies Rituals & Festivals\nPeriod: Lanna period, 16th century\nPlace of Production / Findspot: Wat Chedi Sung, Hod sub-district\n, Hod district, Chiang Mai province\nMaterial: Quartz, Gold, Stone\nDimensions: Width 1.1 cm, Height 4.5 cm, Length 7 cm\nCollection: National Museum Bangkok\nOther Information / Object Biography: Acquired from Wat Chedi Sung, \nHod sub-district, Hod district, Chiang Mai province, in 1960.",
+   "thematic_section": "Ceremonies Rituals & Festivals",
+   "period": "Lanna period, 16th century",
+   "place_of_production": "Wat Chedi Sung, Hod sub-district , Hod district, Chiang Mai province",
+   "material": "Quartz, Gold, Stone",
+   "dimensions": "Width 1.1 cm, Height 4.5 cm, Length 7 cm",
+   "collection": "National Museum Bangkok",
+   "object_biography": "Acquired from Wat Chedi Sung, Hod sub-district, Hod district, Chiang Mai province, in 1960.",
+   "thumbnail_nodes": [
+    "1232:1765",
+    "1232:1766"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 6,
+   "illustration_era_label_raster": null
+  },
+  {
+   "card_order": 10,
+   "key": "pod duang",
+   "title": "Pod Duang (Bullet Money) stamped with the Chakra and Great Crown Marks, Reign of King Rama IV",
+   "card_frame": "1232:1771",
+   "title_node": "1232:1774",
+   "meta_node": "1232:1775",
+   "meta_raw": "Section : Trade and Maritime Navigation\nPeriod: Rattanakosin period, 19th century\nPlace of Production / Findspot: Thailand\nMaterial: Silver\nDimensions: Width 1.2–1.5 cm\nCollection: National Museum Bangkok\nOther Information / Object Biography: Received by the National Museum \nBangkok from the Ministry of Finance, Thailand.",
+   "thematic_section": "Trade and Maritime Navigation",
+   "period": "Rattanakosin period, 19th century",
+   "place_of_production": "Thailand",
+   "material": "Silver",
+   "dimensions": "Width 1.2–1.5 cm",
+   "collection": "National Museum Bangkok",
+   "object_biography": "Received by the National Museum Bangkok from the Ministry of Finance, Thailand.",
+   "thumbnail_nodes": [
+    "1232:1772"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 11,
+   "illustration_era_label_raster": null
+  },
+  {
+   "card_order": 11,
+   "key": "hand carved ivory",
+   "title": "Hand-Carved Ivory and Metal Opium Pipe",
+   "card_frame": "1232:1777",
+   "title_node": "1232:1780",
+   "meta_node": "1232:1781",
+   "meta_raw": "Section : Trade and Maritime Navigation\nMaterial: Animal Ivory/Bone Elements, Blackened Structural Metal Alloy,\nand Hardened Resin or Ceramic Compound\nDimensions: Diameter 4 cm, Width 7 cm, Length 50.5 cm\nCollection: Folklore Museum, The Institute for Southern Thai Studies\nOther Information / Object Biography: Sourced from the private collection of \nMr. Maitree Sawapanichphan, Residence No. 85 Pimonchai Road, Mueang Yala \nDistrict, Yala Province. Official museum documentation recorded on 22 February 1995. \nExhibited in the History and Ethnology Room (Hong Prawattisat lae Chattiphan), \nFolklore Museum, Institute of Southern Thai Studies.",
+   "thematic_section": "Trade and Maritime Navigation",
+   "material": "Animal Ivory/Bone Elements, Blackened Structural Metal Alloy, and Hardened Resin or Ceramic Compound",
+   "dimensions": "Diameter 4 cm, Width 7 cm, Length 50.5 cm",
+   "collection": "Folklore Museum, The Institute for Southern Thai Studies",
+   "object_biography": "Sourced from the private collection of Mr. Maitree Sawapanichphan, Residence No. 85 Pimonchai Road, Mueang Yala District, Yala Province. Official museum documentation recorded on 22 February 1995. Exhibited in the History and Ethnology Room (Hong Prawattisat lae Chattiphan), Folklore Museum, Institute of Southern Thai Studies.",
+   "thumbnail_nodes": [
+    "1232:1778"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 10,
+   "illustration_era_label_raster": null
+  },
+  {
+   "card_order": 12,
+   "key": "tin ingot",
+   "title": "Tin Ingot in the Shape of Elephant",
+   "card_frame": "1232:1783",
+   "title_node": "1232:1786",
+   "meta_node": "1232:1787",
+   "meta_raw": "Section : Trade and Maritime Navigation\nPeriod: The 16th century\nPlace of Production / Findspot: Selangor, Malaysia\nMaterial: Tin\nDimensions: Length: 16.5 cm, Width: 10 cm, Height: 8.3 cm, \nWeight: 1.105 kg\nCollection: Department of Museums Malaysia",
+   "thematic_section": "Trade and Maritime Navigation",
+   "period": "The 16th century",
+   "place_of_production": "Selangor, Malaysia",
+   "material": "Tin",
+   "dimensions": "Length: 16.5 cm, Width: 10 cm, Height: 8.3 cm, Weight: 1.105 kg",
+   "collection": "Department of Museums Malaysia",
+   "thumbnail_nodes": [
+    "1232:1784"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 5,
+   "illustration_era_label_raster": null
+  },
+  {
+   "card_order": 13,
+   "key": "wooden cold press",
+   "title": "Wooden Cold-Press Cake Molds with Elephant,Horse, and Fowl Motifs",
+   "card_frame": "1232:1789",
+   "title_node": "1232:1792",
+   "meta_node": "1232:1793",
+   "meta_raw": "Section : Craft of Everyday\nPlace of Production / Findspot: Mueang Pattani District, Pattani Province\nMaterial: Hardwood\nDimensions: Carved Wood (Elephant Motif) — Width 7 cm, Length 26 cm, \nThickness 2.5 cm. Carved Wood (Horse Motif) — Width 10.5 cm, ]\nLength 32.5 cm, Thickness 3 cm. Carved Wood (Twin Ducks & Single Chicken Motif) \n— Width 8.5 cm, Length 32 cm, Thickness 2.5 cm. Carved Wood \n(Combined Elephant & Horse Motif) — Width 9 cm, Length 35 cm, \nThickness 2 cm.\nCollection: Folklore Museum, The Institute for Southern Thai Studies\nOther Information / Object Biography: Exhibited in the Arts and Crafts Room, \nFolklore Museum, Institute of Southern Thai Studies.",
+   "thematic_section": "Craft of Everyday",
+   "place_of_production": "Mueang Pattani District, Pattani Province",
+   "material": "Hardwood",
+   "dimensions": "Carved Wood (Elephant Motif) — Width 7 cm, Length 26 cm, Thickness 2.5 cm. Carved Wood (Horse Motif) — Width 10.5 cm, ] Length 32.5 cm, Thickness 3 cm. Carved Wood (Twin Ducks & Single Chicken Motif) — Width 8.5 cm, Length 32 cm, Thickness 2.5 cm. Carved Wood (Combined Elephant & Horse Motif) — Width 9 cm, Length 35 cm, Thickness 2 cm.",
+   "collection": "Folklore Museum, The Institute for Southern Thai Studies",
+   "object_biography": "Exhibited in the Arts and Crafts Room, Folklore Museum, Institute of Southern Thai Studies.",
+   "thumbnail_nodes": [
+    "1232:1790"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 9,
+   "illustration_era_label_raster": null
+  },
+  {
+   "card_order": 14,
+   "key": "siwaih",
+   "title": "Siwaih",
+   "card_frame": "1232:1795",
+   "title_node": "1232:1798",
+   "meta_node": "1232:1799",
+   "meta_raw": "Section : Ruling Diplomacy & Defense\nPeriod: 20th century\nPlace of Production / Findspot: Aceh\nMaterial: Metal, Ivory, Wood\nCollection: Museum Nasional Indonesia",
+   "thematic_section": "Ruling Diplomacy & Defense",
+   "period": "20th century",
+   "place_of_production": "Aceh",
+   "material": "Metal, Ivory, Wood",
+   "collection": "Museum Nasional Indonesia",
+   "thumbnail_nodes": [
+    "1232:1796"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 15,
+   "illustration_era_label_raster": null
+  },
+  {
+   "card_order": 15,
+   "key": "bas relief of a royal",
+   "title": "Procession of a King or Noble  (Relief from the Life of the Buddha)",
+   "card_frame": "1232:1801",
+   "title_node": "1232:1804",
+   "meta_node": "1232:1805",
+   "meta_raw": "Section : Ruling Diplomacy & Defense\nTitle: Procession of a King or Noble (Relief from the Life of the Buddha)\nPeriod: c. 780–830 CE (Sailendra period)\nPlace of Production / Findspot: Borobudur Temple, Magelang Regency, \nCentral Java, Indonesia (First Gallery, Chief Wall, Upper Register)\nMaterial: Andesite stone\nDimensions: In situ architectural relief; individual panel dimensions vary. \nBetween 80–100 cm high\nCollection: Borobudur Temple Compounds (UNESCO World Heritage Site), \nCentral Java, Indonesia\n",
+   "thematic_section": "Ruling Diplomacy & Defense",
+   "meta_title": "Procession of a King or Noble (Relief from the Life of the Buddha)",
+   "period": "c. 780–830 CE (Sailendra period)",
+   "place_of_production": "Borobudur Temple, Magelang Regency, Central Java, Indonesia (First Gallery, Chief Wall, Upper Register)",
+   "material": "Andesite stone",
+   "dimensions": "In situ architectural relief; individual panel dimensions vary. Between 80–100 cm high",
+   "collection": "Borobudur Temple Compounds (UNESCO World Heritage Site), Central Java, Indonesia",
+   "thumbnail_nodes": [
+    "1232:1802"
+   ],
+   "read_more_label": "Read more >>",
+   "illustration_order": 2,
+   "illustration_era_label_raster": null
+  }
+ ],
+ "reflection": {
+  "title": "Reflection",
+  "body": "The objects in this trail reveal the elephant's enduring presence across Southeast Asia. Archaeological and art-historical evidence points to long relationships between people and elephants, shaped by encounter, admiration, labour, and ritual. As \"ecosystem engineers,\" elephants have helped shape forests by opening paths, dispersing seeds, and creating habitats for other species. They have also been closely intertwined with human life through transport, logging, warfare, and ceremony, serving as working animals while also expressing prestige and authority in different communities.\n\nAs Hindu-Buddhist traditions spread through trade and migration, they encountered societies where elephants already occupied important places in local worlds of belief. In Buddhist tradition, Queen Maya dreams of a white elephant before the Buddha's birth, making the animal a sign of auspicious conception and spiritual promise. In Hindu tradition, Ganesha, the elephant-headed deity, is revered as the remover of obstacles and the bringer of wisdom. Across Southeast Asia, communities adapted these traditions alongside existing understandings of the elephant, weaving them into religious practice, ritual, and everyday life.\n\nThe objects gathered here reflect this diversity of relationships. Elephant forms and motifs appear in temple sculpture, Buddha's relic containers, and commercial textiles. Elephant bones and tusks feature in objects ranging from coconut graters and medicinal fire pistons to luxury opium pipes. Across mainland and island Southeast Asia, these objects connect forests and households, sacred and everyday practices, and communities whose traditions extend beyond present-day political borders.\n\nToday, these long relationships face new challenges. Habitat loss, land-use change, and human-elephant conflict continue to threaten elephant populations across the region. Conservation has therefore become part of the elephant's story, alongside the beliefs, practices, and material traditions through which communities have lived with elephants for generations. Together, these objects remind us that shared heritage emerges through enduring relationships between people, animals, landscapes, and material culture.",
+  "title_node": "1232:1816",
+  "body_node": "1232:1817",
+  "frame": "1232:1807"
+ }
+}

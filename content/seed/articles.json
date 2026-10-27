@@ -1,0 +1,136 @@
+{
+ "_meta": {
+  "_source": {
+   "figma_file_key": "EhcqSXTMEArlrfSGUQVCwl",
+   "lastModified": "2026-10-27T09:48:30Z",
+   "extracted_by": "design-extract",
+   "pages": "Page 2 Version #Final 01092026 (elephant detail frames) + Page 2.1 ALL GIF trails (all trails)"
+  },
+  "note": "ข้อความคัดลอกตรงจาก Figma · ชื่อ slide มี \": \" นำหน้าตาม Figma (คัดลอกตรง) · หัวเรื่อง popup บนแผนที่ใช้ข้อความเดียวกัน (Section 11 Pop up 1-4)"
+ },
+ "articles": [
+  {
+   "slug": "introduction",
+   "title": "Introduction",
+   "title_node": "670:1223",
+   "frame": "670:1215 (Desktop - 1471)",
+   "summary_paragraphs": [
+    {
+     "node": "670:1224",
+     "text": "What comes to mind when you look at the title of this digital exhibition? Where do you think it takes place? \nTake a guess at the kinds of images and objects we're about to uncover."
+    },
+    {
+     "node": "670:1225",
+     "text": "To get started, let’s dive into the exhibition’s rich Southeast Asian roots, which will serve as our map before we explore how it weaves together animals, nature, and culture."
+    }
+   ],
+   "body": "The Southeast Asian region has long been shaped by the movement of ideas, beliefs, goods, peoples and other living beings. Across rivers, forests, coastlines, mountains, and maritime routes, animals have travelled alongside human communities, becoming part of the region’s knowledge, beliefs, and lore. Concurrently, animals have featured in the region’s practices including its rituals, ceremonies, art, and the everyday.\n\nScales, Feathers & Fins invites you to explore how real and imagined creatures feature centrally in the region’s nature and culture, i.e., in its landscapes and ecosystems as well as in its stories, objects, and traditions, which we refer to as Southeast Asia’s “shared heritage”. Fittingly, this exhibition is part of UNESCO’s larger project titled, Shared Heritage: Museums in Southeast Asia.\nThe exhibition is the result of partnership between ten museums across five Southeast Asian countries—Brunei Darussalam, Indonesia, Malaysia, Singapore, and Thailand —and builds upon UNESCO’s earlier initiative called Shared Histories of Southeast Asia. These museums’ diverse collections—spanning natural history and technology, to art and ethnology—make this exhibition interdisciplinary.\n\nIt features 119 exhibits including specimens,objects, and artefacts! Thus, by bringing these different materials in dialogue, the exhibition looks beyond the boundaries of disciplines, institutions, and nation-states to approach Southeast Asia as a connected and shared environment.",
+   "body_node": "670:1227",
+   "home_summary_nodes": [
+    "670:9373",
+    "670:9374"
+   ],
+   "read_more_label": "Read more >>",
+   "note": "ข้อความ summary ซ้ำกับหน้าแรก (Frame 12685 ใน 670:1152) · body ยาวแสดงหลังกด \"Read more >>\""
+  },
+  {
+   "slug": "knowing-southeast-asia",
+   "title": "Knowing Southeast Asia",
+   "title_node": "670:1231",
+   "frame": "670:1215 (Desktop - 1471)",
+   "summary_paragraphs": [
+    {
+     "node": "670:1232",
+     "text": "What comes to mind when we think of Southeast Asia? Is it the physical terrain of winding rivers, jagged mountains, and endless coastlines? Is it a collection of nation-states defined by borders? An ecological hotspot of biodiversity? Or perhaps a vast, intricate tapestry of cultures?"
+    },
+    {
+     "node": "670:1233",
+     "text": "This exhibition suggests it is all this and more. Come on in, take your time, and join us in rethinking how we understand this vibrant region."
+    }
+   ],
+   "body": "Southeast Asia was formalised as a region only as recently as the Second World War, i.e., 1939-45. Most of its modern nation-states were formed soon after. In stark contrast, the region’s maritime routes, riverine systems, and overland passages predate and traverse recent borders. These highways connect natural and cultural ecosystems across and beyond the region. For at least two thousand years now, humans, plants, animals, and their related beliefs, materials, technologies, and skills have moved and interacted across these channels. On the sheer strength of these confluences, centres of political, economic, and religious power emerged across the Southeast Asian world. These include the Khmer, Ayutthaya, Srivijaya, and Majapahit empires to name just a few. These influential centres enhanced contacts among merchants, monks, pilgrims, scholars, and artisans of different racial, religious, and ethnic groups. Accordingly, the region continued to witness intermixing in terms of its peoples and their ways of thinking, living, and working to shape a distinct Southeast Asian landscape and culture, or what we also refer to as our shared heritage.\n\nThus, knowing Southeast Asia is about recognising its intertwined mountains and waterways, actors and objects that have connected and co-existed long before our recent wars and redrawing of borders.",
+   "body_node": "670:1237",
+   "read_more_label": "Read more >>"
+  },
+  {
+   "slug": "people-places-and-shared-histories",
+   "map_slide": 1,
+   "variant_node": "670:1461",
+   "title": ": People, Places, and Shared Histories",
+   "title_node": "670:1479",
+   "paragraphs": [
+    {
+     "node": "670:1480",
+     "text": "Southeast Asia is defined by remarkable physical and topographical diversity. It is divided into two sub-regions: mainland and maritime (island) zones. The mainland includes Viet Nam, Laos, Cambodia, Thailand, and Myanmar, and is marked by mountain chains, river valleys, and deltas such as the Mekong, Chao Phraya, and Irrawaddy systems. The maritime zone includes Malaysia, Singapore, Indonesia, Brunei, the Philippines, and Timor-Leste, and is shaped by seas, straits, archipelagos, and uplands."
+    },
+    {
+     "node": "670:1481",
+     "text": "Historically, these landscapes were linked by riverine, coastal, and overland routes that connected mainland and island societies, while also tying the region to India, China, and the Middle East. Ports and river centers such as Oc Eo in the Mekong delta, Palembang along the Musi River in Sumatra, and Butuan in the Philippines became key nodes in these networks. Traders, monks, and artisans moved not only goods but also beliefs, stories, artistic forms, and social practices, thus helping to share and shape the region’s experiences, traditions, and histories."
+    }
+   ],
+   "map_note": "ภาพแผนที่ในหน้า 1471 เป็น placeholder \"Picture map 1120x630 px\" · ภาพแผนที่จริงอยู่ใน Frame 12718 (670:1596)"
+  },
+  {
+   "slug": "early-centres-of-power",
+   "map_slide": 2,
+   "variant_node": "670:1483",
+   "title": ": Early Centres of Power",
+   "title_node": "670:1501",
+   "paragraphs": [
+    {
+     "node": "670:1502",
+     "text": "In Southeast Asia, early centers of power emerged along rivers, coastlines, and maritime routes. They were linked less by fixed borders than by shifting networks of influence. This system is often described as a “mandala model,” in which power radiated outward from courts and sacred centers through tribute, trade, alliances, and ritual."
+    },
+    {
+     "node": "670:1503",
+     "text": "Land-based kingdoms such as the Khmer Empire drew strength from control of water and agriculture. At Angkor, reservoirs, canals, and irrigation channels supported rice cultivation and underpinned the wealth and power of the state. By contrast, maritime powers such as Srivijaya, centered in Sumatra, rose by controlling sea trade, especially the Strait of Malacca, a vital passage linking India and China."
+    },
+    {
+     "node": "670:1504",
+     "text": "These centres of power tapped on the monsoon winds and sea lanes as well as on riverine and overland routes to facilitate vibrant connections and alliances between people and places. As a result, scholars, pilgrims, merchants, and artisans carried Buddhist texts, luxury goods, and artistic technologies across and beyond the region. Today, Southeast Asia’s monumental architecture, shipwrecks, and devotional practices alike bear witness to these wide-reaching exchanges, shaped in large part by the rise of early kingdoms and empires."
+    }
+   ],
+   "map_note": "ภาพแผนที่ในหน้า 1471 เป็น placeholder \"Picture map 1120x630 px\" · ภาพแผนที่จริงอยู่ใน Frame 12718 (670:1596)"
+  },
+  {
+   "slug": "rice-and-spice",
+   "map_slide": 3,
+   "variant_node": "670:1506",
+   "title": ": Rice and Spice",
+   "title_node": "670:1524",
+   "paragraphs": [
+    {
+     "node": "670:1525",
+     "text": "Rice and spices have long shaped Southeast Asia’s landscapes, livelihoods, and experience. Rice has sustained communities across the region for millennia, especially in the great river deltas of the Irrawaddy, Mekong, and Red River, where low-lying, water-rich environments support intensive cultivation. In upland areas, people transformed steep terrain into terraced rice landscapes."
+    },
+    {
+     "node": "670:1526",
+     "text": "Spices followed a different but equally powerful path. Cloves and nutmeg were native to the Moluccas, the “Spice Islands” of eastern Indonesia, where volcanic soils supported their growth. Across Southeast Asia, the hot, humid climate and tropical forests made spices highly valued not only as flavourings, but also in medicine, perfumery, and preservation. Their importance helped make the region a major node in early long-distance commerce, with port cities such as Malacca becoming key centers of the spice trade."
+    },
+    {
+     "node": "670:1527",
+     "text": "Growing rice and spices required deep knowledge of both nature and culture. Farmers tracked bird paths and seasonal cycles, communities participated in agricultural rites, and artisans crafted tools for harvest, and boxes for betel and nuts. These histories show that rice and spices were never just crops. Instead, they linked islands, coasts, deltas, and uplands into a Southeast Asian world of shared knowledge, practice, and tradition."
+    }
+   ],
+   "map_note": "ภาพแผนที่ในหน้า 1471 เป็น placeholder \"Picture map 1120x630 px\" · ภาพแผนที่จริงอยู่ใน Frame 12718 (670:1596)"
+  },
+  {
+   "slug": "animals-and-ecosystems",
+   "map_slide": 4,
+   "variant_node": "670:1529",
+   "title": ": Animals and Ecosystems",
+   "title_node": "670:1547",
+   "paragraphs": [
+    {
+     "node": "670:1548",
+     "text": "Southeast Asia spans mainland river basins, monsoon forests, mangroves, peat swamps, coral reefs, and tropical rainforests. This wide range of ecosystems creates many different habitats to support the region's rich and varied wildlife. Species often differ sharply from one place to another. Islands such as Borneo, Sumatra, and the Philippines are especially known for endemic species — animals and plants found naturally in one place and nowhere else. On the mainland, deltas and floodplains support species adapted to water, mud, and seasonal flooding."
+    },
+    {
+     "node": "670:1549",
+     "text": "These manifold and rich animal species are deeply woven into regional life. Elephants, crocodiles, and birds appear in lore, art, and religious traditions, while shells, ivory, and other animal products have travelled expansive trade networks that link forests, coasts, and cities. In many communities, animals such as the rooster and the hornbill play central roles in ritual and social practice. Ultimately, Southeast Asia’s animals and ecosystems are closely bound with its shared spiritual beliefs and economies."
+    }
+   ],
+   "map_note": "ภาพแผนที่ในหน้า 1471 เป็น placeholder \"Picture map 1120x630 px\" · ภาพแผนที่จริงอยู่ใน Frame 12718 (670:1596)"
+  }
+ ]
+}

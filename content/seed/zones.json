@@ -1,0 +1,69 @@
+{
+ "_meta": {
+  "_source": {
+   "figma_file_key": "EhcqSXTMEArlrfSGUQVCwl",
+   "lastModified": "2026-10-27T09:48:30Z",
+   "extracted_by": "design-extract",
+   "pages": "Page 2 Version #Final 01092026 (elephant detail frames) + Page 2.1 ALL GIF trails (all trails)"
+  },
+  "note": "สี zone = pixel จาก render ของ frame (ไม่มี token สีใน Figma) · Zone 6 (frame 1232:632) เป็นสำเนาหน้า timeline ไม่ปรากฏใน nav/การ์ด"
+ },
+ "zones": [
+  {
+   "number": 1,
+   "name": "Animals in Nature & Ecological Wisdom",
+   "name_raw": "Animals in Nature \n& Ecological Wisdom",
+   "color_hex": "#14705E",
+   "card_node": "I670:9480;670:9416",
+   "page_frame": "670:1241 (Desktop - 1472)",
+   "cover_node": "1013:1289",
+   "has_page": true
+  },
+  {
+   "number": 2,
+   "name": "Beyond the Visible: Animal Lore & Cosmic Order",
+   "name_raw": "Beyond the Visible: \nAnimal Lore & Cosmic Order",
+   "color_hex": "#D6A2BA",
+   "card_node": "I670:9481;670:9428",
+   "page_frame": "670:1296 (Desktop - 1473)",
+   "has_page": true
+  },
+  {
+   "number": 3,
+   "name": "Material Cultures: Animals in Craft & Ritual",
+   "name_raw": "Material Cultures: \nAnimals in Craft & Ritual",
+   "color_hex": "#E6553D",
+   "card_node": "I670:9482;670:9435",
+   "page_frame": "670:1349 (Desktop - 1474)",
+   "has_page": true
+  },
+  {
+   "number": 4,
+   "name": "Animal Trails: Reflections & Interpretation",
+   "name_raw": "Animal Trails: \nReflections & Interpretation",
+   "name_variants": [
+    "Creatures and Trails that Bind Southeast Asia: Shared Thoughts and Reflections (node 670:1559 annotation / 670:1116 style sheet)"
+   ],
+   "color_hex": "#EC7966",
+   "card_node": "I670:9534;670:9464",
+   "card_component_set": "670:9461",
+   "card_size": "560x360",
+   "page_frame": "670:1551 (Desktop - zone 4) = timeline ช้าง",
+   "has_page": true,
+   "note": "ชื่อ zone 4 ขัดกันใน Figma — P-2xx"
+  },
+  {
+   "number": 5,
+   "name": "The Curious Minds’s Play Zone",
+   "name_variants": [
+    "The Curious Minds’ Play Zone (style sheet node 670:1118)"
+   ],
+   "color_hex": "#4BBAA3",
+   "card_node": "I670:9537;670:9520",
+   "card_component_set": "670:9517",
+   "card_size": "560x360",
+   "has_page": false,
+   "note": "ไม่มี frame หน้า zone 5 ใน Figma — P-2xx"
+  }
+ ]
+}
