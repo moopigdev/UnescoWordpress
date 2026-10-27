@@ -113,3 +113,5 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [core-import-refresh/reviewer] [2026-10-27] กรณีกลับด้าน: webm เป็นของ importer/ว่าง แต่ admin เลือก hevc หรือ poster เอง → refresh เปลี่ยน webm แต่คง hevc/poster ของ admin → คู่วิดีโอไม่ตรงกัน
 - [core-import-refresh/reviewer] [2026-10-27] `icc.php` เขียนทับไฟล์ใน uploads ตรงๆ ไม่ atomic (crash กลางคันไฟล์ uploads พัง · ต้นฉบับปลอดภัย)
 - [core-import-refresh/reviewer] [2026-10-27] refresh ICC หาไฟล์ด้วย key `asset:*` → ถ้า admin replace เนื้อไฟล์ของ attachment ที่ importer สร้าง (plugin replace-media) จะถูกถอด ICC ด้วย
+- [design-p163/reviewer] [2026-10-27] `design/detail-style.py` ไม่มี --help และไม่ปฏิเสธ arg ที่ไม่รู้จัก → รันผิดแล้วเขียน seed/ไฟล์ครอปจริงทันที (reviewer เผลอรัน --help · ผลเหมือนเดิมทุกไบต์ แต่ mtime เปลี่ยน) · ควรใช้ argparse + default --no-write
+- [design-p163/reviewer] [2026-10-27] DESIGN-SPEC §4.8.1 แถว `text_blocks[]` ("text ถ้า ≤120 ตัว ไม่งั้น text_head") และ `lines[]` ("เฉพาะ block ที่มี list") ยังไม่บอกข้อยกเว้นของ plain_meta (มีในหมายเหตุ P-163 แล้ว)
