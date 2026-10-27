@@ -63,3 +63,7 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [media-dev] [2026-10-27] poster ของ hero ต่อเฟรมใช้ "เฟรมแรก" ตามสั่ง (C2/D13) — patola-cloth เฟรม 01 เป็นพิกเซลกระจัดกระจายเกือบว่าง (ทอผ้าเพิ่งเริ่ม) · ถ้าต้องการ poster ที่เห็นลายชัด เพิ่ม `poster_layer` ต่อรายการใน `hero-frames.spec.json` แล้วให้ hero_frames.py อ่าน
 - [media-dev] [2026-10-27] HEVC-alpha fallback ของ hero ต่อเฟรม (ivory-fire-piston · patola-cloth) ทดสอบด้วย ffprobe/ffmpeg เท่านั้น ยังไม่เล่นบน Safari/iOS จริง (เหมือน media-encode)
 - [media-dev] [2026-10-27] hero ของ trail อื่น (16 trail · ~105 วัตถุ) ยังไม่ทำ (D7 รอบหน้า) — เพิ่มได้โดยขยาย `hero_spec.py` (ตอนนี้เลือกเฉพาะ frame ใน page Final ที่ไม่มี WebM เจ้าของ) แล้วต้องมี asset ภาพเฟรมดาวน์โหลดเพิ่ม (427 ภาพ · ไม่อยู่ในรอบนี้)
+- [home-page/reviewer] [2026-10-27] tablet/mobile: ตอนไอคอน trail แสดง stage สูงขึ้น (768: 405→905) เนื้อหาด้านล่างเลื่อน (layout shift)
+- [home-page/reviewer] [2026-10-27] ไอคอน trail: alt = ชื่อ trail + screen-reader-text ชื่อเดียวกัน → screen reader อ่านซ้ำ
+- [home-page/reviewer] [2026-10-27] seek walking 0.001 ทำให้ webm โหลดทั้งไฟล์ตอน first paint (ตอนนี้ 24KB ไม่มีปัญหา) · ถ้าไฟล์ใหญ่ขึ้นให้ seek หลังเข้าจอ
+- [home-page/reviewer] [2026-10-27] WP core emoji script อ้าง s.w.org (ภายนอก) → core-chrome ปิด emoji script
