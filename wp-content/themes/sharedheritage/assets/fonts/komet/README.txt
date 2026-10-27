@@ -1,6 +1,6 @@
-Komet web fonts (paid licence) — waiting for the owner's files (D6 / P-205).
+Komet web fonts (paid licence) — files delivered (D19, 2026-10-27; web licence confirmed by the owner).
 
-Put the web-licensed files here with exactly these names (woff2 preferred, woff optional):
+Self-hosted woff2, converted from the owner's OTF (originals: Unesco/design/fonts/, outside the repo):
 
   Komet-Light.woff2     -> CSS font-weight 300  (Figma "Komet-Light",   listed as 400)
   Komet-Regular.woff2   -> CSS font-weight 400  (Figma "Komet-Regular", listed as 500)
@@ -8,5 +8,5 @@ Put the web-licensed files here with exactly these names (woff2 preferred, woff 
   Komet-Bold.woff2      -> CSS font-weight 700  (Figma "Komet-Bold",    listed as 700)
   Komet-Heavy.woff2     -> CSS font-weight 800  (Figma "Komet-Heavy",   listed as 800)
 
-inc/fonts.php prints an @font-face rule only for files that exist, so nothing 404s while a style is
-missing. No code change is needed when the files arrive. Do not load Komet from a CDN.
+inc/fonts.php prints an @font-face rule for each file that exists (no code change needed).
+Do not load Komet from a CDN. Do not commit the original OTF files.
