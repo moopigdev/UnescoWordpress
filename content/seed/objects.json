@@ -20934,7 +20934,7 @@
          "clips_content": false,
          "radius": 22
         },
-        "radius": 22,
+        "radius": 0,
         "shadow": [
          {
           "x": 0,
@@ -20997,7 +20997,7 @@
          "clips_content": false,
          "radius": 10
         },
-        "radius": 10,
+        "radius": 0,
         "shadow": [
          {
           "x": 0,
@@ -25451,12 +25451,12 @@
         "font": {
          "family": "Komet",
          "weight": 600,
-         "size": 24,
-         "line_height": 30,
+         "size": 20,
+         "line_height": 25,
          "letter_spacing": 0,
          "align": "LEFT"
         },
-        "color": "#6C757D",
+        "color": "#343A40",
         "auto_resize": "HEIGHT",
         "runs": [
          {
@@ -25578,7 +25578,7 @@
          "clips_content": false,
          "radius": 22
         },
-        "radius": 22,
+        "radius": 0,
         "scale_mode": "STRETCH",
         "image_transform": [
          [
@@ -25623,7 +25623,7 @@
          "clips_content": false,
          "radius": 10
         },
-        "radius": 10,
+        "radius": 0,
         "shadow": [
          {
           "x": 0,
