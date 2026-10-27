@@ -1,6 +1,6 @@
 # MEDIA — WebM + poster + fallback Safari/iOS
 
-เจ้าของ: media-dev · task `media-encode` · ตัวเลขทุกตัวมาจาก ffprobe/ffmpeg จริง (สร้างอัตโนมัติใน `content/media-manifest.json`)
+เจ้าของ: media-dev · task `media-encode` + `media-hero-frames` · ตัวเลขทุกตัวมาจาก ffprobe/ffmpeg จริง (สร้างอัตโนมัติใน `content/media-manifest.json`)
 
 ## วิธีรัน
 ```bash
@@ -9,6 +9,8 @@ FORCE=1 bash scripts/media/encode.sh    # ทำใหม่ทุกไฟล�
 ```
 - ต้นฉบับ: `Unesco/media/src/File Animated/**.webm` (ไม่แตะ · ไม่ commit) → ผล: `Unesco/media/out/` (ไม่ commit)
 - ปรับได้ด้วย env: `MEDIA_SRC` `MEDIA_OUT` `LIMIT_BYTES` (default 3000000) `MAXW` (1440) `MAXFPS` (30) `POSTER_AT` (0.35 = ตำแหน่งเฟรม poster) `FALLBACK_FPS` (10)
+- สคริปต์: `encode.sh` (WebM เจ้าของ) → เรียก `hero_frames.py` (hero ต่อเฟรม · อ่าน `hero-frames.spec.json`) → `manifest.py` (เขียน manifest รวม) · `SKIP_HERO_FRAMES=1` ข้ามส่วนต่อเฟรม · `HERO_CRF` (24) · `DESIGN_ASSETS` (default `Unesco/design/assets`)
+- สร้าง spec ใหม่ (เฉพาะเมื่อ seed/figma เปลี่ยน · ไม่เรียก Figma — อ่าน `design/figma-file.json` ที่ดาวน์โหลดไว้): `python3 -I scripts/media/hero_spec.py > scripts/media/hero-frames.spec.json`
 - ต้องมี: ffmpeg (libvpx-vp9 + hevc_videotoolbox = macOS) · cwebp · python3
 - รันซ้ำได้ผลเดิม: ข้ามไฟล์ที่ out ใหม่กว่า src · HEVC ไม่ถูกสร้างใหม่ถ้ามีอยู่แล้ว (videotoolbox ไม่ deterministic ระดับไบต์) · manifest ไม่มี timestamp (ทดสอบรัน 2 ครั้ง `diff` ว่าง)
 - ชื่อ out = slug ของชื่อไฟล์ (ตัวเล็ก · `-` · ตัด `.webm.webm` ซ้อน) เช่น `walking.webm.webm` → `walking.webm` · `Bas-relief of a procession.webm` → `bas-relief-of-a-procession.webm`
@@ -41,3 +43,42 @@ FORCE=1 bash scripts/media/encode.sh    # ทำใหม่ทุกไฟล�
 - iOS ต่ำกว่า 17.4 ไม่เล่น WebM เลย → ไฟล์ทึบจะเห็นแค่ poster (ยอมรับได้ ตามเกณฑ์ DOD C4 ที่เน้นไฟล์ alpha)
 - poster เลือกเฟรมอัตโนมัติ 35% — บางไฟล์ (ganesha, singhasari) อยู่กลาง transition เห็นตัวละครซ้อน/จาง · ปรับต่อไฟล์ได้ถ้าจะให้ design เลือกเฟรมเอง (เพิ่ม map ใน `encode.sh` ภายหลัง → DEFERRED)
 - ยังไม่ทราบว่าวัตถุไหนใน seed ไม่มี WebM — เทียบกับ seed หลัง design-extract (คำถาม O-5 ข้อ "ภาพนิ่ง" ยังรอเจ้าของ)
+
+
+---
+# media-hero-frames — hero ต่อเฟรมจาก Figma (D13) สำหรับวัตถุที่ไม่มี WebM จากเจ้าของ
+
+## วัตถุที่ไม่มี WebM (นับจริง: 15 วัตถุ page Final − 7 ที่เจ้าของส่ง = **8**)
+จับคู่ WebM เจ้าของ → slug ใน seed (เก็บใน `hero-frames.spec.json` `owner_webm`): bas-relief-of-a-procession → `bas-relief-of-a-royal-or-noble-procession-…` · elephant-shaped-containers → `elephant-shaped-relic-containers` · ที่เหลือชื่อตรง · `walking` → `object_slug: null` + `usage: "home-trails"` (D12)
+ไม่มี WebM 8 ชิ้น: wooden-cold-press-cake-molds… · embossed-brass-basin… · elephant-leg-bone · hand-carved-ivory-and-metal-opium-pipe · ivory-fire-piston-ivory-fire-syringe · patola-cloth · pod-duang-stamped… · siwaih
+
+## วิธีต่อเฟรม (`hero_frames.py`)
+1. เฟรมต่อวัตถุ = layer ใน hero ที่ **แสดงจริง** (ไม่ `visible:false`) เรียงตามเลขในชื่อ layer · layer opacity 0 (เฟรม 01) นับ · ขนาด = กรอบ hero ใน Figma (§4.8: 1440×810 · patola 1120×730 · leg-bone 1320×742) · patola ครอปตาม `imageTransform` (STRETCH)
+2. ภาพต้นฉบับ 4096×2304 RGBA → lanczos ลงขนาด hero → VP9 **10fps CFR · เฟรมละ 0.7s (7 เฟรมวิดีโอ/ภาพ)** · `-an` · 2-pass CRF 24 (วนเพิ่ม CRF ทีละ 3 ถ้าเกิน 3MB) · `yuva420p` ถ้า alpha_min < 250 ไม่งั้น `yuv420p` · `-fflags +bitexact` (webm ไม่มี UID สุ่ม → รัน `FORCE=1` ซ้ำได้ไบต์เดิม ตรวจแล้ว) · loop ได้ (ใช้ `<video loop>`) ความยาว = จำนวนเฟรม × 0.7 เป๊ะ
+3. poster = **เฟรมแรก** (≤640 กว้าง WebP q80) · มีเฟรมเดียว = `<slug>.still.webp` (ขนาด hero เต็ม) + poster · fallback Safari/iOS เหมือนเดิม (alpha → `<slug>.hevc.mov` · ทึบ → poster)
+4. ตรวจคุณภาพ: ถอดเฟรมกลางแต่ละช่วง 0.7s เทียบภาพต้นฉบับที่ย่อแล้ว (วางบนพื้นขาว) SSIM-Y ต่ำสุดต่อวัตถุ: embossed-brass-basin 0.989 · opium-pipe 0.998 · ivory-fire-piston 0.997 · patola 0.991 · pod-duang 0.9997 · siwaih 0.9995 · cake-molds 0.998 (พิสูจน์ลำดับ/จังหวะเฟรมด้วย)
+
+## ตารางผล (วัดจาก ffprobe/`ls`)
+| slug (= ชื่อไฟล์ out) | เฟรม | ต้นฉบับรวม (MB) | out (MB) | วิดีโอ | alpha จริง | fallback | poster (KB) |
+|---|---|---|---|---|---|---|---|
+| wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs | 12 | 10.95 | 0.43 | 1440×810 · 8.4s · 10fps | ❌ ทึบ | poster | 9.7 |
+| embossed-brass-basin-with-mythical-animal-motifs | 15 | 61.37 | 0.22 | 1440×810 · 10.5s | ❌ ทึบ | poster | 7.8 |
+| hand-carved-ivory-and-metal-opium-pipe | 6 | 9.63 | 0.17 | 1440×810 · 4.2s | ❌ ทึบ | poster | 7.0 |
+| ivory-fire-piston-ivory-fire-syringe | 15 | 20.39 | 0.23 | 1440×810 · 10.5s | ✅ | hevc.mov 0.75MB (10.5s) | 15.9 |
+| patola-cloth | 9 (seed นับ 5 — P-301) | 0.39 | 0.21 | 1120×730 · 6.3s | ✅ | hevc.mov 0.77MB (6.3s) | 24.7 |
+| pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king | 15 | 12.93 | 0.47 | 1440×810 · 10.5s | ❌ ทึบ | poster | 7.5 |
+| siwaih | 15 | 10.14 | 0.19 | 1440×810 · 10.5s | ❌ ทึบ | poster | 4.6 |
+| elephant-leg-bone | 1 (ซ่อน 5 — P-301) | 1.65 | 0.14 (`.still.webp` 1320×742) | **ภาพนิ่ง ไม่มีวิดีโอ** | ✅ (โปร่งใส) | — | 43.3 |
+
+ทุก WebM ≤ 0.48MB (เกณฑ์ 3MB) · ไม่มี O-xx เรื่องขนาด
+
+## manifest (`content/media-manifest.json` — 16 รายการ)
+ทุกรายการมี `object_slug` (slug ใน seed · walking = `null`) · `source` (`owner-webm` | `figma-frames`) · `kind` (`video` | `still`) · `usage` (`object-hero` | `home-trails`) · รายการ `figma-frames` มีเพิ่ม `figma_frame_id` `figma_frame_name` `frame_refs[]` `steps` `frame_duration_s` `crf` · `kind: still` → `out: null`, `fallback: null`, ใช้ `still` · รายการ owner-webm 8 รายการเดิมค่าเท่าเดิมทุกฟิลด์ (เทียบก่อน/หลัง · เพิ่มแค่ 4 ฟิลด์ข้างต้น)
+การจับคู่วัตถุ → ไฟล์: ใช้ `object_slug` (ไม่ใช่ `id`/ชื่อไฟล์ของ owner-webm 2 ตัวที่ชื่อต่างจาก seed)
+
+## ข้อจำกัด (เพิ่ม)
+- ภาพ hero 3 ชุดมี alpha จริง (ivory-fire-piston · patola · leg-bone) — Figma มี SOLID ขาวรองใต้ภาพ → ใช้พื้น `#FFF` หลังวิดีโอ (P-302)
+- patola: เฟรม 01 เกือบว่าง (แอนิเมชันทอผ้า) → poster (เฟรมแรกตามสั่ง) แทบไม่เห็นลาย (DEFERRED)
+- ตัวเลข `fps`=10 ของ figma-frames เป็น CFR จริง (ต่างจาก owner-webm ที่เป็น VFR stepped: ใช้ `steps` + `frame_duration_s` ดูจำนวนภาพจริง) · เฟรมซ้ำกินไบต์ต่ำมาก
+- ไฟล์ out ที่สร้างเพิ่มข้าง WebM: `<slug>.frames.json` (sidecar: alpha ต่อเฟรม · crf — manifest.py อ่าน) · ทั้งหมดอยู่ใน `Unesco/media/out/` ไม่ commit
+- ต้องมี `Unesco/design/assets/` (ภาพเฟรม 144 ref · ไม่ commit) ถึงรัน hero_frames.py ได้ · ไม่มี → ใช้ `SKIP_HERO_FRAMES=1` (manifest จะ error ถ้าไม่มี sidecar)

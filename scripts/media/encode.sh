@@ -77,5 +77,11 @@ find "$SRC" -type f -name '*.webm' | LC_ALL=C sort | while IFS= read -r f; do
   if [ "$real" = 0 ]; then rm -f "$m"; fi
 done
 echo "(done encode)"
+# hero ที่ไม่มี WebM จากเจ้าของ (D13): ต่อเฟรมจาก design/assets ตาม hero-frames.spec.json (สร้างด้วย hero_spec.py)
+SPEC="$HERE/hero-frames.spec.json"
+if [ -f "$SPEC" ] && [ "${SKIP_HERO_FRAMES:-0}" != 1 ]; then
+  UNESCO_ROOT="$UNESCO" LIMIT_BYTES="$LIMIT" python3 -I "$HERE/hero_frames.py" "$SPEC" "$OUT"
+  SPECARG="$SPEC"
+else SPECARG=""; fi
 # manifest.py probe ไฟล์ src/out เองทั้งหมด (ตัวเลขทุกตัวมาจาก ffprobe)
-python3 -I "$HERE/manifest.py" "$SRC" "$OUT" "$REPO/content/media-manifest.json"
+python3 -I "$HERE/manifest.py" "$SRC" "$OUT" "$REPO/content/media-manifest.json" $SPECARG

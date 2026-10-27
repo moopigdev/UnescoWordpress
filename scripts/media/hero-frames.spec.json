@@ -1,0 +1,857 @@
+{
+  "frame_s": 0.7,
+  "fps": 10,
+  "figma_last_modified": "2026-10-27T09:48:30Z",
+  "rule": "ดูหัวไฟล์ scripts/media/hero_spec.py",
+  "owner_webm": {
+    "bas-relief-of-a-procession": {
+      "object_slug": "bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the",
+      "usage": "object-hero"
+    },
+    "elephant-and-mahout-kendi": {
+      "object_slug": "elephant-and-mahout-kendi",
+      "usage": "object-hero"
+    },
+    "elephant-molar-coconut-grater": {
+      "object_slug": "elephant-molar-coconut-grater",
+      "usage": "object-hero"
+    },
+    "elephant-shaped-containers": {
+      "object_slug": "elephant-shaped-relic-containers",
+      "usage": "object-hero"
+    },
+    "ganesha": {
+      "object_slug": "ganesha",
+      "usage": "object-hero"
+    },
+    "singhasari-ganesha": {
+      "object_slug": "singhasari-ganesha",
+      "usage": "object-hero"
+    },
+    "tin-ingot-in-the-shape-of-an-elephant": {
+      "object_slug": "tin-ingot-in-the-shape-of-an-elephant",
+      "usage": "object-hero"
+    },
+    "walking": {
+      "object_slug": null,
+      "usage": "home-trails"
+    }
+  },
+  "items": [
+    {
+      "slug": "elephant-leg-bone",
+      "figma_frame_id": "1041:1290",
+      "figma_frame_name": "Desktop - 1510",
+      "hero_node": "1041:1293",
+      "hero_name": "Frame Gif",
+      "width": 1320,
+      "height": 742,
+      "vf": "scale=1320:742:flags=lanczos,format=rgba",
+      "mode": "still",
+      "layers": [
+        {
+          "order": 1,
+          "node": "1041:1305",
+          "name": "1 123",
+          "ref": "e79714c1c172080210cf97b49fc6aa7cb14a639d",
+          "file": "e79714c1c172080210cf97b49fc6aa7cb14a639d.png"
+        }
+      ],
+      "excluded": [
+        {
+          "node": "1041:1317",
+          "name": "2 12",
+          "reason": "figma visible=false",
+          "refs": [
+            "5fba40147fdceb7ffe5ffd43c5576ddd094c094a"
+          ]
+        },
+        {
+          "node": "1041:1329",
+          "name": "3 3",
+          "reason": "figma visible=false",
+          "refs": [
+            "03fb182db539892a1843baa2ddb521e90b446f06"
+          ]
+        },
+        {
+          "node": "1041:1341",
+          "name": "4 3",
+          "reason": "figma visible=false",
+          "refs": [
+            "e84690e1a8ac3b43e195ab59184d6544328735df"
+          ]
+        },
+        {
+          "node": "1041:1353",
+          "name": "5 2",
+          "reason": "figma visible=false",
+          "refs": [
+            "27791f9f60e042229ecad7ab60230bf5df6f1e04"
+          ]
+        },
+        {
+          "node": "1041:1365",
+          "name": "6 2",
+          "reason": "figma visible=false",
+          "refs": [
+            "5ceeedc52e072dca15fb4ab057945c7ebb385106"
+          ]
+        }
+      ],
+      "seed_hero_image_count": 6,
+      "seed_refs_not_used": [
+        "5fba40147fdceb7ffe5ffd43c5576ddd094c094a",
+        "03fb182db539892a1843baa2ddb521e90b446f06",
+        "e84690e1a8ac3b43e195ab59184d6544328735df",
+        "27791f9f60e042229ecad7ab60230bf5df6f1e04",
+        "5ceeedc52e072dca15fb4ab057945c7ebb385106"
+      ],
+      "seed_refs_missing_from_seed": [],
+      "notes": []
+    },
+    {
+      "slug": "embossed-brass-basin-with-mythical-animal-motifs",
+      "figma_frame_id": "964:1522",
+      "figma_frame_name": "Desktop - 1505",
+      "hero_node": "964:1525",
+      "hero_name": "Frame GIF",
+      "width": 1440,
+      "height": 810,
+      "vf": "scale=1440:810:flags=lanczos,format=rgba",
+      "mode": "video",
+      "layers": [
+        {
+          "order": 1,
+          "node": "964:1526",
+          "name": "01 4",
+          "ref": "8b24f92ef1946de81f769833db068bdf3e3bb23a",
+          "file": "8b24f92ef1946de81f769833db068bdf3e3bb23a.png"
+        },
+        {
+          "order": 2,
+          "node": "964:1527",
+          "name": "02 4",
+          "ref": "b7379d743108019bfff9d816935f8961ab904a5e",
+          "file": "b7379d743108019bfff9d816935f8961ab904a5e.png"
+        },
+        {
+          "order": 3,
+          "node": "964:1528",
+          "name": "03 4",
+          "ref": "3af2b893d2bfc17c1e883593890014a51ff690ae",
+          "file": "3af2b893d2bfc17c1e883593890014a51ff690ae.png"
+        },
+        {
+          "order": 4,
+          "node": "964:1529",
+          "name": "04 4",
+          "ref": "e563a2bd8b20b735a4841b3f495a06cce7fbcde2",
+          "file": "e563a2bd8b20b735a4841b3f495a06cce7fbcde2.png"
+        },
+        {
+          "order": 5,
+          "node": "964:1530",
+          "name": "05 4",
+          "ref": "4bc9455279792eb398dffac6bbc9adae6147ad14",
+          "file": "4bc9455279792eb398dffac6bbc9adae6147ad14.png"
+        },
+        {
+          "order": 6,
+          "node": "964:1531",
+          "name": "06 4",
+          "ref": "767cd0b229392303071c4ed191d62e98bccce266",
+          "file": "767cd0b229392303071c4ed191d62e98bccce266.png"
+        },
+        {
+          "order": 7,
+          "node": "964:1532",
+          "name": "07 3",
+          "ref": "1cb0310908188505101764bb36a72addbc9fcbc0",
+          "file": "1cb0310908188505101764bb36a72addbc9fcbc0.png"
+        },
+        {
+          "order": 8,
+          "node": "964:1533",
+          "name": "08 3",
+          "ref": "df6d22c01688084e032d33a1c4287356f0a9eefe",
+          "file": "df6d22c01688084e032d33a1c4287356f0a9eefe.png"
+        },
+        {
+          "order": 9,
+          "node": "964:1534",
+          "name": "09 3",
+          "ref": "52a29d1f4ade760b0bd4653dabc1728c3d024696",
+          "file": "52a29d1f4ade760b0bd4653dabc1728c3d024696.png"
+        },
+        {
+          "order": 10,
+          "node": "964:1535",
+          "name": "10 4",
+          "ref": "c954bccf47e675bec12cfafa7e6e73bf0ac06ab1",
+          "file": "c954bccf47e675bec12cfafa7e6e73bf0ac06ab1.png"
+        },
+        {
+          "order": 11,
+          "node": "964:1536",
+          "name": "11 24",
+          "ref": "3b43d9389e76b53594ef92afb4cd57965baa8f44",
+          "file": "3b43d9389e76b53594ef92afb4cd57965baa8f44.png"
+        },
+        {
+          "order": 12,
+          "node": "964:1537",
+          "name": "12 25",
+          "ref": "53255ae3a29f9afe14f4aca98583e2f0344604fe",
+          "file": "53255ae3a29f9afe14f4aca98583e2f0344604fe.png"
+        },
+        {
+          "order": 13,
+          "node": "964:1538",
+          "name": "13 26",
+          "ref": "52ad610382f656c2e1286f08226e8d7f77869445",
+          "file": "52ad610382f656c2e1286f08226e8d7f77869445.png"
+        },
+        {
+          "order": 14,
+          "node": "964:1539",
+          "name": "14 27",
+          "ref": "e53a1c288909838d52349c5cfa3b1127c22656dd",
+          "file": "e53a1c288909838d52349c5cfa3b1127c22656dd.png"
+        },
+        {
+          "order": 15,
+          "node": "964:1862",
+          "name": "15 2",
+          "ref": "0897711d7ef0b347084e9f8acfc820a5153a141e",
+          "file": "0897711d7ef0b347084e9f8acfc820a5153a141e.png"
+        }
+      ],
+      "excluded": [],
+      "seed_hero_image_count": 15,
+      "seed_refs_not_used": [],
+      "seed_refs_missing_from_seed": [],
+      "notes": []
+    },
+    {
+      "slug": "hand-carved-ivory-and-metal-opium-pipe",
+      "figma_frame_id": "1042:1719",
+      "figma_frame_name": "Desktop - 1511",
+      "hero_node": "1042:1720",
+      "hero_name": "Frame GIF",
+      "width": 1440,
+      "height": 810,
+      "vf": "scale=1440:810:flags=lanczos,format=rgba",
+      "mode": "video",
+      "layers": [
+        {
+          "order": 1,
+          "node": "1042:1743",
+          "name": "01 4",
+          "ref": "d45f0838000a6e54674e0702081b28b4389abff9",
+          "file": "d45f0838000a6e54674e0702081b28b4389abff9.png"
+        },
+        {
+          "order": 2,
+          "node": "1042:1760",
+          "name": "02 4",
+          "ref": "ffb71edd03d35fa1fc5f7c408e699371941b78f1",
+          "file": "ffb71edd03d35fa1fc5f7c408e699371941b78f1.png"
+        },
+        {
+          "order": 3,
+          "node": "1042:1777",
+          "name": "03 4",
+          "ref": "5f22636ac9ea17880b67c1dd85b7eaf72c7c9322",
+          "file": "5f22636ac9ea17880b67c1dd85b7eaf72c7c9322.png"
+        },
+        {
+          "order": 4,
+          "node": "1042:1794",
+          "name": "04 4",
+          "ref": "b10553863c8b86052ae61ac1aa70dc4ceac333fd",
+          "file": "b10553863c8b86052ae61ac1aa70dc4ceac333fd.png"
+        },
+        {
+          "order": 5,
+          "node": "1042:1811",
+          "name": "05 4",
+          "ref": "e172dbcf728a93738931d75ec61d1a45e52334d8",
+          "file": "e172dbcf728a93738931d75ec61d1a45e52334d8.png"
+        },
+        {
+          "order": 6,
+          "node": "1042:1828",
+          "name": "06 4",
+          "ref": "bf740591aa2862e51a2186389b601854c7790cb3",
+          "file": "bf740591aa2862e51a2186389b601854c7790cb3.png"
+        }
+      ],
+      "excluded": [],
+      "seed_hero_image_count": 6,
+      "seed_refs_not_used": [],
+      "seed_refs_missing_from_seed": [],
+      "notes": []
+    },
+    {
+      "slug": "ivory-fire-piston-ivory-fire-syringe",
+      "figma_frame_id": "1006:922",
+      "figma_frame_name": "Desktop - 1507",
+      "hero_node": "1006:923",
+      "hero_name": "Frame GIF",
+      "width": 1440,
+      "height": 810,
+      "vf": "scale=1440:810:flags=lanczos,format=rgba",
+      "mode": "video",
+      "layers": [
+        {
+          "order": 1,
+          "node": "1006:946",
+          "name": "01 4",
+          "ref": "3e2f2378de1382395d11d245e9ac6d8ce3015ce7",
+          "file": "3e2f2378de1382395d11d245e9ac6d8ce3015ce7.png"
+        },
+        {
+          "order": 2,
+          "node": "1006:963",
+          "name": "02 4",
+          "ref": "550cfddd472294c66ebb3bfec6d104936ceabf95",
+          "file": "550cfddd472294c66ebb3bfec6d104936ceabf95.png"
+        },
+        {
+          "order": 3,
+          "node": "1006:980",
+          "name": "03 4",
+          "ref": "d5b8a7f3c7798f6eb9e62de9549525bf33ad62c4",
+          "file": "d5b8a7f3c7798f6eb9e62de9549525bf33ad62c4.png"
+        },
+        {
+          "order": 4,
+          "node": "1006:997",
+          "name": "04 4",
+          "ref": "073434b6049c21387f6558b78e44d710cc5e9ca6",
+          "file": "073434b6049c21387f6558b78e44d710cc5e9ca6.png"
+        },
+        {
+          "order": 5,
+          "node": "1006:1014",
+          "name": "05 4",
+          "ref": "5b616b51fbc5a2323d77b3c10e263811dc72490e",
+          "file": "5b616b51fbc5a2323d77b3c10e263811dc72490e.png"
+        },
+        {
+          "order": 6,
+          "node": "1006:1031",
+          "name": "06 4",
+          "ref": "e66bd01b3e51550a680ae502b8f01e611cc622b8",
+          "file": "e66bd01b3e51550a680ae502b8f01e611cc622b8.png"
+        },
+        {
+          "order": 7,
+          "node": "1006:1048",
+          "name": "07 3",
+          "ref": "34146140ec13899c5d325333e89c3fe02b5791a9",
+          "file": "34146140ec13899c5d325333e89c3fe02b5791a9.png"
+        },
+        {
+          "order": 8,
+          "node": "1006:1065",
+          "name": "08 3",
+          "ref": "9e742deab61985ed98632fe67d7dd485ca105452",
+          "file": "9e742deab61985ed98632fe67d7dd485ca105452.png"
+        },
+        {
+          "order": 9,
+          "node": "1006:1082",
+          "name": "09 3",
+          "ref": "7267056cadf291543bffdbd49c41948ac722ec5d",
+          "file": "7267056cadf291543bffdbd49c41948ac722ec5d.png"
+        },
+        {
+          "order": 10,
+          "node": "1006:1099",
+          "name": "10 4",
+          "ref": "2c618572de3aea2043975a3fdbeb70cdf54ee609",
+          "file": "2c618572de3aea2043975a3fdbeb70cdf54ee609.png"
+        },
+        {
+          "order": 11,
+          "node": "1006:1116",
+          "name": "11 24",
+          "ref": "32d1fc046303c8b4652c48294e5c1d6c228e81e3",
+          "file": "32d1fc046303c8b4652c48294e5c1d6c228e81e3.png"
+        },
+        {
+          "order": 12,
+          "node": "1006:1133",
+          "name": "12 25",
+          "ref": "1a06bd759cf8817b67f1815ec2aafa86464ef412",
+          "file": "1a06bd759cf8817b67f1815ec2aafa86464ef412.png"
+        },
+        {
+          "order": 13,
+          "node": "1006:1150",
+          "name": "13 26",
+          "ref": "6ad1750bbd8d470b10095c2f9825125d48833361",
+          "file": "6ad1750bbd8d470b10095c2f9825125d48833361.png"
+        },
+        {
+          "order": 14,
+          "node": "1006:1167",
+          "name": "14 27",
+          "ref": "496f3f172abe89ea84953c84bdd04f325255c119",
+          "file": "496f3f172abe89ea84953c84bdd04f325255c119.png"
+        },
+        {
+          "order": 15,
+          "node": "1006:1184",
+          "name": "15 2",
+          "ref": "91851956649982d3baf61208179289fa4e785fea",
+          "file": "91851956649982d3baf61208179289fa4e785fea.png"
+        }
+      ],
+      "excluded": [],
+      "seed_hero_image_count": 15,
+      "seed_refs_not_used": [],
+      "seed_refs_missing_from_seed": [],
+      "notes": []
+    },
+    {
+      "slug": "patola-cloth",
+      "figma_frame_id": "3004:804",
+      "figma_frame_name": "Desktop - 1512",
+      "hero_node": "3004:815",
+      "hero_name": "Frame 12706",
+      "width": 1120,
+      "height": 730,
+      "vf": "crop=w='floor(iw*0.5929059386)':h='floor(ih*1.0000000000)':x='round(iw*0.2035470158)':y='round(ih*0.0000000000)',scale=1120:730:flags=lanczos,format=rgba",
+      "mode": "video",
+      "layers": [
+        {
+          "order": 1,
+          "node": "3004:825",
+          "name": "Frame 01",
+          "ref": "0a8219a9d6b9bb311e498d39eeaef347aa81aa0e",
+          "file": "0a8219a9d6b9bb311e498d39eeaef347aa81aa0e.png"
+        },
+        {
+          "order": 2,
+          "node": "3004:823",
+          "name": "Frame 02,03",
+          "ref": "882729600d2f212ec8a11971fbee18af9cd2a15a",
+          "file": "882729600d2f212ec8a11971fbee18af9cd2a15a.png"
+        },
+        {
+          "order": 3,
+          "node": "3004:823",
+          "name": "Frame 02,03",
+          "ref": "71cffb7eb6d8e69b03b3dcb000fa5c4f933bbc67",
+          "file": "71cffb7eb6d8e69b03b3dcb000fa5c4f933bbc67.png"
+        },
+        {
+          "order": 4,
+          "node": "3004:821",
+          "name": "Frame 04,05",
+          "ref": "d1a939de87ed8b618780d3d745a0636a7f07d91f",
+          "file": "d1a939de87ed8b618780d3d745a0636a7f07d91f.png"
+        },
+        {
+          "order": 5,
+          "node": "3004:821",
+          "name": "Frame 04,05",
+          "ref": "980608eaf3962251a663725a9485d94419a63e77",
+          "file": "980608eaf3962251a663725a9485d94419a63e77.png"
+        },
+        {
+          "order": 6,
+          "node": "3004:819",
+          "name": "Frame 06,07",
+          "ref": "636d4342e812236bb820be25b79a36ab66402ce1",
+          "file": "636d4342e812236bb820be25b79a36ab66402ce1.png"
+        },
+        {
+          "order": 7,
+          "node": "3004:819",
+          "name": "Frame 06,07",
+          "ref": "3ecd54988fdb4cac55f8ceda06e344c294300a06",
+          "file": "3ecd54988fdb4cac55f8ceda06e344c294300a06.png"
+        },
+        {
+          "order": 8,
+          "node": "3004:817",
+          "name": "Frame 08,09",
+          "ref": "7b4924165a997c74a6ad13aeb99a850bfee42205",
+          "file": "7b4924165a997c74a6ad13aeb99a850bfee42205.png"
+        },
+        {
+          "order": 9,
+          "node": "3004:817",
+          "name": "Frame 08,09",
+          "ref": "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf",
+          "file": "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf.png"
+        }
+      ],
+      "excluded": [],
+      "seed_hero_image_count": 5,
+      "seed_refs_not_used": [],
+      "seed_refs_missing_from_seed": [
+        "882729600d2f212ec8a11971fbee18af9cd2a15a",
+        "d1a939de87ed8b618780d3d745a0636a7f07d91f",
+        "636d4342e812236bb820be25b79a36ab66402ce1",
+        "7b4924165a997c74a6ad13aeb99a850bfee42205"
+      ],
+      "notes": [
+        "ลำดับตามเลขในชื่อ layer ไม่ตรงกับลำดับใน tree (tree เรียงกลับ): ใช้เลขในชื่อ",
+        "layer เดียวมีหลาย IMAGE fill (ชื่อ \"NN,MM\") : ใช้ทุก fill ตามลำดับล่าง->บน เป็นเฟรมแยก (seed hero_images เก็บเฉพาะ fill บนสุดของแต่ละ layer)"
+      ]
+    },
+    {
+      "slug": "pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king",
+      "figma_frame_id": "964:2090",
+      "figma_frame_name": "Desktop - 1506",
+      "hero_node": "964:2093",
+      "hero_name": "Frame GIF",
+      "width": 1440,
+      "height": 810,
+      "vf": "scale=1440:810:flags=lanczos,format=rgba",
+      "mode": "video",
+      "layers": [
+        {
+          "order": 1,
+          "node": "964:2094",
+          "name": "01 4",
+          "ref": "fc2327c3709ad7f49b5ca3ec4d872a06cff7344c",
+          "file": "fc2327c3709ad7f49b5ca3ec4d872a06cff7344c.png"
+        },
+        {
+          "order": 2,
+          "node": "964:2095",
+          "name": "02 4",
+          "ref": "fd295f1a3df65e7d6f6c4d14fc76fb712010d686",
+          "file": "fd295f1a3df65e7d6f6c4d14fc76fb712010d686.png"
+        },
+        {
+          "order": 3,
+          "node": "964:2096",
+          "name": "03 4",
+          "ref": "60e03a92db74a4c91ee3f74feff7ff3d96150f56",
+          "file": "60e03a92db74a4c91ee3f74feff7ff3d96150f56.png"
+        },
+        {
+          "order": 4,
+          "node": "964:2097",
+          "name": "04 4",
+          "ref": "7b715d4567914cfaf9c41e476880d0c9f7c93606",
+          "file": "7b715d4567914cfaf9c41e476880d0c9f7c93606.png"
+        },
+        {
+          "order": 5,
+          "node": "964:2098",
+          "name": "05 4",
+          "ref": "1f78b8e81d44dd2ea7f389f6c03b42de20869f40",
+          "file": "1f78b8e81d44dd2ea7f389f6c03b42de20869f40.png"
+        },
+        {
+          "order": 6,
+          "node": "964:2099",
+          "name": "06 4",
+          "ref": "8cb490619886ae993990a9f23c23d0bcef4f5512",
+          "file": "8cb490619886ae993990a9f23c23d0bcef4f5512.png"
+        },
+        {
+          "order": 7,
+          "node": "964:2100",
+          "name": "07 3",
+          "ref": "8b1e884d772e06fe7965095e0c8897f97ea482c9",
+          "file": "8b1e884d772e06fe7965095e0c8897f97ea482c9.png"
+        },
+        {
+          "order": 8,
+          "node": "964:2101",
+          "name": "08 3",
+          "ref": "93c5df3feb85ba92dc0fbfa5b5e85cd32d576596",
+          "file": "93c5df3feb85ba92dc0fbfa5b5e85cd32d576596.png"
+        },
+        {
+          "order": 9,
+          "node": "964:2102",
+          "name": "09 3",
+          "ref": "e9a46baa22ebeabf55f47fb1b872ba916897e06d",
+          "file": "e9a46baa22ebeabf55f47fb1b872ba916897e06d.png"
+        },
+        {
+          "order": 10,
+          "node": "964:2103",
+          "name": "10 4",
+          "ref": "b637f028a8fe0c20fdf6e9de2e4f38762a65f944",
+          "file": "b637f028a8fe0c20fdf6e9de2e4f38762a65f944.png"
+        },
+        {
+          "order": 11,
+          "node": "964:2104",
+          "name": "11 24",
+          "ref": "567436ba8672dd444c57512e3b7f2b7e22b012dc",
+          "file": "567436ba8672dd444c57512e3b7f2b7e22b012dc.png"
+        },
+        {
+          "order": 12,
+          "node": "964:2105",
+          "name": "12 25",
+          "ref": "30aa944c2e3732650e00b3973bf136b4e4358505",
+          "file": "30aa944c2e3732650e00b3973bf136b4e4358505.png"
+        },
+        {
+          "order": 13,
+          "node": "964:2106",
+          "name": "13 26",
+          "ref": "0df912941e278aa40d2fe5b72e9029c0a03ec3e5",
+          "file": "0df912941e278aa40d2fe5b72e9029c0a03ec3e5.png"
+        },
+        {
+          "order": 14,
+          "node": "964:2107",
+          "name": "14 27",
+          "ref": "4fc2a730f4446d522c663bc54ccdc35eef52cd85",
+          "file": "4fc2a730f4446d522c663bc54ccdc35eef52cd85.png"
+        },
+        {
+          "order": 15,
+          "node": "964:2108",
+          "name": "15 2",
+          "ref": "80aa7cc63acbe2aad8732c6a4897d21a85f446bd",
+          "file": "80aa7cc63acbe2aad8732c6a4897d21a85f446bd.png"
+        }
+      ],
+      "excluded": [],
+      "seed_hero_image_count": 15,
+      "seed_refs_not_used": [],
+      "seed_refs_missing_from_seed": [],
+      "notes": []
+    },
+    {
+      "slug": "siwaih",
+      "figma_frame_id": "1006:561",
+      "figma_frame_name": "Desktop - 1508",
+      "hero_node": "1006:562",
+      "hero_name": "Frame GIF",
+      "width": 1440,
+      "height": 810,
+      "vf": "scale=1440:810:flags=lanczos,format=rgba",
+      "mode": "video",
+      "layers": [
+        {
+          "order": 1,
+          "node": "1006:585",
+          "name": "01 4",
+          "ref": "555ce4502c68cb606333226de51606ff1b9f24e7",
+          "file": "555ce4502c68cb606333226de51606ff1b9f24e7.png"
+        },
+        {
+          "order": 2,
+          "node": "1006:602",
+          "name": "02 4",
+          "ref": "8bcbdd55e500c4a0d39942e15c8df8680bd1c92f",
+          "file": "8bcbdd55e500c4a0d39942e15c8df8680bd1c92f.png"
+        },
+        {
+          "order": 3,
+          "node": "1006:619",
+          "name": "03 4",
+          "ref": "cfa81da262ef7666a84fc4e3f53abcb8a1533968",
+          "file": "cfa81da262ef7666a84fc4e3f53abcb8a1533968.png"
+        },
+        {
+          "order": 4,
+          "node": "1006:636",
+          "name": "04 4",
+          "ref": "02f9f6b15688e9b9408f7f41e97c91fe287142aa",
+          "file": "02f9f6b15688e9b9408f7f41e97c91fe287142aa.png"
+        },
+        {
+          "order": 5,
+          "node": "1006:653",
+          "name": "05 4",
+          "ref": "2c69347284bf8dec927857244a7f3942942b3da7",
+          "file": "2c69347284bf8dec927857244a7f3942942b3da7.png"
+        },
+        {
+          "order": 6,
+          "node": "1006:670",
+          "name": "06 4",
+          "ref": "dc47a79f8fd8f9e46f0dc607e0980eb6557d82c6",
+          "file": "dc47a79f8fd8f9e46f0dc607e0980eb6557d82c6.png"
+        },
+        {
+          "order": 7,
+          "node": "1006:687",
+          "name": "07 3",
+          "ref": "d9cbe89e6c79ce0dc8c181a8791bd563ebaf4b05",
+          "file": "d9cbe89e6c79ce0dc8c181a8791bd563ebaf4b05.png"
+        },
+        {
+          "order": 8,
+          "node": "1006:704",
+          "name": "08 3",
+          "ref": "7e430e01e15edfa4fff41809bcc35f75bde56a08",
+          "file": "7e430e01e15edfa4fff41809bcc35f75bde56a08.png"
+        },
+        {
+          "order": 9,
+          "node": "1006:721",
+          "name": "09 3",
+          "ref": "0d661e68fc166e186afd4cf6cfed779a95a067f8",
+          "file": "0d661e68fc166e186afd4cf6cfed779a95a067f8.png"
+        },
+        {
+          "order": 10,
+          "node": "1006:738",
+          "name": "10 4",
+          "ref": "ac0d4451a18bc28cbbb282031a536cbe36b29571",
+          "file": "ac0d4451a18bc28cbbb282031a536cbe36b29571.png"
+        },
+        {
+          "order": 11,
+          "node": "1006:755",
+          "name": "11 24",
+          "ref": "9194c64a5f3f9cbada9568f7bff49b632dbe4d0a",
+          "file": "9194c64a5f3f9cbada9568f7bff49b632dbe4d0a.png"
+        },
+        {
+          "order": 12,
+          "node": "1006:772",
+          "name": "12 25",
+          "ref": "911d95e246668ce359b9437c305836c67631002a",
+          "file": "911d95e246668ce359b9437c305836c67631002a.png"
+        },
+        {
+          "order": 13,
+          "node": "1006:789",
+          "name": "13 26",
+          "ref": "446da39becbd6a1d02591dffa8f8be40f4e44dbf",
+          "file": "446da39becbd6a1d02591dffa8f8be40f4e44dbf.png"
+        },
+        {
+          "order": 14,
+          "node": "1006:806",
+          "name": "14 27",
+          "ref": "a51227b8e3b2480625dc6ea4daf8ff95e0d93242",
+          "file": "a51227b8e3b2480625dc6ea4daf8ff95e0d93242.png"
+        },
+        {
+          "order": 15,
+          "node": "1006:823",
+          "name": "15 2",
+          "ref": "58e6075bfb7f086f3e4a3ae1fb443ec626ad48b8",
+          "file": "58e6075bfb7f086f3e4a3ae1fb443ec626ad48b8.png"
+        }
+      ],
+      "excluded": [],
+      "seed_hero_image_count": 15,
+      "seed_refs_not_used": [],
+      "seed_refs_missing_from_seed": [],
+      "notes": []
+    },
+    {
+      "slug": "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs",
+      "figma_frame_id": "1041:866",
+      "figma_frame_name": "Desktop - 1509",
+      "hero_node": "1041:867",
+      "hero_name": "Frame GIF",
+      "width": 1440,
+      "height": 810,
+      "vf": "scale=1440:810:flags=lanczos,format=rgba",
+      "mode": "video",
+      "layers": [
+        {
+          "order": 1,
+          "node": "1041:868",
+          "name": "01 4",
+          "ref": "5ab99bf88623bb5fe95629748fc7fba8b263b7dc",
+          "file": "5ab99bf88623bb5fe95629748fc7fba8b263b7dc.png"
+        },
+        {
+          "order": 2,
+          "node": "1041:869",
+          "name": "02 4",
+          "ref": "ba077230353e9720cc9ab1d6f3dc37828b23bc35",
+          "file": "ba077230353e9720cc9ab1d6f3dc37828b23bc35.png"
+        },
+        {
+          "order": 3,
+          "node": "1041:870",
+          "name": "03 4",
+          "ref": "a96873e379aeb3d4e2fe775ab9e51e4856ca3a30",
+          "file": "a96873e379aeb3d4e2fe775ab9e51e4856ca3a30.png"
+        },
+        {
+          "order": 4,
+          "node": "1041:871",
+          "name": "04 4",
+          "ref": "10776812df0becf6d808b5d99f4741dad96e99a5",
+          "file": "10776812df0becf6d808b5d99f4741dad96e99a5.png"
+        },
+        {
+          "order": 5,
+          "node": "1041:872",
+          "name": "05 4",
+          "ref": "30f467cc4c8a93add599ca122d7c963fc79f170e",
+          "file": "30f467cc4c8a93add599ca122d7c963fc79f170e.png"
+        },
+        {
+          "order": 6,
+          "node": "1041:873",
+          "name": "06 4",
+          "ref": "194bc8868e569f1409820fa6bbedcc7ad63b176f",
+          "file": "194bc8868e569f1409820fa6bbedcc7ad63b176f.png"
+        },
+        {
+          "order": 7,
+          "node": "1041:874",
+          "name": "07 3",
+          "ref": "e54f2cbd589396cafafbe80f1fc7b6ea52e50a8d",
+          "file": "e54f2cbd589396cafafbe80f1fc7b6ea52e50a8d.png"
+        },
+        {
+          "order": 8,
+          "node": "1041:875",
+          "name": "08 3",
+          "ref": "7391dfa39e1c49486978c325cd3600fbd69571d3",
+          "file": "7391dfa39e1c49486978c325cd3600fbd69571d3.png"
+        },
+        {
+          "order": 9,
+          "node": "1041:876",
+          "name": "09 3",
+          "ref": "07c5160592afe5e57f9f0ad58e72711b5abddb85",
+          "file": "07c5160592afe5e57f9f0ad58e72711b5abddb85.png"
+        },
+        {
+          "order": 10,
+          "node": "1041:877",
+          "name": "10 4",
+          "ref": "3ef5facd669242ab21c199d483f0e135511edd9c",
+          "file": "3ef5facd669242ab21c199d483f0e135511edd9c.png"
+        },
+        {
+          "order": 11,
+          "node": "1041:878",
+          "name": "11 24",
+          "ref": "f72303dfd0904b9eae0afa1cdabb676f4d9b1d68",
+          "file": "f72303dfd0904b9eae0afa1cdabb676f4d9b1d68.png"
+        },
+        {
+          "order": 12,
+          "node": "1041:879",
+          "name": "12 25",
+          "ref": "21a15e751d85f227f01f12a805405d3c1d1491b4",
+          "file": "21a15e751d85f227f01f12a805405d3c1d1491b4.png"
+        }
+      ],
+      "excluded": [],
+      "seed_hero_image_count": 12,
+      "seed_refs_not_used": [],
+      "seed_refs_missing_from_seed": [],
+      "notes": []
+    }
+  ]
+}

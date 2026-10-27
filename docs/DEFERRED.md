@@ -38,3 +38,6 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [core-chrome] [2026-10-27] seed import (core-contract) ควรสร้างเมนู location `primary` จาก `site.json nav_primary` (5 รายการ · URL ว่าง P-211) — ถ้าไม่สร้าง Header #02 จะว่าง (theme ไม่ hardcode รายการ)
 - [core-chrome/reviewer] [2026-10-27] base.css ยังมีค่า px ที่ไม่ผ่าน token: padding Back 8px · min-height ปุ่มเมนู 44px · hamburger 20/2/±6px · ความกว้างแถบ 1164.2774px
 - [core-chrome/reviewer] [2026-10-27] ที่ ≤768 ข้อความ "MUSEUMS IN SOUTH-EAST ASIA" ในภาพ raster โลโก้เล็กมาก (เป็นภาพ ไม่ใช่ HTML) — ให้เจ้าของดูด้วยตา
+- [media-dev] [2026-10-27] poster ของ hero ต่อเฟรมใช้ "เฟรมแรก" ตามสั่ง (C2/D13) — patola-cloth เฟรม 01 เป็นพิกเซลกระจัดกระจายเกือบว่าง (ทอผ้าเพิ่งเริ่ม) · ถ้าต้องการ poster ที่เห็นลายชัด เพิ่ม `poster_layer` ต่อรายการใน `hero-frames.spec.json` แล้วให้ hero_frames.py อ่าน
+- [media-dev] [2026-10-27] HEVC-alpha fallback ของ hero ต่อเฟรม (ivory-fire-piston · patola-cloth) ทดสอบด้วย ffprobe/ffmpeg เท่านั้น ยังไม่เล่นบน Safari/iOS จริง (เหมือน media-encode)
+- [media-dev] [2026-10-27] hero ของ trail อื่น (16 trail · ~105 วัตถุ) ยังไม่ทำ (D7 รอบหน้า) — เพิ่มได้โดยขยาย `hero_spec.py` (ตอนนี้เลือกเฉพาะ frame ใน page Final ที่ไม่มี WebM เจ้าของ) แล้วต้องมี asset ภาพเฟรมดาวน์โหลดเพิ่ม (427 ภาพ · ไม่อยู่ในรอบนี้)
