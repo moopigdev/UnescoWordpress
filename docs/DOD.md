@@ -13,7 +13,8 @@ reviewer ตรวจตามนี้**เท่านั้น** · ข้อ
 5. gate ผ่าน
 
 ## B · page (home · grid · timeline · detail)
-1. ตรง Figma frame — เทียบ `design/frames/*.png` ที่ 1440 (และ mobile ถ้ามี design) · layout/สี/ฟอนต์/ข้อความผิดชัด = F
+1. **desktop 1440 ตรง Figma 100%** (D5) — screenshot หน้าจริงที่ viewport 1440 เทียบ `design/frames/*.png` ทีละ section · ตำแหน่ง/ระยะ/ขนาด/สี/ฟอนต์ (family·size·weight·line-height·letter-spacing)/ข้อความ/ภาพ ต่างที่มองเห็นได้ = F · ค่าต้องมาจาก DESIGN-SPEC (ไม่ประมาณ)
+1b. **tablet (768–1024) · mobile (375–430) responsive ตามเหมาะสม** (D5 · ไม่มี frame) — F เฉพาะเมื่อ: เลื่อนแนวนอนได้ · เนื้อหาซ้อน/ล้น/ถูกตัด · ตัวอักษร < 14px หรืออ่านไม่ได้ · nav ใช้ไม่ได้ · ภาพ/วิดีโอบิดสัดส่วน · การเลือกจัดวางที่สมเหตุสมผลไม่ใช่ F
 2. ข้อมูลมาจาก CPT/ฟิลด์ ไม่ hardcode เนื้อหา (ยกเว้น label UI)
 3. escape ทุก output · ไม่มี PHP warning/notice (WP_DEBUG)
 4. วิดีโอ `muted playsinline loop preload="metadata" poster` · เล่นเมื่อเข้าจอ · ไม่โหลดวิดีโอใหญ่ตอน first paint

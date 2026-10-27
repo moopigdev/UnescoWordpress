@@ -8,3 +8,4 @@
 | D2 | 2026-10-27 | media | WebM | ไฟล์ที่ได้มาเป็น WebM · ต้องมี fallback Safari/iOS ถ้ามี alpha |
 | D3 | 2026-10-27 | host | Hostinger `sharedheritage.net` (Business plan · live สาธารณะ) | เจ้าของ UNESCO แชร์มา |
 | D4 | 2026-10-27 | workflow | ใช้ workflow แบบ royal-project ปรับเป็น repo เดียว | พิสูจน์แล้วจากการใช้จริง |
+| D5 | 2026-10-27 | ความตรงดีไซน์ | **desktop (1440) ตรง Figma 100%** · tablet/mobile **responsive ตามเหมาะสม** (ไม่มี frame ให้เทียบ) → DOD B1/B1b | เจ้าของสั่งตรง |

@@ -7,7 +7,7 @@ dev เขียน P-xxx ที่ §DEV เมื่อ "ทำต่อไม
 | O | เรื่อง | บล็อก | สถานะ |
 |---|---|---|---|
 | O-1 | `FIGMA_TOKEN` (scope `file_content:read`) ใส่ที่ `Unesco/.env` เอง (copy จาก `.env.example`) | 🔴 `design-extract` | รอ |
-| O-2 | scope คืนนี้: หน้าไหนบ้าง · page "Page 2 Version #Final 01092026" คือ final จริงไหม · ต้องมี mobile ไหม | 🔴 ขอบเขตทุกหน้า | รอ |
+| O-2 | scope คืนนี้: หน้าไหนบ้าง · page "Page 2 Version #Final 01092026" คือ final จริงไหม · ~~ต้องมี mobile ไหม~~ | 🔴 ขอบเขตทุกหน้า | ✅ บางส่วน 2026-10-27: mobile/tablet = responsive ตามเหมาะสม · desktop ตรง 100% (D5) · ยังรอ: หน้าไหนบ้าง · page final |
 | O-3 | ภาษา: อังกฤษอย่างเดียว / มีไทยด้วย | — | รอ |
 | O-4 | ทีม UNESCO แก้อะไรผ่าน admin: วัตถุอย่างเดียว / ข้อความหน้าแรก + บทความด้วย | — (กระทบ CONTENT-MODEL) | รอ |
 | O-5 | media: อนุญาตให้ดาวน์โหลดโฟลเดอร์ Drive (~68MB) หรือเจ้าของวางที่ `Unesco/media/src/` · วัตถุที่ไม่มี WebM ใช้ภาพนิ่งไหม · บีบ Ganesha 50MB ได้ไหม | 🔴 `media-encode` | รอ |
