@@ -158,3 +158,7 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [design-timeline-v3] [2026-10-28] ค่า p→α (`p^2.5`) และ scale `1+0.35p` ฟิตจากเฟรม 32 เฟรมเดียว (ที่ห่างกึ่งกลาง 95px) · ไม่มีเฟรมกลางทางอื่นให้ยืนยัน → ปรับตอนดู preview
 - [design-timeline-v3] [2026-10-28] mini-map ใน Slides: ชิ้น 1–4 เป็นลายเส้น ที่เหลือสี (ร่างยังไม่ครบ) — v3 ใช้สีทุกชิ้น · ข้อความเล็กในภาพย่อ (ชื่อ/ยุค) ไม่ทำ
 - [design-timeline-v3] [2026-10-28] P-170 (seed `strip_dot.frame_x` ไม่คิด crop) แก้ใน seed v2 เป็น `frame_x_corrected` แล้ว · ไม่มีแถว P-170 ใน PENDING ของ branch นี้ (อยู่ใน wt/timeline2) → ให้ orchestrator ปิด P-170 ตอน merge (D26 ไม่ใช้ raster)
+- [design-timeline-v3/reviewer] [2026-10-28] ลูกศร ‹ › กึ่งกลาง y_rel วัดได้ ≈258 (ref-3 235–281 · slide 31 ≈259) สเปกเขียน 262 (238–286) ต่าง ~4px — ไม่แก้ในรอบนี้ (คลาดเคลื่อนในช่วง ±3px ของภาพ Slides) · ตรวจตอน preview
+- [design-timeline-v3/reviewer] [2026-10-28] `sh_card_meta` จริงมีทั้ง "SECTION :" และ "Section :" → ตัดบรรทัดนี้แบบไม่สนตัวพิมพ์ใหญ่เล็ก (สเปก §4.5c.4 เขียน `Section :` — dev ให้ใช้ case-insensitive)
+- [design-timeline-v3/reviewer] [2026-10-28] เพดาน active 400 (รอบก่อน) เป็น `[P]` ของ design-dev ไม่ใช่ D27 — รอบนี้ยกเลิกแล้ว (กฎขนาดใหม่ไม่ต้องใช้)
+- [design-timeline-v3/reviewer] [2026-10-28] ภาพ Basin ใน Slides ฐานลอยเหนือเส้น ≈23px (ล่าง y_rel 357 ทั้ง rest/active · ลายเส้นช้างการ์ตูนก็ลอย ≈22px) ขณะสเปกให้ฐาน = เส้น −2 — อาจเป็นขอบโปร่งในภาพ Slides ไม่ใช่เจตนา · ดูตอน preview
