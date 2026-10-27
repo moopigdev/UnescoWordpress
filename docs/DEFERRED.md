@@ -155,3 +155,6 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [reviewer design-timeline-v2 r2] [2026-10-28] DESIGN-SPEC §4.5b.3 ยังเขียน "แถวการ์ดไป `card_frame_x`" (หลวม) — จุดยึดจริง = กึ่งกลางภาพตาม §6.4b · เก็บกวาด
 - [reviewer design-timeline-v2 r2] [2026-10-28] §4.5b.7 ("ต้องขอก็ต่อเมื่อเลือก C") และ P-220 ("ถ้าเลือก B/C") ยังมีประโยคเงื่อนไข B/C หลัง D24 — เก็บกวาด
 - [reviewer design-timeline-v2 r2] [2026-10-28] seed v2 `object_scale_evidence` อ้าง "slides 31→34" (ประวัติ ไม่กระทบ)
+- [design-timeline-v3] [2026-10-28] ค่า p→α (`p^2.5`) และ scale `1+0.35p` ฟิตจากเฟรม 32 เฟรมเดียว (ที่ห่างกึ่งกลาง 95px) · ไม่มีเฟรมกลางทางอื่นให้ยืนยัน → ปรับตอนดู preview
+- [design-timeline-v3] [2026-10-28] mini-map ใน Slides: ชิ้น 1–4 เป็นลายเส้น ที่เหลือสี (ร่างยังไม่ครบ) — v3 ใช้สีทุกชิ้น · ข้อความเล็กในภาพย่อ (ชื่อ/ยุค) ไม่ทำ
+- [design-timeline-v3] [2026-10-28] P-170 (seed `strip_dot.frame_x` ไม่คิด crop) แก้ใน seed v2 เป็น `frame_x_corrected` แล้ว · ไม่มีแถว P-170 ใน PENDING ของ branch นี้ (อยู่ใน wt/timeline2) → ให้ orchestrator ปิด P-170 ตอน merge (D26 ไม่ใช้ raster)

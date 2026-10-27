@@ -1,7 +1,7 @@
 {
  "_meta": {
   "task": "design-timeline-v2",
-  "decision": "D23 + D24 (เจ้าของ 2026-10-28 = ทางเลือก A: raster เดิม + จุดกดได้ + animate ภาพการ์ด)",
+  "decision": "D26 (แทน D24+D25): Timeline v3 = Section 50 / Slides 31–54 100% · ค่าเดิมของ D24 เก็บไว้ใต้ items[].strip_dot / animation (deprecated) · layout/animation ใหม่ = key `v3`",
   "note": "ข้อมูลช่วยทำ Timeline v2 (layout = frame zone 4 670:1551 · animation ตาม Google Slides 31–54) · ไม่แก้ timeline-elephant.json เดิม · ตัวเลข strip_dot/strip_object_bbox วัดจาก raster ที่ดึงแล้ว ไม่เรียก Figma API",
   "scale": {
    "raster_px_to_frame_x": 2.68555,
@@ -17,10 +17,11 @@
    "frame_top_y": 200
   },
   "slides_order_evidence": "mini-map ใน Slides/annot-zone4-ref-* เรียง 15 ชิ้น = card_order 1..15 (อ่านจากภาพ ความมั่นใจปานกลาง · P-218)",
-  "lastModified_figma_json": "2026-10-27T09:48:30Z"
+  "lastModified_figma_json": "2026-10-27T09:48:30Z",
+  "P-170": "strip_dot.frame_x เดิมไม่คิด imageTransform ของ raster (a 0.967019 · tx 0.006978) → ใช้ frame_x_corrected = (raster_x/4096 − 0.006978)/0.967019 × 11000 · D26 ไม่ใช้ raster"
  },
  "animation": {
-  "status": "proposal-from-slides · D24=A",
+  "status": "DEPRECATED (D24/D25 ถูกแทนด้วย D26) — ใช้ key `v3`",
   "selected": {
    "object_scale": 1.5,
    "object_scale_evidence": "line art 149×179→color 200×272–280 (Ganesha, slides 31→34) ; cartoon elephant 181×129→≈283×165 (slide 41) ; measured at 1440-wide slide",
@@ -128,7 +129,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 9052,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -190,7 +193,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 1748,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -252,7 +257,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 318,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -314,7 +321,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 4814,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -376,7 +385,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 4181,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -438,7 +449,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 8174,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -523,7 +536,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 2326,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -585,7 +600,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 7616,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -647,7 +664,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 3570,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -732,7 +751,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 7019,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -794,7 +815,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 6369,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -856,7 +879,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 3100,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -918,7 +943,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 5622,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -980,7 +1007,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 10535,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -1042,7 +1071,9 @@
      44,
      44
     ],
-    "aria_label_from": "title"
+    "aria_label_from": "title",
+    "frame_x_corrected": 954,
+    "deprecated": "D26: ไม่ใช้ raster · frame_x เดิม (ไม่คิด crop) ผิด ดู frame_x_corrected"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -1086,5 +1117,539 @@
     }
    ]
   }
- ]
+ ],
+ "v3": {
+  "decision": "D26",
+  "source": "Slides 31–54 + annot-zone4-ref-1..3 (= owner-ref-before/transition/active) — ค่า [R] วัดที่ ref-3 ×1440/1424 · y_rel นับจากเส้นล่าง header ใน Slides (86.5)",
+  "stage": {
+   "design_width": 1440,
+   "min_height": 723,
+   "origin": "ขอบล่าง header จริงของเว็บ"
+  },
+  "pitch_px": 376.6,
+  "morph_half_pitch_px": 188,
+  "initial_c": 2.5,
+  "c_range": [
+   1,
+   15
+  ],
+  "trail_icons": {
+   "count": 17,
+   "x0": 19.2,
+   "y_rel": [
+    27,
+    54
+   ],
+   "size": [
+    25.3,
+    26.3
+   ],
+   "pitch": 28.3,
+   "group_colors": {
+    "green": "#178D74",
+    "red": "#E7553D",
+    "mustard": "#C3BC85",
+    "purple": "#B47093"
+   },
+   "no_active_enlarge": true
+  },
+  "minimap": {
+   "x": [
+    639,
+    1413
+   ],
+   "y_rel": [
+    6.5,
+    71.5
+   ],
+   "pitch": 51.6,
+   "dot0_x": 658,
+   "baseline_y_rel": [
+    57,
+    61
+   ],
+   "contain_box": [
+    48,
+    38
+   ],
+   "viewport_frame": {
+    "w": 195,
+    "h": 50,
+    "y_rel": [
+     14.5,
+     64.5
+    ],
+    "color": "#EDEBDA"
+   }
+  },
+  "arrows": {
+   "left_x": [
+    27,
+    53
+   ],
+   "right_x": [
+    1387,
+    1412
+   ],
+   "center_y_rel": 262,
+   "size": [
+    25,
+    48
+   ],
+   "stroke": 3,
+   "color": "#000000"
+  },
+  "timeline": {
+   "x": [
+    31,
+    1412
+   ],
+   "y_rel_center": 382.2,
+   "thickness": 4,
+   "dot_diameter": 12,
+   "color": "#000000"
+  },
+  "object": {
+   "rest_contain_box": [
+    260,
+    180
+   ],
+   "active_scale": 1.35,
+   "base_gap_above_line": 2,
+   "rest_treatment": "ภาพสี sh_thumbnail เล็ก opacity 0.6 ไม่ทำเทา ไม่มี sh_line_art (D26 ล่าสุด)",
+   "rest_opacity": {
+    "value": 0.6,
+    "label": "[P]",
+    "why": "นักออกแบบ: จางเล็กน้อย 0.5–0.7 · ค่าเฉลี่ยลายเส้นใน Slides 159–175 ; ภาพสีเฉลี่ย≈100 ที่ 0.6 → ≈162"
+   }
+  },
+  "title": {
+   "font": "Komet-Heavy",
+   "size_px": 18,
+   "line_height_px": 22,
+   "color": "#212529",
+   "gap_above_active_object": 19,
+   "max_width": 340
+  },
+  "photo": {
+   "center_x": 720,
+   "top_y_rel": 389,
+   "contain_box": [
+    340,
+    324
+   ],
+   "cap_at_file_px": true
+  },
+  "meta": {
+   "x": 907,
+   "max_width": 442,
+   "first_line_top_y_rel": 490,
+   "line_pitch": 18.6,
+   "font": "Komet 14",
+   "color": "#212529",
+   "omit_line_prefix": "Section",
+   "hidden_dashed_guides": true
+  },
+  "alpha_measured": {
+   "31": 0.05,
+   "32": 0.2,
+   "33": 0.4,
+   "34": 0.6,
+   "35": 1.0,
+   "36": 0.4,
+   "37": 0.2,
+   "38": 0.1,
+   "39": 0.0
+  },
+  "reveal_fn": {
+   "photo_meta_title": "p^2.5",
+   "color_layer": "ไม่มี (ภาพใบเดียว: opacity = 0.6 + 0.4·p)",
+   "scale": "1+0.35p",
+   "p": "clamp(1-|d|/188,0,1)",
+   "settle_ms": 400,
+   "object_opacity": "0.6+0.4p"
+  },
+  "timing_ms": {
+   "button": 600,
+   "jump": "min(900,400+80*|delta|)",
+   "snap": 400,
+   "wheel_idle": 150,
+   "easing": "cubic-bezier(.4,0,.2,1)"
+  },
+  "items": [
+   {
+    "card_order": 1,
+    "key": "elephant leg bone",
+    "trimmed_px": "1360×720",
+    "rest_px": [
+     260,
+     138
+    ],
+    "active_px": [
+     351,
+     186
+    ],
+    "minimap_px": [
+     48,
+     25
+    ],
+    "photo_px": [
+     340,
+     180
+    ]
+   },
+   {
+    "card_order": 2,
+    "key": "singhasari ganesha",
+    "trimmed_px": "1340×1885",
+    "rest_px": [
+     128,
+     180
+    ],
+    "active_px": [
+     173,
+     243
+    ],
+    "minimap_px": [
+     27,
+     38
+    ],
+    "photo_px": [
+     230,
+     324
+    ]
+   },
+   {
+    "card_order": 3,
+    "key": "ganesha",
+    "trimmed_px": "1563×1878",
+    "rest_px": [
+     150,
+     180
+    ],
+    "active_px": [
+     202,
+     243
+    ],
+    "minimap_px": [
+     32,
+     38
+    ],
+    "photo_px": [
+     270,
+     324
+    ]
+   },
+   {
+    "card_order": 4,
+    "key": "elephant molar",
+    "trimmed_px": "767×383",
+    "rest_px": [
+     260,
+     130
+    ],
+    "active_px": [
+     351,
+     176
+    ],
+    "minimap_px": [
+     48,
+     24
+    ],
+    "photo_px": [
+     340,
+     170
+    ]
+   },
+   {
+    "card_order": 5,
+    "key": "embossed brass",
+    "trimmed_px": "1343×960",
+    "rest_px": [
+     252,
+     180
+    ],
+    "active_px": [
+     340,
+     243
+    ],
+    "minimap_px": [
+     48,
+     34
+    ],
+    "photo_px": [
+     340,
+     243
+    ]
+   },
+   {
+    "card_order": 6,
+    "key": "ivory fire piston",
+    "trimmed_px": "group 174×152",
+    "rest_px": [
+     206,
+     180
+    ],
+    "active_px": [
+     278,
+     243
+    ],
+    "minimap_px": [
+     44,
+     38
+    ],
+    "photo_px": [
+     340,
+     297
+    ]
+   },
+   {
+    "card_order": 7,
+    "key": "elephant and mahout",
+    "trimmed_px": "1401×2203",
+    "rest_px": [
+     114,
+     180
+    ],
+    "active_px": [
+     154,
+     243
+    ],
+    "minimap_px": [
+     24,
+     38
+    ],
+    "photo_px": [
+     206,
+     324
+    ]
+   },
+   {
+    "card_order": 8,
+    "key": "patola",
+    "trimmed_px": "611×580",
+    "rest_px": [
+     190,
+     180
+    ],
+    "active_px": [
+     256,
+     243
+    ],
+    "minimap_px": [
+     40,
+     38
+    ],
+    "photo_px": [
+     340,
+     323
+    ]
+   },
+   {
+    "card_order": 9,
+    "key": "elephant shaped relic",
+    "trimmed_px": "group 180×150",
+    "rest_px": [
+     216,
+     180
+    ],
+    "active_px": [
+     292,
+     243
+    ],
+    "minimap_px": [
+     46,
+     38
+    ],
+    "photo_px": [
+     340,
+     283
+    ]
+   },
+   {
+    "card_order": 10,
+    "key": "pod duang",
+    "trimmed_px": "226×226",
+    "rest_px": [
+     180,
+     180
+    ],
+    "active_px": [
+     243,
+     243
+    ],
+    "minimap_px": [
+     38,
+     38
+    ],
+    "photo_px": [
+     324,
+     324
+    ]
+   },
+   {
+    "card_order": 11,
+    "key": "hand carved ivory",
+    "trimmed_px": "2017×270",
+    "rest_px": [
+     260,
+     35
+    ],
+    "active_px": [
+     351,
+     47
+    ],
+    "minimap_px": [
+     48,
+     6
+    ],
+    "photo_px": [
+     340,
+     46
+    ]
+   },
+   {
+    "card_order": 12,
+    "key": "tin ingot",
+    "trimmed_px": "954×637",
+    "rest_px": [
+     260,
+     174
+    ],
+    "active_px": [
+     351,
+     235
+    ],
+    "minimap_px": [
+     48,
+     32
+    ],
+    "photo_px": [
+     340,
+     227
+    ]
+   },
+   {
+    "card_order": 13,
+    "key": "wooden cold press",
+    "trimmed_px": "936×287",
+    "rest_px": [
+     260,
+     80
+    ],
+    "active_px": [
+     351,
+     108
+    ],
+    "minimap_px": [
+     48,
+     15
+    ],
+    "photo_px": [
+     340,
+     104
+    ]
+   },
+   {
+    "card_order": 14,
+    "key": "siwaih",
+    "trimmed_px": "981×252",
+    "rest_px": [
+     260,
+     67
+    ],
+    "active_px": [
+     351,
+     90
+    ],
+    "minimap_px": [
+     48,
+     12
+    ],
+    "photo_px": [
+     340,
+     87
+    ]
+   },
+   {
+    "card_order": 15,
+    "key": "bas relief of a royal",
+    "trimmed_px": "4096×1270",
+    "rest_px": [
+     260,
+     81
+    ],
+    "active_px": [
+     351,
+     109
+    ],
+    "minimap_px": [
+     48,
+     15
+    ],
+    "photo_px": [
+     340,
+     105
+    ]
+   }
+  ],
+  "groups": {
+   "6": {
+    "node": "1232:1744",
+    "bbox": [
+     174,
+     152
+    ],
+    "children": [
+     {
+      "node": "1232:1745",
+      "rel": [
+       0,
+       0,
+       122.6,
+       151.7
+      ]
+     },
+     {
+      "node": "1232:1746",
+      "rel": [
+       70.6,
+       6.4,
+       103.4,
+       145.6
+      ]
+     }
+    ]
+   },
+   "9": {
+    "node": "1232:1764",
+    "bbox": [
+     180,
+     150
+    ],
+    "children": [
+     {
+      "node": "1232:1766",
+      "rel": [
+       0,
+       0,
+       110.3,
+       101.8
+      ]
+     },
+     {
+      "node": "1232:1765",
+      "rel": [
+       28.6,
+       35.4,
+       151.4,
+       114.6
+      ]
+     }
+    ]
+   }
+  },
+  "fields_added": [],
+  "sh_line_art": "cancelled"
+ }
 }
