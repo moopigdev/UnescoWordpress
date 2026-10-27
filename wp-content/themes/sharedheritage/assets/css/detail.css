@@ -160,19 +160,12 @@
 	background: color-mix(in srgb, var(--sh-color-white) 10%, transparent); /* Button Back fill #FFFFFF@10% (964:2114) */
 }
 
-/* ---- Title — Figma auto-width text boxes may run past a narrow column ---- */
+/* ---- Title — wraps inside the text column (D28): never wider than the column, so it cannot run under the image column ---- */
 .sh-detail__title {
-	position: relative;
-	z-index: 1; /* drawn over an image column it may run into */
+	max-width: 100%;
 	color: var(--sh-d-title, var(--sh-color-neutral-900));
 	white-space: pre-line;
 	overflow-wrap: anywhere;
-}
-
-.sh-detail__title:not(.sh-detail__block),
-.sh-detail__title--auto {
-	width: max-content;
-	max-width: calc(1120 * var(--sh-d-u));
 }
 
 .sh-detail__title:not(.sh-detail__block) {
@@ -222,14 +215,6 @@
 
 .sh-detail__caption-generic .sh-detail__caption-label {
 	font: var(--sh-type-caption-bold);
-}
-
-/* Narrower than the frame: the image column is no longer clear of a long title → wrap inside the column. */
-@media (max-width: 1439px) {
-	.sh-detail__panel--cols .sh-detail__title {
-		width: auto;
-		max-width: 100%;
-	}
 }
 
 /* ---- Below the 1024 frame range: hero keeps its ratio · one column (D5 / DOD B1b) ---- */
@@ -304,11 +289,6 @@
 	.sh-detail__panel--cols .sh-detail__media,
 	.sh-detail__panel:not(.sh-detail__panel--cols) .sh-detail__media {
 		margin-top: var(--sh-space-30);
-	}
-
-	.sh-detail__title {
-		width: auto;
-		max-width: 100%;
 	}
 
 	.sh-detail__back {
