@@ -1,0 +1,207 @@
+/*
+ * Zone page (taxonomy-zone.php · DESIGN-SPEC §4.3 · §3.6 tile · frames 1472–1474).
+ * Desktop 1440: cover [160,150 1120×410] · banner [160,579 1120×166] r22 shadow-200 · grid rows y=795/1029/1263
+ * (tile 184, gap 50) · Back [160,1521]. Tablet/mobile: same order, fluid container (D5).
+ */
+
+.sh-zone {
+	--sh-zone-banner-gap: 19px;  /* cover bottom y=560 → banner y=579 (zone 1) */
+	--sh-zone-grid-gap: var(--sh-tile-gap);
+	--sh-zone-back-gap: 74px;    /* grid bottom y=1447 → Back y=1521 */
+	--sh-zone-bottom: 75px;      /* Back bottom y=1571 → page end y=1646 */
+	--sh-zone-banner-strip: 840px; /* mobile: banner image width (labels ≈ 15px) */
+}
+
+/* Per-zone offsets measured from the three Figma frames (zone 2: banner y=580, grid +1; zone 3: shorter page). */
+.sh-zone[data-zone="2"] {
+	--sh-zone-banner-gap: 20px;
+	--sh-zone-back-gap: 73px;
+}
+
+.sh-zone[data-zone="3"] {
+	--sh-zone-banner-gap: 20px;
+	--sh-zone-back-gap: 68px;
+	--sh-zone-bottom: 63px;
+}
+
+.sh-zone__title {
+	padding-block: var(--sh-space-40);
+}
+
+/* ---- Cover (1120×410) ---- */
+.sh-zone__cover {
+	aspect-ratio: 1120 / 410;
+	overflow: hidden;
+}
+
+.sh-zone__cover-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Zone 1 cover is a STRETCH fill with imageTransform (y 0.36%–99.88% of the image); zones 2/3 are plain FILL. */
+.sh-zone[data-zone="1"] .sh-zone__cover {
+	position: relative;
+}
+
+.sh-zone[data-zone="1"] .sh-zone__cover-img {
+	position: absolute;
+	top: -0.3639%;
+	left: 0;
+	height: 100.4826%;
+	object-fit: fill;
+}
+
+/*
+ * ---- Banner (1120×166 · Drop Shadow/200) ----
+ * Figma `Frame 12684` has radius 22 but clipsContent=false, so the image keeps square corners in the
+ * rendered frame (verified on frame PNG) — no border-radius here. Its Drop Shadow/200 follows the image's
+ * opaque pixels (none above the white area), so it is a drop-shadow filter, not a box-shadow.
+ */
+.sh-zone__banner {
+	margin-top: var(--sh-zone-banner-gap);
+	/* drop-shadow() takes the standard deviation (= half of a box-shadow blur): Figma blur 4 → 2px. */
+	filter: drop-shadow(0 1px 2px rgba(12, 12, 13, 0.05)) drop-shadow(0 1px 2px rgba(12, 12, 13, 0.1));
+}
+
+.sh-zone__banner-view {
+	overflow: hidden;
+}
+
+.sh-zone__banner-strip {
+	position: relative;
+	aspect-ratio: 1120 / 166;
+	overflow: hidden;
+}
+
+.sh-zone__banner-img {
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
+
+/* Figma imageTransform: the 4096×965 export is cropped to x 2.556%–97.46% · y 14.10%–73.80% of the image. */
+.sh-zone__banner--crop .sh-zone__banner-img {
+	position: absolute;
+	top: -23.617%;
+	left: -2.693%;
+	width: 105.372%;
+	height: 167.489%;
+	max-width: none;
+}
+
+/* ---- Trail grid: 5 × 184 (gap 50) at 1440 ---- */
+.sh-zone__grid {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: var(--sh-zone-grid-gap);
+	margin-top: var(--sh-space-50);
+	padding: 0;
+	list-style: none;
+}
+
+.sh-tile {
+	position: relative;
+	aspect-ratio: 1;
+	background: var(--sh-tile-bg, var(--sh-color-tile-beige));
+}
+
+.sh-tile__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.sh-tile__name {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--sh-space-10);
+	text-align: center;
+}
+
+/* Hover image 210 on a 184 tile: 13px out on every side (7.065%). Not shown until hover. */
+.sh-tile__img--hover {
+	position: absolute;
+	top: -7.065%;
+	left: -7.065%;
+	width: 114.13%;
+	height: 114.13%;
+	max-width: none;
+	opacity: 0;
+	transform: scale(0.876);
+	pointer-events: none;
+	transition: opacity var(--sh-duration-tile) var(--sh-ease), transform var(--sh-duration-tile) var(--sh-ease);
+}
+
+.sh-tile__img {
+	transition: transform var(--sh-duration-tile) var(--sh-ease);
+}
+
+@media (hover: hover) {
+	.sh-tile:hover {
+		z-index: 2;
+	}
+
+	.sh-tile:hover .sh-tile__img--hover {
+		opacity: 1;
+		transform: none;
+	}
+
+	/* No hover image uploaded: grow the default image to 210 instead. */
+	.sh-tile--no-hover:hover .sh-tile__img {
+		transform: scale(1.1413);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sh-tile__img,
+	.sh-tile__img--hover {
+		transition: none;
+	}
+}
+
+/* ---- Back + page end ---- */
+.sh-zone__back {
+	margin-top: var(--sh-zone-back-gap);
+	padding-bottom: var(--sh-zone-bottom);
+}
+
+/* ---- Tablet / mobile (no Figma frame — D5) ---- */
+@media (max-width: 1023px) {
+	.sh-zone[data-zone] {
+		--sh-zone-grid-gap: var(--sh-space-20);
+		--sh-zone-banner-gap: var(--sh-space-20);
+		--sh-zone-back-gap: var(--sh-space-40);
+		--sh-zone-bottom: var(--sh-space-40);
+	}
+
+	.sh-zone__grid {
+		margin-top: var(--sh-space-30);
+	}
+}
+
+@media (max-width: 767px) {
+	.sh-zone[data-zone] {
+		--sh-zone-grid-gap: var(--sh-space-12);
+		--sh-zone-banner-gap: var(--sh-space-16);
+	}
+
+	.sh-zone__grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	/* The ZONE 1–5 labels are baked into the image: keep them ≥14px by scrolling the strip inside the box. */
+	.sh-zone__banner-view {
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+	}
+
+	.sh-zone__banner-strip {
+		width: var(--sh-zone-banner-strip);
+	}
+}
