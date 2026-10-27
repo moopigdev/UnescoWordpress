@@ -3,6 +3,10 @@
 ## ข้อเท็จจริง (ตรวจ 2026-10-27)
 Business plan · **live สาธารณะ** · WP เปล่า (0 page · theme `hostinger-ai-theme`) · Wordfence · LiteSpeed · PHP 8.5 บน server · DNS Squarespace → 156.67.222.233 · owner it.bgk@unesco.org แชร์สิทธิ์มา
 
+## การเข้าถึง (2026-10-27)
+- hPanel: บัญชี it.bgk@unesco.org (เราเป็นผู้ร่วมงาน) · staging = `staging.sharedheritage.net` (สร้าง 2026-10-27 · คัดลอกจาก prod)
+- SSH: port 65002 · user u972755030 · host 156.67.222.233 · คีย์ `~/.ssh/sharedheritage_hostinger` (ed25519 เฉพาะงานนี้ · ไม่มี passphrase · อยู่นอก repo) · เจ้าของต้องเปิด SSH + เพิ่ม public key ใน hPanel ก่อน
+
 ## กติกา (hook บังคับ)
 1. **staging ก่อนเสมอ** (`scripts/deploy.sh staging`) — ต้องมี staging ใน hPanel + SSH/key ก่อน (O-6, เจ้าของทำ/อนุญาต)
 2. **production ต้องมี `orchestrator/deploy-approved`** — orchestrator เขียนหลังเจ้าของตอบ "ใช่" ในแชทเท่านั้น (ไม่มีไฟล์ = guard-bash บล็อก `deploy.sh` ที่ไม่ใช่ staging และ rsync/scp/sftp ไปโฮสต์ปลายทาง) · ลบไฟล์ทันทีหลัง deploy เสร็จ — การอนุมัติใช้ครั้งเดียว
