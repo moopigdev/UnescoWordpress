@@ -187,3 +187,11 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [wp-dev timeline-v3] [2026-10-28] metadata ที่ยาวเกิน 7 บรรทัด (Cake Molds 15 · Bas-relief 13 · Fire Piston 11 บรรทัดที่กว้าง 442) เลย stage 723 → stage ยืดลงล่าง (`--stage-h` = 496 + สูง metadata สูงสุด + 24 · k ไม่เปลี่ยน) หน้าเลื่อนลงได้ แทนการทับ/ตัดข้อความ `[P]`
 - [wp-dev timeline-v3] [2026-10-28] ● ใช้ roving tabindex (Tab หยุดที่ ● ของชิ้นกลางจุดเดียว · ← → Home End ย้ายทั้งชิ้นและโฟกัส) — กัน Tab ไปโฟกัส ● ที่อยู่นอกจอ (มองไม่เห็น focus ring) `[P]` · ชื่อชิ้นกลางเป็น Tab stop (ลิงก์ detail) ชื่ออื่น tabindex -1
 - [wp-dev timeline-v3] [2026-10-28] มือถือ (pitch 62vw): ● / ภาพของชิ้นข้างเคียงอยู่นอกจอ (เห็นแค่ขอบ ≤ 43px ใต้ลูกศร) → แตะได้คือ mini-map · ‹ › · ปัดซ้ายขวา (แตะที่ขอบชิ้นข้าง = โดนลูกศร = ไปชิ้นนั้นเหมือนกัน)
+- [reviewer timeline-v3 r1] [2026-10-28] stage สูงตาม metadata ยาวสุด (`--stage-h` 799) → 1440×900 / 1366×768 เลื่อนแนวตั้ง ≈49px เสมอแม้ชิ้นปัจจุบันข้อความสั้น · ขัดเจตนา D27 "พอดีจอ" เล็กน้อย → เจ้าของดูใน preview
+- [reviewer timeline-v3 r1] [2026-10-28] mini-map baseline สเปก y_rel 57 vs ref-3 ≈54.6 → design-dev ยืนยัน
+- [reviewer timeline-v3 r1] [2026-10-28] aria-label "Elephant timeline" vs สเปก "Elephant's Trail timeline"
+- [reviewer timeline-v3 r1] [2026-10-28] การ์ด 6: admin เปลี่ยน/ลบภาพที่ 2 → แสดงภาพเต็มไม่ trim (ขอบโปร่ง)
+- [reviewer timeline-v3 r1] [2026-10-28] ภาพต้นฉบับถึง 5.7MB โหลดทั้งหมดใน mini-map → ตรวจบน server ว่า srcset ได้ไฟล์เล็ก (import SH_IMPORT_SUBSIZES)
+- [reviewer timeline-v3 r1] [2026-10-28] ครั้งแรกใน Chrome ใหม่ หลังถึงชิ้น 15 คลิก 3 ครั้งไม่ตอบสนอง · ทำซ้ำ 6 รอบไม่เกิด → เจ้าของสังเกตใน preview
+- [reviewer timeline-v3 r2] [2026-10-28] กล่องชื่อ Pod Duang / การ์ด 6 ล้ำเข้ากล่อง mini-map 3.2 / 4.6px (ตัวอักษรอยู่ใต้กรอบครีม ไม่ทับภาพ)
+- [reviewer timeline-v3 r2] [2026-10-28] `timeline.js` fitTitles ขยายทุกชื่อที่เกิน 2 บรรทัดที่ 280 (c13 → 320 · c15 → 300 · Pod Duang → 440) · สเปก §4.5c.1 "max 280" ไม่มีข้อยกเว้น → design-dev เขียนข้อยกเว้นในสเปก หรือยอม 3 บรรทัด
