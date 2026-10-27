@@ -2,7 +2,8 @@
 /**
  * Importer: files → media library (attachments), deduplicated by _sh_import_key.
  * Sources live outside the repo: Unesco/design/assets (images, by Figma imageRef) and
- * Unesco/media/out (videos/posters, from content/media-manifest.json).
+ * Unesco/media/out (videos/posters, from content/media-manifest.json). JPEG/PNG with a non-sRGB ICC profile
+ * are re-tagged sRGB on copy (icc.php).
  *
  * @package sharedheritage-core
  */
@@ -67,6 +68,9 @@ function sh_imp_attachment( string $src, string $key, string $title, array $vide
 	$dest = $up['path'] . '/' . $name;
 	if ( ! copy( $src, $dest ) ) {
 		throw new RuntimeException( 'copy failed: ' . $src );
+	}
+	if ( sh_imp_icc_normalize( $dest, (string) $check['type'] ) ) { // Display P3 etc. → sRGB as Figma shows it (icc.php).
+		sh_imp_count( 'updated', 'icc_to_srgb' );
 	}
 	$id = wp_insert_attachment(
 		wp_slash(
@@ -147,45 +151,96 @@ function sh_imp_image( array $map, ?string $ref, string $title ): ?int {
 }
 
 /**
- * Video, HEVC fallback and poster of a manifest entry.
+ * First manifest entry whose $field equals $value (e.g. object_slug = seed slug · usage = home-trails). null = none.
  *
  * @param array<string, mixed> $manifest content/media-manifest.json.
- * @param string|null          $id       Manifest id.
- * @param string               $title    Title.
- * @return array{webm:?int,hevc:?int,poster:?int,has_alpha:?bool}
+ * @param string               $field    Entry key.
+ * @param string               $value    Wanted value.
+ * @return array<string, mixed>|null
  */
-function sh_imp_video( array $manifest, ?string $id, string $title ): array {
-	$out = array(
-		'webm'      => null,
-		'hevc'      => null,
-		'poster'    => null,
-		'has_alpha' => null,
-	);
-	$entry = null;
-	foreach ( (array) $manifest['files'] as $f ) {
-		if ( null !== $id && isset( $f['id'] ) && $f['id'] === $id ) {
-			$entry = $f;
+function sh_imp_manifest_entry( array $manifest, string $field, string $value ): ?array {
+	foreach ( (array) ( isset( $manifest['files'] ) ? $manifest['files'] : array() ) as $f ) {
+		if ( is_array( $f ) && isset( $f[ $field ] ) && $f[ $field ] === $value ) {
+			return $f;
 		}
 	}
+	return null;
+}
+
+/**
+ * Attachments of a manifest entry: kind "video" → WebM + poster (+ HEVC only for fallback.type hevc-alpha-mov,
+ * "poster-only" = the poster) · kind "still" → the still image (out = null). No entry → all 0 (field cleared).
+ *
+ * @param array<string, mixed>|null $entry Manifest entry.
+ * @param string                    $title Title.
+ * @return array{webm:int,hevc:int,poster:int,has_alpha:bool,still:int}
+ */
+function sh_imp_video( ?array $entry, string $title ): array {
+	$out = array(
+		'webm'      => 0,
+		'hevc'      => 0,
+		'poster'    => 0,
+		'has_alpha' => false,
+		'still'     => 0,
+	);
 	if ( null === $entry ) {
 		return $out;
 	}
-	$dir   = sh_imp_config()['media'];
+	$dir  = sh_imp_config()['media'];
+	$file = static fn( string $p ): string => $dir . '/' . basename( $p );
+	$key  = static fn( string $p ): string => 'media:' . basename( $p );
+	if ( isset( $entry['kind'] ) && 'still' === $entry['kind'] ) {
+		if ( ! empty( $entry['still'] ) ) {
+			$out['still'] = sh_imp_attachment( $file( (string) $entry['still'] ), $key( (string) $entry['still'] ), $title . ' hero' );
+		}
+		return $out;
+	}
+	if ( empty( $entry['out'] ) ) {
+		return $out;
+	}
 	$video = array(
 		'width'  => isset( $entry['width'] ) ? (int) $entry['width'] : 0,
 		'height' => isset( $entry['height'] ) ? (int) $entry['height'] : 0,
 		'length' => isset( $entry['duration_s'] ) ? (int) round( (float) $entry['duration_s'] ) : 0,
 	);
-	$file  = static fn( string $p ): string => $dir . '/' . basename( $p );
 
-	$out['webm']      = sh_imp_attachment( $file( (string) $entry['out'] ), 'media:' . basename( (string) $entry['out'] ), $title . ' video', $video );
-	$out['poster']    = sh_imp_attachment( $file( (string) $entry['poster'] ), 'media:' . basename( (string) $entry['poster'] ), $title . ' poster' );
+	$out['webm']      = sh_imp_attachment( $file( (string) $entry['out'] ), $key( (string) $entry['out'] ), $title . ' video', $video );
+	$out['poster']    = empty( $entry['poster'] ) ? 0 : sh_imp_attachment( $file( (string) $entry['poster'] ), $key( (string) $entry['poster'] ), $title . ' poster' );
 	$out['has_alpha'] = ! empty( $entry['has_alpha'] );
-	$out['hevc']      = 0;
 	// Only real video fallbacks (opaque files have type "poster-only" = the poster above).
 	if ( ! empty( $entry['fallback']['file'] ) && isset( $entry['fallback']['type'] ) && 'hevc-alpha-mov' === $entry['fallback']['type'] ) {
 		$fb          = (string) $entry['fallback']['file'];
-		$out['hevc'] = sh_imp_attachment( $file( $fb ), 'media:' . basename( $fb ), $title . ' video hevc', $video );
+		$out['hevc'] = sh_imp_attachment( $file( $fb ), $key( $fb ), $title . ' video hevc', $video );
 	}
 	return $out;
+}
+
+/**
+ * Attachment for a design-asset reference used inside seed style keys "*_ref" (design-dev crops:
+ * "<ref>.crop-<node>.png"). Accepts a file name in design/assets (with or without extension) or a Figma
+ * imageRef from image-map.json. 0 (+ warning) when no file — the caller keeps the original value.
+ *
+ * @param array<string, mixed> $map   image-map.json.
+ * @param string               $value Value of the *_ref key.
+ * @param string               $title Attachment title.
+ */
+function sh_imp_asset_ref( array $map, string $value, string $title ): int {
+	$dir  = sh_imp_config()['assets'];
+	$name = basename( $value ); // never leave design/assets.
+	$cand = array();
+	if ( isset( $map['files'][ $name ] ) ) {
+		$cand[] = (string) $map['files'][ $name ];
+	}
+	$cand[] = $name;
+	foreach ( array( 'png', 'jpg', 'jpeg', 'webp' ) as $ext ) {
+		$cand[] = $name . '.' . $ext;
+	}
+	foreach ( $cand as $file ) {
+		if ( '' !== $file && '.' !== $file[0] && is_file( $dir . '/' . $file ) ) {
+			$ext = (string) pathinfo( $file, PATHINFO_EXTENSION );
+			return sh_imp_attachment( $dir . '/' . $file, 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) ), $title );
+		}
+	}
+	sh_imp_warn( 'style *_ref without file (kept as text): ' . $value . ' (' . $title . ')' );
+	return 0;
 }
