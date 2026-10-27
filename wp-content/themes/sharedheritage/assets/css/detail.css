@@ -1,0 +1,335 @@
+/*
+ * Detail page (single-object.php) — DESIGN-SPEC §4.8 · §6.3 · tokens from tokens.css only.
+ *
+ * Geometry arrives as unitless numbers (px in the 1440 Figma frame) in --sh-d-* custom properties set
+ * by template-parts/detail/{hero,panel}.php from sh_object_layout(). --sh-d-u turns them into lengths:
+ * 1px at ≥1440 (frame size, centred) and proportionally smaller down to 1024. Below 1024 there is no
+ * frame (D5): the hero keeps its aspect ratio and the panel stacks in one column.
+ */
+
+.sh-detail {
+	container-type: inline-size;
+}
+
+.sh-detail__hero,
+.sh-detail__panel {
+	--sh-d-u: min(calc(100cqw / 1440), 1px);
+}
+
+/* ---- Hero: layout hero bbox ---- */
+.sh-detail__hero {
+	width: calc(1440 * var(--sh-d-u));
+	margin: calc(var(--sh-d-hero-top, 0) * var(--sh-d-u)) auto 0;
+}
+
+.sh-detail__hero-box {
+	width: calc(var(--sh-d-hero-w, 1440) * var(--sh-d-u));
+	height: calc(var(--sh-d-hero-h, 810) * var(--sh-d-u));
+	margin-left: calc(var(--sh-d-hero-x, 0) * var(--sh-d-u));
+}
+
+.sh-detail__hero-media {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+/* ---- Panel: y (gap under the hero) · height · fill · padding top/bottom ---- */
+.sh-detail__panel {
+	min-height: calc(var(--sh-d-panel-h, 0) * var(--sh-d-u));
+	margin-top: calc(var(--sh-d-hero-gap, 0) * var(--sh-d-u));
+	margin-bottom: calc(var(--sh-d-tail, 0) * var(--sh-d-u));
+	padding: calc(var(--sh-d-pad-top, 60) * var(--sh-d-u)) 0 calc(var(--sh-d-pad-bottom, 60) * var(--sh-d-u));
+	background: var(--sh-d-panel-bg, transparent);
+	color: var(--sh-d-text, var(--sh-color-neutral-900));
+}
+
+/* Container 1120 at x=160 (§2.3 · panel padding 160/160). */
+.sh-detail__inner {
+	width: calc(1120 * var(--sh-d-u));
+	margin-inline: auto;
+}
+
+.sh-detail__cols {
+	display: flex;
+	align-items: flex-start;
+}
+
+/* Text column: width/min-height = layout column · generic mode: gap = panel_gap. */
+.sh-detail__text {
+	display: flex;
+	flex: none;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: calc(var(--sh-d-gap, 22) * var(--sh-d-u));
+	width: calc(var(--sh-d-text-w, 1120) * var(--sh-d-u));
+	min-height: calc(var(--sh-d-text-h, 0) * var(--sh-d-u));
+}
+
+/* Layout text_blocks (§4.8.1): column padding-top, then each block's own gap_before. */
+.sh-detail__text--blocks {
+	gap: 0;
+	padding-top: calc(var(--sh-d-text-pad, 0) * var(--sh-d-u));
+}
+
+.sh-detail__block {
+	width: 100%;
+	margin: 0;
+	font-family: var(--sh-d-ff, var(--sh-font-komet));
+	font-weight: var(--sh-d-fw, var(--sh-fw-komet-regular));
+	font-size: calc(var(--sh-d-fs, 18) * 1px);
+	line-height: calc(var(--sh-d-lh, 24) * 1px);
+	letter-spacing: var(--sh-letter-spacing);
+	white-space: pre-line;
+}
+
+.sh-detail__text--blocks > .sh-detail__block + .sh-detail__block {
+	margin-top: calc(var(--sh-d-bgap, 0) * var(--sh-d-u));
+}
+
+.sh-detail__row,
+.sh-detail__line {
+	display: block;
+}
+
+/* Figma bullet list: indent 1.5em per level, disc marker outside (1493 plain_meta lines). */
+.sh-detail__line--bullet {
+	display: list-item;
+	margin-left: calc(var(--sh-d-indent, 1) * 1.5em);
+	list-style: disc outside;
+}
+
+/* Image column at its layout x/width/height. */
+.sh-detail__media {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	gap: calc(var(--sh-d-gap, 22) * var(--sh-d-u));
+}
+
+.sh-detail__panel--cols .sh-detail__media {
+	flex: none;
+	width: calc(var(--sh-d-media-w, 359) * var(--sh-d-u));
+	height: calc(var(--sh-d-media-h, 0) * var(--sh-d-u));
+	margin-left: calc((var(--sh-d-media-x, 761) - var(--sh-d-text-w, 739)) * var(--sh-d-u));
+}
+
+/* Extra image fields (no layout images[]): share the column box, contained, at the bottom. */
+.sh-detail__panel--cols .sh-detail__media:not(.sh-detail__media--placed) .sh-detail__image {
+	flex: 1 1 0;
+	min-height: 0;
+	object-fit: contain;
+	object-position: 50% 100%;
+}
+
+/* Layout images[]: pre-cropped to their bbox → drawn at the bbox (later ones on top). */
+.sh-detail__media--placed {
+	position: relative;
+	display: block;
+}
+
+.sh-detail__media--placed .sh-detail__image {
+	position: absolute;
+	top: calc(var(--sh-d-img-y, 0) * var(--sh-d-u));
+	left: calc(var(--sh-d-img-x, 0) * var(--sh-d-u));
+	width: calc(var(--sh-d-img-w, 0) * var(--sh-d-u));
+	max-width: none;
+	height: calc(var(--sh-d-img-h, 0) * var(--sh-d-u));
+}
+
+.sh-detail__panel:not(.sh-detail__panel--cols) .sh-detail__cols {
+	flex-direction: column;
+}
+
+.sh-detail__panel:not(.sh-detail__panel--cols) .sh-detail__media {
+	width: 100%;
+	margin-top: calc(var(--sh-d-gap, 22) * var(--sh-d-u));
+}
+
+.sh-detail__image {
+	width: 100%;
+	height: auto;
+}
+
+/* Back: Figma y = lowest column bottom + layout distance. */
+.sh-detail__back {
+	margin-top: calc(var(--sh-d-back-gap, 22) * var(--sh-d-u));
+}
+
+.sh-detail__panel--dark .sh-detail__back:not(:hover):not(:focus-visible) {
+	background: color-mix(in srgb, var(--sh-color-white) 10%, transparent); /* Button Back fill #FFFFFF@10% (964:2114) */
+}
+
+/* ---- Title — Figma auto-width text boxes may run past a narrow column ---- */
+.sh-detail__title {
+	position: relative;
+	z-index: 1; /* drawn over an image column it may run into */
+	color: var(--sh-d-title, var(--sh-color-neutral-900));
+	white-space: pre-line;
+	overflow-wrap: anywhere;
+}
+
+.sh-detail__title:not(.sh-detail__block),
+.sh-detail__title--auto {
+	width: max-content;
+	max-width: calc(1120 * var(--sh-d-u));
+}
+
+.sh-detail__title:not(.sh-detail__block) {
+	font: var(--sh-type-page-title);
+}
+
+/* ---- Generic text (no text_blocks): §2.2 levels ---- */
+/* Metadata block: label Komet-Bold · value Komet-Regular · 20/25, or 24/30 when lines are direct panel children. */
+.sh-detail__meta-block {
+	margin: 0;
+	font: var(--sh-type-collection-bold);
+	color: var(--sh-d-meta, inherit);
+}
+
+.sh-detail__panel--meta-lg .sh-detail__meta-block {
+	font: var(--sh-type-metadata);
+}
+
+.sh-detail__meta-block dt,
+.sh-detail__meta-block dd {
+	display: inline;
+	margin: 0;
+}
+
+.sh-detail__meta-block dd {
+	font-weight: var(--sh-fw-komet-regular);
+}
+
+/* Collection 20/25: label Komet-Bold · value Komet-Regular (Final standard, P-206). */
+.sh-detail__collection {
+	font: var(--sh-type-collection);
+	color: var(--sh-d-coll, inherit);
+}
+
+.sh-detail__collection strong {
+	font-weight: var(--sh-fw-komet-bold);
+}
+
+/* Caption 18/24 Komet-Light · "Caption:" Komet-Bold · paragraphs separated by one blank line. */
+.sh-detail__caption-generic {
+	font: var(--sh-type-caption);
+}
+
+.sh-detail__caption-generic p + p {
+	margin-top: 24px; /* one empty 24px line between paragraphs (Figma "\n\n") */
+}
+
+.sh-detail__caption-generic .sh-detail__caption-label {
+	font: var(--sh-type-caption-bold);
+}
+
+/* Narrower than the frame: the image column is no longer clear of a long title → wrap inside the column. */
+@media (max-width: 1439px) {
+	.sh-detail__panel--cols .sh-detail__title {
+		width: auto;
+		max-width: 100%;
+	}
+}
+
+/* ---- Below the 1024 frame range: hero keeps its ratio · one column (D5 / DOD B1b) ---- */
+@media (max-width: 1023px) {
+	.sh-detail__hero {
+		width: 100%;
+		margin-top: 0;
+	}
+
+	.sh-detail__hero-box {
+		width: 100%;
+		height: auto;
+		margin-left: 0;
+		aspect-ratio: var(--sh-d-hero-w, 1440) / var(--sh-d-hero-h, 810);
+	}
+
+	.sh-detail__panel {
+		min-height: 0;
+		margin-block: 0;
+		padding: var(--sh-space-40) var(--sh-tablet-margin);
+	}
+
+	.sh-detail__inner {
+		width: 100%;
+		max-width: var(--sh-container);
+	}
+
+	.sh-detail__cols,
+	.sh-detail__panel--cols .sh-detail__cols {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.sh-detail__text,
+	.sh-detail__panel--cols .sh-detail__media {
+		width: 100%;
+		height: auto;
+		min-height: 0;
+		margin-left: 0;
+	}
+
+	.sh-detail__panel--cols .sh-detail__image {
+		flex: none;
+	}
+
+	/* Placed crops stack at their own ratio (no frame to place them in). */
+	.sh-detail__media--placed {
+		display: flex;
+	}
+
+	.sh-detail__media--placed .sh-detail__image {
+		position: static;
+		width: min(100%, calc(var(--sh-d-img-w, 0) * 1px));
+		height: auto;
+		aspect-ratio: var(--sh-d-img-w, 1) / var(--sh-d-img-h, 1);
+	}
+
+	.sh-detail__text:not(.sh-detail__text--blocks),
+	.sh-detail__media {
+		gap: var(--sh-space-22);
+	}
+
+	/* Block gaps keep their Figma px (not scaled down with the frame). */
+	.sh-detail__text--blocks {
+		padding-top: 0;
+	}
+
+	.sh-detail__text--blocks > .sh-detail__block + .sh-detail__block {
+		margin-top: calc(var(--sh-d-bgap, 0) * 1px);
+	}
+
+	.sh-detail__panel--cols .sh-detail__media,
+	.sh-detail__panel:not(.sh-detail__panel--cols) .sh-detail__media {
+		margin-top: var(--sh-space-30);
+	}
+
+	.sh-detail__title {
+		width: auto;
+		max-width: 100%;
+	}
+
+	.sh-detail__back {
+		margin-top: var(--sh-space-30);
+	}
+}
+
+@media (max-width: 767px) {
+	.sh-detail__panel {
+		padding-block: var(--sh-space-30);
+	}
+
+	.sh-detail__text .sh-detail__title {
+		font-size: 28px; /* 36px headings overflow 375–430 screens; no mobile frame (D5) */
+		line-height: 35px;
+	}
+
+	.sh-detail__text .sh-detail__meta,
+	.sh-detail__text .sh-detail__plain,
+	.sh-detail__panel--meta-lg .sh-detail__meta-block {
+		font-size: 20px;
+		line-height: 25px;
+	}
+}

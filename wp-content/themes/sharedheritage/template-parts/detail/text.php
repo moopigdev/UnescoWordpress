@@ -1,0 +1,163 @@
+<?php
+/**
+ * Detail text column — DESIGN-SPEC §4.8.1 `text_blocks[]` · `caption` (P-161/P-162).
+ *
+ * With layout text_blocks: blocks in Figma order, each with its own font/size/line-height/colour and
+ * gap_before; content from the object fields (title = sh_title_raw/post title · meta/collection rows =
+ * row.field → sh_<field> with the label Figma shows · caption = sh_caption with caption.label /
+ * label_breaks / paragraph_indent_nbsp) · plain_meta = text kept in the layout (lines[] or full runs) ·
+ * lorem_placeholder is never shown (P-213).
+ * Without them (objects outside the 15 Final frames): title → metadata block (sh_meta_color set) or
+ * Collection line → "Caption:" + paragraphs (generic rules, §2.2 levels).
+ *
+ * Args: post_id (int) · layout (sh_object_layout()).
+ *
+ * @package sharedheritage
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+$sh_args   = ( isset( $args ) && is_array( $args ) ) ? $args : array();
+$sh_id     = isset( $sh_args['post_id'] ) ? (int) $sh_args['post_id'] : (int) get_the_ID();
+$sh_layout = isset( $sh_args['layout'] ) && is_array( $sh_args['layout'] ) ? $sh_args['layout'] : array();
+
+$sh_title_raw = trim( (string) sh_get( 'sh_title_raw', $sh_id ) );
+$sh_title     = '' !== $sh_title_raw ? $sh_title_raw : get_the_title( $sh_id );
+$sh_caption   = trim( (string) sh_get( 'sh_caption', $sh_id ) );
+$sh_blocks    = array_values( array_filter( (array) ( $sh_layout['text_blocks'] ?? array() ), 'is_array' ) );
+usort( $sh_blocks, static fn( $a, $b ) => (int) ( $a['order'] ?? 0 ) <=> (int) ( $b['order'] ?? 0 ) );
+
+$sh_hex = static function ( $v ): string {
+	$c = is_string( $v ) ? sanitize_hex_color( $v ) : '';
+	return is_string( $c ) ? $c : '';
+};
+$sh_n   = static fn( $v ): string => (string) round( is_numeric( $v ) ? (float) $v : 0.0, 3 );
+
+/* Figma weight → CSS: Komet by PostScript name (tokens.css) · other families as in Figma. */
+$sh_weight = static function ( $w, string $family = 'Komet' ): string {
+	$map = array(
+		400 => 'light',
+		500 => 'regular',
+		600 => 'medium',
+		700 => 'bold',
+		800 => 'heavy',
+	);
+	if ( 'Komet' !== $family ) {
+		return (string) max( 100, min( 900, (int) $w ) );
+	}
+	return 'var(--sh-fw-komet-' . ( $map[ (int) $w ] ?? 'regular' ) . ')';
+};
+$sh_family = static function ( string $family ): string {
+	$map = array(
+		'Barlow Condensed' => 'var(--sh-font-barlow-condensed)',
+		'Roboto Flex'      => 'var(--sh-font-roboto-flex)',
+	);
+	return $map[ $family ] ?? 'var(--sh-font-komet)';
+};
+/* Inline custom properties of one block (font · colour · gap above). */
+$sh_block_style = static function ( array $b, string $color ) use ( $sh_weight, $sh_family, $sh_n ): string {
+	$f   = isset( $b['font'] ) && is_array( $b['font'] ) ? $b['font'] : array();
+	$fam = isset( $f['family'] ) && is_string( $f['family'] ) ? $f['family'] : 'Komet';
+	return '--sh-d-ff:' . $sh_family( $fam ) . ';--sh-d-fw:' . $sh_weight( $f['weight'] ?? 500, $fam )
+		. ';--sh-d-fs:' . $sh_n( $f['size'] ?? 18 ) . ';--sh-d-lh:' . $sh_n( $f['line_height'] ?? 24 )
+		. ';--sh-d-bgap:' . $sh_n( $b['gap_before'] ?? 0 ) . ';' . ( '' !== $color ? 'color:' . $color . ';' : '' );
+};
+/* One styled run of text. */
+$sh_run = static fn( string $text, $weight, string $color, string $cls = '' ): string => '<span class="' . esc_attr( trim( 'sh-detail__run ' . $cls ) ) . '" style="'
+	. esc_attr( 'font-weight:' . $sh_weight( $weight ) . ';' . ( '' !== $color ? 'color:' . $color . ';' : '' ) ) . '">' . esc_html( $text ) . '</span>';
+
+$sh_fields = array( 'collection', 'thematic_section', 'period', 'place_of_production', 'material', 'dimensions', 'local_name', 'object_biography' );
+
+if ( ! $sh_blocks ) {
+	get_template_part( 'template-parts/detail/text-generic', null, array( 'post_id' => $sh_id ) );
+	return;
+}
+?>
+<div class="sh-detail__text sh-detail__text--blocks">
+	<?php
+	$sh_has_title = false;
+	foreach ( $sh_blocks as $sh_b ) {
+		$sh_role = (string) ( $sh_b['role'] ?? '' );
+		$sh_col  = $sh_hex( $sh_b['color'] ?? '' );
+
+		if ( 'title' === $sh_role && ! $sh_has_title ) {
+			$sh_has_title = true;
+			$sh_auto      = 'WIDTH_AND_HEIGHT' === ( $sh_b['auto_resize'] ?? '' ) ? ' sh-detail__title--auto' : '';
+			printf(
+				'<h1 id="sh-detail-title" class="sh-detail__block sh-detail__title%1$s" style="%2$s">%3$s</h1>',
+				esc_attr( $sh_auto ),
+				esc_attr( $sh_block_style( $sh_b, '' !== $sh_hex( sh_get( 'sh_title_color', $sh_id ) ) ? '' : $sh_col ) ), // field colour (CSS var) wins.
+				esc_html( $sh_title )
+			);
+		} elseif ( ( 'meta' === $sh_role || 'collection' === $sh_role ) && ! empty( $sh_b['rows'] ) && is_array( $sh_b['rows'] ) ) {
+			$sh_out = '';
+			foreach ( $sh_b['rows'] as $sh_row ) {
+				$sh_field = is_array( $sh_row ) ? (string) ( $sh_row['field'] ?? '' ) : '';
+				$sh_value = in_array( $sh_field, $sh_fields, true ) ? trim( (string) sh_get( 'sh_' . $sh_field, $sh_id ) ) : '';
+				if ( '' === $sh_value ) {
+					continue;
+				}
+				$sh_lc   = $sh_hex( $sh_row['label_color'] ?? '' );
+				$sh_vc   = $sh_hex( $sh_row['value_color'] ?? '' );
+				$sh_out .= '<span class="sh-detail__row">'
+					. $sh_run( (string) ( $sh_row['label'] ?? '' ), $sh_row['label_weight'] ?? 700, $sh_lc ) . ' '
+					. $sh_run( $sh_value, $sh_row['value_weight'] ?? 500, $sh_vc ) . '</span>';
+			}
+			if ( '' !== $sh_out ) {
+				$sh_default = 'meta' === $sh_role ? 'var(--sh-d-meta, inherit)' : 'var(--sh-d-coll, inherit)';
+				// Runs are escaped by $sh_run().
+				echo '<p class="sh-detail__block sh-detail__meta" style="' . esc_attr( $sh_block_style( $sh_b, '' !== $sh_col ? $sh_col : $sh_default ) ) . '">' . $sh_out . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
+		} elseif ( 'plain_meta' === $sh_role ) {
+			$sh_out = '';
+			if ( ! empty( $sh_b['lines'] ) && is_array( $sh_b['lines'] ) ) {
+				foreach ( $sh_b['lines'] as $sh_line ) {
+					$sh_bul  = is_array( $sh_line ) && 'NONE' !== ( $sh_line['list'] ?? 'NONE' );
+					$sh_out .= '<span class="sh-detail__line' . ( $sh_bul ? ' sh-detail__line--bullet' : '' ) . '" style="--sh-d-indent:'
+						. esc_attr( (string) max( 0, (int) ( $sh_line['indent'] ?? 0 ) ) ) . '">' . esc_html( (string) ( $sh_line['text'] ?? '' ) ) . '</span>';
+				}
+			} elseif ( ! empty( $sh_b['runs'] ) && is_array( $sh_b['runs'] ) ) {
+				foreach ( $sh_b['runs'] as $sh_r ) {
+					if ( ! is_array( $sh_r ) || ! isset( $sh_r['text'] ) ) { // text_head only = truncated copy: show nothing.
+						$sh_out = '';
+						break;
+					}
+					$sh_out .= $sh_run( (string) $sh_r['text'], $sh_r['weight'] ?? 500, $sh_hex( $sh_r['color'] ?? '' ) );
+				}
+			}
+			if ( '' !== $sh_out ) {
+				// Lines/runs are escaped above.
+				echo '<p class="sh-detail__block sh-detail__plain" style="' . esc_attr( $sh_block_style( $sh_b, $sh_col ) ) . '">' . $sh_out . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
+		} elseif ( 'caption' === $sh_role && '' !== $sh_caption ) {
+			$sh_cap    = isset( $sh_layout['caption'] ) && is_array( $sh_layout['caption'] ) ? $sh_layout['caption'] : array();
+			$sh_label  = array_key_exists( 'label', $sh_cap ) ? $sh_cap['label'] : __( 'Caption:', 'sharedheritage' );
+			$sh_breaks = isset( $sh_cap['label_breaks'] ) ? max( 0, min( 3, (int) $sh_cap['label_breaks'] ) ) : 2;
+			$sh_indent = isset( $sh_cap['paragraph_indent_nbsp'] ) && is_array( $sh_cap['paragraph_indent_nbsp'] ) ? array_values( $sh_cap['paragraph_indent_nbsp'] ) : array();
+			$sh_body   = '';
+			$sh_parts  = preg_split( '/(\R\R|\R)/u', $sh_caption, -1, PREG_SPLIT_DELIM_CAPTURE );
+			$sh_para   = 0;
+			foreach ( is_array( $sh_parts ) ? $sh_parts : array() as $sh_i => $sh_part ) {
+				if ( 1 === $sh_i % 2 ) {
+					$sh_body .= str_repeat( "\n", substr_count( str_replace( "\r\n", "\n", $sh_part ), "\n" ) );
+					continue;
+				}
+				$sh_pad   = isset( $sh_indent[ $sh_para ] ) ? max( 0, min( 40, (int) $sh_indent[ $sh_para ] ) ) : 0;
+				$sh_body .= str_repeat( '&nbsp;', $sh_pad ) . esc_html( $sh_part );
+				++$sh_para;
+			}
+			$sh_body_c = $sh_hex( sh_get( 'sh_text_color', $sh_id ) );
+			$sh_body_c = '' !== $sh_body_c ? $sh_body_c : $sh_hex( $sh_cap['body_color'] ?? '' );
+			$sh_head   = is_string( $sh_label ) && '' !== $sh_label
+				? $sh_run( $sh_label, $sh_cap['label_weight'] ?? 700, $sh_hex( $sh_cap['label_color'] ?? '' ), 'sh-detail__caption-label' ) . str_repeat( "\n", $sh_breaks )
+				: '';
+			$sh_style  = $sh_block_style( $sh_b, $sh_body_c ) . '--sh-d-fw:' . $sh_weight( $sh_cap['body_weight'] ?? 400 ) . ';';
+			// Label run and body pieces are escaped above.
+			echo '<p class="sh-detail__block sh-detail__caption" style="' . esc_attr( $sh_style ) . '">' . $sh_head . $sh_body . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+	}
+	if ( ! $sh_has_title ) {
+		echo '<h1 id="sh-detail-title" class="screen-reader-text">' . esc_html( $sh_title ) . '</h1>';
+	}
+	?>
+</div>
