@@ -1,7 +1,7 @@
 {
  "_meta": {
   "task": "design-timeline-v2",
-  "decision": "D23",
+  "decision": "D23 + D24 (เจ้าของ 2026-10-28 = ทางเลือก A: raster เดิม + จุดกดได้ + animate ภาพการ์ด)",
   "note": "ข้อมูลช่วยทำ Timeline v2 (layout = frame zone 4 670:1551 · animation ตาม Google Slides 31–54) · ไม่แก้ timeline-elephant.json เดิม · ตัวเลข strip_dot/strip_object_bbox วัดจาก raster ที่ดึงแล้ว ไม่เรียก Figma API",
   "scale": {
    "raster_px_to_frame_x": 2.68555,
@@ -20,28 +20,51 @@
   "lastModified_figma_json": "2026-10-27T09:48:30Z"
  },
  "animation": {
-  "status": "proposal-from-slides",
+  "status": "proposal-from-slides · D24=A",
   "selected": {
    "object_scale": 1.5,
    "object_scale_evidence": "line art 149×179→color 200×272–280 (Ganesha, slides 31→34) ; cartoon elephant 181×129→≈283×165 (slide 41) ; measured at 1440-wide slide",
-   "photo_opacity_steps": [
-    0.1,
-    0.34,
-    0.67,
-    1.0
-   ],
-   "text_opacity_steps": [
-    0.24,
-    0.74,
-    0.98
-   ],
-   "title_color_final": "#333333",
-   "meta_color_final": "#767676",
-   "meta_color_steps": [
-    "#D3D3D3",
-    "#A7A7A7",
-    "#767676"
-   ]
+   "photo_opacity_steps": {
+    "31": 0.05,
+    "32": 0.2,
+    "33": 0.4,
+    "34": 0.6,
+    "35": 1.0,
+    "36": 0.4,
+    "37": 0.2,
+    "38": 0.1,
+    "39": 0.0,
+    "note": "ฐาน 1.0 = slide 35 · วัดเทียบ slide 35 alpha เท่ากันทุกช่อง RGB · active = 35 (34 ยัง selecting)"
+   },
+   "title_color_final": "#212529",
+   "meta_color_final": "#212529",
+   "text_opacity_steps_title": {
+    "32": 0.19,
+    "33": 0.61,
+    "34": 0.81,
+    "35": 1.0,
+    "36": 0.8,
+    "37": 0.6,
+    "38": 0.0
+   },
+   "text_opacity_steps_meta": {
+    "32": 0.22,
+    "33": 0.45,
+    "34": 0.67,
+    "35": 1.0,
+    "36": 0.4,
+    "37": 0.4,
+    "38": 0.1
+   },
+   "full_state_measured_darkest": {
+    "title": "#080808",
+    "meta": "#3B3B3B",
+    "note": "ref-3 (#333333/#767676) คือสถานะกลาง ≈ slide 34 (α≈0.6) ไม่ใช่สีเต็ม · ใช้ token #212529"
+   },
+   "card_image_rest_opacity": {
+    "value": 0.5,
+    "origin": "proposal (Slides ซ่อนภาพตอนพัก ไม่ใช่ค่าจาก Slides)"
+   }
   },
   "suggested_timing_ms": {
    "scroll_to_center": 700,
@@ -49,6 +72,41 @@
    "fade_out": 300,
    "easing": "cubic-bezier(.4,0,.2,1)",
    "note": "เสนอ — สไลด์ไม่มีเวลา มีแต่ลำดับเฟรม"
+  },
+  "anchor": {
+   "card_row": "กึ่งกลางภาพ/กลุ่ม active หลังขยาย = x 720 · scrollLeftCards = clamp(imageX + w/2 − 720, 0, 11193−1440=9753) · transform-origin = กึ่งกลางภาพ/กลุ่ม",
+   "raster_row": "scrollLeftRaster = clamp(strip_dot.frame_x − 720, 0, 11000−1440=9560)",
+   "scroller": "แถวการ์ด = scroller หลัก · raster ตามอัตโนมัติ · ลาก raster ไม่เปลี่ยน active",
+   "groups": {
+    "card_6": {
+     "group": "1232:1744",
+     "bbox_px": [
+      174,
+      152
+     ],
+     "x": 4399
+    },
+    "card_9": {
+     "group": "1232:1764",
+     "bbox_px": [
+      180,
+      150
+     ],
+     "x": 6434
+    }
+   }
+  },
+  "dot_buttons": {
+   "count": 15,
+   "element": "button",
+   "size_px": [
+    44,
+    44
+   ],
+   "center": "(strip_dot.frame_x, 806±3)",
+   "aria_label": "title ของวัตถุ",
+   "aria_current": "จุดของชิ้น active",
+   "click": "active ชิ้นนั้น"
   }
  },
  "items": [
@@ -60,8 +118,17 @@
    "strip_dot": {
     "raster_x": 3288,
     "frame_x": 8830,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -113,8 +180,17 @@
    "strip_dot": {
     "raster_x": 658,
     "frame_x": 1767,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -166,8 +242,17 @@
    "strip_dot": {
     "raster_x": 143,
     "frame_x": 384,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -219,8 +304,17 @@
    "strip_dot": {
     "raster_x": 1762,
     "frame_x": 4732,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -272,8 +366,17 @@
    "strip_dot": {
     "raster_x": 1534,
     "frame_x": 4120,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -325,8 +428,17 @@
    "strip_dot": {
     "raster_x": 2972,
     "frame_x": 7981,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -401,8 +513,17 @@
    "strip_dot": {
     "raster_x": 866,
     "frame_x": 2326,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -454,8 +575,17 @@
    "strip_dot": {
     "raster_x": 2771,
     "frame_x": 7442,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -507,8 +637,17 @@
    "strip_dot": {
     "raster_x": 1314,
     "frame_x": 3529,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -583,8 +722,17 @@
    "strip_dot": {
     "raster_x": 2556,
     "frame_x": 6864,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -636,8 +784,17 @@
    "strip_dot": {
     "raster_x": 2322,
     "frame_x": 6236,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -689,8 +846,17 @@
    "strip_dot": {
     "raster_x": 1145,
     "frame_x": 3075,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -742,8 +908,17 @@
    "strip_dot": {
     "raster_x": 2053,
     "frame_x": 5513,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -795,8 +970,17 @@
    "strip_dot": {
     "raster_x": 3822,
     "frame_x": 10264,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
@@ -848,8 +1032,17 @@
    "strip_dot": {
     "raster_x": 372,
     "frame_x": 999,
-    "frame_y": 803,
-    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+    "frame_y": 806,
+    "source": "measured from IMG 791ae91b (black ● on timeline row, raster y≈217–219.5) × 11000/4096 · frame_y ≈806 ±3",
+    "diameter_frame_px": [
+     38,
+     40
+    ],
+    "hit_target_px": [
+     44,
+     44
+    ],
+    "aria_label_from": "title"
    },
    "strip_object_bbox": {
     "raster_px": [
