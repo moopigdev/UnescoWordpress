@@ -4,8 +4,9 @@
  *
  * Header (with rule) · trail icon row `797:2110` (sh_trails('timeline_nav'), current trail 45×45) ·
  * horizontal scroller `Frame 114443` (Figma overflow HORIZONTAL_SCROLLING): illustration `1232:1711`
- * (one raster image, D8) above the card row `Frame 114464` (sh_timeline_items(), by sh_card_order) ending
- * with Reflection · Back `[160,1476]` outside the scroller. No walking elephant (D12).
+ * (one raster image, D8) above the card row `Frame 114464` (sh_timeline_items(), by sh_card_order)
+ * (Reflection `1232:1807` is hidden in Figma → not rendered, D16) · Back `[160,1476]` outside the scroller.
+ * No walking elephant (D12).
  * Scrolling: native + wheel / mouse drag / ‹ › buttons / keyboard (assets/js/timeline.js).
  *
  * @package sharedheritage
@@ -24,8 +25,6 @@ $sh_trail = null;
 $sh_items = array();
 $sh_nav   = array();
 $sh_ill   = 0;
-$sh_ref_t = '';
-$sh_ref_b = array();
 if ( $sh_api ) {
 	$sh_trail_id = absint( sh_get( 'sh_timeline_trail', $sh_page_id ) );
 	$sh_term     = $sh_trail_id ? get_term( $sh_trail_id, 'trail' ) : null;
@@ -33,8 +32,6 @@ if ( $sh_api ) {
 	$sh_items    = $sh_trail ? sh_timeline_items( $sh_trail ) : array();
 	$sh_nav      = sh_trails( 'timeline_nav' );
 	$sh_ill      = absint( sh_get( 'sh_timeline_illustration', $sh_page_id ) );
-	$sh_ref_t    = trim( (string) sh_get( 'sh_timeline_reflection_title', $sh_page_id ) );
-	$sh_ref_b    = sh_paragraphs( (string) sh_get( 'sh_timeline_reflection_body', $sh_page_id ) );
 }
 
 $sh_geo       = include __DIR__ . '/template-parts/timeline/geometry.php';
@@ -111,21 +108,6 @@ $sh_geo_ill   = isset( $sh_geo['illustration'] ) && is_array( $sh_geo['illustrat
 				}
 				?>
 			</ol>
-
-			<?php if ( '' !== $sh_ref_t || ! empty( $sh_ref_b ) ) : ?>
-				<section class="sh-tl-reflection" data-sh-timeline-stop>
-					<?php if ( '' !== $sh_ref_t ) : ?>
-						<h2 class="sh-tl-reflection__title sh-t-page-title"><?php echo esc_html( $sh_ref_t ); ?></h2>
-					<?php endif; ?>
-					<?php if ( ! empty( $sh_ref_b ) ) : ?>
-						<div class="sh-tl-reflection__body sh-t-reflection">
-							<?php foreach ( $sh_ref_b as $sh_para ) : ?>
-								<p><?php echo esc_html( $sh_para ); ?></p>
-							<?php endforeach; ?>
-						</div>
-					<?php endif; ?>
-				</section>
-			<?php endif; ?>
 		</div>
 	</div>
 

@@ -82,7 +82,7 @@
 .sh-tl__track {
 	position: relative;
 	display: grid;
-	grid-template-columns: max-content max-content;
+	grid-template-columns: max-content;
 	align-items: start;
 	width: max-content;
 }
@@ -217,26 +217,6 @@
 	white-space: pre-line;
 }
 
-/*
- * ---- Reflection — Frame 114446 (visible:false in the Figma frame; shown per brief / CONTENT-MODEL §8) ----
- * pad-left 50 · pad-right 30 · Frame 12686 655 wide, pad-top 10, gap 20 · title 36/45 · body 20/24.
- * Placed after the last card, beside both scroller rows (the illustration ends at x 11000, so the space
- * above the card row is empty there) and centred vertically: 1011 tall inside the 1340.481 scroller.
- */
-.sh-tl-reflection {
-	grid-area: 1 / 2 / 3 / 3;
-	align-self: center;
-	display: flex;
-	flex-direction: column;
-	gap: var(--sh-space-20);
-	width: calc(655px + var(--sh-space-50) + var(--sh-space-30));
-	padding: var(--sh-space-10) var(--sh-space-30) 0 var(--sh-space-50);
-}
-
-.sh-tl-reflection__body p + p {
-	margin-top: 24px; /* one empty 24px line between paragraphs */
-}
-
 /* ---- ‹ › buttons (§6.4 item 4) — centred on the illustration ---- */
 .sh-tl__arrow {
 	position: absolute;
@@ -332,18 +312,6 @@
 	.sh-tl-card__title,
 	.sh-tl-card__meta {
 		width: auto;
-	}
-
-	.sh-tl-reflection {
-		width: auto;
-		padding: var(--sh-space-30) var(--sh-tablet-margin) var(--sh-space-30) 0;
-	}
-
-	/* 4 columns × 280 so the long text reads sideways like the rest of the timeline. */
-	.sh-tl-reflection__body {
-		width: calc(4 * 280px + 3 * var(--sh-space-20));
-		column-count: 4;
-		column-gap: var(--sh-space-20);
 	}
 
 	.sh-tl__back {

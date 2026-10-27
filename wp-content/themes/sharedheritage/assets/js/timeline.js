@@ -34,7 +34,7 @@
 		}
 	}
 
-	// Scroll positions that put each card / Reflection where the first card starts.
+	// Scroll positions that put each card where the first card starts.
 	function stops() {
 		var items = root.querySelectorAll( '[data-sh-timeline-stop]' );
 		if ( ! items.length ) {
@@ -120,7 +120,7 @@
 	var dragged = false;
 	vp.addEventListener( 'pointerdown', function ( e ) {
 		dragged = false;
-		if ( 'mouse' !== e.pointerType || 0 !== e.button || ( e.target.closest && e.target.closest( '.sh-tl-card__text, .sh-tl-reflection' ) ) ) {
+		if ( 'mouse' !== e.pointerType || 0 !== e.button || ( e.target.closest && e.target.closest( '.sh-tl-card__text' ) ) ) {
 			return;
 		}
 		drag = { x: e.clientX, left: vp.scrollLeft, id: e.pointerId };
