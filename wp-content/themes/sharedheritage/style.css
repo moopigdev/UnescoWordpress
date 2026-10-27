@@ -1,0 +1,10 @@
+/*
+Theme Name: Shared Heritage
+Description: Classic PHP theme for Shared Heritage (sharedheritage.net). Content structure lives in the sharedheritage-core mu-plugin, not in this theme.
+Version: 0.1.0
+Requires at least: 6.5
+Requires PHP: 8.3
+Text Domain: sharedheritage
+*/
+
+/* Styles live in assets/css/ (tokens.css, base.css, <page>.css) and are enqueued by inc/enqueue.php. */
