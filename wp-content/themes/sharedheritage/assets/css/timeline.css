@@ -1,0 +1,353 @@
+/*
+ * Timeline (Zone 4) — page-timeline.php · Figma 670:1551 "Desktop - zone 4" (DESIGN-SPEC §4.5 · §6.4).
+ * Coordinates are relative to the 1440 frame; .sh-tl starts under the header (y = 150).
+ *   trail icons `797:2110` [0,150 725×55] pad 20/5 gap 5 · icon 35 (current 45)
+ *   scroller `Frame 114443` [0,200 1440×1340.481] overflow HORIZONTAL_SCROLLING:
+ *     illustration `1232:1711` 11000×791.481 · card row `Frame 114464` pad-left 500 pad-top 100, h 549
+ *   Back `670:1556` [160,1476] · frame height 1582
+ * Per-card geometry arrives as inline custom properties from template-parts/timeline/geometry.php.
+ */
+
+.sh-tl {
+	--tl-ill-w: 11000px;
+	--tl-ill-h: 791.481px;
+	--tl-ill-scale: 1;
+	position: relative;
+	padding: 50px 0 41.519px; /* scroller at y 200 (150 + 50) · 1582 − (200 + 1340.481) below */
+}
+
+/* ---- Trail icon row (Frame trails 797:2110) ---- */
+.sh-tl__trails {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	gap: var(--sh-space-5);
+	height: 55px;
+	margin: 0;
+	padding: var(--sh-space-5) var(--sh-space-20);
+	list-style: none;
+}
+
+.sh-tl__trail {
+	flex: none;
+	width: 35px;
+	height: 35px;
+}
+
+.sh-tl__trail.is-current {
+	width: 45px;
+	height: 45px;
+}
+
+.sh-tl__trail-icon {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.sh-tl__trail-icon--empty {
+	overflow: hidden;
+	background: var(--sh-color-neutral-200);
+	font: var(--sh-type-popup-body);
+	color: transparent;
+}
+
+/* ---- Horizontal scroller ---- */
+.sh-tl__viewport {
+	overflow-x: auto;
+	overflow-y: hidden;
+	overscroll-behavior-x: contain;
+	scrollbar-width: none;
+	cursor: grab;
+}
+
+.sh-tl__viewport::-webkit-scrollbar {
+	display: none;
+}
+
+.sh-tl__viewport:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: -2px;
+}
+
+.sh-tl.is-dragging .sh-tl__viewport {
+	cursor: grabbing;
+	user-select: none;
+}
+
+.sh-tl__track {
+	position: relative;
+	display: grid;
+	grid-template-columns: max-content max-content;
+	align-items: start;
+	width: max-content;
+}
+
+/* Illustration: raster 11000×791.481; the box keeps its size when the image is missing. */
+.sh-tl__ill {
+	grid-area: 1 / 1;
+	width: calc(var(--tl-ill-w) * var(--tl-ill-scale));
+	height: calc(var(--tl-ill-h) * var(--tl-ill-scale));
+	overflow: hidden;
+}
+
+.sh-tl__ill-inner {
+	width: var(--tl-ill-w);
+	height: var(--tl-ill-h);
+	transform: scale(var(--tl-ill-scale));
+	transform-origin: 0 0;
+}
+
+/* ---- Images in a fixed box (helpers.php sh_timeline_image) ---- */
+.sh-tl-img {
+	position: relative;
+	display: block;
+	flex: none;
+	width: var(--bw, 180px);
+	height: var(--bh, auto);
+	overflow: hidden;
+}
+
+.sh-tl-img__img {
+	width: 100%;
+	max-width: none;
+	height: 100%;
+	-webkit-user-drag: none;
+}
+
+.sh-tl-img--crop .sh-tl-img__img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform-origin: 0 0;
+}
+
+.sh-tl-img--cover .sh-tl-img__img {
+	object-fit: cover;
+}
+
+.sh-tl-img--contain .sh-tl-img__img {
+	object-fit: contain;
+}
+
+/* ---- Card row (Frame 114464) ---- */
+.sh-tl__row {
+	grid-area: 2 / 1;
+	display: flex;
+	align-items: flex-start;
+	min-height: 549px;
+	margin: 0;
+	padding: var(--sh-space-100) 0 0 500px;
+	list-style: none;
+}
+
+/* Tablet (768–1439, no Figma frame): first card keeps the 500/1440 proportion of the frame. */
+@media (max-width: 1439px) {
+	.sh-tl__row {
+		padding-left: calc(500 / 1440 * 100vw);
+	}
+}
+
+.sh-tl-card {
+	--pl: 0px;
+	--pr: 0px;
+	--col: 477px;
+	--tw: 100%;
+	--mw: 100%;
+	--lh: 24px;
+	display: flex;
+	flex: none;
+	align-items: center;
+	gap: var(--sh-space-10);
+	padding: 0 var(--pr) 0 var(--pl);
+}
+
+.sh-tl-card__media {
+	display: block;
+	flex: none;
+	color: inherit;
+}
+
+.sh-tl-card--generic .sh-tl-card__media {
+	display: flex;
+	gap: var(--sh-space-10);
+}
+
+.sh-tl-card--group .sh-tl-card__media {
+	position: relative;
+	width: var(--gw);
+	height: var(--gh);
+}
+
+.sh-tl-card--group .sh-tl-img {
+	position: absolute;
+	top: var(--by, 0);
+	left: var(--bx, 0);
+}
+
+.sh-tl-card__text {
+	display: flex;
+	flex: none;
+	flex-direction: column;
+	gap: var(--sh-space-15);
+	width: var(--col);
+}
+
+.sh-tl-card__title {
+	width: var(--tw);
+}
+
+.sh-tl-card__title a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.sh-tl-card__title a:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 2px;
+}
+
+.sh-tl-card__meta {
+	width: var(--mw);
+	line-height: var(--lh);
+	white-space: pre-line;
+}
+
+/*
+ * ---- Reflection — Frame 114446 (visible:false in the Figma frame; shown per brief / CONTENT-MODEL §8) ----
+ * pad-left 50 · pad-right 30 · Frame 12686 655 wide, pad-top 10, gap 20 · title 36/45 · body 20/24.
+ * Placed after the last card, beside both scroller rows (the illustration ends at x 11000, so the space
+ * above the card row is empty there) and centred vertically: 1011 tall inside the 1340.481 scroller.
+ */
+.sh-tl-reflection {
+	grid-area: 1 / 2 / 3 / 3;
+	align-self: center;
+	display: flex;
+	flex-direction: column;
+	gap: var(--sh-space-20);
+	width: calc(655px + var(--sh-space-50) + var(--sh-space-30));
+	padding: var(--sh-space-10) var(--sh-space-30) 0 var(--sh-space-50);
+}
+
+.sh-tl-reflection__body p + p {
+	margin-top: 24px; /* one empty 24px line between paragraphs */
+}
+
+/* ---- ‹ › buttons (§6.4 item 4) — centred on the illustration ---- */
+.sh-tl__arrow {
+	position: absolute;
+	top: calc(50px + var(--tl-ill-h) * var(--tl-ill-scale) / 2);
+	z-index: 3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 88px;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--sh-color-black);
+	cursor: pointer;
+	transform: translateY(-50%);
+}
+
+.sh-tl__arrow[hidden] {
+	display: none;
+}
+
+.sh-tl__arrow--prev {
+	left: var(--sh-space-10);
+}
+
+.sh-tl__arrow--next {
+	right: var(--sh-space-10);
+}
+
+.sh-tl__arrow:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 2px;
+}
+
+/* ---- Back (outside the scroller, y 1476 → 1326 under the header) ---- */
+.sh-tl__back {
+	position: absolute;
+	top: 1326px;
+	left: var(--sh-page-offset);
+	z-index: 3;
+}
+
+/* ---- Mobile (no Figma frame — D5): stacked cards, half-size illustration, scroll inside the box ---- */
+@media (max-width: 767px) {
+	.sh-tl {
+		--tl-ill-scale: 0.5;
+		padding: 0 0 var(--sh-space-30);
+	}
+
+	.sh-tl__trails {
+		position: static;
+		flex-wrap: wrap;
+		height: auto;
+		padding: var(--sh-space-10) var(--sh-tablet-margin);
+	}
+
+	.sh-tl__viewport {
+		scrollbar-width: thin;
+	}
+
+	.sh-tl__viewport::-webkit-scrollbar {
+		display: block;
+		height: 6px;
+	}
+
+	.sh-tl__viewport::-webkit-scrollbar-thumb {
+		background: var(--sh-color-neutral-400);
+	}
+
+	.sh-tl__arrow {
+		display: none;
+	}
+
+	.sh-tl__row {
+		gap: var(--sh-space-40);
+		min-height: 0;
+		padding: var(--sh-space-30) var(--sh-tablet-margin);
+	}
+
+	.sh-tl-card {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--sh-space-15);
+		width: 300px;
+		padding: 0;
+	}
+
+	.sh-tl-card__text {
+		width: 100%;
+	}
+
+	.sh-tl-card__title,
+	.sh-tl-card__meta {
+		width: auto;
+	}
+
+	.sh-tl-reflection {
+		width: auto;
+		padding: var(--sh-space-30) var(--sh-tablet-margin) var(--sh-space-30) 0;
+	}
+
+	/* 4 columns × 280 so the long text reads sideways like the rest of the timeline. */
+	.sh-tl-reflection__body {
+		width: calc(4 * 280px + 3 * var(--sh-space-20));
+		column-count: 4;
+		column-gap: var(--sh-space-20);
+	}
+
+	.sh-tl__back {
+		position: static;
+		margin: var(--sh-space-10) var(--sh-tablet-margin) 0;
+	}
+}
