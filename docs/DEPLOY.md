@@ -2,6 +2,8 @@
 
 ## ข้อเท็จจริง (ตรวจ 2026-10-27)
 Business plan · **live สาธารณะ** · WP เปล่า (0 page · theme `hostinger-ai-theme`) · Wordfence · LiteSpeed · PHP 8.5 บน server · DNS Squarespace → 156.67.222.233 · owner it.bgk@unesco.org แชร์สิทธิ์มา
+- **PHP CLI `disable_functions`** (orchestrator อ่านผ่าน SSH 2026-10-27): `system, exec, shell_exec, passthru, mysql_list_dbs, ini_alter, dl, symlink, link, chgrp, leak, popen, apache_child_terminate, virtual, mb_send_mail, proc_open` → **wp-cli ที่ spawn process พังทุกคำสั่ง**: `wp db export|import|query|cli` (เรียก mysqldump/mysql) · `wp rewrite structure` (เรียก `wp rewrite flush` ผ่าน launch) · `wp rewrite flush --hard` · `--launch` (deploy staging ครั้งแรกหยุดที่ตรงนี้: `Cannot do 'launch option': … proc_open() … disabled`) · ใช้ได้: option / plugin / theme / post list / config get / eval / eval-file / cache / litespeed-purge
+- `/usr/bin/mysqldump` และ `/usr/bin/mysql` มีบน server (ตรวจแล้ว) — script เรียกตรงจาก shell แทน `wp db …`
 
 ## การเข้าถึง (2026-10-27)
 - hPanel: บัญชี it.bgk@unesco.org (เราเป็นผู้ร่วมงาน) · staging = `staging.sharedheritage.net` (สร้าง 2026-10-27 · คัดลอกจาก prod · WP + DB แยก)
@@ -30,11 +32,14 @@ scripts/deploy.sh [staging|production] [--dry-run] [--discover] [--no-import]   
 **ลำดับที่ script ทำ** (ไฟล์ฝั่ง server = `scripts/deploy/remote.sh` ส่งทาง `ssh … bash -s -- <phase>` · ไม่ต้องติดตั้งอะไรบน server นอกจาก wp-cli ของ Hostinger)
 0. local: config ครบ · key มีจริง · production: `deploy-approved` + **tree ต้องสะอาด** (wp-content · scripts/import · content) · import: ภาพทุกไฟล์ที่ `image-map.json` "files" อ้างต้องมีใน design/assets
 1. **preflight** (อ่านอย่างเดียว): `wp core is-installed` · `siteurl` ของ WP path **ต้องตรง URL ที่คาด** (ไม่ตรง = หยุด · กันส่งผิด site) · พิมพ์ theme + จำนวน object/timeline_item · **production + import + มี object/timeline_item อยู่แล้ว → หยุด exit 3** (ห้าม import ทับ prod · ถามเจ้าของ · ส่งแค่โค้ดใช้ `--no-import`)
-2. **production เท่านั้น — สำรองก่อนเขียนอะไรทั้งหมด:** `wp db export` + `tar wp-content` + theme เดิม → `~/sh-deploy/backups/production-<ts>/` (chmod 700/600) + `ROLLBACK.txt` (พิมพ์ออกจอด้วย)
+2. **production เท่านั้น — สำรองก่อนเขียนอะไรทั้งหมด:** `mysqldump` ตรง (ไม่ใช่ `wp db export`) + `tar wp-content` + theme เดิม → `~/sh-deploy/backups/production-<ts>/` (chmod 700/600) + `ROLLBACK.txt` (พิมพ์ออกจอด้วย)
+   - ค่า DB จาก `wp config get DB_NAME|DB_HOST|DB_CHARSET|DB_USER|DB_PASSWORD` (อ่าน wp-config · ไม่ spawn) · `DB_HOST` แยก host/port/socket → `db-conn.cnf` (ไม่มีรหัส) · user/รหัส → option file ชั่วคราว `mktemp ~/sh-deploy/.db-cnf.*` (600 ในโฟลเดอร์ 700 · ค่าไม่ขึ้นจอ/argv/log) → `mysqldump --defaults-extra-file=<ไฟล์> --single-transaction --quick --skip-lock-tables --no-tablespaces --default-character-set=<DB_CHARSET|utf8mb4> --result-file=db.sql <DB_NAME>` → ลบไฟล์ทันที (trap แม้ dump พัง)
+   - ไม่มี `mysqldump` · dump ล้ม · บรรทัดสุดท้ายของ `db.sql` ไม่มี `Dump completed` = **หยุดก่อนส่งไฟล์ใดๆ**
 3. prepare: `mkdir -p wp-content/mu-plugins` · โฟลเดอร์ tmp import
 4. rsync (`-rlptz` · exclude `.git` `.playground` `node_modules` `.DS_Store`): mu-plugin ทีละรายการ (โฟลเดอร์ `sharedheritage-core/` ใช้ `--delete` ภายในโฟลเดอร์ตัวเอง · ไฟล์ loader `sharedheritage-core.php` ไม่มี `--delete`) → theme `sharedheritage/` (`--delete` ภายในโฟลเดอร์ theme) · **ไม่แตะ wp-content อื่น** (mu-plugin ของ Hostinger · theme อื่น · uploads) · import: bundle (`scripts/import/` · `content/` · ภาพ 159 ไฟล์ที่ image-map อ้าง · `media/out` ยกเว้น `*.html`) → `~/sh-deploy/tmp-<env>-<ts>/`
-5. post: ACF ฟรี (ข้ามถ้ามี ACF Pro active · ติดตั้ง/activate ถ้ายังไม่มี) · `wp theme activate sharedheritage` (ถ้ายังไม่ active) · `wp rewrite structure '/%postname%/'` + `wp rewrite flush --hard` · import: `SH_IMPORT_ASSETS_DIR=<tmp>/assets SH_IMPORT_MEDIA_DIR=<tmp>/media SH_IMPORT_SUBSIZES=1 SH_IMPORT_REPORT=~/sh-deploy/logs/import-<env>-<ts>.json wp eval-file <tmp>/scripts/import/import.php` (mode `missing` = ไม่ทับของที่ admin แก้) · **ลบ tmp เสมอ** (trap แม้ import พัง) · `wp litespeed-purge all` ถ้ามีคำสั่ง
-- idempotent: รันซ้ำได้ — rsync ส่งเฉพาะที่ต่าง · ACF/theme ข้ามถ้ามีแล้ว · import หาเดิมด้วย `_sh_import_key` (รอบ 2 สร้างใหม่ 0)
+5. post: ACF ฟรี (ข้ามถ้ามี ACF Pro active · ติดตั้ง/activate ถ้ายังไม่มี) · `wp theme activate sharedheritage` (ถ้ายังไม่ active) · permalink ด้วย `wp eval` 2 process (ไม่ใช้ `rewrite structure` / `flush --hard` — proc_open): (1) `$wp_rewrite->set_permalink_structure('/%postname%/')` ถ้ายังไม่ใช่ (2) process ใหม่ `flush_rewrite_rules(false)` (rules ว่าง = หยุด) แล้ว `.htaccess`: มี `# BEGIN WordPress` แล้ว = **ไม่แตะ** (staging มีอยู่แล้ว) · ไม่มี = เขียนบล็อกด้วย `save_mod_rewrite_rules()` (บังคับ filter `got_rewrite` = true เพราะ CLI ไม่รู้ว่า server เป็น LiteSpeed) · เขียนไม่ได้ = หยุด · import: `SH_IMPORT_ASSETS_DIR=<tmp>/assets SH_IMPORT_MEDIA_DIR=<tmp>/media SH_IMPORT_SUBSIZES=1 SH_IMPORT_REPORT=~/sh-deploy/logs/import-<env>-<ts>.json wp eval-file <tmp>/scripts/import/import.php` (mode `missing` = ไม่ทับของที่ admin แก้) · **ลบ tmp เสมอ** (trap แม้ import พัง) · `wp litespeed-purge all` ถ้ามีคำสั่ง
+- idempotent: รันซ้ำได้ — rsync ส่งเฉพาะที่ต่าง · ACF/theme ข้ามถ้ามีแล้ว · permalink ข้ามถ้าตั้งแล้ว · import หาเดิมด้วย `_sh_import_key` (รอบ 2 สร้างใหม่ 0)
+- **resume หลัง staging ครั้งแรกหยุด (2026-10-27 · หยุดที่ permalink ก่อน import):** รัน `scripts/deploy.sh staging` ซ้ำได้เลย — ACF (ติดตั้ง+active แล้ว) / theme (active แล้ว) / permalink (option ถูกตั้งก่อน wp-cli พัง) ถูกข้าม → flush → import (bundle ส่งใหม่ไป tmp ใหม่ · tmp เดิมถูกลบแล้ว) · จำลอง offline 2 รอบติดกันถึง import ทั้งคู่
 
 ## ขั้นตอน staging (orchestrator)
 1. เจ้าของเปิด SSH + เพิ่ม public key (O-6) → `scripts/deploy.sh staging --discover` → ยืนยัน path ที่ siteurl = `https://staging.sharedheritage.net` → `cp scripts/deploy/hosts.env.example scripts/deploy/hosts.env` แล้วใส่ `SH_STAGING_WP_PATH` (+ `SH_PRODUCTION_WP_PATH` ถ้าเห็นในผล discover)
@@ -62,13 +67,23 @@ BK=~/sh-deploy/backups/production-<ts> ; WP=<SH_PRODUCTION_WP_PATH>
 cd "$WP"
 mv wp-content "wp-content.failed-<ts>"              # เก็บของที่ deploy ไว้ตรวจ
 tar -xzf "$BK/wp-content.tar.gz" -C "$WP"           # คืน wp-content ทั้งก้อน (theme · mu-plugin · plugins · uploads)
-wp --path="$WP" db import "$BK/db.sql"              # คืน DB (theme ที่ active เดิม · permalink · ACF · เนื้อหา)
+# คืน DB (theme ที่ active เดิม · permalink · ACF · เนื้อหา) — ⛔ ห้าม `wp db import` (proc_open ถูกปิด) → mysql ตรง
+DB_NAME=<ดู ROLLBACK.txt> ; DB_CS=<ดู ROLLBACK.txt>
+q() { sed 's/[\\"]/\\&/g'; }
+CNF="$(mktemp "$BK/.db-cnf.XXXXXX")"               # 600 · รหัสอ่านจาก wp-config ไม่พิมพ์ขึ้นจอ
+{ echo '[client]'
+  printf 'user="%s"\n' "$(wp --path="$WP" config get DB_USER | q)"
+  printf 'password="%s"\n' "$(wp --path="$WP" config get DB_PASSWORD | q)"
+  cat "$BK/db-conn.cnf"; } > "$CNF"
+mysql --defaults-extra-file="$CNF" --default-character-set="$DB_CS" "$DB_NAME" < "$BK/db.sql"; echo "mysql exit=$?"
+rm -f "$CNF"
 wp --path="$WP" cache flush
 wp --path="$WP" litespeed-purge all || true
 # ตรวจหน้าเว็บแล้วค่อยลบ: rm -rf "$WP/wp-content.failed-<ts>"
 ```
 - ถอยแค่ theme (ไม่คืน DB): `wp --path="$WP" theme activate "$(cat "$BK/stylesheet.txt")"` แล้ว purge — mu-plugin ยังอยู่แต่ไม่มีผลกับ theme เดิม
 - ถอดแค่โค้ดของเรา: `wp theme activate <เดิม>` → `rm -rf "$WP/wp-content/mu-plugins/sharedheritage-core" "$WP/wp-content/mu-plugins/sharedheritage-core.php"` (เนื้อหาที่ import ยังอยู่ใน DB · CPT ซ่อนเพราะไม่มี mu-plugin)
+- `ROLLBACK.txt` ของแต่ละชุดมีคำสั่งชุดนี้พร้อมค่าจริง (WP · BK · TS · DB_NAME · DB_CS) วางทั้งก้อนใน bash ได้
 - ไม่มี SSH: hPanel › Files › File Manager (คืน wp-content จาก tar) + hPanel › Databases › phpMyAdmin (import `db.sql`) · หรือ hPanel › Backups (สำรองรายวันของ Hostinger)
 - สำรองเก็บบน server (ใช้ quota) — ลบชุดเก่าเมื่อ prod นิ่งแล้ว (`ls ~/sh-deploy/backups`)
 

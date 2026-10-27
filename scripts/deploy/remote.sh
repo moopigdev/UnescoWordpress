@@ -7,10 +7,16 @@
 #   discover   อ่านอย่างเดียว: หา wp-config.php ใต้ ~/domains · พิมพ์ path + siteurl + home + theme ที่ active
 #   preflight  อ่านอย่างเดียว: WP ติดตั้งแล้ว · siteurl ตรง --url · พิมพ์ theme/ACF/จำนวน object
 #              production + --import=1 + มี object/timeline_item อยู่แล้ว → exit 3 (หยุดถามเจ้าของ · ห้าม import ทับ prod)
-#   backup     (production) wp db export + tar wp-content → <dir>/backups/<env>-<ts>/ (chmod 700) + ROLLBACK.txt
+#   backup     (production) mysqldump (ตรงจาก shell) + tar wp-content → <dir>/backups/<env>-<ts>/ (chmod 700) + ROLLBACK.txt
 #   prepare    mkdir mu-plugins (ถ้ายังไม่มี) · โฟลเดอร์ tmp import
 #   post       ACF · activate theme · permalink /%postname%/ · import (ถ้า --import=1) · ลบ tmp · LiteSpeed purge
 # args: --env=staging|production --path=<WP absolute> --url=<siteurl ที่คาด> --dir=<งาน · relative กับ $HOME> --ts=<stamp> --import=0|1
+#
+# ⛔ Hostinger: PHP disable_functions = system exec shell_exec passthru popen proc_open … (ตรวจจริง 2026-10-27)
+#   → wp-cli ที่ spawn process พังทั้งหมด: `db export|import|query|cli` (เรียก mysql/mysqldump) · `rewrite structure`
+#     (เรียก `wp rewrite flush` ผ่าน runcommand/launch) · `rewrite flush --hard` · `--launch` ฯลฯ
+#   → ไฟล์นี้ใช้เฉพาะ wp-cli ที่ทำงานใน process เดียว (option/plugin/theme/post list/config get/eval/eval-file/cache)
+#     และเรียก mysqldump/mysql ตรงจาก shell (ไม่ผ่าน PHP)
 set -euo pipefail
 
 PHASE="${1:-}"; [ $# -gt 0 ] && shift
@@ -62,15 +68,20 @@ if [ "$PHASE" = discover ]; then
     exit 0
   fi
   command -v wp >/dev/null || fail "ไม่พบ wp-cli บน server"
-  found=0
-  while IFS= read -r cfg; do
-    d="$(dirname "$cfg")"; found=1
-    s="$(wp --path="$d" --skip-plugins --skip-themes option get siteurl 2>/dev/null || echo '?')"
-    h="$(wp --path="$d" --skip-plugins --skip-themes option get home 2>/dev/null || echo '?')"
-    t="$(wp --path="$d" --skip-plugins --skip-themes option get stylesheet 2>/dev/null || echo '?')"
-    printf '  path=%s\n    siteurl=%s · home=%s · theme=%s\n' "$d" "$s" "$h" "$t"
-  done < <(find "$HOME/domains" -maxdepth 4 -name wp-config.php 2>/dev/null | sort)
-  [ "$found" = 1 ] || say "ไม่พบ wp-config.php ใต้ ~/domains"
+  # ไม่ใช้ process substitution `< <(…)` — Hostinger `ssh … bash -s` ไม่มี /dev/fd · wp อ่าน stdin จาก /dev/null (ไม่กินรายการ)
+  cfgs="$(find "$HOME/domains" -maxdepth 4 -name wp-config.php 2>/dev/null | sort)" || true
+  if [ -z "$cfgs" ]; then
+    say "ไม่พบ wp-config.php ใต้ ~/domains"
+  else
+    printf '%s\n' "$cfgs" | while IFS= read -r cfg; do
+      [ -n "$cfg" ] || continue
+      d="$(dirname "$cfg")"
+      s="$(wp --path="$d" --skip-plugins --skip-themes option get siteurl 2>/dev/null </dev/null || echo '?')"
+      h="$(wp --path="$d" --skip-plugins --skip-themes option get home 2>/dev/null </dev/null || echo '?')"
+      t="$(wp --path="$d" --skip-plugins --skip-themes option get stylesheet 2>/dev/null </dev/null || echo '?')"
+      printf '  path=%s\n    siteurl=%s · home=%s · theme=%s\n' "$d" "$s" "$h" "$t"
+    done
+  fi
   say "ยืนยัน path ที่ siteurl ตรงกับ staging/production แล้วใส่ใน scripts/deploy/hosts.env"
   exit 0
 fi
@@ -83,6 +94,48 @@ WP=(wp --path="$WP_PATH")
 TMP="$BASE/tmp-$ENV-$TS"          # bundle import (deploy.sh rsync มาไว้ที่นี่) — นอก webroot
 BK="$BASE/backups/$ENV-$TS"
 LOGS="$BASE/logs"
+
+# --- DB ตรงจาก shell (wp db export/import ใช้ proc_open → พังบน Hostinger) ---
+# ค่าจาก `wp config get` (อ่าน wp-config.php · ไม่โหลด WP · ไม่ spawn) · รหัสผ่านไม่ผ่าน argv/stdout/log —
+# อยู่ในไฟล์ option ชั่วคราว (mktemp = 600 · ในโฟลเดอร์ 700) ส่งให้ mysqldump ด้วย --defaults-extra-file แล้วลบทันที
+NL=$'\n'; CNF=""; DB_NAME_=""; DB_CS_=""
+cnf_q() { printf '%s' "$1" | sed 's/[\\"]/\\&/g'; }   # ค่าในบรรทัด key="…" ของ option file (printf = builtin → ค่าไม่ขึ้น ps)
+# db_conn <file> — host/port/socket (ไม่มีความลับ) → <file> (600) · ตั้ง DB_NAME_ DB_CS_
+db_conn() {
+  local h port="" sock=""
+  DB_NAME_="$(wp --path="$WP_PATH" config get DB_NAME)" || fail "อ่าน DB_NAME จาก wp-config ไม่ได้"
+  h="$(wp --path="$WP_PATH" config get DB_HOST)" || fail "อ่าน DB_HOST จาก wp-config ไม่ได้"
+  DB_CS_="$(wp --path="$WP_PATH" config get DB_CHARSET 2>/dev/null)" || DB_CS_=""
+  [ -n "$DB_CS_" ] || DB_CS_=utf8mb4
+  [ -n "$DB_NAME_" ] || fail "DB_NAME ว่าง"
+  case "$DB_CS_" in *[!A-Za-z0-9_]*) fail "DB_CHARSET แปลก ($DB_CS_)" ;; esac
+  case "$h" in                                   # DB_HOST = host | host:port | host:/socket
+    *:/*) sock="/${h#*:/}"; h="${h%%:/*}" ;;
+    *:*) port="${h##*:}"; h="${h%:*}" ;;
+  esac
+  case "$port" in *[!0-9]*) fail "port ใน DB_HOST แปลก ($port)" ;; esac
+  [ -n "$h" ] || h=localhost
+  case "$h$sock" in *"$NL"*) fail "DB_HOST มีขึ้นบรรทัดใหม่" ;; esac
+  { printf 'host="%s"\n' "$(cnf_q "$h")"
+    [ -z "$port" ] || printf 'port=%s\n' "$port"
+    [ -z "$sock" ] || printf 'socket="%s"\n' "$(cnf_q "$sock")"
+  } > "$1"
+  chmod 600 "$1"
+}
+# db_cnf <conn-file> — [client] user/password (จาก wp-config) + conn → $CNF ชั่วคราว · ผู้เรียกต้อง rm (trap ด้วย)
+db_cnf() {
+  local u p
+  u="$(wp --path="$WP_PATH" config get DB_USER)" || fail "อ่าน DB_USER จาก wp-config ไม่ได้"
+  p="$(wp --path="$WP_PATH" config get DB_PASSWORD)" || fail "อ่าน DB_PASSWORD จาก wp-config ไม่ได้"
+  case "$u$p" in *"$NL"*) fail "DB_USER/DB_PASSWORD มีขึ้นบรรทัดใหม่ — ใช้ option file ไม่ได้" ;; esac
+  CNF="$(mktemp "$BASE/.db-cnf.XXXXXX")"        # $BASE = 700 · mktemp = 600
+  { echo '[client]'
+    printf 'user="%s"\n' "$(cnf_q "$u")"
+    printf 'password="%s"\n' "$(cnf_q "$p")"
+    cat "$1"
+  } > "$CNF"
+}
+cnf_rm() { if [ -n "$CNF" ]; then rm -f "$CNF"; CNF=""; fi; }
 
 case "$PHASE" in
 preflight)
@@ -118,10 +171,30 @@ preflight)
   ;;
 backup)
   [ "$ENV" = production ] || say "(สำรองบน $ENV)"
+  [ "$DRY" = 1 ] || command -v mysqldump >/dev/null || fail "ไม่พบ mysqldump บน server — ยังไม่ได้แตะอะไร"
+  trap cnf_rm EXIT                                         # ลบไฟล์รหัสผ่านชั่วคราวแม้ dump พัง
   R mkdir -p "$BASE/backups"
   R chmod 700 "$BASE" "$BASE/backups"
   R mkdir -m 700 "$BK"
-  R "${WP[@]}" --skip-plugins --skip-themes db export "$BK/db.sql"
+  # DB: mysqldump ตรง (ไม่ใช่ `wp db export` — spawn mysqldump ด้วย proc_open)
+  DUMP_OPTS=(--single-transaction --quick --skip-lock-tables --no-tablespaces)
+  if [ "$DRY" = 1 ]; then
+    DB_NAME_='<DB_NAME>'; DB_CS_='<DB_CHARSET|utf8mb4>'
+    show "${WP[@]}" config get DB_NAME '|' DB_HOST '|' DB_CHARSET
+    echo "  [remote]   → $BK/db-conn.cnf (host/port/socket · ไม่มีรหัส · 600)"
+    show "${WP[@]}" config get DB_USER '|' DB_PASSWORD
+    echo "  [remote]   → \$(mktemp $BASE/.db-cnf.XXXXXX) (600 · ค่าไม่พิมพ์ · ลบหลัง dump แม้พัง)"
+    show mysqldump --defaults-extra-file='<cnf>' "${DUMP_OPTS[@]}" --default-character-set="$DB_CS_" --result-file="$BK/db.sql" "$DB_NAME_"
+    show rm -f '<cnf>'
+    echo "  [remote]   db.sql บรรทัดสุดท้ายต้องมี 'Dump completed' (ไม่มี = หยุด ก่อนส่งไฟล์ใดๆ)"
+  else
+    db_conn "$BK/db-conn.cnf"
+    db_cnf "$BK/db-conn.cnf"
+    mysqldump --defaults-extra-file="$CNF" "${DUMP_OPTS[@]}" --default-character-set="$DB_CS_" \
+      --result-file="$BK/db.sql" "$DB_NAME_" || fail "mysqldump ล้ม — ยังไม่ได้ส่งไฟล์ใดๆ"
+    cnf_rm
+    tail -n 1 "$BK/db.sql" | grep -q 'Dump completed' || fail "db.sql ไม่ครบ (ไม่มี 'Dump completed') — หยุดก่อนส่งไฟล์ใดๆ"
+  fi
   if [ "$DRY" = 1 ]; then
     show "${WP[@]}" --skip-plugins --skip-themes option get stylesheet '>' "$BK/stylesheet.txt"
   else
@@ -129,25 +202,40 @@ backup)
   fi
   R tar -czf "$BK/wp-content.tar.gz" -C "$WP_PATH" wp-content
   R chmod 600 "$BK/db.sql" "$BK/wp-content.tar.gz"
-  rb="$(cat <<EOF
-# ROLLBACK $ENV — สำรองก่อน deploy $TS (รันบน server: ssh -p 65002 <user>@<host>)
-cd "$WP_PATH"
-mv wp-content "wp-content.failed-$TS"                       # เก็บของที่ deploy ไว้ตรวจ
-tar -xzf "$BK/wp-content.tar.gz" -C "$WP_PATH"               # คืน wp-content (theme · mu-plugin · uploads · plugins)
-wp --path="$WP_PATH" db import "$BK/db.sql"                  # คืน DB (theme เดิม = $(cat "$BK/stylesheet.txt" 2>/dev/null || echo '<ดู stylesheet.txt>'))
-wp --path="$WP_PATH" cache flush
-wp --path="$WP_PATH" litespeed-purge all || true
-# ตรวจหน้าเว็บแล้วค่อยลบ: rm -rf "$WP_PATH/wp-content.failed-$TS"
+  # ROLLBACK: หัว = ค่าจริงตอนสำรอง · ตัว = heredoc แบบ quote (ไม่ขยายตัวแปรตอนนี้) — ⛔ ไม่มี wp db import (proc_open)
+  rollback_text() {
+    cat <<EOF
+# ROLLBACK $ENV — สำรองก่อน deploy $TS (รันบน server: ssh -p 65002 <user>@<host> · วางทั้งก้อนใน bash)
+# ⛔ Hostinger ปิด proc_open/exec ใน PHP → ห้าม wp db import/export · คืน DB ด้วย mysql ตรง (รหัสจาก wp-config → ไฟล์ 600 ชั่วคราว → ลบ)
+WP="$WP_PATH"; BK="$BK"; TS="$TS"; DB_NAME="$DB_NAME_"; DB_CS="$DB_CS_"
+# theme เดิม = $(cat "$BK/stylesheet.txt" 2>/dev/null || echo '<ดู stylesheet.txt>')
 EOF
-)"
+    cat <<'EOF'
+cd "$WP"
+mv wp-content "wp-content.failed-$TS"                        # เก็บของที่ deploy ไว้ตรวจ
+tar -xzf "$BK/wp-content.tar.gz" -C "$WP"                     # คืน wp-content (theme · mu-plugin · uploads · plugins)
+q() { sed 's/[\\"]/\\&/g'; }
+CNF="$(mktemp "$BK/.db-cnf.XXXXXX")"                           # 600 ในโฟลเดอร์ 700
+{ echo '[client]'
+  printf 'user="%s"\n' "$(wp --path="$WP" config get DB_USER | q)"
+  printf 'password="%s"\n' "$(wp --path="$WP" config get DB_PASSWORD | q)"
+  cat "$BK/db-conn.cnf"; } > "$CNF"
+mysql --defaults-extra-file="$CNF" --default-character-set="$DB_CS" "$DB_NAME" < "$BK/db.sql"; echo "mysql exit=$? (0 = คืน DB แล้ว)"
+rm -f "$CNF"
+wp --path="$WP" cache flush
+wp --path="$WP" litespeed-purge all || true
+# ตรวจหน้าเว็บแล้วค่อยลบ: rm -rf "$WP/wp-content.failed-$TS"
+EOF
+  }
   if [ "$DRY" = 1 ]; then
-    show printf '%s\n' '<rollback-commands-below>' '>' "$BK/ROLLBACK.txt"
+    show rollback_text '>' "$BK/ROLLBACK.txt"
+    echo "  [remote]   (ข้อความ ROLLBACK ด้านล่าง)"
   else
-    printf '%s\n' "$rb" > "$BK/ROLLBACK.txt"
+    rollback_text > "$BK/ROLLBACK.txt"
     ls -la "$BK"
   fi
   say "สำรองแล้ว → $BK · คำสั่ง rollback:"
-  printf '%s\n' "$rb"
+  rollback_text
   ;;
 prepare)
   R mkdir -p "$WP_PATH/wp-content/mu-plugins"
@@ -173,8 +261,41 @@ post)
     R "${WP[@]}" plugin install advanced-custom-fields --activate
   fi
   Q "${WP[@]}" theme is-active sharedheritage || R "${WP[@]}" theme activate sharedheritage
-  R "${WP[@]}" rewrite structure '/%postname%/'
-  R "${WP[@]}" rewrite flush --hard
+  read -r -d '' PHP_PERMALINK <<'PHP' || true
+global $wp_rewrite;
+$want = '/%postname%/';
+if ( get_option( 'permalink_structure' ) === $want ) {
+	WP_CLI::log( 'permalink already ' . $want );
+} else {
+	$wp_rewrite->set_permalink_structure( $want );
+	WP_CLI::success( 'permalink set ' . $want );
+}
+PHP
+  read -r -d '' PHP_FLUSH <<'PHP' || true
+flush_rewrite_rules( false );
+if ( ! get_option( 'rewrite_rules' ) ) {
+	WP_CLI::error( 'rewrite_rules empty after flush' );
+}
+require_once ABSPATH . 'wp-admin/includes/file.php';
+require_once ABSPATH . 'wp-admin/includes/misc.php';
+$ht  = get_home_path() . '.htaccess';
+$cur = is_readable( $ht ) ? (string) file_get_contents( $ht ) : '';
+if ( false !== strpos( $cur, '# BEGIN WordPress' ) ) {
+	WP_CLI::log( '.htaccess has WordPress block - unchanged' );
+} else {
+	add_filter( 'got_rewrite', '__return_true' );
+	if ( ! save_mod_rewrite_rules() ) {
+		WP_CLI::error( 'cannot write WordPress block to ' . $ht );
+	}
+	WP_CLI::success( 'wrote WordPress block to ' . $ht );
+}
+WP_CLI::success( 'rewrite rules flushed' );
+PHP
+  # permalink: ⛔ ไม่ใช้ `wp rewrite structure` (spawn `wp rewrite flush` ผ่าน launch) / `rewrite flush --hard` (proc_open)
+  # → `wp eval` ใน process เดียว 2 ครั้ง: (1) ตั้ง structure (2) process ใหม่ (init เห็น structure ใหม่ · CPT ลงทะเบียนครบ) flush
+  #   .htaccess: มีบล็อก `# BEGIN WordPress` แล้ว = ไม่แตะ · ไม่มี = เขียนบล็อก (save_mod_rewrite_rules) · เขียนไม่ได้ = หยุด
+  R "${WP[@]}" eval "$PHP_PERMALINK"
+  R "${WP[@]}" eval "$PHP_FLUSH"
   if [ "$IMPORT" = 1 ]; then
     R mkdir -p "$LOGS"
     say "import seed (mode missing = ไม่ทับของที่มี · sub-size ภาพ)"
