@@ -5,7 +5,7 @@
  * Video (sh_hero_video_hevc / sh_hero_video_webm + sh_hero_poster) when the object has one, else the
  * still sh_hero_image. Box = layout hero bbox (px at 1440, scaled by detail.css); media is contained
  * (never cropped or stretched). No video and no image → nothing is printed and the panel follows the
- * header (DOD B6). Playback starts when the video enters the viewport (assets/js/detail.js).
+ * header (DOD B6). Plays once (no loop, D22), starting when the video first enters the viewport (assets/js/detail.js).
  *
  * Args: post_id (int) · geometry (array from single-object.php).
  *
@@ -42,7 +42,7 @@ $sh_alt   = '' !== $sh_alt ? $sh_alt : get_the_title( $sh_id );
 <div class="sh-detail__hero" style="<?php echo esc_attr( $sh_style ); ?>">
 	<div class="sh-detail__hero-box">
 		<?php if ( $sh_has_video ) : ?>
-			<video class="sh-detail__hero-media" muted playsinline loop preload="metadata" data-sh-autoplay
+			<video class="sh-detail__hero-media" muted playsinline preload="metadata" data-sh-autoplay
 				<?php echo '' !== $sh_hero['poster'] ? 'poster="' . esc_url( $sh_hero['poster'] ) . '"' : ''; ?>
 				aria-label="<?php echo esc_attr( $sh_alt ); ?>">
 				<?php if ( '' !== $sh_hero['hevc'] ) : ?>
