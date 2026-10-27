@@ -102,10 +102,16 @@ function sh_import_refresh_media( array $seed, array $map, array $manifest, arra
 
 	foreach ( sh_import_scope_objects( $seed ) as $o ) {
 		$id = isset( $objects[ $o['slug'] ] ) ? (int) $objects[ $o['slug'] ] : 0;
-		if ( ! $id || ! array_filter( array( 'sh_hero_video_webm', 'sh_hero_video_hevc', 'sh_hero_poster', 'sh_hero_image' ), static fn( $k ) => sh_imp_replaceable( get_post_meta( $id, $k, true ) ) ) ) {
-			continue; // Every hero field holds an admin choice: do not even create attachments.
+		// The video group (webm · hevc · poster · has_alpha) belongs together: an admin's own WebM keeps the whole group.
+		$video_ok = $id && sh_imp_replaceable( get_post_meta( $id, 'sh_hero_video_webm', true ) );
+		if ( ! $id || ( ! $video_ok && ! sh_imp_replaceable( get_post_meta( $id, 'sh_hero_image', true ) ) ) ) {
+			continue; // Nothing the importer may touch: do not even create attachments.
 		}
-		sh_imp_refresh_fields( $id, sh_import_object_hero( $manifest, $map, $o ), 'sh_hero_video_webm', 'object_hero' );
+		$hero = sh_import_object_hero( $manifest, $map, $o );
+		if ( ! $video_ok ) {
+			$hero = array( 'sh_hero_image' => $hero['sh_hero_image'] );
+		}
+		sh_imp_refresh_fields( $id, $hero, 'sh_hero_video_webm', 'object_hero' );
 	}
 
 	$front = $pages['front']['id'];
