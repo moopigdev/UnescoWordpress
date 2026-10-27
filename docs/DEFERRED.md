@@ -91,3 +91,4 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [timeline-page/reviewer] [2026-10-27] ลากเมาส์บนภาพการ์ด (อยู่ใน `<a>`) แล้ว timeline ไม่เลื่อน — การลากลิงก์ของเบราว์เซอร์แย่ง · ลากบนภาพเส้นเวลาได้ปกติ
 - [timeline-page/reviewer] [2026-10-27] การ์ดที่ไม่มีภาพแคบลง การ์ดถัดไปขยับซ้าย (ไม่ซ้อน/ไม่พัง)
 - [timeline-page/reviewer] [2026-10-27] DESIGN-SPEC §4.5 ไอคอนช้าง active "x≈260" คลาด — จริง [340,155] (`797:2043`)
+- [orchestrator] [2026-10-27] เจ้าของจะทดสอบ HEVC-alpha บน iPhone/Safari ตอน deploy · ไฟล์ทึบ 4 ตัว (ganesha · singhasari · tin-ingot · walking) ใช้ไปก่อน ขอไฟล์โปร่งใสใหม่เมื่อลูกค้าขอ · หน้าเทสในเครื่อง `media/out/preview.html` (นอก repo)
