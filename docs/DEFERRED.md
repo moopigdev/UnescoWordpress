@@ -36,3 +36,5 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [core-chrome] [2026-10-27] ฟอนต์ fallback ของ Komet (D6) = `"Segoe UI", "Avenir Next", system-ui…` (เลือกเพราะเป็น humanist sans ที่มีในเครื่องส่วนใหญ่ · วัดบน macOS: ความกว้างเมนู Header #02 ต่าง Komet ≤ 3.5px ต่อคำ) — สลับเป็น Komet อัตโนมัติเมื่อวางไฟล์ใน `assets/fonts/komet/` (ดู README.txt ในโฟลเดอร์)
 - [core-chrome] [2026-10-27] มือถือ (<768): แถบโลโก้แสดงเป็น 2 ช่วงของภาพเดียว (UNESCO+TEMASEK | SHARED HERITAGE) ที่ scale เดียวกัน · เมนูเป็นปุ่ม "Menu" (hamburger) เปิด-ปิด · ไม่มี frame ใน Figma (D5) — ถ้าเจ้าของอยากได้แบบอื่นค่อยปรับ
 - [core-chrome] [2026-10-27] seed import (core-contract) ควรสร้างเมนู location `primary` จาก `site.json nav_primary` (5 รายการ · URL ว่าง P-211) — ถ้าไม่สร้าง Header #02 จะว่าง (theme ไม่ hardcode รายการ)
+- [core-chrome/reviewer] [2026-10-27] base.css ยังมีค่า px ที่ไม่ผ่าน token: padding Back 8px · min-height ปุ่มเมนู 44px · hamburger 20/2/±6px · ความกว้างแถบ 1164.2774px
+- [core-chrome/reviewer] [2026-10-27] ที่ ≤768 ข้อความ "MUSEUMS IN SOUTH-EAST ASIA" ในภาพ raster โลโก้เล็กมาก (เป็นภาพ ไม่ใช่ HTML) — ให้เจ้าของดูด้วยตา
