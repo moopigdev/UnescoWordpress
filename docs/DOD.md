@@ -17,7 +17,7 @@ reviewer ตรวจตามนี้**เท่านั้น** · ข้อ
 1b. **tablet (768–1024) · mobile (375–430) responsive ตามเหมาะสม** (D5 · ไม่มี frame) — F เฉพาะเมื่อ: เลื่อนแนวนอนได้ · เนื้อหาซ้อน/ล้น/ถูกตัด · ตัวอักษร < 14px หรืออ่านไม่ได้ · nav ใช้ไม่ได้ · ภาพ/วิดีโอบิดสัดส่วน · การเลือกจัดวางที่สมเหตุสมผลไม่ใช่ F
 2. ข้อมูลมาจาก CPT/ฟิลด์ ไม่ hardcode เนื้อหา (ยกเว้น label UI)
 3. escape ทุก output · ไม่มี PHP warning/notice (WP_DEBUG)
-4. วิดีโอ `muted playsinline loop preload="metadata" poster` · เล่นเมื่อเข้าจอ · ไม่โหลดวิดีโอใหญ่ตอน first paint
+4. วิดีโอ `muted playsinline preload="metadata" poster` (+ `loop` ยกเว้น hero หน้า detail = เล่นครั้งเดียว D22) · เล่นเมื่อเข้าจอ · ไม่โหลดวิดีโอใหญ่ตอน first paint
 5. enqueue เฉพาะหน้าที่ใช้ · ไม่มี CDN lib โดยไม่มี D ใน DECISION-LOG
 6. ไม่มีวิดีโอ/ภาพ → layout ไม่พัง
 7. แตะเฉพาะไฟล์ที่ถือตาม PLAN (ownership map)
