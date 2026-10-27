@@ -22,3 +22,4 @@
 | D16 | 2026-10-27 | Reflection (Timeline) | **ซ่อนตาม Figma** (`1232:1807` visible:false) · ฟิลด์ยังอยู่ใน CONTENT-MODEL แต่หน้าไม่แสดง | P-141 · เจ้าของตอบ |
 | D17 | 2026-10-27 | hero Kendi 1493 | ใช้ **แอนิเมชัน WebM ของเจ้าของ** (ไม่ใช้ภาพนิ่ง `0652a86e` ที่วางทับบนสุดใน Figma) · `hero_bg` ใน seed ไม่ render | P-216 · เจ้าของตอบ |
 | D18 | 2026-10-27 | ปุ่ม ‹ › Timeline | **เก็บไว้** (ตาม DESIGN-SPEC §6.4 · ไม่มีใน frame Final · ซ่อนเมื่อสุดทาง · ไม่แสดงบนมือถือ) — ไม่ใช่ F ของ B1 | เจ้าของตอบ |
+| D19 | 2026-10-27 | ไฟล์ฟอนต์ Komet | เจ้าของส่งไฟล์ (32 .otf จาก fonnts.com) และ**ยืนยันว่ามีไลเซนส์เว็บแล้ว** · ใช้ 5 น้ำหนัก Light/Regular/Medium/Bold/Heavy → แปลงเป็น woff2 (fonttools) → self-host `assets/fonts/komet/` · ต้นฉบับ otf อยู่ `Unesco/design/fonts/` (นอก repo) | P-205 · เจ้าของตอบ |
