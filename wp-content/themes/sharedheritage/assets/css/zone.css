@@ -9,6 +9,7 @@
 	--sh-zone-grid-gap: var(--sh-tile-gap);
 	--sh-zone-back-gap: 74px;    /* grid bottom y=1447 → Back y=1521 */
 	--sh-zone-bottom: 75px;      /* Back bottom y=1571 → page end y=1646 */
+	--sh-zone-cover-mobile-scale: 0.5; /* mobile: cover shown at 50% of desktop size */
 	--sh-zone-banner-strip: 840px; /* mobile: banner image width (labels ≈ 15px) */
 }
 
@@ -193,6 +194,23 @@
 
 	.sh-zone__grid {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	/*
+	 * The zone name is baked into the cover image: show the cover at half desktop scale (205px tall, centred crop)
+	 * so the title keeps a cap height ≥ ~12px instead of shrinking with the width.
+	 */
+	.sh-zone__cover {
+		height: calc(var(--sh-zone-cover-mobile-scale) * 410px);
+		aspect-ratio: auto;
+	}
+
+	.sh-zone[data-zone] .sh-zone__cover-img {
+		position: static;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 50%;
 	}
 
 	/* The ZONE 1–5 labels are baked into the image: keep them ≥14px by scrolling the strip inside the box. */
