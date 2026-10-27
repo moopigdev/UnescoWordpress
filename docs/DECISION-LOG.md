@@ -9,3 +9,7 @@
 | D3 | 2026-10-27 | host | Hostinger `sharedheritage.net` (Business plan · live สาธารณะ) | เจ้าของ UNESCO แชร์มา |
 | D4 | 2026-10-27 | workflow | ใช้ workflow แบบ royal-project ปรับเป็น repo เดียว | พิสูจน์แล้วจากการใช้จริง |
 | D5 | 2026-10-27 | ความตรงดีไซน์ | **desktop (1440) ตรง Figma 100%** · tablet/mobile **responsive ตามเหมาะสม** (ไม่มี frame ให้เทียบ) → DOD B1/B1b | เจ้าของสั่งตรง |
+| D6 | 2026-10-27 | ฟอนต์ | **Komet** (ฟอนต์หลักใน Figma) — เจ้าของส่งไฟล์ที่มีไลเซนส์เว็บมาที่ `Unesco/design/fonts/` · ระหว่างรอ wp-dev ใช้ fallback ใน `font-family` stack ตามที่ DESIGN-SPEC ระบุ แล้วสลับเป็น `@font-face` self-host เมื่อได้ไฟล์ (ไม่ใช้ CDN) · reviewer ไม่นับความต่างของ glyph เป็น F จนกว่าไฟล์มา | P-205 · เจ้าของตอบ |
+| D7 | 2026-10-27 | ขอบเขตคืนนี้ | **trail ช้างอย่างเดียว** ตาม page Final (670:860): Home · Intro · Zone 1-3 · trail ช้าง · timeline ช้าง · detail วัตถุช้าง 15 ชิ้น (ใช้ Patola cloth ตาม Final ไม่ใช่ Gringsing) · trail อื่น 16 trail/วัตถุ ~105 ชิ้น = รอบหน้า (seed เก็บไว้แล้วแต่ยังไม่ import) | P-201 · P-203 · O-2 · เจ้าของตอบ |
+| D8 | 2026-10-27 | ข้อความในรูป | ใช้ภาพ raster ตามดีไซน์ไปก่อน (hero · ชื่อ zone บนปก · ป้าย timeline) · admin แก้ได้โดยเปลี่ยนรูป · ทำเป็นข้อความจริงทีหลังเมื่อมีภาพแยกชั้น | P-207 · เจ้าของตอบ |
+| D9 | 2026-10-27 | ภาพอ้างอิง | Figma render API ติด 429 ถึง ~2026-11-01 → ใช้ `design/frames/*.png` ที่มี **ตัดขอบเหลือ 1440** (เงา header ทำให้กว้าง 1448) เป็นภาพเทียบ DOD B1 · ไม่ใช้ Figma MCP | P-215 · เจ้าของตอบ |
