@@ -1,0 +1,1427 @@
+{
+ "_meta": {
+  "generated_by": "scripts/import/build-image-map.py",
+  "figma_file": "figma-file.json",
+  "figma_lastModified": "2026-10-27T09:48:30Z",
+  "note": "ref = Figma imageRef = file name (without extension) in Unesco/design/assets · null = no image in Figma · see 'missing' for refs without a file"
+ },
+ "objects": {
+  "elephant-leg-bone": {
+   "final_frame": "1041:1290",
+   "tile": "70cf8ed707243f7c812a1f0171dd4a6500b35b0c",
+   "tile_hover": "e978e4de5e9bcd4380ef4aa99371487b85171615",
+   "tile_set": "939:774",
+   "hero_image": "e79714c1c172080210cf97b49fc6aa7cb14a639d",
+   "extra_images": [
+    "4953122e17ae97232adf69a47ba5ed1405c8d733"
+   ],
+   "video": null
+  },
+  "singhasari-ganesha": {
+   "final_frame": "670:2802",
+   "tile": "8ac7f98bc70e717330451ca7e8d30c061542268f",
+   "tile_hover": "08849e4a56875c3cfda45651c35f71ce42d5dfec",
+   "tile_set": "940:778",
+   "hero_image": "cc4fa3e3eb70e901db048341cbc9dea06b473bcb",
+   "extra_images": [],
+   "video": "singhasari-ganesha"
+  },
+  "ganesha": {
+   "final_frame": "670:2786",
+   "tile": "ce053c2bf4aca30fa7f70b380fa5ef8a41173c70",
+   "tile_hover": "fb5e1f7e330178705eb29ce778bb44bfe972a023",
+   "tile_set": "940:782",
+   "hero_image": "31ff0ee0c1620fd35786cfa017ff1c368fce9a38",
+   "extra_images": [],
+   "video": "ganesha"
+  },
+  "elephant-molar-coconut-grater": {
+   "final_frame": "956:975",
+   "tile": "e6107260af94f3c942b4fbcf2b07040a37805f89",
+   "tile_hover": "bc3b0037bd5f5871ca71283adf4f54e9f5e68919",
+   "tile_set": "940:786",
+   "hero_image": "2511e717a0bc936ec101162ec5ff44844fb92b6a",
+   "extra_images": [],
+   "video": "elephant-molar-coconut-grater"
+  },
+  "embossed-brass-basin-with-mythical-animal-motifs": {
+   "final_frame": "964:1522",
+   "tile": "b4177480ca6c29287bfb9b0b66744c26c3dda5b4",
+   "tile_hover": "7a0556b8dc388cdfdaace3022d1eac18ae0144bb",
+   "tile_set": "940:790",
+   "hero_image": "b7379d743108019bfff9d816935f8961ab904a5e",
+   "extra_images": [
+    "d12242d44121fd7f93180fe99cb227f848f6467d",
+    "fe9f4e8f0bf9d5ddf52ad5b39359330be8c0bb28"
+   ],
+   "video": null
+  },
+  "ivory-fire-piston-ivory-fire-syringe": {
+   "final_frame": "1006:922",
+   "tile": "a32f030f2dac179a29c54c7be49480be25b6a760",
+   "tile_hover": "909199a89ee7443b972251906ddca30b61bab3a5",
+   "tile_set": "940:794",
+   "hero_image": "550cfddd472294c66ebb3bfec6d104936ceabf95",
+   "extra_images": [
+    "dd599abf57b26d23ba11ccc0197a1e7a68e0d458",
+    "8dcebc793b2265a8aa9c502af29cba3088d659a2"
+   ],
+   "video": null
+  },
+  "elephant-and-mahout-kendi": {
+   "final_frame": "670:2872",
+   "tile": "9b686c50b68a9bb9acc0cae3cbe0099ada59521a",
+   "tile_hover": "8d13f99968832945085da7a31d4d07487f941977",
+   "tile_set": "797:1922",
+   "hero_image": "621646b5dd0382559f9cf7e9b2f8bf0620ac698e",
+   "extra_images": [
+    "97fa4b24704236a40923663518f9aa29c6ce1cb2",
+    "810b828903b38a64facdfd38ffe651e4d1f23f46"
+   ],
+   "video": "elephant-and-mahout-kendi"
+  },
+  "patola-cloth": {
+   "final_frame": "3004:804",
+   "tile": "fd0013b9f60c2cecb5ba97cb752628c0ce04bd2a",
+   "tile_hover": "5e5b3d261ca9c171ce8b4ed35f89325dff42f506",
+   "tile_set": "940:798",
+   "hero_image": "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf",
+   "extra_images": [
+    "06e906153fce5c90d379a1100d824fc39579b832",
+    "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf"
+   ],
+   "video": null
+  },
+  "elephant-shaped-relic-containers": {
+   "final_frame": "961:1024",
+   "tile": "9e10caee6f9128f7addacd727d65478276063de6",
+   "tile_hover": "2733b6a7223e7f828c9a0728822a996d20d454e6",
+   "tile_set": "940:802",
+   "hero_image": "3d83690a0b52ba5125f83d04368ecdab78ffd65e",
+   "extra_images": [
+    "1c3aa3a10055d34a499058cb6d74a29c814cfa42"
+   ],
+   "video": "elephant-shaped-containers"
+  },
+  "pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king": {
+   "final_frame": "964:2090",
+   "tile": "4727b9182ca17f373e904459cb30eb46315a5e9f",
+   "tile_hover": "7847f8ce21ef80789787d936ca54cbf72487260c",
+   "tile_set": "940:806",
+   "hero_image": "fd295f1a3df65e7d6f6c4d14fc76fb712010d686",
+   "extra_images": [
+    "bf841c7f35a6ca3858a1b46b02a46a6887ad714e"
+   ],
+   "video": null
+  },
+  "hand-carved-ivory-and-metal-opium-pipe": {
+   "final_frame": "1042:1719",
+   "tile": "bb70007222b8d8aea29ae505041fd824fbc12106",
+   "tile_hover": "4aae1591a9b6aa9f97ddf11c7e8f102500716071",
+   "tile_set": "940:810",
+   "hero_image": "ffb71edd03d35fa1fc5f7c408e699371941b78f1",
+   "extra_images": [
+    "10a3379a6d219df35f0a4c597352cc1df24a621c"
+   ],
+   "video": null
+  },
+  "tin-ingot-in-the-shape-of-an-elephant": {
+   "final_frame": "670:2828",
+   "tile": "64812b89ef37f38a317fd61eb91abee1964c317c",
+   "tile_hover": "97ac147df1c5b3ac00b9e465712124507f42aeaa",
+   "tile_set": "940:814",
+   "hero_image": "34e2ea63757a9a734a920a5fe984343b9d42026c",
+   "extra_images": [
+    "266b59cda0e3c73fef6538cc69323e7d959456b3"
+   ],
+   "video": "tin-ingot-in-the-shape-of-an-elephant"
+  },
+  "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs": {
+   "final_frame": "1041:866",
+   "tile": "d02a2ee07191109d18581fa8f1118197fcbc0d72",
+   "tile_hover": "614dedb5ac96ea12c65979cdc901ac749c6c9727",
+   "tile_set": "940:818",
+   "hero_image": "ba077230353e9720cc9ab1d6f3dc37828b23bc35",
+   "extra_images": [
+    "60b979fd2cd2e862c94bcaf9ba2beff0ceb1c5f3"
+   ],
+   "video": null
+  },
+  "siwaih": {
+   "final_frame": "1006:561",
+   "tile": "49ee53f853f362a1cb012db4674186cbaf53ba68",
+   "tile_hover": "2ef26c9beb3b808b906755ee7e5f565943f966c7",
+   "tile_set": "940:822",
+   "hero_image": "8bcbdd55e500c4a0d39942e15c8df8680bd1c92f",
+   "extra_images": [
+    "148537c0c0f4fb01bb87fd06eb2600f18c355806"
+   ],
+   "video": null
+  },
+  "bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the": {
+   "final_frame": "670:2847",
+   "tile": "ccacbdf1823c7ec789a79ddc546b0db4cb63d410",
+   "tile_hover": "0522e0ee2b555c1651d1e7ccce59fa7ea6f2f334",
+   "tile_set": "940:826",
+   "hero_image": "a1b2aeeedadbd3f6e4b844944c7dfb01858876d2",
+   "extra_images": [
+    "b42c75df1b5be9ddd269cb33e31fdecdd38524c0",
+    "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06",
+    "4ce53001c838fd7804c16a3e17737286ab45fdc1",
+    "de086fc9260067212cc9a370bc3d8a8c8c6d7a19",
+    "f1c29b0dc6b4449c68abb6cee3bc2afa2f116cfb",
+    "378c155fa27dc3d2a02a9bb5bd1f96ebf7b97b9d"
+   ],
+   "video": "bas-relief-of-a-procession"
+  }
+ },
+ "timeline_items": {
+  "1": {
+   "thumbnail": "4953122e17ae97232adf69a47ba5ed1405c8d733",
+   "all": [
+    "4953122e17ae97232adf69a47ba5ed1405c8d733"
+   ]
+  },
+  "2": {
+   "thumbnail": "b0afe5baa2b42c90d16a21257cde00f0845a6a9a",
+   "all": [
+    "b0afe5baa2b42c90d16a21257cde00f0845a6a9a"
+   ]
+  },
+  "3": {
+   "thumbnail": "bc3f275a51500bf09f5a2ee1f3d0638656056ae9",
+   "all": [
+    "bc3f275a51500bf09f5a2ee1f3d0638656056ae9"
+   ]
+  },
+  "4": {
+   "thumbnail": "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b",
+   "all": [
+    "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b"
+   ]
+  },
+  "5": {
+   "thumbnail": "5d9931b48643cf08792e1b307c1574625677ddff",
+   "all": [
+    "5d9931b48643cf08792e1b307c1574625677ddff"
+   ]
+  },
+  "6": {
+   "thumbnail": "f8e2d79d41f367604a48aa87f7067ed701f6b1f0",
+   "all": [
+    "f8e2d79d41f367604a48aa87f7067ed701f6b1f0",
+    "8dcebc793b2265a8aa9c502af29cba3088d659a2"
+   ]
+  },
+  "7": {
+   "thumbnail": "867b28338953f22209122a9fa9dcbb76a2c2bd5c",
+   "all": [
+    "867b28338953f22209122a9fa9dcbb76a2c2bd5c"
+   ]
+  },
+  "8": {
+   "thumbnail": "07e22a68538ac8489e1348d26ad6d4e1154c41ed",
+   "all": [
+    "07e22a68538ac8489e1348d26ad6d4e1154c41ed"
+   ]
+  },
+  "9": {
+   "thumbnail": "b1ba8a8a18498389fb9a9f257d957ec6516fcc99",
+   "all": [
+    "b1ba8a8a18498389fb9a9f257d957ec6516fcc99",
+    "1c3aa3a10055d34a499058cb6d74a29c814cfa42"
+   ]
+  },
+  "10": {
+   "thumbnail": "bf841c7f35a6ca3858a1b46b02a46a6887ad714e",
+   "all": [
+    "bf841c7f35a6ca3858a1b46b02a46a6887ad714e"
+   ]
+  },
+  "11": {
+   "thumbnail": "ba68e8525d46c78cf3004f1b591c8a4e223ef73f",
+   "all": [
+    "ba68e8525d46c78cf3004f1b591c8a4e223ef73f"
+   ]
+  },
+  "12": {
+   "thumbnail": "32fba0363a69a81347de674ede2112e30b076200",
+   "all": [
+    "32fba0363a69a81347de674ede2112e30b076200"
+   ]
+  },
+  "13": {
+   "thumbnail": "730ba23e657cab7964b8fc86ef5f8cb33119b25c",
+   "all": [
+    "730ba23e657cab7964b8fc86ef5f8cb33119b25c"
+   ]
+  },
+  "14": {
+   "thumbnail": "9c5706f8ddaeb9483fafb98b17c3b3a286dcbecb",
+   "all": [
+    "9c5706f8ddaeb9483fafb98b17c3b3a286dcbecb"
+   ]
+  },
+  "15": {
+   "thumbnail": "91cfd6aecee3155b6879af0e80c878b85c3860e9",
+   "all": [
+    "91cfd6aecee3155b6879af0e80c878b85c3860e9"
+   ]
+  }
+ },
+ "trails": {
+  "rooster": {
+   "icon_home": "5f216ed1368da5ea53eb2cf97a4d5542459d711e",
+   "icon_home_hover": "17bbb16a79e3121b3c9f8b35ed7ca2b31531298d",
+   "zone_grid_order": 3,
+   "tile_zone_grid": "342701ac0798ff180cfac759317c472a546cf9ed",
+   "tile_zone_grid_hover": "64fe0e4ee4bc04898863d19512ce5350123921bd",
+   "cover": null,
+   "timeline_nav_order": 4,
+   "icon_timeline": "17bbb16a79e3121b3c9f8b35ed7ca2b31531298d"
+  },
+  "turtle": {
+   "icon_home": "042394062f57e7314b3ab68f0dd88288035b5b96",
+   "icon_home_hover": "aa9819daae144336bf741c47f868145435c5fdcb",
+   "zone_grid_order": 15,
+   "tile_zone_grid": "e3622bd14db8e56f05f53fe61b9e9bed85cfd7b8",
+   "tile_zone_grid_hover": "ce3169a52b0025e78e766c50223af5556319fdfe",
+   "cover": null,
+   "timeline_nav_order": 15,
+   "icon_timeline": "aa9819daae144336bf741c47f868145435c5fdcb"
+  },
+  "deer": {
+   "icon_home": "3311064ca263fd5ea7e323ef5c3223236806d0ce",
+   "icon_home_hover": "706a21c0024a75c6be2ae03f66ec30b8426252b4",
+   "zone_grid_order": 4,
+   "tile_zone_grid": "c1a8fb82673c3ab15b7b5da47a4cc230ccc0f31f",
+   "tile_zone_grid_hover": "65d217b76a74d4479df610dade21e336e419b4b3",
+   "cover": null,
+   "timeline_nav_order": 12,
+   "icon_timeline": "706a21c0024a75c6be2ae03f66ec30b8426252b4"
+  },
+  "dragon": {
+   "icon_home": "78ba2a9c592b6d989f07a2e32c1720329e706d55",
+   "icon_home_hover": "90c51467be1459101d21d959c8bf5d688157bae1",
+   "zone_grid_order": 5,
+   "tile_zone_grid": "e4a3a4bad9a3e6ab55cb8b20ee35d1bf365af91e",
+   "tile_zone_grid_hover": "790fc2f2c88c1293da9cc1c7a6c8f59d2210ff91",
+   "cover": null,
+   "timeline_nav_order": 7,
+   "icon_timeline": "90c51467be1459101d21d959c8bf5d688157bae1"
+  },
+  "fish": {
+   "icon_home": "baaa803afaad0e2741a8c3f808ce75c220fdd5a6",
+   "icon_home_hover": "091014ad1ebc26b465c39cd8994bb38c035e64e4",
+   "zone_grid_order": 6,
+   "tile_zone_grid": "aa14ecd1303c9a6907ad37a756a610b7d0c78cd2",
+   "tile_zone_grid_hover": "8db0a0732ff66a57031a009651b602df5d8d9b0b",
+   "cover": null,
+   "timeline_nav_order": 16,
+   "icon_timeline": "a3ff80091ac25a1b0731ab4e5cdc2543d16583d9"
+  },
+  "hornbill": {
+   "icon_home": "3fab79d2ca0fc54daf006f5d4eda7554b950ed91",
+   "icon_home_hover": "ad12c01136e12666657a9f2902c3059ff25ab4e2",
+   "zone_grid_order": 8,
+   "tile_zone_grid": "4ce4a412dc95e49a6e49de56d5b2c69d86eba8e7",
+   "tile_zone_grid_hover": "e3c45a09561d0988ebd72b1b4eb39ef7d3396cc1",
+   "cover": null,
+   "timeline_nav_order": 2,
+   "icon_timeline": "ad12c01136e12666657a9f2902c3059ff25ab4e2"
+  },
+  "horse": {
+   "icon_home": "a2f606758633051b0910a9e661bff07054034855",
+   "icon_home_hover": "47eb7f6812377b59bef78e766bc202ce9f51bf79",
+   "zone_grid_order": 9,
+   "tile_zone_grid": "87938c71354cfc0fd72db85bcb1b4c6e3568a658",
+   "tile_zone_grid_hover": "2f3a8b9cea789395a68499e9a5f91c96fc7defe5",
+   "cover": null,
+   "timeline_nav_order": 11,
+   "icon_timeline": "47eb7f6812377b59bef78e766bc202ce9f51bf79"
+  },
+  "naga": {
+   "icon_home": "b419819cb994f64b2132466303bb35023ccd21fd",
+   "icon_home_hover": "914d1a6461b5c8d12cd596effb73037ebefab436",
+   "zone_grid_order": 14,
+   "tile_zone_grid": "70eb068742ccf43dc11056667ecf87891e97e753",
+   "tile_zone_grid_hover": "ae47dcea20a04293087620e49b9b3c1dee26ca6c",
+   "cover": null,
+   "timeline_nav_order": 8,
+   "icon_timeline": "914d1a6461b5c8d12cd596effb73037ebefab436"
+  },
+  "water-bird": {
+   "icon_home": "9b1c5c1e2d2f2c27c2fc2467629ab6b9ab1dafc6",
+   "icon_home_hover": "9270334ced3aa5dad64ca65cc666ec90044da98f",
+   "zone_grid_order": null,
+   "tile_zone_grid": null,
+   "tile_zone_grid_hover": null,
+   "cover": null,
+   "timeline_nav_order": 3,
+   "icon_timeline": "9270334ced3aa5dad64ca65cc666ec90044da98f"
+  },
+  "makara": {
+   "icon_home": "21f024a52e96606556f4b3db7a9bb09946ac0da7",
+   "icon_home_hover": "0b230779c8a934d9056c435e1994c9b2b89fcb27",
+   "zone_grid_order": 11,
+   "tile_zone_grid": "77d84c86e681408da172e84a8e60c68e68c001bd",
+   "tile_zone_grid_hover": "9a4ee322ba8d0d32314b67f00ee019ea9aaea41b",
+   "cover": null,
+   "timeline_nav_order": 14,
+   "icon_timeline": "0b230779c8a934d9056c435e1994c9b2b89fcb27"
+  },
+  "lion": {
+   "icon_home": "331dc6e329401acd852d130992a2ef98822bad1c",
+   "icon_home_hover": "68a990a4961e19dbb927fd0d143e3d434c45ee9a",
+   "zone_grid_order": 10,
+   "tile_zone_grid": "2dd1b2eb919eed5c8f3a67ba4a1e8b4cd22fd023",
+   "tile_zone_grid_hover": "0b0dc3c8c5a95d6a0e4b323fb76f39f80f36b7ba",
+   "cover": null,
+   "timeline_nav_order": 13,
+   "icon_timeline": "68a990a4961e19dbb927fd0d143e3d434c45ee9a"
+  },
+  "seashell": {
+   "icon_home": "80727192aa60ba5bed96afae27d2eb0e340c707e",
+   "icon_home_hover": "535eb1d8ac88c6f2dd4e9956a6769c8b4efe3077",
+   "zone_grid_order": 13,
+   "tile_zone_grid": "33b1445224b55b21998bcb815d1c87a519ff9577",
+   "tile_zone_grid_hover": "73d5da8215e1e1cae75933d75fc85c9300d1639f",
+   "cover": null,
+   "timeline_nav_order": 17,
+   "icon_timeline": "10b2ff544aab69be192001c5ba9cdb02e61e61a9"
+  },
+  "buffalo": {
+   "icon_home": "5b2303da4b3d8d4c59d0366df64f895726d6384c",
+   "icon_home_hover": "bf92aef517efb250a021bdfc8fe5ecdc87936eb6",
+   "zone_grid_order": 2,
+   "tile_zone_grid": "dabf695eff4c2f190b9800dd05ba6ea0c0791572",
+   "tile_zone_grid_hover": "70a313144649046f262577067f86d982a3323738",
+   "cover": null,
+   "timeline_nav_order": 10,
+   "icon_timeline": "bf92aef517efb250a021bdfc8fe5ecdc87936eb6"
+  },
+  "phoenix": {
+   "icon_home": "ba0b342cab0b4404e4d0a4b9d65a1b15a6421568",
+   "icon_home_hover": "6bfbfd9c87376a877a21d5a38f31b17d28dd9bbe",
+   "zone_grid_order": 12,
+   "tile_zone_grid": "dd7d34c58dabdcdefc3f20023aa1f68c1373260a",
+   "tile_zone_grid_hover": "c96e30802b0a40b044148a67b85cdebce7a1a514",
+   "cover": null,
+   "timeline_nav_order": 6,
+   "icon_timeline": "6bfbfd9c87376a877a21d5a38f31b17d28dd9bbe"
+  },
+  "bird": {
+   "icon_home": "337ec1cc97ee6420117278631cffdbd02c36b443",
+   "icon_home_hover": "6299dae5cd81351af66dbf1fed38b4d8a412389b",
+   "zone_grid_order": 1,
+   "tile_zone_grid": "4c493fdc4a29e8f97679610b3f1cad52d5d08b9e",
+   "tile_zone_grid_hover": "f8cdca6ed2122344a967c09723c63a2c6f630690",
+   "cover": null,
+   "timeline_nav_order": 1,
+   "icon_timeline": "6299dae5cd81351af66dbf1fed38b4d8a412389b"
+  },
+  "garuda": {
+   "icon_home": "33bab1e0a53e16d9f9e48380ab6ed761429ab5c1",
+   "icon_home_hover": "0a9942129a6595f5c5935e68ae80821407f33042",
+   "zone_grid_order": 7,
+   "tile_zone_grid": "8428e71bcc441ecea1da55185080518897c441fd",
+   "tile_zone_grid_hover": "0e852035a30f543a9a2e79cd36a8198d9dd0cf37",
+   "cover": null,
+   "timeline_nav_order": 5,
+   "icon_timeline": "0a9942129a6595f5c5935e68ae80821407f33042"
+  },
+  "elephant": {
+   "icon_home": "a958a1fcaa1ba35cd1837220acb5bf130b77df77",
+   "icon_home_hover": "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487",
+   "zone_grid_order": null,
+   "tile_zone_grid": null,
+   "tile_zone_grid_hover": null,
+   "cover": "ed0e5ee93dd264f7f2bee4007437a5b16c92ad64",
+   "timeline_nav_order": 9,
+   "icon_timeline": "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487"
+  }
+ },
+ "zones": {
+  "1": {
+   "card": "342629afe7c3096b250956a6bfa18f5a55dd4d01",
+   "card_hover": "35c9b660c3b2a9cd65ffe83314e0b79903d8226f",
+   "cover": "10247f33df7eb00b4c372f25f8006e633cf1aba9",
+   "banner": "413791d606d517988c07682c407b0e79fa8aa303"
+  },
+  "2": {
+   "card": "42f23205d3b36c2e64be218319661f4c17111ed4",
+   "card_hover": "ac84f1bbe78c230f46fa83abdf384e4553ea90e9",
+   "cover": "597a0bb7beb04c60e5c1dab6bb136d762b40b106",
+   "banner": "e5dbe73519a7331624d728c3c7a65577dd39a0ea"
+  },
+  "3": {
+   "card": "26c17a475a3f123793369af363c396e1fbbdff61",
+   "card_hover": "4f92af722c020aaf22ff989878e2e1729607c9f3",
+   "cover": "9bdc2e00f7a83e6e85233f7d0a3c75c90f0bce55",
+   "banner": "172ff28b84b349b73264855d16052064728f76f5"
+  },
+  "4": {
+   "card": "0c5c09f6ab7cb91c6839bd3c41ea038c5b5b1ba7",
+   "card_hover": "1feab554459a89eee5603a8222ab5de2faaa5084",
+   "cover": null,
+   "banner": null
+  },
+  "5": {
+   "card": "728a2a8d19b484143f26ad2396c4c4aee42804da",
+   "card_hover": "626ccffb25f4d2fb84091df1001cc045737928e0",
+   "cover": null,
+   "banner": null
+  }
+ },
+ "pages": {
+  "home": {
+   "hero": "2e3fa9c46cbd208659aa21cdcd503d65ff002aee",
+   "intro_image": "3f4cfd0076c9f4c7755f5340646ef8ec2b458a67",
+   "zone_bar": "30d9d3016d547f0b3a28a3084b68117466b32974",
+   "trails_video": "walking"
+  },
+  "intro": {
+   "cover": "2e3fa9c46cbd208659aa21cdcd503d65ff002aee",
+   "intro_image": "bec4f0860329aaeeea6b51314eade1b76ec68072",
+   "knowing_image": "74e1d6fd0e8417532fcc489e36fcca2f40ae0b30",
+   "map_image": "cd63a05d3457f1ce1e611f777b3cb9cdb6b9c264"
+  },
+  "timeline": {
+   "illustration": "791ae91b792bf74464ae45d721e6265bc165e7ce"
+  }
+ },
+ "site": {
+  "header_image": "709572bf7eca3d77a7e317182be8860998a233f4"
+ },
+ "files": {
+  "042394062f57e7314b3ab68f0dd88288035b5b96": "042394062f57e7314b3ab68f0dd88288035b5b96.jpg",
+  "0522e0ee2b555c1651d1e7ccce59fa7ea6f2f334": "0522e0ee2b555c1651d1e7ccce59fa7ea6f2f334.jpg",
+  "06e906153fce5c90d379a1100d824fc39579b832": "06e906153fce5c90d379a1100d824fc39579b832.jpg",
+  "07e22a68538ac8489e1348d26ad6d4e1154c41ed": "07e22a68538ac8489e1348d26ad6d4e1154c41ed.png",
+  "08849e4a56875c3cfda45651c35f71ce42d5dfec": "08849e4a56875c3cfda45651c35f71ce42d5dfec.jpg",
+  "091014ad1ebc26b465c39cd8994bb38c035e64e4": "091014ad1ebc26b465c39cd8994bb38c035e64e4.png",
+  "0a9942129a6595f5c5935e68ae80821407f33042": "0a9942129a6595f5c5935e68ae80821407f33042.jpg",
+  "0b0dc3c8c5a95d6a0e4b323fb76f39f80f36b7ba": "0b0dc3c8c5a95d6a0e4b323fb76f39f80f36b7ba.png",
+  "0b230779c8a934d9056c435e1994c9b2b89fcb27": "0b230779c8a934d9056c435e1994c9b2b89fcb27.jpg",
+  "0c5c09f6ab7cb91c6839bd3c41ea038c5b5b1ba7": "0c5c09f6ab7cb91c6839bd3c41ea038c5b5b1ba7.png",
+  "0e852035a30f543a9a2e79cd36a8198d9dd0cf37": "0e852035a30f543a9a2e79cd36a8198d9dd0cf37.jpg",
+  "10247f33df7eb00b4c372f25f8006e633cf1aba9": "10247f33df7eb00b4c372f25f8006e633cf1aba9.jpg",
+  "10a3379a6d219df35f0a4c597352cc1df24a621c": "10a3379a6d219df35f0a4c597352cc1df24a621c.png",
+  "10b2ff544aab69be192001c5ba9cdb02e61e61a9": "10b2ff544aab69be192001c5ba9cdb02e61e61a9.jpg",
+  "148537c0c0f4fb01bb87fd06eb2600f18c355806": "148537c0c0f4fb01bb87fd06eb2600f18c355806.png",
+  "172ff28b84b349b73264855d16052064728f76f5": "172ff28b84b349b73264855d16052064728f76f5.png",
+  "17bbb16a79e3121b3c9f8b35ed7ca2b31531298d": "17bbb16a79e3121b3c9f8b35ed7ca2b31531298d.jpg",
+  "1c3aa3a10055d34a499058cb6d74a29c814cfa42": "1c3aa3a10055d34a499058cb6d74a29c814cfa42.png",
+  "1feab554459a89eee5603a8222ab5de2faaa5084": "1feab554459a89eee5603a8222ab5de2faaa5084.png",
+  "21f024a52e96606556f4b3db7a9bb09946ac0da7": "21f024a52e96606556f4b3db7a9bb09946ac0da7.jpg",
+  "2511e717a0bc936ec101162ec5ff44844fb92b6a": "2511e717a0bc936ec101162ec5ff44844fb92b6a.png",
+  "266b59cda0e3c73fef6538cc69323e7d959456b3": "266b59cda0e3c73fef6538cc69323e7d959456b3.png",
+  "26c17a475a3f123793369af363c396e1fbbdff61": "26c17a475a3f123793369af363c396e1fbbdff61.png",
+  "2733b6a7223e7f828c9a0728822a996d20d454e6": "2733b6a7223e7f828c9a0728822a996d20d454e6.jpg",
+  "2dd1b2eb919eed5c8f3a67ba4a1e8b4cd22fd023": "2dd1b2eb919eed5c8f3a67ba4a1e8b4cd22fd023.png",
+  "2e3fa9c46cbd208659aa21cdcd503d65ff002aee": "2e3fa9c46cbd208659aa21cdcd503d65ff002aee.jpg",
+  "2ef26c9beb3b808b906755ee7e5f565943f966c7": "2ef26c9beb3b808b906755ee7e5f565943f966c7.jpg",
+  "2f3a8b9cea789395a68499e9a5f91c96fc7defe5": "2f3a8b9cea789395a68499e9a5f91c96fc7defe5.png",
+  "30d9d3016d547f0b3a28a3084b68117466b32974": "30d9d3016d547f0b3a28a3084b68117466b32974.png",
+  "32fba0363a69a81347de674ede2112e30b076200": "32fba0363a69a81347de674ede2112e30b076200.png",
+  "3311064ca263fd5ea7e323ef5c3223236806d0ce": "3311064ca263fd5ea7e323ef5c3223236806d0ce.jpg",
+  "331dc6e329401acd852d130992a2ef98822bad1c": "331dc6e329401acd852d130992a2ef98822bad1c.jpg",
+  "337ec1cc97ee6420117278631cffdbd02c36b443": "337ec1cc97ee6420117278631cffdbd02c36b443.jpg",
+  "33b1445224b55b21998bcb815d1c87a519ff9577": "33b1445224b55b21998bcb815d1c87a519ff9577.png",
+  "33bab1e0a53e16d9f9e48380ab6ed761429ab5c1": "33bab1e0a53e16d9f9e48380ab6ed761429ab5c1.jpg",
+  "342629afe7c3096b250956a6bfa18f5a55dd4d01": "342629afe7c3096b250956a6bfa18f5a55dd4d01.png",
+  "342701ac0798ff180cfac759317c472a546cf9ed": "342701ac0798ff180cfac759317c472a546cf9ed.png",
+  "35c9b660c3b2a9cd65ffe83314e0b79903d8226f": "35c9b660c3b2a9cd65ffe83314e0b79903d8226f.png",
+  "378c155fa27dc3d2a02a9bb5bd1f96ebf7b97b9d": "378c155fa27dc3d2a02a9bb5bd1f96ebf7b97b9d.png",
+  "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b": "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b.png",
+  "3f4cfd0076c9f4c7755f5340646ef8ec2b458a67": "3f4cfd0076c9f4c7755f5340646ef8ec2b458a67.png",
+  "3fab79d2ca0fc54daf006f5d4eda7554b950ed91": "3fab79d2ca0fc54daf006f5d4eda7554b950ed91.jpg",
+  "413791d606d517988c07682c407b0e79fa8aa303": "413791d606d517988c07682c407b0e79fa8aa303.png",
+  "42f23205d3b36c2e64be218319661f4c17111ed4": "42f23205d3b36c2e64be218319661f4c17111ed4.png",
+  "4727b9182ca17f373e904459cb30eb46315a5e9f": "4727b9182ca17f373e904459cb30eb46315a5e9f.jpg",
+  "47eb7f6812377b59bef78e766bc202ce9f51bf79": "47eb7f6812377b59bef78e766bc202ce9f51bf79.jpg",
+  "4953122e17ae97232adf69a47ba5ed1405c8d733": "4953122e17ae97232adf69a47ba5ed1405c8d733.png",
+  "49ee53f853f362a1cb012db4674186cbaf53ba68": "49ee53f853f362a1cb012db4674186cbaf53ba68.jpg",
+  "4aae1591a9b6aa9f97ddf11c7e8f102500716071": "4aae1591a9b6aa9f97ddf11c7e8f102500716071.jpg",
+  "4c493fdc4a29e8f97679610b3f1cad52d5d08b9e": "4c493fdc4a29e8f97679610b3f1cad52d5d08b9e.png",
+  "4ce4a412dc95e49a6e49de56d5b2c69d86eba8e7": "4ce4a412dc95e49a6e49de56d5b2c69d86eba8e7.jpg",
+  "4ce53001c838fd7804c16a3e17737286ab45fdc1": "4ce53001c838fd7804c16a3e17737286ab45fdc1.png",
+  "4f92af722c020aaf22ff989878e2e1729607c9f3": "4f92af722c020aaf22ff989878e2e1729607c9f3.png",
+  "535eb1d8ac88c6f2dd4e9956a6769c8b4efe3077": "535eb1d8ac88c6f2dd4e9956a6769c8b4efe3077.png",
+  "597a0bb7beb04c60e5c1dab6bb136d762b40b106": "597a0bb7beb04c60e5c1dab6bb136d762b40b106.jpg",
+  "5b2303da4b3d8d4c59d0366df64f895726d6384c": "5b2303da4b3d8d4c59d0366df64f895726d6384c.jpg",
+  "5d9931b48643cf08792e1b307c1574625677ddff": "5d9931b48643cf08792e1b307c1574625677ddff.png",
+  "5e5b3d261ca9c171ce8b4ed35f89325dff42f506": "5e5b3d261ca9c171ce8b4ed35f89325dff42f506.jpg",
+  "5f216ed1368da5ea53eb2cf97a4d5542459d711e": "5f216ed1368da5ea53eb2cf97a4d5542459d711e.jpg",
+  "60b979fd2cd2e862c94bcaf9ba2beff0ceb1c5f3": "60b979fd2cd2e862c94bcaf9ba2beff0ceb1c5f3.png",
+  "614dedb5ac96ea12c65979cdc901ac749c6c9727": "614dedb5ac96ea12c65979cdc901ac749c6c9727.jpg",
+  "621646b5dd0382559f9cf7e9b2f8bf0620ac698e": "621646b5dd0382559f9cf7e9b2f8bf0620ac698e.png",
+  "626ccffb25f4d2fb84091df1001cc045737928e0": "626ccffb25f4d2fb84091df1001cc045737928e0.png",
+  "6299dae5cd81351af66dbf1fed38b4d8a412389b": "6299dae5cd81351af66dbf1fed38b4d8a412389b.jpg",
+  "64812b89ef37f38a317fd61eb91abee1964c317c": "64812b89ef37f38a317fd61eb91abee1964c317c.jpg",
+  "64fe0e4ee4bc04898863d19512ce5350123921bd": "64fe0e4ee4bc04898863d19512ce5350123921bd.png",
+  "65d217b76a74d4479df610dade21e336e419b4b3": "65d217b76a74d4479df610dade21e336e419b4b3.png",
+  "68a990a4961e19dbb927fd0d143e3d434c45ee9a": "68a990a4961e19dbb927fd0d143e3d434c45ee9a.jpg",
+  "6bfbfd9c87376a877a21d5a38f31b17d28dd9bbe": "6bfbfd9c87376a877a21d5a38f31b17d28dd9bbe.jpg",
+  "706a21c0024a75c6be2ae03f66ec30b8426252b4": "706a21c0024a75c6be2ae03f66ec30b8426252b4.jpg",
+  "709572bf7eca3d77a7e317182be8860998a233f4": "709572bf7eca3d77a7e317182be8860998a233f4.jpg",
+  "70a313144649046f262577067f86d982a3323738": "70a313144649046f262577067f86d982a3323738.png",
+  "70cf8ed707243f7c812a1f0171dd4a6500b35b0c": "70cf8ed707243f7c812a1f0171dd4a6500b35b0c.jpg",
+  "70eb068742ccf43dc11056667ecf87891e97e753": "70eb068742ccf43dc11056667ecf87891e97e753.png",
+  "728a2a8d19b484143f26ad2396c4c4aee42804da": "728a2a8d19b484143f26ad2396c4c4aee42804da.png",
+  "730ba23e657cab7964b8fc86ef5f8cb33119b25c": "730ba23e657cab7964b8fc86ef5f8cb33119b25c.png",
+  "73d5da8215e1e1cae75933d75fc85c9300d1639f": "73d5da8215e1e1cae75933d75fc85c9300d1639f.png",
+  "74e1d6fd0e8417532fcc489e36fcca2f40ae0b30": "74e1d6fd0e8417532fcc489e36fcca2f40ae0b30.png",
+  "77d84c86e681408da172e84a8e60c68e68c001bd": "77d84c86e681408da172e84a8e60c68e68c001bd.png",
+  "7847f8ce21ef80789787d936ca54cbf72487260c": "7847f8ce21ef80789787d936ca54cbf72487260c.jpg",
+  "78ba2a9c592b6d989f07a2e32c1720329e706d55": "78ba2a9c592b6d989f07a2e32c1720329e706d55.jpg",
+  "790fc2f2c88c1293da9cc1c7a6c8f59d2210ff91": "790fc2f2c88c1293da9cc1c7a6c8f59d2210ff91.png",
+  "791ae91b792bf74464ae45d721e6265bc165e7ce": "791ae91b792bf74464ae45d721e6265bc165e7ce.png",
+  "7a0556b8dc388cdfdaace3022d1eac18ae0144bb": "7a0556b8dc388cdfdaace3022d1eac18ae0144bb.jpg",
+  "80727192aa60ba5bed96afae27d2eb0e340c707e": "80727192aa60ba5bed96afae27d2eb0e340c707e.png",
+  "810b828903b38a64facdfd38ffe651e4d1f23f46": "810b828903b38a64facdfd38ffe651e4d1f23f46.png",
+  "8428e71bcc441ecea1da55185080518897c441fd": "8428e71bcc441ecea1da55185080518897c441fd.jpg",
+  "867b28338953f22209122a9fa9dcbb76a2c2bd5c": "867b28338953f22209122a9fa9dcbb76a2c2bd5c.png",
+  "87938c71354cfc0fd72db85bcb1b4c6e3568a658": "87938c71354cfc0fd72db85bcb1b4c6e3568a658.png",
+  "8ac7f98bc70e717330451ca7e8d30c061542268f": "8ac7f98bc70e717330451ca7e8d30c061542268f.jpg",
+  "8d13f99968832945085da7a31d4d07487f941977": "8d13f99968832945085da7a31d4d07487f941977.jpg",
+  "8db0a0732ff66a57031a009651b602df5d8d9b0b": "8db0a0732ff66a57031a009651b602df5d8d9b0b.png",
+  "8dcebc793b2265a8aa9c502af29cba3088d659a2": "8dcebc793b2265a8aa9c502af29cba3088d659a2.png",
+  "909199a89ee7443b972251906ddca30b61bab3a5": "909199a89ee7443b972251906ddca30b61bab3a5.jpg",
+  "90c51467be1459101d21d959c8bf5d688157bae1": "90c51467be1459101d21d959c8bf5d688157bae1.jpg",
+  "914d1a6461b5c8d12cd596effb73037ebefab436": "914d1a6461b5c8d12cd596effb73037ebefab436.jpg",
+  "91cfd6aecee3155b6879af0e80c878b85c3860e9": "91cfd6aecee3155b6879af0e80c878b85c3860e9.png",
+  "9270334ced3aa5dad64ca65cc666ec90044da98f": "9270334ced3aa5dad64ca65cc666ec90044da98f.jpg",
+  "97ac147df1c5b3ac00b9e465712124507f42aeaa": "97ac147df1c5b3ac00b9e465712124507f42aeaa.jpg",
+  "97fa4b24704236a40923663518f9aa29c6ce1cb2": "97fa4b24704236a40923663518f9aa29c6ce1cb2.png",
+  "9a4ee322ba8d0d32314b67f00ee019ea9aaea41b": "9a4ee322ba8d0d32314b67f00ee019ea9aaea41b.png",
+  "9b1c5c1e2d2f2c27c2fc2467629ab6b9ab1dafc6": "9b1c5c1e2d2f2c27c2fc2467629ab6b9ab1dafc6.jpg",
+  "9b686c50b68a9bb9acc0cae3cbe0099ada59521a": "9b686c50b68a9bb9acc0cae3cbe0099ada59521a.png",
+  "9bdc2e00f7a83e6e85233f7d0a3c75c90f0bce55": "9bdc2e00f7a83e6e85233f7d0a3c75c90f0bce55.jpg",
+  "9c5706f8ddaeb9483fafb98b17c3b3a286dcbecb": "9c5706f8ddaeb9483fafb98b17c3b3a286dcbecb.png",
+  "9e10caee6f9128f7addacd727d65478276063de6": "9e10caee6f9128f7addacd727d65478276063de6.jpg",
+  "a1b2aeeedadbd3f6e4b844944c7dfb01858876d2": "a1b2aeeedadbd3f6e4b844944c7dfb01858876d2.png",
+  "a2f606758633051b0910a9e661bff07054034855": "a2f606758633051b0910a9e661bff07054034855.jpg",
+  "a32f030f2dac179a29c54c7be49480be25b6a760": "a32f030f2dac179a29c54c7be49480be25b6a760.jpg",
+  "a3ff80091ac25a1b0731ab4e5cdc2543d16583d9": "a3ff80091ac25a1b0731ab4e5cdc2543d16583d9.jpg",
+  "a958a1fcaa1ba35cd1837220acb5bf130b77df77": "a958a1fcaa1ba35cd1837220acb5bf130b77df77.jpg",
+  "aa14ecd1303c9a6907ad37a756a610b7d0c78cd2": "aa14ecd1303c9a6907ad37a756a610b7d0c78cd2.png",
+  "aa9819daae144336bf741c47f868145435c5fdcb": "aa9819daae144336bf741c47f868145435c5fdcb.jpg",
+  "ac84f1bbe78c230f46fa83abdf384e4553ea90e9": "ac84f1bbe78c230f46fa83abdf384e4553ea90e9.png",
+  "ad12c01136e12666657a9f2902c3059ff25ab4e2": "ad12c01136e12666657a9f2902c3059ff25ab4e2.jpg",
+  "ae47dcea20a04293087620e49b9b3c1dee26ca6c": "ae47dcea20a04293087620e49b9b3c1dee26ca6c.png",
+  "b0afe5baa2b42c90d16a21257cde00f0845a6a9a": "b0afe5baa2b42c90d16a21257cde00f0845a6a9a.png",
+  "b1ba8a8a18498389fb9a9f257d957ec6516fcc99": "b1ba8a8a18498389fb9a9f257d957ec6516fcc99.png",
+  "b4177480ca6c29287bfb9b0b66744c26c3dda5b4": "b4177480ca6c29287bfb9b0b66744c26c3dda5b4.jpg",
+  "b419819cb994f64b2132466303bb35023ccd21fd": "b419819cb994f64b2132466303bb35023ccd21fd.jpg",
+  "b42c75df1b5be9ddd269cb33e31fdecdd38524c0": "b42c75df1b5be9ddd269cb33e31fdecdd38524c0.png",
+  "ba0b342cab0b4404e4d0a4b9d65a1b15a6421568": "ba0b342cab0b4404e4d0a4b9d65a1b15a6421568.jpg",
+  "ba68e8525d46c78cf3004f1b591c8a4e223ef73f": "ba68e8525d46c78cf3004f1b591c8a4e223ef73f.png",
+  "baaa803afaad0e2741a8c3f808ce75c220fdd5a6": "baaa803afaad0e2741a8c3f808ce75c220fdd5a6.png",
+  "bb70007222b8d8aea29ae505041fd824fbc12106": "bb70007222b8d8aea29ae505041fd824fbc12106.jpg",
+  "bc3b0037bd5f5871ca71283adf4f54e9f5e68919": "bc3b0037bd5f5871ca71283adf4f54e9f5e68919.jpg",
+  "bc3f275a51500bf09f5a2ee1f3d0638656056ae9": "bc3f275a51500bf09f5a2ee1f3d0638656056ae9.png",
+  "bec4f0860329aaeeea6b51314eade1b76ec68072": "bec4f0860329aaeeea6b51314eade1b76ec68072.png",
+  "bf841c7f35a6ca3858a1b46b02a46a6887ad714e": "bf841c7f35a6ca3858a1b46b02a46a6887ad714e.png",
+  "bf92aef517efb250a021bdfc8fe5ecdc87936eb6": "bf92aef517efb250a021bdfc8fe5ecdc87936eb6.jpg",
+  "c1a8fb82673c3ab15b7b5da47a4cc230ccc0f31f": "c1a8fb82673c3ab15b7b5da47a4cc230ccc0f31f.png",
+  "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487": "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487.jpg",
+  "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06": "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06.png",
+  "c96e30802b0a40b044148a67b85cdebce7a1a514": "c96e30802b0a40b044148a67b85cdebce7a1a514.png",
+  "ccacbdf1823c7ec789a79ddc546b0db4cb63d410": "ccacbdf1823c7ec789a79ddc546b0db4cb63d410.jpg",
+  "cd63a05d3457f1ce1e611f777b3cb9cdb6b9c264": "cd63a05d3457f1ce1e611f777b3cb9cdb6b9c264.jpg",
+  "ce053c2bf4aca30fa7f70b380fa5ef8a41173c70": "ce053c2bf4aca30fa7f70b380fa5ef8a41173c70.jpg",
+  "ce3169a52b0025e78e766c50223af5556319fdfe": "ce3169a52b0025e78e766c50223af5556319fdfe.jpg",
+  "d02a2ee07191109d18581fa8f1118197fcbc0d72": "d02a2ee07191109d18581fa8f1118197fcbc0d72.jpg",
+  "d12242d44121fd7f93180fe99cb227f848f6467d": "d12242d44121fd7f93180fe99cb227f848f6467d.jpg",
+  "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf": "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf.png",
+  "dabf695eff4c2f190b9800dd05ba6ea0c0791572": "dabf695eff4c2f190b9800dd05ba6ea0c0791572.png",
+  "dd599abf57b26d23ba11ccc0197a1e7a68e0d458": "dd599abf57b26d23ba11ccc0197a1e7a68e0d458.png",
+  "dd7d34c58dabdcdefc3f20023aa1f68c1373260a": "dd7d34c58dabdcdefc3f20023aa1f68c1373260a.png",
+  "de086fc9260067212cc9a370bc3d8a8c8c6d7a19": "de086fc9260067212cc9a370bc3d8a8c8c6d7a19.png",
+  "e3622bd14db8e56f05f53fe61b9e9bed85cfd7b8": "e3622bd14db8e56f05f53fe61b9e9bed85cfd7b8.jpg",
+  "e3c45a09561d0988ebd72b1b4eb39ef7d3396cc1": "e3c45a09561d0988ebd72b1b4eb39ef7d3396cc1.jpg",
+  "e4a3a4bad9a3e6ab55cb8b20ee35d1bf365af91e": "e4a3a4bad9a3e6ab55cb8b20ee35d1bf365af91e.png",
+  "e5dbe73519a7331624d728c3c7a65577dd39a0ea": "e5dbe73519a7331624d728c3c7a65577dd39a0ea.png",
+  "e6107260af94f3c942b4fbcf2b07040a37805f89": "e6107260af94f3c942b4fbcf2b07040a37805f89.jpg",
+  "e79714c1c172080210cf97b49fc6aa7cb14a639d": "e79714c1c172080210cf97b49fc6aa7cb14a639d.png",
+  "e978e4de5e9bcd4380ef4aa99371487b85171615": "e978e4de5e9bcd4380ef4aa99371487b85171615.jpg",
+  "ed0e5ee93dd264f7f2bee4007437a5b16c92ad64": "ed0e5ee93dd264f7f2bee4007437a5b16c92ad64.png",
+  "f1c29b0dc6b4449c68abb6cee3bc2afa2f116cfb": "f1c29b0dc6b4449c68abb6cee3bc2afa2f116cfb.png",
+  "f8cdca6ed2122344a967c09723c63a2c6f630690": "f8cdca6ed2122344a967c09723c63a2c6f630690.png",
+  "f8e2d79d41f367604a48aa87f7067ed701f6b1f0": "f8e2d79d41f367604a48aa87f7067ed701f6b1f0.png",
+  "fb5e1f7e330178705eb29ce778bb44bfe972a023": "fb5e1f7e330178705eb29ce778bb44bfe972a023.jpg",
+  "fd0013b9f60c2cecb5ba97cb752628c0ce04bd2a": "fd0013b9f60c2cecb5ba97cb752628c0ce04bd2a.jpg",
+  "fe9f4e8f0bf9d5ddf52ad5b39359330be8c0bb28": "fe9f4e8f0bf9d5ddf52ad5b39359330be8c0bb28.jpg"
+ },
+ "missing": [
+  "31ff0ee0c1620fd35786cfa017ff1c368fce9a38",
+  "34e2ea63757a9a734a920a5fe984343b9d42026c",
+  "3d83690a0b52ba5125f83d04368ecdab78ffd65e",
+  "550cfddd472294c66ebb3bfec6d104936ceabf95",
+  "8bcbdd55e500c4a0d39942e15c8df8680bd1c92f",
+  "b7379d743108019bfff9d816935f8961ab904a5e",
+  "ba077230353e9720cc9ab1d6f3dc37828b23bc35",
+  "cc4fa3e3eb70e901db048341cbc9dea06b473bcb",
+  "fd295f1a3df65e7d6f6c4d14fc76fb712010d686",
+  "ffb71edd03d35fa1fc5f7c408e699371941b78f1"
+ ],
+ "nodes": {
+  "939:775": {
+   "for": "object elephant-leg-bone tile (Ele 2) (default)",
+   "ref": "70cf8ed707243f7c812a1f0171dd4a6500b35b0c"
+  },
+  "939:776": {
+   "for": "object elephant-leg-bone tile (Ele 2) (hover)",
+   "ref": "e978e4de5e9bcd4380ef4aa99371487b85171615"
+  },
+  "1041:1305": {
+   "for": "object elephant-leg-bone hero still",
+   "ref": "e79714c1c172080210cf97b49fc6aa7cb14a639d"
+  },
+  "1041:1452": {
+   "for": "object elephant-leg-bone extra image",
+   "ref": "4953122e17ae97232adf69a47ba5ed1405c8d733"
+  },
+  "940:779": {
+   "for": "object singhasari-ganesha tile (Ele 3) (default)",
+   "ref": "8ac7f98bc70e717330451ca7e8d30c061542268f"
+  },
+  "940:780": {
+   "for": "object singhasari-ganesha tile (Ele 3) (hover)",
+   "ref": "08849e4a56875c3cfda45651c35f71ce42d5dfec"
+  },
+  "1057:1008": {
+   "for": "object singhasari-ganesha hero still",
+   "ref": "cc4fa3e3eb70e901db048341cbc9dea06b473bcb"
+  },
+  "940:783": {
+   "for": "object ganesha tile (Ele 4) (default)",
+   "ref": "ce053c2bf4aca30fa7f70b380fa5ef8a41173c70"
+  },
+  "940:784": {
+   "for": "object ganesha tile (Ele 4) (hover)",
+   "ref": "fb5e1f7e330178705eb29ce778bb44bfe972a023"
+  },
+  "1051:8221": {
+   "for": "object ganesha hero still",
+   "ref": "31ff0ee0c1620fd35786cfa017ff1c368fce9a38"
+  },
+  "940:787": {
+   "for": "object elephant-molar-coconut-grater tile (Ele 5) (default)",
+   "ref": "e6107260af94f3c942b4fbcf2b07040a37805f89"
+  },
+  "940:788": {
+   "for": "object elephant-molar-coconut-grater tile (Ele 5) (hover)",
+   "ref": "bc3b0037bd5f5871ca71283adf4f54e9f5e68919"
+  },
+  "958:1226": {
+   "for": "object elephant-molar-coconut-grater hero still",
+   "ref": "2511e717a0bc936ec101162ec5ff44844fb92b6a"
+  },
+  "940:791": {
+   "for": "object embossed-brass-basin-with-mythical-animal-motifs tile (Ele 6) (default)",
+   "ref": "b4177480ca6c29287bfb9b0b66744c26c3dda5b4"
+  },
+  "940:792": {
+   "for": "object embossed-brass-basin-with-mythical-animal-motifs tile (Ele 6) (hover)",
+   "ref": "7a0556b8dc388cdfdaace3022d1eac18ae0144bb"
+  },
+  "964:1527": {
+   "for": "object embossed-brass-basin-with-mythical-animal-motifs hero still",
+   "ref": "b7379d743108019bfff9d816935f8961ab904a5e"
+  },
+  "964:1547": {
+   "for": "object embossed-brass-basin-with-mythical-animal-motifs extra image",
+   "ref": "d12242d44121fd7f93180fe99cb227f848f6467d"
+  },
+  "964:1808": {
+   "for": "object embossed-brass-basin-with-mythical-animal-motifs extra image",
+   "ref": "fe9f4e8f0bf9d5ddf52ad5b39359330be8c0bb28"
+  },
+  "940:795": {
+   "for": "object ivory-fire-piston-ivory-fire-syringe tile (Ele 7) (default)",
+   "ref": "a32f030f2dac179a29c54c7be49480be25b6a760"
+  },
+  "940:796": {
+   "for": "object ivory-fire-piston-ivory-fire-syringe tile (Ele 7) (hover)",
+   "ref": "909199a89ee7443b972251906ddca30b61bab3a5"
+  },
+  "1006:963": {
+   "for": "object ivory-fire-piston-ivory-fire-syringe hero still",
+   "ref": "550cfddd472294c66ebb3bfec6d104936ceabf95"
+  },
+  "1006:1237": {
+   "for": "object ivory-fire-piston-ivory-fire-syringe extra image",
+   "ref": "dd599abf57b26d23ba11ccc0197a1e7a68e0d458"
+  },
+  "1006:1249": {
+   "for": "object ivory-fire-piston-ivory-fire-syringe extra image",
+   "ref": "8dcebc793b2265a8aa9c502af29cba3088d659a2"
+  },
+  "797:1923": {
+   "for": "object elephant-and-mahout-kendi tile (Ele 01) (default)",
+   "ref": "9b686c50b68a9bb9acc0cae3cbe0099ada59521a"
+  },
+  "797:1924": {
+   "for": "object elephant-and-mahout-kendi tile (Ele 01) (hover)",
+   "ref": "8d13f99968832945085da7a31d4d07487f941977"
+  },
+  "670:2885": {
+   "for": "object elephant-and-mahout-kendi hero still",
+   "ref": "621646b5dd0382559f9cf7e9b2f8bf0620ac698e"
+  },
+  "670:2881": {
+   "for": "object elephant-and-mahout-kendi extra image",
+   "ref": "97fa4b24704236a40923663518f9aa29c6ce1cb2"
+  },
+  "670:2883": {
+   "for": "object elephant-and-mahout-kendi extra image",
+   "ref": "810b828903b38a64facdfd38ffe651e4d1f23f46"
+  },
+  "940:799": {
+   "for": "object patola-cloth tile (Ele 8) (default)",
+   "ref": "fd0013b9f60c2cecb5ba97cb752628c0ce04bd2a"
+  },
+  "940:800": {
+   "for": "object patola-cloth tile (Ele 8) (hover)",
+   "ref": "5e5b3d261ca9c171ce8b4ed35f89325dff42f506"
+  },
+  "3004:817": {
+   "for": "object patola-cloth hero still",
+   "ref": "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf"
+  },
+  "3004:812": {
+   "for": "object patola-cloth extra image",
+   "ref": "06e906153fce5c90d379a1100d824fc39579b832"
+  },
+  "3004:814": {
+   "for": "object patola-cloth extra image",
+   "ref": "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf"
+  },
+  "940:803": {
+   "for": "object elephant-shaped-relic-containers tile (Ele 9) (default)",
+   "ref": "9e10caee6f9128f7addacd727d65478276063de6"
+  },
+  "940:804": {
+   "for": "object elephant-shaped-relic-containers tile (Ele 9) (hover)",
+   "ref": "2733b6a7223e7f828c9a0728822a996d20d454e6"
+  },
+  "961:1063": {
+   "for": "object elephant-shaped-relic-containers hero still",
+   "ref": "3d83690a0b52ba5125f83d04368ecdab78ffd65e"
+  },
+  "961:1231": {
+   "for": "object elephant-shaped-relic-containers extra image",
+   "ref": "1c3aa3a10055d34a499058cb6d74a29c814cfa42"
+  },
+  "940:807": {
+   "for": "object pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king tile (Ele 10) (default)",
+   "ref": "4727b9182ca17f373e904459cb30eb46315a5e9f"
+  },
+  "940:808": {
+   "for": "object pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king tile (Ele 10) (hover)",
+   "ref": "7847f8ce21ef80789787d936ca54cbf72487260c"
+  },
+  "964:2095": {
+   "for": "object pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king hero still",
+   "ref": "fd295f1a3df65e7d6f6c4d14fc76fb712010d686"
+  },
+  "964:2117": {
+   "for": "object pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king extra image",
+   "ref": "bf841c7f35a6ca3858a1b46b02a46a6887ad714e"
+  },
+  "940:811": {
+   "for": "object hand-carved-ivory-and-metal-opium-pipe tile (Ele 11) (default)",
+   "ref": "bb70007222b8d8aea29ae505041fd824fbc12106"
+  },
+  "940:812": {
+   "for": "object hand-carved-ivory-and-metal-opium-pipe tile (Ele 11) (hover)",
+   "ref": "4aae1591a9b6aa9f97ddf11c7e8f102500716071"
+  },
+  "1042:1760": {
+   "for": "object hand-carved-ivory-and-metal-opium-pipe hero still",
+   "ref": "ffb71edd03d35fa1fc5f7c408e699371941b78f1"
+  },
+  "1042:1982": {
+   "for": "object hand-carved-ivory-and-metal-opium-pipe extra image",
+   "ref": "10a3379a6d219df35f0a4c597352cc1df24a621c"
+  },
+  "940:815": {
+   "for": "object tin-ingot-in-the-shape-of-an-elephant tile (Ele 12) (default)",
+   "ref": "64812b89ef37f38a317fd61eb91abee1964c317c"
+  },
+  "940:816": {
+   "for": "object tin-ingot-in-the-shape-of-an-elephant tile (Ele 12) (hover)",
+   "ref": "97ac147df1c5b3ac00b9e465712124507f42aeaa"
+  },
+  "670:2832": {
+   "for": "object tin-ingot-in-the-shape-of-an-elephant hero still",
+   "ref": "34e2ea63757a9a734a920a5fe984343b9d42026c"
+  },
+  "1041:1458": {
+   "for": "object tin-ingot-in-the-shape-of-an-elephant extra image",
+   "ref": "266b59cda0e3c73fef6538cc69323e7d959456b3"
+  },
+  "940:819": {
+   "for": "object wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs tile (Ele 13) (default)",
+   "ref": "d02a2ee07191109d18581fa8f1118197fcbc0d72"
+  },
+  "940:820": {
+   "for": "object wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs tile (Ele 13) (hover)",
+   "ref": "614dedb5ac96ea12c65979cdc901ac749c6c9727"
+  },
+  "1041:869": {
+   "for": "object wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs hero still",
+   "ref": "ba077230353e9720cc9ab1d6f3dc37828b23bc35"
+  },
+  "1041:890": {
+   "for": "object wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs extra image",
+   "ref": "60b979fd2cd2e862c94bcaf9ba2beff0ceb1c5f3"
+  },
+  "940:823": {
+   "for": "object siwaih tile (Ele 14) (default)",
+   "ref": "49ee53f853f362a1cb012db4674186cbaf53ba68"
+  },
+  "940:824": {
+   "for": "object siwaih tile (Ele 14) (hover)",
+   "ref": "2ef26c9beb3b808b906755ee7e5f565943f966c7"
+  },
+  "1006:602": {
+   "for": "object siwaih hero still",
+   "ref": "8bcbdd55e500c4a0d39942e15c8df8680bd1c92f"
+  },
+  "1038:579": {
+   "for": "object siwaih extra image",
+   "ref": "148537c0c0f4fb01bb87fd06eb2600f18c355806"
+  },
+  "940:827": {
+   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the tile (Ele 15) (default)",
+   "ref": "ccacbdf1823c7ec789a79ddc546b0db4cb63d410"
+  },
+  "940:828": {
+   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the tile (Ele 15) (hover)",
+   "ref": "0522e0ee2b555c1651d1e7ccce59fa7ea6f2f334"
+  },
+  "670:2862": {
+   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the hero still",
+   "ref": "a1b2aeeedadbd3f6e4b844944c7dfb01858876d2"
+  },
+  "670:2855": {
+   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
+   "ref": "b42c75df1b5be9ddd269cb33e31fdecdd38524c0"
+  },
+  "670:2856": {
+   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
+   "ref": "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06"
+  },
+  "670:2857": {
+   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
+   "ref": "4ce53001c838fd7804c16a3e17737286ab45fdc1"
+  },
+  "670:2858": {
+   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
+   "ref": "de086fc9260067212cc9a370bc3d8a8c8c6d7a19"
+  },
+  "670:2859": {
+   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
+   "ref": "f1c29b0dc6b4449c68abb6cee3bc2afa2f116cfb"
+  },
+  "670:2860": {
+   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
+   "ref": "378c155fa27dc3d2a02a9bb5bd1f96ebf7b97b9d"
+  },
+  "1232:1714": {
+   "for": "timeline card 1 thumbnail",
+   "ref": "4953122e17ae97232adf69a47ba5ed1405c8d733"
+  },
+  "1232:1720": {
+   "for": "timeline card 2 thumbnail",
+   "ref": "b0afe5baa2b42c90d16a21257cde00f0845a6a9a"
+  },
+  "1232:1726": {
+   "for": "timeline card 3 thumbnail",
+   "ref": "bc3f275a51500bf09f5a2ee1f3d0638656056ae9"
+  },
+  "1232:1732": {
+   "for": "timeline card 4 thumbnail",
+   "ref": "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b"
+  },
+  "1232:1738": {
+   "for": "timeline card 5 thumbnail",
+   "ref": "5d9931b48643cf08792e1b307c1574625677ddff"
+  },
+  "1232:1745": {
+   "for": "timeline card 6 thumbnail",
+   "ref": "f8e2d79d41f367604a48aa87f7067ed701f6b1f0"
+  },
+  "1232:1746": {
+   "for": "timeline card 6 thumbnail",
+   "ref": "8dcebc793b2265a8aa9c502af29cba3088d659a2"
+  },
+  "1232:1752": {
+   "for": "timeline card 7 thumbnail",
+   "ref": "867b28338953f22209122a9fa9dcbb76a2c2bd5c"
+  },
+  "1232:1758": {
+   "for": "timeline card 8 thumbnail",
+   "ref": "07e22a68538ac8489e1348d26ad6d4e1154c41ed"
+  },
+  "1232:1765": {
+   "for": "timeline card 9 thumbnail",
+   "ref": "b1ba8a8a18498389fb9a9f257d957ec6516fcc99"
+  },
+  "1232:1766": {
+   "for": "timeline card 9 thumbnail",
+   "ref": "1c3aa3a10055d34a499058cb6d74a29c814cfa42"
+  },
+  "1232:1772": {
+   "for": "timeline card 10 thumbnail",
+   "ref": "bf841c7f35a6ca3858a1b46b02a46a6887ad714e"
+  },
+  "1232:1778": {
+   "for": "timeline card 11 thumbnail",
+   "ref": "ba68e8525d46c78cf3004f1b591c8a4e223ef73f"
+  },
+  "1232:1784": {
+   "for": "timeline card 12 thumbnail",
+   "ref": "32fba0363a69a81347de674ede2112e30b076200"
+  },
+  "1232:1790": {
+   "for": "timeline card 13 thumbnail",
+   "ref": "730ba23e657cab7964b8fc86ef5f8cb33119b25c"
+  },
+  "1232:1796": {
+   "for": "timeline card 14 thumbnail",
+   "ref": "9c5706f8ddaeb9483fafb98b17c3b3a286dcbecb"
+  },
+  "1232:1802": {
+   "for": "timeline card 15 thumbnail",
+   "ref": "91cfd6aecee3155b6879af0e80c878b85c3860e9"
+  },
+  "670:9575": {
+   "for": "trail rooster home icon (default)",
+   "ref": "5f216ed1368da5ea53eb2cf97a4d5542459d711e"
+  },
+  "670:9574": {
+   "for": "trail rooster home icon (hover)",
+   "ref": "17bbb16a79e3121b3c9f8b35ed7ca2b31531298d"
+  },
+  "1018:1382": {
+   "for": "trail rooster zone grid tile (default)",
+   "ref": "342701ac0798ff180cfac759317c472a546cf9ed"
+  },
+  "1018:1383": {
+   "for": "trail rooster zone grid tile (hover)",
+   "ref": "64fe0e4ee4bc04898863d19512ce5350123921bd"
+  },
+  "670:9584": {
+   "for": "trail turtle home icon (default)",
+   "ref": "042394062f57e7314b3ab68f0dd88288035b5b96"
+  },
+  "670:9586": {
+   "for": "trail turtle home icon (hover)",
+   "ref": "aa9819daae144336bf741c47f868145435c5fdcb"
+  },
+  "1018:1430": {
+   "for": "trail turtle zone grid tile (default)",
+   "ref": "e3622bd14db8e56f05f53fe61b9e9bed85cfd7b8"
+  },
+  "1018:1431": {
+   "for": "trail turtle zone grid tile (hover)",
+   "ref": "ce3169a52b0025e78e766c50223af5556319fdfe"
+  },
+  "670:9589": {
+   "for": "trail deer home icon (default)",
+   "ref": "3311064ca263fd5ea7e323ef5c3223236806d0ce"
+  },
+  "670:9591": {
+   "for": "trail deer home icon (hover)",
+   "ref": "706a21c0024a75c6be2ae03f66ec30b8426252b4"
+  },
+  "1018:1386": {
+   "for": "trail deer zone grid tile (default)",
+   "ref": "c1a8fb82673c3ab15b7b5da47a4cc230ccc0f31f"
+  },
+  "1018:1387": {
+   "for": "trail deer zone grid tile (hover)",
+   "ref": "65d217b76a74d4479df610dade21e336e419b4b3"
+  },
+  "670:9594": {
+   "for": "trail dragon home icon (default)",
+   "ref": "78ba2a9c592b6d989f07a2e32c1720329e706d55"
+  },
+  "670:9596": {
+   "for": "trail dragon home icon (hover)",
+   "ref": "90c51467be1459101d21d959c8bf5d688157bae1"
+  },
+  "1018:1390": {
+   "for": "trail dragon zone grid tile (default)",
+   "ref": "e4a3a4bad9a3e6ab55cb8b20ee35d1bf365af91e"
+  },
+  "1018:1391": {
+   "for": "trail dragon zone grid tile (hover)",
+   "ref": "790fc2f2c88c1293da9cc1c7a6c8f59d2210ff91"
+  },
+  "670:9599": {
+   "for": "trail fish home icon (default)",
+   "ref": "baaa803afaad0e2741a8c3f808ce75c220fdd5a6"
+  },
+  "670:9601": {
+   "for": "trail fish home icon (hover)",
+   "ref": "091014ad1ebc26b465c39cd8994bb38c035e64e4"
+  },
+  "1018:1394": {
+   "for": "trail fish zone grid tile (default)",
+   "ref": "aa14ecd1303c9a6907ad37a756a610b7d0c78cd2"
+  },
+  "1018:1395": {
+   "for": "trail fish zone grid tile (hover)",
+   "ref": "8db0a0732ff66a57031a009651b602df5d8d9b0b"
+  },
+  "670:9604": {
+   "for": "trail hornbill home icon (default)",
+   "ref": "3fab79d2ca0fc54daf006f5d4eda7554b950ed91"
+  },
+  "670:9606": {
+   "for": "trail hornbill home icon (hover)",
+   "ref": "ad12c01136e12666657a9f2902c3059ff25ab4e2"
+  },
+  "1018:1402": {
+   "for": "trail hornbill zone grid tile (default)",
+   "ref": "4ce4a412dc95e49a6e49de56d5b2c69d86eba8e7"
+  },
+  "1018:1403": {
+   "for": "trail hornbill zone grid tile (hover)",
+   "ref": "e3c45a09561d0988ebd72b1b4eb39ef7d3396cc1"
+  },
+  "670:9659": {
+   "for": "trail horse home icon (default)",
+   "ref": "a2f606758633051b0910a9e661bff07054034855"
+  },
+  "670:9661": {
+   "for": "trail horse home icon (hover)",
+   "ref": "47eb7f6812377b59bef78e766bc202ce9f51bf79"
+  },
+  "1018:1406": {
+   "for": "trail horse zone grid tile (default)",
+   "ref": "87938c71354cfc0fd72db85bcb1b4c6e3568a658"
+  },
+  "1018:1407": {
+   "for": "trail horse zone grid tile (hover)",
+   "ref": "2f3a8b9cea789395a68499e9a5f91c96fc7defe5"
+  },
+  "670:9609": {
+   "for": "trail naga home icon (default)",
+   "ref": "b419819cb994f64b2132466303bb35023ccd21fd"
+  },
+  "670:9611": {
+   "for": "trail naga home icon (hover)",
+   "ref": "914d1a6461b5c8d12cd596effb73037ebefab436"
+  },
+  "1018:1426": {
+   "for": "trail naga zone grid tile (default)",
+   "ref": "70eb068742ccf43dc11056667ecf87891e97e753"
+  },
+  "1018:1427": {
+   "for": "trail naga zone grid tile (hover)",
+   "ref": "ae47dcea20a04293087620e49b9b3c1dee26ca6c"
+  },
+  "670:9614": {
+   "for": "trail water-bird home icon (default)",
+   "ref": "9b1c5c1e2d2f2c27c2fc2467629ab6b9ab1dafc6"
+  },
+  "670:9616": {
+   "for": "trail water-bird home icon (hover)",
+   "ref": "9270334ced3aa5dad64ca65cc666ec90044da98f"
+  },
+  "670:9619": {
+   "for": "trail makara home icon (default)",
+   "ref": "21f024a52e96606556f4b3db7a9bb09946ac0da7"
+  },
+  "670:9621": {
+   "for": "trail makara home icon (hover)",
+   "ref": "0b230779c8a934d9056c435e1994c9b2b89fcb27"
+  },
+  "1018:1414": {
+   "for": "trail makara zone grid tile (default)",
+   "ref": "77d84c86e681408da172e84a8e60c68e68c001bd"
+  },
+  "1018:1415": {
+   "for": "trail makara zone grid tile (hover)",
+   "ref": "9a4ee322ba8d0d32314b67f00ee019ea9aaea41b"
+  },
+  "670:9654": {
+   "for": "trail lion home icon (default)",
+   "ref": "331dc6e329401acd852d130992a2ef98822bad1c"
+  },
+  "670:9656": {
+   "for": "trail lion home icon (hover)",
+   "ref": "68a990a4961e19dbb927fd0d143e3d434c45ee9a"
+  },
+  "1018:1410": {
+   "for": "trail lion zone grid tile (default)",
+   "ref": "2dd1b2eb919eed5c8f3a67ba4a1e8b4cd22fd023"
+  },
+  "1018:1411": {
+   "for": "trail lion zone grid tile (hover)",
+   "ref": "0b0dc3c8c5a95d6a0e4b323fb76f39f80f36b7ba"
+  },
+  "670:9624": {
+   "for": "trail seashell home icon (default)",
+   "ref": "80727192aa60ba5bed96afae27d2eb0e340c707e"
+  },
+  "670:9626": {
+   "for": "trail seashell home icon (hover)",
+   "ref": "535eb1d8ac88c6f2dd4e9956a6769c8b4efe3077"
+  },
+  "1018:1422": {
+   "for": "trail seashell zone grid tile (default)",
+   "ref": "33b1445224b55b21998bcb815d1c87a519ff9577"
+  },
+  "1018:1423": {
+   "for": "trail seashell zone grid tile (hover)",
+   "ref": "73d5da8215e1e1cae75933d75fc85c9300d1639f"
+  },
+  "670:9629": {
+   "for": "trail buffalo home icon (default)",
+   "ref": "5b2303da4b3d8d4c59d0366df64f895726d6384c"
+  },
+  "670:9631": {
+   "for": "trail buffalo home icon (hover)",
+   "ref": "bf92aef517efb250a021bdfc8fe5ecdc87936eb6"
+  },
+  "1018:1378": {
+   "for": "trail buffalo zone grid tile (default)",
+   "ref": "dabf695eff4c2f190b9800dd05ba6ea0c0791572"
+  },
+  "1018:1379": {
+   "for": "trail buffalo zone grid tile (hover)",
+   "ref": "70a313144649046f262577067f86d982a3323738"
+  },
+  "670:9634": {
+   "for": "trail phoenix home icon (default)",
+   "ref": "ba0b342cab0b4404e4d0a4b9d65a1b15a6421568"
+  },
+  "670:9636": {
+   "for": "trail phoenix home icon (hover)",
+   "ref": "6bfbfd9c87376a877a21d5a38f31b17d28dd9bbe"
+  },
+  "1018:1418": {
+   "for": "trail phoenix zone grid tile (default)",
+   "ref": "dd7d34c58dabdcdefc3f20023aa1f68c1373260a"
+  },
+  "1018:1419": {
+   "for": "trail phoenix zone grid tile (hover)",
+   "ref": "c96e30802b0a40b044148a67b85cdebce7a1a514"
+  },
+  "670:9649": {
+   "for": "trail bird home icon (default)",
+   "ref": "337ec1cc97ee6420117278631cffdbd02c36b443"
+  },
+  "670:9651": {
+   "for": "trail bird home icon (hover)",
+   "ref": "6299dae5cd81351af66dbf1fed38b4d8a412389b"
+  },
+  "1018:1373": {
+   "for": "trail bird zone grid tile (default)",
+   "ref": "4c493fdc4a29e8f97679610b3f1cad52d5d08b9e"
+  },
+  "1018:1374": {
+   "for": "trail bird zone grid tile (hover)",
+   "ref": "f8cdca6ed2122344a967c09723c63a2c6f630690"
+  },
+  "670:9639": {
+   "for": "trail garuda home icon (default)",
+   "ref": "33bab1e0a53e16d9f9e48380ab6ed761429ab5c1"
+  },
+  "670:9641": {
+   "for": "trail garuda home icon (hover)",
+   "ref": "0a9942129a6595f5c5935e68ae80821407f33042"
+  },
+  "1018:1398": {
+   "for": "trail garuda zone grid tile (default)",
+   "ref": "8428e71bcc441ecea1da55185080518897c441fd"
+  },
+  "1018:1399": {
+   "for": "trail garuda zone grid tile (hover)",
+   "ref": "0e852035a30f543a9a2e79cd36a8198d9dd0cf37"
+  },
+  "670:9644": {
+   "for": "trail elephant home icon (default)",
+   "ref": "a958a1fcaa1ba35cd1837220acb5bf130b77df77"
+  },
+  "670:9646": {
+   "for": "trail elephant home icon (hover)",
+   "ref": "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487"
+  },
+  "796:1799": {
+   "for": "trail elephant cover",
+   "ref": "ed0e5ee93dd264f7f2bee4007437a5b16c92ad64"
+  },
+  "797:2041": {
+   "for": "timeline nav icon 1",
+   "ref": "6299dae5cd81351af66dbf1fed38b4d8a412389b"
+  },
+  "797:2037": {
+   "for": "timeline nav icon 2",
+   "ref": "ad12c01136e12666657a9f2902c3059ff25ab4e2"
+  },
+  "797:2035": {
+   "for": "timeline nav icon 3",
+   "ref": "9270334ced3aa5dad64ca65cc666ec90044da98f"
+  },
+  "797:2039": {
+   "for": "timeline nav icon 4",
+   "ref": "17bbb16a79e3121b3c9f8b35ed7ca2b31531298d"
+  },
+  "797:2067": {
+   "for": "timeline nav icon 5",
+   "ref": "0a9942129a6595f5c5935e68ae80821407f33042"
+  },
+  "797:2061": {
+   "for": "timeline nav icon 6",
+   "ref": "6bfbfd9c87376a877a21d5a38f31b17d28dd9bbe"
+  },
+  "797:2063": {
+   "for": "timeline nav icon 7",
+   "ref": "90c51467be1459101d21d959c8bf5d688157bae1"
+  },
+  "797:2065": {
+   "for": "timeline nav icon 8",
+   "ref": "914d1a6461b5c8d12cd596effb73037ebefab436"
+  },
+  "797:2043": {
+   "for": "timeline nav icon 9",
+   "ref": "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487"
+  },
+  "797:2045": {
+   "for": "timeline nav icon 10",
+   "ref": "bf92aef517efb250a021bdfc8fe5ecdc87936eb6"
+  },
+  "797:2051": {
+   "for": "timeline nav icon 11",
+   "ref": "47eb7f6812377b59bef78e766bc202ce9f51bf79"
+  },
+  "797:2047": {
+   "for": "timeline nav icon 12",
+   "ref": "706a21c0024a75c6be2ae03f66ec30b8426252b4"
+  },
+  "797:2049": {
+   "for": "timeline nav icon 13",
+   "ref": "68a990a4961e19dbb927fd0d143e3d434c45ee9a"
+  },
+  "797:2057": {
+   "for": "timeline nav icon 14",
+   "ref": "0b230779c8a934d9056c435e1994c9b2b89fcb27"
+  },
+  "797:2053": {
+   "for": "timeline nav icon 15",
+   "ref": "aa9819daae144336bf741c47f868145435c5fdcb"
+  },
+  "797:2055": {
+   "for": "timeline nav icon 16",
+   "ref": "a3ff80091ac25a1b0731ab4e5cdc2543d16583d9"
+  },
+  "797:2059": {
+   "for": "timeline nav icon 17",
+   "ref": "10b2ff544aab69be192001c5ba9cdb02e61e61a9"
+  },
+  "670:9422": {
+   "for": "zone 1 card (default)",
+   "ref": "342629afe7c3096b250956a6bfa18f5a55dd4d01"
+  },
+  "670:9421": {
+   "for": "zone 1 card (hover)",
+   "ref": "35c9b660c3b2a9cd65ffe83314e0b79903d8226f"
+  },
+  "1013:1289": {
+   "for": "zone 1 cover",
+   "ref": "10247f33df7eb00b4c372f25f8006e633cf1aba9"
+  },
+  "1013:1292": {
+   "for": "zone 1 banner",
+   "ref": "413791d606d517988c07682c407b0e79fa8aa303"
+  },
+  "670:9426": {
+   "for": "zone 2 card (default)",
+   "ref": "42f23205d3b36c2e64be218319661f4c17111ed4"
+  },
+  "670:9429": {
+   "for": "zone 2 card (hover)",
+   "ref": "ac84f1bbe78c230f46fa83abdf384e4553ea90e9"
+  },
+  "1179:5759": {
+   "for": "zone 2 cover",
+   "ref": "597a0bb7beb04c60e5c1dab6bb136d762b40b106"
+  },
+  "1013:1343": {
+   "for": "zone 2 banner",
+   "ref": "e5dbe73519a7331624d728c3c7a65577dd39a0ea"
+  },
+  "670:9433": {
+   "for": "zone 3 card (default)",
+   "ref": "26c17a475a3f123793369af363c396e1fbbdff61"
+  },
+  "670:9436": {
+   "for": "zone 3 card (hover)",
+   "ref": "4f92af722c020aaf22ff989878e2e1729607c9f3"
+  },
+  "1179:5762": {
+   "for": "zone 3 cover",
+   "ref": "9bdc2e00f7a83e6e85233f7d0a3c75c90f0bce55"
+  },
+  "1013:1369": {
+   "for": "zone 3 banner",
+   "ref": "172ff28b84b349b73264855d16052064728f76f5"
+  },
+  "670:9462": {
+   "for": "zone 4 card (default)",
+   "ref": "0c5c09f6ab7cb91c6839bd3c41ea038c5b5b1ba7"
+  },
+  "670:9465": {
+   "for": "zone 4 card (hover)",
+   "ref": "1feab554459a89eee5603a8222ab5de2faaa5084"
+  },
+  "670:9518": {
+   "for": "zone 5 card (default)",
+   "ref": "728a2a8d19b484143f26ad2396c4c4aee42804da"
+  },
+  "670:9521": {
+   "for": "zone 5 card (hover)",
+   "ref": "626ccffb25f4d2fb84091df1001cc045737928e0"
+  },
+  "670:9367": {
+   "for": "intro cover (same image as home hero, DESIGN-SPEC §4.2)",
+   "ref": "2e3fa9c46cbd208659aa21cdcd503d65ff002aee"
+  },
+  "670:9370": {
+   "for": "home introduction image",
+   "ref": "3f4cfd0076c9f4c7755f5340646ef8ec2b458a67"
+  },
+  "885:1201": {
+   "for": "home zone bar",
+   "ref": "30d9d3016d547f0b3a28a3084b68117466b32974"
+  },
+  "670:1221": {
+   "for": "intro: Introduction image",
+   "ref": "bec4f0860329aaeeea6b51314eade1b76ec68072"
+  },
+  "670:1236": {
+   "for": "intro: Knowing Southeast Asia image",
+   "ref": "74e1d6fd0e8417532fcc489e36fcca2f40ae0b30"
+  },
+  "670:1596": {
+   "for": "intro: map (Frame 12718, DESIGN-SPEC §4.7)",
+   "ref": "cd63a05d3457f1ce1e611f777b3cb9cdb6b9c264"
+  },
+  "1232:1711": {
+   "for": "timeline illustration 11000x791",
+   "ref": "791ae91b792bf74464ae45d721e6265bc165e7ce"
+  },
+  "670:9386": {
+   "for": "Header #1 background (logos in image)",
+   "ref": "709572bf7eca3d77a7e317182be8860998a233f4"
+  }
+ }
+}

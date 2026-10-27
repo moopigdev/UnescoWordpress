@@ -1,4 +1,31 @@
 # path ที่ scripts/smoke.sh ตรวจ (บรรทัดละ path ขึ้นต้นด้วย /) · บรรทัดว่าง/ขึ้นต้น # ข้าม
 # ต้องได้ 200 ตรงๆ (ไม่ตาม redirect) → ใช้ path แบบมี / ท้ายตาม permalink /%postname%/
-# งานหน้าเพิ่ม path ของหน้าตัวเองเมื่อ template + ข้อมูล seed พร้อม
+# ทุก route ใน PLAN มีข้อมูล import แล้ว (core-contract) · งานหน้าเพิ่ม path ของหน้าตัวเองได้
+# Home — front-page.php (page "home" = หน้าแรก)
 /
+# Intro — page-intro.php
+/intro/
+# Zone 1–3 — taxonomy-zone.php
+/zone/zone-1/
+/zone/zone-2/
+/zone/zone-3/
+# Trail ช้าง — taxonomy-trail.php
+/trail/elephant/
+# Timeline — page-timeline.php
+/timeline/
+# Detail วัตถุ trail ช้าง 15 ชิ้น — single-object.php (ลำดับตาม trail_order)
+/object/elephant-leg-bone/
+/object/singhasari-ganesha/
+/object/ganesha/
+/object/elephant-molar-coconut-grater/
+/object/embossed-brass-basin-with-mythical-animal-motifs/
+/object/ivory-fire-piston-ivory-fire-syringe/
+/object/elephant-and-mahout-kendi/
+/object/patola-cloth/
+/object/elephant-shaped-relic-containers/
+/object/pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king/
+/object/hand-carved-ivory-and-metal-opium-pipe/
+/object/tin-ingot-in-the-shape-of-an-elephant/
+/object/wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs/
+/object/siwaih/
+/object/bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the/
