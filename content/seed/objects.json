@@ -20104,7 +20104,24 @@
           "color": "#F8F9FA",
           "start": 0,
           "length": 232,
-          "text_head": "Bas-relief of a Royal or Noble Processio"
+          "text": "Bas-relief of a Royal or Noble Procession, illustrating the Life of the Buddha. \nLocation: First gallery, chief wall, top row. \nSource: N. J. Krom, Barabudur: Archaeological Description Vol. I (The Hague: Martinus Nijhoff, 1927), 50"
+         }
+        ],
+        "lines": [
+         {
+          "text": "Bas-relief of a Royal or Noble Procession, illustrating the Life of the Buddha. ",
+          "list": "NONE",
+          "indent": 0
+         },
+         {
+          "text": "Location: First gallery, chief wall, top row. ",
+          "list": "NONE",
+          "indent": 0
+         },
+         {
+          "text": "Source: N. J. Krom, Barabudur: Archaeological Description Vol. I (The Hague: Martinus Nijhoff, 1927), 50",
+          "list": "NONE",
+          "indent": 0
          }
         ],
         "y_in_col": 115,
