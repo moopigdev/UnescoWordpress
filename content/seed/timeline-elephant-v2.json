@@ -1,0 +1,897 @@
+{
+ "_meta": {
+  "task": "design-timeline-v2",
+  "decision": "D23",
+  "note": "ข้อมูลช่วยทำ Timeline v2 (layout = frame zone 4 670:1551 · animation ตาม Google Slides 31–54) · ไม่แก้ timeline-elephant.json เดิม · ตัวเลข strip_dot/strip_object_bbox วัดจาก raster ที่ดึงแล้ว ไม่เรียก Figma API",
+  "scale": {
+   "raster_px_to_frame_x": 2.68555,
+   "raster_px_to_frame_y": 2.77713,
+   "raster_size": [
+    4096,
+    285
+   ],
+   "frame_size": [
+    11000,
+    791.481
+   ],
+   "frame_top_y": 200
+  },
+  "slides_order_evidence": "mini-map ใน Slides/annot-zone4-ref-* เรียง 15 ชิ้น = card_order 1..15 (อ่านจากภาพ ความมั่นใจปานกลาง · P-218)",
+  "lastModified_figma_json": "2026-10-27T09:48:30Z"
+ },
+ "animation": {
+  "status": "proposal-from-slides",
+  "selected": {
+   "object_scale": 1.5,
+   "object_scale_evidence": "line art 149×179→color 200×272–280 (Ganesha, slides 31→34) ; cartoon elephant 181×129→≈283×165 (slide 41) ; measured at 1440-wide slide",
+   "photo_opacity_steps": [
+    0.1,
+    0.34,
+    0.67,
+    1.0
+   ],
+   "text_opacity_steps": [
+    0.24,
+    0.74,
+    0.98
+   ],
+   "title_color_final": "#333333",
+   "meta_color_final": "#767676",
+   "meta_color_steps": [
+    "#D3D3D3",
+    "#A7A7A7",
+    "#767676"
+   ]
+  },
+  "suggested_timing_ms": {
+   "scroll_to_center": 700,
+   "fade_scale_in": 450,
+   "fade_out": 300,
+   "easing": "cubic-bezier(.4,0,.2,1)",
+   "note": "เสนอ — สไลด์ไม่มีเวลา มีแต่ลำดับเฟรม"
+  }
+ },
+ "items": [
+  {
+   "key": "elephant leg bone",
+   "card_order": 1,
+   "illustration_order": 14,
+   "card_frame_x": 500,
+   "strip_dot": {
+    "raster_x": 3288,
+    "frame_x": 8830,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     3253,
+     44,
+     3548,
+     216
+    ],
+    "frame_px": [
+     8736,
+     322,
+     9528,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": true,
+   "thumbnails": [
+    {
+     "node": "1232:1714",
+     "imageRef": "4953122e17ae97232adf69a47ba5ed1405c8d733",
+     "file": "4953122e17ae97232adf69a47ba5ed1405c8d733.png",
+     "node_px": [
+      300,
+      202
+     ],
+     "file_px": [
+      1920,
+      1080
+     ],
+     "opaque_bbox_px": [
+      276,
+      188,
+      1636,
+      908
+     ],
+     "trimmed_px": [
+      1360,
+      720
+     ]
+    }
+   ]
+  },
+  {
+   "key": "singhasari ganesha",
+   "card_order": 2,
+   "illustration_order": 3,
+   "card_frame_x": 1512,
+   "strip_dot": {
+    "raster_x": 658,
+    "frame_x": 1767,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     621,
+     123,
+     689,
+     216
+    ],
+    "frame_px": [
+     1668,
+     542,
+     1850,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": true,
+   "thumbnails": [
+    {
+     "node": "1232:1720",
+     "imageRef": "b0afe5baa2b42c90d16a21257cde00f0845a6a9a",
+     "file": "b0afe5baa2b42c90d16a21257cde00f0845a6a9a.png",
+     "node_px": [
+      300,
+      279
+     ],
+     "file_px": [
+      4096,
+      2304
+     ],
+     "opaque_bbox_px": [
+      1378,
+      179,
+      2718,
+      2064
+     ],
+     "trimmed_px": [
+      1340,
+      1885
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ganesha",
+   "card_order": 3,
+   "illustration_order": 1,
+   "card_frame_x": 2371,
+   "strip_dot": {
+    "raster_x": 143,
+    "frame_x": 384,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     128,
+     121,
+     231,
+     216
+    ],
+    "frame_px": [
+     344,
+     536,
+     620,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": true,
+   "thumbnails": [
+    {
+     "node": "1232:1726",
+     "imageRef": "bc3f275a51500bf09f5a2ee1f3d0638656056ae9",
+     "file": "bc3f275a51500bf09f5a2ee1f3d0638656056ae9.png",
+     "node_px": [
+      180,
+      187
+     ],
+     "file_px": [
+      4096,
+      2304
+     ],
+     "opaque_bbox_px": [
+      1267,
+      179,
+      2830,
+      2057
+     ],
+     "trimmed_px": [
+      1563,
+      1878
+     ]
+    }
+   ]
+  },
+  {
+   "key": "elephant molar",
+   "card_order": 4,
+   "illustration_order": 8,
+   "card_frame_x": 3037,
+   "strip_dot": {
+    "raster_x": 1762,
+    "frame_x": 4732,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     1755,
+     130,
+     1926,
+     216
+    ],
+    "frame_px": [
+     4713,
+     561,
+     5172,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": true,
+   "thumbnails": [
+    {
+     "node": "1232:1732",
+     "imageRef": "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b",
+     "file": "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b.png",
+     "node_px": [
+      180,
+      95
+     ],
+     "file_px": [
+      1920,
+      1080
+     ],
+     "opaque_bbox_px": [
+      577,
+      348,
+      1344,
+      731
+     ],
+     "trimmed_px": [
+      767,
+      383
+     ]
+    }
+   ]
+  },
+  {
+   "key": "embossed brass",
+   "card_order": 5,
+   "illustration_order": 7,
+   "card_frame_x": 3704,
+   "strip_dot": {
+    "raster_x": 1534,
+    "frame_x": 4120,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     1478,
+     134,
+     1596,
+     216
+    ],
+    "frame_px": [
+     3969,
+     572,
+     4286,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": false,
+   "thumbnails": [
+    {
+     "node": "1232:1738",
+     "imageRef": "5d9931b48643cf08792e1b307c1574625677ddff",
+     "file": "5d9931b48643cf08792e1b307c1574625677ddff.png",
+     "node_px": [
+      180,
+      129
+     ],
+     "file_px": [
+      1344,
+      961
+     ],
+     "opaque_bbox_px": [
+      1,
+      1,
+      1344,
+      961
+     ],
+     "trimmed_px": [
+      1343,
+      960
+     ]
+    }
+   ]
+  },
+  {
+   "key": "ivory fire piston",
+   "card_order": 6,
+   "illustration_order": 13,
+   "card_frame_x": 4399,
+   "strip_dot": {
+    "raster_x": 2972,
+    "frame_x": 7981,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     2922,
+     101,
+     3018,
+     216
+    ],
+    "frame_px": [
+     7847,
+     480,
+     8105,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": false,
+   "thumbnails": [
+    {
+     "node": "1232:1745",
+     "imageRef": "f8e2d79d41f367604a48aa87f7067ed701f6b1f0",
+     "file": "f8e2d79d41f367604a48aa87f7067ed701f6b1f0.png",
+     "node_px": [
+      123,
+      152
+     ],
+     "file_px": [
+      4096,
+      3084
+     ],
+     "opaque_bbox_px": [
+      1782,
+      1283,
+      2315,
+      2713
+     ],
+     "trimmed_px": [
+      533,
+      1430
+     ]
+    },
+    {
+     "node": "1232:1746",
+     "imageRef": "8dcebc793b2265a8aa9c502af29cba3088d659a2",
+     "file": "8dcebc793b2265a8aa9c502af29cba3088d659a2.png",
+     "node_px": [
+      103,
+      146
+     ],
+     "file_px": [
+      4096,
+      3084
+     ],
+     "opaque_bbox_px": [
+      1813,
+      749,
+      2316,
+      2335
+     ],
+     "trimmed_px": [
+      503,
+      1586
+     ]
+    }
+   ]
+  },
+  {
+   "key": "elephant and mahout",
+   "card_order": 7,
+   "illustration_order": 4,
+   "card_frame_x": 5188,
+   "strip_dot": {
+    "raster_x": 866,
+    "frame_x": 2326,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     795,
+     123,
+     928,
+     216
+    ],
+    "frame_px": [
+     2135,
+     542,
+     2492,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": false,
+   "thumbnails": [
+    {
+     "node": "1232:1752",
+     "imageRef": "867b28338953f22209122a9fa9dcbb76a2c2bd5c",
+     "file": "867b28338953f22209122a9fa9dcbb76a2c2bd5c.png",
+     "node_px": [
+      180,
+      168
+     ],
+     "file_px": [
+      4096,
+      2731
+     ],
+     "opaque_bbox_px": [
+      1266,
+      279,
+      2667,
+      2482
+     ],
+     "trimmed_px": [
+      1401,
+      2203
+     ]
+    }
+   ]
+  },
+  {
+   "key": "patola",
+   "card_order": 8,
+   "illustration_order": 12,
+   "card_frame_x": 5927,
+   "strip_dot": {
+    "raster_x": 2771,
+    "frame_x": 7442,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     2688,
+     90,
+     2823,
+     216
+    ],
+    "frame_px": [
+     7219,
+     450,
+     7581,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": false,
+   "thumbnails": [
+    {
+     "node": "1232:1758",
+     "imageRef": "07e22a68538ac8489e1348d26ad6d4e1154c41ed",
+     "file": "07e22a68538ac8489e1348d26ad6d4e1154c41ed.png",
+     "node_px": [
+      200,
+      188
+     ],
+     "file_px": [
+      625,
+      589
+     ],
+     "opaque_bbox_px": [
+      13,
+      1,
+      624,
+      581
+     ],
+     "trimmed_px": [
+      611,
+      580
+     ]
+    }
+   ]
+  },
+  {
+   "key": "elephant shaped relic",
+   "card_order": 9,
+   "illustration_order": 6,
+   "card_frame_x": 6434,
+   "strip_dot": {
+    "raster_x": 1314,
+    "frame_x": 3529,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     1253,
+     156,
+     1414,
+     216
+    ],
+    "frame_px": [
+     3365,
+     633,
+     3797,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": false,
+   "thumbnails": [
+    {
+     "node": "1232:1765",
+     "imageRef": "b1ba8a8a18498389fb9a9f257d957ec6516fcc99",
+     "file": "b1ba8a8a18498389fb9a9f257d957ec6516fcc99.png",
+     "node_px": [
+      151,
+      115
+     ],
+     "file_px": [
+      1381,
+      922
+     ],
+     "opaque_bbox_px": [
+      523,
+      308,
+      924,
+      597
+     ],
+     "trimmed_px": [
+      401,
+      289
+     ]
+    },
+    {
+     "node": "1232:1766",
+     "imageRef": "1c3aa3a10055d34a499058cb6d74a29c814cfa42",
+     "file": "1c3aa3a10055d34a499058cb6d74a29c814cfa42.png",
+     "node_px": [
+      110,
+      102
+     ],
+     "file_px": [
+      1381,
+      922
+     ],
+     "opaque_bbox_px": [
+      274,
+      251,
+      1061,
+      641
+     ],
+     "trimmed_px": [
+      787,
+      390
+     ]
+    }
+   ]
+  },
+  {
+   "key": "pod duang",
+   "card_order": 10,
+   "illustration_order": 11,
+   "card_frame_x": 7101,
+   "strip_dot": {
+    "raster_x": 2556,
+    "frame_x": 6864,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     2498,
+     133,
+     2643,
+     216
+    ],
+    "frame_px": [
+     6708,
+     569,
+     7098,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": false,
+   "thumbnails": [
+    {
+     "node": "1232:1772",
+     "imageRef": "bf841c7f35a6ca3858a1b46b02a46a6887ad714e",
+     "file": "bf841c7f35a6ca3858a1b46b02a46a6887ad714e.png",
+     "node_px": [
+      180,
+      180
+     ],
+     "file_px": [
+      227,
+      227
+     ],
+     "opaque_bbox_px": [
+      0,
+      1,
+      226,
+      227
+     ],
+     "trimmed_px": [
+      226,
+      226
+     ]
+    }
+   ]
+  },
+  {
+   "key": "hand carved ivory",
+   "card_order": 11,
+   "illustration_order": 10,
+   "card_frame_x": 7768,
+   "strip_dot": {
+    "raster_x": 2322,
+    "frame_x": 6236,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     2221,
+     146,
+     2451,
+     216
+    ],
+    "frame_px": [
+     5965,
+     605,
+     6582,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": false,
+   "thumbnails": [
+    {
+     "node": "1232:1778",
+     "imageRef": "ba68e8525d46c78cf3004f1b591c8a4e223ef73f",
+     "file": "ba68e8525d46c78cf3004f1b591c8a4e223ef73f.png",
+     "node_px": [
+      180,
+      107
+     ],
+     "file_px": [
+      2098,
+      411
+     ],
+     "opaque_bbox_px": [
+      47,
+      54,
+      2064,
+      324
+     ],
+     "trimmed_px": [
+      2017,
+      270
+     ]
+    }
+   ]
+  },
+  {
+   "key": "tin ingot",
+   "card_order": 12,
+   "illustration_order": 5,
+   "card_frame_x": 8507,
+   "strip_dot": {
+    "raster_x": 1145,
+    "frame_x": 3075,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     1064,
+     142,
+     1204,
+     216
+    ],
+    "frame_px": [
+     2857,
+     594,
+     3233,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": false,
+   "thumbnails": [
+    {
+     "node": "1232:1784",
+     "imageRef": "32fba0363a69a81347de674ede2112e30b076200",
+     "file": "32fba0363a69a81347de674ede2112e30b076200.png",
+     "node_px": [
+      180,
+      128
+     ],
+     "file_px": [
+      1920,
+      1080
+     ],
+     "opaque_bbox_px": [
+      483,
+      221,
+      1437,
+      858
+     ],
+     "trimmed_px": [
+      954,
+      637
+     ]
+    }
+   ]
+  },
+  {
+   "key": "wooden cold press",
+   "card_order": 13,
+   "illustration_order": 9,
+   "card_frame_x": 9074,
+   "strip_dot": {
+    "raster_x": 2053,
+    "frame_x": 5513,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     2004,
+     155,
+     2183,
+     216
+    ],
+    "frame_px": [
+     5382,
+     630,
+     5863,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": false,
+   "thumbnails": [
+    {
+     "node": "1232:1790",
+     "imageRef": "730ba23e657cab7964b8fc86ef5f8cb33119b25c",
+     "file": "730ba23e657cab7964b8fc86ef5f8cb33119b25c.png",
+     "node_px": [
+      180,
+      82
+     ],
+     "file_px": [
+      1920,
+      1080
+     ],
+     "opaque_bbox_px": [
+      598,
+      397,
+      1534,
+      684
+     ],
+     "trimmed_px": [
+      936,
+      287
+     ]
+    }
+   ]
+  },
+  {
+   "key": "siwaih",
+   "card_order": 14,
+   "illustration_order": 15,
+   "card_frame_x": 9741,
+   "strip_dot": {
+    "raster_x": 3822,
+    "frame_x": 10264,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     3715,
+     160,
+     3962,
+     216
+    ],
+    "frame_px": [
+     9977,
+     644,
+     10640,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": false,
+   "thumbnails": [
+    {
+     "node": "1232:1796",
+     "imageRef": "9c5706f8ddaeb9483fafb98b17c3b3a286dcbecb",
+     "file": "9c5706f8ddaeb9483fafb98b17c3b3a286dcbecb.png",
+     "node_px": [
+      200,
+      112
+     ],
+     "file_px": [
+      1920,
+      1080
+     ],
+     "opaque_bbox_px": [
+      478,
+      437,
+      1459,
+      689
+     ],
+     "trimmed_px": [
+      981,
+      252
+     ]
+    }
+   ]
+  },
+  {
+   "key": "bas relief of a royal",
+   "card_order": 15,
+   "illustration_order": 2,
+   "card_frame_x": 10528,
+   "strip_dot": {
+    "raster_x": 372,
+    "frame_x": 999,
+    "frame_y": 803,
+    "source": "measured from IMG 791ae91b (black ● on timeline row y≈217 px) × 11000/4096"
+   },
+   "strip_object_bbox": {
+    "raster_px": [
+     266,
+     145,
+     477,
+     216
+    ],
+    "frame_px": [
+     714,
+     603,
+     1281,
+     800
+    ],
+    "note": "connected-component bbox (approx; includes helper figures/line art where touching)"
+   },
+   "line_art_in_raster": false,
+   "thumbnails": [
+    {
+     "node": "1232:1802",
+     "imageRef": "91cfd6aecee3155b6879af0e80c878b85c3860e9",
+     "file": "91cfd6aecee3155b6879af0e80c878b85c3860e9.png",
+     "node_px": [
+      180,
+      56
+     ],
+     "file_px": [
+      4096,
+      1270
+     ],
+     "opaque_bbox_px": [
+      0,
+      0,
+      4096,
+      1270
+     ],
+     "trimmed_px": [
+      4096,
+      1270
+     ]
+    }
+   ]
+  }
+ ]
+}
