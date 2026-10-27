@@ -10,7 +10,9 @@
 #   backup     (production) mysqldump (ตรงจาก shell) + tar wp-content → <dir>/backups/<env>-<ts>/ (chmod 700) + ROLLBACK.txt
 #   prepare    mkdir mu-plugins (ถ้ายังไม่มี) · โฟลเดอร์ tmp import
 #   post       ACF · activate theme · permalink /%postname%/ · import (ถ้า --import=1) · ลบ tmp · LiteSpeed purge
-# args: --env=staging|production --path=<WP absolute> --url=<siteurl ที่คาด> --dir=<งาน · relative กับ $HOME> --ts=<stamp> --import=0|1
+#              --import=refresh: ข้าม ACF/theme/permalink · import ด้วย SH_IMPORT_ONLY=refresh (ไม่สร้างอะไรใหม่ · refresh step เท่านั้น)
+#              หลัง import: อ่าน runs[-1].warnings ของรายงาน → พิมพ์จำนวน + ทุกบรรทัด · > 0 = exit 4 (หลัง purge · tmp ถูกลบแล้ว)
+# args: --env=staging|production --path=<WP absolute> --url=<siteurl ที่คาด> --dir=<งาน · relative กับ $HOME> --ts=<stamp> --import=0|1|refresh
 #
 # ⛔ Hostinger: PHP disable_functions = system exec shell_exec passthru popen proc_open … (ตรวจจริง 2026-10-27)
 #   → wp-cli ที่ spawn process พังทั้งหมด: `db export|import|query|cli` (เรียก mysql/mysqldump) · `rewrite structure`
@@ -53,6 +55,7 @@ Q() { if [ "$DRY" = 1 ]; then show "$@"; echo "  [remote]   (dry-run: ถือ�
 V() { if [ "$DRY" = 1 ]; then show "$@" >&2; echo "<?>"; else "$@"; fi; }
 
 case "$PHASE" in discover|preflight|backup|prepare|post) ;; *) fail "phase ต้องเป็น discover|preflight|backup|prepare|post" ;; esac
+case "$IMPORT" in 0|1|refresh) ;; *) fail "--import ต้องเป็น 0|1|refresh ($IMPORT)" ;; esac
 case "$DIR" in ''|/*|*..*) fail "--dir ต้องเป็น path relative กับ home ไม่มี .. ($DIR)" ;; esac
 
 if [ "$DRY" = 1 ]; then HOME_R='$HOME'; else HOME_R="$HOME"; cd "$HOME"; fi
@@ -159,7 +162,9 @@ preflight)
   say "theme ที่ active: $(V "${WP[@]}" --skip-plugins --skip-themes option get stylesheet)"
   n="$(V "${WP[@]}" --skip-plugins --skip-themes post list --post_type=object,timeline_item --post_status=any --format=count)"
   say "object + timeline_item ที่มีอยู่: $n"
-  if [ "$ENV" = production ] && [ "$IMPORT" = 1 ]; then
+  if [ "$IMPORT" = refresh ]; then
+    say "refresh-only: เนื้อหาที่มีอยู่ไม่ถูกสร้างซ้ำ/ทับ (SH_IMPORT_ONLY=refresh) — ไม่หยุดเพราะมีเนื้อหา"
+  elif [ "$ENV" = production ] && [ "$IMPORT" = 1 ]; then
     if [ "$DRY" = 1 ]; then
       echo "  [remote]   production: ถ้า > 0 → หยุด exit 3 (ห้าม import ทับ prod · ถามเจ้าของ · ส่งแค่โค้ดใช้ --no-import)"
     elif [ "$n" != 0 ]; then
@@ -238,8 +243,8 @@ EOF
   rollback_text
   ;;
 prepare)
-  R mkdir -p "$WP_PATH/wp-content/mu-plugins"
-  if [ "$IMPORT" = 1 ]; then
+  [ "$IMPORT" = refresh ] || R mkdir -p "$WP_PATH/wp-content/mu-plugins"
+  if [ "$IMPORT" != 0 ]; then
     R mkdir -p "$BASE"
     R chmod 700 "$BASE"
     R mkdir -p "$TMP"
@@ -247,20 +252,24 @@ prepare)
   ;;
 post)
   cleanup() {
-    if [ "$IMPORT" = 1 ]; then
+    if [ "$IMPORT" != 0 ]; then
       case "$TMP" in */"$DIR"/tmp-"$ENV"-"$TS") R rm -rf "$TMP" ;; *) echo "remote: ไม่ลบ $TMP (path ไม่ตรงรูปแบบ)" >&2 ;; esac
     fi
   }
   trap cleanup EXIT                                        # ลบ tmp import แม้ขั้นไหนพัง
-  # ACF ฟรี (DEFERRED core-contract) — ข้ามถ้ามี ACF Pro active
-  if Q "${WP[@]}" plugin is-active advanced-custom-fields-pro; then
+  # ACF ฟรี (DEFERRED core-contract) — ข้ามถ้ามี ACF Pro active · refresh-only ข้ามทั้งช่วง ACF/theme/permalink
+  if [ "$IMPORT" = refresh ]; then
+    say "refresh-only: ข้าม ACF · theme · permalink"
+  elif Q "${WP[@]}" plugin is-active advanced-custom-fields-pro; then
     say "ACF Pro active อยู่ — ข้าม ACF ฟรี"
   elif Q "${WP[@]}" plugin is-installed advanced-custom-fields; then
     Q "${WP[@]}" plugin is-active advanced-custom-fields || R "${WP[@]}" plugin activate advanced-custom-fields
   else
     R "${WP[@]}" plugin install advanced-custom-fields --activate
   fi
-  Q "${WP[@]}" theme is-active sharedheritage || R "${WP[@]}" theme activate sharedheritage
+  if [ "$IMPORT" != refresh ]; then
+    Q "${WP[@]}" theme is-active sharedheritage || R "${WP[@]}" theme activate sharedheritage
+  fi
   read -r -d '' PHP_PERMALINK <<'PHP' || true
 global $wp_rewrite;
 $want = '/%postname%/';
@@ -294,14 +303,52 @@ PHP
   # permalink: ⛔ ไม่ใช้ `wp rewrite structure` (spawn `wp rewrite flush` ผ่าน launch) / `rewrite flush --hard` (proc_open)
   # → `wp eval` ใน process เดียว 2 ครั้ง: (1) ตั้ง structure (2) process ใหม่ (init เห็น structure ใหม่ · CPT ลงทะเบียนครบ) flush
   #   .htaccess: มีบล็อก `# BEGIN WordPress` แล้ว = ไม่แตะ · ไม่มี = เขียนบล็อก (save_mod_rewrite_rules) · เขียนไม่ได้ = หยุด
-  R "${WP[@]}" eval "$PHP_PERMALINK"
-  R "${WP[@]}" eval "$PHP_FLUSH"
-  if [ "$IMPORT" = 1 ]; then
+  if [ "$IMPORT" != refresh ]; then
+    R "${WP[@]}" eval "$PHP_PERMALINK"
+    R "${WP[@]}" eval "$PHP_FLUSH"
+  fi
+  # คำเตือนของ import = runs[-1].warnings ของรายงาน (ไม่ใช่ระดับบนสุด) · ไม่มีรายงาน/ไม่มี key = error (ไม่ถือว่า 0)
+  read -r -d '' PHP_WARN <<'PHP' || true
+$f    = (string) getenv( 'SH_IMPORT_REPORT_READ' );
+$r    = is_readable( $f ) ? json_decode( (string) file_get_contents( $f ), true ) : null;
+$last = is_array( $r ) && ! empty( $r['runs'] ) && is_array( $r['runs'] ) ? end( $r['runs'] ) : null;
+if ( ! is_array( $last ) || ! isset( $last['warnings'] ) || ! is_array( $last['warnings'] ) ) {
+	WP_CLI::error( 'import report has no runs[-1].warnings: ' . $f );
+}
+foreach ( $last['warnings'] as $w ) {
+	WP_CLI::log( '  WARNING: ' . $w ); // ASCII only: dry-run prints this code with printf %q (bash 3.2 splits UTF-8).
+}
+WP_CLI::log( 'SH_IMPORT_WARNINGS=' . count( $last['warnings'] ) );
+PHP
+  IMPORT_WARN=0
+  if [ "$IMPORT" != 0 ]; then
     R mkdir -p "$LOGS"
-    say "import seed (mode missing = ไม่ทับของที่มี · sub-size ภาพ)"
-    R env SH_IMPORT_ASSETS_DIR="$TMP/assets" SH_IMPORT_MEDIA_DIR="$TMP/media" SH_IMPORT_SUBSIZES=1 \
-      SH_IMPORT_REPORT="$LOGS/import-$ENV-$TS.json" "${WP[@]}" eval-file "$TMP/scripts/import/import.php"
-    say "รายงาน import: $LOGS/import-$ENV-$TS.json"
+    REPORT="$LOGS/import-$ENV-$TS.json"
+    if [ "$IMPORT" = refresh ]; then
+      say "import: refresh-only (SH_IMPORT_ONLY=refresh · ไม่สร้างใหม่ · แก้เฉพาะค่าที่ยังเป็นของ import · sub-size ภาพ)"
+      ONLY=(SH_IMPORT_ONLY=refresh)
+    else
+      say "import seed (mode missing = ไม่ทับของที่มี · sub-size ภาพ)"
+      ONLY=()
+    fi
+    R env SH_IMPORT_ASSETS_DIR="$TMP/assets" SH_IMPORT_MEDIA_DIR="$TMP/media" SH_IMPORT_SUBSIZES=1 "${ONLY[@]+"${ONLY[@]}"}" \
+      SH_IMPORT_REPORT="$REPORT" "${WP[@]}" eval-file "$TMP/scripts/import/import.php"
+    say "รายงาน import: $REPORT"
+    if [ "$DRY" = 1 ]; then
+      show env SH_IMPORT_REPORT_READ="$REPORT" "${WP[@]}" eval "$PHP_WARN"
+      echo "  [remote]   (> 0 = พิมพ์ ⛔ + exit 4 หลัง purge · ไม่มี runs[-1].warnings = หยุด)"
+    else
+      wout="$(env SH_IMPORT_REPORT_READ="$REPORT" "${WP[@]}" eval "$PHP_WARN")" || fail "อ่านคำเตือนจากรายงาน $REPORT ไม่ได้ — ตรวจเอง (runs[-1].warnings)"
+      printf '%s\n' "$wout"
+      nw="$(printf '%s\n' "$wout" | sed -n 's/^SH_IMPORT_WARNINGS=\([0-9][0-9]*\)$/\1/p' | tail -1)"
+      [ -n "$nw" ] || fail "หา SH_IMPORT_WARNINGS ในผลไม่เจอ — ตรวจรายงาน $REPORT เอง"
+      if [ "$nw" = 0 ]; then
+        say "คำเตือน import: 0 (runs[-1].warnings)"
+      else
+        echo "remote[$PHASE]: ⛔ คำเตือน import: $nw รายการ (runs[-1].warnings ของ $REPORT) — รายการอยู่ด้านบน" >&2
+        IMPORT_WARN="$nw"
+      fi
+    fi
   fi
   # cache: ⛔ ล้มตรงนี้ = warning ไม่ใช่ fatal (deploy เสร็จแล้ว) — `wp litespeed-purge all` ยิง HTTP ไปที่เว็บ
   #   (staging ไม่มี DNS → "Could not notify the web server to purge.")
@@ -326,6 +373,10 @@ PHP
     if [ "$PURGE_WARN" = 1 ]; then
       say "⚠ purge ไม่ครบ (ไม่กระทบ deploy) — ให้ purge เองใน wp-admin › LiteSpeed Cache › Toolbox › Purge All หรือ hPanel › LiteSpeed Cache (page cache อาจค้างจนหมดอายุ)"
     fi
+  fi
+  if [ "$IMPORT_WARN" != 0 ]; then
+    echo "remote[$PHASE]: ⛔ import มีคำเตือน $IMPORT_WARN รายการ — ไม่ใช่ 0 · exit 4" >&2
+    exit 4
   fi
   ;;
 esac

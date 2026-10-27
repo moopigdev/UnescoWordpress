@@ -167,3 +167,6 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [reviewer design-timeline-v3 r2] [2026-10-28] §4.5c.1 แถว "ชิ้นบนเส้น" ยังเขียน "active ×1.35" ขัด s_i ต่อชิ้น (1.34–1.52) → ยึดตาราง §4.5c.3
 - [reviewer design-timeline-v3 r2] [2026-10-28] seed `v3.groups.6` ยังเป็น Figma Group 34 (174×152) และ `items[6].ratio` 1.14 · สเปกสั่งแบบ Slides (2 ภาพสูงเท่ากัน ข้างกัน 107×163) → wp-dev ยึดสเปก + `rest_px`
 - [reviewer design-timeline-v3 r2] [2026-10-28] บรรทัด DEFERRED เดิมเรื่อง `p^2.5`/`1+0.35p` ล้าสมัยหลัง F2 → ปิด
+- [deploy-crops] [2026-10-28] `deploy.sh --refresh-only` ส่ง bundle import เต็ม (ภาพ 191 ไฟล์ + media/out) แม้ step `2026-10-28-layout-refs` ใช้แค่ภาพครอป 22 ไฟล์ — ตั้งใจให้ refresh step อื่นที่ยังไม่รันมีไฟล์ครบ · ถ้าอยากลดเวลา rsync ค่อยกรองตาม step ที่ยังไม่เสร็จ
+- [reviewer deploy-crops r1] [2026-10-28] refresh `2026-10-28-layout-refs` ข้ามค่าที่ต่างจาก seed เงียบๆ (ตั้งใจ — กันทับค่า admin) · ถ้า objects.json เปลี่ยนก่อนรันบน prod ref ที่ยังเป็นข้อความจะไม่ถูกแปลงและ warnings ยัง 0 → หลังรันจริงต้องตรวจ placed = 12
+- [reviewer deploy-crops r1] [2026-10-28] admin ที่เปิดหน้าแก้ object ค้างไว้ก่อน refresh แล้วกดบันทึกหลัง อาจเขียนค่าข้อความกลับ · step บันทึก done แล้ว deploy.sh บังคับรันซ้ำไม่ได้ → แจ้งทีม UNESCO ก่อนรัน + ตรวจ placed หลังรัน

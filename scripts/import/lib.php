@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Config from constants (playground blueprint) or environment (wp eval-file). Paths outside the repo.
  *
- * @return array{content:string,assets:string,media:string,map:string,mode:string,report:string,subsizes:bool}
+ * @return array{content:string,assets:string,media:string,map:string,mode:string,report:string,subsizes:bool,only:string}
  */
 function sh_imp_config(): array {
 	$get  = static function ( string $name, string $default ): string {
@@ -24,6 +24,10 @@ function sh_imp_config(): array {
 	$repo = dirname( __DIR__, 2 );
 	$root = is_dir( dirname( $repo ) . '/design' ) ? dirname( $repo ) : dirname( $repo, 2 ); // repo or .worktrees/<wt>.
 	$mode = $get( 'SH_IMPORT_MODE', 'missing' );
+	$only = $get( 'SH_IMPORT_ONLY', '' );
+	if ( '' !== $only && 'refresh' !== $only ) {
+		throw new RuntimeException( 'SH_IMPORT_ONLY must be empty or "refresh" (got "' . $only . '")' );
+	}
 	return array(
 		'content'  => rtrim( $get( 'SH_IMPORT_CONTENT_DIR', $repo . '/content' ), '/' ),
 		'assets'   => rtrim( $get( 'SH_IMPORT_ASSETS_DIR', $root . '/design/assets' ), '/' ),
@@ -32,6 +36,7 @@ function sh_imp_config(): array {
 		'mode'     => in_array( $mode, array( 'missing', 'overwrite' ), true ) ? $mode : 'missing',
 		'report'   => $get( 'SH_IMPORT_REPORT', '' ),
 		'subsizes' => '1' === $get( 'SH_IMPORT_SUBSIZES', '0' ),
+		'only'     => $only,
 	);
 }
 
@@ -83,8 +88,10 @@ function sh_imp_count( string $what, string $kind ): void {
  * @param string $msg Message.
  */
 function sh_imp_warn( string $msg ): void {
-	$s               = &sh_imp_state();
-	$s['warnings'][] = $msg;
+	$s = &sh_imp_state();
+	if ( ! in_array( $msg, $s['warnings'], true ) ) { // Same file asked twice in a run (import + refresh) = one warning.
+		$s['warnings'][] = $msg;
+	}
 }
 
 /**

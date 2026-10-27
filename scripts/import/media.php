@@ -226,20 +226,10 @@ function sh_imp_video( ?array $entry, string $title ): array {
  */
 function sh_imp_asset_ref( array $map, string $value, string $title ): int {
 	$dir  = sh_imp_config()['assets'];
-	$name = basename( $value ); // never leave design/assets.
-	$cand = array();
-	if ( isset( $map['files'][ $name ] ) ) {
-		$cand[] = (string) $map['files'][ $name ];
-	}
-	$cand[] = $name;
-	foreach ( array( 'png', 'jpg', 'jpeg', 'webp' ) as $ext ) {
-		$cand[] = $name . '.' . $ext;
-	}
-	foreach ( $cand as $file ) {
-		if ( '' !== $file && '.' !== $file[0] && is_file( $dir . '/' . $file ) ) {
-			$ext = (string) pathinfo( $file, PATHINFO_EXTENSION );
-			return sh_imp_attachment( $dir . '/' . $file, 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) ), $title );
-		}
+	$file = sh_import_ref_file( $map, $value, $dir ); // refs.php — the same rule deploy.sh bundles by.
+	if ( '' !== $file ) {
+		$ext = (string) pathinfo( $file, PATHINFO_EXTENSION );
+		return sh_imp_attachment( $dir . '/' . $file, 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) ), $title );
 	}
 	sh_imp_warn( 'style *_ref without file (kept as text): ' . $value . ' (' . $title . ')' );
 	return 0;

@@ -2,11 +2,13 @@
 # deploy.sh — ขึ้น Shared Heritage ไป Hostinger (staging / production) ผ่าน SSH + rsync + wp-cli บน server
 #
 # usage:
-#   scripts/deploy.sh [staging|production] [--dry-run] [--discover] [--no-import]
+#   scripts/deploy.sh [staging|production] [--dry-run] [--discover] [--no-import | --refresh-only]
 #     (ไม่ระบุ = staging)
 #   --dry-run    พิมพ์ทุกคำสั่งที่จะรัน (ssh · rsync · wp-cli ฝั่ง server) ⛔ ไม่เชื่อมต่อ server
 #   --discover   อ่านอย่างเดียว: SSH ไปหา WordPress ใต้ ~/domains → พิมพ์ path + siteurl ให้ยืนยัน (ไม่เขียนอะไร)
 #   --no-import  ส่งแค่โค้ด (theme + mu-plugin) + ACF/theme/permalink/purge · ไม่ import seed
+#   --refresh-only  site ที่มีเนื้อหาแล้ว (production ด้วย): ไม่ส่งโค้ด · ไม่แตะ ACF/theme/permalink · ส่ง bundle import แล้วรัน
+#                เฉพาะ refresh step (SH_IMPORT_ONLY=refresh — ไม่สร้าง post/term/page/option ใหม่ · ไม่ทับค่าที่ admin แก้)
 #
 # ลำดับ (real run):
 #   0 ตรวจ local (config · key · ไฟล์) · production: ต้องมี orchestrator/deploy-approved + tree สะอาด
@@ -15,6 +17,7 @@
 #   3 prepare: mkdir mu-plugins · tmp import (นอก webroot)
 #   4 rsync mu-plugin แล้ว theme (--delete เฉพาะในโฟลเดอร์ของเรา) · bundle import → tmp
 #   5 post: ACF · activate theme · permalink /%postname%/ + flush · import (SH_IMPORT_SUBSIZES=1) · ลบ tmp · LiteSpeed purge
+#     import มีคำเตือน (runs[-1].warnings ของรายงาน) > 0 → พิมพ์ทุกบรรทัด + exit 4 หลังทุกขั้นเสร็จ (ห้ามอ่านว่าผ่าน)
 # config: scripts/deploy/hosts.env (ไม่ commit) > scripts/deploy/hosts.env.example · env ของ shell ชนะไฟล์
 # รายละเอียด + rollback: docs/DEPLOY.md · ⛔ dev ไม่รันกับ server จริง — orchestrator รัน (staging ก่อนเสมอ)
 set -euo pipefail
@@ -24,18 +27,20 @@ HERE="$REPO/scripts/deploy"
 # shellcheck source=deploy/lib.sh
 . "$HERE/lib.sh"
 
-ENV=staging; DRY=0; DISCOVER=0; IMPORT=1; ENV_SET=0
+ENV=staging; DRY=0; DISCOVER=0; IMPORT=1; ENV_SET=0; NOIMP=0
 for a in "$@"; do
   case "$a" in
     staging|production) [ "$ENV_SET" = 0 ] || sh_die "ระบุ environment ได้ครั้งเดียว"; ENV="$a"; ENV_SET=1 ;;
     --dry-run) DRY=1 ;;
     --discover) DISCOVER=1 ;;
-    --no-import) IMPORT=0 ;;
-    -h|--help) sed -n '2,19p' "$0"; exit 0 ;;
+    --no-import) IMPORT=0; NOIMP=$((NOIMP + 1)) ;;
+    --refresh-only) IMPORT=refresh; NOIMP=$((NOIMP + 1)) ;;
+    -h|--help) sed -n '2,23p' "$0"; exit 0 ;;
     *) sh_die "ไม่รู้จัก argument: $a (ดู --help)" ;;
   esac
 done
 
+[ "$NOIMP" -le 1 ] || sh_die "--no-import กับ --refresh-only ใช้ได้อย่างเดียว"
 ROOT="$(sh_find_root "$REPO")"
 sh_load_config "$HERE/hosts.env" "$HERE/hosts.env.example"
 # ↑ lib ตั้งค่าเป็นตัวแปร shell — บอก shellcheck ว่ามีจริง
@@ -114,39 +119,45 @@ fi
 EXCL=(--exclude=.git --exclude=.playground --exclude=node_modules --exclude=.DS_Store)
 RS=(-rlptzv -e "$RSH")   # ไม่ใช้ -a (-o -g ตั้ง owner ไม่ได้บน shared host) · flag ที่ openrsync ของ macOS รองรับเท่านั้น
 
-# bundle import (เฉพาะไฟล์ที่ import อ่าน): scripts/import · content · ภาพที่ image-map "files" อ้าง · media/out
+# bundle import (ทุกไฟล์ที่ import อ่าน): scripts/import · content · ภาพ design/assets ตาม scripts/import/bundle-files.php
+# (image-map "files" + ไฟล์ของ style *_ref ทุกตัวของวัตถุที่ import — กฎเดียวกับ import: refs.php) · media/out
 LB=""
 cleanup_local() { if [ -n "$LB" ]; then case "$LB" in */sh-deploy-bundle.*) rm -rf "$LB" ;; esac; fi; }
 trap cleanup_local EXIT
-if [ "$IMPORT" = 1 ]; then
+if [ "$IMPORT" != 0 ]; then
   ASSETS="${SH_DESIGN_ASSETS:-}"; MEDIA="${SH_MEDIA_OUT:-}"
   [ -n "$ASSETS" ] || { [ -n "$ROOT" ] && ASSETS="$ROOT/design/assets"; }
   [ -n "$MEDIA" ] || { [ -n "$ROOT" ] && MEDIA="$ROOT/media/out"; }
   ASSETS="$(sh_expand_home "${ASSETS:-}")"; MEDIA="$(sh_expand_home "${MEDIA:-}")"
   [ -d "$ASSETS" ] || sh_die "ไม่พบภาพ design/assets ($ASSETS) — ตั้ง SH_DESIGN_ASSETS หรือใช้ --no-import"
   [ -d "$MEDIA" ] || sh_die "ไม่พบ media/out ($MEDIA) — ตั้ง SH_MEDIA_OUT หรือใช้ --no-import"
-  LIST="$(python3 - "$REPO/scripts/import/image-map.json" <<'PY'
-import json, sys
-m = json.load(open(sys.argv[1]))
-for f in sorted(set((m.get("files") or {}).values())):
-    if "/" in f or f.startswith("."):
-        sys.exit("image-map: ชื่อไฟล์ไม่ปลอดภัย: " + f)
-    print(f)
-PY
-)"
-  NA=0; MISS=""
-  while IFS= read -r f; do
+  PHP="$(command -v php || true)"
+  [ -n "$PHP" ] || { [ -x "$HOME/Library/Application Support/Herd/bin/php" ] && PHP="$HOME/Library/Application Support/Herd/bin/php"; }
+  [ -n "$PHP" ] || sh_die "ไม่พบ php ในเครื่อง (ใช้หารายการไฟล์ที่ import อ่าน) — ยังไม่ได้เชื่อมต่อ server"
+  # <kind>\t<file> ต่อบรรทัด (map | ref) · ไฟล์ที่อ้างแต่ไม่มี / ชื่อไม่ปลอดภัย = php exit ≠ 0 → หยุดก่อนเชื่อมต่อ
+  LIST="$("$PHP" "$REPO/scripts/import/bundle-files.php" "$ASSETS" "$REPO/content" "$REPO/scripts/import/image-map.json")" \
+    || sh_die "ภาพที่ import อ้าง (image-map / style *_ref) ไม่ครบใน $ASSETS — ดูรายการด้านบน · ยังไม่ได้เชื่อมต่อ server"
+  NA=0; NR=0; FILES=""; REFS=""
+  while IFS="$(printf '\t')" read -r kind f; do
     [ -n "$f" ] || continue
-    if [ -f "$ASSETS/$f" ]; then NA=$((NA + 1)); else MISS="$MISS $f"; fi
+    case "$f" in */*|.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;; esac
+    [ -f "$ASSETS/$f" ] || sh_die "ไม่พบ $ASSETS/$f"
+    case "$kind" in
+      map) NA=$((NA + 1)) ;;
+      ref) NR=$((NR + 1)); REFS="$REFS $f" ;;
+      *) sh_die "bundle-files: ชนิดไม่รู้จัก ($kind)" ;;
+    esac
+    FILES="$FILES$f
+"
   done <<< "$LIST"
-  [ -z "$MISS" ] || sh_die "ภาพที่ image-map อ้างแต่ไม่มีใน $ASSETS:$MISS"
-  sh_say "bundle import: scripts/import + content + ภาพ $NA ไฟล์ (จาก image-map) + media/out"
+  sh_say "bundle import: scripts/import + content + ภาพ $((NA + NR)) ไฟล์ (image-map $NA + style *_ref $NR) + media/out"
+  if [ "$DRY" = 1 ]; then for f in $REFS; do sh_say "  *_ref: $f"; done; fi
   if [ "$DRY" = 0 ]; then
     LB="$(mktemp -d "${TMPDIR:-/tmp}/sh-deploy-bundle.XXXXXX")"
     mkdir -p "$LB/scripts" "$LB/assets" "$LB/media"
     cp -R "$REPO/scripts/import" "$LB/scripts/import"
     cp -R "$REPO/content" "$LB/content"
-    while IFS= read -r f; do [ -n "$f" ] && cp "$ASSETS/$f" "$LB/assets/$f"; done <<< "$LIST"
+    while IFS= read -r f; do [ -n "$f" ] && cp "$ASSETS/$f" "$LB/assets/$f"; done <<< "$FILES"
     for f in "$MEDIA"/*; do
       [ -f "$f" ] || continue
       case "$f" in *.html) continue ;; esac            # preview.html = หน้าเทสในเครื่อง
@@ -154,7 +165,7 @@ PY
     done
   else
     LB_SHOW="<local-bundle>"
-    sh_say "  <local-bundle> = mktemp ในเครื่อง: scripts/import/ · content/ · assets/ ($NA ไฟล์จาก $ASSETS) · media/ (จาก $MEDIA ยกเว้น *.html)"
+    sh_say "  <local-bundle> = mktemp ในเครื่อง: scripts/import/ · content/ · assets/ ($((NA + NR)) ไฟล์จาก $ASSETS) · media/ (จาก $MEDIA ยกเว้น *.html)"
   fi
 fi
 
@@ -162,7 +173,7 @@ RARGS=(--env="$ENV" --path="$WP_PATH" --url="$URL" --prod-url="$SH_PRODUCTION_UR
 
 echo "-- 1. preflight (อ่านอย่างเดียว)"
 set +e; remote preflight "${RARGS[@]}"; rc=$?; set -e
-if [ "$rc" = 3 ]; then sh_say "⛔ หยุด: production มีเนื้อหาแล้ว — ถามเจ้าของก่อน (ส่งแค่โค้ด: --no-import)"; exit 3; fi
+if [ "$rc" = 3 ]; then sh_say "⛔ หยุด: production มีเนื้อหาแล้ว — ถามเจ้าของก่อน (ส่งแค่โค้ด: --no-import · แก้ค่าที่ import รุ่นเก่าเขียนผิด: --refresh-only)"; exit 3; fi
 [ "$rc" = 0 ] || sh_die "preflight ไม่ผ่าน (exit $rc) — ยังไม่ได้แตะ server"
 
 if [ "$ENV" = production ]; then
@@ -173,23 +184,35 @@ fi
 echo "-- 3. prepare"
 remote prepare "${RARGS[@]}"
 
-echo "-- 4. rsync (mu-plugin → theme)"
-for e in "$MU"/*; do
-  [ -e "$e" ] || continue
-  b="$(basename "$e")"
-  if [ -d "$e" ]; then   # --delete เฉพาะในโฟลเดอร์ของเราเอง
-    xrsync "${RS[@]}" --delete "${EXCL[@]}" "$e/" "$DEST:$WP_PATH/wp-content/mu-plugins/$b/"
-  else                   # ไฟล์ loader — ไม่มี --delete (ห้ามแตะ mu-plugin อื่นของ Hostinger)
-    xrsync "${RS[@]}" "$e" "$DEST:$WP_PATH/wp-content/mu-plugins/$b"
-  fi
-done
-xrsync "${RS[@]}" --delete "${EXCL[@]}" "$THEME/" "$DEST:$WP_PATH/wp-content/themes/sharedheritage/"
-if [ "$IMPORT" = 1 ]; then
+if [ "$IMPORT" = refresh ]; then
+  echo "-- 4. rsync (refresh-only: ไม่ส่งโค้ด · bundle import → tmp)"
+else
+  echo "-- 4. rsync (mu-plugin → theme)"
+  for e in "$MU"/*; do
+    [ -e "$e" ] || continue
+    b="$(basename "$e")"
+    if [ -d "$e" ]; then   # --delete เฉพาะในโฟลเดอร์ของเราเอง
+      xrsync "${RS[@]}" --delete "${EXCL[@]}" "$e/" "$DEST:$WP_PATH/wp-content/mu-plugins/$b/"
+    else                   # ไฟล์ loader — ไม่มี --delete (ห้ามแตะ mu-plugin อื่นของ Hostinger)
+      xrsync "${RS[@]}" "$e" "$DEST:$WP_PATH/wp-content/mu-plugins/$b"
+    fi
+  done
+  xrsync "${RS[@]}" --delete "${EXCL[@]}" "$THEME/" "$DEST:$WP_PATH/wp-content/themes/sharedheritage/"
+fi
+if [ "$IMPORT" != 0 ]; then
   xrsync "${RS[@]}" "${EXCL[@]}" "${LB:-${LB_SHOW:-}}/" "$DEST:$RDIR/tmp-$ENV-$TS/"
 fi
 
-echo "-- 5. post (ACF · theme · permalink · import · ลบ tmp · purge)"
-remote post "${RARGS[@]}"
+if [ "$IMPORT" = refresh ]; then echo "-- 5. post (refresh-only: import SH_IMPORT_ONLY=refresh · ลบ tmp · purge)"
+else echo "-- 5. post (ACF · theme · permalink · import · ลบ tmp · purge)"; fi
+set +e; remote post "${RARGS[@]}"; rc=$?; set -e
+if [ "$rc" = 4 ]; then
+  sh_say "⛔ deploy ส่งครบแล้ว แต่ import มีคำเตือน (จำนวน + รายการอยู่ด้านบน · รายงาน ~/$RDIR/logs/import-$ENV-$TS.json → runs[-1].warnings)"
+  sh_say "   ห้ามรายงานว่าผ่าน — ตรวจทุกบรรทัด (ไฟล์ที่ไม่ได้ส่ง = ช่องในหน้าเว็บยังเป็นข้อความ) · exit 4"
+  [ "$ENV" = production ] && sh_say "   rollback: ~/$RDIR/backups/$ENV-$TS/ROLLBACK.txt · ⛔ orchestrator: ลบ orchestrator/deploy-approved ทันที"
+  exit 4
+fi
+[ "$rc" = 0 ] || sh_die "post ล้ม (exit $rc)$([ "$ENV" = production ] && echo " — rollback: ~/$RDIR/backups/$ENV-$TS/ROLLBACK.txt")"
 
 echo "== เสร็จ: $ENV $URL"
 if [ "$ENV" = production ]; then

@@ -1,39 +1,14 @@
 <?php
 /**
  * Importer: objects (D7 — the 15 objects of the elephant trail = seed objects with trail_order.elephant),
- * per-trail object order, timeline cards + Timeline page fields.
+ * per-trail object order, timeline cards + Timeline page fields. Scope + Final frame: refs.php.
  *
  * @package sharedheritage-core
  */
 
 defined( 'ABSPATH' ) || exit;
 
-/**
- * Seed objects in scope (D7), ordered by elephant trail order.
- *
- * @param array<string, mixed> $seed Seed files.
- * @return array<int, array<string, mixed>>
- */
-function sh_import_scope_objects( array $seed ): array {
-	$list = array_values( array_filter( $seed['objects']['objects'], static fn( $o ) => ! empty( $o['trail_order']['elephant'] ) ) );
-	usort( $list, static fn( $a, $b ) => (int) $a['trail_order']['elephant'] <=> (int) $b['trail_order']['elephant'] );
-	return $list;
-}
-
-/**
- * The Figma record of the Final page ("Page 2  Version #Final …") — the frame the detail page must match.
- *
- * @param array<string, mixed> $o Seed object.
- * @return array<string, mixed>
- */
-function sh_import_final_frame( array $o ): array {
-	foreach ( $o['figma'] as $f ) {
-		if ( str_contains( (string) $f['page'], 'Final' ) ) {
-			return $f;
-		}
-	}
-	return $o['figma'][0];
-}
+require_once __DIR__ . '/refs.php';
 
 /**
  * Detail layout JSON from the Final frame style — the whole style object (unknown keys pass through), layer names
