@@ -13,8 +13,8 @@
    "TEMASEK FOUNDATION (raster)",
    "SHARED HERITAGE · MUSEUMS IN SOUTH-EAST ASIA (raster)"
   ],
-  "header_component": "670:1107 Header #1 / 670:1142 Header #02",
-  "note": "โลโก้เป็นภาพ/vector ใน Header #1 — ส่งออกเป็น asset ภายหลัง (ยังไม่ export)"
+  "header_component": "670:1057 Header #1 (component set) / 670:1142 Header #02 (component set)",
+  "note": "โลโก้ UNESCO ส่งออกเป็น SVG แล้ว: design/assets/svg/unesco-logo.svg · โลโก้ TEMASEK FOUNDATION + SHARED HERITAGE ฝังในภาพพื้น Header #1 (imageRef 709572bf…, ไฟล์ design/assets/709572bf7eca….jpg) ไม่มีไฟล์แยก"
  },
  "nav_primary": [
   "Main Page",
@@ -104,20 +104,38 @@
     "text": "The Curious Minds’s Play Zone"
    }
   ],
-  "side_navigator": [
-   {
-    "label": "Intro",
-    "scroll_target": "670:9368"
-   },
-   {
-    "label": "Zone",
-    "scroll_target": "670:9479"
-   },
-   {
-    "label": "Trails",
-    "scroll_target": "1013:1273"
-   }
-  ],
+  "side_navigator": {
+   "dots": [
+    {
+     "order": 1,
+     "node": "871:2240",
+     "scroll_target": "670:9368",
+     "target_name": "Introduction (Frame 12685)"
+    },
+    {
+     "order": 2,
+     "node": "871:2241",
+     "scroll_target": "670:9479",
+     "target_name": "Zone 1-3 cards (Zone 123)"
+    },
+    {
+     "order": 3,
+     "node": "871:2242",
+     "scroll_target": "886:1795",
+     "target_name": "Trails (Frame All trails)"
+    },
+    {
+     "order": 4,
+     "node": "871:2247",
+     "scroll_target": "670:9541",
+     "target_name": "Zone 4-5 cards (Frame 12792)"
+    }
+   ],
+   "container": "871:2239 Navigator [176,587 30x150]",
+   "style": "วงกลม 30x30 พื้น #FFFFFF stroke #ADB5BD 2px inside · gap 10 · ไม่มี icon/ข้อความ",
+   "interaction": "ON_CLICK -> SCROLL_TO (scroll-animate 0.3s) ตาม interactions ใน figma-file.json",
+   "note": "ตามหมายเหตุ Figma 929:1597 + ภาพ annot-navigator.png · navigator เก่า 670:9542 (วงกลม 58px ป้าย Intro/Zone/Trails) ไม่ใช้"
+  },
   "zone_tabs": [
    "ZONE 1",
    "ZONE 2",
