@@ -50,3 +50,4 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [core-contract/reviewer] [2026-10-27] `sh_layout` รับ JSON array (เช่น `[1,2]`) ทั้งที่เอกสาร/ข้อความ validation บอก "JSON object"
 - [core-contract/reviewer] [2026-10-27] จำนวน attachment ใน CONTENT-MODEL §12 (179) เก่า — วัดได้ 183→189 หลัง design-dev เพิ่มภาพ hero
 - [core-contract/reviewer] [2026-10-27] `timeline_item` ไม่ public แต่อ่านผ่าน REST ได้โดยไม่ login (ตรงเอกสาร · เป็นข้อมูลที่หน้าแสดงอยู่แล้ว)
+- [intro-page] [2026-10-27] แผนที่ intro: ไม่มีพิกัดหมุด → ปุ่มเลข 1–4 ทำหน้าที่เป็นหมุด (คลิก = เปลี่ยน slide + เปิด popup ตำแหน่ง Figma `[681,63]`) · ถ้าต้องมีหมุดบนภาพ ต้องมีฟิลด์พิกัดใน core · ลูกศร ‹ › วนรอบ (Figma ไม่ระบุว่าวน/หยุดที่ปลาย) · `Read more >>` ทั้ง 3 จุดของ 1471 เป็น `visible:false` ใน Figma → ไม่แสดง (body ยาวแสดงทั้งหมด ตาม frame)
