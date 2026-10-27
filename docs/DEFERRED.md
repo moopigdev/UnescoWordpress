@@ -162,3 +162,8 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [design-timeline-v3/reviewer] [2026-10-28] `sh_card_meta` จริงมีทั้ง "SECTION :" และ "Section :" → ตัดบรรทัดนี้แบบไม่สนตัวพิมพ์ใหญ่เล็ก (สเปก §4.5c.4 เขียน `Section :` — dev ให้ใช้ case-insensitive)
 - [design-timeline-v3/reviewer] [2026-10-28] เพดาน active 400 (รอบก่อน) เป็น `[P]` ของ design-dev ไม่ใช่ D27 — รอบนี้ยกเลิกแล้ว (กฎขนาดใหม่ไม่ต้องใช้)
 - [design-timeline-v3/reviewer] [2026-10-28] ภาพ Basin ใน Slides ฐานลอยเหนือเส้น ≈23px (ล่าง y_rel 357 ทั้ง rest/active · ลายเส้นช้างการ์ตูนก็ลอย ≈22px) ขณะสเปกให้ฐาน = เส้น −2 — อาจเป็นขอบโปร่งในภาพ Slides ไม่ใช่เจตนา · ดูตอน preview
+- [reviewer design-timeline-v3 r2] [2026-10-28] Ganesha active `200×249` ใน §4.5c.3/seed รวมจุดบนเส้น · วัตถุจริง ≈200×240 → wp-dev ใช้ scale สม่ำเสมอ (s≈1.342) ห้ามยืดภาพ
+- [reviewer design-timeline-v3 r2] [2026-10-28] metadata α วัดซ้ำ .19/.37/.55 → สูตร ≈0.39p เหมาะกว่า 0.47p · ปรับตอน preview
+- [reviewer design-timeline-v3 r2] [2026-10-28] §4.5c.1 แถว "ชิ้นบนเส้น" ยังเขียน "active ×1.35" ขัด s_i ต่อชิ้น (1.34–1.52) → ยึดตาราง §4.5c.3
+- [reviewer design-timeline-v3 r2] [2026-10-28] seed `v3.groups.6` ยังเป็น Figma Group 34 (174×152) และ `items[6].ratio` 1.14 · สเปกสั่งแบบ Slides (2 ภาพสูงเท่ากัน ข้างกัน 107×163) → wp-dev ยึดสเปก + `rest_px`
+- [reviewer design-timeline-v3 r2] [2026-10-28] บรรทัด DEFERRED เดิมเรื่อง `p^2.5`/`1+0.35p` ล้าสมัยหลัง F2 → ปิด
