@@ -1619,7 +1619,7 @@
   {
    "slug": "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs",
    "title": "Wooden Cold-Press Cake Molds with Elephant, Horse, and Fowl Motifs",
-   "title_raw": "Wooden Cold-Press Cake Molds with  Elephant, Horse, and Fowl Motifs",
+   "title_raw": "Wooden Cold-Press Cake Molds with\nElephant, Horse, and Fowl Motifs",
    "title_variants": [
     "Wooden Cold-Press Cake Molds with Elephant, Horse, and Fowl Motifs"
    ],
@@ -1832,7 +1832,213 @@
       "title_color": "#495057",
       "collection_color": "#343A40",
       "caption_color": "#343A40",
-      "meta_color": null
+      "meta_color": null,
+      "text_col": {
+       "node": "1041:884",
+       "name": "Frame 12747",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        1020,
+        739,
+        1119
+       ],
+       "layout": "VERTICAL",
+       "gap": 22,
+       "padding_top": 0,
+       "content_top": 1020,
+       "bottom": 2139
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "1041:885",
+        "bbox": [
+         160,
+         1020,
+         636,
+         90
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#495057",
+        "auto_resize": "WIDTH_AND_HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#495057",
+          "start": 0,
+          "length": 67,
+          "text": "Wooden Cold-Press Cake Molds with \nElephant, Horse, and Fowl Motifs"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "collection",
+        "node": "1041:886",
+        "bbox": [
+         160,
+         1132,
+         739,
+         25
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 500,
+         "size": 20,
+         "line_height": 25,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 11,
+          "text": "Collection:"
+         },
+         {
+          "weight": 500,
+          "color": "#343A40",
+          "start": 11,
+          "length": 57,
+          "text": " Folklore Museum, The Institute for Southern Thai Studies"
+         }
+        ],
+        "rows": [
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "Folklore Museum, The Institute for Southern Thai Studies",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#343A40",
+          "value_color": "#343A40"
+         }
+        ],
+        "y_in_col": 112,
+        "gap_before": 22
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "1041:887",
+        "bbox": [
+         160,
+         1179,
+         739,
+         960
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 10,
+          "text": "Caption:\n\n"
+         },
+         {
+          "weight": 400,
+          "color": "#343A40",
+          "start": 10,
+          "length": 2682,
+          "text_head": "This phim yen (literally \"cold mold\") is"
+         }
+        ],
+        "y_in_col": 159,
+        "gap_before": 22
+       }
+      ],
+      "caption": {
+       "node": "1041:887",
+       "label": "Caption:",
+       "label_weight": 700,
+       "label_color": "#343A40",
+       "label_breaks": 2,
+       "body_weight": 400,
+       "body_color": "#343A40",
+       "body_length": 2682,
+       "body_break_runs": {
+        "2": 4
+       }
+      },
+      "meta_labels": [
+       "Collection:"
+      ],
+      "image_col": {
+       "nodes": [
+        "1041:889"
+       ],
+       "node": "1041:889",
+       "name": "Frame 114479",
+       "bbox": [
+        921,
+        1020,
+        360,
+        689
+       ],
+       "layout": "HORIZONTAL",
+       "gap": 10,
+       "padding_top": 100
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "1041:890",
+        "name": "Rectangle 27",
+        "bbox": [
+         921,
+         1120,
+         360,
+         589
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          0.301868,
+          0.883326,
+          -0.119776
+         ],
+         [
+          -1.714,
+          1.567949,
+          0.722118
+         ]
+        ],
+        "source_image": "60b979fd2cd2e862c94bcaf9ba2beff0ceb1c5f3",
+        "source_file": "60b979fd2cd2e862c94bcaf9ba2beff0ceb1c5f3.png",
+        "crop_ref": "60b979fd2cd2e862c94bcaf9ba2beff0ceb1c5f3.crop-1041-890.png",
+        "crop_size": [
+         360,
+         589
+        ],
+        "crop_scale": 1.0
+       }
+      ]
      }
     },
     {
@@ -9782,7 +9988,270 @@
       "title_color": "#495057",
       "collection_color": "#343A40",
       "caption_color": "#343A40",
-      "meta_color": null
+      "meta_color": null,
+      "text_col": {
+       "node": "964:1541",
+       "name": "Frame 12747",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        1020,
+        549,
+        1483
+       ],
+       "layout": "VERTICAL",
+       "gap": 22,
+       "padding_top": 0,
+       "content_top": 1020,
+       "bottom": 2503
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "964:1542",
+        "bbox": [
+         160,
+         1020,
+         855,
+         45
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#495057",
+        "auto_resize": "WIDTH_AND_HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#495057",
+          "start": 0,
+          "length": 48,
+          "text": "Embossed Brass Basin with Mythical Animal Motifs"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "collection",
+        "node": "964:1543",
+        "bbox": [
+         160,
+         1087,
+         549,
+         50
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 500,
+         "size": 20,
+         "line_height": 25,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 11,
+          "text": "Collection:"
+         },
+         {
+          "weight": 500,
+          "color": "#343A40",
+          "start": 11,
+          "length": 57,
+          "text": " Folklore Museum, The Institute for Southern Thai Studies"
+         }
+        ],
+        "rows": [
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "Folklore Museum, The Institute for Southern Thai Studies",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#343A40",
+          "value_color": "#343A40"
+         }
+        ],
+        "y_in_col": 67,
+        "gap_before": 22
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "964:1544",
+        "bbox": [
+         160,
+         1159,
+         549,
+         1344
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 9,
+          "text": "Caption:\n"
+         },
+         {
+          "weight": 400,
+          "color": "#343A40",
+          "start": 9,
+          "length": 3013,
+          "text_head": "This repoussé and chased brass holy wate"
+         }
+        ],
+        "y_in_col": 139,
+        "gap_before": 22
+       }
+      ],
+      "caption": {
+       "node": "964:1544",
+       "label": "Caption:",
+       "label_weight": 700,
+       "label_color": "#343A40",
+       "label_breaks": 1,
+       "body_weight": 400,
+       "body_color": "#343A40",
+       "body_length": 3013,
+       "body_break_runs": {
+        "2": 4
+       }
+      },
+      "meta_labels": [
+       "Collection:"
+      ],
+      "image_col": {
+       "nodes": [
+        "964:1816"
+       ],
+       "node": "964:1816",
+       "name": "Frame 114475",
+       "bbox": [
+        731,
+        1020,
+        549,
+        840
+       ],
+       "layout": "VERTICAL",
+       "gap": 30,
+       "padding_top": 80
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "964:1547",
+        "name": "12 3",
+        "bbox": [
+         731,
+         1100,
+         549,
+         365
+        ],
+        "container": {
+         "node": "964:1546",
+         "name": "Frame 12742",
+         "bbox": [
+          731,
+          1100,
+          549,
+          365
+         ],
+         "clips_content": false,
+         "radius": 0
+        },
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          1.0,
+          0.0,
+          0.0
+         ],
+         [
+          0.0,
+          0.880743,
+          0.032718
+         ]
+        ],
+        "source_image": "d12242d44121fd7f93180fe99cb227f848f6467d",
+        "source_file": "d12242d44121fd7f93180fe99cb227f848f6467d.jpg",
+        "crop_ref": "d12242d44121fd7f93180fe99cb227f848f6467d.crop-964-1547.png",
+        "crop_size": [
+         1098,
+         730
+        ],
+        "crop_scale": 2.0
+       },
+       {
+        "order": 2,
+        "node": "964:1808",
+        "name": "12 3",
+        "bbox": [
+         731,
+         1495,
+         549,
+         365
+        ],
+        "container": {
+         "node": "964:1807",
+         "name": "Frame 12748",
+         "bbox": [
+          731,
+          1495,
+          549,
+          365
+         ],
+         "clips_content": false,
+         "radius": 0
+        },
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          1.0,
+          0.0,
+          -0.0
+         ],
+         [
+          0.0,
+          0.885595,
+          0.090841
+         ]
+        ],
+        "source_image": "fe9f4e8f0bf9d5ddf52ad5b39359330be8c0bb28",
+        "source_file": "fe9f4e8f0bf9d5ddf52ad5b39359330be8c0bb28.jpg",
+        "crop_ref": "fe9f4e8f0bf9d5ddf52ad5b39359330be8c0bb28.crop-964-1808.png",
+        "crop_size": [
+         1098,
+         730
+        ],
+        "crop_scale": 2.0
+       }
+      ]
      }
     },
     {
@@ -19559,7 +20028,298 @@
       "title_color": "#D75F47",
       "collection_color": null,
       "caption_color": null,
-      "meta_color": null
+      "meta_color": null,
+      "text_col": {
+       "node": "670:2849",
+       "name": "Frame 12683",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        1110,
+        739,
+        685
+       ],
+       "layout": "VERTICAL",
+       "gap": 25,
+       "padding_top": 30,
+       "content_top": 1140,
+       "bottom": 1795
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "670:2850",
+        "bbox": [
+         160,
+         1140,
+         739,
+         90
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#D75F47",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#D75F47",
+          "start": 0,
+          "length": 78,
+          "text": "Bas-relief of a Royal or Noble Procession, illustrating the Life of the Buddha"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "plain_meta",
+        "node": "670:2851",
+        "bbox": [
+         160,
+         1255,
+         739,
+         130
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 600,
+         "size": 24,
+         "line_height": 26,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#F8F9FA",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 600,
+          "color": "#F8F9FA",
+          "start": 0,
+          "length": 232,
+          "text_head": "Bas-relief of a Royal or Noble Processio"
+         }
+        ],
+        "y_in_col": 115,
+        "gap_before": 25
+       },
+       {
+        "order": 3,
+        "role": "lorem_placeholder",
+        "node": "670:2852",
+        "bbox": [
+         160,
+         1410,
+         739,
+         192
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 400,
+          "color": "#343A40",
+          "start": 0,
+          "length": 633,
+          "text_head": "Lorem Ipsum is simply dummy text of the "
+         }
+        ],
+        "y_in_col": 270,
+        "gap_before": 25
+       },
+       {
+        "order": 4,
+        "role": "lorem_placeholder",
+        "node": "670:2853",
+        "bbox": [
+         160,
+         1627,
+         739,
+         168
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 400,
+          "color": "#343A40",
+          "start": 0,
+          "length": 538,
+          "text_head": "Lorem Ipsum is simply dummy text of the "
+         }
+        ],
+        "y_in_col": 487,
+        "gap_before": 25
+       }
+      ],
+      "meta_labels": [],
+      "image_col": {
+       "nodes": [
+        "670:2854"
+       ],
+       "node": "670:2854",
+       "name": "Frame 12771",
+       "bbox": [
+        921,
+        1110,
+        359,
+        722
+       ],
+       "layout": "VERTICAL",
+       "gap": 10,
+       "padding_top": 0
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "670:2855",
+        "name": "01 11",
+        "bbox": [
+         921,
+         1110,
+         359,
+         112
+        ],
+        "radius": 0,
+        "scale_mode": "FILL",
+        "source_image": "b42c75df1b5be9ddd269cb33e31fdecdd38524c0",
+        "source_file": "b42c75df1b5be9ddd269cb33e31fdecdd38524c0.png",
+        "crop_ref": "b42c75df1b5be9ddd269cb33e31fdecdd38524c0.crop-670-2855.png",
+        "crop_size": [
+         718,
+         224
+        ],
+        "crop_scale": 2.0
+       },
+       {
+        "order": 2,
+        "node": "670:2856",
+        "name": "02 11",
+        "bbox": [
+         921,
+         1232,
+         359,
+         112
+        ],
+        "radius": 0,
+        "scale_mode": "FILL",
+        "source_image": "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06",
+        "source_file": "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06.png",
+        "crop_ref": "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06.crop-670-2856.png",
+        "crop_size": [
+         718,
+         224
+        ],
+        "crop_scale": 2.0
+       },
+       {
+        "order": 3,
+        "node": "670:2857",
+        "name": "03 9",
+        "bbox": [
+         921,
+         1354,
+         359,
+         112
+        ],
+        "radius": 0,
+        "scale_mode": "FILL",
+        "source_image": "4ce53001c838fd7804c16a3e17737286ab45fdc1",
+        "source_file": "4ce53001c838fd7804c16a3e17737286ab45fdc1.png",
+        "crop_ref": "4ce53001c838fd7804c16a3e17737286ab45fdc1.crop-670-2857.png",
+        "crop_size": [
+         718,
+         224
+        ],
+        "crop_scale": 2.0
+       },
+       {
+        "order": 4,
+        "node": "670:2858",
+        "name": "04 8",
+        "bbox": [
+         921,
+         1476,
+         359,
+         112
+        ],
+        "radius": 0,
+        "scale_mode": "FILL",
+        "source_image": "de086fc9260067212cc9a370bc3d8a8c8c6d7a19",
+        "source_file": "de086fc9260067212cc9a370bc3d8a8c8c6d7a19.png",
+        "crop_ref": "de086fc9260067212cc9a370bc3d8a8c8c6d7a19.crop-670-2858.png",
+        "crop_size": [
+         718,
+         224
+        ],
+        "crop_scale": 2.0
+       },
+       {
+        "order": 5,
+        "node": "670:2859",
+        "name": "05 7",
+        "bbox": [
+         921,
+         1598,
+         359,
+         112
+        ],
+        "radius": 0,
+        "scale_mode": "FILL",
+        "source_image": "f1c29b0dc6b4449c68abb6cee3bc2afa2f116cfb",
+        "source_file": "f1c29b0dc6b4449c68abb6cee3bc2afa2f116cfb.png",
+        "crop_ref": "f1c29b0dc6b4449c68abb6cee3bc2afa2f116cfb.crop-670-2859.png",
+        "crop_size": [
+         718,
+         224
+        ],
+        "crop_scale": 2.0
+       },
+       {
+        "order": 6,
+        "node": "670:2860",
+        "name": "06 7",
+        "bbox": [
+         921,
+         1720,
+         359,
+         112
+        ],
+        "radius": 0,
+        "scale_mode": "FILL",
+        "source_image": "378c155fa27dc3d2a02a9bb5bd1f96ebf7b97b9d",
+        "source_file": "378c155fa27dc3d2a02a9bb5bd1f96ebf7b97b9d.png",
+        "crop_ref": "378c155fa27dc3d2a02a9bb5bd1f96ebf7b97b9d.crop-670-2860.png",
+        "crop_size": [
+         718,
+         224
+        ],
+        "crop_scale": 2.0
+       }
+      ]
      }
     },
     {
@@ -19950,7 +20710,370 @@
       "title_color": "#617250",
       "collection_color": null,
       "caption_color": "#000000",
-      "meta_color": null
+      "meta_color": null,
+      "text_col": {
+       "node": "670:2874",
+       "name": "Frame 12683",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        1050,
+        549,
+        588
+       ],
+       "layout": "VERTICAL",
+       "gap": 15,
+       "padding_top": 0,
+       "content_top": 1050,
+       "bottom": 1638
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "670:2875",
+        "bbox": [
+         160,
+         1050,
+         549,
+         45
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#617250",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#617250",
+          "start": 0,
+          "length": 25,
+          "text": "Elephant and Mahout Kendi"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "plain_meta",
+        "node": "670:2876",
+        "bbox": [
+         160,
+         1110,
+         549,
+         30
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 600,
+         "size": 24,
+         "line_height": 30,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#FFFFFF",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 600,
+          "color": "#FFFFFF",
+          "start": 0,
+          "length": 43,
+          "text": "Si Satchanalai Kiln Site, Central Thailand,"
+         }
+        ],
+        "lines": [
+         {
+          "text": "Si Satchanalai Kiln Site, Central Thailand,",
+          "list": "UNORDERED",
+          "indent": 1
+         }
+        ],
+        "y_in_col": 60,
+        "gap_before": 15
+       },
+       {
+        "order": 3,
+        "role": "plain_meta",
+        "node": "670:2877",
+        "bbox": [
+         160,
+         1155,
+         549,
+         60
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 600,
+         "size": 24,
+         "line_height": 30,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#FFFFFF",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 600,
+          "color": "#FFFFFF",
+          "start": 0,
+          "length": 60,
+          "text": "15th–early 16th century CE\nBrunei Darussalam Maritime Museum"
+         }
+        ],
+        "lines": [
+         {
+          "text": "15th–early 16th century CE",
+          "list": "UNORDERED",
+          "indent": 1
+         },
+         {
+          "text": "Brunei Darussalam Maritime Museum",
+          "list": "NONE",
+          "indent": 0
+         }
+        ],
+        "y_in_col": 105,
+        "gap_before": 15
+       },
+       {
+        "order": 4,
+        "role": "caption",
+        "node": "670:2878",
+        "bbox": [
+         160,
+         1230,
+         549,
+         408
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#000000",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 400,
+          "color": "#000000",
+          "start": 0,
+          "length": 1027,
+          "text_head": "A brown-glazed stoneware pouring vessel,"
+         }
+        ],
+        "y_in_col": 180,
+        "gap_before": 15
+       }
+      ],
+      "caption": {
+       "node": "670:2878",
+       "label": null,
+       "label_weight": null,
+       "label_color": null,
+       "label_breaks": 0,
+       "body_weight": 400,
+       "body_color": "#000000",
+       "body_length": 1027,
+       "body_break_runs": {
+        "1": 2
+       },
+       "paragraph_indent_nbsp": [
+        0,
+        15,
+        15
+       ]
+      },
+      "meta_labels": [],
+      "image_col": {
+       "nodes": [
+        "670:2879"
+       ],
+       "node": "670:2879",
+       "name": "Frame 12684",
+       "bbox": [
+        731,
+        1050,
+        549,
+        588
+       ],
+       "layout": "VERTICAL",
+       "gap": 20,
+       "padding_top": 0
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "670:2881",
+        "name": "Rectangle 1",
+        "bbox": [
+         731,
+         1050,
+         549,
+         284
+        ],
+        "container": {
+         "node": "670:2880",
+         "name": "Frame 12682",
+         "bbox": [
+          731,
+          1050,
+          549,
+          284
+         ],
+         "clips_content": false,
+         "radius": 22
+        },
+        "radius": 22,
+        "shadow": [
+         {
+          "x": 0,
+          "y": 1,
+          "blur": 4,
+          "spread": 0,
+          "color": "#0C0C0D",
+          "opacity": 0.05
+         },
+         {
+          "x": 0,
+          "y": 1,
+          "blur": 4,
+          "spread": 0,
+          "color": "#0C0C0D",
+          "opacity": 0.1
+         }
+        ],
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          1.623593,
+          0.0,
+          -0.534449
+         ],
+         [
+          0.0,
+          1.0,
+          0.0
+         ]
+        ],
+        "source_image": "97fa4b24704236a40923663518f9aa29c6ce1cb2",
+        "source_file": "97fa4b24704236a40923663518f9aa29c6ce1cb2.png",
+        "crop_ref": "97fa4b24704236a40923663518f9aa29c6ce1cb2.crop-670-2881.png",
+        "crop_size": [
+         1098,
+         568
+        ],
+        "crop_scale": 2.0
+       },
+       {
+        "order": 2,
+        "node": "670:2883",
+        "name": "Rectangle 1",
+        "bbox": [
+         731,
+         1354,
+         549,
+         284
+        ],
+        "container": {
+         "node": "670:2882",
+         "name": "Frame 12683",
+         "bbox": [
+          731,
+          1354,
+          549,
+          284
+         ],
+         "clips_content": false,
+         "radius": 10
+        },
+        "radius": 10,
+        "shadow": [
+         {
+          "x": 0,
+          "y": 1,
+          "blur": 4,
+          "spread": 0,
+          "color": "#0C0C0D",
+          "opacity": 0.05
+         },
+         {
+          "x": 0,
+          "y": 1,
+          "blur": 4,
+          "spread": 0,
+          "color": "#0C0C0D",
+          "opacity": 0.1
+         }
+        ],
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          1.707081,
+          0.0,
+          -0.060393
+         ],
+         [
+          0.0,
+          0.919215,
+          0.019288
+         ]
+        ],
+        "source_image": "810b828903b38a64facdfd38ffe651e4d1f23f46",
+        "source_file": "810b828903b38a64facdfd38ffe651e4d1f23f46.png",
+        "crop_ref": "810b828903b38a64facdfd38ffe651e4d1f23f46.crop-670-2883.png",
+        "crop_size": [
+         1098,
+         568
+        ],
+        "crop_scale": 2.0
+       }
+      ],
+      "hero_bg": {
+       "node": "670:2891",
+       "name": "Rectangle 1",
+       "parent_node": "670:2884",
+       "parent_name": "Frame 12779",
+       "bbox": [
+        0,
+        200,
+        1440,
+        790
+       ],
+       "z_in_parent": 7,
+       "z_of": 7,
+       "scale_mode": "STRETCH",
+       "image_transform": [
+        [
+         1.0,
+         0.0,
+         0.0
+        ],
+        [
+         0.0,
+         0.426192,
+         0.474085
+        ]
+       ],
+       "source_image": "0652a86e6bd079fcb7494b2f99d6a03b8bfd151a",
+       "source_file": "0652a86e6bd079fcb7494b2f99d6a03b8bfd151a.jpg",
+       "crop_ref": "0652a86e6bd079fcb7494b2f99d6a03b8bfd151a.crop-670-2891.png",
+       "crop_size": [
+        1440,
+        790
+       ],
+       "crop_scale": 1.0
+      }
      }
     },
     {
@@ -20139,7 +21262,7 @@
   {
    "slug": "elephant-leg-bone",
    "title": "Elephant Leg Bone (Elephas maximus indicus)",
-   "title_raw": "Elephant Leg Bone  (Elephas maximus indicus)",
+   "title_raw": "Elephant Leg Bone\n(Elephas maximus indicus)",
    "trails": [
     "elephant"
    ],
@@ -20306,7 +21429,221 @@
       "title_color": "#FFFFFF",
       "collection_color": "#F8F9FA",
       "caption_color": "#343A40",
-      "meta_color": null
+      "meta_color": null,
+      "text_col": {
+       "node": "1041:1367",
+       "name": "Frame 12683",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        952,
+        739,
+        1180
+       ],
+       "layout": "VERTICAL",
+       "gap": 25,
+       "padding_top": 30,
+       "content_top": 982,
+       "bottom": 2132
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "1041:1379",
+        "bbox": [
+         160,
+         982,
+         739,
+         90
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#FFFFFF",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#FFFFFF",
+          "start": 0,
+          "length": 44,
+          "text": "Elephant Leg Bone \n(Elephas maximus indicus)"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "collection",
+        "node": "1041:1391",
+        "bbox": [
+         160,
+         1097,
+         739,
+         26
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 600,
+         "size": 24,
+         "line_height": 26,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#F8F9FA",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 0,
+          "length": 11,
+          "text": "Collection:"
+         },
+         {
+          "weight": 600,
+          "color": "#F8F9FA",
+          "start": 11,
+          "length": 1,
+          "text": " "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 12,
+          "length": 23,
+          "text": "National Museum Bangkok"
+         }
+        ],
+        "rows": [
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "National Museum Bangkok",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         }
+        ],
+        "y_in_col": 115,
+        "gap_before": 25
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "1041:1403",
+        "bbox": [
+         160,
+         1148,
+         739,
+         984
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 9,
+          "text": "Caption:\n"
+         },
+         {
+          "weight": 400,
+          "color": "#343A40",
+          "start": 9,
+          "length": 2864,
+          "text_head": "\nThis bone originates from the Asian ele"
+         }
+        ],
+        "y_in_col": 166,
+        "gap_before": 25
+       }
+      ],
+      "caption": {
+       "node": "1041:1403",
+       "label": "Caption:",
+       "label_weight": 700,
+       "label_color": "#343A40",
+       "label_breaks": 2,
+       "body_weight": 400,
+       "body_color": "#343A40",
+       "body_length": 2863,
+       "body_break_runs": {
+        "2": 4
+       }
+      },
+      "meta_labels": [
+       "Collection:"
+      ],
+      "image_col": {
+       "nodes": [
+        "1041:1451"
+       ],
+       "node": "1041:1451",
+       "name": "Frame 114479",
+       "bbox": [
+        921,
+        952,
+        360,
+        689
+       ],
+       "layout": "HORIZONTAL",
+       "gap": 10,
+       "padding_top": 100
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "1041:1452",
+        "name": "Rectangle 27",
+        "bbox": [
+         921,
+         1052,
+         360,
+         589
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          0.538036,
+          -0.474443,
+          0.443433
+         ],
+         [
+          0.515523,
+          1.564954,
+          -0.533603
+         ]
+        ],
+        "paint_rotation": 450,
+        "source_image": "4953122e17ae97232adf69a47ba5ed1405c8d733",
+        "source_file": "4953122e17ae97232adf69a47ba5ed1405c8d733.png",
+        "crop_ref": "4953122e17ae97232adf69a47ba5ed1405c8d733.crop-1041-1452.png",
+        "crop_size": [
+         720,
+         1178
+        ],
+        "crop_scale": 2.0
+       }
+      ]
      }
     },
     {
@@ -20623,7 +21960,262 @@
       "title_color": "#D75F47",
       "collection_color": null,
       "caption_color": "#343A40",
-      "meta_color": "#F8F9FA"
+      "meta_color": "#F8F9FA",
+      "text_col": {
+       "node": "956:977",
+       "name": "Frame 12683",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        1071,
+        1120,
+        881
+       ],
+       "layout": "VERTICAL",
+       "gap": 25,
+       "padding_top": 30,
+       "content_top": 1101,
+       "bottom": 1952
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "956:978",
+        "bbox": [
+         160,
+         1101,
+         1120,
+         45
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#D75F47",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#D75F47",
+          "start": 0,
+          "length": 51,
+          "text": "Elephant Molar Coconut Grater (Dwarf Elephant Bone)"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "meta",
+        "node": "956:979",
+        "bbox": [
+         160,
+         1171,
+         1120,
+         156
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 600,
+         "size": 20,
+         "line_height": 26,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#F8F9FA",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 0,
+          "length": 9,
+          "text": "Material:"
+         },
+         {
+          "weight": 600,
+          "color": "#F8F9FA",
+          "start": 9,
+          "length": 1,
+          "text": " "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 10,
+          "length": 45,
+          "text": "Animal bone (specifically an elephant molar)\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 55,
+          "length": 11,
+          "text": "Dimensions:"
+         },
+         {
+          "weight": 600,
+          "color": "#F8F9FA",
+          "start": 66,
+          "length": 1,
+          "text": " "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 67,
+          "length": 43,
+          "text": "Length: 58 cm, Width: 33 cm, Height: 18 cm\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 110,
+          "length": 11,
+          "text": "Collection:"
+         },
+         {
+          "weight": 600,
+          "color": "#F8F9FA",
+          "start": 121,
+          "length": 1,
+          "text": " "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 122,
+          "length": 57,
+          "text": "Folklore Museum, The Institute for Southern Thai Studies\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 179,
+          "length": 37,
+          "text": "Other Information / Object Biography:"
+         },
+         {
+          "weight": 600,
+          "color": "#F8F9FA",
+          "start": 216,
+          "length": 1,
+          "text": " "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 217,
+          "length": 255,
+          "text_head": "Contributed by Mrs. Sriya Kongyen, House"
+         }
+        ],
+        "rows": [
+         {
+          "label": "Material:",
+          "field": "material",
+          "value": "Animal bone (specifically an elephant molar)",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Dimensions:",
+          "field": "dimensions",
+          "value": "Length: 58 cm, Width: 33 cm, Height: 18 cm",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "Folklore Museum, The Institute for Southern Thai Studies",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Other Information / Object Biography:",
+          "field": "object_biography",
+          "value": "Contributed by Mrs. Sriya Kongyen, House No. 21, Ranot Sub-district, Ranot District, Songkhla Province. Data recorded on 28 January 1997. Exhibited in the Coconut Grater Room (Kratai Khud Maphrao Room), Folklore Museum, Institute of Southern Thai Studies.",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         }
+        ],
+        "y_in_col": 70,
+        "gap_before": 25
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "956:980",
+        "bbox": [
+         160,
+         1352,
+         1120,
+         600
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 9,
+          "text": "Caption:\n"
+         },
+         {
+          "weight": 400,
+          "color": "#343A40",
+          "start": 9,
+          "length": 2576,
+          "text_head": "This coconut grater, known in Southern T"
+         }
+        ],
+        "y_in_col": 251,
+        "gap_before": 25
+       }
+      ],
+      "caption": {
+       "node": "956:980",
+       "label": "Caption:",
+       "label_weight": 700,
+       "label_color": "#343A40",
+       "label_breaks": 1,
+       "body_weight": 400,
+       "body_color": "#343A40",
+       "body_length": 2576,
+       "body_break_runs": {
+        "2": 3
+       }
+      },
+      "meta_labels": [
+       "Material:",
+       "Dimensions:",
+       "Collection:",
+       "Other Information / Object Biography:"
+      ]
      }
     },
     {
@@ -21003,7 +22595,357 @@
       "title_color": "#D75F47",
       "collection_color": null,
       "caption_color": "#212529",
-      "meta_color": "#F8F9FA"
+      "meta_color": "#F8F9FA",
+      "text_col": {
+       "node": "961:1218",
+       "name": "Frame 12747",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        1020,
+        549,
+        1011
+       ],
+       "layout": "VERTICAL",
+       "gap": 22,
+       "padding_top": 0,
+       "content_top": 1020,
+       "bottom": 2031
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "961:1219",
+        "bbox": [
+         160,
+         1020,
+         571,
+         45
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#D75F47",
+        "auto_resize": "WIDTH_AND_HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#D75F47",
+          "start": 0,
+          "length": 32,
+          "text": "Elephant-Shaped Relic Containers"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "meta",
+        "node": "961:1220",
+        "bbox": [
+         160,
+         1087,
+         549,
+         250
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 700,
+         "size": 20,
+         "line_height": 25,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#F8F9FA",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 0,
+          "length": 10,
+          "text": "Section : "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 10,
+          "length": 31,
+          "text": "Ceremonies Rituals & Festivals\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 41,
+          "length": 8,
+          "text": "Period: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 49,
+          "length": 27,
+          "text": "Lanna period, 16th century\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 76,
+          "length": 32,
+          "text": "Place of Production / Findspot: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 108,
+          "length": 68,
+          "text": "Wat Chedi Sung, Hod sub-district, Hod district, Chiang Mai province\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 176,
+          "length": 10,
+          "text": "Material: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 186,
+          "length": 20,
+          "text": "Quartz, Gold, Stone\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 206,
+          "length": 12,
+          "text": "Dimensions: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 218,
+          "length": 41,
+          "text": "Width 1.1 cm, Height 4.5 cm, Length 7 cm\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 259,
+          "length": 12,
+          "text": "Collection: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 271,
+          "length": 24,
+          "text": "National Museum Bangkok\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 295,
+          "length": 38,
+          "text": "Other Information / Object Biography: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 333,
+          "length": 91,
+          "text": "Acquired from Wat Chedi Sung, Hod sub-district, Hod district, Chiang Mai province, in 1960."
+         }
+        ],
+        "rows": [
+         {
+          "label": "Section :",
+          "field": "thematic_section",
+          "value": "Ceremonies Rituals & Festivals",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Period:",
+          "field": "period",
+          "value": "Lanna period, 16th century",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Place of Production / Findspot:",
+          "field": "place_of_production",
+          "value": "Wat Chedi Sung, Hod sub-district, Hod district, Chiang Mai province",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Material:",
+          "field": "material",
+          "value": "Quartz, Gold, Stone",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Dimensions:",
+          "field": "dimensions",
+          "value": "Width 1.1 cm, Height 4.5 cm, Length 7 cm",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "National Museum Bangkok",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Other Information / Object Biography:",
+          "field": "object_biography",
+          "value": "Acquired from Wat Chedi Sung, Hod sub-district, Hod district, Chiang Mai province, in 1960.",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         }
+        ],
+        "y_in_col": 67,
+        "gap_before": 22
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "961:1221",
+        "bbox": [
+         160,
+         1359,
+         549,
+         672
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#212529",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#212529",
+          "start": 0,
+          "length": 9,
+          "text": "Caption:\n"
+         },
+         {
+          "weight": 400,
+          "color": "#212529",
+          "start": 9,
+          "length": 1664,
+          "text_head": "These miniature relic containers, fashio"
+         }
+        ],
+        "y_in_col": 339,
+        "gap_before": 22
+       }
+      ],
+      "caption": {
+       "node": "961:1221",
+       "label": "Caption:",
+       "label_weight": 700,
+       "label_color": "#212529",
+       "label_breaks": 1,
+       "body_weight": 400,
+       "body_color": "#212529",
+       "body_length": 1664,
+       "body_break_runs": {
+        "1": 3
+       }
+      },
+      "meta_labels": [
+       "Section :",
+       "Period:",
+       "Place of Production / Findspot:",
+       "Material:",
+       "Dimensions:",
+       "Collection:",
+       "Other Information / Object Biography:"
+      ],
+      "image_col": {
+       "nodes": [
+        "961:1230"
+       ],
+       "node": "961:1230",
+       "name": "Frame 12742",
+       "bbox": [
+        731,
+        1020,
+        549,
+        302.24
+       ],
+       "layout": "VERTICAL",
+       "gap": 12,
+       "padding_top": 0
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "961:1231",
+        "name": "12 3",
+        "bbox": [
+         731,
+         1020,
+         549,
+         302.24
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          0.806548,
+          0.0,
+          0.076876
+         ],
+         [
+          0.0,
+          0.665089,
+          0.165905
+         ]
+        ],
+        "source_image": "1c3aa3a10055d34a499058cb6d74a29c814cfa42",
+        "source_file": "1c3aa3a10055d34a499058cb6d74a29c814cfa42.png",
+        "crop_ref": "1c3aa3a10055d34a499058cb6d74a29c814cfa42.crop-961-1231.png",
+        "crop_size": [
+         1098,
+         604
+        ],
+        "crop_scale": 2.0
+       }
+      ]
      }
     },
     {
@@ -21419,7 +23361,307 @@
       "title_color": "#D75F47",
       "collection_color": null,
       "caption_color": "#212529",
-      "meta_color": "#F8F9FA"
+      "meta_color": "#F8F9FA",
+      "text_col": {
+       "node": "670:2796",
+       "name": "Frame 12685",
+       "direct_in_panel": true,
+       "bbox": [
+        160,
+        1060,
+        1120,
+        785
+       ],
+       "layout": "VERTICAL",
+       "gap": 22,
+       "padding_top": 0,
+       "content_top": 1060,
+       "note": "text nodes are direct children of the panel (vertical auto-layout, gap = panel gap)",
+       "bottom": 1845
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "670:2797",
+        "bbox": [
+         160,
+         1060,
+         1120,
+         45
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#D75F47",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#D75F47",
+          "start": 0,
+          "length": 7,
+          "text": "Ganesha"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "meta",
+        "node": "670:2798",
+        "bbox": [
+         160,
+         1127,
+         1120,
+         240
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 700,
+         "size": 24,
+         "line_height": 30,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#F8F9FA",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 0,
+          "length": 10,
+          "text": "Section : "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 10,
+          "length": 34,
+          "text": "Cosmology Religion & Spirituality\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 44,
+          "length": 7,
+          "text": "Period:"
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 51,
+          "length": 19,
+          "text": " 10th–11th century\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 70,
+          "length": 32,
+          "text": "Place of Production / Findspot: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 102,
+          "length": 39,
+          "text": "Candi Singhasari, East Java, Indonesia\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 141,
+          "length": 10,
+          "text": "Material: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 151,
+          "length": 28,
+          "text": "Andesite, ****Volcanic rock\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 179,
+          "length": 12,
+          "text": "Dimensions: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 191,
+          "length": 15,
+          "text": "Height: 172 cm\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 206,
+          "length": 12,
+          "text": "Collection: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 218,
+          "length": 24,
+          "text": "National Museum Bangkok\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 242,
+          "length": 27,
+          "text": "Specimen/Object biography: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 269,
+          "length": 112,
+          "text": "The Dutch government in Java presented this to King Chulalongkorn (Rama V) of Thailand during his visit in 1896."
+         }
+        ],
+        "rows": [
+         {
+          "label": "Section :",
+          "field": "thematic_section",
+          "value": "Cosmology Religion & Spirituality",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Period:",
+          "field": "period",
+          "value": "10th–11th century",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Place of Production / Findspot:",
+          "field": "place_of_production",
+          "value": "Candi Singhasari, East Java, Indonesia",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Material:",
+          "field": "material",
+          "value": "Andesite, ****Volcanic rock",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Dimensions:",
+          "field": "dimensions",
+          "value": "Height: 172 cm",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "National Museum Bangkok",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Specimen/Object biography:",
+          "field": "object_biography",
+          "value": "The Dutch government in Java presented this to King Chulalongkorn (Rama V) of Thailand during his visit in 1896.",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         }
+        ],
+        "y_in_col": 67,
+        "gap_before": 22
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "670:2799",
+        "bbox": [
+         160,
+         1389,
+         1120,
+         456
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#212529",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#212529",
+          "start": 0,
+          "length": 10,
+          "text": "Caption:\n\n"
+         },
+         {
+          "weight": 400,
+          "color": "#212529",
+          "start": 10,
+          "length": 1578,
+          "text_head": "Carved from volcanic stone, this monumen"
+         }
+        ],
+        "y_in_col": 329,
+        "gap_before": 22
+       }
+      ],
+      "caption": {
+       "node": "670:2799",
+       "label": "Caption:",
+       "label_weight": 700,
+       "label_color": "#212529",
+       "label_breaks": 2,
+       "body_weight": 400,
+       "body_color": "#212529",
+       "body_length": 1578,
+       "body_break_runs": {
+        "2": 3
+       }
+      },
+      "meta_labels": [
+       "Section :",
+       "Period:",
+       "Place of Production / Findspot:",
+       "Material:",
+       "Dimensions:",
+       "Collection:",
+       "Specimen/Object biography:"
+      ]
      }
     },
     {
@@ -21928,7 +24170,214 @@
       "title_color": "#495057",
       "collection_color": "#343A40",
       "caption_color": "#343A40",
-      "meta_color": null
+      "meta_color": null,
+      "text_col": {
+       "node": "1042:1932",
+       "name": "Frame 12747",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        1020,
+        739,
+        1338
+       ],
+       "layout": "VERTICAL",
+       "gap": 22,
+       "padding_top": 0,
+       "content_top": 1020,
+       "bottom": 2358
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "1042:1944",
+        "bbox": [
+         160,
+         1020,
+         707,
+         45
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#495057",
+        "auto_resize": "WIDTH_AND_HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#495057",
+          "start": 0,
+          "length": 38,
+          "text": "Hand-Carved Ivory and Metal Opium Pipe"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "collection",
+        "node": "1042:1956",
+        "bbox": [
+         160,
+         1087,
+         739,
+         25
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 500,
+         "size": 20,
+         "line_height": 25,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 11,
+          "text": "Collection:"
+         },
+         {
+          "weight": 500,
+          "color": "#343A40",
+          "start": 11,
+          "length": 57,
+          "text": " Folklore Museum, The Institute for Southern Thai Studies"
+         }
+        ],
+        "rows": [
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "Folklore Museum, The Institute for Southern Thai Studies",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#343A40",
+          "value_color": "#343A40"
+         }
+        ],
+        "y_in_col": 67,
+        "gap_before": 22
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "1042:1968",
+        "bbox": [
+         160,
+         1134,
+         739,
+         1224
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 700,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 10,
+          "text": "Caption:\n\n"
+         },
+         {
+          "weight": 400,
+          "color": "#343A40",
+          "start": 10,
+          "length": 3408,
+          "text_head": "This hand-carved ivory opium pipe (in Th"
+         }
+        ],
+        "y_in_col": 114,
+        "gap_before": 22
+       }
+      ],
+      "caption": {
+       "node": "1042:1968",
+       "label": "Caption:",
+       "label_weight": 700,
+       "label_color": "#343A40",
+       "label_breaks": 2,
+       "body_weight": 400,
+       "body_color": "#343A40",
+       "body_length": 3408,
+       "body_break_runs": {
+        "2": 7
+       }
+      },
+      "meta_labels": [
+       "Collection:"
+      ],
+      "image_col": {
+       "nodes": [
+        "1042:1981"
+       ],
+       "node": "1042:1981",
+       "name": "Frame 114479",
+       "bbox": [
+        921,
+        1020,
+        360,
+        689
+       ],
+       "layout": "HORIZONTAL",
+       "gap": 10,
+       "padding_top": 100
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "1042:1982",
+        "name": "Rectangle 27",
+        "bbox": [
+         921,
+         1120,
+         360,
+         589
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          0.230596,
+          -0.760448,
+          0.751935
+         ],
+         [
+          1.182472,
+          0.959841,
+          -0.549041
+         ]
+        ],
+        "paint_rotation": 270,
+        "source_image": "10a3379a6d219df35f0a4c597352cc1df24a621c",
+        "source_file": "10a3379a6d219df35f0a4c597352cc1df24a621c.png",
+        "crop_ref": "10a3379a6d219df35f0a4c597352cc1df24a621c.crop-1042-1982.png",
+        "crop_size": [
+         720,
+         1178
+        ],
+        "crop_scale": 2.0
+       }
+      ]
      }
     },
     {
@@ -22313,7 +24762,246 @@
       "title_color": "#495057",
       "collection_color": "#343A40",
       "caption_color": "#343A40",
-      "meta_color": null
+      "meta_color": null,
+      "text_col": {
+       "node": "1006:1186",
+       "name": "Frame 12747",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        1020,
+        739,
+        1074
+       ],
+       "layout": "VERTICAL",
+       "gap": 22,
+       "padding_top": 0,
+       "content_top": 1020,
+       "bottom": 2094
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "1006:1198",
+        "bbox": [
+         160,
+         1020,
+         597,
+         45
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#495057",
+        "auto_resize": "WIDTH_AND_HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#495057",
+          "start": 0,
+          "length": 38,
+          "text": "Ivory Fire Piston / Ivory Fire Syringe"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "collection",
+        "node": "1006:1210",
+        "bbox": [
+         160,
+         1087,
+         739,
+         25
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 500,
+         "size": 20,
+         "line_height": 25,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 11,
+          "text": "Collection:"
+         },
+         {
+          "weight": 500,
+          "color": "#343A40",
+          "start": 11,
+          "length": 57,
+          "text": " Folklore Museum, The Institute for Southern Thai Studies"
+         }
+        ],
+        "rows": [
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "Folklore Museum, The Institute for Southern Thai Studies",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#343A40",
+          "value_color": "#343A40"
+         }
+        ],
+        "y_in_col": 67,
+        "gap_before": 22
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "1006:1222",
+        "bbox": [
+         160,
+         1134,
+         739,
+         960
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 9,
+          "text": "Caption:\n"
+         },
+         {
+          "weight": 400,
+          "color": "#343A40",
+          "start": 9,
+          "length": 2780,
+          "text_head": "\nThis ivory fire piston (in Thai: lek fa"
+         }
+        ],
+        "y_in_col": 114,
+        "gap_before": 22
+       }
+      ],
+      "caption": {
+       "node": "1006:1222",
+       "label": "Caption:",
+       "label_weight": 700,
+       "label_color": "#343A40",
+       "label_breaks": 2,
+       "body_weight": 400,
+       "body_color": "#343A40",
+       "body_length": 2779,
+       "body_break_runs": {
+        "2": 4
+       }
+      },
+      "meta_labels": [
+       "Collection:"
+      ],
+      "image_col": {
+       "nodes": [
+        "1006:1224"
+       ],
+       "node": "1006:1224",
+       "name": "Frame 114475",
+       "bbox": [
+        921,
+        1020,
+        359,
+        334
+       ],
+       "layout": "VERTICAL",
+       "gap": 30,
+       "padding_top": 80
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "1006:1237",
+        "name": "12 3",
+        "bbox": [
+         941,
+         1100,
+         232,
+         243
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          0.478575,
+          0.0,
+          0.315176
+         ],
+         [
+          0.0,
+          0.665753,
+          0.30411
+         ]
+        ],
+        "source_image": "dd599abf57b26d23ba11ccc0197a1e7a68e0d458",
+        "source_file": "dd599abf57b26d23ba11ccc0197a1e7a68e0d458.png",
+        "crop_ref": "dd599abf57b26d23ba11ccc0197a1e7a68e0d458.crop-1006-1237.png",
+        "crop_size": [
+         464,
+         486
+        ],
+        "crop_scale": 2.0
+       },
+       {
+        "order": 2,
+        "node": "1006:1249",
+        "name": "12 4",
+        "bbox": [
+         1039,
+         1110,
+         221,
+         244
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          0.455884,
+          0.0,
+          0.272492
+         ],
+         [
+          0.0,
+          0.668493,
+          0.183562
+         ]
+        ],
+        "source_image": "8dcebc793b2265a8aa9c502af29cba3088d659a2",
+        "source_file": "8dcebc793b2265a8aa9c502af29cba3088d659a2.png",
+        "crop_ref": "8dcebc793b2265a8aa9c502af29cba3088d659a2.crop-1006-1249.png",
+        "crop_size": [
+         442,
+         488
+        ],
+        "crop_scale": 2.0
+       }
+      ]
      }
     },
     {
@@ -22700,7 +25388,283 @@
       "title_color": "#495057",
       "collection_color": "#6C757D",
       "caption_color": "#343A40",
-      "meta_color": null
+      "meta_color": null,
+      "text_col": {
+       "node": "3004:806",
+       "name": "Frame Text",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        940,
+        549,
+        989
+       ],
+       "layout": "VERTICAL",
+       "gap": 15,
+       "padding_top": 0,
+       "content_top": 940,
+       "bottom": 1929
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "3004:807",
+        "bbox": [
+         160,
+         940,
+         549,
+         45
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#495057",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#495057",
+          "start": 0,
+          "length": 12,
+          "text": "Patola cloth"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "collection",
+        "node": "3004:808",
+        "bbox": [
+         160,
+         1000,
+         549,
+         50
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 600,
+         "size": 24,
+         "line_height": 30,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#6C757D",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "size": 20,
+          "start": 0,
+          "length": 11,
+          "text": "Collection:"
+         },
+         {
+          "weight": 500,
+          "color": "#343A40",
+          "size": 20,
+          "start": 11,
+          "length": 57,
+          "text": " Department of Museums Malaysia (Jabatan Muzium Malaysia)"
+         }
+        ],
+        "rows": [
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "Department of Museums Malaysia (Jabatan Muzium Malaysia)",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#343A40",
+          "value_color": "#343A40"
+         }
+        ],
+        "y_in_col": 60,
+        "gap_before": 15
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "3004:809",
+        "bbox": [
+         160,
+         1065,
+         549,
+         864
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 400,
+          "color": "#343A40",
+          "start": 0,
+          "length": 2053,
+          "text_head": "This silk cloth, known as patola in Indi"
+         }
+        ],
+        "y_in_col": 125,
+        "gap_before": 15
+       }
+      ],
+      "caption": {
+       "node": "3004:809",
+       "label": null,
+       "label_weight": null,
+       "label_color": null,
+       "label_breaks": 0,
+       "body_weight": 400,
+       "body_color": "#343A40",
+       "body_length": 2053,
+       "body_break_runs": {
+        "2": 3
+       }
+      },
+      "meta_labels": [
+       "Collection:"
+      ],
+      "image_col": {
+       "nodes": [
+        "3004:810"
+       ],
+       "node": "3004:810",
+       "name": "Frame Picture",
+       "bbox": [
+        731,
+        940,
+        549,
+        588
+       ],
+       "layout": "VERTICAL",
+       "gap": 20,
+       "padding_top": 0
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "3004:812",
+        "name": "Rectangle 1",
+        "bbox": [
+         731,
+         940,
+         549,
+         284
+        ],
+        "container": {
+         "node": "3004:811",
+         "name": "Frame 12682",
+         "bbox": [
+          731,
+          940,
+          549,
+          284
+         ],
+         "clips_content": false,
+         "radius": 22
+        },
+        "radius": 22,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          1.0,
+          0.0,
+          -0.00098
+         ],
+         [
+          0.0,
+          0.880646,
+          0.085794
+         ]
+        ],
+        "source_image": "06e906153fce5c90d379a1100d824fc39579b832",
+        "source_file": "06e906153fce5c90d379a1100d824fc39579b832.jpg",
+        "crop_ref": "06e906153fce5c90d379a1100d824fc39579b832.crop-3004-812.png",
+        "crop_size": [
+         1098,
+         568
+        ],
+        "crop_scale": 2.0
+       },
+       {
+        "order": 2,
+        "node": "3004:814",
+        "name": "Rectangle 1",
+        "bbox": [
+         731,
+         1244,
+         549,
+         284
+        ],
+        "container": {
+         "node": "3004:813",
+         "name": "Frame 12683",
+         "bbox": [
+          731,
+          1244,
+          549,
+          284
+         ],
+         "clips_content": false,
+         "radius": 10
+        },
+        "radius": 10,
+        "shadow": [
+         {
+          "x": 0,
+          "y": 1,
+          "blur": 4,
+          "spread": 0,
+          "color": "#0C0C0D",
+          "opacity": 0.05
+         },
+         {
+          "x": 0,
+          "y": 1,
+          "blur": 4,
+          "spread": 0,
+          "color": "#0C0C0D",
+          "opacity": 0.1
+         }
+        ],
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          0.747041,
+          0.0,
+          0.12579
+         ],
+         [
+          0.0,
+          1.0,
+          0.0
+         ]
+        ],
+        "source_image": "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf",
+        "source_file": "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf.png",
+        "crop_ref": "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf.crop-3004-814.png",
+        "crop_size": [
+         1098,
+         568
+        ],
+        "crop_scale": 2.0
+       }
+      ]
      }
     }
    ],
@@ -22718,7 +25682,7 @@
   {
    "slug": "pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king",
    "title": "Pod Duang (Bullet Money) stamped with the Chakra and Great Crown Marks, Reign of King Rama IV",
-   "title_raw": "Pod Duang (Bullet Money) stamped with the Chakra and  Great Crown Marks, Reign of King Rama IV",
+   "title_raw": "Pod Duang (Bullet Money) stamped with the Chakra and\nGreat Crown Marks, Reign of King Rama IV",
    "trails": [
     "elephant"
    ],
@@ -22967,7 +25931,225 @@
       "title_color": "#FFFFFF",
       "collection_color": "#F8F9FA",
       "caption_color": "#E9ECEF",
-      "meta_color": null
+      "meta_color": null,
+      "text_col": {
+       "node": "964:2110",
+       "name": "Frame 12747",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        1020,
+        739,
+        759
+       ],
+       "layout": "VERTICAL",
+       "gap": 22,
+       "padding_top": 0,
+       "content_top": 1020,
+       "bottom": 1779
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "964:2111",
+        "bbox": [
+         160,
+         1020,
+         959,
+         90
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#FFFFFF",
+        "auto_resize": "WIDTH_AND_HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#FFFFFF",
+          "start": 0,
+          "length": 94,
+          "text": "Pod Duang (Bullet Money) stamped with the Chakra and \nGreat Crown Marks, Reign of King Rama IV"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "collection",
+        "node": "964:2112",
+        "bbox": [
+         160,
+         1132,
+         739,
+         25
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 500,
+         "size": 20,
+         "line_height": 25,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#F8F9FA",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 0,
+          "length": 11,
+          "text": "Collection:"
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 11,
+          "length": 24,
+          "text": " National Museum Bangkok"
+         }
+        ],
+        "rows": [
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "National Museum Bangkok",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         }
+        ],
+        "y_in_col": 112,
+        "gap_before": 22
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "964:2113",
+        "bbox": [
+         160,
+         1179,
+         739,
+         600
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#E9ECEF",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#E9ECEF",
+          "start": 0,
+          "length": 9,
+          "text": "Caption:\n"
+         },
+         {
+          "weight": 400,
+          "color": "#E9ECEF",
+          "start": 9,
+          "length": 1624,
+          "text_head": "Pod Duang (Bullet Money) is a form of si"
+         }
+        ],
+        "y_in_col": 159,
+        "gap_before": 22
+       }
+      ],
+      "caption": {
+       "node": "964:2113",
+       "label": "Caption:",
+       "label_weight": 700,
+       "label_color": "#E9ECEF",
+       "label_breaks": 1,
+       "body_weight": 400,
+       "body_color": "#E9ECEF",
+       "body_length": 1624,
+       "body_break_runs": {
+        "2": 3
+       }
+      },
+      "meta_labels": [
+       "Collection:"
+      ],
+      "image_col": {
+       "nodes": [
+        "964:2115"
+       ],
+       "node": "964:2115",
+       "name": "Frame 114475",
+       "bbox": [
+        921,
+        1020,
+        359,
+        445
+       ],
+       "layout": "VERTICAL",
+       "gap": 30,
+       "padding_top": 80
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "964:2117",
+        "name": "12 3",
+        "bbox": [
+         921,
+         1100,
+         359,
+         365
+        ],
+        "container": {
+         "node": "964:2116",
+         "name": "Frame 12742",
+         "bbox": [
+          921,
+          1100,
+          359,
+          365
+         ],
+         "clips_content": false,
+         "radius": 0
+        },
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          1.056114,
+          0.0,
+          -0.030116
+         ],
+         [
+          0.0,
+          1.073765,
+          -0.036985
+         ]
+        ],
+        "source_image": "bf841c7f35a6ca3858a1b46b02a46a6887ad714e",
+        "source_file": "bf841c7f35a6ca3858a1b46b02a46a6887ad714e.png",
+        "crop_ref": "bf841c7f35a6ca3858a1b46b02a46a6887ad714e.crop-964-2117.png",
+        "crop_size": [
+         359,
+         365
+        ],
+        "crop_scale": 1.0
+       }
+      ]
      }
     },
     {
@@ -23390,7 +26572,307 @@
       "title_color": "#D75F47",
       "collection_color": null,
       "caption_color": "#212529",
-      "meta_color": "#F8F9FA"
+      "meta_color": "#F8F9FA",
+      "text_col": {
+       "node": "670:2810",
+       "name": "Frame 12685",
+       "direct_in_panel": true,
+       "bbox": [
+        160,
+        1060,
+        1120,
+        785
+       ],
+       "layout": "VERTICAL",
+       "gap": 22,
+       "padding_top": 0,
+       "content_top": 1060,
+       "note": "text nodes are direct children of the panel (vertical auto-layout, gap = panel gap)",
+       "bottom": 1845
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "670:2811",
+        "bbox": [
+         160,
+         1060,
+         1120,
+         45
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#D75F47",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#D75F47",
+          "start": 0,
+          "length": 18,
+          "text": "Singhasari Ganesha"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "meta",
+        "node": "1057:1177",
+        "bbox": [
+         160,
+         1127,
+         1120,
+         240
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 500,
+         "size": 24,
+         "line_height": 30,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#F8F9FA",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 0,
+          "length": 9,
+          "text": "Section :"
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 9,
+          "length": 35,
+          "text": " Cosmology Religion & Spirituality\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 44,
+          "length": 7,
+          "text": "Period:"
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 51,
+          "length": 14,
+          "text": " 13th century\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 65,
+          "length": 31,
+          "text": "Place of Production / Findspot:"
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 96,
+          "length": 63,
+          "text": " Singasari Hindu-Buddhist temple complex, East Java, Indonesia\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 159,
+          "length": 9,
+          "text": "Material:"
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 168,
+          "length": 25,
+          "text": " Andesite, Volcanic rock\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 193,
+          "length": 11,
+          "text": "Dimensions:"
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 204,
+          "length": 46,
+          "text": " Height: 154 cm, Length: 105 cm, Width: 72 cm\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 250,
+          "length": 11,
+          "text": "Collection:"
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 261,
+          "length": 27,
+          "text": " Museum Nasional Indonesia\n"
+         },
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 288,
+          "length": 38,
+          "text": "Other Information / Object Biography: "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 326,
+          "length": 123,
+          "text_head": "This statue was formerly held by the Wer"
+         }
+        ],
+        "rows": [
+         {
+          "label": "Section :",
+          "field": "thematic_section",
+          "value": "Cosmology Religion & Spirituality",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Period:",
+          "field": "period",
+          "value": "13th century",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Place of Production / Findspot:",
+          "field": "place_of_production",
+          "value": "Singasari Hindu-Buddhist temple complex, East Java, Indonesia",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Material:",
+          "field": "material",
+          "value": "Andesite, Volcanic rock",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Dimensions:",
+          "field": "dimensions",
+          "value": "Height: 154 cm, Length: 105 cm, Width: 72 cm",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "Museum Nasional Indonesia",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         },
+         {
+          "label": "Other Information / Object Biography:",
+          "field": "object_biography",
+          "value": "This statue was formerly held by the Wereldmuseum Leiden in the Netherlands. It was returned to Indonesia in September 2023",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         }
+        ],
+        "y_in_col": 67,
+        "gap_before": 22
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "670:2813",
+        "bbox": [
+         160,
+         1389,
+         1120,
+         456
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#212529",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#212529",
+          "start": 0,
+          "length": 10,
+          "text": "Caption:\n\n"
+         },
+         {
+          "weight": 400,
+          "color": "#212529",
+          "start": 10,
+          "length": 1790,
+          "text_head": "Carved from volcanic andesite, this thir"
+         }
+        ],
+        "y_in_col": 329,
+        "gap_before": 22
+       }
+      ],
+      "caption": {
+       "node": "670:2813",
+       "label": "Caption:",
+       "label_weight": 700,
+       "label_color": "#212529",
+       "label_breaks": 2,
+       "body_weight": 400,
+       "body_color": "#212529",
+       "body_length": 1790,
+       "body_break_runs": {
+        "2": 2
+       }
+      },
+      "meta_labels": [
+       "Section :",
+       "Period:",
+       "Place of Production / Findspot:",
+       "Material:",
+       "Dimensions:",
+       "Collection:",
+       "Other Information / Object Biography:"
+      ]
      }
     },
     {
@@ -23800,7 +27282,214 @@
       "title_color": "#495057",
       "collection_color": "#343A40",
       "caption_color": "#343A40",
-      "meta_color": null
+      "meta_color": null,
+      "text_col": {
+       "node": "1006:825",
+       "name": "Frame 12747",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        1020,
+        739,
+        858
+       ],
+       "layout": "VERTICAL",
+       "gap": 22,
+       "padding_top": 0,
+       "content_top": 1020,
+       "bottom": 1878
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "1006:837",
+        "bbox": [
+         160,
+         1020,
+         112,
+         45
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#495057",
+        "auto_resize": "WIDTH_AND_HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#495057",
+          "start": 0,
+          "length": 6,
+          "text": "Siwaih"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "collection",
+        "node": "1006:849",
+        "bbox": [
+         160,
+         1087,
+         739,
+         25
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 500,
+         "size": 20,
+         "line_height": 25,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 11,
+          "text": "Collection:"
+         },
+         {
+          "weight": 500,
+          "color": "#343A40",
+          "start": 11,
+          "length": 26,
+          "text": " Museum Nasional Indonesia"
+         }
+        ],
+        "rows": [
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "Museum Nasional Indonesia",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#343A40",
+          "value_color": "#343A40"
+         }
+        ],
+        "y_in_col": 67,
+        "gap_before": 22
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "1006:861",
+        "bbox": [
+         160,
+         1134,
+         739,
+         744
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#343A40",
+          "start": 0,
+          "length": 10,
+          "text": "Caption:\n\n"
+         },
+         {
+          "weight": 400,
+          "color": "#343A40",
+          "start": 10,
+          "length": 2124,
+          "text_head": "The siwaih is a curved dagger derived fr"
+         }
+        ],
+        "y_in_col": 114,
+        "gap_before": 22
+       }
+      ],
+      "caption": {
+       "node": "1006:861",
+       "label": "Caption:",
+       "label_weight": 700,
+       "label_color": "#343A40",
+       "label_breaks": 2,
+       "body_weight": 400,
+       "body_color": "#343A40",
+       "body_length": 2124,
+       "body_break_runs": {
+        "2": 3
+       }
+      },
+      "meta_labels": [
+       "Collection:"
+      ],
+      "image_col": {
+       "nodes": [
+        "1038:578"
+       ],
+       "node": "1038:578",
+       "name": "Frame 114479",
+       "bbox": [
+        921,
+        1020,
+        360,
+        589
+       ],
+       "layout": "HORIZONTAL",
+       "gap": 10,
+       "padding_top": 0
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "1038:579",
+        "name": "Rectangle 27",
+        "bbox": [
+         921,
+         1020,
+         360,
+         589
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          0.244393,
+          -0.913772,
+          0.817241
+         ],
+         [
+          2.119195,
+          1.565967,
+          -1.401522
+         ]
+        ],
+        "paint_rotation": 270,
+        "source_image": "148537c0c0f4fb01bb87fd06eb2600f18c355806",
+        "source_file": "148537c0c0f4fb01bb87fd06eb2600f18c355806.png",
+        "crop_ref": "148537c0c0f4fb01bb87fd06eb2600f18c355806.crop-1038-579.png",
+        "crop_size": [
+         630,
+         1031
+        ],
+        "crop_scale": 1.75
+       }
+      ]
      }
     },
     {
@@ -24191,7 +27880,213 @@
       "title_color": "#FFFFFF",
       "collection_color": "#F8F9FA",
       "caption_color": "#343A40",
-      "meta_color": null
+      "meta_color": null,
+      "text_col": {
+       "node": "670:2840",
+       "name": "Frame 12683",
+       "direct_in_panel": false,
+       "bbox": [
+        160,
+        1045,
+        684,
+        535
+       ],
+       "layout": "VERTICAL",
+       "gap": 25,
+       "padding_top": 30,
+       "content_top": 1075,
+       "bottom": 1580
+      },
+      "text_blocks": [
+       {
+        "order": 1,
+        "role": "title",
+        "node": "670:2841",
+        "bbox": [
+         160,
+         1075,
+         684,
+         45
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 800,
+         "size": 36,
+         "line_height": 45,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#FFFFFF",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 800,
+          "color": "#FFFFFF",
+          "start": 0,
+          "length": 37,
+          "text": "Tin ingot in the shape of an elephant"
+         }
+        ],
+        "y_in_col": 0,
+        "gap_before": 0
+       },
+       {
+        "order": 2,
+        "role": "collection",
+        "node": "670:2842",
+        "bbox": [
+         160,
+         1145,
+         684,
+         26
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 600,
+         "size": 24,
+         "line_height": 26,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#F8F9FA",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 700,
+          "color": "#F8F9FA",
+          "start": 0,
+          "length": 11,
+          "text": "Collection:"
+         },
+         {
+          "weight": 600,
+          "color": "#F8F9FA",
+          "start": 11,
+          "length": 1,
+          "text": " "
+         },
+         {
+          "weight": 500,
+          "color": "#F8F9FA",
+          "start": 12,
+          "length": 30,
+          "text": "Department of Museums Malaysia"
+         }
+        ],
+        "rows": [
+         {
+          "label": "Collection:",
+          "field": "collection",
+          "value": "Department of Museums Malaysia",
+          "label_weight": 700,
+          "value_weight": 500,
+          "label_color": "#F8F9FA",
+          "value_color": "#F8F9FA"
+         }
+        ],
+        "y_in_col": 70,
+        "gap_before": 25
+       },
+       {
+        "order": 3,
+        "role": "caption",
+        "node": "670:2843",
+        "bbox": [
+         160,
+         1196,
+         684,
+         384
+        ],
+        "font": {
+         "family": "Komet",
+         "weight": 400,
+         "size": 18,
+         "line_height": 24,
+         "letter_spacing": 0,
+         "align": "LEFT"
+        },
+        "color": "#343A40",
+        "auto_resize": "HEIGHT",
+        "runs": [
+         {
+          "weight": 400,
+          "color": "#343A40",
+          "start": 0,
+          "length": 1029,
+          "text_head": "The use of animal-shaped tin ingots was "
+         }
+        ],
+        "y_in_col": 121,
+        "gap_before": 25
+       }
+      ],
+      "caption": {
+       "node": "670:2843",
+       "label": null,
+       "label_weight": null,
+       "label_color": null,
+       "label_breaks": 0,
+       "body_weight": 400,
+       "body_color": "#343A40",
+       "body_length": 1029,
+       "body_break_runs": {
+        "1": 4
+       }
+      },
+      "meta_labels": [
+       "Collection:"
+      ],
+      "image_col": {
+       "nodes": [
+        "1041:1460"
+       ],
+       "node": "1041:1460",
+       "name": "Frame 114480",
+       "bbox": [
+        866,
+        1045,
+        414,
+        382.68
+       ],
+       "layout": "VERTICAL",
+       "gap": 10,
+       "padding_top": 100
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "1041:1458",
+        "name": "tin ingots ช้าง2-07 1",
+        "bbox": [
+         866,
+         1145,
+         414,
+         282.68
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "image_transform": [
+         [
+          0.41333,
+          0.0,
+          0.56543
+         ],
+         [
+          0.0,
+          0.501736,
+          0.240451
+         ]
+        ],
+        "source_image": "266b59cda0e3c73fef6538cc69323e7d959456b3",
+        "source_file": "266b59cda0e3c73fef6538cc69323e7d959456b3.png",
+        "crop_ref": "266b59cda0e3c73fef6538cc69323e7d959456b3.crop-1041-1458.png",
+        "crop_size": [
+         828,
+         565
+        ],
+        "crop_scale": 2.0
+       }
+      ]
      }
     },
     {
