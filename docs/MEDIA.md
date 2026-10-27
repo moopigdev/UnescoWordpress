@@ -9,7 +9,7 @@ FORCE=1 bash scripts/media/encode.sh    # ทำใหม่ทุกไฟล�
 ```
 - ต้นฉบับ: `Unesco/media/src/File Animated/**.webm` (ไม่แตะ · ไม่ commit) → ผล: `Unesco/media/out/` (ไม่ commit)
 - ปรับได้ด้วย env: `MEDIA_SRC` `MEDIA_OUT` `LIMIT_BYTES` (default 3000000) `MAXW` (1440) `MAXFPS` (30) `POSTER_AT` (0.35 = ตำแหน่งเฟรม poster) `FALLBACK_FPS` (10)
-- สคริปต์: `encode.sh` (WebM เจ้าของ) → เรียก `hero_frames.py` (hero ต่อเฟรม · อ่าน `hero-frames.spec.json`) → `manifest.py` (เขียน manifest รวม) · `SKIP_HERO_FRAMES=1` ข้ามส่วนต่อเฟรม · `HERO_CRF` (24) · `DESIGN_ASSETS` (default `Unesco/design/assets`)
+- สคริปต์: `encode.sh` (WebM เจ้าของ) → เรียก `hero_frames.py` (hero ต่อเฟรม · อ่าน `hero-frames.spec.json`) → `manifest.py` (เขียน manifest รวม) · `SKIP_HERO_FRAMES=1` ข้ามแค่การ encode ต่อเฟรม (manifest ยังรวมครบ 16 รายการจาก spec + ไฟล์ที่มีใน out · ไม่มี sidecar = error) · `HERO_CRF` (24) · `DESIGN_ASSETS` (default `Unesco/design/assets`)
 - สร้าง spec ใหม่ (เฉพาะเมื่อ seed/figma เปลี่ยน · ไม่เรียก Figma — อ่าน `design/figma-file.json` ที่ดาวน์โหลดไว้): `python3 -I scripts/media/hero_spec.py > scripts/media/hero-frames.spec.json`
 - ต้องมี: ffmpeg (libvpx-vp9 + hevc_videotoolbox = macOS) · cwebp · python3
 - รันซ้ำได้ผลเดิม: ข้ามไฟล์ที่ out ใหม่กว่า src · HEVC ไม่ถูกสร้างใหม่ถ้ามีอยู่แล้ว (videotoolbox ไม่ deterministic ระดับไบต์) · manifest ไม่มี timestamp (ทดสอบรัน 2 ครั้ง `diff` ว่าง)
@@ -42,7 +42,7 @@ FORCE=1 bash scripts/media/encode.sh    # ทำใหม่ทุกไฟล�
 - การใช้งานในหน้า: `<video>` ใส่ `<source src=hevc.mov type='video/mp4; codecs="hvc1"'>` **ก่อน** `<source src=.webm type="video/webm">` (Safari เลือกตัวแรกที่เล่นได้) · ใส่ `poster=` เสมอ · ไฟล์ทึบไม่ต้องมี hevc
 - iOS ต่ำกว่า 17.4 ไม่เล่น WebM เลย → ไฟล์ทึบจะเห็นแค่ poster (ยอมรับได้ ตามเกณฑ์ DOD C4 ที่เน้นไฟล์ alpha)
 - poster เลือกเฟรมอัตโนมัติ 35% — บางไฟล์ (ganesha, singhasari) อยู่กลาง transition เห็นตัวละครซ้อน/จาง · ปรับต่อไฟล์ได้ถ้าจะให้ design เลือกเฟรมเอง (เพิ่ม map ใน `encode.sh` ภายหลัง → DEFERRED)
-- ยังไม่ทราบว่าวัตถุไหนใน seed ไม่มี WebM — เทียบกับ seed หลัง design-extract (คำถาม O-5 ข้อ "ภาพนิ่ง" ยังรอเจ้าของ)
+- (ล้าสมัยแล้ว) วัตถุที่ไม่มี WebM นับแล้ว = 8 ชิ้น และตอบ O-5 ด้วย D13 แล้ว — ดูหัวข้อ media-hero-frames ด้านล่าง
 
 
 ---
@@ -81,4 +81,4 @@ FORCE=1 bash scripts/media/encode.sh    # ทำใหม่ทุกไฟล�
 - patola: เฟรม 01 เกือบว่าง (แอนิเมชันทอผ้า) → poster (เฟรมแรกตามสั่ง) แทบไม่เห็นลาย (DEFERRED)
 - ตัวเลข `fps`=10 ของ figma-frames เป็น CFR จริง (ต่างจาก owner-webm ที่เป็น VFR stepped: ใช้ `steps` + `frame_duration_s` ดูจำนวนภาพจริง) · เฟรมซ้ำกินไบต์ต่ำมาก
 - ไฟล์ out ที่สร้างเพิ่มข้าง WebM: `<slug>.frames.json` (sidecar: alpha ต่อเฟรม · crf — manifest.py อ่าน) · ทั้งหมดอยู่ใน `Unesco/media/out/` ไม่ commit
-- ต้องมี `Unesco/design/assets/` (ภาพเฟรม 144 ref · ไม่ commit) ถึงรัน hero_frames.py ได้ · ไม่มี → ใช้ `SKIP_HERO_FRAMES=1` (manifest จะ error ถ้าไม่มี sidecar)
+- ต้องมี `Unesco/design/assets/` (ภาพเฟรม 144 ref · ไม่ commit) ถึงรัน hero_frames.py ได้ · ไม่มี → ใช้ `SKIP_HERO_FRAMES=1` ได้ถ้า `media/out/` มีไฟล์ hero + `<slug>.frames.json` ครบแล้ว (manifest ยังได้ 16 รายการ) · ถ้าไม่มี sidecar manifest.py จะ exit ≠ 0 ไม่ตัดรายการ
