@@ -142,3 +142,4 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [deploy-fix/reviewer] [2026-10-27] remote.sh DB_HOST แบบ `host:port:/socket` และ IPv6 `[::1]:port` แยกผิด → mysqldump ล้ม (หยุดเอง ไม่รั่ว) แม้ WordPress รองรับ
 - [deploy-fix/reviewer] [2026-10-27] `--defaults-extra-file` ถูก `~/.my.cnf` [client] บน host ทับ user/password/host ได้ (จบที่ access denied) · ทางแก้ `--defaults-file` แต่เสียค่า socket จาก /etc/my.cnf
 - [deploy-fix/reviewer] [2026-10-27] หัว ROLLBACK ใส่ DB_NAME/WP_PATH ใน "…" ไม่ escape · DB_NAME ไม่ตรวจรูปแบบ (ขึ้นต้น `-` → mysqldump อ่านเป็น option) — ค่ามาจาก wp-config ของเราเอง
+- [deploy-purge] [2026-10-27] ไม่มีทางล้าง page cache ของ LiteSpeed server โดยไม่ผ่าน HTTP จาก wp-cli (ที่เก็บอยู่นอก wp-content บน shared host) — staging ไม่มี DNS จึงต้อง purge เองใน wp-admin/hPanel หลัง deploy · ตอน DNS ชี้แล้ว `litespeed-purge all` น่าจะผ่านเอง · ทดสอบกับ server จริงไม่ได้ (sim ด้วย wp ปลอม)

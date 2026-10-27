@@ -303,14 +303,45 @@ PHP
       SH_IMPORT_REPORT="$LOGS/import-$ENV-$TS.json" "${WP[@]}" eval-file "$TMP/scripts/import/import.php"
     say "รายงาน import: $LOGS/import-$ENV-$TS.json"
   fi
+  # cache: ⛔ ล้มตรงนี้ = warning ไม่ใช่ fatal (deploy เสร็จแล้ว) — `wp litespeed-purge all` ยิง HTTP ไปที่เว็บ
+  #   (staging ไม่มี DNS → "Could not notify the web server to purge.") จึงลองแบบไม่ใช้ HTTP ก่อน:
+  #   (1) `wp cache flush` (object cache · ใน process เดียว)  (2) ลบไฟล์ asset ที่ LiteSpeed สร้าง
+  #   (wp-content/litespeed/{css,js,cssjs} — สร้างใหม่เองเมื่อมีคนเข้า · ไม่แตะ ccss/ucss/lqip ที่สร้างช้า)
+  #   (3) `wp litespeed-purge all` (ถ้ามีคำสั่ง · ล้ม = warning) · ⛔ ไม่ลบอะไรนอก <WP_PATH>/wp-content/
+  PURGE_WARN=0
+  warn() { echo "remote[$PHASE]: ⚠ $*" >&2; PURGE_WARN=1; }
   if [ "$DRY" = 1 ]; then
+    show "${WP[@]}" cache flush
+    echo "  [remote]   (ถ้าล้ม = warning ไม่ fatal)"
+    show find "$WP_PATH/wp-content/litespeed/css" "$WP_PATH/wp-content/litespeed/js" "$WP_PATH/wp-content/litespeed/cssjs" -mindepth 1 -delete
+    echo "  [remote]   (เฉพาะโฟลเดอร์ที่มีจริง · ไม่ใช่ symlink · อยู่ใต้ $WP_PATH/wp-content/ เท่านั้น)"
     show "${WP[@]}" cli has-command litespeed-purge
-    echo "  [remote]   (ถ้ามี — LiteSpeed Cache active):"
+    echo "  [remote]   (ถ้ามี — LiteSpeed Cache active · ล้ม = warning ไม่ fatal):"
     show "${WP[@]}" litespeed-purge all
-  elif "${WP[@]}" cli has-command litespeed-purge; then
-    "${WP[@]}" litespeed-purge all
   else
-    say "ไม่มีคำสั่ง litespeed-purge — ข้าม (purge เองใน wp-admin ถ้าจำเป็น)"
+    "${WP[@]}" cache flush || warn "wp cache flush ล้ม — ข้าม (deploy ไม่ได้รับผล)"
+    if WPC="$(cd "$WP_PATH/wp-content" 2>/dev/null && pwd -P)" && [ -d "$WPC/litespeed" ] && [ ! -L "$WPC/litespeed" ]; then
+      for sub in css js cssjs; do
+        d="$WPC/litespeed/$sub"
+        if [ -d "$d" ] && [ ! -L "$d" ]; then
+          rp="$(cd "$d" 2>/dev/null && pwd -P)" || continue
+          case "$rp/" in
+            "$WPC"/litespeed/*) find "$rp" -mindepth 1 -delete 2>/dev/null \
+              && say "ลบไฟล์ cache LiteSpeed: wp-content/litespeed/$sub" \
+              || warn "ลบ wp-content/litespeed/$sub ไม่หมด" ;;
+            *) warn "ข้าม $d (path ออกนอก wp-content)" ;;
+          esac
+        fi
+      done
+    fi
+    if "${WP[@]}" cli has-command litespeed-purge; then
+      "${WP[@]}" litespeed-purge all || warn "wp litespeed-purge all ล้ม (CLI ต้องยิง HTTP ไปที่เว็บ — DNS/ไม่ถึงจาก server) — deploy สำเร็จแล้ว"
+    else
+      say "ไม่มีคำสั่ง litespeed-purge — ข้าม"
+    fi
+    if [ "$PURGE_WARN" = 1 ]; then
+      say "⚠ purge ไม่ครบ (ไม่กระทบ deploy) — page cache อาจค้างจนหมดอายุ: purge เองใน wp-admin › LiteSpeed Cache › Toolbox › Purge All หรือ hPanel › LiteSpeed Cache"
+    fi
   fi
   ;;
 esac
