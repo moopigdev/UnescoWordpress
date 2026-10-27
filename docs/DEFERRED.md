@@ -171,3 +171,6 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [reviewer deploy-crops r1] [2026-10-28] refresh `2026-10-28-layout-refs` ข้ามค่าที่ต่างจาก seed เงียบๆ (ตั้งใจ — กันทับค่า admin) · ถ้า objects.json เปลี่ยนก่อนรันบน prod ref ที่ยังเป็นข้อความจะไม่ถูกแปลงและ warnings ยัง 0 → หลังรันจริงต้องตรวจ placed = 12
 - [reviewer deploy-crops r1] [2026-10-28] admin ที่เปิดหน้าแก้ object ค้างไว้ก่อน refresh แล้วกดบันทึกหลัง อาจเขียนค่าข้อความกลับ · step บันทึก done แล้ว deploy.sh บังคับรันซ้ำไม่ได้ → แจ้งทีม UNESCO ก่อนรัน + ตรวจ placed หลังรัน
 - [reviewer detail-title r1] [2026-10-28] pod-duang: title มีขึ้นบรรทัดจาก Figma ("…the Chakra and⏎Great Crown…") + pre-line → 1440/1767 แสดง 3 บรรทัด (บรรทัดกลางสั้น "the Chakra and") · 390 = 5 บรรทัด · ทางเลือก: ลบขึ้นบรรทัดในเนื้อหาชิ้นนี้ หรือ D ใหม่ให้หัวข้อไม่สนขึ้นบรรทัดของ Figma — ถามเจ้าของ
+- [reviewer design-timeline-v3 r1] [2026-10-28] mini-map baseline: สเปก y_rel 57 vs ref-3 ≈54.6 — ยืนยันค่าเดียวตอน preview (ผลต่าง ≈2px)
+- [reviewer design-timeline-v3 r1] [2026-10-28] aria-label: สเปกเขียน "Elephant's Trail timeline" แต่โค้ดใช้ "Elephant timeline" — เลือกค่าเดียว (สเปก §6.4c a11y ยังเขียน "Elephant's Trail timeline")
+- [design-timeline-v3-fix] [2026-10-28] ภาพใต้เส้น Basin: สูตรจากไฟล์ trim (1343×960) ให้ 320×229 ต่างจากค่าวัด ref-3 ≈317×223 (ratio 1.42 vs 1.399) · Molar 320×160 vs 320×161 — ใช้ค่าจากสูตร
