@@ -254,30 +254,14 @@ result["pages"]["intro"] = {
     "cover": ref_of("670:9367", "intro cover (same image as home hero, DESIGN-SPEC §4.2)"),
     "intro_image": ref_of("670:1221", "intro: Introduction image"),
     "knowing_image": ref_of("670:1236", "intro: Knowing Southeast Asia image"),
-    "map_image": ref_of("670:1596", "intro: map (Frame 12718, DESIGN-SPEC §4.7)"),
+    # the map shown in frame 1471 itself (Frame 12767 > Frame 12655 fill 39907d2c) — not Section 11 670:1596 (P-150 · D14)
+    "map_image": ref_of("I670:1239;670:1462", "intro: map in frame 1471 (Frame 12655, DESIGN-SPEC §4.7)"),
 }
 result["pages"]["timeline"] = {"illustration": ref_of("1232:1711", "timeline illustration 11000x791")}
 result["site"] = {"header_image": ref_of("670:9386", "Header #1 background (logos in image)")}
 
-# ---- video (content/media-manifest.json id) per object / page --------------------------------
-# media-dev named files after the source file names ("Elephant Trails WebM/<name>.webm"); matched to seed slugs by title.
-VIDEO_BY_OBJECT = {
-    "bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the": "bas-relief-of-a-procession",
-    "elephant-and-mahout-kendi": "elephant-and-mahout-kendi",
-    "elephant-molar-coconut-grater": "elephant-molar-coconut-grater",
-    "elephant-shaped-relic-containers": "elephant-shaped-containers",
-    "ganesha": "ganesha",
-    "singhasari-ganesha": "singhasari-ganesha",
-    "tin-ingot-in-the-shape-of-an-elephant": "tin-ingot-in-the-shape-of-an-elephant",
-}
-manifest_ids = {f["id"] for f in json.load(open(os.path.join(REPO, "content", "media-manifest.json"), encoding="utf-8"))["files"]}
-for slug, vid in VIDEO_BY_OBJECT.items():
-    if slug not in result["objects"] or vid not in manifest_ids:
-        sys.exit(f"video map broken: {slug} -> {vid}")
-for slug, e in result["objects"].items():
-    e["video"] = VIDEO_BY_OBJECT.get(slug)
-# "Homepage/walking.webm" 1120x630 = size of the footprint animation AAMM -01 [160,1913 1120x630] (DESIGN-SPEC §6.2)
-result["pages"]["home"]["trails_video"] = "walking" if "walking" in manifest_ids else None
+# ---- video: not in this map — the importer reads content/media-manifest.json directly
+# (object hero = entry with object_slug == seed slug · Home trails = usage "home-trails")
 
 result = {
     "_meta": {

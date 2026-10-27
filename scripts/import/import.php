@@ -9,7 +9,9 @@
  * Env/constants: SH_IMPORT_ASSETS_DIR (Unesco/design/assets) · SH_IMPORT_MEDIA_DIR (Unesco/media/out)
  *   SH_IMPORT_MODE missing (default: never touch what exists) | overwrite (seed wins)
  *   SH_IMPORT_REPORT=<file.json> · SH_IMPORT_SUBSIZES=1 (generate image sub-sizes)
+ *   SH_IMPORT_REFRESH=<id>|all  re-run a refresh step (refresh.php) that this site already ran
  * Idempotent: running twice creates nothing new (lookup by _sh_import_key / term slug / page path).
+ * Fixes to values an older importer wrote: refresh.php steps (once per site, never over an admin's own file).
  *
  * @package sharedheritage-core
  */
@@ -17,8 +19,10 @@
 defined( 'ABSPATH' ) || exit( "run inside WordPress (wp eval-file)\n" );
 
 require_once __DIR__ . '/lib.php';
+require_once __DIR__ . '/icc.php';
 require_once __DIR__ . '/media.php';
 require_once __DIR__ . '/entities.php';
+require_once __DIR__ . '/refresh.php';
 
 /**
  * Run the import; returns the report.
@@ -44,6 +48,7 @@ function sh_import_run(): array {
 	sh_import_trail_order( $seed, $trails, $objects );
 	sh_import_timeline( $seed, $map, $trails, $objects, $pages );
 	sh_import_site( $seed, $map );
+	$refresh = sh_import_refresh( $seed, $map, $manifest, $objects, $pages );
 
 	$s      = sh_imp_state();
 	$counts = array(
@@ -56,6 +61,7 @@ function sh_import_run(): array {
 	);
 	return array(
 		'mode'     => $cfg['mode'],
+		'refresh'  => $refresh,
 		'counts'   => $counts,
 		'created'  => $s['created'],
 		'updated'  => $s['updated'],
