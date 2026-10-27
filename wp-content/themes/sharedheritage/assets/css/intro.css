@@ -230,9 +230,20 @@
 	.sh-intro__section--intro .sh-intro__row { min-height: 284px; }
 }
 
-/* ---- Tablet (768–1024): same two-column layout, container margin 24 (style guide) ---- */
-@media (max-width: 1023px) {
-	.sh-intro__popup { right: 24px; }
+/*
+ * ---- Below the full 1120 map (<1168): the map is too short for a 350–460px popup (and overflow:hidden would clip it
+ * and cover the › button) → popup becomes a centred overlay, 336 wide (F1). Mobile (<768) widens it below. ----
+ */
+@media (max-width: 1167px) {
+	.sh-intro__popup {
+		position: fixed;
+		top: 50%;
+		right: auto;
+		left: 50%;
+		max-height: 80vh;
+		overflow-y: auto;
+		transform: translate(-50%, -50%);
+	}
 }
 
 /* ---- Mobile (<768): stacked ---- */
