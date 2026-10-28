@@ -14,7 +14,7 @@
   {
    "card_order": 1,
    "key": "elephant leg bone",
-   "title": "Elephant Leg Bone (Elephas maximus indicus)",
+   "title": "Elephant Leg Bone",
    "card_frame": "1232:1713",
    "title_node": "1232:1716",
    "meta_node": "1232:1717",
@@ -79,7 +79,7 @@
   {
    "card_order": 4,
    "key": "elephant molar",
-   "title": "Elephant Molar Coconut Grater  (Dwarf Elephant Bone)",
+   "title": "Elephant molar coconut grater",
    "card_frame": "1232:1731",
    "title_node": "1232:1734",
    "meta_node": "1232:1735",
@@ -99,7 +99,7 @@
   {
    "card_order": 5,
    "key": "embossed brass",
-   "title": "Embossed Brass Basin with Mythical Animal Motifs",
+   "title": "Embossed brass basin with mythical animal motifs",
    "card_frame": "1232:1737",
    "title_node": "1232:1740",
    "meta_node": "1232:1741",
@@ -119,7 +119,7 @@
   {
    "card_order": 6,
    "key": "ivory fire piston",
-   "title": "Ivory Fire Piston / Ivory Fire Syringe",
+   "title": "Fire piston",
    "card_frame": "1232:1743",
    "title_node": "1232:1748",
    "meta_node": "1232:1749",
@@ -159,7 +159,7 @@
   {
    "card_order": 8,
    "key": "patola",
-   "title": "Patola Cloth (Cindai)",
+   "title": "Patola Cloth",
    "card_frame": "1232:1757",
    "title_node": "1232:1760",
    "meta_node": "1232:1761",
@@ -180,7 +180,7 @@
   {
    "card_order": 9,
    "key": "elephant shaped relic",
-   "title": "Elephant-Shaped Relic Containers",
+   "title": "Elephant-shaped containers",
    "card_frame": "1232:1763",
    "title_node": "1232:1768",
    "meta_node": "1232:1769",
@@ -203,7 +203,7 @@
   {
    "card_order": 10,
    "key": "pod duang",
-   "title": "Pod Duang (Bullet Money) stamped with the Chakra and Great Crown Marks, Reign of King Rama IV",
+   "title": "Pod duang stamped with the chakra and great crown marks",
    "card_frame": "1232:1771",
    "title_node": "1232:1774",
    "meta_node": "1232:1775",
@@ -225,7 +225,7 @@
   {
    "card_order": 11,
    "key": "hand carved ivory",
-   "title": "Hand-Carved Ivory and Metal Opium Pipe",
+   "title": "Hand-carved opium pipe",
    "card_frame": "1232:1777",
    "title_node": "1232:1780",
    "meta_node": "1232:1781",
@@ -245,7 +245,7 @@
   {
    "card_order": 12,
    "key": "tin ingot",
-   "title": "Tin Ingot in the Shape of Elephant",
+   "title": "Tin ingot in the shape of an elephant",
    "card_frame": "1232:1783",
    "title_node": "1232:1786",
    "meta_node": "1232:1787",
@@ -266,7 +266,7 @@
   {
    "card_order": 13,
    "key": "wooden cold press",
-   "title": "Wooden Cold-Press Cake Molds with Elephant,Horse, and Fowl Motifs",
+   "title": "Wooden cold-press cake moulds with elephant, horse and fowl motifs",
    "card_frame": "1232:1789",
    "title_node": "1232:1792",
    "meta_node": "1232:1793",
@@ -307,7 +307,7 @@
   {
    "card_order": 15,
    "key": "bas relief of a royal",
-   "title": "Procession of a King or Noble  (Relief from the Life of the Buddha)",
+   "title": "Bas-relief of a procession, illustrating the life of the Buddha",
    "card_frame": "1232:1801",
    "title_node": "1232:1804",
    "meta_node": "1232:1805",
