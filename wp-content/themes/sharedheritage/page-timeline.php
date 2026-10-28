@@ -82,7 +82,7 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 						</ol>
 					</div>
 
-					<button class="sh-tl__arrow sh-tl__arrow--prev" type="button" aria-label="<?php esc_attr_e( 'Previous object', 'sharedheritage' ); ?>" data-sh-tl-prev>
+					<button class="sh-tl__arrow sh-tl__arrow--prev" type="button" disabled aria-label="<?php esc_attr_e( 'Previous object', 'sharedheritage' ); ?>" data-sh-tl-prev>
 						<svg viewBox="0 0 25 48" aria-hidden="true" focusable="false"><polyline points="23.5,1.5 2,24 23.5,46.5" fill="none" stroke="currentColor" stroke-width="3"/></svg>
 					</button>
 					<button class="sh-tl__arrow sh-tl__arrow--next" type="button" aria-label="<?php esc_attr_e( 'Next object', 'sharedheritage' ); ?>" data-sh-tl-next>
@@ -93,7 +93,7 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 						<span class="sh-tl__line" aria-hidden="true"></span>
 						<ol class="sh-tl__items">
 							<?php foreach ( $sh_items as $sh_i => $sh_item ) : ?>
-								<li class="sh-tl__item" style="<?php echo esc_attr( sh_tl_style( array( '--i' => (string) ( $sh_i + 1 ), '--rw' => sh_tl_num( $sh_item['rest'][0] ), '--ar' => sh_tl_num( $sh_item['ratio'] ), '--s' => sh_tl_num( $sh_item['scale'] ) ) ) ); ?>" data-sh-tl-item>
+								<li class="sh-tl__item<?php echo 0 === $sh_i ? ' is-vis is-center' : ''; ?>" style="<?php echo esc_attr( sh_tl_style( array( '--i' => (string) ( $sh_i + 1 ), '--rw' => sh_tl_num( $sh_item['rest'][0] ), '--ar' => sh_tl_num( $sh_item['ratio'] ), '--s' => sh_tl_num( $sh_item['scale'] ) ) + ( 0 === $sh_i ? array( '--p' => '1', '--ta' => '1' ) : array() ) ) ); ?>" data-sh-tl-item>
 									<p class="sh-tl__title">
 										<?php if ( '' !== $sh_item['url'] ) : ?>
 											<a href="<?php echo esc_url( $sh_item['url'] ); ?>" tabindex="-1"><?php echo nl2br( esc_html( $sh_item['title'] ), false ); ?></a>
@@ -101,14 +101,14 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 											<span><?php echo nl2br( esc_html( $sh_item['title'] ), false ); ?></span>
 										<?php endif; ?>
 									</p>
-									<span class="sh-tl__obj" data-sh-tl-go="<?php echo esc_attr( (string) ( $sh_i + 1 ) ); ?>"><?php echo sh_tl_pic( $sh_item, $sh_item['rest'][0] * $sh_item['scale'], $sh_item['title'], $sh_i < 5 ? 'eager' : 'lazy', ( 1 === $sh_i || 2 === $sh_i ) ? 'high' : '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built in sh_tl_pic() (escaped there). ?></span>
+									<span class="sh-tl__obj" data-sh-tl-go="<?php echo esc_attr( (string) ( $sh_i + 1 ) ); ?>"><?php echo sh_tl_pic( $sh_item, $sh_item['rest'][0] * $sh_item['scale'], $sh_item['title'], $sh_i < 5 ? 'eager' : 'lazy', ( 0 === $sh_i || 1 === $sh_i ) ? 'high' : '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built in sh_tl_pic() (escaped there). ?></span>
 								</li>
 							<?php endforeach; ?>
 						</ol>
 						<ol class="sh-tl__dots" aria-label="<?php esc_attr_e( 'Objects on the timeline', 'sharedheritage' ); ?>">
 							<?php foreach ( $sh_items as $sh_i => $sh_item ) : ?>
 								<li class="sh-tl__dot-item" style="--i:<?php echo esc_attr( (string) ( $sh_i + 1 ) ); ?>">
-									<button class="sh-tl__dot" type="button" aria-label="<?php echo esc_attr( $sh_item['title'] ); ?>" data-sh-tl-go="<?php echo esc_attr( (string) ( $sh_i + 1 ) ); ?>" data-sh-tl-dot></button>
+									<button class="sh-tl__dot" type="button" aria-label="<?php echo esc_attr( $sh_item['title'] ); ?>" data-sh-tl-go="<?php echo esc_attr( (string) ( $sh_i + 1 ) ); ?>" data-sh-tl-dot<?php echo 0 === $sh_i ? ' aria-current="true"' : ' tabindex="-1"'; ?>></button>
 								</li>
 							<?php endforeach; ?>
 						</ol>
@@ -118,9 +118,9 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 
 			<div class="sh-tl__below">
 				<?php foreach ( $sh_items as $sh_i => $sh_item ) : ?>
-					<div class="sh-tl__info" style="<?php echo esc_attr( sh_tl_style( array( '--pw' => sh_tl_num( $sh_item['photo'][0] ), '--ar' => sh_tl_num( $sh_item['ratio'] ) ) ) ); ?>" data-sh-tl-info data-title="<?php echo esc_attr( $sh_item['title'] ); ?>" data-period="<?php echo esc_attr( $sh_item['period'] ); ?>">
+					<div class="sh-tl__info<?php echo 0 === $sh_i ? ' is-vis is-center' : ''; ?>" style="<?php echo esc_attr( sh_tl_style( array( '--pw' => sh_tl_num( $sh_item['photo'][0] ), '--ar' => sh_tl_num( $sh_item['ratio'] ) ) + ( 0 === $sh_i ? array( '--pa' => '1', '--ma' => '1' ) : array() ) ) ); ?>" data-sh-tl-info data-title="<?php echo esc_attr( $sh_item['title'] ); ?>" data-period="<?php echo esc_attr( $sh_item['period'] ); ?>">
 						<?php
-						$sh_pic = sh_tl_pic( $sh_item, (float) $sh_item['photo'][0], '', 'lazy' );
+						$sh_pic = sh_tl_pic( $sh_item, (float) $sh_item['photo'][0], '', 0 === $sh_i ? 'eager' : 'lazy' );
 						if ( '' !== $sh_item['url'] ) {
 							echo '<a class="sh-tl__photo" href="' . esc_url( $sh_item['url'] ) . '" tabindex="-1" aria-hidden="true">' . $sh_pic . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $sh_pic built in sh_tl_pic().
 						} else {
