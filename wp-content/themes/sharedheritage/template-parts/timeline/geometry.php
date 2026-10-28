@@ -5,7 +5,9 @@
  * Source: content/seed/timeline-elephant-v2.json key `v3` (read only) + DESIGN-SPEC §4.5c.3 table.
  * Content (title · images · metadata · link) comes from the timeline_item fields only (CONTENT-MODEL §3).
  *
- * Per timeline_item slug:
+ * `items` is keyed by the stable card number N (1–15) = the number in the import key `<key_prefix><N>` (post meta
+ * _sh_import_key, helpers.php sh_tl_geo_entry()) — not by slug or title, which an admin or a heading change (D31) can alter.
+ * The comment after each key is the original post slug, for reference only. Per item:
  *   rest  = [w, h] object on the line when not centred (px at 1440) · scale = active ÷ rest (uniform, no stretch)
  *   photo = [w, h] photo under the line (contain in 320×265, centred at y_rel 561 — and ≤ the file's trimmed pixels — Pod Duang 226)
  *   mini  = [w, h] mini-map thumbnail (≤ 48×38)
@@ -26,6 +28,7 @@ $sh_full = static function ( string $field, array $src, array $crop ): array {
 };
 
 return array(
+	'key_prefix' => 'timeline:elephant:', // _sh_import_key prefix of the cards these entries belong to.
 	// §4.5c.3 rule for items without an entry (or with a replaced image): "contain" in these boxes.
 	'rule'  => array(
 		'rest'        => array( 163, 180 ),
@@ -37,46 +40,46 @@ return array(
 		'mini'        => array( 48, 38 ),
 	),
 	'items' => array(
-		'elephant-leg-bone-elephas-maximus-indicus' => array(
+		1 => array( // elephant-leg-bone-elephas-maximus-indicus
 			'rest' => array( 163, 86 ), 'scale' => 1.515, 'photo' => array( 320, 169 ), 'mini' => array( 48, 25 ), 'ratio' => 1360 / 720,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 1920, 1080 ), array( 276, 188, 1636, 908 ) ) ),
 		),
-		'singhasari-ganesha' => array(
+		2 => array( // singhasari-ganesha
 			'rest' => array( 126, 178 ), 'scale' => 1.413, 'photo' => array( 188, 265 ), 'mini' => array( 27, 38 ), 'ratio' => 1340 / 1885,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 4096, 2304 ), array( 1378, 179, 2718, 2064 ) ) ),
 		),
-		'ganesha' => array(
+		3 => array( // ganesha
 			'rest' => array( 149, 180 ), 'scale' => 1.342, 'photo' => array( 221, 265 ), 'mini' => array( 32, 38 ), 'ratio' => 1563 / 1878,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 4096, 2304 ), array( 1267, 179, 2830, 2057 ) ) ),
 		),
-		'elephant-molar-coconut-grater-dwarf-elephant-bone' => array(
+		4 => array( // elephant-molar-coconut-grater-dwarf-elephant-bone
 			'rest' => array( 163, 81 ), 'scale' => 1.515, 'photo' => array( 320, 160 ), 'mini' => array( 48, 24 ), 'ratio' => 767 / 383,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 1920, 1080 ), array( 577, 348, 1344, 731 ) ) ),
 		),
-		'embossed-brass-basin-with-mythical-animal-motifs' => array(
+		5 => array( // embossed-brass-basin-with-mythical-animal-motifs
 			'rest' => array( 163, 113 ), 'scale' => 1.515, 'photo' => array( 320, 229 ), 'mini' => array( 48, 34 ), 'ratio' => 1343 / 960,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 1344, 961 ), array( 1, 1, 1344, 961 ) ) ),
 		),
 		// Slides 49/51: left = pointed piece (sh_thumbnail_2, full height 163) · right = bottle with base (sh_thumbnail, 130 high,
 		// same base line) · gap ≈7 px, no overlap. Group 107×163: piston 503/1586 → 0.483 wide · bottle 533/1430 → 0.452 wide.
-		'ivory-fire-piston-ivory-fire-syringe' => array(
+		6 => array( // ivory-fire-piston-ivory-fire-syringe
 			'rest' => array( 107, 163 ), 'scale' => 1.523, 'photo' => array( 174, 265 ), 'mini' => array( 25, 38 ), 'ratio' => 107 / 163,
 			'images' => array(
 				array( 'field' => 'sh_thumbnail_2', 'src' => array( 4096, 3084 ), 'crop' => array( 1813, 749, 2316, 2335 ), 'box' => array( 0, 0, 0.483, 1 ) ),
 				array( 'field' => 'sh_thumbnail', 'src' => array( 4096, 3084 ), 'crop' => array( 1782, 1283, 2315, 2713 ), 'box' => array( 0.548, 0.204, 0.452, 0.796 ) ),
 			),
 		),
-		'elephant-and-mahout-kendi' => array(
+		7 => array( // elephant-and-mahout-kendi
 			'rest' => array( 114, 180 ), 'scale' => 1.395, 'photo' => array( 169, 265 ), 'mini' => array( 24, 38 ), 'ratio' => 1401 / 2203,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 4096, 2731 ), array( 1266, 279, 2667, 2482 ) ) ),
 		),
-		'patola-cloth-cindai' => array(
+		8 => array( // patola-cloth-cindai
 			'rest' => array( 163, 155 ), 'scale' => 1.515, 'photo' => array( 279, 265 ), 'mini' => array( 40, 38 ), 'ratio' => 611 / 580,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 625, 589 ), array( 13, 1, 624, 581 ) ) ),
 		),
 		// Not in Slides → Figma Group 33 `1232:1764` 180×150 (§4.5c.3): 1765 [28.6,35.4 151.4×114.6] · 1766 [0,0 110.3×101.8]
 		// on top; crops = the nodes' imageTransform (UV × file px).
-		'elephant-shaped-relic-containers' => array(
+		9 => array( // elephant-shaped-relic-containers
 			'rest' => array( 163, 136 ), 'scale' => 1.515, 'photo' => array( 318, 265 ), 'mini' => array( 46, 38 ), 'ratio' => 180 / 150,
 			'images' => array(
 				array( 'field' => 'sh_thumbnail', 'src' => array( 1381, 922 ), 'crop' => array( 298.25, 199.74, 991.2, 724.36 ), 'box' => array( 28.595 / 180, 35.377 / 150, 151.406 / 180, 114.623 / 150 ) ),
@@ -84,27 +87,27 @@ return array(
 			),
 		),
 		// Photo capped at the file (226 px, §4.5c.3 "ห้ามขยายเกินพิกเซลไฟล์").
-		'pod-duang-bullet-money-stamped-with-the-chakra-and-great-crown-marks-reign-of-king-rama-iv' => array(
+		10 => array( // pod-duang-bullet-money-stamped-with-the-chakra-and-great-crown-marks-reign-of-king-rama-iv
 			'rest' => array( 163, 163 ), 'scale' => 1.515, 'photo' => array( 226, 226 ), 'mini' => array( 38, 38 ), 'ratio' => 1,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 227, 227 ), array( 0, 1, 226, 227 ) ) ),
 		),
-		'hand-carved-ivory-and-metal-opium-pipe' => array(
+		11 => array( // hand-carved-ivory-and-metal-opium-pipe
 			'rest' => array( 200, 27 ), 'scale' => 1.52, 'photo' => array( 320, 43 ), 'mini' => array( 48, 6 ), 'ratio' => 2017 / 270,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 2098, 411 ), array( 47, 54, 2064, 324 ) ) ),
 		),
-		'tin-ingot-in-the-shape-of-elephant' => array(
+		12 => array( // tin-ingot-in-the-shape-of-elephant
 			'rest' => array( 163, 109 ), 'scale' => 1.515, 'photo' => array( 320, 214 ), 'mini' => array( 48, 32 ), 'ratio' => 954 / 637,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 1920, 1080 ), array( 483, 221, 1437, 858 ) ) ),
 		),
-		'wooden-cold-press-cake-molds-with-elephanthorse-and-fowl-motifs' => array(
+		13 => array( // wooden-cold-press-cake-molds-with-elephanthorse-and-fowl-motifs
 			'rest' => array( 200, 61 ), 'scale' => 1.52, 'photo' => array( 320, 98 ), 'mini' => array( 48, 15 ), 'ratio' => 936 / 287,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 1920, 1080 ), array( 598, 397, 1534, 684 ) ) ),
 		),
-		'siwaih' => array(
+		14 => array( // siwaih
 			'rest' => array( 200, 51 ), 'scale' => 1.52, 'photo' => array( 320, 82 ), 'mini' => array( 48, 12 ), 'ratio' => 981 / 252,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 1920, 1080 ), array( 478, 437, 1459, 689 ) ) ),
 		),
-		'procession-of-a-king-or-noble-relief-from-the-life-of-the-buddha' => array(
+		15 => array( // procession-of-a-king-or-noble-relief-from-the-life-of-the-buddha
 			'rest' => array( 200, 62 ), 'scale' => 1.52, 'photo' => array( 320, 99 ), 'mini' => array( 48, 15 ), 'ratio' => 4096 / 1270,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 4096, 1270 ), array( 0, 0, 4096, 1270 ) ) ),
 		),

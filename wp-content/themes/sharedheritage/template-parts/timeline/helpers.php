@@ -64,6 +64,26 @@ function sh_tl_is_design_file( int $id, array $src ): bool {
 }
 
 /**
+ * Design geometry entry of a card, found by its stable card number — never by title or slug (admin can change both).
+ *
+ * The number is the N of the import key `<key_prefix>N` (post meta _sh_import_key, set once by the importer).
+ * No key, other trail, or no entry for N → empty array → the caller uses the §4.5c.3 rule.
+ *
+ * @param WP_Post $item timeline_item.
+ * @param array   $geo  geometry.php.
+ * @return array<string, mixed>
+ */
+function sh_tl_geo_entry( WP_Post $item, array $geo ): array {
+	$prefix = isset( $geo['key_prefix'] ) ? (string) $geo['key_prefix'] : '';
+	$key    = (string) get_post_meta( $item->ID, '_sh_import_key', true );
+	if ( '' === $prefix || 0 !== strpos( $key, $prefix ) || ! preg_match( '/^[0-9]+$/', substr( $key, strlen( $prefix ) ) ) ) {
+		return array();
+	}
+	$n = (int) substr( $key, strlen( $prefix ) );
+	return isset( $geo['items'][ $n ] ) && is_array( $geo['items'][ $n ] ) ? $geo['items'][ $n ] : array();
+}
+
+/**
  * Everything one timeline stop needs (CONTENT-MODEL §3 fields + §4.5c geometry).
  *
  * @param WP_Post $item timeline_item.
@@ -71,7 +91,7 @@ function sh_tl_is_design_file( int $id, array $src ): bool {
  * @return array<string, mixed>|null null when the item has no image at all.
  */
 function sh_tl_item( WP_Post $item, array $geo ): ?array {
-	$entry = isset( $geo['items'][ $item->post_name ] ) && is_array( $geo['items'][ $item->post_name ] ) ? $geo['items'][ $item->post_name ] : array();
+	$entry = sh_tl_geo_entry( $item, $geo );
 	$rule  = isset( $geo['rule'] ) && is_array( $geo['rule'] ) ? $geo['rule'] : array();
 	$ids   = array(
 		'sh_thumbnail'   => absint( sh_get( 'sh_thumbnail', $item->ID ) ),
