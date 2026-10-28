@@ -195,3 +195,4 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [reviewer timeline-v3 r1] [2026-10-28] ครั้งแรกใน Chrome ใหม่ หลังถึงชิ้น 15 คลิก 3 ครั้งไม่ตอบสนอง · ทำซ้ำ 6 รอบไม่เกิด → เจ้าของสังเกตใน preview
 - [reviewer timeline-v3 r2] [2026-10-28] กล่องชื่อ Pod Duang / การ์ด 6 ล้ำเข้ากล่อง mini-map 3.2 / 4.6px (ตัวอักษรอยู่ใต้กรอบครีม ไม่ทับภาพ)
 - [reviewer timeline-v3 r2] [2026-10-28] `timeline.js` fitTitles ขยายทุกชื่อที่เกิน 2 บรรทัดที่ 280 (c13 → 320 · c15 → 300 · Pod Duang → 440) · สเปก §4.5c.1 "max 280" ไม่มีข้อยกเว้น → design-dev เขียนข้อยกเว้นในสเปก หรือยอม 3 บรรทัด
+- [orchestrator] [2026-10-28] Pod Duang: prod แก้ `sh_title_raw` (object 171) เอาขึ้นบรรทัดออกแล้วตามเจ้าของ · แต่ seed `content/seed/objects.json` ยังมี "Chakra and\nGreat Crown" → install ใหม่จะได้ขึ้นบรรทัดอีก · design-dev แก้ seed รอบถัดไป (import mode missing ไม่ทับ prod)
