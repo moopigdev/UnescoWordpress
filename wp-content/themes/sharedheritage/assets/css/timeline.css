@@ -2,7 +2,7 @@
  * Timeline v3 (Zone 4) — page-timeline.php · D26/D27 · DESIGN-SPEC §4.5c (layout) · §6.4c (motion).
  * Stage = 1440×723 design px under the real header (y_rel 0 = header bottom), scaled by --k (§4.5c.5).
  * Every moving value comes from custom properties written by assets/js/timeline.js:
- *   --c      continuous index of the object at the centre (load: 2.5 = Slides 31)
+ *   --c      continuous index of the object at the centre (load: 1 = first object, D30)
  *   --k      stage scale · --pitch distance between objects · --line-l/--line-r time line insets
  *   --tr/--mr  text enlargement so title ≥ 14px and metadata ≥ 12px on screen when k < 1
  *   per object: --p (0 rest → 1 centre) · --ta title alpha · per info: --pa photo alpha · --ma metadata alpha
@@ -10,7 +10,7 @@
  */
 
 .sh-tl {
-	--c: 2.5;
+	--c: 1;
 	--k: 1;
 	--pitch: 376.6px;
 	--line-y: 380.2px;   /* top of the 4px line · centre y_rel 382.2 */
