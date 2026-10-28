@@ -454,11 +454,11 @@ html:not(.sh-js) .sh-tl__arrow {
 	pointer-events: none;
 }
 
-/* ---- Back §3.3 · x 160 · y_rel 649 (unscaled component, placed with k) ---- */
+/* ---- Back §3.3 · D29: left edge = site container edge (same rule as header bar / .sh-trail__back) · y_rel 649 placed with k ---- */
 .sh-tl__back {
 	position: absolute;
 	top: calc(649px * var(--k));
-	left: calc(50% - 560px * var(--k));
+	left: max(var(--sh-tablet-margin), calc((100% - var(--sh-container)) / 2));
 	z-index: 8;
 }
 
@@ -552,7 +552,7 @@ html:not(.sh-js) .sh-tl__arrow {
 		position: relative;
 		top: auto;
 		left: auto;
-		margin: 24px 0 24px 20px;
+		margin: 24px 0 24px max(var(--sh-tablet-margin), calc((100% - var(--sh-container)) / 2));
 	}
 }
 
