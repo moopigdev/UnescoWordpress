@@ -35,9 +35,14 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--figma", default=os.path.join(unesco_root(), "design", "figma-file.json"))
 ap.add_argument("--assets", default=os.path.join(unesco_root(), "design", "assets"))
 ap.add_argument("--out", default=os.path.join(HERE, "image-map.json"))
+# Figma 2026-11-11: only the detail frames (objects) were re-specced against the new file (DESIGN-SPEC §4.8.3 · P-245);
+# every other section keeps the older dump first (§1.1b: Home/Intro/Zone not diffed · some nodes, e.g. the timeline
+# bar 797:2110, are gone). Nodes missing from one dump are looked up in the other.
+ap.add_argument("--figma-fallback", default=os.path.join(unesco_root(), "design", "figma-file.2026-10-27.json"))
 args = ap.parse_args()
 
 fig = json.load(open(args.figma, encoding="utf-8"))
+old_fig = json.load(open(args.figma_fallback, encoding="utf-8")) if args.figma_fallback and os.path.isfile(args.figma_fallback) else None
 seed_dir = os.path.join(REPO, "content", "seed")
 seed = {n: json.load(open(os.path.join(seed_dir, n + ".json"), encoding="utf-8"))
         for n in ("objects", "trails", "zones", "timeline-elephant")}
@@ -50,14 +55,21 @@ for fn in os.listdir(args.assets):
 idx = {}
 
 
-def index(n, parent=None):
-    idx[n["id"]] = n
-    n["_parent"] = parent
+def index(n, parent=None, old=False, into=None):
+    into = idx if into is None else into
+    into[n["id"]] = dict(n, _parent=parent, _old=old)
     for c in n.get("children", []):
-        index(c, n["id"])
+        index(c, n["id"], old, into)
 
 
-index(fig["document"])
+idx_current, idx_older = {}, {}
+if old_fig is not None:
+    index(old_fig["document"], old=True, into=idx_current)  # current file below replaces nodes with the same id
+index(fig["document"], into=idx_current)
+index(fig["document"], into=idx_older)
+if old_fig is not None:
+    index(old_fig["document"], old=True, into=idx_older)  # older dump wins (sections not re-specced)
+idx = idx_current  # objects section; switched to idx_older after it
 nodes_log = {}
 missing = set()
 
@@ -88,7 +100,7 @@ def ref_of(node_id, why):
         nodes_log[node_id] = {"for": why, "error": "node not found"}
         return None
     r = deep_ref(n)
-    nodes_log[node_id] = {"for": why, "ref": r}
+    nodes_log[node_id] = {"for": why, "ref": r, **({"older_dump": True} if n.get("_old") else {})}
     if r and r not in assets:
         missing.add(r)
     return r
@@ -186,6 +198,9 @@ for pos, (o, inst) in enumerate(zip(final_objects, tiles), start=1):
     entry["extra_images"] = extra
     result["objects"][o["slug"]] = entry
 
+# ---- everything else: the dump the seed was specced against (older first) --------------------------
+idx = idx_older
+
 # ---- timeline items (card thumbnails) --------------------------------------------------------
 for it in seed["timeline-elephant"]["items"]:
     thumbs = [ref_of(nid, f"timeline card {it['card_order']} thumbnail") for nid in it.get("thumbnail_nodes", [])]
@@ -268,6 +283,8 @@ result = {
         "generated_by": "scripts/import/build-image-map.py",
         "figma_file": os.path.basename(args.figma),
         "figma_lastModified": fig.get("lastModified"),
+        "figma_fallback": os.path.basename(args.figma_fallback) if old_fig is not None else None,
+        "nodes_from_older_dump": sorted(k for k, v in nodes_log.items() if v.get("older_dump")),
         "note": "ref = Figma imageRef = file name (without extension) in Unesco/design/assets · null = no image in Figma · see 'missing' for refs without a file",
     },
     **result,
