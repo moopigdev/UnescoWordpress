@@ -27,14 +27,18 @@
    "collection": "National Museum Bangkok",
    "object_biography": "Received from the Ministry of Finance, Thailand.",
    "thumbnail_nodes": [
-    "1232:1714"
+    "3103:1037"
    ],
+   "thumbnail_refs": [
+    "bbc1e1610db71dacfc7e7d1e6a09f168415c3d18"
+   ],
+   "below_ref": "4953122e17ae97232adf69a47ba5ed1405c8d733.png",
+   "below_node": "3102:1031",
    "read_more_label": "Read more >>",
    "illustration_order": 14,
    "illustration_era_label_raster": "20th–21st century",
-   "below_ref": "bbc1e1610db71dacfc7e7d1e6a09f168415c3d18.png",
-   "below_node": "3103:1037",
-   "d39": "D39(3): รูปใต้เส้น (Figma 500×281) = โครงกระดูกช้าง+คนลายเส้น `bbc1e161` ≠ ภาพบนเส้น `4953122e` (บนเส้นตรง) · ขัด P-224/D27 default (ไม่มีโครงกระดูก) → ลบ below_ref บรรทัดนี้ได้ถ้าเจ้าของไม่เอา"
+   "d39": "D39(3): รูปใต้เส้น (Figma 500×281) = โครงกระดูกช้าง+คนลายเส้น `bbc1e161` ≠ ภาพบนเส้น `4953122e` (บนเส้นตรง) · ขัด P-224/D27 default (ไม่มีโครงกระดูก) → ลบ below_ref บรรทัดนี้ได้ถ้าเจ้าของไม่เอา",
+   "d45": "D45 สลับบน/ใต้เส้น: บนเส้น+mini-map = โครงกระดูกช้างลายเส้น+คน `bbc1e161` (3103:1037) · ใต้เส้น = กระดูกขาสี `4953122e` (3102:1031) · ตรง image-map.json timeline_items.1 (all/below) · ทับ d39(3)"
   },
   {
    "card_order": 2,
@@ -162,17 +166,18 @@
    "place_of_production": "Si Satchanalai Kiln Site, Central Thailand",
    "collection": "Brunei Darussalam Maritime Museum",
    "thumbnail_nodes": [
-    "3103:1181"
+    "3103:1187"
    ],
    "thumbnail_refs": [
-    "621646b5dd0382559f9cf7e9b2f8bf0620ac698e"
+    "555d365bf27bf74e903854746e2a422bc3049d3d"
    ],
+   "below_ref": "621646b5dd0382559f9cf7e9b2f8bf0620ac698e.png",
+   "below_node": "3103:1181",
    "read_more_label": "Read more >>",
    "illustration_order": 4,
    "illustration_era_label_raster": "15th–early 16th century CE",
-   "below_ref": "555d365bf27bf74e903854746e2a422bc3049d3d.png",
-   "below_node": "3103:1187",
-   "d39": "D39(2): บนเส้น = `621646b5` (Figma 3103:1181 · เดิม 1232:1752 `867b2833`) · ใต้เส้น = kendi+คนลายเส้น `555d365b` (3103:1187)"
+   "d39": "D39(2): บนเส้น = `621646b5` (Figma 3103:1181 · เดิม 1232:1752 `867b2833`) · ใต้เส้น = kendi+คนลายเส้น `555d365b` (3103:1187)",
+   "d45": "D45 สลับบน/ใต้เส้น: บนเส้น+mini-map = kendi+คนลายเส้น `555d365b` (3103:1187) · ใต้เส้น = kendi เล็กมีน้ำ `621646b5` (3103:1181) · ตรง image-map.json timeline_items.7 · ทับ d39(2)"
   },
   {
    "card_order": 8,
@@ -211,15 +216,20 @@
    "collection": "National Museum Bangkok",
    "object_biography": "Acquired from Wat Chedi Sung, Hod sub-district, Hod district, Chiang Mai province, in 1960.",
    "thumbnail_nodes": [
-    "1232:1765",
-    "1232:1766"
+    "3103:1220"
    ],
+   "thumbnail_refs": [
+    "1c0fc05b6641353a96a7a1af354072eab2433e69"
+   ],
+   "below_ref": "b1ba8a8a18498389fb9a9f257d957ec6516fcc99.png",
+   "below_ref_2": "1c3aa3a10055d34a499058cb6d74a29c814cfa42.png",
+   "below_node": "3103:1233",
+   "below_node_2": "3103:1234",
    "read_more_label": "Read more >>",
    "illustration_order": 6,
    "illustration_era_label_raster": null,
-   "below_ref": "1c0fc05b6641353a96a7a1af354072eab2433e69.png",
-   "below_node": "3103:1220",
-   "d39": "D39(3): รูปใต้เส้น (Figma 500×281) = ภาพรวม 2 ชิ้นมีเส้นขอบ `1c0fc05b` ≠ กลุ่มบนเส้น `b1ba8a8a`+`1c3aa3a1` (บนเส้นตรง)"
+   "d39": "D39(3): รูปใต้เส้น (Figma 500×281) = ภาพรวม 2 ชิ้นมีเส้นขอบ `1c0fc05b` ≠ กลุ่มบนเส้น `b1ba8a8a`+`1c3aa3a1` (บนเส้นตรง)",
+   "d45": "D45 สลับบน/ใต้เส้น: บนเส้น+mini-map = 2 ชิ้นมีเส้นขอบ `1c0fc05b` (3103:1220) · ใต้เส้น = กลุ่ม 2 ภาพเดิม `b1ba8a8a` (below_ref · 3103:1233) + `1c3aa3a1` (below_ref_2 · 3103:1234) · ตรง image-map.json timeline_items.9 (below = 2 ภาพ) · ทับ d39(3)"
   },
   {
    "card_order": 10,
