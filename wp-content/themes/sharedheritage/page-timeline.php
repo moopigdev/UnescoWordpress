@@ -4,7 +4,8 @@
  *
  * One stage (1440×723 under the header, scaled by k to fit the screen — §4.5c.5):
  *   trail icons ×17 · mini-map (15 thumbnails + cream viewport frame) · ‹ › · fixed time line ·
- *   objects on the line (all move together; the one nearest the centre grows + gets its title) ·
+ *   objects on the line (all move together; the one nearest the centre grows + gets its title · D32/D33: line art at
+ *   rest cross-dissolves to the colour image) ·
  *   under the line: the centred object's photo + metadata (fixed at the centre, fade in by position).
  * State = c (continuous index of the object at the centre), driven by assets/js/timeline.js.
  * Content: sh_timeline_items() by sh_card_order (CONTENT-MODEL §3) · layout constants: template-parts/timeline/geometry.php.
@@ -92,8 +93,12 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 					<div class="sh-tl__track" data-sh-tl-track>
 						<span class="sh-tl__line" aria-hidden="true"></span>
 						<ol class="sh-tl__items">
-							<?php foreach ( $sh_items as $sh_i => $sh_item ) : ?>
-								<li class="sh-tl__item<?php echo 0 === $sh_i ? ' is-vis is-center' : ''; ?>" style="<?php echo esc_attr( sh_tl_style( array( '--i' => (string) ( $sh_i + 1 ), '--rw' => sh_tl_num( $sh_item['rest'][0] ), '--ar' => sh_tl_num( $sh_item['ratio'] ), '--s' => sh_tl_num( $sh_item['scale'] ) ) + ( 0 === $sh_i ? array( '--p' => '1', '--ta' => '1' ) : array() ) ) ); ?>" data-sh-tl-item>
+							<?php
+							foreach ( $sh_items as $sh_i => $sh_item ) :
+								// D32/D33: line art at rest under the colour image (cross-dissolve by --p) · none = faded colour image.
+								$sh_line = ! empty( $sh_item['line'] ) ? sh_tl_line_pic( $sh_item, (float) $sh_item['line']['w'], $sh_i < 5 ? 'eager' : 'lazy' ) : '';
+								?>
+								<li class="sh-tl__item<?php echo '' !== $sh_line ? ' has-line' : ''; ?><?php echo 0 === $sh_i ? ' is-vis is-center' : ''; ?>" style="<?php echo esc_attr( sh_tl_style( array( '--i' => (string) ( $sh_i + 1 ), '--rw' => sh_tl_num( $sh_item['rest'][0] ), '--ar' => sh_tl_num( $sh_item['ratio'] ), '--s' => sh_tl_num( $sh_item['scale'] ) ) + ( 0 === $sh_i ? array( '--p' => '1', '--ta' => '1' ) : array() ) ) ); ?>" data-sh-tl-item>
 									<p class="sh-tl__title">
 										<?php if ( '' !== $sh_item['url'] ) : ?>
 											<a href="<?php echo esc_url( $sh_item['url'] ); ?>" tabindex="-1"><?php echo nl2br( esc_html( $sh_item['title'] ), false ); ?></a>
@@ -101,7 +106,7 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 											<span><?php echo nl2br( esc_html( $sh_item['title'] ), false ); ?></span>
 										<?php endif; ?>
 									</p>
-									<span class="sh-tl__obj" data-sh-tl-go="<?php echo esc_attr( (string) ( $sh_i + 1 ) ); ?>"><?php echo sh_tl_pic( $sh_item, $sh_item['rest'][0] * $sh_item['scale'], $sh_item['title'], $sh_i < 5 ? 'eager' : 'lazy', ( 0 === $sh_i || 1 === $sh_i ) ? 'high' : '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built in sh_tl_pic() (escaped there). ?></span>
+									<span class="sh-tl__obj" data-sh-tl-go="<?php echo esc_attr( (string) ( $sh_i + 1 ) ); ?>"><?php echo $sh_line . sh_tl_pic( $sh_item, $sh_item['rest'][0] * $sh_item['scale'], $sh_item['title'], $sh_i < 5 ? 'eager' : 'lazy', ( 0 === $sh_i || 1 === $sh_i ) ? 'high' : '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built in sh_tl_line_pic() / sh_tl_pic() (escaped there). ?></span>
 								</li>
 							<?php endforeach; ?>
 						</ol>

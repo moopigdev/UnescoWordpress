@@ -2,7 +2,8 @@
  * Timeline v3 (D26 · D27) — DESIGN-SPEC §6.4c. One number drives the page: c = continuous index of the object at
  * the centre (1…N, load 1 = first object selected, D30). Objects/● move by --c (CSS); everything else follows p_i:
  *   p_i = clamp(1 − |i − c|·376.6 / 188, 0, 1)      (at most one object has p > 0)
- *   object opacity 0.6 + 0.4p · scale 1 + (s_i − 1)p (CSS) · title α 0.62p² · photo α 0.40p · metadata α 0.47p
+ *   object opacity 0.6 + 0.4p (with line art, D32/D33: line α 1 − p · colour α p) · scale 1 + (s_i − 1)p (CSS) ·
+ *   title α 0.62p² · photo α 0.40p · metadata α 0.47p
  *   settle: no input for 150 ms and |d| < 8 px → title/photo/metadata α → 1 in 400 ms ease-out.
  * Input: ‹ › 600 ms · ● / mini-map / object click: min(900, 400 + 80·|Δ|) ms · cubic-bezier(.4,0,.2,1) ·
  * drag (1 pitch = 376.6·k px) → snap 400 ms ease-out · horizontal wheel → idle 150 ms → snap 300 ms ·

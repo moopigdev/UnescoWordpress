@@ -174,6 +174,7 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 	return array_merge(
 		$out,
 		array(
+			'line'   => sh_tl_line_art( $item, $entry, $rule ),
 			'images' => $images,
 			'title'  => get_the_title( $item ),
 			'url'    => ( $object_id && 'publish' === get_post_status( $object_id ) ) ? (string) get_permalink( $object_id ) : '',
@@ -181,6 +182,75 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 			'period' => $period,
 		)
 	);
+}
+
+/**
+ * Line art shown on the line while the item is not centred (D32/D33 · DESIGN-SPEC §4.5c.3b · §6.4c).
+ *
+ * Rest width: the measured box of geometry.php `line` while the attachment is still that design file; any other image
+ * (admin upload · cards without an entry) is "contained" in the §4.5c.3 rule's rest box (wide box for ratio > 3).
+ * Empty field / not an image → null → the item keeps the faded colour image (fallback).
+ *
+ * @param WP_Post $item  timeline_item.
+ * @param array   $entry sh_tl_geo_entry().
+ * @param array   $rule  geometry.php `rule`.
+ * @return array{id:int,w:float,ratio:float}|null
+ */
+function sh_tl_line_art( WP_Post $item, array $entry, array $rule ): ?array {
+	$id  = absint( sh_get( 'sh_line_art', $item->ID ) );
+	$src = ( $id && wp_attachment_is_image( $id ) ) ? wp_get_attachment_image_src( $id, 'full' ) : false;
+	if ( ! $src || empty( $src[1] ) || empty( $src[2] ) ) {
+		return null;
+	}
+	$ratio = $src[1] / $src[2];
+	if ( ! empty( $entry['line']['src'] ) && ! empty( $entry['line']['rest'] ) && sh_tl_is_design_file( $id, $entry['line']['src'] ) ) {
+		$w = (float) $entry['line']['rest'][0];
+	} elseif ( ! empty( $rule['rest'] ) && ! empty( $rule['wide_rest'] ) ) {
+		$wide = $ratio > ( isset( $rule['wide_ratio'] ) ? (float) $rule['wide_ratio'] : 3 );
+		$w    = sh_tl_contain( $ratio, ...( $wide ? $rule['wide_rest'] : $rule['rest'] ) )[0];
+	} else {
+		return null;
+	}
+	return array(
+		'id'    => $id,
+		'w'     => $w,
+		'ratio' => $ratio,
+	);
+}
+
+/**
+ * Line art layer of an item (under the colour image · same base and scale — sized by timeline.css).
+ *
+ * @param array  $item    sh_tl_item() with a `line`.
+ * @param float  $width   Largest width it is shown at (px at 1440) → `sizes`.
+ * @param string $loading 'eager' | 'lazy'.
+ */
+function sh_tl_line_pic( array $item, float $width, string $loading ): string {
+	$line = $item['line'];
+	$tag  = wp_get_attachment_image(
+		(int) $line['id'],
+		'full',
+		false,
+		array(
+			'class'     => 'sh-tl__line-img',
+			'alt'       => '', // Decorative: the colour image of the same object carries the alt.
+			'loading'   => $loading,
+			'decoding'  => 'async',
+			'draggable' => 'false',
+			'sizes'     => (int) ceil( $width ) . 'px',
+		)
+	);
+	if ( '' === $tag ) {
+		return '';
+	}
+	$style = sh_tl_style(
+		array(
+			'--lw'  => sh_tl_num( $line['w'] ),
+			'--lar' => sh_tl_num( $line['ratio'] ),
+		)
+	);
+	// $tag comes from wp_get_attachment_image() (attributes escaped by core).
+	return '<span class="sh-tl__line-art" style="' . esc_attr( $style ) . '">' . $tag . '</span>';
 }
 
 /**

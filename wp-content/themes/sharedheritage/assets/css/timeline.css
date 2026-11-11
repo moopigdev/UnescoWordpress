@@ -6,6 +6,7 @@
  *   --k      stage scale · --pitch distance between objects · --line-l/--line-r time line insets
  *   --tr/--mr  text enlargement so title ≥ 14px and metadata ≥ 12px on screen when k < 1
  *   per object: --p (0 rest → 1 centre) · --ta title alpha · per info: --pa photo alpha · --ma metadata alpha
+ *   per line art (D32/D33): --lw rest width (px at 1440) · --lar file ratio — α 1 − p, colour image α p
  * Values not in tokens.css (Slides colours) are page-local: --tl-cream #EDEBDA [R] · --tl-mini-line #DFDFDF [R].
  */
 
@@ -291,6 +292,44 @@ html:not(.sh-js) .sh-tl__arrow {
 	cursor: default;
 }
 
+/*
+ * D32/D33 (§4.5c.3b · §6.4c): item with line art = 2 layers, same base (bottom centre) and same scale s_i (both inside
+ * .sh-tl__obj) · line art under the colour image · α_line = 1 − p · α_colour = p (no 0.6 floor). Line art box =
+ * its own rest width --lw (§4.5c.3b) × file ratio --lar, clamped like the colour box on tablet/mobile (§4.5c.6).
+ */
+.sh-tl__item.has-line .sh-tl__obj {
+	opacity: 1;
+}
+
+.sh-tl__item.has-line .sh-tl__obj > .sh-tl-pic {
+	opacity: var(--p);
+}
+
+.sh-tl__line-art {
+	--lwe: calc(var(--lw) * 1px);
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	display: block;
+	width: var(--lwe);
+	aspect-ratio: var(--lar);
+	opacity: calc(1 - var(--p));
+	transform: translateX(-50%);
+}
+
+/* Centred: the (fading) line art is wider/taller than the colour image — never cover the title link. */
+.sh-tl__item.is-center .sh-tl__line-art {
+	pointer-events: none;
+}
+
+.sh-tl__line-img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	pointer-events: none;
+}
+
 .sh-tl.is-moving .sh-tl__item,
 .sh-tl.is-moving .sh-tl__dot-item {
 	will-change: transform;
@@ -510,6 +549,10 @@ html:not(.sh-js) .sh-tl__arrow {
 		--rwe: min(calc(var(--rw) * 1px), 18cqw, calc(140px * var(--ar)));
 	}
 
+	.sh-tl__line-art {
+		--lwe: min(calc(var(--lw) * 1px), 18cqw, calc(140px * var(--lar)));
+	}
+
 	/* Narrower than 340 so the centred title never reaches the neighbours (pitch 26.15cqw · rest ≤ 18cqw). */
 	.sh-tl__title {
 		max-width: min(340px, 33cqw);
@@ -593,6 +636,10 @@ html:not(.sh-js) .sh-tl__arrow {
 
 	.sh-tl__item {
 		--rwe: min(calc(var(--rw) * 1px), 46cqw, calc(120px * var(--ar)));
+	}
+
+	.sh-tl__line-art {
+		--lwe: min(calc(var(--lw) * 1px), 46cqw, calc(120px * var(--lar)));
 	}
 
 	.sh-tl__title {
