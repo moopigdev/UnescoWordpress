@@ -6,7 +6,7 @@
  * gap_before; content from the object fields (title = sh_title_raw/post title · meta/collection block =
  * the info rows of §4.8.2 #12: fixed order Period → Place of production / Findspot → Material →
  * Dimensions → Collection → Other information / Object biography, standard labels (700) + values (500,
- * or the weight Figma gives the value run), only the fields the block's Figma rows list, empty values
+ * or the weight Figma gives the value run), every field with a value (D42 · P-186), empty values
  * skipped, Section never shown · caption = sh_caption: caption.label / label_breaks, one <p> per
  * paragraph (any line break) with caption.paragraph_gap.px between (#11 · P-246), justified when Figma
  * says JUSTIFIED (#9) · paragraph_indent_nbsp) · plain_meta = text kept in the layout (lines[] or full
@@ -129,24 +129,39 @@ if ( ! $sh_blocks ) {
 					$sh_by_field[ $sh_field ] = $sh_row;
 				}
 			}
-			// Weight of the run after each label run (1510 Leg Bone: value 600 in a 24/26 w600 block).
+			// Weight of the value run after each label run.
 			$sh_after = array();
 			$sh_runs  = isset( $sh_b['runs'] ) && is_array( $sh_b['runs'] ) ? array_values( $sh_b['runs'] ) : array();
 			foreach ( $sh_runs as $sh_k => $sh_r ) {
-				if ( is_array( $sh_r ) && isset( $sh_r['text'], $sh_runs[ $sh_k + 1 ]['weight'] ) && is_string( $sh_r['text'] ) ) {
-					$sh_after[ trim( $sh_r['text'] ) ] = $sh_runs[ $sh_k + 1 ]['weight'];
-				}
-			}
-			$sh_out = '';
-			foreach ( $sh_info_rows as $sh_field => $sh_label ) {
-				if ( ! isset( $sh_by_field[ $sh_field ] ) ) {
+				if ( ! is_array( $sh_r ) || ! isset( $sh_r['text'] ) || ! is_string( $sh_r['text'] ) || '' === trim( $sh_r['text'] ) ) {
 					continue;
 				}
+				// Next run with visible text (1510 has a lone " " run in another weight between label and value).
+				for ( $sh_n2 = $sh_k + 1; isset( $sh_runs[ $sh_n2 ] ); $sh_n2++ ) {
+					$sh_nx = $sh_runs[ $sh_n2 ];
+					$sh_tx = is_array( $sh_nx ) ? (string) ( $sh_nx['text'] ?? ( $sh_nx['text_head'] ?? 'x' ) ) : '';
+					if ( '' !== trim( $sh_tx ) ) {
+						if ( isset( $sh_nx['weight'] ) ) {
+							$sh_after[ trim( $sh_r['text'] ) ] = $sh_nx['weight'];
+						}
+						break;
+					}
+				}
+			}
+			// Rows Figma does not list: weights of the block's first row, colours = block colour.
+			$sh_first = reset( $sh_by_field );
+			$sh_first = is_array( $sh_first ) ? $sh_first : array();
+			$sh_def   = array(
+				'label_weight' => $sh_first['label_weight'] ?? 700,
+				'value_weight' => $sh_after[ trim( (string) ( $sh_first['label_in_figma'] ?? $sh_first['label'] ?? '' ) ) ] ?? ( $sh_first['value_weight'] ?? 500 ),
+			);
+			$sh_out = '';
+			foreach ( $sh_info_rows as $sh_field => $sh_label ) {
 				$sh_value = trim( (string) sh_get( 'sh_' . $sh_field, $sh_id ) );
 				if ( '' === $sh_value ) {
 					continue;
 				}
-				$sh_row  = $sh_by_field[ $sh_field ];
+				$sh_row  = $sh_by_field[ $sh_field ] ?? $sh_def;
 				$sh_fig  = trim( (string) ( $sh_row['label_in_figma'] ?? $sh_row['label'] ?? '' ) );
 				$sh_vw   = $sh_after[ $sh_fig ] ?? ( $sh_row['value_weight'] ?? 500 );
 				$sh_out .= '<span class="sh-detail__row">'
