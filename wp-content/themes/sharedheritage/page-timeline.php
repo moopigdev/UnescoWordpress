@@ -5,8 +5,8 @@
  * One stage (1440×723 under the header, scaled by k to fit the screen — §4.5c.5):
  *   trail icons ×17 · mini-map (15 thumbnails + cream viewport frame) · ‹ › · fixed time line ·
  *   objects on the line (all move together; the one nearest the centre grows + gets its title) ·
- *   under the line: the centred object's photo + metadata (fixed at the centre, fade in by position · D35: an object
- *   with `sh_line_art` shows its line art there first, then cross-fades to the colour photo when it settles).
+ *   under the line: the centred object's photo + metadata (fixed at the centre, fade in by position · D35/D36: an object
+ *   with `sh_line_art` shows that "before" image there first, then cross-fades to the colour photo when it settles).
  * State = c (continuous index of the object at the centre), driven by assets/js/timeline.js.
  * Content: sh_timeline_items() by sh_card_order (CONTENT-MODEL §3) · layout constants: template-parts/timeline/geometry.php.
  * Reflection = last stop N + 1 (D34 · §4.5c.7: ● only on the line · title + text under it) · Back §3.3 (D27) ·
@@ -135,13 +135,12 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 					?>
 					<div class="sh-tl__info<?php echo '' !== $sh_line ? ' has-line' : ''; ?><?php echo 0 === $sh_i ? ' is-vis is-center' : ''; ?>" style="<?php echo esc_attr( sh_tl_style( array( '--pw' => sh_tl_num( $sh_item['photo'][0] ), '--ar' => sh_tl_num( $sh_item['ratio'] ) ) + ( 0 === $sh_i ? array( '--pa' => '1', '--ma' => '1' ) : array() ) ) ); ?>" data-sh-tl-info data-title="<?php echo esc_attr( $sh_item['title'] ); ?>" data-period="<?php echo esc_attr( $sh_item['period'] ); ?>">
 						<?php
-						$sh_pic = sh_tl_pic( $sh_item, (float) $sh_item['photo'][0], '', 0 === $sh_i ? 'eager' : 'lazy' );
+						$sh_pic = $sh_line . sh_tl_pic( $sh_item, (float) $sh_item['photo'][0], '', 0 === $sh_i ? 'eager' : 'lazy' ); // D35/D36: "before" image under the colour photo, same link.
 						if ( '' !== $sh_item['url'] ) {
-							echo '<a class="sh-tl__photo" href="' . esc_url( $sh_item['url'] ) . '" tabindex="-1" aria-hidden="true">' . $sh_pic . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $sh_pic built in sh_tl_pic().
+							echo '<a class="sh-tl__photo" href="' . esc_url( $sh_item['url'] ) . '" tabindex="-1" aria-hidden="true">' . $sh_pic . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $sh_pic built in sh_tl_line_pic() / sh_tl_pic().
 						} else {
 							echo '<span class="sh-tl__photo">' . $sh_pic . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- as above.
 						}
-						echo $sh_line; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built in sh_tl_line_pic() (escaped there).
 						?>
 						<?php if ( ! empty( $sh_item['lines'] ) ) : ?>
 							<p class="sh-tl__meta"><?php echo implode( '<br>', array_map( 'esc_html', $sh_item['lines'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- each line escaped. ?></p>

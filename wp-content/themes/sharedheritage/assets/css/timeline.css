@@ -6,7 +6,7 @@
  *   --k      stage scale · --pitch distance between objects · --line-l/--line-r time line insets
  *   --tr/--mr  text enlargement so title ≥ 14px and metadata ≥ 12px on screen when k < 1
  *   per object: --p (0 rest → 1 centre) · --ta title alpha · per info: --pa photo alpha · --ma metadata alpha
- *   D35 line art of the photo: --lpw width (contain 320×265 · px at 1440) · --lar file ratio · --la α (timeline.js)
+ *   D35/D36 "before" image of the photo: --lpw width (contain 320×265 · px at 1440) · --lar file ratio · --la α
  * Values not in tokens.css (Slides colours) are page-local: --tl-cream #EDEBDA [R] · --tl-mini-line #DFDFDF [R].
  */
 
@@ -439,20 +439,35 @@ html:not(.sh-js) .sh-tl__arrow {
 }
 
 /*
- * D35 (D36: only items whose sh_line_art is set): line art in the photo box, over the photo · contain 320×265 by its own
- * ratio · same centre (x 720 · y_rel 561) · α --la: 0.40p while moving → 0 as the colour photo fades in on settle.
+ * D35/D36 (§4.5c.3b · §6.4c): items with sh_line_art — the "before" image sits in the photo link under the colour
+ * image, contained in the same 320×265 box by its own ratio, same centre · α --la (0.40p coming in → 0.40(1 − e) during
+ * the settle cross-fade) · the colour image takes --pa (the link itself stays opaque so both layers fade apart).
  */
+.sh-tl__info.has-line .sh-tl__photo {
+	opacity: 1;
+}
+
+.sh-tl__info.has-line .sh-tl__photo > .sh-tl-pic {
+	opacity: var(--pa);
+}
+
 .sh-tl__photo-line {
 	--la: 0;
 	--lpwe: calc(var(--lpw) * 1px);
 	position: absolute;
-	top: calc(561px - var(--lpwe) / var(--lar) / 2);
-	left: calc(720px - var(--lpwe) / 2);
+	top: 50%;
+	left: 50%;
 	display: block;
 	width: var(--lpwe);
 	aspect-ratio: var(--lar);
+	visibility: hidden;
 	opacity: var(--la);
-	pointer-events: none; /* clicks go to the photo link underneath */
+	pointer-events: none;
+	transform: translate(-50%, -50%);
+}
+
+.sh-tl__photo-line.is-on {
+	visibility: visible;
 }
 
 .sh-tl__line-img {
@@ -611,12 +626,9 @@ html:not(.sh-js) .sh-tl__arrow {
 		left: auto;
 	}
 
-	/* Line art: centred on the photo (first in the column), never taller than it (stays inside the stacked block). */
+	/* "Before" image: same box rule as the photo here, never taller than the photo (stays inside the stacked block). */
 	.sh-tl__photo-line {
 		--lpwe: min(calc(var(--lpw) * 1px), 280px, calc(260px * var(--lar)), calc(var(--pwe) / var(--ar) * var(--lar)));
-		top: calc(var(--pwe) / var(--ar) / 2 - var(--lpwe) / var(--lar) / 2);
-		left: 50%;
-		transform: translateX(-50%);
 	}
 
 	.sh-tl__meta {

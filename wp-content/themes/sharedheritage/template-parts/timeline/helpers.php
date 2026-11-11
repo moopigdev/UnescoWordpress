@@ -185,8 +185,8 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 }
 
 /**
- * Line art of the photo under the line (D35 · replaces D32/D33's top row): while the item comes to the centre the
- * photo box shows the line art (α 0.40p), on settle it cross-fades to the colour photo (timeline.js).
+ * "Before" image of the photo under the line (`sh_line_art` · D35/D36 · replaces D32/D33's top row): while the item
+ * comes to the centre the photo box shows it (α 0.40p), on settle it cross-fades to the colour photo (timeline.js).
  * Box = the photo rule of §4.5c.3: "contain" in 320×265 by the line art's own ratio, never larger than the file,
  * centred on the same point as the photo (x 720 · y_rel 561). Empty field / not an image → null (photo as before).
  *
@@ -212,7 +212,7 @@ function sh_tl_line_art( WP_Post $item, array $rule ): ?array {
 }
 
 /**
- * Line art layer of the photo under the line (over the photo · same centre · sized by timeline.css).
+ * "Before" layer of the photo under the line: inside the photo link, under the colour image, same centre (timeline.css).
  *
  * @param array  $item    sh_tl_item() with a `line`.
  * @param string $loading 'eager' | 'lazy'.
@@ -225,7 +225,7 @@ function sh_tl_line_pic( array $item, string $loading ): string {
 		false,
 		array(
 			'class'     => 'sh-tl__line-img',
-			'alt'       => '', // Decorative: the colour photo of the same object is the content.
+			'alt'       => '', // Decorative: the colour photo of the same object is the content (§6.4c D35/D36).
 			'loading'   => $loading,
 			'decoding'  => 'async',
 			'draggable' => 'false',

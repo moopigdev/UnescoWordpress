@@ -3,9 +3,10 @@
  * the centre (1…N, load 1 = first object selected, D30). Objects/● move by --c (CSS); everything else follows p_i:
  *   p_i = clamp(1 − |i − c|·376.6 / 188, 0, 1)      (at most one object has p > 0)
  *   object opacity 0.6 + 0.4p · scale 1 + (s_i − 1)p (CSS) · title α 0.62p² · photo α 0.40p · metadata α 0.47p
- *   D35/D36 photo with line art (sh_line_art): coming in = line art α 0.40p (colour photo 0) → settle cross-fades
- *   line art → colour (colour = settle s · line 0.40p·(1 − s)) · once shown, the colour photo uses 0.40p again (leaving)
- *   until the object is out of the window (p = 0) · reduced motion / load (D30) = colour at once.
+ *   D35/D36 photo with a "before" image (sh_line_art): phase before (coming in: before α 0.40p · colour 0) → settle
+ *   cross-fade 400 ms cubic-bezier(0,0,.2,1) e: before 0.40(1 − e) · colour e → phase colour (moving again: colour
+ *   0.40p, before 0 — leaving fades the colour photo) → back to phase before at p = 0 · reduced motion / load (D30) =
+ *   colour at once.
  *   settle: no input for 150 ms and |d| < 8 px → title/photo/metadata α → 1 in 400 ms ease-out.
  * Input: ‹ › 600 ms · ● / mini-map / object click: min(900, 400 + 80·|Δ|) ms · cubic-bezier(.4,0,.2,1) ·
  * drag (1 pitch = 376.6·k px) → snap 400 ms ease-out · horizontal wheel → idle 150 ms → snap 300 ms ·
@@ -72,6 +73,7 @@
 	}
 	var EASE = bezier( 0.4, 0, 0.2, 1 );
 	var EASE_OUT = bezier( 0, 0, 0.58, 1 );
+	var EASE_XF = bezier( 0, 0, 0.2, 1 );   // D35/D36 before → colour cross-fade (§6.4c)
 
 	function clamp( v, lo, hi ) {
 		return Math.min( hi, Math.max( lo, v ) );
@@ -87,7 +89,9 @@
 	var settleAt = null;
 	var settleIdx = 1;           // D30: object 1 starts fully settled (α 1) — no load animation
 	var settleS = 1;
-	var colorIdx = 1;            // object whose colour photo has been shown (D35) — D30: object 1 at load
+	var settleU = 1;             // linear settle progress 0 → 1 (settleS = eased)
+	var colorIdx = 1;            // object whose photo is in phase "colour" (D35/D36) — D30: object 1 at load
+	var xfIdx = 0;               // object whose before → colour cross-fade belongs to the current settle
 	var announced = 0;
 	var suppressUntil = 0;
 	var raf = 0;
@@ -227,15 +231,32 @@
 			toggle( items[ i ], 'c' + i, 'is-center', center );
 			if ( infos[ i ] ) {
 				if ( lines[ i ] ) {
-					if ( colorIdx !== idx && ( MQ_REDUCE.matches || ( idx === settleIdx && s >= 1 ) ) ) {
-						colorIdx = idx;
+					var settling = idx === settleIdx && settleU > 0;
+					if ( colorIdx !== idx && ( MQ_REDUCE.matches ? p > 0 : settling ) ) {
+						colorIdx = idx;              // phase colour from the first frame of the cross-fade
+						xfIdx = MQ_REDUCE.matches ? 0 : idx;
 					}
-					var shown = colorIdx === idx;
-					set( infos[ i ], 'pa' + i, '--pa', shown ? mix( 0.4 * p, s ) : s.toFixed( 4 ) );
-					set( lines[ i ], 'la' + i, '--la', shown ? '0' : ( 0.4 * p * ( 1 - s ) ).toFixed( 4 ) );
-					if ( shown && 0 === p ) {
-						colorIdx = 0; // Out of the window: next time it comes in as line art again.
+					var pa;
+					var la = 0;
+					if ( xfIdx === idx && settling ) {
+						var e = EASE_XF( settleU );  // before 0.40 → 0 · colour 0 → 1
+						pa = e;
+						la = 0.4 * ( 1 - e );
+					} else if ( colorIdx === idx ) {
+						pa = parseFloat( mix( 0.4 * p, s ) );
+					} else {
+						pa = 0;
+						la = 0.4 * p;
 					}
+					if ( xfIdx === idx && ! settling ) {
+						xfIdx = 0;                   // moved again: colour 0.40p at once, before gone
+					}
+					if ( colorIdx === idx && 0 === p ) {
+						colorIdx = 0;                // out of the window: comes in as "before" next time
+					}
+					set( infos[ i ], 'pa' + i, '--pa', pa.toFixed( 4 ) );
+					set( lines[ i ], 'la' + i, '--la', la.toFixed( 4 ) );
+					toggle( lines[ i ], 'lo' + i, 'is-on', la > 0 );
 				} else {
 					set( infos[ i ], 'pa' + i, '--pa', mix( 0.4 * p, s ) );
 				}
@@ -316,6 +337,7 @@
 		lastInput = performance.now();
 		settleAt = null;
 		settleS = 0;
+		settleU = 0;
 		settleIdx = 0;
 		announced = 0;
 	}
@@ -352,12 +374,14 @@
 				if ( MQ_REDUCE.matches ) {
 					settleIdx = near;
 					settleS = 1;
+					settleU = 1;
 				} else if ( now - lastInput >= IDLE_MS ) {
 					if ( null === settleAt ) {
 						settleAt = now;
 					}
 					settleIdx = near;
 					var u = Math.min( 1, ( now - settleAt ) / SETTLE_MS );
+					settleU = u;
 					settleS = EASE_OUT( u );
 					more = more || u < 1;
 				} else {
