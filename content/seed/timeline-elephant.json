@@ -30,7 +30,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 14,
-   "illustration_era_label_raster": "20th–21st century"
+   "illustration_era_label_raster": "20th–21st century",
+   "line_art_ref": "01-elephant-leg-bone.png"
   },
   {
    "card_order": 2,
@@ -52,7 +53,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 3,
-   "illustration_era_label_raster": "13th century"
+   "illustration_era_label_raster": "13th century",
+   "line_art_ref": "02-singhasari-ganesha.png"
   },
   {
    "card_order": 3,
@@ -74,7 +76,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 1,
-   "illustration_era_label_raster": "10th–11th century"
+   "illustration_era_label_raster": "10th–11th century",
+   "line_art_ref": "03-ganesha.png"
   },
   {
    "card_order": 4,
@@ -94,7 +97,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 8,
-   "illustration_era_label_raster": "19th century CE"
+   "illustration_era_label_raster": "19th century CE",
+   "line_art_ref": "04-elephant-molar.png"
   },
   {
    "card_order": 5,
