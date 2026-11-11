@@ -31,7 +31,7 @@ FORCE=1 bash scripts/media/encode.sh    # ทำใหม่ทุกไฟล�
 | ganesha | 52.73 | 2.52 | 1440×810 · 30fps · 12.27s (src 2560×1440@60) | ❌ ทึบ (alpha_min 254) | poster | 34 |
 | singhasari-ganesha | 10.10 | 2.72 | 1440×810 · 30fps · 10.03s | ❌ ทึบ | poster | 31 |
 | tin-ingot-in-the-shape-of-an-elephant | 7.00 | 2.38 | 1440×810 · 30fps (src 60) · 10.03s | ❌ ทึบ | poster | 7 |
-| walking | 0.02 | 0.02 (copy) | 1120×630 · 8.8s · 11 เฟรม | ❌ ทึบ (alpha_min 255) | poster | 3 |
+| walking | 0.02 | 0.02 (copy) | 1120×630 · 3.85s · 11 เฟรม (20fps container) | ❌ ทึบ (alpha_min 255) | poster | 3 |
 
 คุณภาพไฟล์ที่ถูกบีบ (เทียบ src ย่อเป็น 1440×810 @10fps): ganesha SSIM-Y 0.983 / PSNR-Y 40.0 dB · singhasari SSIM-Y 0.974 / 37.7 dB · tin SSIM-Y 0.9997 / 58.5 dB → ไม่เสียคุณภาพชัดเจน จึงไม่เปิด O-xx
 
@@ -82,3 +82,9 @@ FORCE=1 bash scripts/media/encode.sh    # ทำใหม่ทุกไฟล�
 - ตัวเลข `fps`=10 ของ figma-frames เป็น CFR จริง (ต่างจาก owner-webm ที่เป็น VFR stepped: ใช้ `steps` + `frame_duration_s` ดูจำนวนภาพจริง) · เฟรมซ้ำกินไบต์ต่ำมาก
 - ไฟล์ out ที่สร้างเพิ่มข้าง WebM: `<slug>.frames.json` (sidecar: alpha ต่อเฟรม · crf — manifest.py อ่าน) · ทั้งหมดอยู่ใน `Unesco/media/out/` ไม่ commit
 - ต้องมี `Unesco/design/assets/` (ภาพเฟรม 144 ref · ไม่ commit) ถึงรัน hero_frames.py ได้ · ไม่มี → ใช้ `SKIP_HERO_FRAMES=1` ได้ถ้า `media/out/` มีไฟล์ hero + `<slug>.frames.json` ครบแล้ว (manifest ยังได้ 16 รายการ) · ถ้าไม่มี sidecar manifest.py จะ exit ≠ 0 ไม่ตัดรายการ
+
+## walking (home-trails) — เปลี่ยนเป็นไฟล์ "รอยเท้าเร็วขึ้น" (BACKLOG #5 · task `media-walking-v2` · 2026-11-11)
+- ต้นฉบับใหม่ `media/src/drive-2026-11-11/walking-edit-1.webm` (sha256 `a973c118…1559e3`) วางทับ `media/src/File Animated/Homepage/walking.webm.webm` (ตัวเดิม 8.8s เก็บไว้ที่ `media/src/walking-v1-8.8s.webm.bak`) → ชื่อ out/manifest id คงเดิม `walking` · `encode.sh` จึงรันซ้ำได้โดยไม่ต้องแก้สคริปต์ (`SKIP_HERO_FRAMES=1 bash scripts/media/encode.sh`)
+- ffprobe/libvpx decode: VP9 · 1120×630 · 3.85s · 11 เฟรมจริง (เฟรมละ 0.35s) · 24,373 B · tag `alpha_mode=1` แต่ alpha plane **ทึบทุกเฟรม (alpha_min 255)** เหมือนตัวเดิม → ตามมาตรฐาน: copy WebM (≤3MB ไม่ re-encode) · **ไม่สร้าง HEVC-alpha** (ไม่มี alpha ให้เก็บ · fallback = poster) · ต้องวางบนพื้นขาว
+- poster = เฟรมที่ 35% (1.35s · เห็นรอยเท้าครบหลายแบบ) · 2,764 B · ไบต์เหมือนตัวเดิม (เฟรมนี้เหมือนกันทั้งสองไฟล์)
+- ภาพจบไฟล์: รอยเท้าจางลงเกือบหมด (ออกแบบให้ loop ต่อเนื่อง)
