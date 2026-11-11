@@ -20,22 +20,8 @@ require_once __DIR__ . '/refs.php';
  * @param string               $title Object title (attachment titles).
  */
 function sh_import_layout( array $frame, array $map, string $title ): string {
-	$style = $frame['style'];
-	foreach ( array( 'panel_children', 'hero' ) as $list ) {
-		foreach ( (array) ( isset( $style[ $list ] ) ? $style[ $list ] : array() ) as $i => $child ) {
-			if ( is_array( $child ) && isset( $child['name'] ) ) {
-				$style[ $list ][ $i ]['name'] = mb_substr( (string) $child['name'], 0, 40 );
-			}
-		}
-	}
-	$style = array_merge(
-		array(
-			'frame_id'   => $frame['frame_id'],
-			'frame_name' => $frame['frame_name'],
-		),
-		sh_import_layout_refs( $style, $map, $title )
-	);
-	return (string) wp_json_encode( $style, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+	// sh_import_layout_base() (refs.php): frame ids + style · names shortened — shared with the 2026-11 refresh fingerprint.
+	return (string) wp_json_encode( sh_import_layout_refs( sh_import_layout_base( $frame ), $map, $title ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
 }
 
 /**
@@ -93,12 +79,13 @@ function sh_import_objects( array $seed, array $map, array $manifest, array $tra
 	$out = array();
 	foreach ( sh_import_scope_objects( $seed ) as $o ) {
 		$slug               = (string) $o['slug'];
+		$text               = sh_import_object_text_2026_11( $o ); // D40: Figma 2026-11-11 title/caption.
 		list( $id, $write ) = sh_imp_post(
 			'object',
 			'object:' . $slug,
 			array(
 				'post_type'  => 'object',
-				'post_title' => (string) $o['title'],
+				'post_title' => $text['post_title'],
 				'post_name'  => $slug,
 			)
 		);
@@ -120,7 +107,7 @@ function sh_import_objects( array $seed, array $map, array $manifest, array $tra
 		$txt   = static fn( string $k ): string => isset( $o[ $k ] ) ? (string) $o[ $k ] : '';
 		$col   = static fn( $v ): string => is_string( $v ) ? $v : '';
 		$meta  = array(
-			'sh_title_raw'            => $txt( 'title_raw' ) !== $txt( 'title' ) ? $txt( 'title_raw' ) : '',
+			'sh_title_raw'            => $text['sh_title_raw'],
 			'sh_collection'           => $txt( 'collection' ),
 			'sh_thematic_section'     => $txt( 'thematic_section' ),
 			'sh_period'               => $txt( 'period' ),
@@ -129,7 +116,7 @@ function sh_import_objects( array $seed, array $map, array $manifest, array $tra
 			'sh_dimensions'           => $txt( 'dimensions' ),
 			'sh_local_name'           => $txt( 'local_name' ),
 			'sh_object_biography'     => $txt( 'object_biography' ),
-			'sh_caption'              => $txt( 'caption' ),
+			'sh_caption'              => $text['sh_caption'],
 			'sh_tile_image'           => sh_imp_image( $map, isset( $m['tile'] ) ? $m['tile'] : null, $o['title'] . ' tile' ),
 			'sh_tile_image_hover'     => sh_imp_image( $map, isset( $m['tile_hover'] ) ? $m['tile_hover'] : null, $o['title'] . ' tile hover' ),
 			'sh_panel_bg'             => $col( isset( $ds['panel_bg'] ) ? $ds['panel_bg'] : null ),
