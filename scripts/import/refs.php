@@ -98,7 +98,8 @@ function sh_import_line_art_file( array $map, string $value, string $dir ): stri
 /**
  * Every design/assets file the import reads: image-map "files" + the "*_ref" files of the in-scope objects'
  * Final frames (the same objects and frames sh_import_objects() / sh_import_layout() use) + the timeline cards'
- * "line_art_ref" files (sh_import_timeline() · refresh 2026-11-11-line-art; "lineart/<file>" = one sub-folder).
+ * "line_art_ref" files (sh_import_timeline() · refresh 2026-11-11-line-art; "lineart/<file>" = one sub-folder) + their
+ * "below_ref" files (D39 sh_below_image · refresh 2026-11-11-timeline-images; top of $dir).
  *
  * @param array<string, mixed> $seed Seed files (needs "objects" · optional "timeline-elephant").
  * @param array<string, mixed> $map  image-map.json.
@@ -142,6 +143,18 @@ function sh_import_bundle_files( array $seed, array $map, string $dir ): array {
 		$file = sh_import_line_art_file( $map, $value, $dir );
 		if ( '' === $file ) {
 			$out['missing'][] = 'line_art_ref card ' . ( isset( $it['card_order'] ) ? (int) $it['card_order'] : 0 ) . ': ' . $value;
+		} elseif ( ! isset( $out['map'][ $file ] ) ) {
+			$out['refs'][ $file ] = $file;
+		}
+	}
+	foreach ( $items as $it ) { // D39 "below_ref" → sh_below_image (file at the top of $dir).
+		$value = isset( $it['below_ref'] ) && is_string( $it['below_ref'] ) ? $it['below_ref'] : '';
+		if ( '' === $value ) {
+			continue;
+		}
+		$file = sh_import_ref_file( $map, $value, $dir );
+		if ( '' === $file ) {
+			$out['missing'][] = 'below_ref card ' . ( isset( $it['card_order'] ) ? (int) $it['card_order'] : 0 ) . ': ' . $value;
 		} elseif ( ! isset( $out['map'][ $file ] ) ) {
 			$out['refs'][ $file ] = $file;
 		}

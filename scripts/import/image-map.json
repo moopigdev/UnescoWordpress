@@ -3,7 +3,8 @@
   "generated_by": "scripts/import/build-image-map.py",
   "figma_file": "figma-file.json",
   "figma_lastModified": "2026-10-27T09:48:30Z",
-  "note": "ref = Figma imageRef = file name (without extension) in Unesco/design/assets · null = no image in Figma · see 'missing' for refs without a file"
+  "note": "ref = Figma imageRef = file name (without extension) in Unesco/design/assets · null = no image in Figma · see 'missing' for refs without a file",
+  "patched": "2026-11-11 timeline-d39 (D39): timeline_items.5/.7 thumbnail = seed thumbnail_refs (cba74a7d · 621646b5) · nodes 3160:1508/3103:1181 replace 1232:1738/1232:1752 · by hand — build-image-map.py cannot read figma-file.json 08:23Z (DEFERRED · P-261); re-running it would undo this"
  },
  "objects": {
   "elephant-leg-bone": {
@@ -186,9 +187,9 @@
    ]
   },
   "5": {
-   "thumbnail": "5d9931b48643cf08792e1b307c1574625677ddff",
+   "thumbnail": "cba74a7dda09c74ec03e27ab1779593e8217ef00",
    "all": [
-    "5d9931b48643cf08792e1b307c1574625677ddff"
+    "cba74a7dda09c74ec03e27ab1779593e8217ef00"
    ]
   },
   "6": {
@@ -199,9 +200,9 @@
    ]
   },
   "7": {
-   "thumbnail": "867b28338953f22209122a9fa9dcbb76a2c2bd5c",
+   "thumbnail": "621646b5dd0382559f9cf7e9b2f8bf0620ac698e",
    "all": [
-    "867b28338953f22209122a9fa9dcbb76a2c2bd5c"
+    "621646b5dd0382559f9cf7e9b2f8bf0620ac698e"
    ]
   },
   "8": {
@@ -539,7 +540,6 @@
   "550cfddd472294c66ebb3bfec6d104936ceabf95": "550cfddd472294c66ebb3bfec6d104936ceabf95.png",
   "597a0bb7beb04c60e5c1dab6bb136d762b40b106": "597a0bb7beb04c60e5c1dab6bb136d762b40b106.jpg",
   "5b2303da4b3d8d4c59d0366df64f895726d6384c": "5b2303da4b3d8d4c59d0366df64f895726d6384c.jpg",
-  "5d9931b48643cf08792e1b307c1574625677ddff": "5d9931b48643cf08792e1b307c1574625677ddff.png",
   "5e5b3d261ca9c171ce8b4ed35f89325dff42f506": "5e5b3d261ca9c171ce8b4ed35f89325dff42f506.jpg",
   "5f216ed1368da5ea53eb2cf97a4d5542459d711e": "5f216ed1368da5ea53eb2cf97a4d5542459d711e.jpg",
   "60b979fd2cd2e862c94bcaf9ba2beff0ceb1c5f3": "60b979fd2cd2e862c94bcaf9ba2beff0ceb1c5f3.png",
@@ -570,7 +570,6 @@
   "80727192aa60ba5bed96afae27d2eb0e340c707e": "80727192aa60ba5bed96afae27d2eb0e340c707e.png",
   "810b828903b38a64facdfd38ffe651e4d1f23f46": "810b828903b38a64facdfd38ffe651e4d1f23f46.png",
   "8428e71bcc441ecea1da55185080518897c441fd": "8428e71bcc441ecea1da55185080518897c441fd.jpg",
-  "867b28338953f22209122a9fa9dcbb76a2c2bd5c": "867b28338953f22209122a9fa9dcbb76a2c2bd5c.png",
   "87938c71354cfc0fd72db85bcb1b4c6e3568a658": "87938c71354cfc0fd72db85bcb1b4c6e3568a658.png",
   "8ac7f98bc70e717330451ca7e8d30c061542268f": "8ac7f98bc70e717330451ca7e8d30c061542268f.jpg",
   "8bcbdd55e500c4a0d39942e15c8df8680bd1c92f": "8bcbdd55e500c4a0d39942e15c8df8680bd1c92f.png",
@@ -620,6 +619,7 @@
   "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487": "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487.jpg",
   "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06": "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06.png",
   "c96e30802b0a40b044148a67b85cdebce7a1a514": "c96e30802b0a40b044148a67b85cdebce7a1a514.png",
+  "cba74a7dda09c74ec03e27ab1779593e8217ef00": "cba74a7dda09c74ec03e27ab1779593e8217ef00.png",
   "cc4fa3e3eb70e901db048341cbc9dea06b473bcb": "cc4fa3e3eb70e901db048341cbc9dea06b473bcb.png",
   "ccacbdf1823c7ec789a79ddc546b0db4cb63d410": "ccacbdf1823c7ec789a79ddc546b0db4cb63d410.jpg",
   "ce053c2bf4aca30fa7f70b380fa5ef8a41173c70": "ce053c2bf4aca30fa7f70b380fa5ef8a41173c70.jpg",
@@ -930,9 +930,9 @@
    "for": "timeline card 4 thumbnail",
    "ref": "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b"
   },
-  "1232:1738": {
-   "for": "timeline card 5 thumbnail",
-   "ref": "5d9931b48643cf08792e1b307c1574625677ddff"
+  "3160:1508": {
+   "for": "timeline card 5 thumbnail (D39 · Figma 08:23Z Section 51 · patched by hand: build-image-map.py cannot read this file — P-261)",
+   "ref": "cba74a7dda09c74ec03e27ab1779593e8217ef00"
   },
   "1232:1745": {
    "for": "timeline card 6 thumbnail",
@@ -942,9 +942,9 @@
    "for": "timeline card 6 thumbnail",
    "ref": "8dcebc793b2265a8aa9c502af29cba3088d659a2"
   },
-  "1232:1752": {
-   "for": "timeline card 7 thumbnail",
-   "ref": "867b28338953f22209122a9fa9dcbb76a2c2bd5c"
+  "3103:1181": {
+   "for": "timeline card 7 thumbnail (D39 · Figma 08:23Z Section 51 · patched by hand: build-image-map.py cannot read this file — P-261)",
+   "ref": "621646b5dd0382559f9cf7e9b2f8bf0620ac698e"
   },
   "1232:1758": {
    "for": "timeline card 8 thumbnail",
