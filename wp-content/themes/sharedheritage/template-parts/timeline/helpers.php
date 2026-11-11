@@ -113,8 +113,6 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 
 	if ( ! empty( $images ) ) {
 		$out = array(
-			'rest'  => $entry['rest'],
-			'scale' => (float) $entry['scale'],
 			'photo' => $entry['photo'],
 			'mini'  => $entry['mini'],
 			'ratio' => (float) $entry['ratio'],
@@ -138,22 +136,23 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 			$images[ $n ]['box'] = array( $x / $ratio, 0, $img['r'] / $ratio, 1 );
 			$x                  += $img['r'];
 		}
-		$wide   = $ratio > ( isset( $rule['wide_ratio'] ) ? (float) $rule['wide_ratio'] : 3 );
-		$rest   = sh_tl_contain( $ratio, ...( $wide ? $rule['wide_rest'] : $rule['rest'] ) );
-		$active = sh_tl_contain( $ratio, ...( $wide ? $rule['wide_active'] : $rule['active'] ) );
-		$photo  = sh_tl_contain( $ratio, ...$rule['photo'] );
-		$max_h  = min( array_map( static fn( $i ) => ( $i['crop'][3] - $i['crop'][1] ) / $i['box'][3], $images ) );
+		$photo = sh_tl_contain( $ratio, ...$rule['photo'] );
+		$max_h = min( array_map( static fn( $i ) => ( $i['crop'][3] - $i['crop'][1] ) / $i['box'][3], $images ) );
 		if ( $photo[1] > $max_h ) {
 			$photo = array( $max_h * $ratio, $max_h );
 		}
 		$out = array(
-			'rest'  => $rest,
-			'scale' => $active[0] / $rest[0],
 			'photo' => $photo,
 			'mini'  => sh_tl_contain( $ratio, ...$rule['mini'] ),
 			'ratio' => $ratio,
 		);
 	}
+
+	// #14 [C] (§4.5c.3): on the line = photo under the line × 0.30 (rest) → × 0.60 (active) · same ratio · scale = 2.
+	$f_rest       = isset( $rule['rest'] ) ? (float) $rule['rest'] : 0.30;
+	$f_active     = isset( $rule['active'] ) ? (float) $rule['active'] : 0.60;
+	$out['rest']  = array( $out['photo'][0] * $f_rest, $out['photo'][1] * $f_rest );
+	$out['scale'] = $f_active / $f_rest;
 
 	// Metadata: one line per row, without the "Section :" row (§4.5c.4 · DEFERRED: case-insensitive).
 	$lines  = array();
@@ -174,6 +173,7 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 	return array_merge(
 		$out,
 		array(
+			'line'   => sh_tl_line_art( $item, $rule ),
 			'images' => $images,
 			'title'  => get_the_title( $item ),
 			'url'    => ( $object_id && 'publish' === get_post_status( $object_id ) ) ? (string) get_permalink( $object_id ) : '',
@@ -181,6 +181,67 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 			'period' => $period,
 		)
 	);
+}
+
+/**
+ * "Before" image of the photo under the line (`sh_line_art` · D35/D36 · replaces D32/D33's top row): while the item
+ * comes to the centre the photo box shows it (α 0.40p), on settle it cross-fades to the colour photo (timeline.js).
+ * Box = the photo rule of §4.5c.3: "contain" in 320×265 by the line art's own ratio, never larger than the file,
+ * centred on the same point as the photo (x 720 · y_rel 561). Empty field / not an image → null (photo as before).
+ *
+ * @param WP_Post $item timeline_item.
+ * @param array   $rule geometry.php `rule`.
+ * @return array{id:int,w:float,ratio:float}|null
+ */
+function sh_tl_line_art( WP_Post $item, array $rule ): ?array {
+	$id  = absint( sh_get( 'sh_line_art', $item->ID ) );
+	$src = ( $id && wp_attachment_is_image( $id ) ) ? wp_get_attachment_image_src( $id, 'full' ) : false;
+	if ( ! $src || empty( $src[1] ) || empty( $src[2] ) || empty( $rule['photo'] ) ) {
+		return null;
+	}
+	$meta  = wp_get_attachment_metadata( $id );
+	$file  = is_array( $meta ) && ! empty( $meta['width'] ) ? array( (float) $meta['width'], (float) $meta['height'] ) : array( (float) $src[1], (float) $src[2] );
+	$ratio = $src[1] / $src[2];
+	$box   = sh_tl_contain( $ratio, ...$rule['photo'] );
+	return array(
+		'id'    => $id,
+		'w'     => min( $box[0], $file[0], $file[1] * $ratio ), // ⛔ never larger than the file's pixels (§4.5c.3).
+		'ratio' => $ratio,
+	);
+}
+
+/**
+ * "Before" layer of the photo under the line: inside the photo link, under the colour image, same centre (timeline.css).
+ *
+ * @param array  $item    sh_tl_item() with a `line`.
+ * @param string $loading 'eager' | 'lazy'.
+ */
+function sh_tl_line_pic( array $item, string $loading ): string {
+	$line = $item['line'];
+	$tag  = wp_get_attachment_image(
+		(int) $line['id'],
+		'full',
+		false,
+		array(
+			'class'     => 'sh-tl__line-img',
+			'alt'       => '', // Decorative: the colour photo of the same object is the content (§6.4c D35/D36).
+			'loading'   => $loading,
+			'decoding'  => 'async',
+			'draggable' => 'false',
+			'sizes'     => (int) ceil( (float) $line['w'] ) . 'px',
+		)
+	);
+	if ( '' === $tag ) {
+		return '';
+	}
+	$style = sh_tl_style(
+		array(
+			'--lpw' => sh_tl_num( $line['w'] ),
+			'--lar' => sh_tl_num( $line['ratio'] ),
+		)
+	);
+	// $tag comes from wp_get_attachment_image() (attributes escaped by core).
+	return '<span class="sh-tl__photo-line" style="' . esc_attr( $style ) . '" aria-hidden="true">' . $tag . '</span>';
 }
 
 /**

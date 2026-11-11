@@ -52,7 +52,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 3,
-   "illustration_era_label_raster": "13th century"
+   "illustration_era_label_raster": "13th century",
+   "line_art_ref": "02-singhasari-ganesha.png"
   },
   {
    "card_order": 3,
@@ -74,7 +75,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 1,
-   "illustration_era_label_raster": "10th–11th century"
+   "illustration_era_label_raster": "10th–11th century",
+   "line_art_ref": "03-ganesha.png"
   },
   {
    "card_order": 4,
@@ -94,7 +96,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 8,
-   "illustration_era_label_raster": "19th century CE"
+   "illustration_era_label_raster": "19th century CE",
+   "line_art_ref": "04-elephant-molar.png"
   },
   {
    "card_order": 5,
@@ -114,7 +117,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 7,
-   "illustration_era_label_raster": null
+   "illustration_era_label_raster": null,
+   "line_art_ref": "05-embossed-brass-basin.png"
   },
   {
    "card_order": 6,
@@ -329,9 +333,10 @@
  ],
  "reflection": {
   "title": "Reflection",
-  "body": "The objects in this trail reveal the elephant's enduring presence across Southeast Asia. Archaeological and art-historical evidence points to long relationships between people and elephants, shaped by encounter, admiration, labour, and ritual. As \"ecosystem engineers,\" elephants have helped shape forests by opening paths, dispersing seeds, and creating habitats for other species. They have also been closely intertwined with human life through transport, logging, warfare, and ceremony, serving as working animals while also expressing prestige and authority in different communities.\n\nAs Hindu-Buddhist traditions spread through trade and migration, they encountered societies where elephants already occupied important places in local worlds of belief. In Buddhist tradition, Queen Maya dreams of a white elephant before the Buddha's birth, making the animal a sign of auspicious conception and spiritual promise. In Hindu tradition, Ganesha, the elephant-headed deity, is revered as the remover of obstacles and the bringer of wisdom. Across Southeast Asia, communities adapted these traditions alongside existing understandings of the elephant, weaving them into religious practice, ritual, and everyday life.\n\nThe objects gathered here reflect this diversity of relationships. Elephant forms and motifs appear in temple sculpture, Buddha's relic containers, and commercial textiles. Elephant bones and tusks feature in objects ranging from coconut graters and medicinal fire pistons to luxury opium pipes. Across mainland and island Southeast Asia, these objects connect forests and households, sacred and everyday practices, and communities whose traditions extend beyond present-day political borders.\n\nToday, these long relationships face new challenges. Habitat loss, land-use change, and human-elephant conflict continue to threaten elephant populations across the region. Conservation has therefore become part of the elephant's story, alongside the beliefs, practices, and material traditions through which communities have lived with elephants for generations. Together, these objects remind us that shared heritage emerges through enduring relationships between people, animals, landscapes, and material culture.",
-  "title_node": "1232:1816",
-  "body_node": "1232:1817",
-  "frame": "1232:1807"
+  "body": "The objects in this trail reveal the elephant's enduring cultural presence across South-East Asia. Elephants have been part of human life in the region for centuries, as part of a relationship shaped by encounter, admiration, labour and ritual. Elephants have long served as working animals in transport, industry and warfare, while also expressing auspicious meanings. In Buddhist tradition, Queen Maya dreamed of a white elephant before the Buddha's birth, making the animal a sign of majesty, enlightenment and spiritual promise. In Hindu tradition, Ganesha, the elephant-headed deity, is revered as the remover of obstacles and the bringer of wisdom.\n\nAs Hindu-Buddhist traditions spread throughout South-East Asia via trade and migration, they encountered societies where elephants already occupied important places in local worlds of belief. Across South-East Asia, communities adapted Hindu-Buddhist traditions into existing understandings of the elephant, weaving them into rituals and everyday life.\nAs essential ‘ecosystem engineers’, elephants disperse seeds, shape forests and landscapes and create habitats for other species. However, illegal trade, hunting, habitat loss and land-use changes threaten elephant populations across the region. Conservation has therefore become part of the relationship between humans and elephants, alongside beliefs, practices and material traditions.\n\nThe objects shown in this trail reflect the diversity of associations with elephants in the region. Elephant forms and motifs appear in textiles, temple sculpture and relic containers and feature in objects ranging from coconut graters and medicinal fire pistons to luxury opium pipes. Across the region, these objects show a shared connection across sacred and everyday practices and communities. Together, these objects remind us that shared heritage is a result of enduring relationships between people, animals, landscapes and material culture, and that safeguarding cultural heritage often also requires protecting natural heritage.",
+  "title_node": "3103:1377",
+  "body_node": "3103:1378",
+  "frame": "3103:1359",
+  "_note": "D34 · ข้อความ = Figma 3101:609 Section 51 (visible · 2026-11-11T03:55:12Z) · ตัวแบ่ง: \\n\\n = ย่อหน้า (บรรทัดว่าง) · \\n เดี่ยว = ขึ้นบรรทัดใหม่ในย่อหน้าเดียวกัน (ย่อหน้า 2 มี 2 ท่อน) · ข้อความเดิม (1232:1817 = 3101:736/3101:925 ที่ซ่อนอยู่ · 2229 ตัวอักษร) ถูกแทนแล้ว"
  }
 }
