@@ -358,7 +358,8 @@
   },
   {
    "slug": "phoenix",
-   "name": "Phonix",
+   "name": "Phoenix",
+   "name_previous": "Phonix",
    "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
    "order_home_icons": 14,
    "figma": {
@@ -436,7 +437,8 @@
   },
   {
    "slug": "elephant",
-   "name": "Elephan",
+   "name": "Elephant",
+   "name_previous": "Elephan",
    "name_note": "ชื่อตาม component set ใน Figma (ยังไม่มีชื่อแสดงผลที่ออกแบบไว้ — O/P-2xx)",
    "order_home_icons": 17,
    "figma": {
