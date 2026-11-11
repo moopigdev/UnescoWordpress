@@ -247,3 +247,4 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [reviewer detail-v2 r1] [2026-11-11] Cake moulds title_raw มีขึ้นบรรทัดหลัง "elephant," → ที่ 1024/768/390 หรือเมื่อ --fit ได้ 3 บรรทัด บรรทัดสั้น (ไม่ทับ ไม่ล้น)
 - [timeline-swap] [2026-11-11] `build-image-map.py` ไม่เขียนคีย์ `timeline_items.<n>.below` และ map ชิ้น 1·7·9 ตาม node เดิม — รันใหม่จะลบการสลับ D45 (เหมือน P-261 ชิ้น 5/7) · แก้พร้อม P-261
 - [timeline-swap] [2026-11-11] prod: `--refresh-only` ไม่ส่งโค้ด → ต้อง deploy โค้ด (theme `geometry.php`/`helpers.php` + mu-plugin `sh_below_image_2`) **ก่อน** refresh step `2026-11-11-timeline-swap` · ถ้าสลับข้อมูลก่อน ธีมเก่าแสดงชิ้น 9 ใต้เส้นแค่ภาพแรก (ไม่รู้จัก `_2`) และชิ้น 1/7/9 ใช้ขนาดตามกฎ (ไม่ใช่ crop ออกแบบ)
+- [home-gap] [2026-11-11] หน้าแรกยังต่างจาก Figma ใหม่ 3117:3607 จุดอื่น (เช่น Trails→Zone 4/5 Figma 40 · เว็บ 32 · comment หัว home.css อ้าง frame เก่า) → ถ้าต้องการตรง frame ใหม่ทั้งหน้า เทียบทั้งหน้าอีกรอบ
