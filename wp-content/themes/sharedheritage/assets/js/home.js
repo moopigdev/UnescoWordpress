@@ -178,11 +178,16 @@
 		video.addEventListener( 'loadedmetadata', firstFrame );
 		firstFrame();
 		video.addEventListener( 'error', reveal );
-		// `loop` is set (so the poster/first frame never sticks); the first pass is the animation → reveal at its end.
+		// `loop` is set (so the poster/first frame never sticks); the first pass is the animation → reveal at its end,
+		// read from the file itself (video.duration — walking.webm 2026-11 = 3.85s). timeupdate fires only every
+		// ~250ms, so a jump back to the start (the loop wrapped before the last-quarter-second check ran) also reveals.
+		var lastTime = 0;
 		video.addEventListener( 'timeupdate', function () {
-			if ( video.duration && video.currentTime >= video.duration - 0.25 ) {
+			var t = video.currentTime;
+			if ( ( video.duration && t >= video.duration - 0.25 ) || t + 0.5 < lastTime ) {
 				reveal();
 			}
+			lastTime = t;
 		} );
 		video.addEventListener( 'ended', reveal );
 
