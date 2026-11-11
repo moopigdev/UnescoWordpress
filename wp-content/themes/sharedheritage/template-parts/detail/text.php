@@ -8,8 +8,8 @@
  * Dimensions → Collection → Other information / Object biography, standard labels (700) + values (500,
  * or the weight Figma gives the value run), every field with a value (D42 · P-186), empty values
  * skipped, Section never shown · caption = sh_caption: caption.label / label_breaks, one <p> per
- * paragraph (any line break) with caption.paragraph_gap.px between (#11 · P-246), justified when Figma
- * says JUSTIFIED (#9) · paragraph_indent_nbsp) · plain_meta = text kept in the layout (lines[] or full
+ * paragraph (any line break) with caption.paragraph_gap.px between (#11 · P-246), justified with hyphens
+ * (D43 · detail.css) · paragraph_indent_nbsp) · plain_meta = text kept in the layout (lines[] or full
  * runs) · lorem_placeholder is never shown (P-213).
  * Without them (objects outside the 15 Final frames): title → metadata block (sh_meta_color set) or
  * Collection line → "Caption:" + paragraphs (generic rules, §2.2 levels).
@@ -205,8 +205,6 @@ if ( ! $sh_blocks ) {
 			// #11: paragraphs one blank line apart (24px) — every break in the text, single "\n" too (P-246).
 			$sh_pgap = $sh_cap['paragraph_gap']['px'] ?? ( $sh_info['caption_paragraph_gap_px'] ?? $sh_lh );
 			$sh_pgap = is_numeric( $sh_pgap ) ? max( 0.0, (float) $sh_pgap ) : $sh_lh;
-			// #9: Figma JUSTIFIED → text-align: justify · hyphens: auto.
-			$sh_just = 'JUSTIFIED' === ( $sh_info['caption_align'] ?? ( $sh_font['align'] ?? '' ) );
 			$sh_paras = preg_split( '/[ \t]*\R(?:[ \t]*\R)*/u', $sh_caption );
 			$sh_paras = array_values( array_filter( array_map( 'rtrim', is_array( $sh_paras ) ? $sh_paras : array() ), static fn( $p ) => '' !== trim( $p ) ) );
 			$sh_body_c = $sh_hex( sh_get( 'sh_text_color', $sh_id ) );
@@ -228,7 +226,7 @@ if ( ! $sh_blocks ) {
 			$sh_style = $sh_block_style( $sh_b, $sh_body_c ) . '--sh-d-fw:' . $sh_weight( $sh_cap['body_weight'] ?? 400 ) . ';'
 				. '--sh-d-pgap:' . $sh_n( $sh_pgap ) . ';--sh-d-lgap:' . $sh_n( max( 0, $sh_breaks - 1 ) * $sh_lh ) . ';';
 			// Label run and paragraphs are escaped above.
-			echo '<div class="sh-detail__block sh-detail__caption' . ( $sh_just ? ' sh-detail__caption--justify' : '' ) . '" style="' . esc_attr( $sh_style ) . '">' . $sh_body . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo '<div class="sh-detail__block sh-detail__caption" style="' . esc_attr( $sh_style ) . '">' . $sh_body . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 	if ( ! $sh_has_title ) {

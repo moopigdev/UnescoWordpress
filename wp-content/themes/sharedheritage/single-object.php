@@ -110,6 +110,35 @@ while ( have_posts() ) :
 		}
 	}
 
+	/*
+	 * D43: the first panel image's top = the top of the info block under the title (first info row), not the
+	 * per-frame image y. Server value = the Figma info block y (no-JS / first paint); detail.js re-measures
+	 * the real row (title may wrap differently). The media column box moves to that y and keeps the images'
+	 * own spacing (images are placed relative to the topmost one — panel.php/images.php).
+	 */
+	$sh_info_y  = null;
+	$sh_img_top = null;
+	if ( $sh_media_col ) {
+		foreach ( (array) ( $sh_layout['text_blocks'] ?? array() ) as $sh_tb ) {
+			$sh_tb_box = is_array( $sh_tb ) && in_array( $sh_tb['role'] ?? '', array( 'meta', 'collection' ), true ) && isset( $sh_tb['bbox'] ) ? $sh_bbox( $sh_tb['bbox'] ) : null;
+			if ( $sh_tb_box && ( null === $sh_info_y || $sh_tb_box[1] < $sh_info_y ) ) {
+				$sh_info_y = $sh_tb_box[1];
+			}
+		}
+		$sh_img_bottom = null;
+		foreach ( (array) ( $sh_layout['images'] ?? array() ) as $sh_im ) {
+			$sh_im_box = is_array( $sh_im ) && isset( $sh_im['bbox'] ) ? $sh_bbox( $sh_im['bbox'] ) : null;
+			if ( $sh_im_box ) {
+				$sh_img_top    = null === $sh_img_top ? $sh_im_box[1] : min( $sh_img_top, $sh_im_box[1] );
+				$sh_img_bottom = null === $sh_img_bottom ? $sh_im_box[1] + $sh_im_box[3] : max( $sh_img_bottom, $sh_im_box[1] + $sh_im_box[3] );
+			}
+		}
+		if ( null !== $sh_info_y ) {
+			$sh_media_bottom = null !== $sh_img_top ? $sh_info_y + ( $sh_img_bottom - $sh_img_top ) : $sh_media_col[1] + $sh_media_col[3];
+			$sh_media_col    = array( $sh_media_col[0], $sh_info_y, $sh_media_col[2], max( 1.0, $sh_media_bottom - $sh_info_y ) );
+		}
+	}
+
 	// Back button: distance below the lowest column (Figma places it under the panel content; may be
 	// slightly negative, e.g. 1484 Back sits 2px inside the image column box).
 	$sh_cols_bottom = $sh_panel_y + $sh_pad_top;
@@ -143,6 +172,7 @@ while ( have_posts() ) :
 		'text_pad'     => $sh_text_pad,
 		'text_nodes'   => $sh_text_nodes,
 		'media_col'    => $sh_media_col,
+		'img_top'      => $sh_img_top,
 		'back_gap'     => $sh_back_gap,
 		'container_x'  => 160.0, // §2.3 / §4.8: panel padding left/right 160 → container 1120 at x=160.
 		'container_w'  => 1120.0,
