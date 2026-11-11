@@ -206,6 +206,33 @@ slide 4 ชุด: ข้อความในหัวข้อ ": People, Plac
 | ปุ่ม Back | `[160,1521 115×50]` | |
 **หมายเหตุ:** กริด 15 tile ภาพ/ลำดับเหมือนกันทั้ง 3 zone ใน Figma (ต่างแค่ cover/banner) → ความสัมพันธ์ trail↔zone ยังไม่ระบุ (P-212)
 
+### 4.3b Zone 1/2/3 — **อัปเดต 2026-11-11** (คอมเมนต์ลูกค้า · BACKLOG #7 #8 · Figma page `3117:3314` "Master Page Version (ปรับแก้ไข:1)" · lastModified ไฟล์ `2026-11-11T08:23:07Z`) — **ทับ §4.3 เฉพาะที่ระบุ** (กริด 15 tile/Header/Back/ภาพแถบ ZONE ไม่เปลี่ยน)
+frame ใหม่: `3117:3684` (zone 1, Desktop - 1472) · `3117:3713` (zone 2, 1473) · `3117:3742` (zone 3, 1474) · 1440×**1930** (สถานะย่อ) · ภาพ render `design/frames/zone{1,2,3}-3117-147{2,3,4}.png`
+
+| section | พิกัด (เทียบ frame 1440) | รายละเอียด |
+|---|---|---|
+| Header #1/#02 | `[0,0]`,`[0,86]` | เหมือนเดิม |
+| Cover (banner) | `[160,150 1120×410]` | **ภาพ banner ใหม่ 3 ใบ** (ตัวหนังสืออยู่ในภาพ — ไม่ต้องวางข้อความทับ) · ไฟล์ 4096×1503 (**3.66×**) ที่ `design/assets/zone-banners-2026-11/zone1-animals-in-nature-and-mythology.png` · `zone2-beyond-the-visible-animals-and-cosmic-order.png` · `zone3-material-cultures-animals.png` (ชื่อไฟล์ = ref ต้นฉบับ `57fe08a9…` / `262bafe2…` / `1fda5191…` ในโฟลเดอร์ `design/assets/` ด้วย) |
+| แถบ ZONE 1–5 `Frame 12684` | `[160,580 1120×166]` r22 + shadow | ภาพ raster เดิม (zone 1 = `413791d6` · zone 2 = `e5dbe735` · zone 3 = `172ff28b`) |
+| **บล็อกข้อความ (ใหม่)** `Detail text Zone 1` (component set `3117:5051`) | `[160,826 1120×H]` H = 193 (zone 1 ย่อ) / 149 (zone 2 ย่อ) / 193 (zone 3 ย่อ) · ขยาย 303 / 523 / 347 | แนวตั้ง gap **20** · **หัวข้อ** Komet-Heavy **34/42.5** (800) กึ่งกลาง `#212529` · **ข้อความ** Komet 20/22 (500) กึ่งกลาง `#000000` (ย่อหน้า = ขึ้นบรรทัด 1 ครั้ง ไม่มีช่องว่างย่อหน้า) · **Read more** Komet 16/22 (500) กึ่งกลาง `#212529` |
+| กริด trail `Frame 114472` | `[160, 826+H+60]` 1120×652 | 3 แถว × 5 tile 184² gap 50 · ลำดับ tile เดิม (Bird · Buffalo · Chicken · Deer · Dragon / Fish · Garuda · Hornbill · Horse · Lion / Makara · Phoenix · Seashell · Serpent · Turtle) |
+| ปุ่ม Back | `[160, กริดล่าง+74]` (zone 1: y=1805) | ตำแหน่งใน Figma zone 2 = 1805 (ควรเป็น 1761) และ zone 3 = 1817 → **ไม่สม่ำเสมอ — ใช้กฎ "กริดล่าง+74"** (P-243) |
+
+**พฤติกรรม Read more (ใหม่)** — คลิก "Read more >>" → บล็อกขยายเป็นสถานะเต็ม (variant `Zone 1.1` / `Zone 2.1` / `Zone 3.1`: ข้อความเต็มแทนข้อความสั้น · ตัวอักษรปุ่มเปลี่ยนเป็น **"Hide >>"**) · คลิก "Hide >>" → ยุบกลับ (variant ย่อ) · smart-animate **0.3s** (zone 1 ระบุใน Figma · zone 2/3 ไม่ระบุ transition → ใช้ 0.3s เท่ากัน) · hover = ตัวหนา + ขีดเส้นใต้ `#D65F47` (variant `Property 1=Default` `3117:4322` = §3.4) · ทั้งสามหน้ากริด/Back เลื่อนลงตามความสูงที่เพิ่ม (flow)
+
+**ข้อความ (คัดลอกตรงจาก Figma → `content/seed/zones.json` zones[1–3].`intro_short` / `body_full`)** — Figma ไม่มีตัวแปร "ข้อความสั้นแยก": ข้อความสั้น = ข้อความในสถานะย่อ, ข้อความเต็ม = สถานะขยาย (zone 1: ย่อ = 2 ย่อหน้าแรก · zone 2/3: ย่อ = ย่อหน้าแรก) · ข้อความที่ซ่อน (`visible:false`) 2 ย่อหน้า "In this borderless digital world…" / "Forget rigid physical galleries!…" ในสถานะย่อ = สำเนาจาก Home → **ไม่แสดง** · ข้อความ zone 1 สถานะขยายจบที่ "…the Garuda" **ไม่มีจุด** (ตามต้นฉบับ — P-242)
+
+**ชื่อ zone — 3 รูปแบบใน Figma + ข้อเสนอว่าใช้ที่ไหน**
+| zone | A: ในภาพ banner (สั้น) | B: หัวข้อในหน้า (`3117:5053/5067/5063`) | C: การ์ด Home ใน Figma (`3117:3633…`) — **ยังเป็นชื่อเก่า** |
+|---|---|---|---|
+| 1 | Animals in Nature & Mythology | Animals in Nature and Mythology | Animals in Nature & Ecological Wisdom |
+| 2 | Beyond the Visible: Animals & Cosmic Order | Beyond the Visible: Animals and the Cosmic Order | Beyond the Visible: Animal Lore & Cosmic Order |
+| 3 | Material Cultures Animals | Material Cultures: Animals in Rituals and Daily Life | Material Cultures: Animals in Craft & Ritual |
+
+ข้อเสนอ (ตัดสินเอง · ถ้าไม่เห็นด้วยแก้ที่ seed ที่เดียว): **ชื่อ term zone (taxonomy) = B** · **H1 ในหน้า = B** (ตรงที่ Figma วางเป็นข้อความ) · **การ์ดหน้าแรก = B** (C เป็นชื่อเก่าที่ยังไม่ได้แก้ — P-241) · **alt ของภาพ banner = A** (ตรงตัวอักษรในภาพ) · แถบ ZONE = ภาพ raster ไม่มีข้อความ · ชื่อ zone 4/5 ไม่เปลี่ยน
+**⚠ ภาพ banner สลับที่ใน Figma:** ใน frame zone 1 (`3117:3684`) ภาพ Cover (`262bafe2`) เขียนว่า "Beyond the Visible…" และใน frame zone 2 (`3117:3713`) เขียนว่า "Animals in Nature & Mythology" → **ผูกภาพตามชื่อที่อยู่ในภาพ** (zone 1 = `57fe08a9` · zone 2 = `262bafe2`) ตามคำสั่งเจ้าของ #7 · zone 3 ตรง (P-240)
+banner Zone 4/5 ใหม่ใน tab เดียวกัน: **ไม่มี** (Zone 4 = Cover ที่เป็นภาพเส้นประ §4.10 · Zone 5 = หน้าหลักไม่มี banner กว้าง §4.11)
+
 ### 4.4 Trail page — Elephant's Trail `796:1795` (1440×1632, clip) · `trail-elephant-1501.png`
 | section | พิกัด | รายละเอียด |
 |---|---|---|
@@ -533,6 +560,11 @@ frame 1440×1582 แต่เนื้อหาในแนวนอนกว้
 | `cover_image` | image 1120×410 | `1013:1289` ref `10247f33df7e…` (Zone 1) | — | `cover_node` |
 | `banner_image` | image 1120×166 (แถบ ZONE 1–5) | `1013:1292` ref `413791d606d5…` | — | (frame ใน `page_frame`) |
 | `has_page` | bool | — | zone 5 = false | `has_page` |
+| `page_title` (ใหม่ 2026-11-11 · zone 1–3) | text | `3117:5053` / `5067` / `5063` | "Animals in Nature and Mythology" | `page_title` (= `name`) · เดิมเก็บใน `name_previous` |
+| `name_banner` (ใหม่) | text (ตรงตัวอักษรในภาพ banner · ใช้เป็น alt) | ภาพ banner | "Animals in Nature & Mythology" | `name_banner` |
+| `intro_short` + `body_full` (ใหม่) | textarea (ย่อหน้า = `\n`) | `3117:5054` (ย่อ) · `3117:5060` / `5068` / `5064` (เต็ม) | zone 1 ย่อ = 2 ย่อหน้า · zone 2/3 ย่อ = 1 ย่อหน้า | `intro_short` `body_full` `intro_nodes` |
+| `read_more` labels (ใหม่) | UI string | `3117:4321` / Hide variant | "Read more >>" ↔ "Hide >>" | `read_more.collapsed/expanded` |
+| `banner_image` (ใหม่ · แทน cover เดิม 1120×410) | image 4096×1503 | `3117:3716` (zone 1 ref `57fe08a9…`) · `3117:3686` (zone 2 ref `262bafe2…`) · `3117:3745` (zone 3 ref `1fda5191…`) | ไฟล์ใน `design/assets/zone-banners-2026-11/` | `banner_image.file/ref/figma_node` |
 
 ### 5.4 `timeline_item` (trail ช้าง) — ใช้ใน: timeline  (seed: `timeline-elephant.json`)
 | ฟิลด์ | ชนิด | ที่มา (node) | ตัวอย่าง | seed key |
