@@ -17,13 +17,15 @@
 
 defined( 'ABSPATH' ) || exit;
 
+require_once __DIR__ . '/refresh-2026-11.php'; // Figma 2026-11-11 round (core-hzd): own rules, see that file.
+
 /**
  * Steps in order: id => what it fixes.
  *
  * @return array<string, string>
  */
 function sh_import_refresh_steps(): array {
-	return array(
+	return sh_import_refresh_steps_2026_11() + array(
 		// core-import-refresh 2026-10-27: hero by manifest object_slug (+ still) · ICC → sRGB · intro map 39907d2c (P-150).
 		'2026-10-27-media'       => 'object hero (manifest object_slug) · Home trails video · intro map · ICC to sRGB',
 		// deploy-crops 2026-10-28: production import ran without the design-dev crop files (not in the deploy bundle).
@@ -232,6 +234,15 @@ function sh_import_refresh( array $seed, array $map, array $manifest, array $obj
 	$ran   = array();
 	foreach ( array_keys( sh_import_refresh_steps() ) as $step ) {
 		if ( isset( $done[ $step ] ) && ! in_array( $step, $force, true ) && ! in_array( 'all', $force, true ) ) {
+			continue;
+		}
+		if ( array_key_exists( $step, sh_import_refresh_steps_2026_11() ) ) {
+			$ran[] = $step;
+			if ( sh_import_refresh_2026_11( $step, $seed, $map, $manifest, $objects, $pages ) ) {
+				$done[ $step ] = gmdate( 'c' );
+			} else {
+				unset( $done[ $step ] ); // Files / seed data still missing: try again on the next import.
+			}
 			continue;
 		}
 		if ( '2026-10-27-media' === $step ) {

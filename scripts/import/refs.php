@@ -125,3 +125,129 @@ function sh_import_bundle_files( array $seed, array $map, string $dir ): array {
 	}
 	return $out;
 }
+
+/**
+ * Sub-folders of design/assets the import may read from (one level only · design-dev exports that are not a Figma
+ * imageRef). scripts/deploy.sh accepts "<sub>/<file>" bundle names only for these (+ lineart/ of the timeline).
+ *
+ * @return string[]
+ */
+function sh_import_asset_subdirs(): array {
+	return array( 'zone-banners-2026-11', 'zone4-animals' );
+}
+
+/**
+ * File (relative to $dir) a seed asset value points to ('' = none). Accepts "design/assets/<sub>/<file>",
+ * "<sub>/<file>" (sub in sh_import_asset_subdirs(), one level, no dot-files) or a top-level file / Figma imageRef
+ * (sh_import_ref_file()). Text after the first space is a note in the seed ("file.png (4096×1971 …)") and is ignored.
+ *
+ * @param array<string, mixed> $map   image-map.json.
+ * @param string               $value Seed value.
+ * @param string               $dir   design/assets directory.
+ */
+function sh_import_seed_asset_file( array $map, string $value, string $dir ): string {
+	$value = (string) preg_replace( '/\s.*$/s', '', trim( $value ) );
+	if ( str_starts_with( $value, 'design/assets/' ) ) {
+		$value = substr( $value, strlen( 'design/assets/' ) );
+	}
+	if ( '' === $value ) {
+		return '';
+	}
+	if ( ! str_contains( $value, '/' ) ) {
+		return sh_import_ref_file( $map, $value, $dir );
+	}
+	$parts = explode( '/', $value );
+	if ( 2 !== count( $parts ) || ! in_array( $parts[0], sh_import_asset_subdirs(), true ) || '' === $parts[1] || '.' === $parts[1][0] ) {
+		return '';
+	}
+	return is_file( $dir . '/' . $value ) ? $value : '';
+}
+
+/**
+ * Every seed asset value the 2026-11 import reads (zones.json banners · Zone 5 page images · zone4-chooser.json):
+ * list of [label, value]. sh_import_zones() / sh_import_trails() / refresh-2026-11.php read the same keys.
+ *
+ * @param array<string, mixed> $seed Seed files (optional "zones", "zone4-chooser").
+ * @return array<int, array{0: string, 1: string}>
+ */
+function sh_import_seed_asset_values( array $seed ): array {
+	$out = array();
+	$add = static function ( string $label, $value ) use ( &$out ): void {
+		if ( is_string( $value ) && '' !== trim( $value ) ) {
+			$out[] = array( $label, $value );
+		}
+	};
+	foreach ( (array) ( isset( $seed['zones']['zones'] ) ? $seed['zones']['zones'] : array() ) as $z ) {
+		$n = 'zone ' . ( isset( $z['number'] ) ? (int) $z['number'] : 0 );
+		$add( $n . ' banner_image.file', isset( $z['banner_image']['file'] ) ? $z['banner_image']['file'] : null );
+		foreach ( sh_import_zone_page_images( $z ) as $k => $v ) {
+			$add( $n . ' page.' . $k, $v );
+		}
+	}
+	$ch = isset( $seed['zone4-chooser'] ) && is_array( $seed['zone4-chooser'] ) ? $seed['zone4-chooser'] : array();
+	$add( 'chooser cover_bg.file_cropped', isset( $ch['_meta']['cover_bg']['file_cropped'] ) ? $ch['_meta']['cover_bg']['file_cropped'] : null );
+	$add( 'chooser zone_bar.file_cropped', isset( $ch['_meta']['zone_bar']['file_cropped'] ) ? $ch['_meta']['zone_bar']['file_cropped'] : null );
+	foreach ( (array) ( isset( $ch['animals'] ) ? $ch['animals'] : array() ) as $a ) {
+		$add( 'chooser ' . ( isset( $a['trail_slug'] ) ? (string) $a['trail_slug'] : '?' ), isset( $a['asset'] ) ? $a['asset'] : null );
+	}
+	return $out;
+}
+
+/**
+ * Zone page images of a seed zone ("page" object · DESIGN-SPEC §4.11 · CONTENT-MODEL §12): meta key => seed value.
+ * Keys: cover · zone_bar · cards[1..4].image / image_hover · strip[1..4] · history.image / image_hover.
+ *
+ * @param array<string, mixed> $z Seed zone.
+ * @return array<string, string> meta key (sh_…) => seed value.
+ */
+function sh_import_zone_page_images( array $z ): array {
+	$p   = isset( $z['page'] ) && is_array( $z['page'] ) ? $z['page'] : array();
+	$out = array();
+	$set = static function ( string $key, $value ) use ( &$out ): void {
+		if ( is_string( $value ) && '' !== trim( $value ) ) {
+			$out[ $key ] = $value;
+		}
+	};
+	$set( 'sh_cover_image', isset( $p['cover'] ) ? $p['cover'] : null );
+	$set( 'sh_banner_image', isset( $p['zone_bar'] ) ? $p['zone_bar'] : null );
+	foreach ( array_values( (array) ( isset( $p['cards'] ) ? $p['cards'] : array() ) ) as $i => $c ) {
+		if ( $i < 4 && is_array( $c ) ) {
+			$set( 'sh_page_card_' . ( $i + 1 ) . '_image', isset( $c['image'] ) ? $c['image'] : null );
+			$set( 'sh_page_card_' . ( $i + 1 ) . '_image_hover', isset( $c['image_hover'] ) ? $c['image_hover'] : null );
+		}
+	}
+	foreach ( array_values( (array) ( isset( $p['strip'] ) ? $p['strip'] : array() ) ) as $i => $v ) {
+		if ( $i < 4 ) {
+			$set( 'sh_page_strip_image_' . ( $i + 1 ), $v );
+		}
+	}
+	$set( 'sh_page_history_image', isset( $p['history']['image'] ) ? $p['history']['image'] : null );
+	$set( 'sh_page_history_image_hover', isset( $p['history']['image_hover'] ) ? $p['history']['image_hover'] : null );
+	return $out;
+}
+
+/**
+ * Bundle list for the seed asset values (sh_import_seed_asset_values()) — merged into sh_import_bundle_files() output
+ * by bundle-files.php. Files already listed stay once; "<sub>/<file>" names keep their sub-folder.
+ *
+ * @param array<string, mixed>                                                      $seed Seed files.
+ * @param array<string, mixed>                                                      $map  image-map.json.
+ * @param string                                                                    $dir  design/assets directory.
+ * @param array{map: string[], refs: string[], missing: string[], unsafe: string[]} $res  sh_import_bundle_files() result.
+ * @return array{map: string[], refs: string[], missing: string[], unsafe: string[]}
+ */
+function sh_import_bundle_seed_files( array $seed, array $map, string $dir, array $res ): array {
+	foreach ( sh_import_seed_asset_values( $seed ) as $v ) {
+		$file = sh_import_seed_asset_file( $map, $v[1], $dir );
+		if ( '' === $file ) {
+			$res['missing'][] = 'seed ' . $v[0] . ': ' . $v[1];
+		} elseif ( ! in_array( $file, $res['map'], true ) ) {
+			$res['refs'][] = $file;
+		}
+	}
+	foreach ( array( 'map', 'refs', 'missing', 'unsafe' ) as $k ) {
+		$res[ $k ] = array_values( array_unique( $res[ $k ] ) );
+		sort( $res[ $k ] );
+	}
+	return $res;
+}

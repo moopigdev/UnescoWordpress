@@ -71,7 +71,7 @@ function sh_import_run(): array {
 	}
 	$cfg  = sh_imp_config();
 	$seed = array();
-	foreach ( array( 'objects', 'trails', 'zones', 'timeline-elephant', 'articles', 'site' ) as $name ) {
+	foreach ( array( 'objects', 'trails', 'zones', 'timeline-elephant', 'articles', 'site', 'zone4-chooser' ) as $name ) {
 		$seed[ $name ] = sh_imp_json( $cfg['content'] . '/seed/' . $name . '.json' );
 	}
 	$manifest = sh_imp_json( $cfg['content'] . '/media-manifest.json' );
