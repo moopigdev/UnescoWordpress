@@ -245,3 +245,5 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [detail-v2] [2026-11-11] `template-parts/detail/text-generic.php` (วัตถุไม่มี text_blocks = trail อื่น · D40(3) รอบหน้า) ยังแสดง `Section :` / `Local Name:` / label ตัวพิมพ์เดิม — ใช้ลำดับ/label เดียวกับ #12 เมื่อทำ detail trail อื่น
 - [reviewer detail-v2 r1] [2026-11-11] text.php ไม่แสดง local_name (ถ้า admin ใส่ Local name ให้ 15 ชิ้นจะไม่ขึ้น) · §4.8.2 มี 6 ช่อง · ตัดสินพร้อม D40(3)/text-generic
 - [reviewer detail-v2 r1] [2026-11-11] Cake moulds title_raw มีขึ้นบรรทัดหลัง "elephant," → ที่ 1024/768/390 หรือเมื่อ --fit ได้ 3 บรรทัด บรรทัดสั้น (ไม่ทับ ไม่ล้น)
+- [timeline-swap] [2026-11-11] `build-image-map.py` ไม่เขียนคีย์ `timeline_items.<n>.below` และ map ชิ้น 1·7·9 ตาม node เดิม — รันใหม่จะลบการสลับ D45 (เหมือน P-261 ชิ้น 5/7) · แก้พร้อม P-261
+- [timeline-swap] [2026-11-11] prod: `--refresh-only` ไม่ส่งโค้ด → ต้อง deploy โค้ด (theme `geometry.php`/`helpers.php` + mu-plugin `sh_below_image_2`) **ก่อน** refresh step `2026-11-11-timeline-swap` · ถ้าสลับข้อมูลก่อน ธีมเก่าแสดงชิ้น 9 ใต้เส้นแค่ภาพแรก (ไม่รู้จัก `_2`) และชิ้น 1/7/9 ใช้ขนาดตามกฎ (ไม่ใช่ crop ออกแบบ)
