@@ -113,8 +113,6 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 
 	if ( ! empty( $images ) ) {
 		$out = array(
-			'rest'  => $entry['rest'],
-			'scale' => (float) $entry['scale'],
 			'photo' => $entry['photo'],
 			'mini'  => $entry['mini'],
 			'ratio' => (float) $entry['ratio'],
@@ -138,22 +136,23 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 			$images[ $n ]['box'] = array( $x / $ratio, 0, $img['r'] / $ratio, 1 );
 			$x                  += $img['r'];
 		}
-		$wide   = $ratio > ( isset( $rule['wide_ratio'] ) ? (float) $rule['wide_ratio'] : 3 );
-		$rest   = sh_tl_contain( $ratio, ...( $wide ? $rule['wide_rest'] : $rule['rest'] ) );
-		$active = sh_tl_contain( $ratio, ...( $wide ? $rule['wide_active'] : $rule['active'] ) );
-		$photo  = sh_tl_contain( $ratio, ...$rule['photo'] );
-		$max_h  = min( array_map( static fn( $i ) => ( $i['crop'][3] - $i['crop'][1] ) / $i['box'][3], $images ) );
+		$photo = sh_tl_contain( $ratio, ...$rule['photo'] );
+		$max_h = min( array_map( static fn( $i ) => ( $i['crop'][3] - $i['crop'][1] ) / $i['box'][3], $images ) );
 		if ( $photo[1] > $max_h ) {
 			$photo = array( $max_h * $ratio, $max_h );
 		}
 		$out = array(
-			'rest'  => $rest,
-			'scale' => $active[0] / $rest[0],
 			'photo' => $photo,
 			'mini'  => sh_tl_contain( $ratio, ...$rule['mini'] ),
 			'ratio' => $ratio,
 		);
 	}
+
+	// #14 [C] (§4.5c.3): on the line = photo under the line × 0.30 (rest) → × 0.60 (active) · same ratio · scale = 2.
+	$f_rest       = isset( $rule['rest'] ) ? (float) $rule['rest'] : 0.30;
+	$f_active     = isset( $rule['active'] ) ? (float) $rule['active'] : 0.60;
+	$out['rest']  = array( $out['photo'][0] * $f_rest, $out['photo'][1] * $f_rest );
+	$out['scale'] = $f_active / $f_rest;
 
 	// Metadata: one line per row, without the "Section :" row (§4.5c.4 · DEFERRED: case-insensitive).
 	$lines  = array();

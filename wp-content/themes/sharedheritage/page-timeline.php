@@ -120,7 +120,7 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 							<?php endforeach; ?>
 							<?php if ( $sh_refl_i ) : ?>
 								<li class="sh-tl__dot-item" style="--i:<?php echo esc_attr( (string) $sh_refl_i ); ?>">
-									<button class="sh-tl__dot" type="button" aria-label="<?php echo esc_attr( $sh_refl_title ); ?>" data-sh-tl-go="<?php echo esc_attr( (string) $sh_refl_i ); ?>" data-sh-tl-dot tabindex="-1"></button>
+									<button class="sh-tl__dot sh-tl__dot--ring" type="button" aria-label="<?php echo esc_attr( $sh_refl_title ); ?>" data-sh-tl-go="<?php echo esc_attr( (string) $sh_refl_i ); ?>" data-sh-tl-dot tabindex="-1"></button>
 								</li>
 							<?php endif; ?>
 						</ol>
