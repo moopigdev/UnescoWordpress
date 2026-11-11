@@ -1,6 +1,6 @@
 /*
  * Trail page — taxonomy-trail.php · Figma "Desktop - 1501" (DESIGN-SPEC §4.4 · §3.6).
- * Desktop 1440: cover [160,150 1120×497.228] · heading block [160,677.2 1120×112] · grid 5×3 tiles 184 gap 50
+ * Desktop 1440: cover [160,150 1120×490] (no rule below it — BACKLOG #6) · heading block [160,677.2 1120×112] · grid 5×3 tiles 184 gap 50
  * from y=829.2 · Back [160,1536] · page height 1632. Below 1168px the content width is the viewport minus 24px margins.
  */
 
@@ -11,19 +11,9 @@
 	padding-inline: max(var(--sh-tablet-margin), calc((100% - var(--sh-container)) / 2));
 }
 
-/* ---- Cover: Frame 12685 — image 1120×497.228, bottom rule #DEE2E6 2px across the full 1440 ---- */
+/* ---- Cover: Frame 12685 (2026-11) — image 1120×490, no stroke (BACKLOG #6 · §4.4) ---- */
 .sh-trail__cover {
 	position: relative;
-}
-
-.sh-trail__cover::after {
-	content: "";
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	height: 2px;
-	background: var(--sh-color-neutral-300);
 }
 
 .sh-trail__cover--empty {
@@ -33,7 +23,7 @@
 .sh-trail__cover-frame {
 	position: relative;
 	overflow: hidden;
-	aspect-ratio: 1120 / 497.228;
+	aspect-ratio: 1120 / 490;
 }
 
 .sh-trail__cover-img {
@@ -45,23 +35,23 @@
 	object-fit: cover;
 }
 
-/* Figma imageTransform of the 1920×1080 original: scale .93628 × .73896 · offset .03490, .12503 */
+/* Figma imageTransform of the 1920×1080 original (2026-11): scale .93628 × .72822 · offset .03490, .12503 */
 .sh-trail__cover-frame--figma-crop .sh-trail__cover-img {
-	top: -16.9193%;
+	top: -17.1695%;
 	left: -3.7271%;
 	width: 106.8089%;
-	height: 135.3243%;
+	height: 137.3216%;
 	object-fit: fill;
 }
 
-/* ---- Heading: Frame 12683 — row · gap 30 · padding 10/0 · centred · 30 below the cover ---- */
+/* ---- Heading: Frame 12683 — row · gap 30 · padding 10/0 · centred · y=677.228 (hero now ends at 640 → 37.228) ---- */
 .sh-trail__intro {
 	display: flex;
 	align-items: center;
 	gap: var(--sh-space-30);
 	min-height: 112px;
 	padding-block: var(--sh-space-10);
-	margin-top: var(--sh-space-30);
+	margin-top: 37.228px;
 }
 
 .sh-trail__title {
