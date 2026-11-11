@@ -111,6 +111,7 @@
 	flex: none;
 	width: calc(var(--sh-d-media-w, 359) * var(--sh-d-u));
 	height: calc(var(--sh-d-media-h, 0) * var(--sh-d-u));
+	margin-top: calc(var(--sh-d-media-y, 0) * var(--sh-d-u)); /* #10: column top vs text column top (Figma y) */
 	margin-left: calc((var(--sh-d-media-x, 761) - var(--sh-d-text-w, 739)) * var(--sh-d-u));
 }
 
