@@ -1,0 +1,273 @@
+/*
+ * Zone 5 main page (taxonomy-zone-zone-5.php · DESIGN-SPEC §4.11a · Figma 1514 `3117:3955` · D40).
+ * Desktop 1440 (`Frame 114484` vertical gap 25): hero [160,150 1120×404] (padding-top 20: Cover 551×384 · gap 20 ·
+ * text 549 with padding-top 40, gap 20) · ZONE bar [160,579 1120×166] · cards [160,770 4 × 280×459.28] ·
+ * strip [160,1254 4 × 280×123] · History [160,1402 1120×453] · Back [160,1965] (gap 110) · page end 2090 (75).
+ * Tablet 768–1023: same layout, fluid. Mobile ≤767: hero stacked, cards/strip 2 per row, bar scrolls (D5).
+ */
+
+.sh-z5 {
+	--sh-z5-gap: 25px;           /* Frame 114484 itemSpacing */
+	--sh-zbar-gap: var(--sh-z5-gap);
+	--sh-z5-back-gap: 110px;     /* History bottom y=1855.3 → Back y=1965 */
+	--sh-z5-bottom: 75px;        /* Back bottom y=2015 → page end y=2090 */
+	--sh-zbar-strip: 840px;      /* mobile: bar image width (labels ≈ 15px) */
+}
+
+/* ---- Hero: Cover 551 + gap 20 + text 549 ---- */
+.sh-z5__hero {
+	display: grid;
+	grid-template-columns: minmax(0, 551fr) minmax(0, 549fr);
+	column-gap: var(--sh-space-20);
+	align-items: start;
+	padding-top: var(--sh-space-20);
+}
+
+.sh-z5__hero--no-cover {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.sh-z5__cover {
+	aspect-ratio: 551 / 384;
+	overflow: hidden;
+}
+
+.sh-z5__cover-img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.sh-z5__text {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sh-space-20);
+	padding-top: var(--sh-space-40);
+}
+
+/* Paragraphs: one blank 22px line between them (source "\n\n"). */
+.sh-z5__intro {
+	text-align: justify;
+}
+
+.sh-z5__intro p + p {
+	margin-top: 22px;
+}
+
+/*
+ * ---- ZONE 1–5 bar (template-parts/zone4/zone-bar.php · 1120×166 · Drop Shadow/200) ----
+ * Figma `Frame 12684` radius 22 does not clip (clipsContent=false) → square image corners; the shadow follows the
+ * image's opaque pixels → drop-shadow filter (Figma blur 4 = 2px standard deviation), as on the zone 1–3 pages.
+ */
+.sh-zbar {
+	margin-top: var(--sh-zbar-gap);
+	filter: drop-shadow(0 1px 2px rgba(12, 12, 13, 0.05)) drop-shadow(0 1px 2px rgba(12, 12, 13, 0.1));
+}
+
+.sh-zbar__view {
+	overflow: hidden;
+}
+
+.sh-zbar__strip {
+	position: relative;
+	aspect-ratio: 1120 / 166;
+	overflow: hidden;
+}
+
+.sh-zbar__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
+
+/* Raw 4096×965 export: Figma imageTransform crop x 2.556%–97.46% · y 14.10%–73.80% (same as the zone 1–3 banner). */
+.sh-zbar--crop .sh-zbar__img {
+	position: absolute;
+	top: -23.617%;
+	left: -2.693%;
+	width: 105.372%;
+	height: 167.489%;
+	max-width: none;
+}
+
+/* Tab hotspots: 5 × 224 at x 160/384/608/832/1056 · tab row y 833–876 of the bar 710–876 (= from 74.1%). */
+.sh-zbar__nav,
+.sh-zbar__tabs {
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sh-zbar__tab {
+	position: absolute;
+	top: 74.1%;
+	bottom: 0;
+	left: calc(var(--sh-zbar-i, 0) * 20%);
+	width: 20%;
+}
+
+.sh-zbar__hit {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.sh-zbar__hit--link:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: -2px;
+}
+
+/* ---- Cards: 4 × 280×459.28, no gap ---- */
+.sh-z5__cards {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	margin: var(--sh-z5-gap) 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sh-z5__card-box {
+	position: relative;
+	display: block;
+	aspect-ratio: 280 / 459.28;
+	overflow: hidden;
+	color: inherit;
+	text-decoration: none;
+}
+
+a.sh-z5__card-box:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: -2px;
+}
+
+/* Default + hover image stacked (template-parts/zone5/swap.php) — cross-fade 0.3s ease-in-out [P]. */
+.sh-z5__card__img,
+.sh-z5__history__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.sh-z5__card__img--hover,
+.sh-z5__history__img--hover {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity var(--sh-duration-tile) var(--sh-ease);
+	pointer-events: none;
+}
+
+@media (hover: hover) {
+	.sh-z5__card-box:hover .sh-z5__card__img--hover,
+	.sh-z5__history:hover .sh-z5__history__img--hover {
+		opacity: 1;
+	}
+}
+
+a.sh-z5__card-box:focus-visible .sh-z5__card__img--hover {
+	opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sh-z5__card__img--hover,
+	.sh-z5__history__img--hover {
+		transition: none;
+	}
+}
+
+/* "Coming soon" label (D40 · P-173 — not in Figma): small pill centred near the card bottom. */
+.sh-z5__soon {
+	position: absolute;
+	bottom: var(--sh-space-20);
+	left: 50%;
+	z-index: 1;
+	padding: var(--sh-space-5) var(--sh-space-15);
+	border-radius: var(--sh-radius-popup);
+	background: var(--sh-color-white);
+	box-shadow: var(--sh-shadow-200);
+	font: var(--sh-type-nav);
+	color: var(--sh-color-neutral-900);
+	white-space: nowrap;
+	transform: translateX(-50%);
+}
+
+/* ---- Image row: 4 × 280×123, no gap · Drop Shadow/200 on slots 1–3 (Figma frames 114488–114490) ---- */
+.sh-z5__strip {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	margin-top: var(--sh-z5-gap);
+}
+
+.sh-z5__strip-item {
+	aspect-ratio: 280 / 123;
+}
+
+.sh-z5__strip-item:nth-child(-n+3) {
+	filter: drop-shadow(0 1px 2px rgba(12, 12, 13, 0.05)) drop-shadow(0 1px 2px rgba(12, 12, 13, 0.1));
+}
+
+.sh-z5__strip-img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* ---- History 1120×453 ---- */
+.sh-z5__history {
+	position: relative;
+	aspect-ratio: 1120 / 453;
+	margin-top: var(--sh-z5-gap);
+	overflow: hidden;
+}
+
+/* ---- Back + page end ---- */
+.sh-z5__back {
+	margin-top: var(--sh-z5-back-gap);
+	padding-bottom: var(--sh-z5-bottom);
+}
+
+/* ---- Tablet / mobile (no Figma frame — D5) ---- */
+@media (max-width: 1023px) {
+	.sh-z5 {
+		--sh-z5-gap: var(--sh-space-20);
+		--sh-z5-back-gap: var(--sh-space-40);
+		--sh-z5-bottom: var(--sh-space-40);
+	}
+}
+
+@media (max-width: 767px) {
+	.sh-z5__hero {
+		grid-template-columns: minmax(0, 1fr);
+		row-gap: var(--sh-space-20);
+	}
+
+	.sh-z5__text {
+		padding-top: 0;
+	}
+
+	/* Justified 18px text in a ~340px column leaves wide gaps: align left on phones. */
+	.sh-z5__intro {
+		text-align: left;
+	}
+
+	.sh-z5__cards,
+	.sh-z5__strip {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	/* The ZONE 1–5 labels are baked into the image: keep them ≥14px by scrolling the strip inside the box. */
+	.sh-zbar__view {
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+	}
+
+	.sh-zbar__strip {
+		width: var(--sh-zbar-strip);
+	}
+}

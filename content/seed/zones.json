@@ -20,6 +20,11 @@
    "home_card_label": "page_title (Figma การ์ดหน้าแรกยังเป็นชื่อเก่า — P-241)",
    "banner_alt_text": "name_banner (ตรงตัวอักษรในภาพ)",
    "zone_bar": "ภาพ raster ไม่มีตัวอักษรแยก"
+  },
+  "_source3": {
+   "by": "design-zone5-seed 2026-11-11",
+   "page": "3117:3314",
+   "note": "zone 5 page (P-172): ข้อความ 2 ย่อหน้า normalize (ตัดช่องว่างท้ายบรรทัด · ย่อหน้า = \\n 1 ครั้ง) · ภาพ design/assets/zone5/ (sub-folder ใหม่)"
   }
  },
  "zones": [
@@ -161,7 +166,9 @@
   },
   {
    "number": 5,
-   "name": "The Curious Minds’s Play Zone",
+   "name": "The Curious Minds’ Play Zone",
+   "name_raw": "The Curious Minds’ Play Zone",
+   "name_previous": "The Curious Minds’s Play Zone",
    "name_variants": [
     "The Curious Minds’ Play Zone (style sheet node 670:1118)"
    ],
@@ -169,8 +176,92 @@
    "card_node": "I670:9537;670:9520",
    "card_component_set": "670:9517",
    "card_size": "560x360",
-   "has_page": false,
-   "note": "ไม่มี frame หน้า zone 5 ใน Figma — P-2xx"
+   "page_frame": "3117:3955 (Desktop - 1514)",
+   "has_page": true,
+   "page_title": "The Curious Minds’ Play Zone",
+   "intro_short": "This zone invites you to carry the journey beyond the screen. Visiting one of our ten partner museums across five countries? Pick up a Shared Heritage Passport, scan the QR codes beside featured objects to follow the animal trails, and collect a sticker for each one you complete. Then play Maker of Myth to sketch a brand-new artefact and leave a message of peace.\nFor teachers and museum educators, explore ready-to-use education materials for Along Animal Trails: Creations that Bind Southeast Asia, and download Understanding Shared Histories, a UNESCO teaching package for lower secondary classrooms.",
+   "intro_nodes": {
+    "title": "3117:3962",
+    "short_text": "3117:3963"
+   },
+   "note": "P-172 · หน้าหลัก Zone 5 จาก Figma 2026-11-11 · ชื่อ H1 = \"Minds’ Play Zone\" (ที่พิมพ์ผิด \"Minds’s\" อยู่ใน name_previous) · การ์ดไปหน้าย่อย 1515/1516 = soon (D40) · ภาพ = ครอปตาม imageTransform ของ Figma เป็น 2x ของขนาดที่แสดง (design/tools/crop-zone5.py)",
+   "page": {
+    "frame": "3117:3955",
+    "cover": "design/assets/zone5/cover.png",
+    "zone_bar": "design/assets/zone5/zone-bar-zone5-active.png",
+    "cards": [
+     {
+      "image": "design/assets/zone5/card1-passport.png",
+      "image_hover": "design/assets/zone5/card1-passport-hover.png",
+      "soon": true,
+      "alt": "Museum Passport",
+      "figma_nodes": {
+       "default": "3117:5084",
+       "hover": "3117:5086",
+       "instance": "3117:3967"
+      },
+      "figma_target": "Museum Passport (Desktop - 1515 · 3117:3983)"
+     },
+     {
+      "image": "design/assets/zone5/card2-card-art-game.png",
+      "image_hover": "design/assets/zone5/card2-card-art-game-hover.png",
+      "soon": true,
+      "alt": "Card-and-Art Game",
+      "figma_nodes": {
+       "default": "3117:5099",
+       "hover": "3117:5101",
+       "instance": "3117:3968"
+      },
+      "figma_target": "Card-and-Art Game (Desktop - 1516 · 3117:4012)"
+     },
+     {
+      "image": "design/assets/zone5/card3-brass-horse.png",
+      "image_hover": "design/assets/zone5/card3-brass-horse-hover.png",
+      "soon": false,
+      "alt": "Good day to you, Cast Brass Tabletop Horse",
+      "figma_nodes": {
+       "default": "3117:5089",
+       "hover": "3117:5091",
+       "instance": "3117:3969"
+      },
+      "figma_target": null
+     },
+     {
+      "image": "design/assets/zone5/card4-shared-histories.png",
+      "image_hover": "design/assets/zone5/card4-shared-histories-hover.png",
+      "soon": false,
+      "alt": "Shared Histories",
+      "figma_nodes": {
+       "default": "3117:5094",
+       "hover": "3117:5096",
+       "instance": "3117:3970"
+      },
+      "figma_target": null
+     }
+    ],
+    "strip": [
+     "design/assets/zone5/strip1.png",
+     "design/assets/zone5/strip2.png",
+     "design/assets/zone5/strip3.png",
+     "design/assets/zone5/strip4.png"
+    ],
+    "strip_nodes": [
+     "3117:3973",
+     "3117:3975",
+     "3117:3977",
+     "3117:3979"
+    ],
+    "history": {
+     "image": "design/assets/zone5/history.png",
+     "image_hover": "design/assets/zone5/history-hover.png",
+     "alt": "Shared Histories",
+     "figma_nodes": {
+      "default": "3117:5104",
+      "hover": "3117:5106",
+      "instance": "3117:3980"
+     }
+    }
+   }
   }
  ]
 }
