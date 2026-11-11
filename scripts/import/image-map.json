@@ -111,7 +111,7 @@
    "I670:1239;670:1462"
   ],
   "note": "ref = Figma imageRef = file name (without extension) in Unesco/design/assets · null = no image in Figma · see 'missing' for refs without a file",
-  "patched": "2026-11-11 timeline-d39 (D39): timeline_items.5/.7 thumbnail = seed thumbnail_refs (cba74a7d · 621646b5) · nodes 3160:1508/3103:1181 replace 1232:1738/1232:1752 · by hand on top of the core-hzd build — build-image-map.py still maps the old nodes (DEFERRED · P-261); re-running it would undo this"
+  "patched": "2026-11-11 timeline-d39 (D39): timeline_items.5/.7 thumbnail = seed thumbnail_refs (cba74a7d · 621646b5) · nodes 3160:1508/3103:1181 replace 1232:1738/1232:1752 · by hand on top of the core-hzd build — build-image-map.py still maps the old nodes (DEFERRED · P-261); re-running it would undo this · 2026-11-11 timeline-swap (D45): timeline_items.1/.7/.9 thumbnail/all = the images Figma puts under the line (bbc1e161 · 555d365b · 1c0fc05b — card 9 one image) · new key `below` = photo(s) under the line (4953122e · 621646b5 · b1ba8a8a+1c3aa3a1) — read before seed below_ref (refs.php sh_import_timeline_below_refs()) · files += bbc1e161/555d365b/1c0fc05b · by hand; build-image-map.py does not write `below` (P-187)"
  },
  "objects": {
   "elephant-leg-bone": {
@@ -273,8 +273,11 @@
  },
  "timeline_items": {
   "1": {
-   "thumbnail": "4953122e17ae97232adf69a47ba5ed1405c8d733",
+   "thumbnail": "bbc1e1610db71dacfc7e7d1e6a09f168415c3d18",
    "all": [
+    "bbc1e1610db71dacfc7e7d1e6a09f168415c3d18"
+   ],
+   "below": [
     "4953122e17ae97232adf69a47ba5ed1405c8d733"
    ]
   },
@@ -310,8 +313,11 @@
    ]
   },
   "7": {
-   "thumbnail": "621646b5dd0382559f9cf7e9b2f8bf0620ac698e",
+   "thumbnail": "555d365bf27bf74e903854746e2a422bc3049d3d",
    "all": [
+    "555d365bf27bf74e903854746e2a422bc3049d3d"
+   ],
+   "below": [
     "621646b5dd0382559f9cf7e9b2f8bf0620ac698e"
    ]
   },
@@ -322,8 +328,11 @@
    ]
   },
   "9": {
-   "thumbnail": "b1ba8a8a18498389fb9a9f257d957ec6516fcc99",
+   "thumbnail": "1c0fc05b6641353a96a7a1af354072eab2433e69",
    "all": [
+    "1c0fc05b6641353a96a7a1af354072eab2433e69"
+   ],
+   "below": [
     "b1ba8a8a18498389fb9a9f257d957ec6516fcc99",
     "1c3aa3a10055d34a499058cb6d74a29c814cfa42"
    ]
@@ -606,6 +615,7 @@
   "148537c0c0f4fb01bb87fd06eb2600f18c355806": "148537c0c0f4fb01bb87fd06eb2600f18c355806.png",
   "172ff28b84b349b73264855d16052064728f76f5": "172ff28b84b349b73264855d16052064728f76f5.png",
   "17bbb16a79e3121b3c9f8b35ed7ca2b31531298d": "17bbb16a79e3121b3c9f8b35ed7ca2b31531298d.jpg",
+  "1c0fc05b6641353a96a7a1af354072eab2433e69": "1c0fc05b6641353a96a7a1af354072eab2433e69.png",
   "1c3aa3a10055d34a499058cb6d74a29c814cfa42": "1c3aa3a10055d34a499058cb6d74a29c814cfa42.png",
   "1feab554459a89eee5603a8222ab5de2faaa5084": "1feab554459a89eee5603a8222ab5de2faaa5084.png",
   "21f024a52e96606556f4b3db7a9bb09946ac0da7": "21f024a52e96606556f4b3db7a9bb09946ac0da7.jpg",
@@ -646,6 +656,7 @@
   "4f92af722c020aaf22ff989878e2e1729607c9f3": "4f92af722c020aaf22ff989878e2e1729607c9f3.png",
   "535eb1d8ac88c6f2dd4e9956a6769c8b4efe3077": "535eb1d8ac88c6f2dd4e9956a6769c8b4efe3077.png",
   "550cfddd472294c66ebb3bfec6d104936ceabf95": "550cfddd472294c66ebb3bfec6d104936ceabf95.png",
+  "555d365bf27bf74e903854746e2a422bc3049d3d": "555d365bf27bf74e903854746e2a422bc3049d3d.png",
   "597a0bb7beb04c60e5c1dab6bb136d762b40b106": "597a0bb7beb04c60e5c1dab6bb136d762b40b106.jpg",
   "5b2303da4b3d8d4c59d0366df64f895726d6384c": "5b2303da4b3d8d4c59d0366df64f895726d6384c.jpg",
   "5e5b3d261ca9c171ce8b4ed35f89325dff42f506": "5e5b3d261ca9c171ce8b4ed35f89325dff42f506.jpg",
@@ -721,6 +732,7 @@
   "ba68e8525d46c78cf3004f1b591c8a4e223ef73f": "ba68e8525d46c78cf3004f1b591c8a4e223ef73f.png",
   "baaa803afaad0e2741a8c3f808ce75c220fdd5a6": "baaa803afaad0e2741a8c3f808ce75c220fdd5a6.png",
   "bb70007222b8d8aea29ae505041fd824fbc12106": "bb70007222b8d8aea29ae505041fd824fbc12106.jpg",
+  "bbc1e1610db71dacfc7e7d1e6a09f168415c3d18": "bbc1e1610db71dacfc7e7d1e6a09f168415c3d18.png",
   "bc3b0037bd5f5871ca71283adf4f54e9f5e68919": "bc3b0037bd5f5871ca71283adf4f54e9f5e68919.jpg",
   "bc3f275a51500bf09f5a2ee1f3d0638656056ae9": "bc3f275a51500bf09f5a2ee1f3d0638656056ae9.png",
   "bec4f0860329aaeeea6b51314eade1b76ec68072": "bec4f0860329aaeeea6b51314eade1b76ec68072.png",
@@ -1025,7 +1037,7 @@
    "ref": "758e3fe761a2fbb6adc4366204d22edfb8ba2b08"
   },
   "1232:1714": {
-   "for": "timeline card 1 thumbnail",
+   "for": "timeline card 1 under the line (D45 swap · timeline_items.1.below · patched by hand)",
    "ref": "4953122e17ae97232adf69a47ba5ed1405c8d733",
    "older_dump": true
   },
@@ -1059,7 +1071,7 @@
    "older_dump": true
   },
   "3103:1181": {
-   "for": "timeline card 7 thumbnail (D39 · Figma 08:23Z Section 51 · patched by hand: build-image-map.py does not map this node — P-261)",
+   "for": "timeline card 7 under the line (D45 swap · timeline_items.7.below · patched by hand)",
    "ref": "621646b5dd0382559f9cf7e9b2f8bf0620ac698e"
   },
   "1232:1758": {
@@ -1068,12 +1080,12 @@
    "older_dump": true
   },
   "1232:1765": {
-   "for": "timeline card 9 thumbnail",
+   "for": "timeline card 9 under the line (D45 swap · timeline_items.9.below · patched by hand)",
    "ref": "b1ba8a8a18498389fb9a9f257d957ec6516fcc99",
    "older_dump": true
   },
   "1232:1766": {
-   "for": "timeline card 9 thumbnail",
+   "for": "timeline card 9 under the line (D45 swap · timeline_items.9.below · patched by hand)",
    "ref": "1c3aa3a10055d34a499058cb6d74a29c814cfa42",
    "older_dump": true
   },
@@ -1619,6 +1631,18 @@
    "for": "Header #1 background (logos in image)",
    "ref": "709572bf7eca3d77a7e317182be8860998a233f4",
    "older_dump": true
+  },
+  "3103:1037": {
+   "for": "timeline card 1 thumbnail (D45 swap · Figma Section 51 puts it under the line · patched by hand)",
+   "ref": "bbc1e1610db71dacfc7e7d1e6a09f168415c3d18"
+  },
+  "3103:1187": {
+   "for": "timeline card 7 thumbnail (D45 swap · Figma Section 51 puts it under the line · patched by hand)",
+   "ref": "555d365bf27bf74e903854746e2a422bc3049d3d"
+  },
+  "3103:1220": {
+   "for": "timeline card 9 thumbnail (D45 swap · Figma Section 51 puts it under the line · patched by hand)",
+   "ref": "1c0fc05b6641353a96a7a1af354072eab2433e69"
   }
  }
 }

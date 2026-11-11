@@ -14,6 +14,8 @@
  * Step 2026-11-11-reflection replaces text only while it is byte-for-byte an older seed text (sh_import_refresh_reflection()).
  * Step 2026-11-11-timeline-images (sh_import_refresh_timeline_images()): sh_thumbnail only while it is still the exact
  * attachment an older import put there · sh_below_image only while empty · done only when no file is missing.
+ * Step 2026-11-11-timeline-swap (sh_import_refresh_timeline_swap()): cards 1·7·9 only while every image field is still
+ * the imported image of that card (before or after D45) · an admin's own image = card skipped + warning.
  * Re-run a step on purpose: SH_IMPORT_REFRESH=<id>[,<id>] (or "all").
  *
  * @package sharedheritage-core
@@ -40,6 +42,8 @@ function sh_import_refresh_steps(): array {
 		'2026-11-11-reflection'      => 'Timeline page reflection title/body → seed text, only where still the text an older import wrote',
 		// timeline-d39 2026-11-11 (D39/D41): cards 5/7 new image on the line · new field sh_below_image (cards 1·7·9).
 		'2026-11-11-timeline-images' => 'timeline_item sh_thumbnail cards 5/7 (only while still the old imported file) · sh_below_image from seed below_ref (only where empty)',
+		// timeline-swap 2026-11-11 (D45): cards 1·7·9 swap the image on the line (+ mini-map) and the one under the line.
+		'2026-11-11-timeline-swap'   => 'timeline_item cards 1·7·9 on/under the line swapped (only while every field is still the imported image of that card)',
 	);
 }
 
@@ -289,7 +293,8 @@ function sh_import_refresh_timeline_images( array $seed, array $map ): int {
 				++$left;
 			}
 		}
-		$below = isset( $it['below_ref'] ) && is_string( $it['below_ref'] ) ? $it['below_ref'] : '';
+		$below = sh_import_timeline_below_refs( $it, $map ); // D45: image-map timeline_items.<n>.below first, else seed below_ref.
+		$below = isset( $below['sh_below_image'] ) ? $below['sh_below_image'] : '';
 		if ( '' !== $below && 0 === absint( get_post_meta( $id, 'sh_below_image', true ) ) ) {
 			$att = sh_imp_below_image( $map, $below, (string) $it['title'] . ' under the line' );
 			if ( $att ) {
@@ -299,6 +304,88 @@ function sh_import_refresh_timeline_images( array $seed, array $map ): int {
 				++$left;
 			}
 		}
+	}
+	return $left;
+}
+
+/**
+ * Step 2026-11-11-timeline-swap (D45 · owner looked at the live site): cards 1·7·9 swap the image on the line (and the
+ * mini-map: sh_thumbnail + _2) with the one under the line (sh_below_image + _2). Target = what the import writes now:
+ * on the line = image-map timeline_items.<n>.all · under the line = sh_import_timeline_below_refs().
+ * A card is written only while EACH of its four fields is still the imported image of that card — the value before D45
+ * ($before below, = image-map/seed up to afcc861) or already the target (attachment import key asset:<ref>; empty where
+ * that state is empty). Any other value (an admin's upload, another library image, a cleared field) = the whole card is
+ * left alone + an import warning. Cards already at the target are not touched (idempotent).
+ *
+ * @param array<string, mixed> $seed Seed files.
+ * @param array<string, mixed> $map  image-map.json.
+ * @return int Cards not written because a file is missing (each one is also an import warning).
+ */
+function sh_import_refresh_timeline_swap( array $seed, array $map ): int {
+	$before = array( // field => ref before D45 ('' = empty).
+		1 => array( 'sh_thumbnail' => '4953122e17ae97232adf69a47ba5ed1405c8d733', 'sh_thumbnail_2' => '', 'sh_below_image' => 'bbc1e1610db71dacfc7e7d1e6a09f168415c3d18', 'sh_below_image_2' => '' ),
+		7 => array( 'sh_thumbnail' => '621646b5dd0382559f9cf7e9b2f8bf0620ac698e', 'sh_thumbnail_2' => '', 'sh_below_image' => '555d365bf27bf74e903854746e2a422bc3049d3d', 'sh_below_image_2' => '' ),
+		9 => array( 'sh_thumbnail' => 'b1ba8a8a18498389fb9a9f257d957ec6516fcc99', 'sh_thumbnail_2' => '1c3aa3a10055d34a499058cb6d74a29c814cfa42', 'sh_below_image' => '1c0fc05b6641353a96a7a1af354072eab2433e69', 'sh_below_image_2' => '' ),
+	);
+	$key_of = static function ( string $ref ): string { // Import key of the attachment made from a ref / file name.
+		$ref = basename( $ref );
+		$ext = (string) pathinfo( $ref, PATHINFO_EXTENSION );
+		return 'asset:' . ( in_array( strtolower( $ext ), array( 'png', 'jpg', 'jpeg', 'webp' ), true ) ? substr( $ref, 0, -strlen( $ext ) - 1 ) : $ref );
+	};
+	$left = 0;
+	foreach ( (array) $seed['timeline-elephant']['items'] as $it ) {
+		$n  = (int) $it['card_order'];
+		$id = isset( $before[ $n ] ) ? sh_imp_find_post( 'timeline_item', 'timeline:elephant:' . $n ) : 0;
+		if ( ! $id ) {
+			continue;
+		}
+		$top    = isset( $map['timeline_items'][ (string) $n ]['all'] ) ? array_values( (array) $map['timeline_items'][ (string) $n ]['all'] ) : array();
+		$below  = sh_import_timeline_below_refs( $it, $map );
+		$target = array(
+			'sh_thumbnail'     => isset( $top[0] ) ? (string) $top[0] : '',
+			'sh_thumbnail_2'   => isset( $top[1] ) ? (string) $top[1] : '',
+			'sh_below_image'   => isset( $below['sh_below_image'] ) ? $below['sh_below_image'] : '',
+			'sh_below_image_2' => isset( $below['sh_below_image_2'] ) ? $below['sh_below_image_2'] : '',
+		);
+		$at_target = true;
+		$changed   = '';
+		foreach ( $target as $field => $ref ) {
+			$cur = absint( get_post_meta( $id, $field, true ) );
+			$key = $cur && 'attachment' === get_post_type( $cur ) ? (string) get_post_meta( $cur, '_sh_import_key', true ) : '';
+			$key = $cur && '' === $key ? '-' : $key; // Not made by the import (admin upload / not an attachment) = never ''.
+			$ok  = array( '' === $before[ $n ][ $field ] ? '' : $key_of( $before[ $n ][ $field ] ), '' === $ref ? '' : $key_of( $ref ) );
+			if ( ! in_array( $key, $ok, true ) ) {
+				$changed = '' === $changed ? $field : $changed;
+			}
+			$at_target = $at_target && $key === $ok[1];
+		}
+		if ( $at_target ) {
+			continue;
+		}
+		if ( '' !== $changed ) {
+			sh_imp_warn( 'timeline-swap (D45) card ' . $n . ' skipped: ' . $changed . ' is not the imported image of this card (changed in admin) — nothing written' );
+			sh_imp_count( 'skipped', 'timeline_swap' );
+			continue;
+		}
+		$att = array();
+		foreach ( $target as $field => $ref ) {
+			if ( '' === $ref ) {
+				$att[ $field ] = 0;
+				continue;
+			}
+			$title         = (string) $it['title'] . ( 0 === strpos( $field, 'sh_thumbnail' ) ? ' card' : ' under the line' ) . ( '_2' === substr( $field, -2 ) ? ' 2' : '' );
+			$att[ $field ] = 0 === strpos( $field, 'sh_thumbnail' ) ? (int) sh_imp_image( $map, $ref, $title ) : sh_imp_below_image( $map, $ref, $title );
+			if ( ! $att[ $field ] ) {
+				$att = array();
+				break;
+			}
+		}
+		if ( ! $att ) {
+			++$left;
+			continue;
+		}
+		sh_imp_meta( 'post', $id, $att );
+		sh_imp_count( 'updated', 'timeline_swap' );
 	}
 	return $left;
 }
@@ -379,6 +466,10 @@ function sh_import_refresh( array $seed, array $map, array $manifest, array $obj
 			continue;
 		}
 		if ( '2026-11-11-timeline-images' === $step && sh_import_refresh_timeline_images( $seed, $map ) > 0 ) {
+			unset( $done[ $step ] ); // Files still missing: try again on the next import.
+			continue;
+		}
+		if ( '2026-11-11-timeline-swap' === $step && sh_import_refresh_timeline_swap( $seed, $map ) > 0 ) {
 			unset( $done[ $step ] ); // Files still missing: try again on the next import.
 			continue;
 		}

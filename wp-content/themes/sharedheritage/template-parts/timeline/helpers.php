@@ -98,18 +98,8 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 		'sh_thumbnail_2' => absint( sh_get( 'sh_thumbnail_2', $item->ID ) ),
 	);
 
-	// Design geometry while every image of the entry is still the design file.
-	$images = array();
-	if ( ! empty( $entry['images'] ) ) {
-		foreach ( $entry['images'] as $img ) {
-			$id = isset( $ids[ $img['field'] ] ) ? $ids[ $img['field'] ] : 0;
-			if ( ! $id || ! wp_attachment_is_image( $id ) || ! sh_tl_is_design_file( $id, $img['src'] ) ) {
-				$images = array();
-				break;
-			}
-			$images[] = array_merge( $img, array( 'id' => $id ) );
-		}
-	}
+	// Design geometry while every image of the entry is still the design file (and no other image field is set).
+	$images = sh_tl_design_images( isset( $entry['images'] ) ? (array) $entry['images'] : array(), $ids );
 
 	if ( ! empty( $images ) ) {
 		$out = array(
@@ -119,32 +109,15 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 		);
 	} else {
 		// Rule (§4.5c.3): whole images side by side at equal height, contained in the boxes.
-		$ratio = 0.0;
-		foreach ( $ids as $field => $id ) {
-			$src = $id ? wp_get_attachment_image_src( $id, 'full' ) : false;
-			if ( ! $src || empty( $src[1] ) || empty( $src[2] ) ) {
-				continue;
-			}
-			$images[] = array( 'field' => $field, 'id' => $id, 'src' => array( (int) $src[1], (int) $src[2] ), 'crop' => array( 0, 0, (int) $src[1], (int) $src[2] ), 'r' => $src[1] / $src[2] );
-			$ratio   += $src[1] / $src[2];
-		}
-		if ( empty( $images ) ) {
+		$group = sh_tl_rule_group( $ids, $rule['photo'] );
+		if ( ! $group ) {
 			return null;
 		}
-		$x = 0.0;
-		foreach ( $images as $n => $img ) {
-			$images[ $n ]['box'] = array( $x / $ratio, 0, $img['r'] / $ratio, 1 );
-			$x                  += $img['r'];
-		}
-		$photo = sh_tl_contain( $ratio, ...$rule['photo'] );
-		$max_h = min( array_map( static fn( $i ) => ( $i['crop'][3] - $i['crop'][1] ) / $i['box'][3], $images ) );
-		if ( $photo[1] > $max_h ) {
-			$photo = array( $max_h * $ratio, $max_h );
-		}
-		$out = array(
-			'photo' => $photo,
-			'mini'  => sh_tl_contain( $ratio, ...$rule['mini'] ),
-			'ratio' => $ratio,
+		$images = $group['images'];
+		$out    = array(
+			'photo' => $group['photo'],
+			'mini'  => sh_tl_contain( $group['ratio'], ...$rule['mini'] ),
+			'ratio' => $group['ratio'],
 		);
 	}
 
@@ -188,9 +161,68 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 }
 
 /**
- * Photo under the line when it is another image than the one on the line (`sh_below_image` · D39/D41 · §4.5c.3d).
- * Design geometry (`below` + `below_images`) while the attachment is still that file, else the §4.5c.3 rule: the whole
- * image contained in 320×265, never larger than the file. Empty field / not an image → null (= the on-line image).
+ * Images of a design entry with their attachment ids — only while every one is still its design file and no other image
+ * field of $ids is set (e.g. an admin adds a 2nd image) · else [] (= use the rule).
+ *
+ * @param array $entry_images geometry.php `images` / `below_images`.
+ * @param int[] $ids          field => attachment id (0 = empty).
+ * @return array
+ */
+function sh_tl_design_images( array $entry_images, array $ids ): array {
+	if ( empty( $entry_images ) || array_diff( array_keys( array_filter( $ids ) ), array_column( $entry_images, 'field' ) ) ) {
+		return array();
+	}
+	$images = array();
+	foreach ( $entry_images as $img ) {
+		$id = isset( $ids[ $img['field'] ] ) ? $ids[ $img['field'] ] : 0;
+		if ( ! $id || ! wp_attachment_is_image( $id ) || ! sh_tl_is_design_file( $id, $img['src'] ) ) {
+			return array();
+		}
+		$images[] = array_merge( $img, array( 'id' => $id ) );
+	}
+	return $images;
+}
+
+/**
+ * Rule (§4.5c.3): the images of $ids side by side at equal height (whole files), the group contained in $box and never
+ * larger than the files' pixels. null = no image.
+ *
+ * @param int[]   $ids field => attachment id (0 = empty).
+ * @param float[] $box [w, h].
+ * @return array{images:array,photo:float[],ratio:float}|null
+ */
+function sh_tl_rule_group( array $ids, array $box ): ?array {
+	$images = array();
+	$ratio  = 0.0;
+	foreach ( $ids as $field => $id ) {
+		$src = ( $id && wp_attachment_is_image( $id ) ) ? wp_get_attachment_image_src( $id, 'full' ) : false;
+		if ( ! $src || empty( $src[1] ) || empty( $src[2] ) ) {
+			continue;
+		}
+		$images[] = array( 'field' => $field, 'id' => $id, 'src' => array( (int) $src[1], (int) $src[2] ), 'crop' => array( 0, 0, (int) $src[1], (int) $src[2] ), 'r' => $src[1] / $src[2] );
+		$ratio   += $src[1] / $src[2];
+	}
+	if ( empty( $images ) ) {
+		return null;
+	}
+	$x = 0.0;
+	foreach ( $images as $n => $img ) {
+		$images[ $n ]['box'] = array( $x / $ratio, 0, $img['r'] / $ratio, 1 );
+		$x                  += $img['r'];
+	}
+	$photo = sh_tl_contain( $ratio, ...$box );
+	$max_h = min( array_map( static fn( $i ) => ( $i['crop'][3] - $i['crop'][1] ) / $i['box'][3], $images ) );
+	if ( $photo[1] > $max_h ) {
+		$photo = array( $max_h * $ratio, $max_h ); // ⛔ never larger than the file's pixels (§4.5c.3).
+	}
+	return array( 'images' => $images, 'photo' => $photo, 'ratio' => $ratio );
+}
+
+/**
+ * Photo under the line when it is another image than the one on the line (`sh_below_image` + optional `sh_below_image_2`
+ * as a 2-image group · D39/D41 → D45 · §4.5c.3d). Design geometry (`below` + `below_images` [+ `below_ratio`]) while the
+ * attachments are still those files, else the §4.5c.3 rule (side by side, contained in 320×265, never larger than the
+ * files). Empty `sh_below_image` / not an image → null (= the on-line image(s)) · `_2` is used only with it.
  *
  * @param WP_Post $item  timeline_item.
  * @param array   $entry geometry.php item entry ([] = none).
@@ -198,41 +230,24 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
  * @return array{photo:float[],ratio:float,images:array}|null
  */
 function sh_tl_below( WP_Post $item, array $entry, array $rule ): ?array {
-	$id = absint( sh_get( 'sh_below_image', $item->ID ) );
-	if ( ! $id || ! wp_attachment_is_image( $id ) || empty( $rule['photo'] ) ) {
+	$ids = array(
+		'sh_below_image'   => absint( sh_get( 'sh_below_image', $item->ID ) ),
+		'sh_below_image_2' => absint( sh_get( 'sh_below_image_2', $item->ID ) ),
+	);
+	if ( ! $ids['sh_below_image'] || ! wp_attachment_is_image( $ids['sh_below_image'] ) || empty( $rule['photo'] ) ) {
 		return null;
 	}
-	$img = ! empty( $entry['below'] ) && ! empty( $entry['below_images'][0] ) ? $entry['below_images'][0] : array();
-	if ( $img && sh_tl_is_design_file( $id, $img['src'] ) ) {
-		list( $x0, $y0, $x1, $y1 ) = array_map( 'floatval', $img['crop'] );
+	$images = ! empty( $entry['below'] ) ? sh_tl_design_images( isset( $entry['below_images'] ) ? (array) $entry['below_images'] : array(), $ids ) : array();
+	if ( $images ) {
+		list( $x0, $y0, $x1, $y1 ) = array_map( 'floatval', $images[0]['crop'] );
 		return array(
 			'photo'  => $entry['below'],
-			'ratio'  => ( $x1 - $x0 ) / max( 1.0, $y1 - $y0 ),
-			'images' => array( array_merge( $img, array( 'id' => $id ) ) ),
+			'ratio'  => isset( $entry['below_ratio'] ) ? (float) $entry['below_ratio'] : ( $x1 - $x0 ) / max( 1.0, $y1 - $y0 ),
+			'images' => $images,
 		);
 	}
-	$src = wp_get_attachment_image_src( $id, 'full' );
-	if ( ! $src || empty( $src[1] ) || empty( $src[2] ) ) {
-		return null;
-	}
-	$ratio = $src[1] / $src[2];
-	$photo = sh_tl_contain( $ratio, ...$rule['photo'] );
-	if ( $photo[1] > $src[2] ) {
-		$photo = array( $src[2] * $ratio, (float) $src[2] ); // ⛔ never larger than the file's pixels (§4.5c.3).
-	}
-	return array(
-		'photo'  => $photo,
-		'ratio'  => $ratio,
-		'images' => array(
-			array(
-				'field' => 'sh_below_image',
-				'id'    => $id,
-				'src'   => array( (int) $src[1], (int) $src[2] ),
-				'crop'  => array( 0, 0, (int) $src[1], (int) $src[2] ),
-				'box'   => array( 0, 0, 1, 1 ),
-			),
-		),
-	);
+	$group = sh_tl_rule_group( $ids, $rule['photo'] );
+	return $group ? array( 'photo' => $group['photo'], 'ratio' => $group['ratio'], 'images' => $group['images'] ) : null;
 }
 
 /**
