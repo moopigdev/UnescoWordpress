@@ -216,3 +216,7 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [core-hzd] [2026-11-11] step `2026-11-11-zone5` อยู่ใน `runs[].refresh` ทุกครั้งจนกว่า seed zone 5 มา (P-172) — ไม่แก้อะไร ไม่เตือน · deploy อ่าน report ต้องรู้ว่าปกติ
 - [core-hzd] [2026-11-11] ⚠ ลำดับ deploy: step `2026-11-11-chooser` ล้าง `sh_link_page` ของ zone 4 → การ์ดหน้าแรกไป `/zone/zone-4/` ทันที → ต้องส่ง theme ที่มีหน้าคั่น (`taxonomy-zone-zone-4.php` หรือเทียบเท่า) ไปก่อนหรือพร้อม `--refresh-only` · theme ปัจจุบันแสดงหน้า zone แบบกริดที่ `/zone/zone-4/` (200 ไม่พัง แต่ไม่ใช่หน้าคั่น)
 - [core-hzd] [2026-11-11] `refs.php sh_import_asset_subdirs()` = `zone-banners-2026-11` `zone4-animals` (ภาพก่อน timeline ใช้ `sh_import_line_art_file()` ของตัวเองกับ `lineart/`) · deploy.sh ยอมทั้ง 3 · โฟลเดอร์ใหม่ = เพิ่มทั้งสองที่ (ชั้นพิเศษ deploy)
+- [reviewer core-hzd r1] [2026-11-11] step objects บันทึก done แม้ไฟล์ภาพขาด (ตอนนี้กันด้วยตรวจ bundle + exit 4)
+- [reviewer core-hzd r1] [2026-11-11] zone ที่ admin แก้ชื่อแล้ว การ์ดหน้าแรกยังถูกอัปเดตเป็นชื่อใหม่ (กฎทีละฟิลด์)
+- [reviewer core-hzd r1] [2026-11-11] ช่องที่ admin ล้างเป็นว่าง แยกไม่ออกจากค่าว่างที่ import เขียน
+- [reviewer core-hzd r1] [2026-11-11] prod ไม่ได้ import จาก f679892 ตรง · sh_layout ไม่ตรง → refresh ข้าม (ทางปลอดภัย) · ตอนรัน staging/prod ดู skipped.kept_admin_value (ไม่มีใครแก้ ควร 0) · ต้องส่งโค้ดหน้า zone-4 ก่อน/พร้อม refresh-only
