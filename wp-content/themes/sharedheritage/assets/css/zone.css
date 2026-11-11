@@ -1,35 +1,63 @@
 /*
- * Zone page (taxonomy-zone.php · DESIGN-SPEC §4.3 · §3.6 tile · frames 1472–1474).
- * Desktop 1440: cover [160,150 1120×410] · banner [160,579 1120×166] r22 shadow-200 · grid rows y=795/1029/1263
- * (tile 184, gap 50) · Back [160,1521]. Tablet/mobile: same order, fluid container (D5).
+ * Zone page (taxonomy-zone.php · DESIGN-SPEC §4.3 + §4.3b · §3.6 tile · frames 3117:3684 / 3713 / 3742, 2026-11).
+ * Desktop 1440 (zone 1, text block folded): cover [160,150 1120×410] · banner [160,580 1120×166] shadow-200 ·
+ * text block [160,826 1120×193] · grid from 826+H+60 (tile 184, gap 50) · Back = grid bottom + 74 (P-243) ·
+ * page end = Back bottom + 75 (frame 1930). Same values for zones 1–3. Tablet/mobile: same order, fluid (D5).
  */
 
 .sh-zone {
-	--sh-zone-banner-gap: 19px;  /* cover bottom y=560 → banner y=579 (zone 1) */
+	--sh-zone-banner-gap: var(--sh-space-20); /* cover bottom y=560 → banner y=580 */
+	--sh-zone-intro-gap: 80px;     /* banner bottom y=746 → text block y=826 */
 	--sh-zone-grid-gap: var(--sh-tile-gap);
-	--sh-zone-back-gap: 74px;    /* grid bottom y=1447 → Back y=1521 */
-	--sh-zone-bottom: 75px;      /* Back bottom y=1571 → page end y=1646 */
+	--sh-zone-grid-top: 60px;      /* Frame 114482 gap: text block → grid */
+	--sh-zone-back-gap: 74px;      /* grid bottom → Back (P-243 rule) */
+	--sh-zone-bottom: 75px;        /* Back bottom y=1855 → page end y=1930 */
 	--sh-zone-cover-mobile-scale: 0.5; /* mobile: cover shown at 50% of desktop size */
 	--sh-zone-banner-strip: 840px; /* mobile: banner image width (labels ≈ 15px) */
 }
 
-/* Per-zone offsets measured from the three Figma frames (zone 2: banner y=580, grid +1; zone 3: shorter page). */
-.sh-zone[data-zone="2"] {
-	--sh-zone-banner-gap: 20px;
-	--sh-zone-back-gap: 73px;
+/* ---- Text block "Detail text Zone 1" (3117:5051): column gap 20 · heading 34/42.5 · text 20/22 centred ---- */
+.sh-zone__intro {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sh-space-20);
+	margin-top: var(--sh-zone-intro-gap);
 }
 
-.sh-zone[data-zone="3"] {
-	--sh-zone-banner-gap: 20px;
-	--sh-zone-back-gap: 68px;
-	--sh-zone-bottom: 63px;
+.sh-zone__intro-title {
+	margin: 0;
 }
 
-.sh-zone__title {
-	padding-block: var(--sh-space-40);
+/* One paragraph per line, no paragraph gap (the Figma text is one node with line breaks). */
+.sh-zone__intro-text > p {
+	margin: 0;
 }
 
-/* ---- Cover (1120×410) ---- */
+.sh-zone__intro-body.is-animating {
+	overflow: hidden;
+	transition: height var(--sh-duration-tile) var(--sh-ease); /* smart-animate 0.3s */
+}
+
+/* JS folds the full text away; without JS the full text shows and the toggle stays hidden. */
+.sh-zone__intro.has-more .sh-zone__intro-text--short,
+.sh-zone__intro .sh-read-more-row {
+	display: none;
+}
+
+.sh-js .sh-zone__intro.has-more:not(.is-open) .sh-zone__intro-text--short,
+.sh-js .sh-zone__intro .sh-read-more-row {
+	display: block;
+}
+
+.sh-js .sh-zone__intro.has-more:not(.is-open) .sh-zone__intro-text--full {
+	display: none;
+}
+
+.sh-zone__intro .sh-read-more-row {
+	font: var(--sh-type-read-more-home); /* strut = 22px so the row is 22 tall */
+}
+
+/* ---- Cover (1120×410) · 2026-11 banners are plain FILL (4096×1503 → cover) ---- */
 .sh-zone__cover {
 	aspect-ratio: 1120 / 410;
 	overflow: hidden;
@@ -39,19 +67,6 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-}
-
-/* Zone 1 cover is a STRETCH fill with imageTransform (y 0.36%–99.88% of the image); zones 2/3 are plain FILL. */
-.sh-zone[data-zone="1"] .sh-zone__cover {
-	position: relative;
-}
-
-.sh-zone[data-zone="1"] .sh-zone__cover-img {
-	position: absolute;
-	top: -0.3639%;
-	left: 0;
-	height: 100.4826%;
-	object-fit: fill;
 }
 
 /*
@@ -97,7 +112,7 @@
 	display: grid;
 	grid-template-columns: repeat(5, minmax(0, 1fr));
 	gap: var(--sh-zone-grid-gap);
-	margin-top: var(--sh-space-50);
+	margin-top: var(--sh-zone-grid-top);
 	padding: 0;
 	list-style: none;
 }
@@ -188,12 +203,10 @@
 	.sh-zone[data-zone] {
 		--sh-zone-grid-gap: var(--sh-space-20);
 		--sh-zone-banner-gap: var(--sh-space-20);
+		--sh-zone-intro-gap: var(--sh-space-40);
+		--sh-zone-grid-top: var(--sh-space-40);
 		--sh-zone-back-gap: var(--sh-space-40);
 		--sh-zone-bottom: var(--sh-space-40);
-	}
-
-	.sh-zone__grid {
-		margin-top: var(--sh-space-30);
 	}
 }
 
@@ -217,7 +230,6 @@
 	}
 
 	.sh-zone[data-zone] .sh-zone__cover-img {
-		position: static;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;

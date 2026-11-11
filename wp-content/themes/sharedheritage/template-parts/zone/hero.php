@@ -1,7 +1,8 @@
 <?php
 /**
- * Zone page, opening part: cover (§4.3 [160,150 1120×410]) and zone banner ([160,579 1120×166] r22 + shadow 200).
- * Zone name sits inside the cover image (D8 · text-in-image) → the <h1> is visually hidden when a cover exists.
+ * Zone page, opening part: cover (§4.3b [160,150 1120×410] · banner 2026-11 with the short zone name in the picture,
+ * alt = that name from the attachment, D8) and the ZONE 1–5 strip ([160,580 1120×166] shadow 200).
+ * The page <h1> is the visible heading of the text block (template-parts/zone/intro.php).
  *
  * Args: zone (WP_Term).
  *
@@ -26,7 +27,6 @@ $sh_cover_html = $sh_cover ? wp_get_attachment_image(
 	false,
 	array(
 		'class'         => 'sh-zone__cover-img',
-		'alt'           => '',
 		'loading'       => 'eager',
 		'decoding'      => 'async',
 		'fetchpriority' => 'high',
@@ -57,8 +57,6 @@ if ( $sh_banner ) {
 	$sh_banner_crop = $sh_w > 0 && $sh_h > 0 && abs( ( $sh_w / $sh_h ) / ( 4096 / 965 ) - 1 ) < 0.01;
 }
 ?>
-<h1 class="<?php echo esc_attr( '' !== $sh_cover_html ? 'screen-reader-text' : 'sh-t-page-title sh-zone__title' ); ?>"><?php echo esc_html( $sh_zone->name ); ?></h1>
-
 <?php if ( '' !== $sh_cover_html ) : ?>
 	<figure class="sh-zone__cover">
 		<?php echo $sh_cover_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() output. ?>
