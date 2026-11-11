@@ -187,6 +187,15 @@
 	overflow-wrap: anywhere;
 }
 
+/* D42 (P-185): Figma title box wider than the column while the images start below it (frame range only) ·
+   --fit (detail.js) = it would hit an image or the screen edge → wrap in the column (D28). */
+@media (min-width: 1024px) {
+	.sh-detail__title--wide:not(.sh-detail__title--fit) {
+		width: calc(var(--sh-d-title-w, 739) * var(--sh-d-u));
+		max-width: none;
+	}
+}
+
 .sh-detail__title:not(.sh-detail__block) {
 	font: var(--sh-type-page-title);
 }

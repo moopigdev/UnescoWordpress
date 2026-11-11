@@ -95,14 +95,33 @@ if ( ! $sh_blocks ) {
 		if ( 'title' === $sh_role && ! $sh_has_title ) {
 			$sh_has_title = true;
 			$sh_auto      = 'WIDTH_AND_HEIGHT' === ( $sh_b['auto_resize'] ?? '' ) ? ' sh-detail__title--auto' : '';
+			/*
+			 * D42 (P-185): the Figma title box may be wider than the text column when every panel image
+			 * starts below it (1633 · 1506 · 1509) → that width; otherwise / when it would still hit an
+			 * image or the screen edge (detail.js adds --fit) it wraps in the column (D28).
+			 */
+			$sh_wide_w = 0.0;
+			$sh_tbox   = isset( $sh_b['bbox'] ) && is_array( $sh_b['bbox'] ) ? array_values( $sh_b['bbox'] ) : array();
+			$sh_tcol_w = $sh_layout['text_col']['bbox'][2] ?? null;
+			$sh_img_y  = array();
+			foreach ( (array) ( $sh_layout['images'] ?? array() ) as $sh_img ) {
+				if ( is_array( $sh_img ) && isset( $sh_img['bbox'][1] ) && is_numeric( $sh_img['bbox'][1] ) ) {
+					$sh_img_y[] = (float) $sh_img['bbox'][1];
+				}
+			}
+			if ( 4 === count( $sh_tbox ) && is_numeric( $sh_tbox[0] ) && is_numeric( $sh_tbox[1] ) && is_numeric( $sh_tbox[2] ) && is_numeric( $sh_tbox[3] )
+				&& is_numeric( $sh_tcol_w ) && (float) $sh_tbox[2] > (float) $sh_tcol_w + 0.5
+				&& $sh_img_y && min( $sh_img_y ) >= (float) $sh_tbox[1] + (float) $sh_tbox[3] ) {
+				$sh_wide_w = min( (float) $sh_tbox[2], 1120.0 - max( 0.0, (float) $sh_tbox[0] - 160.0 ) ); // never past the 1120 container.
+			}
 			printf(
 				'<h1 id="sh-detail-title" class="sh-detail__block sh-detail__title%1$s" style="%2$s">%3$s</h1>',
-				esc_attr( $sh_auto ),
-				esc_attr( $sh_block_style( $sh_b, '' !== $sh_hex( sh_get( 'sh_title_color', $sh_id ) ) ? '' : $sh_col ) ), // field colour (CSS var) wins.
+				esc_attr( $sh_auto . ( $sh_wide_w > 0 ? ' sh-detail__title--wide' : '' ) ),
+				esc_attr( $sh_block_style( $sh_b, '' !== $sh_hex( sh_get( 'sh_title_color', $sh_id ) ) ? '' : $sh_col ) . ( $sh_wide_w > 0 ? '--sh-d-title-w:' . $sh_n( $sh_wide_w ) . ';' : '' ) ), // field colour (CSS var) wins.
 				esc_html( $sh_title )
 			);
 		} elseif ( ( 'meta' === $sh_role || 'collection' === $sh_role ) && ! empty( $sh_b['rows'] ) && is_array( $sh_b['rows'] ) ) {
-			// Figma rows by field (which lines this frame shows · colours · weights).
+			// Figma rows by field (colours · weights) — D42 (P-186): every field with a value is shown, not only these.
 			$sh_by_field = array();
 			foreach ( $sh_b['rows'] as $sh_row ) {
 				$sh_field = is_array( $sh_row ) ? (string) ( $sh_row['field'] ?? '' ) : '';
