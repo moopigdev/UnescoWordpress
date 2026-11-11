@@ -65,7 +65,7 @@ $sh_bar  = sh_home_img(
 		</div>
 	</div>
 
-	<div class="sh-home-zonebar">
+	<div id="sh-home-zonebar" class="sh-home-zonebar">
 		<div class="sh-home-zonebar__scroll">
 			<div class="sh-home-zonebar__box">
 				<?php echo sh_home_kses( $sh_bar ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in sh_home_img() + kses. ?>

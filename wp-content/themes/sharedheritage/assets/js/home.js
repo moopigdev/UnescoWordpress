@@ -1,7 +1,7 @@
 /**
  * Home behaviour (front-page.php) — DESIGN-SPEC §3.5 · §6.1 · §6.2.
- *  1. Navigator dots: scroll to the section in 0.3s (anchor href = no-JS fallback).
- *  2. Trails "Read more >>": show / hide the two long paragraphs.
+ *  1. Navigator dots: scroll in 0.3s to the top / ZONE bar / Trails / Zone 4–5 (anchor href = no-JS fallback).
+ *  2. Trails "Read more >>" ↔ "Hide >>": open / fold the two long paragraphs (0.3s).
  *  3. Trails stage: the footprint video (walking.webm) plays once the section is on screen, then the 17 trail
  *     icons fade in (D12). No video support / reduced motion / error → icons straight away.
  */
@@ -37,58 +37,105 @@
 		window.requestAnimationFrame( step );
 	}
 
+	// Where a dot scrolls to: 'top' = 0 · otherwise the element's top minus its CSS scroll-margin-top (the zone bar keeps
+	// some room above it so the whole ZONE 1–5 strip, animals included, is on screen — BACKLOG #20).
+	function targetY( id ) {
+		if ( id === 'top' ) {
+			return 0;
+		}
+		var el = document.getElementById( id );
+		if ( ! el ) {
+			return null;
+		}
+		var margin = parseFloat( window.getComputedStyle( el ).scrollMarginTop ) || 0;
+		return el.getBoundingClientRect().top + window.pageYOffset - margin;
+	}
+
+	function dotId( dot ) {
+		return ( dot.getAttribute( 'href' ) || '' ).replace( /^#/, '' );
+	}
+
 	dots.forEach( function ( dot ) {
 		dot.addEventListener( 'click', function ( e ) {
-			var id = ( dot.getAttribute( 'href' ) || '' ).replace( /^#/, '' );
-			var section = id ? document.getElementById( id ) : null;
-			if ( ! section || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ) {
+			var id = dotId( dot );
+			var y = id ? targetY( id ) : null;
+			if ( y === null || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ) {
 				return;
 			}
 			e.preventDefault();
-			scrollToY( section.getBoundingClientRect().top + window.pageYOffset );
+			scrollToY( y );
 			if ( window.history && window.history.replaceState ) {
 				window.history.replaceState( null, '', '#' + id );
 			}
 		} );
 	} );
 
-	/* current section → aria-current on its dot (no visual change: Figma has one dot style only) */
-	if ( dots.length && 'IntersectionObserver' in window ) {
-		var seen = {};
-		var io = new IntersectionObserver( function ( entries ) {
-			entries.forEach( function ( en ) {
-				seen[ en.target.id ] = en.isIntersecting ? en.boundingClientRect.top : null;
-			} );
+	/* current section → aria-current on its dot (no visual change: Figma has one dot style only — §3.5) */
+	if ( dots.length ) {
+		var ticking = false;
+		var markCurrent = function () {
+			ticking = false;
+			var line = window.innerHeight * 0.4;
 			var current = null;
 			dots.forEach( function ( dot ) {
-				var id = dot.getAttribute( 'href' ).replace( /^#/, '' );
-				if ( seen[ id ] !== null && seen[ id ] !== undefined ) {
-					current = id;
-				}
-				dot.removeAttribute( 'aria-current' );
-			} );
-			dots.forEach( function ( dot ) {
-				if ( current && dot.getAttribute( 'href' ) === '#' + current ) {
-					dot.setAttribute( 'aria-current', 'true' );
+				var y = targetY( dotId( dot ) );
+				if ( y !== null && y - window.pageYOffset <= line ) {
+					current = dot;
 				}
 			} );
-		}, { rootMargin: '-40% 0px -40% 0px' } );
-		dots.forEach( function ( dot ) {
-			var target = document.getElementById( dot.getAttribute( 'href' ).replace( /^#/, '' ) );
-			if ( target ) {
-				io.observe( target );
+			// Page end reached (the last target cannot scroll up to the line) → last dot.
+			if ( window.pageYOffset >= document.documentElement.scrollHeight - window.innerHeight - 2 ) {
+				current = dots[ dots.length - 1 ];
 			}
-		} );
+			dots.forEach( function ( dot ) {
+				if ( dot === current ) {
+					dot.setAttribute( 'aria-current', 'true' );
+				} else {
+					dot.removeAttribute( 'aria-current' );
+				}
+			} );
+		};
+		var onScroll = function () {
+			if ( ! ticking ) {
+				ticking = true;
+				window.requestAnimationFrame( markCurrent );
+			}
+		};
+		window.addEventListener( 'scroll', onScroll, { passive: true } );
+		window.addEventListener( 'resize', onScroll );
+		markCurrent();
 	}
 
-	/* 2 · trails read more */
+	/* 2 · trails "Read more >>" ↔ "Hide >>" (§3.4 · BACKLOG #4): height animates over 0.3s (smart-animate) */
 	var toggle = document.querySelector( '.sh-home-trails__toggle' );
 	var more = document.getElementById( 'sh-home-trails-more' );
 	if ( toggle && more ) {
+		var holder = toggle.closest( '[data-sh-label-hide]' );
+		var labelMore = toggle.textContent;
+		var labelHide = ( holder && holder.getAttribute( 'data-sh-label-hide' ) ) || labelMore;
+		var timer = null;
 		toggle.addEventListener( 'click', function () {
 			var open = toggle.getAttribute( 'aria-expanded' ) !== 'true';
 			toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
-			more.classList.toggle( 'is-open', open );
+			toggle.textContent = open ? labelHide : labelMore;
+			window.clearTimeout( timer );
+			if ( reduceMotion ) {
+				more.style.height = '';
+				more.classList.toggle( 'is-open', open );
+				return;
+			}
+			var from = open ? 0 : more.offsetHeight;
+			more.classList.add( 'is-open' );
+			var to = open ? more.scrollHeight : 0;
+			more.style.height = from + 'px';
+			void more.offsetHeight; // commit the start height before transitioning
+			more.classList.add( 'is-animating' );
+			more.style.height = to + 'px';
+			timer = window.setTimeout( function () {
+				more.classList.remove( 'is-animating' );
+				more.style.height = '';
+				more.classList.toggle( 'is-open', open );
+			}, 300 );
 		} );
 	}
 

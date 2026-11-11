@@ -1,7 +1,8 @@
 <?php
 /**
  * Home section 5 — Trails (Frame All trails 886:1795 [160,1766 1120×777]).
- * Text block (title · tagline · "Read more >>" → two long paragraphs, Variant2 886:1771) then the stage AAMM-01
+ * Text block (title · tagline · "Read more >>" → two long paragraphs and the button turns into "Hide >>" — set 3117:4306,
+ * §3.4 · BACKLOG #4; label option sh_label_hide) then the stage AAMM-01
  * [160,1913 1120×630]: footprint video (walking.webm, D12) plays when scrolled into view, then the 17 trail icons
  * (sh_trails('home'), rows 6/5/6, 165×165 → hover 185) appear. Without video the icons show at once.
  *
@@ -21,6 +22,10 @@ $sh_more  = array_filter(
 	),
 	'strlen'
 );
+$sh_hide  = (string) get_option( 'sh_label_hide', '' );
+if ( '' === trim( $sh_hide ) ) {
+	$sh_hide = __( 'Hide >>', 'sharedheritage' );
+}
 
 $sh_video_url  = '';
 $sh_video_file = (int) sh_get( 'sh_home_trails_video_webm', $sh_pid );
@@ -47,7 +52,7 @@ while ( $sh_n < count( $sh_trails ) ) {
 }
 ?>
 <section id="sh-home-trails" class="sh-home-trails sh-container" aria-labelledby="sh-home-trails-title">
-	<div class="sh-home-trails__text">
+	<div class="sh-home-trails__text" data-sh-label-hide="<?php echo esc_attr( $sh_hide ); ?>">
 		<?php if ( '' !== $sh_title ) : ?>
 			<h2 id="sh-home-trails-title" class="sh-t-section-title"><?php echo esc_html( $sh_title ); ?></h2>
 		<?php endif; ?>
