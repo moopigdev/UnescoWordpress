@@ -199,13 +199,25 @@
 	gap: var(--sh-space-20);
 }
 
+/*
+ * Long paragraphs (Variant2 3117:4313: 18/22 left · gap 20). The gaps live inside the block (margin-top on each <p>,
+ * the block pulls itself up by one gap) so its height can animate 0 ↔ full without a jump (home.js · 0.3s).
+ */
 .sh-home-trails__more {
-	display: flex;
-	flex-direction: column;
-	gap: var(--sh-space-20);
+	display: flow-root;
+	margin-top: calc(-1 * var(--sh-space-20));
 }
 
-/* Read more → long paragraphs (Variant2). Hidden only once JS is ready to toggle them. */
+.sh-home-trails__more > p {
+	margin-top: var(--sh-space-20);
+}
+
+.sh-home-trails__more.is-animating {
+	overflow: hidden;
+	transition: height var(--sh-duration-tile) var(--sh-ease);
+}
+
+/* Read more → long paragraphs. Hidden only once JS is ready to toggle them. */
 .sh-js .sh-home-trails__more:not(.is-open) {
 	display: none;
 }
@@ -312,11 +324,16 @@
 	opacity: 0;
 }
 
+/* Navigator dot 2 stops here: the whole ZONE 1–5 strip (animals + tabs) in view with room above it (BACKLOG #20). */
+.sh-home-zonebar {
+	scroll-margin-top: var(--sh-space-40);
+}
+
 /* ---- Navigator [176,587 30×150] · 4 dots 30×30 gap 10 ---- */
 .sh-home-nav {
 	position: fixed;
 	top: min(587px, calc(100dvh - 170px));
-	left: calc(50% - 544px); /* 176 at 1440 */
+	left: calc(max(var(--sh-tablet-margin), (100% - var(--sh-container)) / 2) + 16px); /* container x + 16 = 176 at 1440 */
 	z-index: 5;
 	display: none;
 	flex-direction: column;
@@ -344,7 +361,8 @@
 	}
 }
 
-@media (min-width: 1200px) {
+/* Tablet and up (BACKLOG #20: the dots work at 768 too); phones keep the full text column clear. */
+@media (min-width: 768px) {
 	.sh-home-nav {
 		display: flex;
 	}

@@ -1,8 +1,9 @@
 <?php
 /**
- * Zone page — taxonomy `zone` (Zone 1–3: DESIGN-SPEC §4.3 · frames 1472–1474).
+ * Zone page — taxonomy `zone` (Zone 1–3: DESIGN-SPEC §4.3 + §4.3b · frames 3117:3684 / 3713 / 3742).
  *
- * One layout for every zone: cover (1120×410) · zone banner (1120×166) · trail grid (3×5 tiles 184×184) · Back.
+ * One layout for every zone: cover (1120×410) · zone banner (1120×166) · text block (heading · sh_intro · Read more ↔
+ * Hide) · trail grid (3×5 tiles 184×184) · Back.
  * Everything shown comes from the zone term (docs/CONTENT-MODEL §5) and `sh_trails( 'zone_grid' )` (§4).
  * Zone 4 has no zone page of its own (its term points at the Timeline page via sh_link_page → redirect);
  * Zone 5 has no content (sh_has_page = false) → heading + Back only, never an error.
@@ -30,6 +31,7 @@ if ( $sh_zone instanceof WP_Term ) :
 	<div class="sh-container sh-zone" data-zone="<?php echo esc_attr( (string) (int) sh_get_term( 'sh_number', $sh_zone ) ); ?>">
 		<?php
 		get_template_part( 'template-parts/zone/hero', null, array( 'zone' => $sh_zone ) );
+		get_template_part( 'template-parts/zone/intro', null, array( 'zone' => $sh_zone ) );
 		get_template_part( 'template-parts/zone/grid', null, array( 'zone' => $sh_zone ) );
 		?>
 	</div>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Trail cover — Frame 12685 [0,150 1440×497.228] padding 160 · image 1120×497.228 · bottom rule #DEE2E6 2px.
+ * Trail cover — Frame 12685 [160,150 1120×490] · image 1120×490 · no rule below (2026-11 · BACKLOG #6 · §4.4).
  * Renders nothing without a cover image (B6).
  *
  * @package sharedheritage
@@ -17,7 +17,7 @@ if ( null === $sh_trail ) {
 $sh_cover_id = (int) sh_get_term( 'sh_cover_image', $sh_trail );
 $sh_cover    = $sh_cover_id ? wp_get_attachment_image_src( $sh_cover_id, 'full' ) : false;
 
-// Figma crops the 1920×1080 original with imageTransform (scale .9363 × .7390 · offset .0349, .1250):
+// Figma crops the 1920×1080 original with imageTransform (scale .9363 × .7282 · offset .0349, .1250):
 // apply that crop only to a 16:9 original; any other (admin-uploaded) image is simply cover-fitted.
 $sh_crop = ( $sh_cover && ! empty( $sh_cover[1] ) && ! empty( $sh_cover[2] ) && abs( $sh_cover[1] / $sh_cover[2] - 16 / 9 ) < 0.01 );
 ?>
