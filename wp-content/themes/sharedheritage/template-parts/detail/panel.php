@@ -84,6 +84,8 @@ if ( $sh_two_cols ) {
 	$sh_vars['--sh-d-media-x'] = $sh_num( (float) $sh_media_col[0] - $sh_cx );
 	$sh_vars['--sh-d-media-w'] = $sh_num( $sh_media_col[2] );
 	$sh_vars['--sh-d-media-h'] = $sh_num( $sh_media_col[3] );
+	// #10: the image column starts at its own Figma y (images[] sit at their bbox y inside it).
+	$sh_vars['--sh-d-media-y'] = $sh_num( $sh_text_col ? (float) $sh_media_col[1] - (float) $sh_text_col[1] : 0 );
 }
 foreach (
 	array(

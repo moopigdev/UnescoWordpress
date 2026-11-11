@@ -242,3 +242,6 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [reviewer pages-hzt r1] [2026-11-11] navigator ≥768 ลอยทับย่อหน้า Trails (ชิดซ้าย) ตอนกด Read more และทับชื่อการ์ด Zone 1 ที่ 768 ช่วงเลื่อน — ตามดีไซน์ (x=176 vs ข้อความ x=160) · เจ้าของตัดสินถ้าไม่ชอบ
 - [reviewer pages-hzt r1] [2026-11-11] 768: stage Trails สูงขึ้น ~500px หลังไอคอนขึ้น → ปุ่ม 3 จบที่ปลายหน้า (ของเดิม)
 - [reviewer pages-hzt r1] [2026-11-11] การ์ด zone หน้าแรก object-fit fill สัดส่วนเพี้ยน 0.972 (ของเดิม)
+- [detail-v2] [2026-11-11] `template-parts/detail/text-generic.php` (วัตถุไม่มี text_blocks = trail อื่น · D40(3) รอบหน้า) ยังแสดง `Section :` / `Local Name:` / label ตัวพิมพ์เดิม — ใช้ลำดับ/label เดียวกับ #12 เมื่อทำ detail trail อื่น
+- [reviewer detail-v2 r1] [2026-11-11] text.php ไม่แสดง local_name (ถ้า admin ใส่ Local name ให้ 15 ชิ้นจะไม่ขึ้น) · §4.8.2 มี 6 ช่อง · ตัดสินพร้อม D40(3)/text-generic
+- [reviewer detail-v2 r1] [2026-11-11] Cake moulds title_raw มีขึ้นบรรทัดหลัง "elephant," → ที่ 1024/768/390 หรือเมื่อ --fit ได้ 3 บรรทัด บรรทัดสั้น (ไม่ทับ ไม่ล้น)

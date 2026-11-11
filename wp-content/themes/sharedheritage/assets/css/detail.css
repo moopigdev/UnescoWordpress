@@ -92,6 +92,23 @@
 	display: block;
 }
 
+/* Caption (§4.8.2 #9 #11): "Caption:" line, then one <p> per paragraph one blank line apart (24px). */
+.sh-detail__caption > p {
+	margin: 0;
+}
+
+.sh-detail__caption > p + p {
+	margin-top: calc(var(--sh-d-pgap, 24) * 1px);
+}
+
+.sh-detail__caption > .sh-detail__caption-head + p {
+	margin-top: calc(var(--sh-d-lgap, 24) * 1px);
+}
+
+.sh-detail__caption--justify > p {
+	text-align: justify; /* no hyphenation: Figma breaks whole words (D42) */
+}
+
 /* Figma bullet list: indent 1.5em per level, disc marker outside (1493 plain_meta lines). */
 .sh-detail__line--bullet {
 	display: list-item;
@@ -111,6 +128,7 @@
 	flex: none;
 	width: calc(var(--sh-d-media-w, 359) * var(--sh-d-u));
 	height: calc(var(--sh-d-media-h, 0) * var(--sh-d-u));
+	margin-top: calc(var(--sh-d-media-y, 0) * var(--sh-d-u)); /* #10: column top vs text column top (Figma y) */
 	margin-left: calc((var(--sh-d-media-x, 761) - var(--sh-d-text-w, 739)) * var(--sh-d-u));
 }
 
@@ -166,6 +184,15 @@
 	color: var(--sh-d-title, var(--sh-color-neutral-900));
 	white-space: pre-line;
 	overflow-wrap: anywhere;
+}
+
+/* D42 (P-185): Figma title box wider than the column while the images start below it (frame range only) ·
+   --fit (detail.js) = it would hit an image or the screen edge → wrap in the column (D28). */
+@media (min-width: 1024px) {
+	.sh-detail__title--wide:not(.sh-detail__title--fit) {
+		width: calc(var(--sh-d-title-w, 739) * var(--sh-d-u));
+		max-width: none;
+	}
 }
 
 .sh-detail__title:not(.sh-detail__block) {
