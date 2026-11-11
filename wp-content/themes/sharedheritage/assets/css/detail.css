@@ -105,8 +105,20 @@
 	margin-top: calc(var(--sh-d-lgap, 24) * 1px);
 }
 
-.sh-detail__caption--justify > p {
-	text-align: justify; /* no hyphenation: Figma breaks whole words (D42) */
+/* D43: every paragraph (caption, plain text blocks) is justified with hyphenation, all screen sizes (<html lang="en-US"). */
+.sh-detail__caption > p,
+.sh-detail__plain,
+.sh-detail__caption-generic p {
+	text-align: justify;
+	hyphens: auto;
+}
+
+/* Info rows (label + value under the title) are data lines, not paragraphs: left, no hyphenated labels (justify opens wide gaps in 1–2 line rows). */
+.sh-detail__meta,
+.sh-detail__collection,
+.sh-detail__meta-block {
+	text-align: left;
+	hyphens: manual;
 }
 
 /* Figma bullet list: indent 1.5em per level, disc marker outside (1493 plain_meta lines). */
@@ -128,7 +140,7 @@
 	flex: none;
 	width: calc(var(--sh-d-media-w, 359) * var(--sh-d-u));
 	height: calc(var(--sh-d-media-h, 0) * var(--sh-d-u));
-	margin-top: calc(var(--sh-d-media-y, 0) * var(--sh-d-u)); /* #10: column top vs text column top (Figma y) */
+	margin-top: calc(var(--sh-d-media-y, 0) * var(--sh-d-u)); /* D43: = the first info row's top (Figma y here, detail.js sets the measured px) */
 	margin-left: calc((var(--sh-d-media-x, 761) - var(--sh-d-text-w, 739)) * var(--sh-d-u));
 }
 
