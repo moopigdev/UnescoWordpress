@@ -204,6 +204,7 @@ function sh_import_timeline( array $seed, array $map, array $trails, array $obje
 			continue;
 		}
 		$thumbs = isset( $map['timeline_items'][ (string) $n ]['all'] ) ? array_values( (array) $map['timeline_items'][ (string) $n ]['all'] ) : array();
+		$line   = isset( $it['line_art_ref'] ) && is_string( $it['line_art_ref'] ) && '' !== $it['line_art_ref'] ? sh_imp_line_art( $map, $it['line_art_ref'], $it['title'] . ' line art' ) : 0;
 		sh_imp_meta(
 			'post',
 			$id,
@@ -216,6 +217,7 @@ function sh_import_timeline( array $seed, array $map, array $trails, array $obje
 				'sh_card_meta'          => (string) $it['meta_raw'],
 				'sh_thumbnail'          => isset( $thumbs[0] ) ? sh_imp_image( $map, $thumbs[0], $it['title'] . ' card' ) : 0,
 				'sh_thumbnail_2'        => isset( $thumbs[1] ) ? sh_imp_image( $map, $thumbs[1], $it['title'] . ' card 2' ) : 0,
+				'sh_line_art'           => $line ? $line : null, // D32/D33: cards 1–4 · no ref / no file = field untouched.
 			)
 		);
 	}

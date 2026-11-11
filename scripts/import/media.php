@@ -234,3 +234,22 @@ function sh_imp_asset_ref( array $map, string $value, string $title ): int {
 	sh_imp_warn( 'style *_ref without file (kept as text): ' . $value . ' (' . $title . ')' );
 	return 0;
 }
+
+/**
+ * Attachment for a timeline card's "line_art_ref" (D32/D33 · file in design/assets/lineart/ — refs.php
+ * sh_import_line_art_file(), the same rule deploy.sh bundles by). 0 (+ warning) when no file.
+ *
+ * @param array<string, mixed> $map   image-map.json.
+ * @param string               $value Value of items[].line_art_ref.
+ * @param string               $title Attachment title.
+ */
+function sh_imp_line_art( array $map, string $value, string $title ): int {
+	$dir  = sh_imp_config()['assets'];
+	$file = sh_import_line_art_file( $map, $value, $dir );
+	if ( '' !== $file ) {
+		$ext = (string) pathinfo( $file, PATHINFO_EXTENSION );
+		return sh_imp_attachment( $dir . '/' . $file, 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) ), $title );
+	}
+	sh_imp_warn( 'line_art_ref without file: ' . $value . ' (' . $title . ')' );
+	return 0;
+}

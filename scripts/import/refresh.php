@@ -10,6 +10,7 @@
  * Mode "overwrite" already rewrites the fields — only the file part of a step runs (attachments are never re-copied).
  * Step 2026-10-28-layout-refs has its own rule (text values, not attachments — see sh_import_refresh_layout_refs())
  * and is recorded as done only when nothing is left unresolved (a run without the crop files retries next time).
+ * Step 2026-11-11-line-art writes only empty fields (sh_import_refresh_line_art()) · done only when no file is missing.
  * Re-run a step on purpose: SH_IMPORT_REFRESH=<id>[,<id>] (or "all").
  *
  * @package sharedheritage-core
@@ -28,6 +29,8 @@ function sh_import_refresh_steps(): array {
 		'2026-10-27-media'       => 'object hero (manifest object_slug) · Home trails video · intro map · ICC to sRGB',
 		// deploy-crops 2026-10-28: production import ran without the design-dev crop files (not in the deploy bundle).
 		'2026-10-28-layout-refs' => 'object sh_layout *_ref still the seed file name → attachment id',
+		// timeline-lineart 2026-11-11: new field sh_line_art (D32/D33) on sites whose cards were imported without it.
+		'2026-11-11-line-art'    => 'timeline_item sh_line_art from seed line_art_ref, only where still empty',
 	);
 }
 
@@ -215,6 +218,34 @@ function sh_import_refresh_layout_refs( array $seed, array $map, array $objects 
 }
 
 /**
+ * Step 2026-11-11-line-art (D32/D33): each timeline card that exists (import key timeline:elephant:<card_order>) and has
+ * a seed "line_art_ref" gets sh_line_art — only while the field is still empty. Any value already there (an admin's
+ * own line art, or one written by the import) is kept. Runs in every mode; nothing is created except the attachment.
+ *
+ * @param array<string, mixed> $seed Seed files.
+ * @param array<string, mixed> $map  image-map.json.
+ * @return int Cards still without line art because the file is missing (each one is also an import warning).
+ */
+function sh_import_refresh_line_art( array $seed, array $map ): int {
+	$left = 0;
+	foreach ( (array) $seed['timeline-elephant']['items'] as $it ) {
+		$value = isset( $it['line_art_ref'] ) && is_string( $it['line_art_ref'] ) ? $it['line_art_ref'] : '';
+		$id    = '' !== $value ? sh_imp_find_post( 'timeline_item', 'timeline:elephant:' . (int) $it['card_order'] ) : 0;
+		if ( ! $id || 0 !== absint( get_post_meta( $id, 'sh_line_art', true ) ) ) {
+			continue;
+		}
+		$att = sh_imp_line_art( $map, $value, (string) $it['title'] . ' line art' );
+		if ( ! $att ) {
+			++$left;
+			continue;
+		}
+		sh_imp_meta( 'post', $id, array( 'sh_line_art' => $att ) );
+		sh_imp_count( 'updated', 'timeline_line_art' );
+	}
+	return $left;
+}
+
+/**
  * Run the refresh steps not yet applied on this site. Returns the ids run now.
  *
  * @param array<string, mixed>                    $seed     Seed files.
@@ -239,6 +270,10 @@ function sh_import_refresh( array $seed, array $map, array $manifest, array $obj
 		}
 		$ran[] = $step;
 		if ( '2026-10-28-layout-refs' === $step && sh_import_refresh_layout_refs( $seed, $map, $objects ) > 0 ) {
+			unset( $done[ $step ] ); // Files still missing: try again on the next import.
+			continue;
+		}
+		if ( '2026-11-11-line-art' === $step && sh_import_refresh_line_art( $seed, $map ) > 0 ) {
 			unset( $done[ $step ] ); // Files still missing: try again on the next import.
 			continue;
 		}
