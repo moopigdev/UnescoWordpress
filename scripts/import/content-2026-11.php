@@ -85,8 +85,9 @@ function sh_import_zone_meta_2026_11( array $seed, array $map, array $z ): array
 		$meta['sh_cover_image']  = sh_imp_seed_asset( $map, isset( $ch['cover_bg']['file_cropped'] ) ? $ch['cover_bg']['file_cropped'] : null, 'Zone ' . $n . ' choose an animal background' );
 		$meta['sh_banner_image'] = sh_imp_seed_asset( $map, isset( $ch['zone_bar']['file_cropped'] ) ? $ch['zone_bar']['file_cropped'] : null, 'Zone ' . $n . ' zone bar' );
 	}
+	$alts = sh_import_zone_page_alts( $z );
 	foreach ( sh_import_zone_page_images( $z ) as $key => $value ) {
-		$meta[ $key ] = sh_imp_seed_asset( $map, $value, 'Zone ' . $n . ' ' . str_replace( array( 'sh_page_', 'sh_', '_' ), array( '', '', ' ' ), $key ) );
+		$meta[ $key ] = sh_imp_seed_asset( $map, $value, 'Zone ' . $n . ' ' . str_replace( array( 'sh_page_', 'sh_', '_' ), array( '', '', ' ' ), $key ), isset( $alts[ $key ] ) ? $alts[ $key ] : '' );
 	}
 	// null = nothing in the seed: dropped so the caller's value (e.g. the image-map cover of zones without a banner) stays.
 	return array_filter( $meta, static fn( $v ): bool => null !== $v ) + sh_import_zone_page_flags( $z );

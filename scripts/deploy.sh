@@ -142,8 +142,8 @@ if [ "$IMPORT" != 0 ]; then
     [ -n "$f" ] || continue
     # sub-folder ที่ยอม = ชั้นเดียว · รายชื่อตายตัว (refs.php sh_import_asset_subdirs() + lineart/ ของ timeline · P-164)
     case "$f" in
-      lineart/*/*|lineart/.*|zone-banners-2026-11/*/*|zone-banners-2026-11/.*|zone4-animals/*/*|zone4-animals/.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
-      lineart/?*|zone-banners-2026-11/?*|zone4-animals/?*) ;;
+      lineart/*/*|lineart/.*|zone-banners-2026-11/*/*|zone-banners-2026-11/.*|zone4-animals/*/*|zone4-animals/.*|zone5/*/*|zone5/.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
+      lineart/?*|zone-banners-2026-11/?*|zone4-animals/?*|zone5/?*) ;;
       */*|.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
     esac
     [ -f "$ASSETS/$f" ] || sh_die "ไม่พบ $ASSETS/$f"
