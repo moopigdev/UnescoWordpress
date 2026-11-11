@@ -11,6 +11,7 @@
  * Step 2026-10-28-layout-refs has its own rule (text values, not attachments — see sh_import_refresh_layout_refs())
  * and is recorded as done only when nothing is left unresolved (a run without the crop files retries next time).
  * Step 2026-11-11-line-art writes only empty fields (sh_import_refresh_line_art()) · done only when no file is missing.
+ * Step 2026-11-11-reflection replaces text only while it is byte-for-byte an older seed text (sh_import_refresh_reflection()).
  * Re-run a step on purpose: SH_IMPORT_REFRESH=<id>[,<id>] (or "all").
  *
  * @package sharedheritage-core
@@ -31,6 +32,8 @@ function sh_import_refresh_steps(): array {
 		'2026-10-28-layout-refs' => 'object sh_layout *_ref still the seed file name → attachment id',
 		// timeline-lineart 2026-11-11: new field sh_line_art (D32/D33) on sites whose cards were imported without it.
 		'2026-11-11-line-art'    => 'timeline_item sh_line_art from seed line_art_ref, only where still empty',
+		// timeline-lineart (D34) 2026-11-11: Reflection text = Figma 3103:1378 (seed changed from the hidden 1232:1817 text).
+		'2026-11-11-reflection'  => 'Timeline page reflection title/body → seed text, only where still the text an older import wrote',
 	);
 }
 
@@ -246,6 +249,37 @@ function sh_import_refresh_line_art( array $seed, array $map ): int {
 }
 
 /**
+ * Step 2026-11-11-reflection (D34): the Timeline page's reflection fields get the current seed text — only while the
+ * stored value is exactly a text an older import wrote (sha256 below = every earlier seed value: git history of
+ * content/seed/timeline-elephant.json up to 07ed0b5). Anything an admin edited (even one character) stays.
+ * Runs in every mode (overwrite already writes the seed text, so the hashes no longer match).
+ *
+ * @param array<string, mixed>                    $seed  Seed files.
+ * @param array<string, array{id:int,write:bool}> $pages Pages.
+ */
+function sh_import_refresh_reflection( array $seed, array $pages ): void {
+	$old  = array(
+		'sh_timeline_reflection_title' => array( '7538c2135b030e4e91c01e4952055324c62e0182b94d2d0bf0c272f7f55e2373' ), // "Reflection".
+		'sh_timeline_reflection_body'  => array( '35e41fa73aa8a2e0ecf6a6411371c7ab2f1e6a73fecd5d1db2c39b0a8fd9fcb2' ), // 1232:1817 · 4 paragraphs.
+	);
+	$new  = array(
+		'sh_timeline_reflection_title' => (string) $seed['timeline-elephant']['reflection']['title'],
+		'sh_timeline_reflection_body'  => (string) $seed['timeline-elephant']['reflection']['body'],
+	);
+	$page = isset( $pages['timeline']['id'] ) ? (int) $pages['timeline']['id'] : 0;
+	if ( ! $page ) {
+		return;
+	}
+	foreach ( $new as $key => $value ) {
+		$cur = get_post_meta( $page, $key, true );
+		if ( is_string( $cur ) && $cur !== $value && in_array( hash( 'sha256', $cur ), $old[ $key ], true ) ) {
+			sh_imp_meta( 'post', $page, array( $key => $value ) );
+			sh_imp_count( 'updated', 'timeline_reflection' );
+		}
+	}
+}
+
+/**
  * Run the refresh steps not yet applied on this site. Returns the ids run now.
  *
  * @param array<string, mixed>                    $seed     Seed files.
@@ -267,6 +301,9 @@ function sh_import_refresh( array $seed, array $map, array $manifest, array $obj
 		}
 		if ( '2026-10-27-media' === $step ) {
 			sh_import_refresh_media( $seed, $map, $manifest, $objects, $pages, 'overwrite' !== $cfg['mode'] );
+		}
+		if ( '2026-11-11-reflection' === $step ) {
+			sh_import_refresh_reflection( $seed, $pages );
 		}
 		$ran[] = $step;
 		if ( '2026-10-28-layout-refs' === $step && sh_import_refresh_layout_refs( $seed, $map, $objects ) > 0 ) {
