@@ -189,6 +189,7 @@ function sh_core_field_groups(): array {
 				$img( 'sh_thumbnail', 'Card image' ),
 				$img( 'sh_thumbnail_2', 'Card image 2' ),
 				$img( 'sh_below_image', 'Photo under the line (optional)', 'Timeline: the large photo under the line when this object is in the centre. If empty, the card image is used. The object on the line, the mini-map and the object page always use the card image.' ),
+				$img( 'sh_below_image_2', 'Photo under the line 2 (optional)', 'Timeline: a second photo shown beside the photo under the line (two pieces shown as one group). Used only together with "Photo under the line".' ),
 				$img( 'sh_line_art', 'Before image (optional)', 'Timeline: shown in the large photo under the line while this object moves to the centre, then it cross-fades to the card image. Often a line drawing (transparent PNG); any image works. If empty, the card image is shown as before.' ),
 			),
 		),
