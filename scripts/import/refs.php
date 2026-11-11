@@ -160,7 +160,7 @@ function sh_import_bundle_files( array $seed, array $map, string $dir ): array {
  * @return string[]
  */
 function sh_import_asset_subdirs(): array {
-	return array( 'zone-banners-2026-11', 'zone4-animals' );
+	return array( 'zone-banners-2026-11', 'zone4-animals', 'zone5' );
 }
 
 /**
@@ -250,6 +250,29 @@ function sh_import_zone_page_images( array $z ): array {
 	}
 	$set( 'sh_page_history_image', isset( $p['history']['image'] ) ? $p['history']['image'] : null );
 	$set( 'sh_page_history_image_hover', isset( $p['history']['image_hover'] ) ? $p['history']['image_hover'] : null );
+	return $out;
+}
+
+/**
+ * Alt text of zone page images from the seed "page" object (cards[].alt · history.alt): meta key => alt.
+ * Other note keys in the seed (figma_nodes · figma_target · frame · strip_nodes) are not read.
+ *
+ * @param array<string, mixed> $z Seed zone.
+ * @return array<string, string>
+ */
+function sh_import_zone_page_alts( array $z ): array {
+	$p   = isset( $z['page'] ) && is_array( $z['page'] ) ? $z['page'] : array();
+	$out = array();
+	foreach ( array_values( (array) ( isset( $p['cards'] ) ? $p['cards'] : array() ) ) as $i => $c ) {
+		if ( $i < 4 && is_array( $c ) && isset( $c['alt'] ) && is_string( $c['alt'] ) ) {
+			$out[ 'sh_page_card_' . ( $i + 1 ) . '_image' ]       = $c['alt'];
+			$out[ 'sh_page_card_' . ( $i + 1 ) . '_image_hover' ] = $c['alt'];
+		}
+	}
+	if ( isset( $p['history']['alt'] ) && is_string( $p['history']['alt'] ) ) {
+		$out['sh_page_history_image']       = $p['history']['alt'];
+		$out['sh_page_history_image_hover'] = $p['history']['alt'];
+	}
 	return $out;
 }
 

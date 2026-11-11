@@ -459,8 +459,9 @@ function sh_import_refresh_zone_pages( array $seed, array $map ): int {
 			sh_imp_count( 'updated', 'zone_sh_has_page' );
 		}
 		$fields = array( 'sh_intro' => isset( $z['intro_short'] ) ? sh_import_blank_line_paragraphs( $z['intro_short'] ) : null );
+		$alts = sh_import_zone_page_alts( $z );
 		foreach ( sh_import_zone_page_images( $z ) as $key => $value ) {
-			$fields[ $key ] = absint( get_term_meta( $term->term_id, $key, true ) ) ? null : sh_imp_seed_asset( $map, $value, 'Zone ' . $n . ' ' . str_replace( array( 'sh_page_', 'sh_', '_' ), array( '', '', ' ' ), $key ) );
+			$fields[ $key ] = absint( get_term_meta( $term->term_id, $key, true ) ) ? null : sh_imp_seed_asset( $map, $value, 'Zone ' . $n . ' ' . str_replace( array( 'sh_page_', 'sh_', '_' ), array( '', '', ' ' ), $key ), isset( $alts[ $key ] ) ? $alts[ $key ] : '' );
 		}
 		$left += sh_imp_fill_empty( 'term', $term->term_id, $fields + sh_import_zone_page_flags( $z ), 'zone_page' );
 	}
