@@ -140,7 +140,8 @@ if [ "$IMPORT" != 0 ]; then
   NA=0; NR=0; FILES=""; REFS=""
   while IFS="$(printf '\t')" read -r kind f; do
     [ -n "$f" ] || continue
-    case "$f" in */*|.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;; esac
+    # sub-folder เดียวที่ยอม: lineart/<file> ชั้นเดียว (ภาพก่อน timeline · refs.php sh_import_line_art_file · P-164)
+    case "$f" in lineart/*/*|lineart/.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;; lineart/*) ;; */*|.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;; esac
     [ -f "$ASSETS/$f" ] || sh_die "ไม่พบ $ASSETS/$f"
     case "$kind" in
       map) NA=$((NA + 1)) ;;
@@ -157,7 +158,7 @@ if [ "$IMPORT" != 0 ]; then
     mkdir -p "$LB/scripts" "$LB/assets" "$LB/media"
     cp -R "$REPO/scripts/import" "$LB/scripts/import"
     cp -R "$REPO/content" "$LB/content"
-    while IFS= read -r f; do [ -n "$f" ] && cp "$ASSETS/$f" "$LB/assets/$f"; done <<< "$FILES"
+    while IFS= read -r f; do [ -n "$f" ] && mkdir -p "$(dirname "$LB/assets/$f")" && cp "$ASSETS/$f" "$LB/assets/$f"; done <<< "$FILES"
     for f in "$MEDIA"/*; do
       [ -f "$f" ] || continue
       case "$f" in *.html) continue ;; esac            # preview.html = หน้าเทสในเครื่อง
