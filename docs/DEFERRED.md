@@ -200,3 +200,5 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [timeline-lineart] [2026-11-11] Reflection (D34): title ว่าง → `__( 'Reflection' )` ของธีม (ไม่มี option label ใน CONTENT-MODEL) · หัวข้อเป็น `<h2>` · แท็บเล็ต/มือถือ: กล่องล่างสูงขึ้นตาม `--refl-h × p₁₆` (ลอกกฎ 2e ของ desktop) · พื้นฟอนต์ title 14px/body 12px เมื่อ k < 1 (§4.5c.5) — `[P]` ไม่มีในสเปกตรง ๆ
 - [timeline-lineart] [2026-11-11] refresh `2026-11-11-reflection` เทียบ sha256 ของข้อความ seed เก่า (มีค่าเดียวในประวัติ git ของ seed: 35e41fa7…) — ถ้า prod มีข้อความที่ import ใส่ด้วย line ending ต่างจาก seed (\r\n) จะไม่ถูกแทน (ถือว่า admin แก้) → ตรวจหลัง deploy ว่า `updated.timeline_reflection = 1`
 - [timeline-lineart] [2026-11-11] P-141 (Reflection ซ่อน · D16) ถูกแทนด้วย D34 แล้ว — แถว P-141 ใน PENDING ยังไม่ได้ปิด (ไม่ใช่ของงานนี้ · orchestrator ปิดได้)
+- [reviewer timeline-lineart r1] [2026-11-11] มือถือ 390 ที่ Reflection มีช่องว่างขาว ≈190px ระหว่าง mini-map กับเส้น → เจ้าของดูใน preview
+- [reviewer timeline-lineart r1] [2026-11-11] (พฤติกรรมเดิม v3) ชิ้นที่ลบ sh_thumbnail หายออกจากเส้น และ Reflection เลื่อนเป็นจุดที่ 15
