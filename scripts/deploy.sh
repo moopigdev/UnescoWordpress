@@ -140,8 +140,12 @@ if [ "$IMPORT" != 0 ]; then
   NA=0; NR=0; FILES=""; REFS=""
   while IFS="$(printf '\t')" read -r kind f; do
     [ -n "$f" ] || continue
-    # sub-folder เดียวที่ยอม: lineart/<file> ชั้นเดียว (ภาพก่อน timeline · refs.php sh_import_line_art_file · P-164)
-    case "$f" in lineart/*/*|lineart/.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;; lineart/*) ;; */*|.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;; esac
+    # sub-folder ที่ยอม = ชั้นเดียว · รายชื่อตายตัว (refs.php sh_import_asset_subdirs() + lineart/ ของ timeline · P-164)
+    case "$f" in
+      lineart/*/*|lineart/.*|zone-banners-2026-11/*/*|zone-banners-2026-11/.*|zone4-animals/*/*|zone4-animals/.*|zone5/*/*|zone5/.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
+      lineart/?*|zone-banners-2026-11/?*|zone4-animals/?*|zone5/?*) ;;
+      */*|.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
+    esac
     [ -f "$ASSETS/$f" ] || sh_die "ไม่พบ $ASSETS/$f"
     case "$kind" in
       map) NA=$((NA + 1)) ;;

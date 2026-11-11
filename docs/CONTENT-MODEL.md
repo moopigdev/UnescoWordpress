@@ -18,16 +18,18 @@
 |---|---|---|---|---|
 | Home 1470 | `front-page.php` | home | Page "Home" (slug `home`) ตั้งเป็นหน้าแรก (`show_on_front=page`) · group `home` §6 · zone/trail terms | `/` |
 | Intro 1471 (+ map slider) | `page-intro.php` | intro | Page slug **`intro`** · group `intro` §7 | `/intro/` |
-| Zone 1–3 (1472–1474) | `taxonomy-zone.php` | zone | taxonomy `zone` term `zone-<n>` §5 · กริด = `sh_trails('zone_grid')` | `/zone/zone-1/` `/zone/zone-2/` `/zone/zone-3/` |
+| Zone 1–3 (1472–1474 · ใหม่ `3117:3684/3713/3742` §4.3b) | `taxonomy-zone.php` | zone | taxonomy `zone` term `zone-<n>` §5 · กริด = `sh_trails('zone_grid')` · ข้อความ `sh_intro` → Read more `sh_intro_full` | `/zone/zone-1/` `/zone/zone-2/` `/zone/zone-3/` |
+| **Zone 4 หน้าคั่นเลือกสัตว์** (1513 `3117:3946` · D37 · §4.10) | `taxonomy-zone.php` (WP เลือก `taxonomy-zone-zone-4.php` ก่อนถ้า theme มี → asset slug = ชื่อไฟล์) | zone (หรือชื่อไฟล์) | term `zone-4` §5 (`sh_cover_image` = พื้นเส้นประ · `sh_banner_image` = แถบ ZONE (Zone 4 active)) · สัตว์ = `sh_trails('home')` ที่มี `sh_chooser_image` §4 · ลิงก์ = `sh_timeline_page` ของ trail (มี = ลิงก์ · ไม่มี = ไม่ลิงก์ D37/D40) · ตำแหน่ง/ขนาดต่อตัว = ค่าคงที่ใน theme (§4.10 · seed `zone4-chooser.json`) | `/zone/zone-4/` |
+| **Zone 5 หน้าหลัก** (1514 `3117:3955` · D40 · §4.11) | `taxonomy-zone.php` (หรือ `taxonomy-zone-zone-5.php`) | zone (หรือชื่อไฟล์) | term `zone-5` §5 (`sh_has_page` · `sh_cover_image` · `sh_intro` · `sh_banner_image` · tab "Zone page cards") | `/zone/zone-5/` |
 | Trail ช้าง 1501 | `taxonomy-trail.php` | trail | taxonomy `trail` term `elephant` §4 · วัตถุ = `sh_trail_objects()` | `/trail/elephant/` |
 | Timeline (Zone 4) | `page-timeline.php` | timeline | Page slug **`timeline`** · group `timeline` §8 · การ์ด = CPT `timeline_item` §3 | `/timeline/` |
 | Detail วัตถุ 15 ชิ้น | `single-object.php` | detail | CPT `object` §2 | `/object/ganesha/` (ครบ 15 ใน `docs/smoke-urls`) |
-Zone 4 ไม่มีหน้า zone ของตัวเอง: term `zone-4` มี `sh_link_page` = หน้า Timeline (seed: page_frame ของ zone 4 = frame timeline `670:1551`) · Zone 5 `sh_has_page` = false
+Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ของตัวเอง `/zone/zone-4/`** — `sh_link_page` ของ `zone-4` = ว่าง (การ์ดหน้าแรกจึงลิงก์ term link · `/timeline/` ไม่เปลี่ยน · ช้างในหน้าคั่นลิงก์ไป `/timeline/` ผ่าน `sh_timeline_page` ของ trail elephant) · เดิม (ก่อน D37) `sh_link_page` = หน้า Timeline → refresh `2026-11-11-chooser` ล้างค่านี้บน site เดิม · Zone 5 `sh_has_page` = ตาม seed (D40: true เมื่อ seed มีหน้า — P-172) · แยก layout ต่อ zone = template hierarchy `taxonomy-zone-zone-<n>.php` (ไม่มีฟิลด์ "ชนิดหน้า")
 
 ## Entity (ภาพรวม)
 | entity | ชนิด WP | REST base | public URL | หมายเหตุ |
 |---|---|---|---|---|
-| `object` | CPT (`title` · `custom-fields` · `revisions` · ไม่มี editor) | `object` | `/object/<slug>/` | title = ชื่อวัตถุ (seed `title`) · slug = seed `slug` · trails = taxonomy `trail` (หลายค่า, checkbox) |
+| `object` | CPT (`title` · `custom-fields` · `revisions` · ไม่มี editor) | `object` | `/object/<slug>/` | title = ชื่อวัตถุ (seed `figma_2026_11.title` → `title` · D40) · slug = seed `slug` (**ไม่เปลี่ยนตามชื่อ** — ลิงก์เดิมใช้ได้) · บล็อกใต้หัวข้อ (§4.8.2): `sh_period` → `sh_place_of_production` → `sh_material` → `sh_dimensions` → `sh_collection` → `sh_object_biography` (ป้าย "Other information / Object biography:") ข้ามค่าว่าง · trails = taxonomy `trail` (หลายค่า, checkbox) |
 | `timeline_item` | CPT ไม่ public (admin + REST เท่านั้น) | `timeline_item` | — | title = หัวการ์ด (seed `items[].title`) · `menu_order` = card_order |
 | `trail` | taxonomy (บน `object` · hierarchical เพื่อ checkbox · ไม่ใช้ parent) | `trail` | `/trail/<slug>/` | 17 term (seed `etc` ไม่ใช่ trail → ไม่ import) · name = seed `name` ตามตัว (เช่น "Elephan" "Phonix" — ชื่อแสดงผลยังไม่ออกแบบ P-2xx) · description = คำอธิบายหน้า trail (seed `description`, มีเฉพาะ elephant) |
 | `zone` | taxonomy (บน `object` · ยังไม่ผูกวัตถุ/trail — P-212) | `zone` | `/zone/zone-<n>/` | 5 term · name = seed `name` · term ว่างก็ได้ 200 |
@@ -37,18 +39,18 @@ Zone 4 ไม่มีหน้า zone ของตัวเอง: term `zone-
 ## 2. `object` — group: object
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed) | ใช้ในหน้า | REST |
 |---|---|---|---|---|---|---|
-| (post_title) | title | ✔ | title 36/800 `670:2797` | "Ganesha" | detail · trail tile alt · timeline link | ✔ (`title`) |
+| (post_title) | title | ✔ | title 36/800 `670:2797` → **2026-11-11 = `3083:813`… (§4.8.2 · D40)** | "Ganesha" · "Hand-carved opium pipe" (seed `figma_2026_11.title` ถ้ามี · ไม่มี = `title`) | detail · trail tile alt · timeline link | ✔ (`title`) |
 | (taxonomy `trail`) | term[] | ✔ | section Page 2.1 / กริดช้าง | Ganesha `[elephant]` · Embossed Brass Basin `[elephant, garuda, lion, naga]` | trail · detail | ✔ (`trail`) |
 | `sh_title_raw` | `textarea` → string | — (3/15) | title node (ตัวแบ่งบรรทัดดิบ) | Leg Bone: "Elephant Leg Bone\n(Elephas maximus indicus)" · ว่าง = ใช้ post_title | detail | ✔ |
 | `sh_collection` | `text` → string | ✔ (14/15) | `Collection:` ใน metadata `670:2798` | "National Museum Bangkok" | detail | ✔ |
-| `sh_thematic_section` | `text` → string | ✔ | `Section : …` `670:2798` | "Cosmology Religion & Spirituality" | detail | ✔ |
+| `sh_thematic_section` | `text` → string | ✔ | `Section : …` `670:2798` (หายจาก Figma 2026-11-11 §4.8.2) | "Cosmology Religion & Spirituality" | — (เก็บไว้ · หน้า detail ไม่แสดงตั้งแต่ §4.8.2) | ✔ |
 | `sh_period` | `text` → string | — (10/15) | `Period:` | "10th–11th century" | detail | ✔ |
 | `sh_place_of_production` | `text` → string | — (11/15) | `Place of Production / Findspot:` | "Candi Singhasari, East Java, Indonesia" | detail | ✔ |
 | `sh_material` | `text` → string | — (13/15) | `Material:` | "Andesite, ****Volcanic rock" (คัดลอกตรง) | detail | ✔ |
 | `sh_dimensions` | `text` → string | — (13/15) | `Dimensions:` | "Height: 172 cm" | detail | ✔ |
 | `sh_local_name` | `text` → string | — (0/15 ช้าง) | บรรทัดใน metadata (Page 2.1) | Liturgical Pulpit Covers: "Pha Hum Thammasan / …" | detail | ✔ |
 | `sh_object_biography` | `textarea` → string | — (10/15) | `Specimen/Object biography:` | "The Dutch government in Java presented this…" | detail | ✔ |
-| `sh_caption` | `textarea` → string | ✔ (14/15 — Bas-relief มีแต่ lorem P-213) | หลัง "Caption:" `670:2799` | "Carved from volcanic stone, this monumental statue…" (ย่อหน้าคั่นบรรทัดว่าง) | detail | ✔ |
+| `sh_caption` | `textarea` → string | ✔ (15/15 ตั้งแต่ Figma 2026-11-11) | หลัง "Caption:" `670:2799` → 2026-11-11 §4.8.2 | "Carved from volcanic stone, this monumental statue…" (ย่อหน้าคั่นบรรทัดว่าง · seed `figma_2026_11.caption` ถ้ามี · ไม่มี = `caption`) | detail | ✔ |
 | `sh_hero_video_webm` | `file` → integer | — (14/15 มีวิดีโอ) | Frame GIF `1051:8181` (ไฟล์จริง = media manifest `out` ของรายการที่ `object_slug` = slug วัตถุ · `kind: video`) | Ganesha → `ganesha.webm` 1440×810 · Leg Bone ว่าง (`kind: still`) | detail hero | ✔ |
 | `sh_hero_video_hevc` | `file` → integer | — (เฉพาะ alpha 6 ไฟล์) | manifest `fallback.file` เฉพาะ `fallback.type = hevc-alpha-mov` (`poster-only` = ไม่มี) | Kendi → `elephant-and-mahout-kendi.hevc.mov` | detail hero (`<source>` แรกสำหรับ Safari) | ✔ |
 | `sh_hero_video_has_alpha` | `true_false` → boolean | — | manifest `has_alpha` | Kendi true · Ganesha false (พื้นขาวทึบ) | detail hero | ✔ |
@@ -102,6 +104,7 @@ Zone 4 ไม่มีหน้า zone ของตัวเอง: term `zone-
 | `sh_timeline_nav_order` | `number` → integer | ✔ | ลำดับไอคอนใน `Frame trails` `797:2110` | bird 1 … elephant 9 … seashell 17 | timeline | ✔ |
 | `sh_icon_timeline` | `image` → integer | ✔ | ไอคอน 35×35 ใน `797:2110` (15 ตัวใช้ภาพ hover ของ home · fish/seashell ภาพของตัวเอง) | elephant `c7504b4f…` | timeline | ✔ |
 | `sh_icon_group_color` | `color_picker` → string | — | DESIGN-SPEC §2.1/§4.5 กลุ่ม green/red/mustard/purple | elephant `#C3BC85` | timeline | ✔ |
+| `sh_chooser_image` | `image` → integer | — (17/17) | Section 54 `3140:1398` ไฟล์แยกต่อตัว (§4.10 · seed `zone4-chooser.json animals[].asset` ตาม `trail_slug`) | elephant `zone4-animals/elephant.png` 1504×1052 (PNG โปร่ง) | zone 4 หน้าคั่น (ว่าง = ไม่แสดงตัวนั้น) · คลิก → `sh_timeline_page` ของ trail ถ้ามี | ✔ |
 | `sh_cover_image` | `image` → integer | — (elephant) | `796:1799` | `ed0e5ee9…` 1120×497 | trail | ✔ |
 | `sh_timeline_page` | `post_object` → integer (page) | — (ว่าง = ไม่มี timeline) | frame `670:1551` | elephant → หน้า Timeline | trail · timeline | ✔ |
 | `sh_object_order` | `relationship` → array&lt;int&gt; | ✔ | ลำดับ tile `Ele 2…` §4.8 (seed `trail_order`) | elephant: Leg Bone, Singhasari Ganesha, Ganesha, … Bas-relief (15) | trail (ลาก-วางเรียงใน admin) | ✔ |
@@ -109,16 +112,41 @@ Zone 4 ไม่มีหน้า zone ของตัวเอง: term `zone-
 ## 5. `zone` (term) — group: zone
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `zones.json`) | ใช้ในหน้า | REST |
 |---|---|---|---|---|---|---|
-| (name / slug) | term | ✔ | `I670:9480;670:9416` | "Animals in Nature & Ecological Wisdom" / `zone-1` | zone · home | ✔ |
+| (name / slug) | term | ✔ | `I670:9480;670:9416` · 2026-11-11 H1 `3117:5053/5071/5077` (D38: ชื่อ B ทุกที่ · §4.3b) | "Animals in Nature and Mythology" / `zone-1` | zone (H1) · home · แถบ zone | ✔ |
 | `sh_number` | `number` → integer | ✔ | — | 1 | home · zone | ✔ |
-| `sh_card_title` | `textarea` → string | ✔ | ข้อความการ์ด (มี `\n`) | "Animals in Nature \n& Ecological Wisdom" | home | ✔ |
+| `sh_card_title` | `textarea` → string | ✔ | ข้อความการ์ด (มี `\n` · seed `name_raw`) | "Animals in Nature \nand Mythology" | home | ✔ |
 | `sh_color` | `color_picker` → string | ✔ | pixel แถบ zone (§2.1) | `#14705E` | home · zone | ✔ |
 | `sh_card_image` | `image` → integer | ✔ | set `Zone 1` `670:9423` default `670:9415` | `342629af…` 373×487 · zone 4/5 560×294 | home | ✔ |
 | `sh_card_image_hover` | `image` → integer | ✔ | 〃 hover `670:9419` | `35c9b660…` | home | ✔ |
-| `sh_cover_image` | `image` → integer | — (zone 1–3) | `1013:1289` · `1179:5759` · `1179:5762` (ชื่อ zone ในภาพ D8) | zone 1 `10247f33…` 1120×410 | zone | ✔ |
-| `sh_banner_image` | `image` → integer | — (zone 1–3) | `1013:1292` · `1013:1343` · `1013:1369` | zone 1 `413791d6…` 1120×166 | zone | ✔ |
-| `sh_has_page` | `true_false` → boolean | ✔ | — | zone 1–4 true · zone 5 false | home (คลิกได้ไหม) | ✔ |
-| `sh_link_page` | `post_object` → integer (page) | — | page_frame ของ zone = frame timeline | zone 4 → หน้า Timeline | home (ปลายทางการ์ด) | ✔ |
+| `sh_cover_image` | `image` → integer | — (zone 1–5) | zone 1–3: banner ใหม่ `3117:3716/3686/3745` (ชื่อ zone ในภาพ D8 · ผูกตามชื่อในภาพ P-240 · seed `banner_image.file`; alt ของไฟล์ = `name_banner`) · เดิม `1013:1289`… · zone 4: พื้นเส้นประ `3117:3950` (seed chooser `cover_bg.file_cropped`) · zone 5: Cover `[160,170 551×384]` (seed `page.cover`) | zone 1 `zone-banners-2026-11/zone1-animals-in-nature-and-mythology.png` 4096×1503 (แสดง 1120×410) · zone 4 `zone4-animals/_chooser-bg-cover-1120x540.png` | zone | ✔ |
+| `sh_banner_image` | `image` → integer | — (zone 1–5) | แถบ ZONE 1–5: zone 1–3 `1013:1292`… · zone 4 `3117:3951` (Zone 4 active · seed chooser `zone_bar.file_cropped`) · zone 5 (Zone 5 active · seed `page.zone_bar`) | zone 1 `413791d6…` 1120×166 · zone 4 `_zone-bar-zone4-active-1120x166.png` | zone | ✔ |
+| `sh_has_page` | `true_false` → boolean | ✔ | — | zone 1–4 true · zone 5 = seed `has_page` (D40 → true เมื่อ seed มีหน้า P-172) | home (คลิกได้ไหม) | ✔ |
+| `sh_link_page` | `post_object` → integer (page) | — | page_frame ของ zone = frame timeline (ยกเว้น zone 4 ตั้งแต่ D37) | ว่างทุก zone (zone 4 เดิม → หน้า Timeline) | home (ปลายทางการ์ด) · ว่าง = หน้า zone เอง | ✔ |
+| `sh_intro` | `textarea` → string | — (zone 1–3 · 5) | zone 1–3 สถานะย่อ `3117:5054/5072/5078` (§4.3b) · zone 5 `3117:3963` (2 ย่อหน้า) | zone 2 "The second zone allows you to explore…" (seed `intro_short` · บรรทัดใหม่ใน seed = ย่อหน้า → เก็บคั่นบรรทัดว่าง) | zone (ใต้แถบ · zone 5 ข้าง Cover) | ✔ |
+| `sh_intro_full` | `textarea` → string | — (zone 1–3) | สถานะขยาย `3117:5060/5068/5064` | ข้อความเต็ม (รวมย่อหน้าแรก · seed `body_full`) · ว่าง = ไม่มี Read more | zone (Read more ↔ Hide `sh_label_hide`) | ✔ |
+| `sh_page_card_1_image` | `image` → integer | — (zone 5) | `Cover` `3117:5082` default · `[160,770 280×459]` | Passport | zone 5 | ✔ |
+| `sh_page_card_1_image_hover` | `image` → integer | — (zone 5) | 〃 hover (ON_HOVER 0.3s) | | zone 5 | ✔ |
+| `sh_page_card_1_link` | `post_object` → integer (page) | — | ลูกศร annotation → 1515 (ยังเป็น Lorem D40) | ว่าง = ไม่ลิงก์ | zone 5 | ✔ |
+| `sh_page_card_1_soon` | `true_false` → boolean | — | D40 "เร็ว ๆ นี้" | card 1/2 true | zone 5 (ป้าย `sh_label_coming_soon`) | ✔ |
+| `sh_page_card_2_image` | `image` → integer | — (zone 5) | `Cover2` `3117:5097` · `[440,770 280×459]` | Card game | zone 5 | ✔ |
+| `sh_page_card_2_image_hover` | `image` → integer | — (zone 5) | 〃 hover | | zone 5 | ✔ |
+| `sh_page_card_2_link` | `post_object` → integer (page) | — | → 1516 (Lorem) | ว่าง | zone 5 | ✔ |
+| `sh_page_card_2_soon` | `true_false` → boolean | — | D40 | true | zone 5 | ✔ |
+| `sh_page_card_3_image` | `image` → integer | — (zone 5) | `Cover3` `3117:5087` | "Good day to you, Cast Brass Tabletop Horse" | zone 5 | ✔ |
+| `sh_page_card_3_image_hover` | `image` → integer | — (zone 5) | 〃 hover | | zone 5 | ✔ |
+| `sh_page_card_3_link` | `post_object` → integer (page) | — | ไม่ระบุใน Figma | ว่าง | zone 5 | ✔ |
+| `sh_page_card_3_soon` | `true_false` → boolean | — | — | false | zone 5 | ✔ |
+| `sh_page_card_4_image` | `image` → integer | — (zone 5) | `Cover4` `3117:5092` | Shared Histories folder | zone 5 | ✔ |
+| `sh_page_card_4_image_hover` | `image` → integer | — (zone 5) | 〃 hover | | zone 5 | ✔ |
+| `sh_page_card_4_link` | `post_object` → integer (page) | — | ไม่ระบุ | ว่าง | zone 5 | ✔ |
+| `sh_page_card_4_soon` | `true_false` → boolean | — | — | false | zone 5 | ✔ |
+| `sh_page_strip_image_1` | `image` → integer | — (zone 5) | แถวภาพ `[160,1254 280×123]` | passport 3 สี | zone 5 | ✔ |
+| `sh_page_strip_image_2` | `image` → integer | — (zone 5) | `[440,1254 280×123]` | การ์ด 3 ใบ | zone 5 | ✔ |
+| `sh_page_strip_image_3` | `image` → integer | — (zone 5) | `[720,1254 280×123]` | | zone 5 | ✔ |
+| `sh_page_strip_image_4` | `image` → integer | — (zone 5) | `[1000,1254 280×123]` | | zone 5 | ✔ |
+| `sh_page_history_image` | `image` → integer | — (zone 5) | `History` `3117:5102` History1 `[160,1402 1120×453]` | "Shared Histories" | zone 5 | ✔ |
+| `sh_page_history_image_hover` | `image` → integer | — (zone 5) | History2 (hover) | | zone 5 | ✔ |
+ชื่อ zone (D38 · §4.3b): term name = B ("Animals in Nature and Mythology" …) = H1 + การ์ดหน้าแรก (`sh_card_title`) · ชื่อ A (ตัวหนังสือในภาพ banner) = alt ของ attachment banner (`_wp_attachment_image_alt` ตั้งตอน import ถ้าว่าง) · tab "Zone page cards" ใช้กับ zone 5 (zone อื่นเว้นว่าง) · การ์ดที่ไม่มีภาพ = ไม่แสดง
 
 ## 6. Home (front page) — group: home
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `site.json` home) | ใช้ในหน้า | REST |
@@ -175,6 +203,8 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
 | ฟิลด์ (option) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `site.json`) | ใช้ในหน้า | REST |
 |---|---|---|---|---|---|---|
 | `sh_label_read_more` | `text` → string (default "Read more >>") | ✔ | `I670:9375;670:1786` | "Read more >>" | ทุกหน้า | ✔ |
+| `sh_label_hide` | `text` → string (default "Hide >>") | ✔ | `I3117:4318;3117:4321` (§3.4 อัปเดต) | "Hide >>" | home trails · zone 1–3 (Read more ที่ขยายแล้ว) | ✔ |
+| `sh_label_coming_soon` | `text` → string (default "Coming soon") | — | D40 ("เร็ว ๆ นี้" · ไม่มีใน Figma — P-173) | "Coming soon" | zone 5 การ์ดที่ `sh_page_card_<n>_soon` | ✔ |
 | `sh_label_back` | `text` → string (default "Back") | ✔ | Button Back `670:1810` | "Back" | ทุกหน้า | ✔ |
 | `sh_label_zone_prefix` | `text` → string (default "ZONE") | — | ป้าย zone | "ZONE" | home · zone | ✔ |
 | `sh_header_image` | `image` → integer | ✔ | ภาพพื้น Header #1 `670:9386` (โลโก้ในภาพ) | `709572bf…` | header ทุกหน้า | ✔ |
@@ -202,7 +232,7 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
 | `sh_object_extra_images( $id )` · `sh_object_layout( $id )` · `sh_paragraphs( $text )` | id ภาพแผง · layout array · ย่อหน้า string[] |
 
 ## 12. Import (`scripts/import/`)
-- `import.php` (+ `lib.php` `icc.php` `media.php` `entities.php` `objects.php` `refresh.php`) รันใน WP: local อัตโนมัติใน `scripts/local.sh` · server `SH_IMPORT_ASSETS_DIR=… SH_IMPORT_MEDIA_DIR=… wp eval-file scripts/import/import.php`
+- `import.php` (+ `lib.php` `refs.php` `icc.php` `media.php` `entities.php` `objects.php` `content-2026-11.php` `refresh.php` `refresh-2026-11.php` · ข้อมูล `image-map.json` `legacy-values.json`) รันใน WP: local อัตโนมัติใน `scripts/local.sh` · server `SH_IMPORT_ASSETS_DIR=… SH_IMPORT_MEDIA_DIR=… wp eval-file scripts/import/import.php`
 - อ่าน `content/seed/*.json` + `content/media-manifest.json` + `scripts/import/image-map.json` · ภาพจาก `Unesco/design/assets/` · วิดีโอ/poster จาก `Unesco/media/out/` (นอก repo · path จาก env/constant `SH_IMPORT_ASSETS_DIR` `SH_IMPORT_MEDIA_DIR`)
 - `image-map.json` สร้างด้วย `python3 scripts/import/build-image-map.py` จาก `design/figma-file.json` (node ใน seed → imageRef = ชื่อไฟล์ · กฎ: fill IMAGE ที่ visible ชั้นบนสุด · `missing` = ref ที่ไม่มีไฟล์) — รันใหม่เมื่อ seed/Figma/`design/assets` เปลี่ยน
 - **วิดีโอ/ภาพ hero อ่านจาก manifest ตรง (ไม่อยู่ใน image-map):** วัตถุ = รายการที่ `object_slug` = slug (`kind: video` → `out` + `poster` + HEVC เฉพาะ `fallback.type = hevc-alpha-mov` · `kind: still` → `still` เป็น `sh_hero_image`) · Home Trails = รายการ `usage: home-trails` · media-dev เพิ่มรายการใหม่ → import รอบหน้าหยิบเอง ไม่ต้องแก้โค้ด
@@ -211,5 +241,12 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
 - **ภาพใต้เส้น timeline (`sh_below_image` · D39/D41):** seed `items[].below_ref` = ชื่อไฟล์ที่ราก `design/assets/` (กฎ `*_ref`) → attachment `asset:<ชื่อไม่มีนามสกุล>` → `sh_below_image` · ไม่มีคีย์ = ไม่แตะฟิลด์ · ไม่มีไฟล์ = คำเตือน · `bundle-files.php` ใส่ไฟล์เป็น `ref<TAB><file>` · รูปบนเส้นชิ้น 5/7 (D39) = `image-map.json` `timeline_items.5/.7` **แก้มือ** ตาม seed `thumbnail_refs` (`build-image-map.py` อ่าน `figma-file.json` 08:23Z ไม่ได้ — รันใหม่จะทับค่านี้ · P-261)
 - **idempotent:** หาเดิมด้วย `_sh_import_key` (post/attachment) · slug (term) · path (page) · ชื่อ (menu) → `SH_IMPORT_MODE=missing` (default) ไม่แตะของที่มีแล้ว (ไม่ทับงานที่ admin แก้) · `overwrite` = seed ทับ
 - **แก้ค่าที่ importer รุ่นก่อนเขียนผิด = refresh step (`refresh.php`)** รันครั้งเดียวต่อ site (option `sh_import_refresh_done`) แม้ mode `missing` · แก้เฉพาะฟิลด์ที่ระบุ และเฉพาะเมื่อค่าเดิมว่าง หรือยังเป็น attachment ที่ importer สร้าง (มี `_sh_import_key`) — ไฟล์ที่ admin อัปโหลด/เลือกเองไม่ถูกแทน · `2026-11-11-reflection` (D34): `sh_timeline_reflection_title`/`_body` ของหน้า timeline → ข้อความ seed ปัจจุบัน **เฉพาะเมื่อค่าบน site ยังตรงข้อความ seed เดิมทุกไบต์** (เทียบ sha256 ของค่าที่ import รุ่นก่อนเขียน) · admin แก้แล้ว = ไม่แตะ · `2026-11-11-line-art` (D35/D36): `timeline_item` ที่มีแล้ว (key `timeline:elephant:<card_order>`) + seed มี `line_art_ref` → ตั้ง `sh_line_art` **เฉพาะเมื่อฟิลด์ยังว่าง** (ค่าที่ admin ตั้ง/ที่ import เขียนไว้แล้วไม่แตะ) · ไฟล์ขาด = ยังไม่นับว่าเสร็จ (รันใหม่รอบหน้า) · `2026-11-11-timeline-images` (D39/D41): `sh_thumbnail` ชิ้น 5/7 → ref ใหม่ใน image-map **เฉพาะเมื่อยังเป็น attachment ที่ import รุ่นก่อนสร้างจากภาพเดิมของชิ้นนั้นพอดี** (key `asset:5d9931b4…` / `asset:867b2833…` · admin อัปโหลด/เลือกภาพอื่น/ลบภาพ = ไม่แตะ) · `sh_below_image` จาก `below_ref` **เฉพาะเมื่อว่าง** · ไฟล์ขาด = ยังไม่นับว่าเสร็จ · `2026-10-27-media`: hero วัตถุ (`sh_hero_*`) · `sh_home_trails_video_*` · `sh_intro_map_image` · ICC ของไฟล์ `asset:*` ที่คัดลอกไปแล้ว (มี sub-size → สร้างใหม่) · บังคับรันซ้ำ `SH_IMPORT_REFRESH=<id>|all` · import report มี `refresh: [ids ที่รันรอบนี้]` · attachment เก่าที่เลิกใช้ (เช่น แผนที่ `cd63a05d`) ไม่ลบ
+- **รอบ Figma 2026-11-11 (core-hzd · D37 D38 D40 · `content-2026-11.php` + `refresh-2026-11.php`):**
+  - seed ที่อ่านเพิ่ม: `zone4-chooser.json` · `zones.json` (`name`/`name_raw` = ชื่อ B · `intro_short` → `sh_intro` · `body_full` → `sh_intro_full` · `banner_image.file` → `sh_cover_image` + alt `name_banner` · zone 5 `page` ตาม P-172) · `objects.json` `figma_2026_11.{title,title_raw,caption}` (มี = ใช้แทน `title`/`title_raw`/`caption` · slug = `slug` เสมอ) · ข้อความ zones: บรรทัดใหม่ 1 ครั้ง = ย่อหน้า → เก็บคั่นบรรทัดว่าง (`sh_paragraphs()`)
+  - **zone 5 `page` (seed · design-dev เติม P-172):** `{cover, zone_bar, cards: [{image, image_hover, soon}×4], strip: [×4], history: {image, image_hover}}` → `sh_cover_image` `sh_banner_image` `sh_page_card_<n>_image(_hover)` `sh_page_card_<n>_soon` `sh_page_strip_image_<n>` `sh_page_history_image(_hover)` · ลิงก์การ์ด (`sh_page_card_<n>_link`) ไม่ import (admin เลือกเมื่อหน้าย่อยพร้อม) · `cards[].alt` / `history.alt` → alt ของ attachment (ตั้งเมื่อว่าง) · คีย์หมายเหตุ (`frame` `figma_nodes` `figma_target` `strip_nodes`) ไม่อ่าน · seed มาแล้ว (design-dev e62b480 · ภาพ `design/assets/zone5/` 16 ไฟล์)
+  - **ค่าภาพใน seed ใหม่** = path `design/assets/<sub>/<file>` (sub-folder ชั้นเดียว · รายชื่อ `refs.php sh_import_asset_subdirs()` = `zone-banners-2026-11` `zone4-animals` `zone5`) หรือ imageRef/ไฟล์ที่ราก · ข้อความหลังช่องว่างแรก = หมายเหตุ (ตัดทิ้ง) · attachment key `asset:<sub>/<ชื่อไม่มีนามสกุล>` · bundle (`bundle-files.php`) รวมให้เอง
+  - `image-map.json` (build 2026-11-11): ส่วน objects อ่าน `design/figma-file.json` ใหม่ (P-245: Brass Basin `3190:4671` · ภาพแผงใหม่ Ganesha/Singhasari/Molar/Patola/Bas-relief 3) · ส่วนอื่นอ่าน `design/figma-file.2026-10-27.json` ก่อน (`--figma-fallback` · หน้าอื่นยังไม่ได้ spec กับไฟล์ใหม่ §1.1b — ไฟล์ใหม่เปลี่ยน hero หน้าแรก/zone cover ที่ยังไม่มีใครสั่ง) · `_meta.nodes_from_older_dump`
+  - **refresh (site ที่ import ก่อนรอบนี้ = production):** ค่าเดิมแทน **เฉพาะเมื่อยังเท่าค่าที่ import รุ่นก่อนเขียน** — `scripts/import/legacy-values.json` (สร้างด้วย `python3 scripts/import/build-legacy-values.py [base=f818837]` จากประวัติ git ของ seed/image-map ด้วยสูตรเดียวกับ importer · ข้อความเทียบตรง/หลัง sanitize/หลัง decode entity · `sh_layout` เทียบ fingerprint `refs.php sh_import_layout_fingerprint()` (ลำดับ key · รูปแบบตัวเลข · `*_ref` เป็นไฟล์หรือ attachment id ของ import = เท่ากัน) · ภาพแผง 1..6 เทียบรายการ key ทั้งชุด · `EXTRA` = ค่าที่ทีมแก้บน prod ตามคำสั่งเจ้าของ (Pod Duang `sh_title_raw` 2026-10-28)) · ฟิลด์ใหม่เติมเมื่อว่าง (true/false เมื่อยังไม่เคยบันทึก) · step: `2026-11-11-zones` (zone 1–3) · `-objects` (title · title_raw · caption · แถวข้อมูล · สี 5 · `sh_layout` · `sh_extra_image_1..6` · ไม่แตะ slug) · `-chooser` (zone 4 `sh_link_page` = หน้า Timeline → ว่าง · พื้น/แถบ · trail `sh_chooser_image`) · `-zone5` (รอ seed P-172: ไม่บันทึกว่าเสร็จ · ไม่เตือน) · `-media-replace` (ไฟล์ media/out เปลี่ยนแต่ชื่อเดิม: เขียนทับไฟล์ของ attachment ที่ import สร้างเมื่อ sha256 = ไฟล์รุ่นเก่า (`legacy-values.json` `media`) · id/URL เดิม · metadata ใหม่ · admin เปลี่ยนไฟล์ = ไม่ทับ) · ไฟล์ขาด = ไม่บันทึกว่าเสร็จ · ค่าที่ admin แก้ = นับใน report `skipped.kept_admin_value` / `kept_admin_file`
+  - ผลตรวจ (local 2026-11-11 · core-hzd): ดูรายงาน core-hzd (`orchestrator/evidence/core-hzd/`)
 - ผลนับ (local 2026-10-27 · core-import-refresh): object 15 · timeline_item 15 · trail 17 · zone 5 · page 3 · attachment 205 · menu 2 · ICC→sRGB 67 ไฟล์ · คำเตือน 0 · รอบที่ 2 สร้างใหม่ 0 / แก้ 0 · import เก่า→ใหม่บน site เดียวกัน: วิดีโอ 7→14 · HEVC 4→6 · แผนที่ → 39907d2c · ICC 68 · ภาพ hero ที่ admin ตั้งเองคงเดิม
 - ภาพนำเข้าโดยไม่สร้าง sub-size (ต้นฉบับใหญ่ · playground ช้า) · server ใช้ `SH_IMPORT_SUBSIZES=1`

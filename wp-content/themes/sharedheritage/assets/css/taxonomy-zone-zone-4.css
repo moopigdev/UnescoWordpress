@@ -1,0 +1,206 @@
+/*
+ * Zone 4 "choose an animal" page (taxonomy-zone-zone-4.php · DESIGN-SPEC §4.10 · Figma 1513 · D37/D38/D40).
+ * Desktop 1440: background [160,150 1120×540] with 17 animals (PNG boxes in % of the background) · ZONE bar
+ * [160,710 1120×166] (gap 20) · Back [160,940] (gap 64) · page end 1065 (75).
+ * Tablet 768–1023: the same composition scaled to the container. Mobile ≤767: animals in a 3-column grid, the bar
+ * scrolls sideways so its baked-in labels stay readable (no Figma frame — D5).
+ */
+
+.sh-z4 {
+	--sh-zbar-gap: 20px;       /* background bottom y=690 → bar y=710 */
+	--sh-z4-back-gap: 64px;    /* bar bottom y=876 → Back y=940 */
+	--sh-z4-bottom: 75px;      /* Back bottom y=990 → page end y=1065 */
+	--sh-z4-hover-scale: 1.14; /* [P] P-249: 184→210 of the trail tile (§3.6) */
+	--sh-zbar-strip: 840px;    /* mobile: bar image width (labels ≈ 15px) */
+}
+
+/* ---- Background + animals (1120×540) ---- */
+.sh-z4__stage {
+	position: relative;
+	aspect-ratio: 1120 / 540;
+}
+
+.sh-z4__bg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
+
+.sh-z4__animals {
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sh-z4__animal {
+	position: absolute;
+	top: var(--sh-z4-y);
+	left: var(--sh-z4-x);
+	width: var(--sh-z4-w);
+	transform-origin: 50% 50%;
+	transition: transform var(--sh-duration-tile) var(--sh-ease);
+}
+
+.sh-z4__img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.sh-z4__link {
+	display: block;
+}
+
+.sh-z4__link:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 2px;
+}
+
+/* Hover = grow ×1.14 around the PNG box centre, 0.3s ease-in-out, on top of its neighbours (§4.10 · P-249). */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+	.sh-z4__animal:hover,
+	.sh-z4__animal:focus-within {
+		z-index: 2;
+		transform: scale(var(--sh-z4-hover-scale));
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sh-z4__animal {
+		transition: none;
+	}
+}
+
+/*
+ * ---- ZONE 1–5 bar (template-parts/zone4/zone-bar.php · 1120×166 · Drop Shadow/200) ----
+ * Figma `Frame 12684` radius 22 does not clip (clipsContent=false) → square image corners; the shadow follows the
+ * image's opaque pixels → drop-shadow filter (Figma blur 4 = 2px standard deviation), as on the zone 1–3 pages.
+ */
+.sh-zbar {
+	margin-top: var(--sh-zbar-gap);
+	filter: drop-shadow(0 1px 2px rgba(12, 12, 13, 0.05)) drop-shadow(0 1px 2px rgba(12, 12, 13, 0.1));
+}
+
+.sh-zbar__view {
+	overflow: hidden;
+}
+
+.sh-zbar__strip {
+	position: relative;
+	aspect-ratio: 1120 / 166;
+	overflow: hidden;
+}
+
+.sh-zbar__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
+
+/* Raw 4096×965 export: Figma imageTransform crop x 2.556%–97.46% · y 14.10%–73.80% (same as the zone 1–3 banner). */
+.sh-zbar--crop .sh-zbar__img {
+	position: absolute;
+	top: -23.617%;
+	left: -2.693%;
+	width: 105.372%;
+	height: 167.489%;
+	max-width: none;
+}
+
+/* Tab hotspots: 5 × 224 at x 160/384/608/832/1056 · tab row y 833–876 of the bar 710–876 (= from 74.1%). */
+.sh-zbar__nav,
+.sh-zbar__tabs {
+	position: absolute;
+	inset: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sh-zbar__tab {
+	position: absolute;
+	top: 74.1%;
+	bottom: 0;
+	left: calc(var(--sh-zbar-i, 0) * 20%);
+	width: 20%;
+}
+
+.sh-zbar__hit {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.sh-zbar__hit--link:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: -2px;
+}
+
+/* ---- Back + page end ---- */
+.sh-z4__back {
+	margin-top: var(--sh-z4-back-gap);
+	padding-bottom: var(--sh-z4-bottom);
+}
+
+/* ---- Tablet / mobile (no Figma frame — D5) ---- */
+@media (max-width: 1023px) {
+	.sh-z4 {
+		--sh-z4-back-gap: var(--sh-space-40);
+		--sh-z4-bottom: var(--sh-space-40);
+	}
+}
+
+@media (max-width: 767px) {
+	.sh-z4 {
+		--sh-zbar-gap: var(--sh-space-30);
+	}
+
+	/* Scaled to a phone the animals would be 30–60px wide: show them as a 3-column grid instead. */
+	.sh-z4__stage {
+		aspect-ratio: auto;
+	}
+
+	.sh-z4__bg {
+		display: none;
+	}
+
+	.sh-z4__animals {
+		position: static;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: var(--sh-space-12);
+		padding-top: var(--sh-space-20);
+	}
+
+	.sh-z4__animal {
+		position: relative;
+		top: auto;
+		left: auto;
+		width: auto;
+		aspect-ratio: 1;
+	}
+
+	.sh-z4__link {
+		height: 100%;
+	}
+
+	.sh-z4__img {
+		height: 100%;
+		object-fit: contain;
+	}
+
+	/* The ZONE 1–5 labels are baked into the image: keep them ≥14px by scrolling the strip inside the box. */
+	.sh-zbar__view {
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+	}
+
+	.sh-zbar__strip {
+		width: var(--sh-zbar-strip);
+	}
+}

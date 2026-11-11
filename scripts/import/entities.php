@@ -9,6 +9,7 @@
 defined( 'ABSPATH' ) || exit;
 
 require_once __DIR__ . '/objects.php';
+require_once __DIR__ . '/content-2026-11.php';
 
 /**
  * Create a page by route slug (adopts an existing page with that path). Returns [id, write].
@@ -186,6 +187,7 @@ function sh_import_trails( array $seed, array $map, array $pages ): array {
 				'sh_icon_group_color'     => $color,
 				'sh_cover_image'          => sh_imp_image( $map, $ref( 'cover' ), $t['name'] . ' trail cover' ),
 				'sh_timeline_page'        => $has_timeline ? $pages['timeline']['id'] : 0,
+				'sh_chooser_image'        => sh_import_trail_chooser_image( $seed, $map, $slug, (string) $t['name'] ),
 			)
 		);
 	}
@@ -215,11 +217,12 @@ function sh_import_zones( array $seed, array $map, array $pages ): array {
 		}
 		$m       = isset( $map['zones'][ (string) $n ] ) ? $map['zones'][ (string) $n ] : array();
 		$ref     = static fn( string $k ) => isset( $m[ $k ] ) ? $m[ $k ] : null;
-		$to_page = ! empty( $z['page_frame'] ) && strtok( (string) $z['page_frame'], ' ' ) === $timeline_frame;
+		// D37: the chooser zone has its own page (/zone/zone-4/) even though its seed page_frame is the timeline frame.
+		$to_page = ! empty( $z['page_frame'] ) && strtok( (string) $z['page_frame'], ' ' ) === $timeline_frame && sh_import_chooser_zone( $seed ) !== $n;
 		sh_imp_meta(
 			'term',
 			$id,
-			array(
+			sh_import_zone_meta_2026_11( $seed, $map, $z ) + array(
 				'sh_number'           => $n,
 				'sh_card_title'       => isset( $z['name_raw'] ) ? $z['name_raw'] : $z['name'],
 				'sh_color'            => $z['color_hex'],

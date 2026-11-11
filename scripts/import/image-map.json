@@ -2,9 +2,116 @@
  "_meta": {
   "generated_by": "scripts/import/build-image-map.py",
   "figma_file": "figma-file.json",
-  "figma_lastModified": "2026-10-27T09:48:30Z",
+  "figma_lastModified": "2026-11-11T08:23:07Z",
+  "figma_fallback": "figma-file.2026-10-27.json",
+  "nodes_from_older_dump": [
+   "1013:1289",
+   "1013:1292",
+   "1013:1343",
+   "1013:1369",
+   "1018:1373",
+   "1018:1374",
+   "1018:1378",
+   "1018:1379",
+   "1018:1382",
+   "1018:1383",
+   "1018:1386",
+   "1018:1387",
+   "1018:1390",
+   "1018:1391",
+   "1018:1394",
+   "1018:1395",
+   "1018:1398",
+   "1018:1399",
+   "1018:1402",
+   "1018:1403",
+   "1018:1406",
+   "1018:1407",
+   "1018:1410",
+   "1018:1411",
+   "1018:1414",
+   "1018:1415",
+   "1018:1418",
+   "1018:1419",
+   "1018:1422",
+   "1018:1423",
+   "1018:1426",
+   "1018:1427",
+   "1018:1430",
+   "1018:1431",
+   "1179:5759",
+   "1179:5762",
+   "1232:1711",
+   "1232:1714",
+   "1232:1720",
+   "1232:1726",
+   "1232:1732",
+   "1232:1745",
+   "1232:1746",
+   "1232:1758",
+   "1232:1765",
+   "1232:1766",
+   "1232:1772",
+   "1232:1778",
+   "1232:1784",
+   "1232:1790",
+   "1232:1796",
+   "1232:1802",
+   "670:1221",
+   "670:1236",
+   "670:9367",
+   "670:9370",
+   "670:9386",
+   "670:9421",
+   "670:9422",
+   "670:9426",
+   "670:9429",
+   "670:9433",
+   "670:9436",
+   "670:9462",
+   "670:9465",
+   "670:9518",
+   "670:9521",
+   "670:9574",
+   "670:9575",
+   "670:9584",
+   "670:9586",
+   "670:9589",
+   "670:9591",
+   "670:9594",
+   "670:9596",
+   "670:9599",
+   "670:9601",
+   "670:9604",
+   "670:9606",
+   "670:9609",
+   "670:9611",
+   "670:9614",
+   "670:9616",
+   "670:9619",
+   "670:9621",
+   "670:9624",
+   "670:9626",
+   "670:9629",
+   "670:9631",
+   "670:9634",
+   "670:9636",
+   "670:9639",
+   "670:9641",
+   "670:9644",
+   "670:9646",
+   "670:9649",
+   "670:9651",
+   "670:9654",
+   "670:9656",
+   "670:9659",
+   "670:9661",
+   "796:1799",
+   "885:1201",
+   "I670:1239;670:1462"
+  ],
   "note": "ref = Figma imageRef = file name (without extension) in Unesco/design/assets · null = no image in Figma · see 'missing' for refs without a file",
-  "patched": "2026-11-11 timeline-d39 (D39): timeline_items.5/.7 thumbnail = seed thumbnail_refs (cba74a7d · 621646b5) · nodes 3160:1508/3103:1181 replace 1232:1738/1232:1752 · by hand — build-image-map.py cannot read figma-file.json 08:23Z (DEFERRED · P-261); re-running it would undo this"
+  "patched": "2026-11-11 timeline-d39 (D39): timeline_items.5/.7 thumbnail = seed thumbnail_refs (cba74a7d · 621646b5) · nodes 3160:1508/3103:1181 replace 1232:1738/1232:1752 · by hand on top of the core-hzd build — build-image-map.py still maps the old nodes (DEFERRED · P-261); re-running it would undo this"
  },
  "objects": {
   "elephant-leg-bone": {
@@ -23,7 +130,9 @@
    "tile_hover": "08849e4a56875c3cfda45651c35f71ce42d5dfec",
    "tile_set": "940:778",
    "hero_image": "cc4fa3e3eb70e901db048341cbc9dea06b473bcb",
-   "extra_images": []
+   "extra_images": [
+    "0a6ec9bebc2978d72034d3f37bc920d71c02039d"
+   ]
   },
   "ganesha": {
    "final_frame": "670:2786",
@@ -31,7 +140,9 @@
    "tile_hover": "fb5e1f7e330178705eb29ce778bb44bfe972a023",
    "tile_set": "940:782",
    "hero_image": "31ff0ee0c1620fd35786cfa017ff1c368fce9a38",
-   "extra_images": []
+   "extra_images": [
+    "f1d4be854cf641e83104dec4f170589dbf4f2177"
+   ]
   },
   "elephant-molar-coconut-grater": {
    "final_frame": "956:975",
@@ -39,10 +150,12 @@
    "tile_hover": "bc3b0037bd5f5871ca71283adf4f54e9f5e68919",
    "tile_set": "940:786",
    "hero_image": "2511e717a0bc936ec101162ec5ff44844fb92b6a",
-   "extra_images": []
+   "extra_images": [
+    "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b"
+   ]
   },
   "embossed-brass-basin-with-mythical-animal-motifs": {
-   "final_frame": "964:1522",
+   "final_frame": "3190:4671",
    "tile": "b4177480ca6c29287bfb9b0b66744c26c3dda5b4",
    "tile_hover": "7a0556b8dc388cdfdaace3022d1eac18ae0144bb",
    "tile_set": "940:790",
@@ -81,8 +194,8 @@
    "tile_set": "940:798",
    "hero_image": "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf",
    "extra_images": [
-    "06e906153fce5c90d379a1100d824fc39579b832",
-    "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf"
+    "82df69cbf21960db408047bca5c869ceba2e7e16",
+    "f105bd749215d33161c818c3dd2c811028f9fbf5"
    ]
   },
   "elephant-shaped-relic-containers": {
@@ -152,12 +265,9 @@
    "tile_set": "940:826",
    "hero_image": "a1b2aeeedadbd3f6e4b844944c7dfb01858876d2",
    "extra_images": [
-    "b42c75df1b5be9ddd269cb33e31fdecdd38524c0",
-    "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06",
-    "4ce53001c838fd7804c16a3e17737286ab45fdc1",
-    "de086fc9260067212cc9a370bc3d8a8c8c6d7a19",
-    "f1c29b0dc6b4449c68abb6cee3bc2afa2f116cfb",
-    "378c155fa27dc3d2a02a9bb5bd1f96ebf7b97b9d"
+    "b359f3308d64eeea5bcb08a083b66fda33a97786",
+    "b15cb8a02fd0828de13d69da7d1518128eb447c9",
+    "758e3fe761a2fbb6adc4366204d22edfb8ba2b08"
    ]
   }
  },
@@ -481,10 +591,10 @@
  "files": {
   "042394062f57e7314b3ab68f0dd88288035b5b96": "042394062f57e7314b3ab68f0dd88288035b5b96.jpg",
   "0522e0ee2b555c1651d1e7ccce59fa7ea6f2f334": "0522e0ee2b555c1651d1e7ccce59fa7ea6f2f334.jpg",
-  "06e906153fce5c90d379a1100d824fc39579b832": "06e906153fce5c90d379a1100d824fc39579b832.jpg",
   "07e22a68538ac8489e1348d26ad6d4e1154c41ed": "07e22a68538ac8489e1348d26ad6d4e1154c41ed.png",
   "08849e4a56875c3cfda45651c35f71ce42d5dfec": "08849e4a56875c3cfda45651c35f71ce42d5dfec.jpg",
   "091014ad1ebc26b465c39cd8994bb38c035e64e4": "091014ad1ebc26b465c39cd8994bb38c035e64e4.png",
+  "0a6ec9bebc2978d72034d3f37bc920d71c02039d": "0a6ec9bebc2978d72034d3f37bc920d71c02039d.png",
   "0a9942129a6595f5c5935e68ae80821407f33042": "0a9942129a6595f5c5935e68ae80821407f33042.jpg",
   "0b0dc3c8c5a95d6a0e4b323fb76f39f80f36b7ba": "0b0dc3c8c5a95d6a0e4b323fb76f39f80f36b7ba.png",
   "0b230779c8a934d9056c435e1994c9b2b89fcb27": "0b230779c8a934d9056c435e1994c9b2b89fcb27.jpg",
@@ -519,7 +629,6 @@
   "342701ac0798ff180cfac759317c472a546cf9ed": "342701ac0798ff180cfac759317c472a546cf9ed.png",
   "34e2ea63757a9a734a920a5fe984343b9d42026c": "34e2ea63757a9a734a920a5fe984343b9d42026c.png",
   "35c9b660c3b2a9cd65ffe83314e0b79903d8226f": "35c9b660c3b2a9cd65ffe83314e0b79903d8226f.png",
-  "378c155fa27dc3d2a02a9bb5bd1f96ebf7b97b9d": "378c155fa27dc3d2a02a9bb5bd1f96ebf7b97b9d.png",
   "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b": "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b.png",
   "39907d2c90eadd57d4183533f40df272403a5a38": "39907d2c90eadd57d4183533f40df272403a5a38.png",
   "3d83690a0b52ba5125f83d04368ecdab78ffd65e": "3d83690a0b52ba5125f83d04368ecdab78ffd65e.png",
@@ -534,7 +643,6 @@
   "4aae1591a9b6aa9f97ddf11c7e8f102500716071": "4aae1591a9b6aa9f97ddf11c7e8f102500716071.jpg",
   "4c493fdc4a29e8f97679610b3f1cad52d5d08b9e": "4c493fdc4a29e8f97679610b3f1cad52d5d08b9e.png",
   "4ce4a412dc95e49a6e49de56d5b2c69d86eba8e7": "4ce4a412dc95e49a6e49de56d5b2c69d86eba8e7.jpg",
-  "4ce53001c838fd7804c16a3e17737286ab45fdc1": "4ce53001c838fd7804c16a3e17737286ab45fdc1.png",
   "4f92af722c020aaf22ff989878e2e1729607c9f3": "4f92af722c020aaf22ff989878e2e1729607c9f3.png",
   "535eb1d8ac88c6f2dd4e9956a6769c8b4efe3077": "535eb1d8ac88c6f2dd4e9956a6769c8b4efe3077.png",
   "550cfddd472294c66ebb3bfec6d104936ceabf95": "550cfddd472294c66ebb3bfec6d104936ceabf95.png",
@@ -561,6 +669,7 @@
   "730ba23e657cab7964b8fc86ef5f8cb33119b25c": "730ba23e657cab7964b8fc86ef5f8cb33119b25c.png",
   "73d5da8215e1e1cae75933d75fc85c9300d1639f": "73d5da8215e1e1cae75933d75fc85c9300d1639f.png",
   "74e1d6fd0e8417532fcc489e36fcca2f40ae0b30": "74e1d6fd0e8417532fcc489e36fcca2f40ae0b30.png",
+  "758e3fe761a2fbb6adc4366204d22edfb8ba2b08": "758e3fe761a2fbb6adc4366204d22edfb8ba2b08.png",
   "77d84c86e681408da172e84a8e60c68e68c001bd": "77d84c86e681408da172e84a8e60c68e68c001bd.png",
   "7847f8ce21ef80789787d936ca54cbf72487260c": "7847f8ce21ef80789787d936ca54cbf72487260c.jpg",
   "78ba2a9c592b6d989f07a2e32c1720329e706d55": "78ba2a9c592b6d989f07a2e32c1720329e706d55.jpg",
@@ -569,6 +678,7 @@
   "7a0556b8dc388cdfdaace3022d1eac18ae0144bb": "7a0556b8dc388cdfdaace3022d1eac18ae0144bb.jpg",
   "80727192aa60ba5bed96afae27d2eb0e340c707e": "80727192aa60ba5bed96afae27d2eb0e340c707e.png",
   "810b828903b38a64facdfd38ffe651e4d1f23f46": "810b828903b38a64facdfd38ffe651e4d1f23f46.png",
+  "82df69cbf21960db408047bca5c869ceba2e7e16": "82df69cbf21960db408047bca5c869ceba2e7e16.png",
   "8428e71bcc441ecea1da55185080518897c441fd": "8428e71bcc441ecea1da55185080518897c441fd.jpg",
   "87938c71354cfc0fd72db85bcb1b4c6e3568a658": "87938c71354cfc0fd72db85bcb1b4c6e3568a658.png",
   "8ac7f98bc70e717330451ca7e8d30c061542268f": "8ac7f98bc70e717330451ca7e8d30c061542268f.jpg",
@@ -600,10 +710,11 @@
   "ad12c01136e12666657a9f2902c3059ff25ab4e2": "ad12c01136e12666657a9f2902c3059ff25ab4e2.jpg",
   "ae47dcea20a04293087620e49b9b3c1dee26ca6c": "ae47dcea20a04293087620e49b9b3c1dee26ca6c.png",
   "b0afe5baa2b42c90d16a21257cde00f0845a6a9a": "b0afe5baa2b42c90d16a21257cde00f0845a6a9a.png",
+  "b15cb8a02fd0828de13d69da7d1518128eb447c9": "b15cb8a02fd0828de13d69da7d1518128eb447c9.png",
   "b1ba8a8a18498389fb9a9f257d957ec6516fcc99": "b1ba8a8a18498389fb9a9f257d957ec6516fcc99.png",
+  "b359f3308d64eeea5bcb08a083b66fda33a97786": "b359f3308d64eeea5bcb08a083b66fda33a97786.png",
   "b4177480ca6c29287bfb9b0b66744c26c3dda5b4": "b4177480ca6c29287bfb9b0b66744c26c3dda5b4.jpg",
   "b419819cb994f64b2132466303bb35023ccd21fd": "b419819cb994f64b2132466303bb35023ccd21fd.jpg",
-  "b42c75df1b5be9ddd269cb33e31fdecdd38524c0": "b42c75df1b5be9ddd269cb33e31fdecdd38524c0.png",
   "b7379d743108019bfff9d816935f8961ab904a5e": "b7379d743108019bfff9d816935f8961ab904a5e.png",
   "ba077230353e9720cc9ab1d6f3dc37828b23bc35": "ba077230353e9720cc9ab1d6f3dc37828b23bc35.png",
   "ba0b342cab0b4404e4d0a4b9d65a1b15a6421568": "ba0b342cab0b4404e4d0a4b9d65a1b15a6421568.jpg",
@@ -617,7 +728,6 @@
   "bf92aef517efb250a021bdfc8fe5ecdc87936eb6": "bf92aef517efb250a021bdfc8fe5ecdc87936eb6.jpg",
   "c1a8fb82673c3ab15b7b5da47a4cc230ccc0f31f": "c1a8fb82673c3ab15b7b5da47a4cc230ccc0f31f.png",
   "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487": "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487.jpg",
-  "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06": "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06.png",
   "c96e30802b0a40b044148a67b85cdebce7a1a514": "c96e30802b0a40b044148a67b85cdebce7a1a514.png",
   "cba74a7dda09c74ec03e27ab1779593e8217ef00": "cba74a7dda09c74ec03e27ab1779593e8217ef00.png",
   "cc4fa3e3eb70e901db048341cbc9dea06b473bcb": "cc4fa3e3eb70e901db048341cbc9dea06b473bcb.png",
@@ -630,7 +740,6 @@
   "dabf695eff4c2f190b9800dd05ba6ea0c0791572": "dabf695eff4c2f190b9800dd05ba6ea0c0791572.png",
   "dd599abf57b26d23ba11ccc0197a1e7a68e0d458": "dd599abf57b26d23ba11ccc0197a1e7a68e0d458.png",
   "dd7d34c58dabdcdefc3f20023aa1f68c1373260a": "dd7d34c58dabdcdefc3f20023aa1f68c1373260a.png",
-  "de086fc9260067212cc9a370bc3d8a8c8c6d7a19": "de086fc9260067212cc9a370bc3d8a8c8c6d7a19.png",
   "e3622bd14db8e56f05f53fe61b9e9bed85cfd7b8": "e3622bd14db8e56f05f53fe61b9e9bed85cfd7b8.jpg",
   "e3c45a09561d0988ebd72b1b4eb39ef7d3396cc1": "e3c45a09561d0988ebd72b1b4eb39ef7d3396cc1.jpg",
   "e4a3a4bad9a3e6ab55cb8b20ee35d1bf365af91e": "e4a3a4bad9a3e6ab55cb8b20ee35d1bf365af91e.png",
@@ -639,7 +748,8 @@
   "e79714c1c172080210cf97b49fc6aa7cb14a639d": "e79714c1c172080210cf97b49fc6aa7cb14a639d.png",
   "e978e4de5e9bcd4380ef4aa99371487b85171615": "e978e4de5e9bcd4380ef4aa99371487b85171615.jpg",
   "ed0e5ee93dd264f7f2bee4007437a5b16c92ad64": "ed0e5ee93dd264f7f2bee4007437a5b16c92ad64.png",
-  "f1c29b0dc6b4449c68abb6cee3bc2afa2f116cfb": "f1c29b0dc6b4449c68abb6cee3bc2afa2f116cfb.png",
+  "f105bd749215d33161c818c3dd2c811028f9fbf5": "f105bd749215d33161c818c3dd2c811028f9fbf5.jpg",
+  "f1d4be854cf641e83104dec4f170589dbf4f2177": "f1d4be854cf641e83104dec4f170589dbf4f2177.png",
   "f8cdca6ed2122344a967c09723c63a2c6f630690": "f8cdca6ed2122344a967c09723c63a2c6f630690.png",
   "f8e2d79d41f367604a48aa87f7067ed701f6b1f0": "f8e2d79d41f367604a48aa87f7067ed701f6b1f0.png",
   "fb5e1f7e330178705eb29ce778bb44bfe972a023": "fb5e1f7e330178705eb29ce778bb44bfe972a023.jpg",
@@ -678,6 +788,10 @@
    "for": "object singhasari-ganesha hero still",
    "ref": "cc4fa3e3eb70e901db048341cbc9dea06b473bcb"
   },
+  "3083:791": {
+   "for": "object singhasari-ganesha extra image",
+   "ref": "0a6ec9bebc2978d72034d3f37bc920d71c02039d"
+  },
   "940:783": {
    "for": "object ganesha tile (Ele 4) (default)",
    "ref": "ce053c2bf4aca30fa7f70b380fa5ef8a41173c70"
@@ -689,6 +803,10 @@
   "1051:8221": {
    "for": "object ganesha hero still",
    "ref": "31ff0ee0c1620fd35786cfa017ff1c368fce9a38"
+  },
+  "3083:846": {
+   "for": "object ganesha extra image",
+   "ref": "f1d4be854cf641e83104dec4f170589dbf4f2177"
   },
   "940:787": {
    "for": "object elephant-molar-coconut-grater tile (Ele 5) (default)",
@@ -702,6 +820,10 @@
    "for": "object elephant-molar-coconut-grater hero still",
    "ref": "2511e717a0bc936ec101162ec5ff44844fb92b6a"
   },
+  "3083:901": {
+   "for": "object elephant-molar-coconut-grater extra image",
+   "ref": "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b"
+  },
   "940:791": {
    "for": "object embossed-brass-basin-with-mythical-animal-motifs tile (Ele 6) (default)",
    "ref": "b4177480ca6c29287bfb9b0b66744c26c3dda5b4"
@@ -710,15 +832,15 @@
    "for": "object embossed-brass-basin-with-mythical-animal-motifs tile (Ele 6) (hover)",
    "ref": "7a0556b8dc388cdfdaace3022d1eac18ae0144bb"
   },
-  "964:1527": {
+  "3190:4714": {
    "for": "object embossed-brass-basin-with-mythical-animal-motifs hero still",
    "ref": "b7379d743108019bfff9d816935f8961ab904a5e"
   },
-  "964:1547": {
+  "3190:4984": {
    "for": "object embossed-brass-basin-with-mythical-animal-motifs extra image",
    "ref": "d12242d44121fd7f93180fe99cb227f848f6467d"
   },
-  "964:1808": {
+  "3190:4993": {
    "for": "object embossed-brass-basin-with-mythical-animal-motifs extra image",
    "ref": "fe9f4e8f0bf9d5ddf52ad5b39359330be8c0bb28"
   },
@@ -776,11 +898,11 @@
   },
   "3004:812": {
    "for": "object patola-cloth extra image",
-   "ref": "06e906153fce5c90d379a1100d824fc39579b832"
+   "ref": "82df69cbf21960db408047bca5c869ceba2e7e16"
   },
   "3004:814": {
    "for": "object patola-cloth extra image",
-   "ref": "d9e3b5d4e4e84722bafe5dd3ac122a232dfbeebf"
+   "ref": "f105bd749215d33161c818c3dd2c811028f9fbf5"
   },
   "940:803": {
    "for": "object elephant-shaped-relic-containers tile (Ele 9) (default)",
@@ -892,355 +1014,423 @@
   },
   "670:2855": {
    "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
-   "ref": "b42c75df1b5be9ddd269cb33e31fdecdd38524c0"
+   "ref": "b359f3308d64eeea5bcb08a083b66fda33a97786"
   },
   "670:2856": {
    "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
-   "ref": "c77d5bbbab4d1b8e9da3e11e039bbe18976b5e06"
+   "ref": "b15cb8a02fd0828de13d69da7d1518128eb447c9"
   },
   "670:2857": {
    "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
-   "ref": "4ce53001c838fd7804c16a3e17737286ab45fdc1"
-  },
-  "670:2858": {
-   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
-   "ref": "de086fc9260067212cc9a370bc3d8a8c8c6d7a19"
-  },
-  "670:2859": {
-   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
-   "ref": "f1c29b0dc6b4449c68abb6cee3bc2afa2f116cfb"
-  },
-  "670:2860": {
-   "for": "object bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the extra image",
-   "ref": "378c155fa27dc3d2a02a9bb5bd1f96ebf7b97b9d"
+   "ref": "758e3fe761a2fbb6adc4366204d22edfb8ba2b08"
   },
   "1232:1714": {
    "for": "timeline card 1 thumbnail",
-   "ref": "4953122e17ae97232adf69a47ba5ed1405c8d733"
+   "ref": "4953122e17ae97232adf69a47ba5ed1405c8d733",
+   "older_dump": true
   },
   "1232:1720": {
    "for": "timeline card 2 thumbnail",
-   "ref": "b0afe5baa2b42c90d16a21257cde00f0845a6a9a"
+   "ref": "b0afe5baa2b42c90d16a21257cde00f0845a6a9a",
+   "older_dump": true
   },
   "1232:1726": {
    "for": "timeline card 3 thumbnail",
-   "ref": "bc3f275a51500bf09f5a2ee1f3d0638656056ae9"
+   "ref": "bc3f275a51500bf09f5a2ee1f3d0638656056ae9",
+   "older_dump": true
   },
   "1232:1732": {
    "for": "timeline card 4 thumbnail",
-   "ref": "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b"
+   "ref": "378ea9bdc2b4dddd49daa4c6d2256e9c23cafe2b",
+   "older_dump": true
   },
   "3160:1508": {
-   "for": "timeline card 5 thumbnail (D39 · Figma 08:23Z Section 51 · patched by hand: build-image-map.py cannot read this file — P-261)",
+   "for": "timeline card 5 thumbnail (D39 · Figma 08:23Z Section 51 · patched by hand: build-image-map.py does not map this node — P-261)",
    "ref": "cba74a7dda09c74ec03e27ab1779593e8217ef00"
   },
   "1232:1745": {
    "for": "timeline card 6 thumbnail",
-   "ref": "f8e2d79d41f367604a48aa87f7067ed701f6b1f0"
+   "ref": "f8e2d79d41f367604a48aa87f7067ed701f6b1f0",
+   "older_dump": true
   },
   "1232:1746": {
    "for": "timeline card 6 thumbnail",
-   "ref": "8dcebc793b2265a8aa9c502af29cba3088d659a2"
+   "ref": "8dcebc793b2265a8aa9c502af29cba3088d659a2",
+   "older_dump": true
   },
   "3103:1181": {
-   "for": "timeline card 7 thumbnail (D39 · Figma 08:23Z Section 51 · patched by hand: build-image-map.py cannot read this file — P-261)",
+   "for": "timeline card 7 thumbnail (D39 · Figma 08:23Z Section 51 · patched by hand: build-image-map.py does not map this node — P-261)",
    "ref": "621646b5dd0382559f9cf7e9b2f8bf0620ac698e"
   },
   "1232:1758": {
    "for": "timeline card 8 thumbnail",
-   "ref": "07e22a68538ac8489e1348d26ad6d4e1154c41ed"
+   "ref": "07e22a68538ac8489e1348d26ad6d4e1154c41ed",
+   "older_dump": true
   },
   "1232:1765": {
    "for": "timeline card 9 thumbnail",
-   "ref": "b1ba8a8a18498389fb9a9f257d957ec6516fcc99"
+   "ref": "b1ba8a8a18498389fb9a9f257d957ec6516fcc99",
+   "older_dump": true
   },
   "1232:1766": {
    "for": "timeline card 9 thumbnail",
-   "ref": "1c3aa3a10055d34a499058cb6d74a29c814cfa42"
+   "ref": "1c3aa3a10055d34a499058cb6d74a29c814cfa42",
+   "older_dump": true
   },
   "1232:1772": {
    "for": "timeline card 10 thumbnail",
-   "ref": "bf841c7f35a6ca3858a1b46b02a46a6887ad714e"
+   "ref": "bf841c7f35a6ca3858a1b46b02a46a6887ad714e",
+   "older_dump": true
   },
   "1232:1778": {
    "for": "timeline card 11 thumbnail",
-   "ref": "ba68e8525d46c78cf3004f1b591c8a4e223ef73f"
+   "ref": "ba68e8525d46c78cf3004f1b591c8a4e223ef73f",
+   "older_dump": true
   },
   "1232:1784": {
    "for": "timeline card 12 thumbnail",
-   "ref": "32fba0363a69a81347de674ede2112e30b076200"
+   "ref": "32fba0363a69a81347de674ede2112e30b076200",
+   "older_dump": true
   },
   "1232:1790": {
    "for": "timeline card 13 thumbnail",
-   "ref": "730ba23e657cab7964b8fc86ef5f8cb33119b25c"
+   "ref": "730ba23e657cab7964b8fc86ef5f8cb33119b25c",
+   "older_dump": true
   },
   "1232:1796": {
    "for": "timeline card 14 thumbnail",
-   "ref": "9c5706f8ddaeb9483fafb98b17c3b3a286dcbecb"
+   "ref": "9c5706f8ddaeb9483fafb98b17c3b3a286dcbecb",
+   "older_dump": true
   },
   "1232:1802": {
    "for": "timeline card 15 thumbnail",
-   "ref": "91cfd6aecee3155b6879af0e80c878b85c3860e9"
+   "ref": "91cfd6aecee3155b6879af0e80c878b85c3860e9",
+   "older_dump": true
   },
   "670:9575": {
    "for": "trail rooster home icon (default)",
-   "ref": "5f216ed1368da5ea53eb2cf97a4d5542459d711e"
+   "ref": "5f216ed1368da5ea53eb2cf97a4d5542459d711e",
+   "older_dump": true
   },
   "670:9574": {
    "for": "trail rooster home icon (hover)",
-   "ref": "17bbb16a79e3121b3c9f8b35ed7ca2b31531298d"
+   "ref": "17bbb16a79e3121b3c9f8b35ed7ca2b31531298d",
+   "older_dump": true
   },
   "1018:1382": {
    "for": "trail rooster zone grid tile (default)",
-   "ref": "342701ac0798ff180cfac759317c472a546cf9ed"
+   "ref": "342701ac0798ff180cfac759317c472a546cf9ed",
+   "older_dump": true
   },
   "1018:1383": {
    "for": "trail rooster zone grid tile (hover)",
-   "ref": "64fe0e4ee4bc04898863d19512ce5350123921bd"
+   "ref": "64fe0e4ee4bc04898863d19512ce5350123921bd",
+   "older_dump": true
   },
   "670:9584": {
    "for": "trail turtle home icon (default)",
-   "ref": "042394062f57e7314b3ab68f0dd88288035b5b96"
+   "ref": "042394062f57e7314b3ab68f0dd88288035b5b96",
+   "older_dump": true
   },
   "670:9586": {
    "for": "trail turtle home icon (hover)",
-   "ref": "aa9819daae144336bf741c47f868145435c5fdcb"
+   "ref": "aa9819daae144336bf741c47f868145435c5fdcb",
+   "older_dump": true
   },
   "1018:1430": {
    "for": "trail turtle zone grid tile (default)",
-   "ref": "e3622bd14db8e56f05f53fe61b9e9bed85cfd7b8"
+   "ref": "e3622bd14db8e56f05f53fe61b9e9bed85cfd7b8",
+   "older_dump": true
   },
   "1018:1431": {
    "for": "trail turtle zone grid tile (hover)",
-   "ref": "ce3169a52b0025e78e766c50223af5556319fdfe"
+   "ref": "ce3169a52b0025e78e766c50223af5556319fdfe",
+   "older_dump": true
   },
   "670:9589": {
    "for": "trail deer home icon (default)",
-   "ref": "3311064ca263fd5ea7e323ef5c3223236806d0ce"
+   "ref": "3311064ca263fd5ea7e323ef5c3223236806d0ce",
+   "older_dump": true
   },
   "670:9591": {
    "for": "trail deer home icon (hover)",
-   "ref": "706a21c0024a75c6be2ae03f66ec30b8426252b4"
+   "ref": "706a21c0024a75c6be2ae03f66ec30b8426252b4",
+   "older_dump": true
   },
   "1018:1386": {
    "for": "trail deer zone grid tile (default)",
-   "ref": "c1a8fb82673c3ab15b7b5da47a4cc230ccc0f31f"
+   "ref": "c1a8fb82673c3ab15b7b5da47a4cc230ccc0f31f",
+   "older_dump": true
   },
   "1018:1387": {
    "for": "trail deer zone grid tile (hover)",
-   "ref": "65d217b76a74d4479df610dade21e336e419b4b3"
+   "ref": "65d217b76a74d4479df610dade21e336e419b4b3",
+   "older_dump": true
   },
   "670:9594": {
    "for": "trail dragon home icon (default)",
-   "ref": "78ba2a9c592b6d989f07a2e32c1720329e706d55"
+   "ref": "78ba2a9c592b6d989f07a2e32c1720329e706d55",
+   "older_dump": true
   },
   "670:9596": {
    "for": "trail dragon home icon (hover)",
-   "ref": "90c51467be1459101d21d959c8bf5d688157bae1"
+   "ref": "90c51467be1459101d21d959c8bf5d688157bae1",
+   "older_dump": true
   },
   "1018:1390": {
    "for": "trail dragon zone grid tile (default)",
-   "ref": "e4a3a4bad9a3e6ab55cb8b20ee35d1bf365af91e"
+   "ref": "e4a3a4bad9a3e6ab55cb8b20ee35d1bf365af91e",
+   "older_dump": true
   },
   "1018:1391": {
    "for": "trail dragon zone grid tile (hover)",
-   "ref": "790fc2f2c88c1293da9cc1c7a6c8f59d2210ff91"
+   "ref": "790fc2f2c88c1293da9cc1c7a6c8f59d2210ff91",
+   "older_dump": true
   },
   "670:9599": {
    "for": "trail fish home icon (default)",
-   "ref": "baaa803afaad0e2741a8c3f808ce75c220fdd5a6"
+   "ref": "baaa803afaad0e2741a8c3f808ce75c220fdd5a6",
+   "older_dump": true
   },
   "670:9601": {
    "for": "trail fish home icon (hover)",
-   "ref": "091014ad1ebc26b465c39cd8994bb38c035e64e4"
+   "ref": "091014ad1ebc26b465c39cd8994bb38c035e64e4",
+   "older_dump": true
   },
   "1018:1394": {
    "for": "trail fish zone grid tile (default)",
-   "ref": "aa14ecd1303c9a6907ad37a756a610b7d0c78cd2"
+   "ref": "aa14ecd1303c9a6907ad37a756a610b7d0c78cd2",
+   "older_dump": true
   },
   "1018:1395": {
    "for": "trail fish zone grid tile (hover)",
-   "ref": "8db0a0732ff66a57031a009651b602df5d8d9b0b"
+   "ref": "8db0a0732ff66a57031a009651b602df5d8d9b0b",
+   "older_dump": true
   },
   "670:9604": {
    "for": "trail hornbill home icon (default)",
-   "ref": "3fab79d2ca0fc54daf006f5d4eda7554b950ed91"
+   "ref": "3fab79d2ca0fc54daf006f5d4eda7554b950ed91",
+   "older_dump": true
   },
   "670:9606": {
    "for": "trail hornbill home icon (hover)",
-   "ref": "ad12c01136e12666657a9f2902c3059ff25ab4e2"
+   "ref": "ad12c01136e12666657a9f2902c3059ff25ab4e2",
+   "older_dump": true
   },
   "1018:1402": {
    "for": "trail hornbill zone grid tile (default)",
-   "ref": "4ce4a412dc95e49a6e49de56d5b2c69d86eba8e7"
+   "ref": "4ce4a412dc95e49a6e49de56d5b2c69d86eba8e7",
+   "older_dump": true
   },
   "1018:1403": {
    "for": "trail hornbill zone grid tile (hover)",
-   "ref": "e3c45a09561d0988ebd72b1b4eb39ef7d3396cc1"
+   "ref": "e3c45a09561d0988ebd72b1b4eb39ef7d3396cc1",
+   "older_dump": true
   },
   "670:9659": {
    "for": "trail horse home icon (default)",
-   "ref": "a2f606758633051b0910a9e661bff07054034855"
+   "ref": "a2f606758633051b0910a9e661bff07054034855",
+   "older_dump": true
   },
   "670:9661": {
    "for": "trail horse home icon (hover)",
-   "ref": "47eb7f6812377b59bef78e766bc202ce9f51bf79"
+   "ref": "47eb7f6812377b59bef78e766bc202ce9f51bf79",
+   "older_dump": true
   },
   "1018:1406": {
    "for": "trail horse zone grid tile (default)",
-   "ref": "87938c71354cfc0fd72db85bcb1b4c6e3568a658"
+   "ref": "87938c71354cfc0fd72db85bcb1b4c6e3568a658",
+   "older_dump": true
   },
   "1018:1407": {
    "for": "trail horse zone grid tile (hover)",
-   "ref": "2f3a8b9cea789395a68499e9a5f91c96fc7defe5"
+   "ref": "2f3a8b9cea789395a68499e9a5f91c96fc7defe5",
+   "older_dump": true
   },
   "670:9609": {
    "for": "trail naga home icon (default)",
-   "ref": "b419819cb994f64b2132466303bb35023ccd21fd"
+   "ref": "b419819cb994f64b2132466303bb35023ccd21fd",
+   "older_dump": true
   },
   "670:9611": {
    "for": "trail naga home icon (hover)",
-   "ref": "914d1a6461b5c8d12cd596effb73037ebefab436"
+   "ref": "914d1a6461b5c8d12cd596effb73037ebefab436",
+   "older_dump": true
   },
   "1018:1426": {
    "for": "trail naga zone grid tile (default)",
-   "ref": "70eb068742ccf43dc11056667ecf87891e97e753"
+   "ref": "70eb068742ccf43dc11056667ecf87891e97e753",
+   "older_dump": true
   },
   "1018:1427": {
    "for": "trail naga zone grid tile (hover)",
-   "ref": "ae47dcea20a04293087620e49b9b3c1dee26ca6c"
+   "ref": "ae47dcea20a04293087620e49b9b3c1dee26ca6c",
+   "older_dump": true
   },
   "670:9614": {
    "for": "trail water-bird home icon (default)",
-   "ref": "9b1c5c1e2d2f2c27c2fc2467629ab6b9ab1dafc6"
+   "ref": "9b1c5c1e2d2f2c27c2fc2467629ab6b9ab1dafc6",
+   "older_dump": true
   },
   "670:9616": {
    "for": "trail water-bird home icon (hover)",
-   "ref": "9270334ced3aa5dad64ca65cc666ec90044da98f"
+   "ref": "9270334ced3aa5dad64ca65cc666ec90044da98f",
+   "older_dump": true
   },
   "670:9619": {
    "for": "trail makara home icon (default)",
-   "ref": "21f024a52e96606556f4b3db7a9bb09946ac0da7"
+   "ref": "21f024a52e96606556f4b3db7a9bb09946ac0da7",
+   "older_dump": true
   },
   "670:9621": {
    "for": "trail makara home icon (hover)",
-   "ref": "0b230779c8a934d9056c435e1994c9b2b89fcb27"
+   "ref": "0b230779c8a934d9056c435e1994c9b2b89fcb27",
+   "older_dump": true
   },
   "1018:1414": {
    "for": "trail makara zone grid tile (default)",
-   "ref": "77d84c86e681408da172e84a8e60c68e68c001bd"
+   "ref": "77d84c86e681408da172e84a8e60c68e68c001bd",
+   "older_dump": true
   },
   "1018:1415": {
    "for": "trail makara zone grid tile (hover)",
-   "ref": "9a4ee322ba8d0d32314b67f00ee019ea9aaea41b"
+   "ref": "9a4ee322ba8d0d32314b67f00ee019ea9aaea41b",
+   "older_dump": true
   },
   "670:9654": {
    "for": "trail lion home icon (default)",
-   "ref": "331dc6e329401acd852d130992a2ef98822bad1c"
+   "ref": "331dc6e329401acd852d130992a2ef98822bad1c",
+   "older_dump": true
   },
   "670:9656": {
    "for": "trail lion home icon (hover)",
-   "ref": "68a990a4961e19dbb927fd0d143e3d434c45ee9a"
+   "ref": "68a990a4961e19dbb927fd0d143e3d434c45ee9a",
+   "older_dump": true
   },
   "1018:1410": {
    "for": "trail lion zone grid tile (default)",
-   "ref": "2dd1b2eb919eed5c8f3a67ba4a1e8b4cd22fd023"
+   "ref": "2dd1b2eb919eed5c8f3a67ba4a1e8b4cd22fd023",
+   "older_dump": true
   },
   "1018:1411": {
    "for": "trail lion zone grid tile (hover)",
-   "ref": "0b0dc3c8c5a95d6a0e4b323fb76f39f80f36b7ba"
+   "ref": "0b0dc3c8c5a95d6a0e4b323fb76f39f80f36b7ba",
+   "older_dump": true
   },
   "670:9624": {
    "for": "trail seashell home icon (default)",
-   "ref": "80727192aa60ba5bed96afae27d2eb0e340c707e"
+   "ref": "80727192aa60ba5bed96afae27d2eb0e340c707e",
+   "older_dump": true
   },
   "670:9626": {
    "for": "trail seashell home icon (hover)",
-   "ref": "535eb1d8ac88c6f2dd4e9956a6769c8b4efe3077"
+   "ref": "535eb1d8ac88c6f2dd4e9956a6769c8b4efe3077",
+   "older_dump": true
   },
   "1018:1422": {
    "for": "trail seashell zone grid tile (default)",
-   "ref": "33b1445224b55b21998bcb815d1c87a519ff9577"
+   "ref": "33b1445224b55b21998bcb815d1c87a519ff9577",
+   "older_dump": true
   },
   "1018:1423": {
    "for": "trail seashell zone grid tile (hover)",
-   "ref": "73d5da8215e1e1cae75933d75fc85c9300d1639f"
+   "ref": "73d5da8215e1e1cae75933d75fc85c9300d1639f",
+   "older_dump": true
   },
   "670:9629": {
    "for": "trail buffalo home icon (default)",
-   "ref": "5b2303da4b3d8d4c59d0366df64f895726d6384c"
+   "ref": "5b2303da4b3d8d4c59d0366df64f895726d6384c",
+   "older_dump": true
   },
   "670:9631": {
    "for": "trail buffalo home icon (hover)",
-   "ref": "bf92aef517efb250a021bdfc8fe5ecdc87936eb6"
+   "ref": "bf92aef517efb250a021bdfc8fe5ecdc87936eb6",
+   "older_dump": true
   },
   "1018:1378": {
    "for": "trail buffalo zone grid tile (default)",
-   "ref": "dabf695eff4c2f190b9800dd05ba6ea0c0791572"
+   "ref": "dabf695eff4c2f190b9800dd05ba6ea0c0791572",
+   "older_dump": true
   },
   "1018:1379": {
    "for": "trail buffalo zone grid tile (hover)",
-   "ref": "70a313144649046f262577067f86d982a3323738"
+   "ref": "70a313144649046f262577067f86d982a3323738",
+   "older_dump": true
   },
   "670:9634": {
    "for": "trail phoenix home icon (default)",
-   "ref": "ba0b342cab0b4404e4d0a4b9d65a1b15a6421568"
+   "ref": "ba0b342cab0b4404e4d0a4b9d65a1b15a6421568",
+   "older_dump": true
   },
   "670:9636": {
    "for": "trail phoenix home icon (hover)",
-   "ref": "6bfbfd9c87376a877a21d5a38f31b17d28dd9bbe"
+   "ref": "6bfbfd9c87376a877a21d5a38f31b17d28dd9bbe",
+   "older_dump": true
   },
   "1018:1418": {
    "for": "trail phoenix zone grid tile (default)",
-   "ref": "dd7d34c58dabdcdefc3f20023aa1f68c1373260a"
+   "ref": "dd7d34c58dabdcdefc3f20023aa1f68c1373260a",
+   "older_dump": true
   },
   "1018:1419": {
    "for": "trail phoenix zone grid tile (hover)",
-   "ref": "c96e30802b0a40b044148a67b85cdebce7a1a514"
+   "ref": "c96e30802b0a40b044148a67b85cdebce7a1a514",
+   "older_dump": true
   },
   "670:9649": {
    "for": "trail bird home icon (default)",
-   "ref": "337ec1cc97ee6420117278631cffdbd02c36b443"
+   "ref": "337ec1cc97ee6420117278631cffdbd02c36b443",
+   "older_dump": true
   },
   "670:9651": {
    "for": "trail bird home icon (hover)",
-   "ref": "6299dae5cd81351af66dbf1fed38b4d8a412389b"
+   "ref": "6299dae5cd81351af66dbf1fed38b4d8a412389b",
+   "older_dump": true
   },
   "1018:1373": {
    "for": "trail bird zone grid tile (default)",
-   "ref": "4c493fdc4a29e8f97679610b3f1cad52d5d08b9e"
+   "ref": "4c493fdc4a29e8f97679610b3f1cad52d5d08b9e",
+   "older_dump": true
   },
   "1018:1374": {
    "for": "trail bird zone grid tile (hover)",
-   "ref": "f8cdca6ed2122344a967c09723c63a2c6f630690"
+   "ref": "f8cdca6ed2122344a967c09723c63a2c6f630690",
+   "older_dump": true
   },
   "670:9639": {
    "for": "trail garuda home icon (default)",
-   "ref": "33bab1e0a53e16d9f9e48380ab6ed761429ab5c1"
+   "ref": "33bab1e0a53e16d9f9e48380ab6ed761429ab5c1",
+   "older_dump": true
   },
   "670:9641": {
    "for": "trail garuda home icon (hover)",
-   "ref": "0a9942129a6595f5c5935e68ae80821407f33042"
+   "ref": "0a9942129a6595f5c5935e68ae80821407f33042",
+   "older_dump": true
   },
   "1018:1398": {
    "for": "trail garuda zone grid tile (default)",
-   "ref": "8428e71bcc441ecea1da55185080518897c441fd"
+   "ref": "8428e71bcc441ecea1da55185080518897c441fd",
+   "older_dump": true
   },
   "1018:1399": {
    "for": "trail garuda zone grid tile (hover)",
-   "ref": "0e852035a30f543a9a2e79cd36a8198d9dd0cf37"
+   "ref": "0e852035a30f543a9a2e79cd36a8198d9dd0cf37",
+   "older_dump": true
   },
   "670:9644": {
    "for": "trail elephant home icon (default)",
-   "ref": "a958a1fcaa1ba35cd1837220acb5bf130b77df77"
+   "ref": "a958a1fcaa1ba35cd1837220acb5bf130b77df77",
+   "older_dump": true
   },
   "670:9646": {
    "for": "trail elephant home icon (hover)",
-   "ref": "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487"
+   "ref": "c7504b4f24129d0ba1e9e7af27b9d8c97b3ae487",
+   "older_dump": true
   },
   "796:1799": {
    "for": "trail elephant cover",
-   "ref": "ed0e5ee93dd264f7f2bee4007437a5b16c92ad64"
+   "ref": "ed0e5ee93dd264f7f2bee4007437a5b16c92ad64",
+   "older_dump": true
   },
   "797:2041": {
    "for": "timeline nav icon 1",
@@ -1312,99 +1502,123 @@
   },
   "670:9422": {
    "for": "zone 1 card (default)",
-   "ref": "342629afe7c3096b250956a6bfa18f5a55dd4d01"
+   "ref": "342629afe7c3096b250956a6bfa18f5a55dd4d01",
+   "older_dump": true
   },
   "670:9421": {
    "for": "zone 1 card (hover)",
-   "ref": "35c9b660c3b2a9cd65ffe83314e0b79903d8226f"
+   "ref": "35c9b660c3b2a9cd65ffe83314e0b79903d8226f",
+   "older_dump": true
   },
   "1013:1289": {
    "for": "zone 1 cover",
-   "ref": "10247f33df7eb00b4c372f25f8006e633cf1aba9"
+   "ref": "10247f33df7eb00b4c372f25f8006e633cf1aba9",
+   "older_dump": true
   },
   "1013:1292": {
    "for": "zone 1 banner",
-   "ref": "413791d606d517988c07682c407b0e79fa8aa303"
+   "ref": "413791d606d517988c07682c407b0e79fa8aa303",
+   "older_dump": true
   },
   "670:9426": {
    "for": "zone 2 card (default)",
-   "ref": "42f23205d3b36c2e64be218319661f4c17111ed4"
+   "ref": "42f23205d3b36c2e64be218319661f4c17111ed4",
+   "older_dump": true
   },
   "670:9429": {
    "for": "zone 2 card (hover)",
-   "ref": "ac84f1bbe78c230f46fa83abdf384e4553ea90e9"
+   "ref": "ac84f1bbe78c230f46fa83abdf384e4553ea90e9",
+   "older_dump": true
   },
   "1179:5759": {
    "for": "zone 2 cover",
-   "ref": "597a0bb7beb04c60e5c1dab6bb136d762b40b106"
+   "ref": "597a0bb7beb04c60e5c1dab6bb136d762b40b106",
+   "older_dump": true
   },
   "1013:1343": {
    "for": "zone 2 banner",
-   "ref": "e5dbe73519a7331624d728c3c7a65577dd39a0ea"
+   "ref": "e5dbe73519a7331624d728c3c7a65577dd39a0ea",
+   "older_dump": true
   },
   "670:9433": {
    "for": "zone 3 card (default)",
-   "ref": "26c17a475a3f123793369af363c396e1fbbdff61"
+   "ref": "26c17a475a3f123793369af363c396e1fbbdff61",
+   "older_dump": true
   },
   "670:9436": {
    "for": "zone 3 card (hover)",
-   "ref": "4f92af722c020aaf22ff989878e2e1729607c9f3"
+   "ref": "4f92af722c020aaf22ff989878e2e1729607c9f3",
+   "older_dump": true
   },
   "1179:5762": {
    "for": "zone 3 cover",
-   "ref": "9bdc2e00f7a83e6e85233f7d0a3c75c90f0bce55"
+   "ref": "9bdc2e00f7a83e6e85233f7d0a3c75c90f0bce55",
+   "older_dump": true
   },
   "1013:1369": {
    "for": "zone 3 banner",
-   "ref": "172ff28b84b349b73264855d16052064728f76f5"
+   "ref": "172ff28b84b349b73264855d16052064728f76f5",
+   "older_dump": true
   },
   "670:9462": {
    "for": "zone 4 card (default)",
-   "ref": "0c5c09f6ab7cb91c6839bd3c41ea038c5b5b1ba7"
+   "ref": "0c5c09f6ab7cb91c6839bd3c41ea038c5b5b1ba7",
+   "older_dump": true
   },
   "670:9465": {
    "for": "zone 4 card (hover)",
-   "ref": "1feab554459a89eee5603a8222ab5de2faaa5084"
+   "ref": "1feab554459a89eee5603a8222ab5de2faaa5084",
+   "older_dump": true
   },
   "670:9518": {
    "for": "zone 5 card (default)",
-   "ref": "728a2a8d19b484143f26ad2396c4c4aee42804da"
+   "ref": "728a2a8d19b484143f26ad2396c4c4aee42804da",
+   "older_dump": true
   },
   "670:9521": {
    "for": "zone 5 card (hover)",
-   "ref": "626ccffb25f4d2fb84091df1001cc045737928e0"
+   "ref": "626ccffb25f4d2fb84091df1001cc045737928e0",
+   "older_dump": true
   },
   "670:9367": {
    "for": "intro cover (same image as home hero, DESIGN-SPEC §4.2)",
-   "ref": "2e3fa9c46cbd208659aa21cdcd503d65ff002aee"
+   "ref": "2e3fa9c46cbd208659aa21cdcd503d65ff002aee",
+   "older_dump": true
   },
   "670:9370": {
    "for": "home introduction image",
-   "ref": "3f4cfd0076c9f4c7755f5340646ef8ec2b458a67"
+   "ref": "3f4cfd0076c9f4c7755f5340646ef8ec2b458a67",
+   "older_dump": true
   },
   "885:1201": {
    "for": "home zone bar",
-   "ref": "30d9d3016d547f0b3a28a3084b68117466b32974"
+   "ref": "30d9d3016d547f0b3a28a3084b68117466b32974",
+   "older_dump": true
   },
   "670:1221": {
    "for": "intro: Introduction image",
-   "ref": "bec4f0860329aaeeea6b51314eade1b76ec68072"
+   "ref": "bec4f0860329aaeeea6b51314eade1b76ec68072",
+   "older_dump": true
   },
   "670:1236": {
    "for": "intro: Knowing Southeast Asia image",
-   "ref": "74e1d6fd0e8417532fcc489e36fcca2f40ae0b30"
+   "ref": "74e1d6fd0e8417532fcc489e36fcca2f40ae0b30",
+   "older_dump": true
   },
   "I670:1239;670:1462": {
    "for": "intro: map in frame 1471 (Frame 12655, DESIGN-SPEC §4.7)",
-   "ref": "39907d2c90eadd57d4183533f40df272403a5a38"
+   "ref": "39907d2c90eadd57d4183533f40df272403a5a38",
+   "older_dump": true
   },
   "1232:1711": {
    "for": "timeline illustration 11000x791",
-   "ref": "791ae91b792bf74464ae45d721e6265bc165e7ce"
+   "ref": "791ae91b792bf74464ae45d721e6265bc165e7ce",
+   "older_dump": true
   },
   "670:9386": {
    "for": "Header #1 background (logos in image)",
-   "ref": "709572bf7eca3d77a7e317182be8860998a233f4"
+   "ref": "709572bf7eca3d77a7e317182be8860998a233f4",
+   "older_dump": true
   }
  }
 }
