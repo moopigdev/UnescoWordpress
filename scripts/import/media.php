@@ -236,7 +236,7 @@ function sh_imp_asset_ref( array $map, string $value, string $title ): int {
 }
 
 /**
- * Attachment for a timeline card's "line_art_ref" (D32/D33 · file in design/assets/lineart/ — refs.php
+ * Attachment for a timeline card's "line_art_ref" (D35/D36 "before" image · file in design/assets/lineart/ — refs.php
  * sh_import_line_art_file(), the same rule deploy.sh bundles by). 0 (+ warning) when no file.
  *
  * @param array<string, mixed> $map   image-map.json.

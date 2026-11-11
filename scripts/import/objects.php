@@ -217,7 +217,7 @@ function sh_import_timeline( array $seed, array $map, array $trails, array $obje
 				'sh_card_meta'          => (string) $it['meta_raw'],
 				'sh_thumbnail'          => isset( $thumbs[0] ) ? sh_imp_image( $map, $thumbs[0], $it['title'] . ' card' ) : 0,
 				'sh_thumbnail_2'        => isset( $thumbs[1] ) ? sh_imp_image( $map, $thumbs[1], $it['title'] . ' card 2' ) : 0,
-				'sh_line_art'           => $line ? $line : null, // D32/D33: cards 1–4 · no ref / no file = field untouched.
+				'sh_line_art'           => $line ? $line : null, // D35/D36 "before" image: cards 2–5 · no ref / no file = field untouched.
 			)
 		);
 	}

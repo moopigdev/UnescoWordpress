@@ -30,7 +30,7 @@ function sh_import_refresh_steps(): array {
 		'2026-10-27-media'       => 'object hero (manifest object_slug) · Home trails video · intro map · ICC to sRGB',
 		// deploy-crops 2026-10-28: production import ran without the design-dev crop files (not in the deploy bundle).
 		'2026-10-28-layout-refs' => 'object sh_layout *_ref still the seed file name → attachment id',
-		// timeline-lineart 2026-11-11: new field sh_line_art (D32/D33) on sites whose cards were imported without it.
+		// timeline-lineart 2026-11-11: new field sh_line_art (D35/D36) on sites whose cards were imported without it.
 		'2026-11-11-line-art'    => 'timeline_item sh_line_art from seed line_art_ref, only where still empty',
 		// timeline-lineart (D34) 2026-11-11: Reflection text = Figma 3103:1378 (seed changed from the hidden 1232:1817 text).
 		'2026-11-11-reflection'  => 'Timeline page reflection title/body → seed text, only where still the text an older import wrote',
@@ -221,7 +221,7 @@ function sh_import_refresh_layout_refs( array $seed, array $map, array $objects 
 }
 
 /**
- * Step 2026-11-11-line-art (D32/D33): each timeline card that exists (import key timeline:elephant:<card_order>) and has
+ * Step 2026-11-11-line-art (D35/D36): each timeline card that exists (import key timeline:elephant:<card_order>) and has
  * a seed "line_art_ref" gets sh_line_art — only while the field is still empty. Any value already there (an admin's
  * own line art, or one written by the import) is kept. Runs in every mode; nothing is created except the attachment.
  *
