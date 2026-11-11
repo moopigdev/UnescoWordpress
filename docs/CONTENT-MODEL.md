@@ -83,6 +83,7 @@ Zone 4 ไม่มีหน้า zone ของตัวเอง: term `zone-
 | `sh_card_meta` | `textarea` → string | ✔ | `1232:1717` 14/24 (บรรทัดละรายการ) | "SECTION : Land\nPeriod: 20th-21st century\n…" | timeline card | ✔ |
 | `sh_thumbnail` | `image` → integer | ✔ | ภาพการ์ด `1232:1714` | `4953122e…` 300×202 | timeline card | ✔ |
 | `sh_thumbnail_2` | `image` → integer | — (การ์ด 6, 9) | ภาพที่ 2 ของการ์ด | Ivory Fire Piston `8dcebc79…` | timeline card | ✔ |
+| `sh_below_image` | `image` → integer | — (D39/D41: ชิ้น 1·7·9 มี · ที่เหลือว่าง · admin เพิ่ม/เปลี่ยน/ลบได้) | Figma `3101:609` Section 51 ภาพ 500×281 บนสุดของการ์ด (`3103:1037` · `3103:1187` · `3103:1220`) · seed `items[].below_ref` (ชื่อไฟล์ที่ราก `design/assets/`) | `bbc1e1610db7….png` (ชิ้น 1) · ว่าง → ใช้ `sh_thumbnail` | timeline: ภาพใหญ่ใต้เส้นเท่านั้น (`sh_below_image ?: sh_thumbnail` · ภาพก่อน `sh_line_art` ซ้อนใต้ภาพนี้) · ⛔ แถวบน/mini-map/หน้า detail ไม่ใช้ · ขนาดแถวบนอิงภาพบนเส้น (DESIGN-SPEC §4.5c.3d) | ✔ |
 | `sh_line_art` | `image` → integer | — (D35/D36: ชิ้น 2–5 มี · 1, 6–15 ว่าง · admin เพิ่ม/เปลี่ยน/ลบได้) | Figma `3101:609` Section 51 คู่ "ก่อน ▶ หลัง" (`3103:1040` · `3103:1056` · `3246:3914` · `3160:1510`) · seed `items[].line_art_ref` (ชื่อไฟล์ใน `design/assets/lineart/`) | `02-singhasari-ganesha.png` · ว่าง → ภาพใต้เส้นเป็นภาพสีอย่างเดียว | timeline: "ภาพก่อน" ของภาพใหญ่ใต้เส้น (ขาเข้า α 0.40p → settle cross-fade เป็น `sh_thumbnail` · DESIGN-SPEC §4.5c.3b/§6.4c) · ⛔ แถวบน/mini-map ไม่ใช้ (D35) | ✔ |
 
 ## 4. `trail` (term) — group: trail
