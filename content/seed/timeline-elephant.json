@@ -30,8 +30,7 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 14,
-   "illustration_era_label_raster": "20th–21st century",
-   "line_art_ref": "01-elephant-leg-bone.png"
+   "illustration_era_label_raster": "20th–21st century"
   },
   {
    "card_order": 2,
@@ -118,7 +117,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 7,
-   "illustration_era_label_raster": null
+   "illustration_era_label_raster": null,
+   "line_art_ref": "05-embossed-brass-basin.png"
   },
   {
    "card_order": 6,
