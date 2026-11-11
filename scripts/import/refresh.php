@@ -12,6 +12,8 @@
  * and is recorded as done only when nothing is left unresolved (a run without the crop files retries next time).
  * Step 2026-11-11-line-art writes only empty fields (sh_import_refresh_line_art()) · done only when no file is missing.
  * Step 2026-11-11-reflection replaces text only while it is byte-for-byte an older seed text (sh_import_refresh_reflection()).
+ * Step 2026-11-11-timeline-images (sh_import_refresh_timeline_images()): sh_thumbnail only while it is still the exact
+ * attachment an older import put there · sh_below_image only while empty · done only when no file is missing.
  * Re-run a step on purpose: SH_IMPORT_REFRESH=<id>[,<id>] (or "all").
  *
  * @package sharedheritage-core
@@ -29,13 +31,15 @@ require_once __DIR__ . '/refresh-2026-11.php'; // Figma 2026-11-11 round (core-h
 function sh_import_refresh_steps(): array {
 	return sh_import_refresh_steps_2026_11() + array(
 		// core-import-refresh 2026-10-27: hero by manifest object_slug (+ still) · ICC → sRGB · intro map 39907d2c (P-150).
-		'2026-10-27-media'       => 'object hero (manifest object_slug) · Home trails video · intro map · ICC to sRGB',
+		'2026-10-27-media'           => 'object hero (manifest object_slug) · Home trails video · intro map · ICC to sRGB',
 		// deploy-crops 2026-10-28: production import ran without the design-dev crop files (not in the deploy bundle).
-		'2026-10-28-layout-refs' => 'object sh_layout *_ref still the seed file name → attachment id',
+		'2026-10-28-layout-refs'     => 'object sh_layout *_ref still the seed file name → attachment id',
 		// timeline-lineart 2026-11-11: new field sh_line_art (D35/D36) on sites whose cards were imported without it.
-		'2026-11-11-line-art'    => 'timeline_item sh_line_art from seed line_art_ref, only where still empty',
+		'2026-11-11-line-art'        => 'timeline_item sh_line_art from seed line_art_ref, only where still empty',
 		// timeline-lineart (D34) 2026-11-11: Reflection text = Figma 3103:1378 (seed changed from the hidden 1232:1817 text).
-		'2026-11-11-reflection'  => 'Timeline page reflection title/body → seed text, only where still the text an older import wrote',
+		'2026-11-11-reflection'      => 'Timeline page reflection title/body → seed text, only where still the text an older import wrote',
+		// timeline-d39 2026-11-11 (D39/D41): cards 5/7 new image on the line · new field sh_below_image (cards 1·7·9).
+		'2026-11-11-timeline-images' => 'timeline_item sh_thumbnail cards 5/7 (only while still the old imported file) · sh_below_image from seed below_ref (only where empty)',
 	);
 }
 
@@ -251,6 +255,55 @@ function sh_import_refresh_line_art( array $seed, array $map ): int {
 }
 
 /**
+ * Step 2026-11-11-timeline-images (D39/D41) on cards that exist (import key timeline:elephant:<card_order>):
+ *  - sh_thumbnail → image-map timeline_items.<n>.all[0] only while the field still holds the very attachment an older
+ *    import made from the old Figma image of that card (import key asset:<old ref> below · image-map before 2026-11-11).
+ *    Anything else (an admin's upload, another library image, empty) is kept.
+ *  - sh_below_image → seed below_ref only while the field is still empty.
+ * Runs in every mode (overwrite already wrote the new values, so nothing matches). Nothing is created except attachments.
+ *
+ * @param array<string, mixed> $seed Seed files.
+ * @param array<string, mixed> $map  image-map.json.
+ * @return int Values still not written because the file is missing (each one is also an import warning).
+ */
+function sh_import_refresh_timeline_images( array $seed, array $map ): int {
+	$old  = array(
+		5 => '5d9931b48643cf08792e1b307c1574625677ddff', // Figma 1232:1738 (2026-10-27) → cba74a7d (3160:1508).
+		7 => '867b28338953f22209122a9fa9dcbb76a2c2bd5c', // Figma 1232:1752 (2026-10-27) → 621646b5 (3103:1181).
+	);
+	$left = 0;
+	foreach ( (array) $seed['timeline-elephant']['items'] as $it ) {
+		$n  = (int) $it['card_order'];
+		$id = sh_imp_find_post( 'timeline_item', 'timeline:elephant:' . $n );
+		if ( ! $id ) {
+			continue;
+		}
+		$new = isset( $map['timeline_items'][ (string) $n ]['all'][0] ) ? (string) $map['timeline_items'][ (string) $n ]['all'][0] : '';
+		$cur = absint( get_post_meta( $id, 'sh_thumbnail', true ) );
+		if ( isset( $old[ $n ] ) && '' !== $new && $new !== $old[ $n ] && $cur && 'asset:' . $old[ $n ] === (string) get_post_meta( $cur, '_sh_import_key', true ) ) {
+			$att = sh_imp_image( $map, $new, (string) $it['title'] . ' card' );
+			if ( $att ) {
+				sh_imp_meta( 'post', $id, array( 'sh_thumbnail' => $att ) );
+				sh_imp_count( 'updated', 'timeline_thumbnail' );
+			} else {
+				++$left;
+			}
+		}
+		$below = isset( $it['below_ref'] ) && is_string( $it['below_ref'] ) ? $it['below_ref'] : '';
+		if ( '' !== $below && 0 === absint( get_post_meta( $id, 'sh_below_image', true ) ) ) {
+			$att = sh_imp_below_image( $map, $below, (string) $it['title'] . ' under the line' );
+			if ( $att ) {
+				sh_imp_meta( 'post', $id, array( 'sh_below_image' => $att ) );
+				sh_imp_count( 'updated', 'timeline_below_image' );
+			} else {
+				++$left;
+			}
+		}
+	}
+	return $left;
+}
+
+/**
  * Step 2026-11-11-reflection (D34): the Timeline page's reflection fields get the current seed text — only while the
  * stored value is exactly a text an older import wrote (sha256 below = every earlier seed value: git history of
  * content/seed/timeline-elephant.json up to 07ed0b5). Anything an admin edited (even one character) stays.
@@ -322,6 +375,10 @@ function sh_import_refresh( array $seed, array $map, array $manifest, array $obj
 			continue;
 		}
 		if ( '2026-11-11-line-art' === $step && sh_import_refresh_line_art( $seed, $map ) > 0 ) {
+			unset( $done[ $step ] ); // Files still missing: try again on the next import.
+			continue;
+		}
+		if ( '2026-11-11-timeline-images' === $step && sh_import_refresh_timeline_images( $seed, $map ) > 0 ) {
 			unset( $done[ $step ] ); // Files still missing: try again on the next import.
 			continue;
 		}

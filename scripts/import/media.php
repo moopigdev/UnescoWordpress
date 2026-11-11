@@ -253,3 +253,23 @@ function sh_imp_line_art( array $map, string $value, string $title ): int {
 	sh_imp_warn( 'line_art_ref without file: ' . $value . ' (' . $title . ')' );
 	return 0;
 }
+
+/**
+ * Attachment for a timeline card's "below_ref" (D39 photo under the line → sh_below_image · file at the top of
+ * design/assets — refs.php sh_import_ref_file(), the same rule deploy.sh bundles by). 0 (+ warning) when no file.
+ * Key = asset:<file without extension> (= the imageRef → shared with sh_imp_image() of the same ref).
+ *
+ * @param array<string, mixed> $map   image-map.json.
+ * @param string               $value Value of items[].below_ref.
+ * @param string               $title Attachment title.
+ */
+function sh_imp_below_image( array $map, string $value, string $title ): int {
+	$dir  = sh_imp_config()['assets'];
+	$file = sh_import_ref_file( $map, $value, $dir );
+	if ( '' !== $file ) {
+		$ext = (string) pathinfo( $file, PATHINFO_EXTENSION );
+		return sh_imp_attachment( $dir . '/' . $file, 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) ), $title );
+	}
+	sh_imp_warn( 'below_ref without file: ' . $value . ' (' . $title . ')' );
+	return 0;
+}

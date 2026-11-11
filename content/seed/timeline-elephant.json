@@ -6,7 +6,8 @@
    "extracted_by": "design-extract",
    "pages": "Page 2 Version #Final 01092026 (elephant detail frames) + Page 2.1 ALL GIF trails (all trails)"
   },
-  "note": "ลำดับ card_order = ซ้ายไปขวาในแถวการ์ดข้อมูล (ตรงกับลำดับกริดของ Elephant’s Trail) · illustration_order = ลำดับจุดบนภาพ timeline (อ่านจากภาพ raster zone4.png) — สองลำดับไม่ตรงกัน ดู P-2xx"
+  "note": "ลำดับ card_order = ซ้ายไปขวาในแถวการ์ดข้อมูล (ตรงกับลำดับกริดของ Elephant’s Trail) · illustration_order = ลำดับจุดบนภาพ timeline (อ่านจากภาพ raster zone4.png) — สองลำดับไม่ตรงกัน ดู P-2xx",
+  "d39": "2026-11-11 D39: Section 51 (Figma 3101:609 · figma-file.json lastModified 2026-11-11T08:23:07Z) เทียบ 15 ชิ้น → เปลี่ยน/เพิ่ม: ชิ้น 1 below_ref · ชิ้น 5 thumbnail_nodes · ชิ้น 7 thumbnail_nodes+below_ref · ชิ้น 9 below_ref · `below_ref` = ไฟล์ใน design/assets (ชื่อเต็ม imageRef.png) ใช้เป็น sh_below_image (ไม่บังคับ · ว่าง = sh_thumbnail) · ต้องรัน build-image-map.py ใหม่ (thumbnail_nodes ชิ้น 5/7 เปลี่ยน) · ⚠ figma-file.json ใหม่ (08:23Z) ไม่มี node 1232:*/670:2810 แล้ว (build-image-map.py ล้ม KeyError) และ node ใหม่ 3103:*/3160:* ไม่มีในไฟล์ 10-27 → ชิ้น 5/7 ให้ patch image-map.json timeline_items.5/.7 .all ตรง ๆ จาก `thumbnail_refs` (ภาพอยู่ใน design/assets แล้ว · sh_imp_image ต่อ .png ให้เอง)"
  },
  "frame": "670:1551 (Desktop - zone 4) / copy 1232:632 (Desktop - zone 6)",
  "timeline_illustration_node": "1232:1711 (ROOM4 ele 2, 11000x791, raster)",
@@ -30,7 +31,10 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 14,
-   "illustration_era_label_raster": "20th–21st century"
+   "illustration_era_label_raster": "20th–21st century",
+   "below_ref": "bbc1e1610db71dacfc7e7d1e6a09f168415c3d18.png",
+   "below_node": "3103:1037",
+   "d39": "D39(3): รูปใต้เส้น (Figma 500×281) = โครงกระดูกช้าง+คนลายเส้น `bbc1e161` ≠ ภาพบนเส้น `4953122e` (บนเส้นตรง) · ขัด P-224/D27 default (ไม่มีโครงกระดูก) → ลบ below_ref บรรทัดนี้ได้ถ้าเจ้าของไม่เอา"
   },
   {
    "card_order": 2,
@@ -113,12 +117,16 @@
    "collection": "Folklore Museum, The Institute for Southern Thai Studies",
    "object_biography": "Contributed by Mr. Pracha and Mrs. Namthip Chantharadeeying. Exhibited in the Metalwork and Metallurgy Culture Room, Folklore Museum, Institute of Southern Thai Studies.",
    "thumbnail_nodes": [
-    "1232:1738"
+    "3160:1508"
+   ],
+   "thumbnail_refs": [
+    "cba74a7dda09c74ec03e27ab1779593e8217ef00"
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 7,
    "illustration_era_label_raster": null,
-   "line_art_ref": "05-embossed-brass-basin.png"
+   "line_art_ref": "05-embossed-brass-basin.png",
+   "d39": "D39(1): บนเส้น+ใต้เส้น = `cba74a7d` (Figma 3160:1508 ขวาของ ▶ · เดิม 1232:1738 `5d9931b4`) · ไม่ใส่ below_ref (ใต้เส้น = บนเส้น) · ภาพก่อน `line_art_ref` คงเดิม แต่เล็กลง before_scale 0.62 (ค่าคงที่ธีม · DESIGN-SPEC §4.5c.3d)"
   },
   {
    "card_order": 6,
@@ -154,11 +162,17 @@
    "place_of_production": "Si Satchanalai Kiln Site, Central Thailand",
    "collection": "Brunei Darussalam Maritime Museum",
    "thumbnail_nodes": [
-    "1232:1752"
+    "3103:1181"
+   ],
+   "thumbnail_refs": [
+    "621646b5dd0382559f9cf7e9b2f8bf0620ac698e"
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 4,
-   "illustration_era_label_raster": "15th–early 16th century CE"
+   "illustration_era_label_raster": "15th–early 16th century CE",
+   "below_ref": "555d365bf27bf74e903854746e2a422bc3049d3d.png",
+   "below_node": "3103:1187",
+   "d39": "D39(2): บนเส้น = `621646b5` (Figma 3103:1181 · เดิม 1232:1752 `867b2833`) · ใต้เส้น = kendi+คนลายเส้น `555d365b` (3103:1187)"
   },
   {
    "card_order": 8,
@@ -202,7 +216,10 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 6,
-   "illustration_era_label_raster": null
+   "illustration_era_label_raster": null,
+   "below_ref": "1c0fc05b6641353a96a7a1af354072eab2433e69.png",
+   "below_node": "3103:1220",
+   "d39": "D39(3): รูปใต้เส้น (Figma 500×281) = ภาพรวม 2 ชิ้นมีเส้นขอบ `1c0fc05b` ≠ กลุ่มบนเส้น `b1ba8a8a`+`1c3aa3a1` (บนเส้นตรง)"
   },
   {
    "card_order": 10,

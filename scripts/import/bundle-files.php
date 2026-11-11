@@ -5,9 +5,9 @@
  *   php scripts/import/bundle-files.php <assets-dir> [content-dir] [image-map.json]
  *
  * stdout: one line per file "map<TAB><file>" (image-map "files") or "ref<TAB><file>" (style *_ref, e.g. design-dev
- * crops "<ref>.crop-<node>.png" · timeline line_art_ref "lineart/<file>" · 2026-11 seed assets "<sub>/<file>" for
- * sh_import_asset_subdirs() — path relative to <assets-dir>, at most one sub-folder). stderr: summary. Exit 1 = a
- * referenced file is missing / unsafe (nothing printed
+ * crops "<ref>.crop-<node>.png" · timeline line_art_ref "lineart/<file>" · below_ref "<file>" · 2026-11 seed assets
+ * "<sub>/<file>" for sh_import_asset_subdirs() — path relative to <assets-dir>, at most one sub-folder). stderr: summary.
+ * Exit 1 = a referenced file is missing / unsafe (nothing printed
  * on stdout) · exit 2 = bad arguments / unreadable JSON.
  *
  * @package sharedheritage-core

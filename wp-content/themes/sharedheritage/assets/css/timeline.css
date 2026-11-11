@@ -6,7 +6,8 @@
  *   --k      stage scale · --pitch distance between objects · --line-l/--line-r time line insets
  *   --tr/--mr  text enlargement so title ≥ 14px and metadata ≥ 12px on screen when k < 1
  *   per object: --p (0 rest → 1 centre) · --ta title alpha · per info: --pa photo alpha · --ma metadata alpha
- *   D35/D36 "before" image of the photo: --lpw width (contain 320×265 · px at 1440) · --lar file ratio · --la α
+ *   D35/D36 "before" image of the photo: --lpw width (contain 320×265 · px at 1440) · --lar file ratio · --la α ·
+ *   --lbs (D39 card 5: 0.62) = its box is this × the photo, kept on tablet/mobile
  * Values not in tokens.css (Slides colours) are page-local: --tl-cream #EDEBDA [R] · --tl-mini-line #DFDFDF [R].
  */
 
@@ -465,6 +466,7 @@ html:not(.sh-js) .sh-tl__arrow {
 
 .sh-tl__photo-line {
 	--la: 0;
+	--lbs: 1;
 	--lpwe: calc(var(--lpw) * 1px);
 	position: absolute;
 	top: 50%;
@@ -648,7 +650,7 @@ html:not(.sh-js) .sh-tl__arrow {
 
 	/* "Before" image: same box rule as the photo here, never taller than the photo (stays inside the stacked block). */
 	.sh-tl__photo-line {
-		--lpwe: min(calc(var(--lpw) * 1px), 280px, calc(260px * var(--lar)), calc(var(--pwe) / var(--ar) * var(--lar)));
+		--lpwe: min(calc(var(--lpw) * 1px), 280px, calc(260px * var(--lar)), calc(var(--pwe) * var(--lbs)), calc(var(--pwe) / var(--ar) * var(--lar) * var(--lbs)));
 	}
 
 	.sh-tl__meta {
@@ -759,7 +761,7 @@ html:not(.sh-js) .sh-tl__arrow {
 	}
 
 	.sh-tl__photo-line {
-		--lpwe: min(calc(var(--lpw) * 1px), 70cqw, calc(240px * var(--lar)), calc(var(--pwe) / var(--ar) * var(--lar)));
+		--lpwe: min(calc(var(--lpw) * 1px), 70cqw, calc(240px * var(--lar)), calc(var(--pwe) * var(--lbs)), calc(var(--pwe) / var(--ar) * var(--lar) * var(--lbs)));
 	}
 
 	.sh-tl__meta {
