@@ -3,10 +3,14 @@
  * Detail text column — DESIGN-SPEC §4.8.1 `text_blocks[]` · `caption` (P-161/P-162).
  *
  * With layout text_blocks: blocks in Figma order, each with its own font/size/line-height/colour and
- * gap_before; content from the object fields (title = sh_title_raw/post title · meta/collection rows =
- * row.field → sh_<field> with the label Figma shows · caption = sh_caption with caption.label /
- * label_breaks / paragraph_indent_nbsp) · plain_meta = text kept in the layout (lines[] or full runs) ·
- * lorem_placeholder is never shown (P-213).
+ * gap_before; content from the object fields (title = sh_title_raw/post title · meta/collection block =
+ * the info rows of §4.8.2 #12: fixed order Period → Place of production / Findspot → Material →
+ * Dimensions → Collection → Other information / Object biography, standard labels (700) + values (500,
+ * or the weight Figma gives the value run), only the fields the block's Figma rows list, empty values
+ * skipped, Section never shown · caption = sh_caption: caption.label / label_breaks, one <p> per
+ * paragraph (any line break) with caption.paragraph_gap.px between (#11 · P-246), justified when Figma
+ * says JUSTIFIED (#9) · paragraph_indent_nbsp) · plain_meta = text kept in the layout (lines[] or full
+ * runs) · lorem_placeholder is never shown (P-213).
  * Without them (objects outside the 15 Final frames): title → metadata block (sh_meta_color set) or
  * Collection line → "Caption:" + paragraphs (generic rules, §2.2 levels).
  *
@@ -66,7 +70,15 @@ $sh_block_style = static function ( array $b, string $color ) use ( $sh_weight, 
 $sh_run = static fn( string $text, $weight, string $color, string $cls = '' ): string => '<span class="' . esc_attr( trim( 'sh-detail__run ' . $cls ) ) . '" style="'
 	. esc_attr( 'font-weight:' . $sh_weight( $weight ) . ';' . ( '' !== $color ? 'color:' . $color . ';' : '' ) ) . '">' . esc_html( $text ) . '</span>';
 
-$sh_fields = array( 'collection', 'thematic_section', 'period', 'place_of_production', 'material', 'dimensions', 'local_name', 'object_biography' );
+/* Info rows under the title (DESIGN-SPEC §4.8.2 #12): fixed order · standard labels · no Section line. */
+$sh_info_rows = array(
+	'period'              => __( 'Period:', 'sharedheritage' ),
+	'place_of_production' => __( 'Place of production / Findspot:', 'sharedheritage' ),
+	'material'            => __( 'Material:', 'sharedheritage' ),
+	'dimensions'          => __( 'Dimensions:', 'sharedheritage' ),
+	'collection'          => __( 'Collection:', 'sharedheritage' ),
+	'object_biography'    => __( 'Other information / Object biography:', 'sharedheritage' ),
+);
 
 if ( ! $sh_blocks ) {
 	get_template_part( 'template-parts/detail/text-generic', null, array( 'post_id' => $sh_id ) );
@@ -90,18 +102,37 @@ if ( ! $sh_blocks ) {
 				esc_html( $sh_title )
 			);
 		} elseif ( ( 'meta' === $sh_role || 'collection' === $sh_role ) && ! empty( $sh_b['rows'] ) && is_array( $sh_b['rows'] ) ) {
-			$sh_out = '';
+			// Figma rows by field (which lines this frame shows · colours · weights).
+			$sh_by_field = array();
 			foreach ( $sh_b['rows'] as $sh_row ) {
 				$sh_field = is_array( $sh_row ) ? (string) ( $sh_row['field'] ?? '' ) : '';
-				$sh_value = in_array( $sh_field, $sh_fields, true ) ? trim( (string) sh_get( 'sh_' . $sh_field, $sh_id ) ) : '';
+				if ( isset( $sh_info_rows[ $sh_field ] ) && ! isset( $sh_by_field[ $sh_field ] ) ) {
+					$sh_by_field[ $sh_field ] = $sh_row;
+				}
+			}
+			// Weight of the run after each label run (1510 Leg Bone: value 600 in a 24/26 w600 block).
+			$sh_after = array();
+			$sh_runs  = isset( $sh_b['runs'] ) && is_array( $sh_b['runs'] ) ? array_values( $sh_b['runs'] ) : array();
+			foreach ( $sh_runs as $sh_k => $sh_r ) {
+				if ( is_array( $sh_r ) && isset( $sh_r['text'], $sh_runs[ $sh_k + 1 ]['weight'] ) && is_string( $sh_r['text'] ) ) {
+					$sh_after[ trim( $sh_r['text'] ) ] = $sh_runs[ $sh_k + 1 ]['weight'];
+				}
+			}
+			$sh_out = '';
+			foreach ( $sh_info_rows as $sh_field => $sh_label ) {
+				if ( ! isset( $sh_by_field[ $sh_field ] ) ) {
+					continue;
+				}
+				$sh_value = trim( (string) sh_get( 'sh_' . $sh_field, $sh_id ) );
 				if ( '' === $sh_value ) {
 					continue;
 				}
-				$sh_lc   = $sh_hex( $sh_row['label_color'] ?? '' );
-				$sh_vc   = $sh_hex( $sh_row['value_color'] ?? '' );
+				$sh_row  = $sh_by_field[ $sh_field ];
+				$sh_fig  = trim( (string) ( $sh_row['label_in_figma'] ?? $sh_row['label'] ?? '' ) );
+				$sh_vw   = $sh_after[ $sh_fig ] ?? ( $sh_row['value_weight'] ?? 500 );
 				$sh_out .= '<span class="sh-detail__row">'
-					. $sh_run( (string) ( $sh_row['label'] ?? '' ), $sh_row['label_weight'] ?? 700, $sh_lc ) . ' '
-					. $sh_run( $sh_value, $sh_row['value_weight'] ?? 500, $sh_vc ) . '</span>';
+					. $sh_run( $sh_label, $sh_row['label_weight'] ?? 700, $sh_hex( $sh_row['label_color'] ?? '' ) ) . ' '
+					. $sh_run( $sh_value, $sh_vw, $sh_hex( $sh_row['value_color'] ?? '' ) ) . '</span>';
 			}
 			if ( '' !== $sh_out ) {
 				$sh_default = 'meta' === $sh_role ? 'var(--sh-d-meta, inherit)' : 'var(--sh-d-coll, inherit)';
