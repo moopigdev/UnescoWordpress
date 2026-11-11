@@ -106,8 +106,7 @@
 }
 
 .sh-detail__caption--justify > p {
-	text-align: justify;
-	hyphens: auto;
+	text-align: justify; /* no hyphenation: Figma breaks whole words (D42) */
 }
 
 /* Figma bullet list: indent 1.5em per level, disc marker outside (1493 plain_meta lines). */
