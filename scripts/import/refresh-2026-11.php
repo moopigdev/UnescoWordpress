@@ -25,7 +25,7 @@ require_once __DIR__ . '/content-2026-11.php';
 function sh_import_refresh_steps_2026_11(): array {
 	return array(
 		'2026-11-11-zones'         => 'zone 1–3 name · card title · banner (only old import values) · intro / full text (only empty)',
-		'2026-11-11-objects'       => 'object title · title_raw · caption · detail rows (only old import values · slug unchanged)',
+		'2026-11-11-objects'       => 'object title · title_raw · caption · detail rows · colours · layout · panel images (only old import values · slug unchanged)',
 		'2026-11-11-chooser'       => 'zone 4 own page (link to Timeline removed) · chooser background / zone bar · trail chooser images (only empty)',
 		'2026-11-11-zone5'         => 'zone 5 has a page (D40) · page images / text / coming-soon (only empty) — waits for the seed',
 		'2026-11-11-media-replace' => 'media/out files changed under the same name (walking.webm v2): importer copy rewritten in place',
@@ -201,8 +201,8 @@ function sh_import_refresh_zones( array $seed, array $map ): int {
 		$n    = (int) $z['number'];
 		$term = get_term_by( 'slug', 'zone-' . $n, 'zone' );
 		$old  = isset( $legacy['zones'][ (string) $n ] ) ? $legacy['zones'][ (string) $n ] : array();
-		if ( ! $term instanceof WP_Term || sh_import_chooser_zone( $seed ) === $n ) {
-			continue; // The chooser zone: step 2026-11-11-chooser.
+		if ( ! $term instanceof WP_Term || sh_import_chooser_zone( $seed ) === $n || 5 === $n ) {
+			continue; // The chooser zone: step 2026-11-11-chooser · Zone 5: step 2026-11-11-zone5 (waits for its seed).
 		}
 		sh_imp_refresh_term_text( $term, 'name', (string) $z['name'], isset( $old['name'] ) ? $old['name'] : array() );
 		sh_imp_refresh_term_text( $term, 'sh_card_title', (string) ( isset( $z['name_raw'] ) ? $z['name_raw'] : $z['name'] ), isset( $old['sh_card_title'] ) ? $old['sh_card_title'] : array() );
@@ -235,13 +235,17 @@ function sh_import_refresh_zones( array $seed, array $map ): int {
 }
 
 /**
- * Step 2026-11-11-objects (D40 · BACKLOG #12 #19): title / title_raw / caption / detail rows of each in-scope object
- * → the current seed, only while the stored value is an old import value. The slug (post_name) is never changed.
+ * Step 2026-11-11-objects (D40 · BACKLOG #9–#12 #19 · P-245): title / title_raw / caption / detail rows / colours of
+ * each in-scope object → the current seed, only while the stored value is an old import value · sh_layout only while
+ * its fingerprint is an old seed layout's (refs.php sh_import_layout_fingerprint(): crop refs stored as ids count as
+ * their file) · panel images (sh_extra_image_1..6) only while the six slots are exactly an old import's list.
+ * The slug (post_name) is never changed.
  *
  * @param array<string, mixed> $seed    Seed files.
+ * @param array<string, mixed> $map     image-map.json.
  * @param array<string, int>   $objects slug => post id.
  */
-function sh_import_refresh_objects( array $seed, array $objects ): void {
+function sh_import_refresh_objects( array $seed, array $map, array $objects ): void {
 	$legacy = sh_imp_legacy();
 	$text   = array(
 		'sh_collection'          => 'collection',
@@ -265,6 +269,18 @@ function sh_import_refresh_objects( array $seed, array $objects ): void {
 		foreach ( $text as $key => $k ) {
 			$new[ $key ] = isset( $o[ $k ] ) && is_string( $o[ $k ] ) ? $o[ $k ] : '';
 		}
+		$frame = sh_import_final_frame( $o );
+		$ds    = isset( $o['detail_style'] ) && is_array( $o['detail_style'] ) ? $o['detail_style'] : array();
+		$col   = static fn( $v ): string => is_string( $v ) ? $v : '';
+		$new  += array( // Same sources as sh_import_objects().
+			'sh_panel_bg'         => $col( isset( $ds['panel_bg'] ) ? $ds['panel_bg'] : null ),
+			'sh_title_color'      => $col( isset( $ds['title_color'] ) ? $ds['title_color'] : null ),
+			'sh_text_color'       => $col( isset( $ds['text_color'] ) ? $ds['text_color'] : null ),
+			'sh_meta_color'       => $col( isset( $frame['style']['meta_color'] ) ? $frame['style']['meta_color'] : null ),
+			'sh_collection_color' => $col( isset( $ds['collection_color'] ) ? $ds['collection_color'] : null ),
+		);
+		sh_import_refresh_object_layout( $id, $frame, $map, (string) $new['post_title'], isset( $old['sh_layout'] ) ? (array) $old['sh_layout'] : array() );
+		sh_import_refresh_object_images( $id, $slug, $map, (string) $new['post_title'], isset( $old['sh_extra_images'] ) ? (array) $old['sh_extra_images'] : array() );
 		$write = array();
 		foreach ( $new as $key => $value ) {
 			$field   = 'post_title' === $key ? null : sh_imp_field_def( 'object', $key );
@@ -300,6 +316,71 @@ function sh_import_refresh_objects( array $seed, array $objects ): void {
 			sh_imp_count( 'updated', 'object_text' );
 		}
 	}
+}
+
+/**
+ * sh_layout → the current seed layout while the stored one is an old seed layout (fingerprint).
+ *
+ * @param int                  $id    Object id.
+ * @param array<string, mixed> $frame Final frame (current seed).
+ * @param array<string, mixed> $map   image-map.json.
+ * @param string               $title Object title (attachment titles).
+ * @param string[]             $olds  Old fingerprints.
+ */
+function sh_import_refresh_object_layout( int $id, array $frame, array $map, string $title, array $olds ): void {
+	$cur = json_decode( (string) get_post_meta( $id, 'sh_layout', true ), true );
+	if ( ! is_array( $cur ) ) {
+		sh_imp_count( 'skipped', 'kept_admin_value' ); // Empty / invalid = not what the import wrote.
+		return;
+	}
+	$id_name = static function ( int $att ): string {
+		$key = (string) get_post_meta( $att, '_sh_import_key', true );
+		return str_starts_with( $key, 'asset:' ) ? substr( $key, 6 ) : '';
+	};
+	$fp = sh_import_layout_fingerprint( $cur, $id_name );
+	if ( sh_import_layout_fingerprint( sh_import_layout_base( $frame ) ) === $fp ) {
+		return; // Already the current layout.
+	}
+	if ( ! in_array( $fp, $olds, true ) ) {
+		sh_imp_count( 'skipped', 'kept_admin_value' );
+		return;
+	}
+	sh_imp_meta( 'post', $id, array( 'sh_layout' => sh_import_layout( $frame, $map, $title ) ) );
+	sh_imp_count( 'updated', 'object_layout' );
+}
+
+/**
+ * sh_extra_image_1..6 → current image-map panel images while the six slots hold exactly an old import's list.
+ *
+ * @param int                  $id    Object id.
+ * @param string               $slug  Object slug.
+ * @param array<string, mixed> $map   image-map.json.
+ * @param string               $title Object title.
+ * @param array<int, mixed>    $olds  Old lists of import keys.
+ */
+function sh_import_refresh_object_images( int $id, string $slug, array $map, string $title, array $olds ): void {
+	$cur = array();
+	for ( $i = 1; $i <= 6; $i++ ) {
+		$att   = absint( get_post_meta( $id, 'sh_extra_image_' . $i, true ) );
+		$cur[] = $att ? ( (string) get_post_meta( $att, '_sh_import_key', true ) ?: 'id:' . $att ) : '';
+	}
+	while ( $cur && '' === end( $cur ) ) {
+		array_pop( $cur );
+	}
+	$new = isset( $map['objects'][ $slug ]['extra_images'] ) ? array_values( (array) $map['objects'][ $slug ]['extra_images'] ) : array();
+	if ( array_map( static fn( $r ) => 'asset:' . $r, $new ) === $cur ) {
+		return;
+	}
+	if ( ! in_array( $cur, $olds, true ) ) {
+		sh_imp_count( 'skipped', 'kept_admin_value' );
+		return;
+	}
+	$meta = array();
+	for ( $i = 1; $i <= 6; $i++ ) {
+		$meta[ 'sh_extra_image_' . $i ] = isset( $new[ $i - 1 ] ) ? (int) sh_imp_image( $map, $new[ $i - 1 ], $title . ' image ' . $i ) : 0;
+	}
+	sh_imp_meta( 'post', $id, $meta );
+	sh_imp_count( 'updated', 'object_images' );
 }
 
 /**
@@ -351,7 +432,8 @@ function sh_import_refresh_chooser( array $seed, array $map, array $pages ): int
 
 /**
  * Step 2026-11-11-zone5 (D40 · BACKLOG #16): a zone the seed now gives a page (has_page true + "page") → sh_has_page
- * true (the import wrote false) · page images / intro / coming-soon flags fill empty fields.
+ * true (the import wrote false) · name / card title while still an old import value (P-172: seed name typo) ·
+ * page images / intro / coming-soon flags fill empty fields.
  *
  * @param array<string, mixed> $seed Seed files.
  * @param array<string, mixed> $map  image-map.json.
@@ -366,9 +448,12 @@ function sh_import_refresh_zone_pages( array $seed, array $map ): int {
 			continue; // D40: Zone 5 main page (zones 1–4: other steps).
 		}
 		if ( empty( $z['has_page'] ) || empty( $z['page'] ) ) {
-			++$left; // Seed has no Zone 5 page yet (P-253): run again on the next import.
+			++$left; // Seed has no Zone 5 page yet (P-172): run again on the next import.
 			continue;
 		}
+		$old = isset( sh_imp_legacy()['zones'][ (string) $n ] ) ? sh_imp_legacy()['zones'][ (string) $n ] : array();
+		sh_imp_refresh_term_text( $term, 'name', (string) $z['name'], isset( $old['name'] ) ? $old['name'] : array() );
+		sh_imp_refresh_term_text( $term, 'sh_card_title', (string) ( isset( $z['name_raw'] ) ? $z['name_raw'] : $z['name'] ), isset( $old['sh_card_title'] ) ? $old['sh_card_title'] : array() );
 		if ( ! get_term_meta( $term->term_id, 'sh_has_page', true ) ) {
 			sh_imp_meta( 'term', $term->term_id, array( 'sh_has_page' => true ) );
 			sh_imp_count( 'updated', 'zone_sh_has_page' );
@@ -452,7 +537,7 @@ function sh_import_refresh_2026_11( string $step, array $seed, array $map, array
 		case '2026-11-11-zones':
 			return 0 === sh_import_refresh_zones( $seed, $map );
 		case '2026-11-11-objects':
-			sh_import_refresh_objects( $seed, $objects );
+			sh_import_refresh_objects( $seed, $map, $objects );
 			return true;
 		case '2026-11-11-chooser':
 			return 0 === sh_import_refresh_chooser( $seed, $map, $pages );

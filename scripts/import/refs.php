@@ -278,3 +278,57 @@ function sh_import_bundle_seed_files( array $seed, array $map, string $dir, arra
 	}
 	return $res;
 }
+
+/**
+ * Detail layout of a Final frame before "*_ref" values become attachment ids (objects.php sh_import_layout()):
+ * frame_id + frame_name first, then the whole style · layer names of panel_children / hero shortened to 40 chars.
+ *
+ * @param array<string, mixed> $frame Figma record (frame_id · frame_name · style).
+ * @return array<string, mixed>
+ */
+function sh_import_layout_base( array $frame ): array {
+	$style = (array) $frame['style'];
+	foreach ( array( 'panel_children', 'hero' ) as $list ) {
+		foreach ( (array) ( isset( $style[ $list ] ) ? $style[ $list ] : array() ) as $i => $child ) {
+			if ( is_array( $child ) && isset( $child['name'] ) ) {
+				$style[ $list ][ $i ]['name'] = mb_substr( (string) $child['name'], 0, 40 );
+			}
+		}
+	}
+	return array_merge(
+		array(
+			'frame_id'   => $frame['frame_id'],
+			'frame_name' => $frame['frame_name'],
+		),
+		$style
+	);
+}
+
+/**
+ * Fingerprint (sha256) of a detail layout that ignores how it was stored: key order, number formatting
+ * (1000 = 1000.0 · 6 decimals) and "*_ref" as file name (extension dropped) or attachment id. $id_name maps an
+ * attachment id to the file name it was imported from ('' = not an import attachment → kept as "id:<n>").
+ * Same value from the seed (build-legacy-values.py, CLI) and from a site (refresh-2026-11.php).
+ *
+ * @param array<int|string, mixed> $layout  Layout array (decoded sh_layout or sh_import_layout_base()).
+ * @param callable|null            $id_name fn( int $id ): string.
+ */
+function sh_import_layout_fingerprint( array $layout, ?callable $id_name = null ): string {
+	$norm = static function ( array $node ) use ( &$norm, $id_name ): array {
+		foreach ( $node as $k => $v ) {
+			if ( is_string( $k ) && str_ends_with( $k, '_ref' ) && ( is_int( $v ) || is_string( $v ) ) ) {
+				$name       = is_int( $v ) ? ( null !== $id_name ? (string) $id_name( $v ) : '' ) : basename( $v );
+				$node[ $k ] = '' === $name ? 'id:' . $v : 'ref:' . preg_replace( '/\.(png|jpe?g|webp|gif)$/i', '', $name );
+			} elseif ( is_array( $v ) ) {
+				$node[ $k ] = $norm( $v );
+			} elseif ( is_float( $v ) || is_int( $v ) ) {
+				$node[ $k ] = 'n:' . rtrim( rtrim( sprintf( '%.6F', (float) $v ), '0' ), '.' );
+			}
+		}
+		if ( ! array_is_list( $node ) ) {
+			ksort( $node, SORT_STRING );
+		}
+		return $node;
+	};
+	return hash( 'sha256', (string) json_encode( $norm( $layout ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) );
+}

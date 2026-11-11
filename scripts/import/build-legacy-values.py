@@ -7,6 +7,9 @@ same formulas as the importer (objects.php sh_import_objects() · entities.php s
 
   objects.<slug>.<meta>   post_title = title · sh_title_raw = title_raw when it differs from title, else ''
                           · text fields = seed value or ''        (in-scope objects = trail_order.elephant)
+                          · colours = detail_style.* / Final style.meta_color
+                          · sh_layout = sha256 fingerprints (refs.php sh_import_layout_fingerprint(), run in php)
+                          · sh_extra_images = lists of "asset:<ref>" (image-map history objects.<slug>.extra_images)
   zones.<n>.<key>         name = name · sh_card_title = name_raw (else name) · sh_cover_image = "asset:<image-map cover>"
   media.<import key>      sha256 of files an older import copied (not in git — see MEDIA_OLD)
 
@@ -54,6 +57,34 @@ MEDIA_OLD = {
 }
 
 
+COLOURS = {  # meta → (source, key): d = detail_style · s = Final frame style
+    "sh_panel_bg": ("d", "panel_bg"),
+    "sh_title_color": ("d", "title_color"),
+    "sh_text_color": ("d", "text_color"),
+    "sh_meta_color": ("s", "meta_color"),
+    "sh_collection_color": ("d", "collection_color"),
+}
+
+
+def final_frame(o):  # refs.php sh_import_final_frame()
+    for f in o["figma"]:
+        if "Final" in str(f["page"]):
+            return f
+    return o["figma"][0]
+
+
+def fingerprints(frames):
+    """sha256 of each Final frame layout — the same PHP the refresh step runs (refs.php)."""
+    php = (
+        "define('SH_IMPORT_CLI', true); require %r;"
+        "$in = json_decode(stream_get_contents(STDIN), true); $out = array();"
+        "foreach ($in as $f) { $out[] = sh_import_layout_fingerprint(sh_import_layout_base($f)); }"
+        "echo json_encode($out);"
+    ) % os.path.join(HERE, "refs.php")
+    res = subprocess.run(["php", "-r", php], input=json.dumps(frames), check=True, capture_output=True, text=True)
+    return json.loads(res.stdout)
+
+
 def git(*args):
     return subprocess.run(["git", "-C", REPO, *args], check=True, capture_output=True, text=True).stdout
 
@@ -71,6 +102,7 @@ def add(store, key, sub, meta, value):
 
 out = {}
 commits = {}
+layouts = []
 for sha, data in versions("content/seed/objects.json"):
     commits.setdefault("objects.json", []).append(sha[:7])
     for o in data["objects"]:
@@ -84,6 +116,14 @@ for sha, data in versions("content/seed/objects.json"):
         for meta, k in OBJECT_TEXT.items():
             v = o.get(k)
             add(out, "objects", slug, meta, v if isinstance(v, str) else "")
+        fin = final_frame(o)
+        for meta, (src, k) in COLOURS.items():
+            v = (o.get("detail_style") or {}).get(k) if src == "d" else (fin.get("style") or {}).get(k)
+            add(out, "objects", slug, meta, v if isinstance(v, str) else "")
+        layouts.append((slug, {"frame_id": fin["frame_id"], "frame_name": fin["frame_name"], "style": fin["style"]}))
+
+for (slug, _), fp in zip(layouts, fingerprints([f for _, f in layouts])):
+    add(out, "objects", slug, "sh_layout", fp)
 
 for sha, data in versions("content/seed/zones.json"):
     commits.setdefault("zones.json", []).append(sha[:7])
@@ -97,6 +137,9 @@ for sha, data in versions("scripts/import/image-map.json"):
     for n, z in (data.get("zones") or {}).items():
         if z.get("cover"):
             add(out, "zones", str(n), "sh_cover_image", "asset:" + z["cover"])
+    for slug, e in (data.get("objects") or {}).items():
+        if slug in out.get("objects", {}):
+            add(out, "objects", slug, "sh_extra_images", ["asset:" + r for r in (e.get("extra_images") or []) if r])
 
 for group, items in EXTRA.items():
     for sub, metas in items.items():

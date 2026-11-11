@@ -20,22 +20,8 @@ require_once __DIR__ . '/refs.php';
  * @param string               $title Object title (attachment titles).
  */
 function sh_import_layout( array $frame, array $map, string $title ): string {
-	$style = $frame['style'];
-	foreach ( array( 'panel_children', 'hero' ) as $list ) {
-		foreach ( (array) ( isset( $style[ $list ] ) ? $style[ $list ] : array() ) as $i => $child ) {
-			if ( is_array( $child ) && isset( $child['name'] ) ) {
-				$style[ $list ][ $i ]['name'] = mb_substr( (string) $child['name'], 0, 40 );
-			}
-		}
-	}
-	$style = array_merge(
-		array(
-			'frame_id'   => $frame['frame_id'],
-			'frame_name' => $frame['frame_name'],
-		),
-		sh_import_layout_refs( $style, $map, $title )
-	);
-	return (string) wp_json_encode( $style, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+	// sh_import_layout_base() (refs.php): frame ids + style · names shortened — shared with the 2026-11 refresh fingerprint.
+	return (string) wp_json_encode( sh_import_layout_refs( sh_import_layout_base( $frame ), $map, $title ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
 }
 
 /**
