@@ -16,10 +16,7 @@
  *            margin trimmed — seed items[].thumbnails[].opaque_bbox_px; card 9 = Figma crop of Group 33) ·
  *            box [x, y, w, h] as fractions of the group box (later image = drawn on top).
  * A crop is used only while the attachment is still that file (same pixel size, or WordPress' "-scaled" copy
- * with the same aspect ratio); otherwise the item falls back to the rule (helpers.php sh_tl_item()).
- *   line  = (D32/D33 · §4.5c.3b) line art `sh_line_art` shown at rest: src [file w, h] (design/assets/lineart, already
- *           trimmed) · rest [w, h] at 1440 measured from Slides. Used while the attachment is still that file; another
- *           line art (admin upload, or cards 5–15 later) is "contained" in the rule's rest box (helpers.php).
+ * with the same aspect ratio); otherwise the item falls back to the rule (helpers.php sh_tl_rule_sizes()).
  *
  * @package sharedheritage
  */
@@ -46,22 +43,18 @@ return array(
 		1 => array( // elephant-leg-bone-elephas-maximus-indicus
 			'rest' => array( 163, 86 ), 'scale' => 1.515, 'photo' => array( 320, 169 ), 'mini' => array( 48, 25 ), 'ratio' => 1360 / 720,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 1920, 1080 ), array( 276, 188, 1636, 908 ) ) ),
-			'line' => array( 'src' => array( 1295, 701 ), 'rest' => array( 284, 154 ) ),
 		),
 		2 => array( // singhasari-ganesha
 			'rest' => array( 126, 178 ), 'scale' => 1.413, 'photo' => array( 188, 265 ), 'mini' => array( 27, 38 ), 'ratio' => 1340 / 1885,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 4096, 2304 ), array( 1378, 179, 2718, 2064 ) ) ),
-			'line' => array( 'src' => array( 629, 884 ), 'rest' => array( 126, 178 ) ),
 		),
 		3 => array( // ganesha
 			'rest' => array( 149, 180 ), 'scale' => 1.342, 'photo' => array( 221, 265 ), 'mini' => array( 32, 38 ), 'ratio' => 1563 / 1878,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 4096, 2304 ), array( 1267, 179, 2830, 2057 ) ) ),
-			'line' => array( 'src' => array( 693, 831 ), 'rest' => array( 149, 180 ) ),
 		),
 		4 => array( // elephant-molar-coconut-grater-dwarf-elephant-bone
 			'rest' => array( 163, 81 ), 'scale' => 1.515, 'photo' => array( 320, 160 ), 'mini' => array( 48, 24 ), 'ratio' => 767 / 383,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 1920, 1080 ), array( 577, 348, 1344, 731 ) ) ),
-			'line' => array( 'src' => array( 648, 469 ), 'rest' => array( 181, 129 ) ),
 		),
 		5 => array( // embossed-brass-basin-with-mythical-animal-motifs
 			'rest' => array( 163, 113 ), 'scale' => 1.515, 'photo' => array( 320, 229 ), 'mini' => array( 48, 34 ), 'ratio' => 1343 / 960,

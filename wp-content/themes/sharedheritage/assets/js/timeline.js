@@ -2,12 +2,16 @@
  * Timeline v3 (D26 · D27) — DESIGN-SPEC §6.4c. One number drives the page: c = continuous index of the object at
  * the centre (1…N, load 1 = first object selected, D30). Objects/● move by --c (CSS); everything else follows p_i:
  *   p_i = clamp(1 − |i − c|·376.6 / 188, 0, 1)      (at most one object has p > 0)
- *   object opacity 0.6 + 0.4p (with line art, D32/D33: line α 1 − p · colour α p) · scale 1 + (s_i − 1)p (CSS) ·
- *   title α 0.62p² · photo α 0.40p · metadata α 0.47p
+ *   object opacity 0.6 + 0.4p · scale 1 + (s_i − 1)p (CSS) · title α 0.62p² · photo α 0.40p · metadata α 0.47p
+ *   D35/D36 photo with line art (sh_line_art): coming in = line art α 0.40p (colour photo 0) → settle cross-fades
+ *   line art → colour (colour = settle s · line 0.40p·(1 − s)) · once shown, the colour photo uses 0.40p again (leaving)
+ *   until the object is out of the window (p = 0) · reduced motion / load (D30) = colour at once.
  *   settle: no input for 150 ms and |d| < 8 px → title/photo/metadata α → 1 in 400 ms ease-out.
  * Input: ‹ › 600 ms · ● / mini-map / object click: min(900, 400 + 80·|Δ|) ms · cubic-bezier(.4,0,.2,1) ·
  * drag (1 pitch = 376.6·k px) → snap 400 ms ease-out · horizontal wheel → idle 150 ms → snap 300 ms ·
  * ← → Home End. Reduced motion: no tween/settle (jumps, centre object full at once). Stage fit k: §4.5c.5.
+ * D34 (§4.5c.7): when the page has a Reflection text it is one more stop NS = N + 1 (● only, no image) — c ∈ [1, NS] ·
+ *   text α = metadata formula 0.47p → settle 1 · the stage grows by (H_ref − stage)·p (desktop) / --refl-h·p (stacked).
  */
 ( function () {
 	'use strict';
@@ -23,14 +27,19 @@
 	};
 	var items = all( '[data-sh-tl-item]' );
 	var infos = all( '[data-sh-tl-info]' );
+	var lines = infos.map( function ( info ) {
+		return info.querySelector( '.sh-tl__photo-line' );
+	} );
 	var dots = all( '[data-sh-tl-dot]' );
 	var prevBtn = root.querySelector( '[data-sh-tl-prev]' );
 	var nextBtn = root.querySelector( '[data-sh-tl-next]' );
 	var live = root.querySelector( '[data-sh-tl-live]' );
+	var refl = root.querySelector( '[data-sh-tl-refl]' );
 	var N = items.length;
 	if ( ! N ) {
 		return;
 	}
+	var NS = N + ( refl ? 1 : 0 );   // stops: objects + Reflection (D34)
 
 	var PITCH = 376.6;           // §4.5c.2 (design px)
 	var HALF = 188;              // §6.4c p window
@@ -78,6 +87,7 @@
 	var settleAt = null;
 	var settleIdx = 1;           // D30: object 1 starts fully settled (α 1) — no load animation
 	var settleS = 1;
+	var colorIdx = 1;            // object whose colour photo has been shown (D35) — D30: object 1 at load
 	var announced = 0;
 	var suppressUntil = 0;
 	var raf = 0;
@@ -153,8 +163,16 @@
 				var m = info.querySelector( '.sh-tl__meta' );
 				metaH = Math.max( metaH, m ? m.offsetHeight : 0 );
 			} );
-			s.setProperty( '--stage-h', Math.max( 723, Math.ceil( 496 + metaH + 24 ) ) + 'px' );
+			var stageH = Math.max( 723, Math.ceil( 496 + metaH + 24 ) );
+			s.setProperty( '--stage-h', stageH + 'px' );
+			// D34 2e: H_ref = max(723, title top 428.5 + title + 15 + body + 24) → extra height grown in by p (CSS).
+			s.setProperty( '--stage-x', ( refl ? Math.max( 0, Math.ceil( 428.5 + refl.offsetHeight + 24 ) - stageH ) : 0 ) + 'px' );
+			s.removeProperty( '--refl-h' );
 			return;
+		}
+		s.removeProperty( '--stage-x' );
+		if ( refl ) {
+			s.setProperty( '--refl-h', refl.offsetHeight + 'px' );
 		}
 		var mini = root.querySelector( '[data-sh-tl-mini]' );
 		var top = mini ? mini.offsetTop + mini.offsetHeight + 12 : 140;
@@ -189,17 +207,38 @@
 
 	function render() {
 		root.style.setProperty( '--c', c.toFixed( 5 ) );
-		for ( var i = 0; i < N; i++ ) {
+		for ( var i = 0; i < NS; i++ ) {
 			var idx = i + 1;
 			var p = clamp( 1 - Math.abs( idx - c ) * PITCH / HALF, 0, 1 );
 			var s = idx === settleIdx ? settleS : 0;
 			var center = p >= 0.5;
+			if ( i >= N ) {
+				// D34 Reflection: one block (title + text) · α 0.47p → settle 1 · --rp grows the stage.
+				set( root, 'rp', '--rp', p.toFixed( 4 ) );
+				set( refl, 'ra', '--ra', mix( 0.47 * p, s ) );
+				toggle( refl, 'rv', 'is-vis', p > 0 );
+				toggle( refl, 'rc', 'is-center', center );
+				dotState( i, idx );
+				continue;
+			}
 			set( items[ i ], 'p' + i, '--p', p.toFixed( 4 ) );
 			set( items[ i ], 't' + i, '--ta', mix( 0.62 * p * p, s ) );
 			toggle( items[ i ], 'v' + i, 'is-vis', p > 0 );
 			toggle( items[ i ], 'c' + i, 'is-center', center );
 			if ( infos[ i ] ) {
-				set( infos[ i ], 'pa' + i, '--pa', mix( 0.4 * p, s ) );
+				if ( lines[ i ] ) {
+					if ( colorIdx !== idx && ( MQ_REDUCE.matches || ( idx === settleIdx && s >= 1 ) ) ) {
+						colorIdx = idx;
+					}
+					var shown = colorIdx === idx;
+					set( infos[ i ], 'pa' + i, '--pa', shown ? mix( 0.4 * p, s ) : s.toFixed( 4 ) );
+					set( lines[ i ], 'la' + i, '--la', shown ? '0' : ( 0.4 * p * ( 1 - s ) ).toFixed( 4 ) );
+					if ( shown && 0 === p ) {
+						colorIdx = 0; // Out of the window: next time it comes in as line art again.
+					}
+				} else {
+					set( infos[ i ], 'pa' + i, '--pa', mix( 0.4 * p, s ) );
+				}
 				set( infos[ i ], 'ma' + i, '--ma', mix( 0.47 * p, s ) );
 				toggle( infos[ i ], 'iv' + i, 'is-vis', p > 0 );
 				toggle( infos[ i ], 'ic' + i, 'is-center', center );
@@ -211,27 +250,36 @@
 					link.tabIndex = center ? 0 : -1;
 				}
 			}
-			if ( dots[ i ] ) {
-				// Roving tabindex: only the ● nearest the centre is a Tab stop (the others may be off screen); ← → move.
-				var stop = idx === clamp( Math.round( c ), 1, N );
-				if ( last[ 'r' + i ] !== stop ) {
-					last[ 'r' + i ] = stop;
-					dots[ i ].tabIndex = stop ? 0 : -1;
-					if ( stop && document.activeElement && document.activeElement.hasAttribute( 'data-sh-tl-dot' ) && root.contains( document.activeElement ) ) {
-						dots[ i ].focus( { preventScroll: true } );
-					}
+			dotState( i, idx );
+		}
+		arrows();
+	}
+
+	// ● of stop idx (object or Reflection): roving tabindex + aria-current.
+	function dotState( i, idx ) {
+		if ( dots[ i ] ) {
+			// Roving tabindex: only the ● nearest the centre is a Tab stop (the others may be off screen); ← → move.
+			var stop = idx === clamp( Math.round( c ), 1, NS );
+			if ( last[ 'r' + i ] !== stop ) {
+				last[ 'r' + i ] = stop;
+				dots[ i ].tabIndex = stop ? 0 : -1;
+				if ( stop && document.activeElement && document.activeElement.hasAttribute( 'data-sh-tl-dot' ) && root.contains( document.activeElement ) ) {
+					dots[ i ].focus( { preventScroll: true } );
 				}
-				var cur = Math.abs( c - idx ) < 0.5;
-				if ( last[ 'd' + i ] !== cur ) {
-					last[ 'd' + i ] = cur;
-					if ( cur ) {
-						dots[ i ].setAttribute( 'aria-current', 'true' );
-					} else {
-						dots[ i ].removeAttribute( 'aria-current' );
-					}
+			}
+			var cur = Math.abs( c - idx ) < 0.5;
+			if ( last[ 'd' + i ] !== cur ) {
+				last[ 'd' + i ] = cur;
+				if ( cur ) {
+					dots[ i ].setAttribute( 'aria-current', 'true' );
+				} else {
+					dots[ i ].removeAttribute( 'aria-current' );
 				}
 			}
 		}
+	}
+
+	function arrows() {
 		// D18: an arrow is hidden (visibility) at its end; keep keyboard focus on the arrow that is still available.
 		if ( prevBtn ) {
 			prevBtn.disabled = c <= 1 + 1e-6;
@@ -240,7 +288,7 @@
 			}
 		}
 		if ( nextBtn ) {
-			nextBtn.disabled = c >= N - 1e-6;
+			nextBtn.disabled = c >= NS - 1e-6; // D34: › stays on object 15 when there is a Reflection stop
 			if ( nextBtn.disabled && document.activeElement === nextBtn && prevBtn && ! prevBtn.disabled ) {
 				prevBtn.focus( { preventScroll: true } );
 			}
@@ -249,6 +297,11 @@
 	}
 
 	function announce( idx ) {
+		if ( live && announced !== idx && refl && idx === NS ) {
+			announced = idx;
+			live.textContent = refl.getAttribute( 'data-title' );
+			return;
+		}
 		if ( ! live || announced === idx || ! infos[ idx - 1 ] ) {
 			return;
 		}
@@ -326,7 +379,7 @@
 	}
 
 	function go( to, dur, ease ) {
-		to = clamp( Math.round( to ), 1, N );
+		to = clamp( Math.round( to ), 1, NS );
 		if ( ! tween && Math.abs( to - c ) < 1e-6 ) {
 			return;
 		}
@@ -365,7 +418,7 @@
 			return;
 		}
 		var idx = parseInt( el.getAttribute( 'data-sh-tl-go' ), 10 );
-		if ( idx >= 1 && idx <= N ) {
+		if ( idx >= 1 && idx <= NS ) {
 			jump( idx );
 		}
 	}, true );
@@ -378,7 +431,7 @@
 		}
 		e.preventDefault();
 		if ( 'first' === map[ e.key ] || 'last' === map[ e.key ] ) {
-			jump( 'first' === map[ e.key ] ? 1 : N );
+			jump( 'first' === map[ e.key ] ? 1 : NS );
 		} else {
 			step( map[ e.key ] );
 		}
@@ -399,7 +452,7 @@
 		dx *= 1 === e.deltaMode ? 16 : ( 2 === e.deltaMode ? root.clientWidth : 1 );
 		tween = null;
 		touched();
-		c = clamp( c + dx / pitchPx, 1, N );
+		c = clamp( c + dx / pitchPx, 1, NS );
 		wheelAt = performance.now();
 		wheelPending = true;
 		kick();
@@ -435,7 +488,7 @@
 			}
 		}
 		touched();
-		c = clamp( drag.c0 - dx / pitchPx, 1, N );
+		c = clamp( drag.c0 - dx / pitchPx, 1, NS );
 		drag.pts.push( [ performance.now(), e.clientX ] );
 		if ( drag.pts.length > 6 ) {
 			drag.pts.shift();
@@ -459,7 +512,7 @@
 		var to = clamp( Math.round( c - ( v * 200 ) / pitchPx ), Math.round( c ) - 2, Math.round( c ) + 2 );
 		if ( MQ_REDUCE.matches ) {
 			tween = null;
-			c = clamp( to, 1, N );
+			c = clamp( to, 1, NS );
 			kick();
 		} else {
 			go( to, 400, EASE_OUT );

@@ -6,7 +6,7 @@
  *   --k      stage scale · --pitch distance between objects · --line-l/--line-r time line insets
  *   --tr/--mr  text enlargement so title ≥ 14px and metadata ≥ 12px on screen when k < 1
  *   per object: --p (0 rest → 1 centre) · --ta title alpha · per info: --pa photo alpha · --ma metadata alpha
- *   per line art (D32/D33): --lw rest width (px at 1440) · --lar file ratio — α 1 − p, colour image α p
+ *   D35 line art of the photo: --lpw width (contain 320×265 · px at 1440) · --lar file ratio · --la α (timeline.js)
  * Values not in tokens.css (Slides colours) are page-local: --tl-cream #EDEBDA [R] · --tl-mini-line #DFDFDF [R].
  */
 
@@ -41,7 +41,9 @@
 
 .sh-tl__fit {
 	position: relative;
-	height: calc(var(--stage-h, 723px) * var(--k)); /* --stage-h > 723 only when a metadata block runs past y_rel 699 */
+	/* --stage-h > 723 only when a metadata block runs past y_rel 699 · D34: + the extra height of the Reflection text
+	   (--stage-x, timeline.js) × its progress --rp, so the stage grows with the scroll, never jumps (§4.5c.7 2e). */
+	height: calc((var(--stage-h, 723px) + var(--stage-x, 0px) * var(--rp, 0)) * var(--k));
 }
 
 .sh-tl__stage {
@@ -49,7 +51,7 @@
 	top: 0;
 	left: 50%;
 	width: 1440px;
-	height: var(--stage-h, 723px);
+	height: calc(var(--stage-h, 723px) + var(--stage-x, 0px) * var(--rp, 0));
 	margin-left: -720px;
 	transform: scale(var(--k));
 	transform-origin: 50% 0;
@@ -292,44 +294,6 @@ html:not(.sh-js) .sh-tl__arrow {
 	cursor: default;
 }
 
-/*
- * D32/D33 (§4.5c.3b · §6.4c): item with line art = 2 layers, same base (bottom centre) and same scale s_i (both inside
- * .sh-tl__obj) · line art under the colour image · α_line = 1 − p · α_colour = p (no 0.6 floor). Line art box =
- * its own rest width --lw (§4.5c.3b) × file ratio --lar, clamped like the colour box on tablet/mobile (§4.5c.6).
- */
-.sh-tl__item.has-line .sh-tl__obj {
-	opacity: 1;
-}
-
-.sh-tl__item.has-line .sh-tl__obj > .sh-tl-pic {
-	opacity: var(--p);
-}
-
-.sh-tl__line-art {
-	--lwe: calc(var(--lw) * 1px);
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	display: block;
-	width: var(--lwe);
-	aspect-ratio: var(--lar);
-	opacity: calc(1 - var(--p));
-	transform: translateX(-50%);
-}
-
-/* Centred: the (fading) line art is wider/taller than the colour image — never cover the title link. */
-.sh-tl__item.is-center .sh-tl__line-art {
-	pointer-events: none;
-}
-
-.sh-tl__line-img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	max-width: none;
-	pointer-events: none;
-}
-
 .sh-tl.is-moving .sh-tl__item,
 .sh-tl.is-moving .sh-tl__dot-item {
 	will-change: transform;
@@ -474,6 +438,75 @@ html:not(.sh-js) .sh-tl__arrow {
 	pointer-events: auto;
 }
 
+/*
+ * D35 (D36: only items whose sh_line_art is set): line art in the photo box, over the photo · contain 320×265 by its own
+ * ratio · same centre (x 720 · y_rel 561) · α --la: 0.40p while moving → 0 as the colour photo fades in on settle.
+ */
+.sh-tl__photo-line {
+	--la: 0;
+	--lpwe: calc(var(--lpw) * 1px);
+	position: absolute;
+	top: calc(561px - var(--lpwe) / var(--lar) / 2);
+	left: calc(720px - var(--lpwe) / 2);
+	display: block;
+	width: var(--lpwe);
+	aspect-ratio: var(--lar);
+	opacity: var(--la);
+	pointer-events: none; /* clicks go to the photo link underneath */
+}
+
+.sh-tl__line-img {
+	display: block;
+	width: 100%;
+	max-width: none;
+	height: 100%;
+}
+
+/*
+ * ---- D34 Reflection (§4.5c.7): stop N + 1 · no image · title + text block x 560 → 1340 (780) · title top y_rel 428.5 ·
+ * title Komet-Heavy 20/25 · gap 15 · body Komet Medium 14/17.5, blank line between paragraphs · #212529 · α --ra ----
+ */
+.sh-tl__refl {
+	--ra: 0;
+	position: absolute;
+	top: 428.5px;
+	left: 560px;
+	width: 780px;
+	color: var(--sh-color-neutral-900);
+	visibility: hidden;
+	opacity: var(--ra);
+}
+
+.sh-tl__refl.is-vis {
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.sh-tl__refl-title {
+	margin: 0 0 15px;
+	font-family: var(--sh-font-komet);
+	font-size: calc(20px * max(1, 14 / (20 * var(--k)))); /* title floor 14px on screen (§4.5c.5) */
+	font-weight: var(--sh-fw-komet-heavy);
+	line-height: calc(25px * max(1, 14 / (20 * var(--k))));
+	letter-spacing: 0;
+}
+
+.sh-tl__refl-body {
+	font-family: var(--sh-font-komet);
+	font-size: calc(14px * var(--mr)); /* floor 12px on screen, as the metadata */
+	font-weight: var(--sh-fw-komet-medium);
+	line-height: calc(17.5px * var(--mr));
+	letter-spacing: 0;
+}
+
+.sh-tl__refl-body p {
+	margin: 0 0 calc(17.5px * var(--mr));
+}
+
+.sh-tl__refl-body p:last-child {
+	margin-bottom: 0;
+}
+
 /* ---- Image group: trimmed crop of each image inside the group box ---- */
 .sh-tl-pic {
 	position: relative;
@@ -549,10 +582,6 @@ html:not(.sh-js) .sh-tl__arrow {
 		--rwe: min(calc(var(--rw) * 1px), 18cqw, calc(140px * var(--ar)));
 	}
 
-	.sh-tl__line-art {
-		--lwe: min(calc(var(--lw) * 1px), 18cqw, calc(140px * var(--lar)));
-	}
-
 	/* Narrower than 340 so the centred title never reaches the neighbours (pitch 26.15cqw · rest ≤ 18cqw). */
 	.sh-tl__title {
 		max-width: min(340px, 33cqw);
@@ -582,6 +611,14 @@ html:not(.sh-js) .sh-tl__arrow {
 		left: auto;
 	}
 
+	/* Line art: centred on the photo (first in the column), never taller than it (stays inside the stacked block). */
+	.sh-tl__photo-line {
+		--lpwe: min(calc(var(--lpw) * 1px), 280px, calc(260px * var(--lar)), calc(var(--pwe) / var(--ar) * var(--lar)));
+		top: calc(var(--pwe) / var(--ar) / 2 - var(--lpwe) / var(--lar) / 2);
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
 	.sh-tl__meta {
 		position: relative;
 		top: auto;
@@ -589,6 +626,33 @@ html:not(.sh-js) .sh-tl__arrow {
 		width: min(560px, 100%);
 		font-size: 14px;
 		line-height: 18.6px;
+	}
+
+	/* D34: the stacked area grows to the Reflection text height (--refl-h, timeline.js) with its progress --rp. */
+	.sh-tl__below {
+		min-height: calc(var(--refl-h, 0px) * var(--rp, 0));
+	}
+
+	.sh-tl__refl {
+		top: 0;
+		right: 0;
+		left: 0;
+		width: min(780px, calc(100% - 48px));
+		margin: 0 auto;
+	}
+
+	.sh-tl__refl-title {
+		font-size: 20px;
+		line-height: 25px;
+	}
+
+	.sh-tl__refl-body {
+		font-size: 14px;
+		line-height: 17.5px;
+	}
+
+	.sh-tl__refl-body p {
+		margin-bottom: 17.5px;
 	}
 
 	.sh-tl__back {
@@ -638,10 +702,6 @@ html:not(.sh-js) .sh-tl__arrow {
 		--rwe: min(calc(var(--rw) * 1px), 46cqw, calc(120px * var(--ar)));
 	}
 
-	.sh-tl__line-art {
-		--lwe: min(calc(var(--lw) * 1px), 46cqw, calc(120px * var(--lar)));
-	}
-
 	.sh-tl__title {
 		max-width: min(340px, 68cqw);
 		font-size: 16px;
@@ -657,8 +717,30 @@ html:not(.sh-js) .sh-tl__arrow {
 		padding: 0 20px;
 	}
 
+	.sh-tl__photo-line {
+		--lpwe: min(calc(var(--lpw) * 1px), 70cqw, calc(240px * var(--lar)), calc(var(--pwe) / var(--ar) * var(--lar)));
+	}
+
 	.sh-tl__meta {
 		width: 100%;
 		line-height: 20px;
+	}
+
+	.sh-tl__refl {
+		width: auto;
+		padding: 0 20px;
+	}
+
+	.sh-tl__refl-title {
+		font-size: 18px;
+		line-height: 22px;
+	}
+
+	.sh-tl__refl-body {
+		line-height: 20px;
+	}
+
+	.sh-tl__refl-body p {
+		margin-bottom: 20px;
 	}
 }
