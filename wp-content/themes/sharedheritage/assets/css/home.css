@@ -190,7 +190,9 @@
 
 /* ---- 5 · Trails ---- */
 .sh-home-trails {
-	margin-top: 15px; /* 1751 → 1766 */
+	/* D46: Zone 123 bottom → Trails title. Figma 3117:3607: Zone 123 ends y -118, Frame All trails starts y 2 = 120.
+	   Tablet/phone have no frame (D5): scaled down, 80 / 60. */
+	margin-top: 60px;
 }
 
 .sh-home-trails__text {
@@ -356,6 +358,10 @@
 
 /* ---- Desktop ---- */
 @media (min-width: 1024px) {
+	.sh-home-trails {
+		margin-top: 120px;
+	}
+
 	.sh-home {
 		padding-bottom: 287px; /* 2935 → 3222 (frame tail, P-211: no footer in Figma) */
 	}
@@ -371,6 +377,10 @@
 /* ---- Tablet: icons wrap, 4 per row. The icon grid is taller than the video here, so the stage shows the
    video first and swaps to the icons (no empty overlay area). ---- */
 @media (max-width: 1023px) {
+	.sh-home-trails {
+		margin-top: 80px;
+	}
+
 	.sh-home-trails__stage.is-armed:not(.is-revealed) .sh-home-trails__icons {
 		display: none;
 	}
@@ -396,6 +406,10 @@
 
 /* ---- Mobile ---- */
 @media (max-width: 767px) {
+	.sh-home-trails {
+		margin-top: 60px;
+	}
+
 	.sh-home-intro {
 		padding-block: var(--sh-space-25);
 	}
