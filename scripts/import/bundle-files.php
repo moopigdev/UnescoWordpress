@@ -5,7 +5,9 @@
  *   php scripts/import/bundle-files.php <assets-dir> [content-dir] [image-map.json]
  *
  * stdout: one line per file "map<TAB><file>" (image-map "files") or "ref<TAB><file>" (style *_ref, e.g. design-dev
- * crops "<ref>.crop-<node>.png" · 2026-11 seed assets, "<sub>/<file>" one level for sh_import_asset_subdirs()). stderr: summary. Exit 1 = a referenced file is missing / unsafe (nothing printed
+ * crops "<ref>.crop-<node>.png" · timeline line_art_ref "lineart/<file>" · 2026-11 seed assets "<sub>/<file>" for
+ * sh_import_asset_subdirs() — path relative to <assets-dir>, at most one sub-folder). stderr: summary. Exit 1 = a
+ * referenced file is missing / unsafe (nothing printed
  * on stdout) · exit 2 = bad arguments / unreadable JSON.
  *
  * @package sharedheritage-core
@@ -36,7 +38,11 @@ $sh_json = static function ( string $path ) use ( $sh_stderr ): array {
 	return $data;
 };
 
-$sh_res = sh_import_bundle_files( array( 'objects' => $sh_json( $sh_cont . '/seed/objects.json' ) ), $sh_json( $sh_mapf ), $sh_dir );
+$sh_seed = array(
+	'objects'           => $sh_json( $sh_cont . '/seed/objects.json' ),
+	'timeline-elephant' => $sh_json( $sh_cont . '/seed/timeline-elephant.json' ),
+);
+$sh_res  = sh_import_bundle_files( $sh_seed, $sh_json( $sh_mapf ), $sh_dir );
 
 // 2026-11 seed assets (zone banners · Zone 5 page · Zone 4 chooser — "<sub>/<file>" for sh_import_asset_subdirs()).
 $sh_res = sh_import_bundle_seed_files(

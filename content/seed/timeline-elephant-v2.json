@@ -1119,7 +1119,7 @@
   }
  ],
  "v3": {
-  "decision": "D26 + D27",
+  "decision": "D26 + D27 + D35/D36 + #14/#15 (2026-11-11 ลูกค้า Slides Comment Dev)",
   "source": "Slides 31–54 + annot-zone4-ref-1..3 (= owner-ref-before/transition/active) — ค่า [R] วัดที่ ref-3 ×1440/1424 · y_rel นับจากเส้นล่าง header ใน Slides (86.5)",
   "stage": {
    "design_width": 1440,
@@ -1219,7 +1219,30 @@
    "y_rel_center": 382.2,
    "thickness": 4,
    "dot_diameter": 12,
-   "color": "#000000"
+   "color": "#000000",
+   "reflection_ring": {
+    "label": "[S] #15 ลูกค้า S21 (slide-21.jpg) · ปัด [P]",
+    "replaces_dot_diameter": 12,
+    "outer_diameter": 44,
+    "border_px": 2,
+    "border_color": "#000000",
+    "fill": "#FFFFFF",
+    "covers_line": true,
+    "center": "บนเส้น y_rel 382.2 · x = 720 + (16−c)·376.6",
+    "hit_target": [
+     44,
+     44
+    ],
+    "measured_in_slide21": {
+     "ring_px": 27,
+     "ring_border_px": 1.5,
+     "dot_px": 7.5,
+     "line_px": 2.5,
+     "scale_to_spec": 1.6
+    },
+    "tablet_diameter": 40,
+    "mobile_diameter": 32
+   }
   },
   "object": {
    "rest_contain_box": [
@@ -1312,7 +1335,37 @@
      ],
      "slides": "31-36"
     }
-   }
+   },
+   "size_rule_14": {
+    "label": "[C] ลูกค้า S18/S20 (BACKLOG #14)",
+    "base": "ภาพใต้เส้นของชิ้นเดียวกัน (items[].photo_px · contain ≤320×265)",
+    "active_ratio": 0.6,
+    "rest_ratio": 0.3,
+    "scale_rest_to_active": 2.0,
+    "formula": "size_i(p) = photo_px_i × (0.30 + 0.30·p) · p = clamp(1 − |d|/188, 0, 1)",
+    "anchor": "ฐาน 380.2−2 · origin กึ่งกลางล่าง",
+    "supersedes": [
+     "rest_contain_box",
+     "active_scale",
+     "wide_contain_box",
+     "active_contain_box",
+     "items[].rest_px/active_px/scale เดิม (ประวัติ)"
+    ],
+    "rest_opacity_unchanged": 0.6,
+    "title_gap_above_active_object": 19,
+    "min_gap_checked_px": {
+     "active_vs_rest_neighbour": 232.6,
+     "rest_vs_rest": 280.6,
+     "mid_scroll": 232.6,
+     "note": "ที่เวลาใดมีชิ้นเดียวที่ p>0 · active กว้างสุด 192 · rest กว้างสุด 96"
+    },
+    "max_active_px": [
+     192,
+     159
+    ],
+    "minimap": "ไม่เปลี่ยน"
+   },
+   "_superseded_by_14": "rest_contain_box · active_contain_box · wide_contain_box · active_scale · min_gap_checked_px · measured_S = ประวัติ (กฎเดิมก่อน #14) — ใช้ size_rule_14 + items[].rest_px/active_px"
   },
   "title": {
    "font": "Komet-Heavy",
@@ -1427,15 +1480,15 @@
     "key": "elephant leg bone",
     "ratio": 1.89,
     "rest_px": [
-     163,
-     86
+     96,
+     51
     ],
     "active_px": [
-     247,
-     131
+     192,
+     101
     ],
-    "scale": 1.515,
-    "basis": "กฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      48,
      25
@@ -1445,22 +1498,32 @@
      169
     ],
     "trimmed_src": "1360×720",
-    "photo_top_y_rel": 476.5
+    "photo_top_y_rel": 476.5,
+    "rest_px_old": [
+     163,
+     86
+    ],
+    "active_px_old": [
+     247,
+     131
+    ],
+    "scale_old": 1.515,
+    "title_bottom_y_rel": 258.2
    },
    {
     "card_order": 2,
     "key": "singhasari ganesha",
     "ratio": 0.71,
     "rest_px": [
-     126,
-     178
+     56,
+     80
     ],
     "active_px": [
-     178,
-     250
+     113,
+     159
     ],
-    "scale": 1.413,
-    "basis": "rest วัดจากลายเส้น Slides 31–40 (126×174–181) · active ตามกฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      27,
      38
@@ -1470,22 +1533,32 @@
      265
     ],
     "trimmed_src": "1340×1885",
-    "photo_top_y_rel": 428.5
+    "photo_top_y_rel": 428.5,
+    "rest_px_old": [
+     126,
+     178
+    ],
+    "active_px_old": [
+     178,
+     250
+    ],
+    "scale_old": 1.413,
+    "title_bottom_y_rel": 200.2
    },
    {
     "card_order": 3,
     "key": "ganesha",
     "ratio": 0.83,
     "rest_px": [
-     149,
-     180
+     66,
+     80
     ],
     "active_px": [
-     200,
-     249
+     133,
+     159
     ],
-    "scale": 1.342,
-    "basis": "rest วัดลายเส้น (149×175–184) · active วัดภาพสี slide 33/35 (200×249)",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      32,
      38
@@ -1495,22 +1568,32 @@
      265
     ],
     "trimmed_src": "1563×1878",
-    "photo_top_y_rel": 428.5
+    "photo_top_y_rel": 428.5,
+    "rest_px_old": [
+     149,
+     180
+    ],
+    "active_px_old": [
+     200,
+     249
+    ],
+    "scale_old": 1.342,
+    "title_bottom_y_rel": 200.2
    },
    {
     "card_order": 4,
     "key": "elephant molar",
     "ratio": 2.0,
     "rest_px": [
-     163,
-     81
+     96,
+     48
     ],
     "active_px": [
-     247,
-     123
+     192,
+     96
     ],
-    "scale": 1.515,
-    "basis": "กฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      48,
      24
@@ -1520,22 +1603,32 @@
      160
     ],
     "trimmed_src": "767×383",
-    "photo_top_y_rel": 481.0
+    "photo_top_y_rel": 481.0,
+    "rest_px_old": [
+     163,
+     81
+    ],
+    "active_px_old": [
+     247,
+     123
+    ],
+    "scale_old": 1.515,
+    "title_bottom_y_rel": 263.2
    },
    {
     "card_order": 5,
     "key": "embossed brass",
     "ratio": 1.4,
     "rest_px": [
-     163,
-     113
+     96,
+     69
     ],
     "active_px": [
-     247,
-     173
+     192,
+     137
     ],
-    "scale": 1.515,
-    "basis": "วัดภาพสี slide 43/47 (rest) · 49–51 (active) · ×1.52",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      48,
      34
@@ -1545,22 +1638,32 @@
      229
     ],
     "trimmed_src": "1343×960",
-    "photo_top_y_rel": 446.5
+    "photo_top_y_rel": 446.5,
+    "rest_px_old": [
+     163,
+     113
+    ],
+    "active_px_old": [
+     247,
+     173
+    ],
+    "scale_old": 1.515,
+    "title_bottom_y_rel": 222.2
    },
    {
     "card_order": 6,
     "key": "ivory fire piston",
     "ratio": 0.656,
     "rest_px": [
-     107,
-     163
+     52,
+     80
     ],
     "active_px": [
-     163,
-     248
+     104,
+     159
     ],
-    "scale": 1.523,
-    "basis": "rest วัด slide 47/49/51 (107×160–167) · active = ×1.52 ตาม Basin",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      25,
      38
@@ -1570,22 +1673,32 @@
      265
     ],
     "trimmed_src": "group 107:163 (Slides 49/51 · 2 ภาพ box ซ้าย/ขวา ไม่ซ้อน ฐานเสมอกัน ช่องว่าง ≈7px)",
-    "photo_top_y_rel": 428.5
+    "photo_top_y_rel": 428.5,
+    "rest_px_old": [
+     107,
+     163
+    ],
+    "active_px_old": [
+     163,
+     248
+    ],
+    "scale_old": 1.523,
+    "title_bottom_y_rel": 200.2
    },
    {
     "card_order": 7,
     "key": "elephant and mahout",
     "ratio": 0.64,
     "rest_px": [
-     114,
-     180
+     51,
+     80
     ],
     "active_px": [
-     159,
-     250
+     101,
+     159
     ],
-    "scale": 1.395,
-    "basis": "กฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      24,
      38
@@ -1595,22 +1708,32 @@
      265
     ],
     "trimmed_src": "1401×2203",
-    "photo_top_y_rel": 428.5
+    "photo_top_y_rel": 428.5,
+    "rest_px_old": [
+     114,
+     180
+    ],
+    "active_px_old": [
+     159,
+     250
+    ],
+    "scale_old": 1.395,
+    "title_bottom_y_rel": 200.2
    },
    {
     "card_order": 8,
     "key": "patola",
     "ratio": 1.05,
     "rest_px": [
-     163,
-     155
+     84,
+     80
     ],
     "active_px": [
-     247,
-     234
+     167,
+     159
     ],
-    "scale": 1.515,
-    "basis": "กฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      40,
      38
@@ -1620,22 +1743,32 @@
      265
     ],
     "trimmed_src": "611×580",
-    "photo_top_y_rel": 428.5
+    "photo_top_y_rel": 428.5,
+    "rest_px_old": [
+     163,
+     155
+    ],
+    "active_px_old": [
+     247,
+     234
+    ],
+    "scale_old": 1.515,
+    "title_bottom_y_rel": 200.2
    },
    {
     "card_order": 9,
     "key": "elephant shaped relic",
     "ratio": 1.2,
     "rest_px": [
-     163,
-     136
+     95,
+     80
     ],
     "active_px": [
-     247,
-     206
+     191,
+     159
     ],
-    "scale": 1.515,
-    "basis": "กฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      46,
      38
@@ -1645,22 +1778,32 @@
      265
     ],
     "trimmed_src": "group 180×150",
-    "photo_top_y_rel": 428.5
+    "photo_top_y_rel": 428.5,
+    "rest_px_old": [
+     163,
+     136
+    ],
+    "active_px_old": [
+     247,
+     206
+    ],
+    "scale_old": 1.515,
+    "title_bottom_y_rel": 200.2
    },
    {
     "card_order": 10,
     "key": "pod duang",
     "ratio": 1.0,
     "rest_px": [
-     163,
-     163
+     68,
+     68
     ],
     "active_px": [
-     247,
-     247
+     136,
+     136
     ],
-    "scale": 1.515,
-    "basis": "กฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      38,
      38
@@ -1670,22 +1813,32 @@
      226
     ],
     "trimmed_src": "226×226",
-    "photo_top_y_rel": 448.0
+    "photo_top_y_rel": 448.0,
+    "rest_px_old": [
+     163,
+     163
+    ],
+    "active_px_old": [
+     247,
+     247
+    ],
+    "scale_old": 1.515,
+    "title_bottom_y_rel": 223.2
    },
    {
     "card_order": 11,
     "key": "hand carved ivory",
     "ratio": 7.47,
     "rest_px": [
-     200,
-     27
+     96,
+     13
     ],
     "active_px": [
-     304,
-     41
+     192,
+     26
     ],
-    "scale": 1.52,
-    "basis": "กฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      48,
      6
@@ -1695,22 +1848,32 @@
      43
     ],
     "trimmed_src": "2017×270",
-    "photo_top_y_rel": 539.5
+    "photo_top_y_rel": 539.5,
+    "rest_px_old": [
+     200,
+     27
+    ],
+    "active_px_old": [
+     304,
+     41
+    ],
+    "scale_old": 1.52,
+    "title_bottom_y_rel": 333.2
    },
    {
     "card_order": 12,
     "key": "tin ingot",
     "ratio": 1.5,
     "rest_px": [
-     163,
-     109
+     96,
+     64
     ],
     "active_px": [
-     247,
-     165
+     192,
+     128
     ],
-    "scale": 1.515,
-    "basis": "กฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      48,
      32
@@ -1720,22 +1883,32 @@
      214
     ],
     "trimmed_src": "954×637",
-    "photo_top_y_rel": 454.0
+    "photo_top_y_rel": 454.0,
+    "rest_px_old": [
+     163,
+     109
+    ],
+    "active_px_old": [
+     247,
+     165
+    ],
+    "scale_old": 1.515,
+    "title_bottom_y_rel": 231.2
    },
    {
     "card_order": 13,
     "key": "wooden cold press",
     "ratio": 3.26,
     "rest_px": [
-     200,
-     61
+     96,
+     29
     ],
     "active_px": [
-     304,
-     93
+     192,
+     59
     ],
-    "scale": 1.52,
-    "basis": "กฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      48,
      15
@@ -1745,22 +1918,32 @@
      98
     ],
     "trimmed_src": "936×287",
-    "photo_top_y_rel": 512.0
+    "photo_top_y_rel": 512.0,
+    "rest_px_old": [
+     200,
+     61
+    ],
+    "active_px_old": [
+     304,
+     93
+    ],
+    "scale_old": 1.52,
+    "title_bottom_y_rel": 300.2
    },
    {
     "card_order": 14,
     "key": "siwaih",
     "ratio": 3.89,
     "rest_px": [
-     200,
-     51
+     96,
+     25
     ],
     "active_px": [
-     304,
-     78
+     192,
+     49
     ],
-    "scale": 1.52,
-    "basis": "กฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      48,
      12
@@ -1770,22 +1953,32 @@
      82
     ],
     "trimmed_src": "981×252",
-    "photo_top_y_rel": 520.0
+    "photo_top_y_rel": 520.0,
+    "rest_px_old": [
+     200,
+     51
+    ],
+    "active_px_old": [
+     304,
+     78
+    ],
+    "scale_old": 1.52,
+    "title_bottom_y_rel": 310.2
    },
    {
     "card_order": 15,
     "key": "bas relief of a royal",
     "ratio": 3.23,
     "rest_px": [
-     200,
-     62
+     96,
+     30
     ],
     "active_px": [
-     304,
-     94
+     192,
+     59
     ],
-    "scale": 1.52,
-    "basis": "กฎ",
+    "scale": 2.0,
+    "basis": "[C] #14: rest 0.30 / active 0.60 × photo_px",
     "minimap_px": [
      48,
      15
@@ -1795,7 +1988,17 @@
      99
     ],
     "trimmed_src": "4096×1270",
-    "photo_top_y_rel": 511.5
+    "photo_top_y_rel": 511.5,
+    "rest_px_old": [
+     200,
+     62
+    ],
+    "active_px_old": [
+     304,
+     94
+    ],
+    "scale_old": 1.52,
+    "title_bottom_y_rel": 300.2
    }
   ],
   "groups": {
@@ -1915,6 +2118,25 @@
    "applies_from_width": 1280,
    "transform": "scale(k) origin top-center",
    "line_and_bg": "full viewport width"
+  },
+  "spacing_14": {
+   "label": "[P] S19 ลูกค้า: ภาพ/คำอธิบายล่างชิดเส้นที่ tablet/mobile",
+   "desktop": {
+    "line_bottom_to_photo_top_px_min": 44.3,
+    "line_bottom_to_meta_px": 111.8,
+    "change": "ไม่เปลี่ยน (ไม่ชิด)"
+   },
+   "tablet_768_1279": {
+    "line_to_photo_px_min": 40,
+    "photo_to_meta_px_min": 24,
+    "photo_box_height": "auto = ความสูงภาพจริง"
+   },
+   "mobile_lt_768": {
+    "line_to_photo_px_min": 32,
+    "photo_to_meta_px_min": 20,
+    "photo_box_height": "auto = ความสูงภาพจริง"
+   },
+   "measured_from": "ขอบล่างเส้น (เส้นหนา 4)"
   }
  }
 }

@@ -83,10 +83,24 @@ function sh_import_ref_file( array $map, string $value, string $dir ): string {
 }
 
 /**
- * Every design/assets file the import reads: image-map "files" + the "*_ref" files of the in-scope objects'
- * Final frames (the same objects and frames sh_import_objects() / sh_import_layout() use).
+ * File (relative to $dir) that a timeline card's "line_art_ref" points to ('' = none): first design/assets/lineart/
+ * (DESIGN-SPEC §4.5c.3b · design-dev export) → "lineart/<file>", else the same rule as any "*_ref" at the top of $dir.
  *
- * @param array<string, mixed> $seed Seed files (needs "objects").
+ * @param array<string, mixed> $map   image-map.json.
+ * @param string               $value Value of items[].line_art_ref.
+ * @param string               $dir   design/assets directory.
+ */
+function sh_import_line_art_file( array $map, string $value, string $dir ): string {
+	$file = sh_import_ref_file( array(), $value, $dir . '/lineart' );
+	return '' !== $file ? 'lineart/' . $file : sh_import_ref_file( $map, $value, $dir );
+}
+
+/**
+ * Every design/assets file the import reads: image-map "files" + the "*_ref" files of the in-scope objects'
+ * Final frames (the same objects and frames sh_import_objects() / sh_import_layout() use) + the timeline cards'
+ * "line_art_ref" files (sh_import_timeline() · refresh 2026-11-11-line-art; "lineart/<file>" = one sub-folder).
+ *
+ * @param array<string, mixed> $seed Seed files (needs "objects" · optional "timeline-elephant").
  * @param array<string, mixed> $map  image-map.json.
  * @param string               $dir  design/assets directory.
  * @return array{map: string[], refs: string[], missing: string[], unsafe: string[]}
@@ -117,6 +131,19 @@ function sh_import_bundle_files( array $seed, array $map, string $dir ): array {
 			} elseif ( ! isset( $out['map'][ $file ] ) ) {
 				$out['refs'][ $file ] = $file;
 			}
+		}
+	}
+	$items = isset( $seed['timeline-elephant']['items'] ) ? (array) $seed['timeline-elephant']['items'] : array();
+	foreach ( $items as $it ) {
+		$value = isset( $it['line_art_ref'] ) && is_string( $it['line_art_ref'] ) ? $it['line_art_ref'] : '';
+		if ( '' === $value ) {
+			continue;
+		}
+		$file = sh_import_line_art_file( $map, $value, $dir );
+		if ( '' === $file ) {
+			$out['missing'][] = 'line_art_ref card ' . ( isset( $it['card_order'] ) ? (int) $it['card_order'] : 0 ) . ': ' . $value;
+		} elseif ( ! isset( $out['map'][ $file ] ) ) {
+			$out['refs'][ $file ] = $file;
 		}
 	}
 	foreach ( array( 'map', 'refs', 'missing', 'unsafe' ) as $k ) {

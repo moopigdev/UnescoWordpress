@@ -188,6 +188,7 @@ function sh_core_field_groups(): array {
 				$area( 'sh_card_meta', 'Card metadata', 'One line per item, e.g. "Period: 10th–11th century".', 6 ),
 				$img( 'sh_thumbnail', 'Card image' ),
 				$img( 'sh_thumbnail_2', 'Card image 2' ),
+				$img( 'sh_line_art', 'Before image (optional)', 'Timeline: shown in the large photo under the line while this object moves to the centre, then it cross-fades to the card image. Often a line drawing (transparent PNG); any image works. If empty, the card image is shown as before.' ),
 			),
 		),
 		'trail'         => array(

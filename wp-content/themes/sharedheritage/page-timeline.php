@@ -5,10 +5,12 @@
  * One stage (1440×723 under the header, scaled by k to fit the screen — §4.5c.5):
  *   trail icons ×17 · mini-map (15 thumbnails + cream viewport frame) · ‹ › · fixed time line ·
  *   objects on the line (all move together; the one nearest the centre grows + gets its title) ·
- *   under the line: the centred object's photo + metadata (fixed at the centre, fade in by position).
+ *   under the line: the centred object's photo + metadata (fixed at the centre, fade in by position · D35/D36: an object
+ *   with `sh_line_art` shows that "before" image there first, then cross-fades to the colour photo when it settles).
  * State = c (continuous index of the object at the centre), driven by assets/js/timeline.js.
  * Content: sh_timeline_items() by sh_card_order (CONTENT-MODEL §3) · layout constants: template-parts/timeline/geometry.php.
- * Reflection hidden (D16) · Back §3.3 (D27) · no Read more (title + photo of the centre object link to the object).
+ * Reflection = last stop N + 1 (D34 · §4.5c.7: ● only on the line · title + text under it) · Back §3.3 (D27) ·
+ * no Read more (title + photo of the centre object link to the object).
  *
  * @package sharedheritage
  */
@@ -41,6 +43,11 @@ foreach ( $sh_posts as $sh_post ) {
 	}
 }
 $sh_count = count( $sh_items );
+// D34 (§4.5c.7): Reflection = stop N + 1 after the last object · no image · empty body = no stop.
+$sh_refl_body  = $sh_api && $sh_count ? trim( (string) sh_get( 'sh_timeline_reflection_body', $sh_page_id ) ) : '';
+$sh_refl_title = '' !== $sh_refl_body ? trim( (string) sh_get( 'sh_timeline_reflection_title', $sh_page_id ) ) : '';
+$sh_refl_title = '' !== $sh_refl_title ? $sh_refl_title : __( 'Reflection', 'sharedheritage' );
+$sh_refl_i     = '' !== $sh_refl_body ? $sh_count + 1 : 0;
 $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timeline', 'sharedheritage' ), $sh_trail->name ) : __( 'Timeline', 'sharedheritage' );
 ?>
 <section class="sh-tl" aria-roledescription="carousel" aria-label="<?php echo esc_attr( $sh_label ); ?>" data-sh-tl style="--n:<?php echo esc_attr( (string) $sh_count ); ?>">
@@ -111,18 +118,26 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 									<button class="sh-tl__dot" type="button" aria-label="<?php echo esc_attr( $sh_item['title'] ); ?>" data-sh-tl-go="<?php echo esc_attr( (string) ( $sh_i + 1 ) ); ?>" data-sh-tl-dot<?php echo 0 === $sh_i ? ' aria-current="true"' : ' tabindex="-1"'; ?>></button>
 								</li>
 							<?php endforeach; ?>
+							<?php if ( $sh_refl_i ) : ?>
+								<li class="sh-tl__dot-item" style="--i:<?php echo esc_attr( (string) $sh_refl_i ); ?>">
+									<button class="sh-tl__dot sh-tl__dot--ring" type="button" aria-label="<?php echo esc_attr( $sh_refl_title ); ?>" data-sh-tl-go="<?php echo esc_attr( (string) $sh_refl_i ); ?>" data-sh-tl-dot tabindex="-1"></button>
+								</li>
+							<?php endif; ?>
 						</ol>
 					</div>
 				<?php endif; ?>
 			</div>
 
 			<div class="sh-tl__below">
-				<?php foreach ( $sh_items as $sh_i => $sh_item ) : ?>
-					<div class="sh-tl__info<?php echo 0 === $sh_i ? ' is-vis is-center' : ''; ?>" style="<?php echo esc_attr( sh_tl_style( array( '--pw' => sh_tl_num( $sh_item['photo'][0] ), '--ar' => sh_tl_num( $sh_item['ratio'] ) ) + ( 0 === $sh_i ? array( '--pa' => '1', '--ma' => '1' ) : array() ) ) ); ?>" data-sh-tl-info data-title="<?php echo esc_attr( $sh_item['title'] ); ?>" data-period="<?php echo esc_attr( $sh_item['period'] ); ?>">
+				<?php
+				foreach ( $sh_items as $sh_i => $sh_item ) :
+					$sh_line = ! empty( $sh_item['line'] ) ? sh_tl_line_pic( $sh_item, 0 === $sh_i ? 'eager' : 'lazy' ) : ''; // D35.
+					?>
+					<div class="sh-tl__info<?php echo '' !== $sh_line ? ' has-line' : ''; ?><?php echo 0 === $sh_i ? ' is-vis is-center' : ''; ?>" style="<?php echo esc_attr( sh_tl_style( array( '--pw' => sh_tl_num( $sh_item['photo'][0] ), '--ar' => sh_tl_num( $sh_item['ratio'] ) ) + ( 0 === $sh_i ? array( '--pa' => '1', '--ma' => '1' ) : array() ) ) ); ?>" data-sh-tl-info data-title="<?php echo esc_attr( $sh_item['title'] ); ?>" data-period="<?php echo esc_attr( $sh_item['period'] ); ?>">
 						<?php
-						$sh_pic = sh_tl_pic( $sh_item, (float) $sh_item['photo'][0], '', 0 === $sh_i ? 'eager' : 'lazy' );
+						$sh_pic = $sh_line . sh_tl_pic( $sh_item, (float) $sh_item['photo'][0], '', 0 === $sh_i ? 'eager' : 'lazy' ); // D35/D36: "before" image under the colour photo, same link.
 						if ( '' !== $sh_item['url'] ) {
-							echo '<a class="sh-tl__photo" href="' . esc_url( $sh_item['url'] ) . '" tabindex="-1" aria-hidden="true">' . $sh_pic . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $sh_pic built in sh_tl_pic().
+							echo '<a class="sh-tl__photo" href="' . esc_url( $sh_item['url'] ) . '" tabindex="-1" aria-hidden="true">' . $sh_pic . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $sh_pic built in sh_tl_line_pic() / sh_tl_pic().
 						} else {
 							echo '<span class="sh-tl__photo">' . $sh_pic . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- as above.
 						}
@@ -132,6 +147,12 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 						<?php endif; ?>
 					</div>
 				<?php endforeach; ?>
+				<?php if ( $sh_refl_i ) : ?>
+					<section class="sh-tl__refl" aria-label="<?php echo esc_attr( $sh_refl_title ); ?>" data-sh-tl-refl data-title="<?php echo esc_attr( $sh_refl_title ); ?>">
+						<h2 class="sh-tl__refl-title"><?php echo esc_html( $sh_refl_title ); ?></h2>
+						<div class="sh-tl__refl-body"><?php echo wp_kses_post( wpautop( esc_html( $sh_refl_body ) ) ); // Blank line = paragraph · single newline = <br> (§4.5c.7). ?></div>
+					</section>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
