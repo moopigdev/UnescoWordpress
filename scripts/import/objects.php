@@ -192,7 +192,11 @@ function sh_import_timeline( array $seed, array $map, array $trails, array $obje
 		}
 		$thumbs = isset( $map['timeline_items'][ (string) $n ]['all'] ) ? array_values( (array) $map['timeline_items'][ (string) $n ]['all'] ) : array();
 		$line   = isset( $it['line_art_ref'] ) && is_string( $it['line_art_ref'] ) && '' !== $it['line_art_ref'] ? sh_imp_line_art( $map, $it['line_art_ref'], $it['title'] . ' line art' ) : 0;
-		$below  = isset( $it['below_ref'] ) && is_string( $it['below_ref'] ) && '' !== $it['below_ref'] ? sh_imp_below_image( $map, $it['below_ref'], $it['title'] . ' under the line' ) : 0;
+		$below  = array( 'sh_below_image' => null, 'sh_below_image_2' => null ); // No ref / no file = field untouched.
+		foreach ( sh_import_timeline_below_refs( $it, $map ) as $field => $value ) { // D39/D41 · D45 (image-map timeline_items.<n>.below).
+			$att             = sh_imp_below_image( $map, $value, $it['title'] . ' under the line' . ( 'sh_below_image_2' === $field ? ' 2' : '' ) );
+			$below[ $field ] = $att ? $att : null;
+		}
 		sh_imp_meta(
 			'post',
 			$id,
@@ -205,7 +209,8 @@ function sh_import_timeline( array $seed, array $map, array $trails, array $obje
 				'sh_card_meta'          => (string) $it['meta_raw'],
 				'sh_thumbnail'          => isset( $thumbs[0] ) ? sh_imp_image( $map, $thumbs[0], $it['title'] . ' card' ) : 0,
 				'sh_thumbnail_2'        => isset( $thumbs[1] ) ? sh_imp_image( $map, $thumbs[1], $it['title'] . ' card 2' ) : 0,
-				'sh_below_image'        => $below ? $below : null, // D39/D41 photo under the line: cards 1·7·9 · no ref / no file = field untouched.
+				'sh_below_image'        => $below['sh_below_image'], // D39/D41/D45 photo under the line: cards 1·7·9.
+				'sh_below_image_2'      => $below['sh_below_image_2'], // D45: 2nd photo of the group under the line (card 9).
 				'sh_line_art'           => $line ? $line : null, // D35/D36 "before" image: cards 2–5 · no ref / no file = field untouched.
 			)
 		);
