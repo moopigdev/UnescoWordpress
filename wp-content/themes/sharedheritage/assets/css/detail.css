@@ -92,6 +92,24 @@
 	display: block;
 }
 
+/* Caption (§4.8.2 #9 #11): "Caption:" line, then one <p> per paragraph one blank line apart (24px). */
+.sh-detail__caption > p {
+	margin: 0;
+}
+
+.sh-detail__caption > p + p {
+	margin-top: calc(var(--sh-d-pgap, 24) * 1px);
+}
+
+.sh-detail__caption > .sh-detail__caption-head + p {
+	margin-top: calc(var(--sh-d-lgap, 24) * 1px);
+}
+
+.sh-detail__caption--justify > p {
+	text-align: justify;
+	hyphens: auto;
+}
+
 /* Figma bullet list: indent 1.5em per level, disc marker outside (1493 plain_meta lines). */
 .sh-detail__line--bullet {
 	display: list-item;

@@ -162,29 +162,39 @@ if ( ! $sh_blocks ) {
 			}
 		} elseif ( 'caption' === $sh_role && '' !== $sh_caption ) {
 			$sh_cap    = isset( $sh_layout['caption'] ) && is_array( $sh_layout['caption'] ) ? $sh_layout['caption'] : array();
+			$sh_info   = isset( $sh_layout['info_layout'] ) && is_array( $sh_layout['info_layout'] ) ? $sh_layout['info_layout'] : array();
+			$sh_font   = isset( $sh_b['font'] ) && is_array( $sh_b['font'] ) ? $sh_b['font'] : array();
 			$sh_label  = array_key_exists( 'label', $sh_cap ) ? $sh_cap['label'] : __( 'Caption:', 'sharedheritage' );
 			$sh_breaks = isset( $sh_cap['label_breaks'] ) ? max( 0, min( 3, (int) $sh_cap['label_breaks'] ) ) : 2;
 			$sh_indent = isset( $sh_cap['paragraph_indent_nbsp'] ) && is_array( $sh_cap['paragraph_indent_nbsp'] ) ? array_values( $sh_cap['paragraph_indent_nbsp'] ) : array();
-			$sh_body   = '';
-			$sh_parts  = preg_split( '/(\R\R|\R)/u', $sh_caption, -1, PREG_SPLIT_DELIM_CAPTURE );
-			$sh_para   = 0;
-			foreach ( is_array( $sh_parts ) ? $sh_parts : array() as $sh_i => $sh_part ) {
-				if ( 1 === $sh_i % 2 ) {
-					$sh_body .= str_repeat( "\n", substr_count( str_replace( "\r\n", "\n", $sh_part ), "\n" ) );
-					continue;
-				}
-				$sh_pad   = isset( $sh_indent[ $sh_para ] ) ? max( 0, min( 40, (int) $sh_indent[ $sh_para ] ) ) : 0;
-				$sh_body .= str_repeat( '&nbsp;', $sh_pad ) . esc_html( $sh_part );
-				++$sh_para;
-			}
+			$sh_lh     = is_numeric( $sh_font['line_height'] ?? null ) ? (float) $sh_font['line_height'] : 24.0;
+			// #11: paragraphs one blank line apart (24px) — every break in the text, single "\n" too (P-246).
+			$sh_pgap = $sh_cap['paragraph_gap']['px'] ?? ( $sh_info['caption_paragraph_gap_px'] ?? $sh_lh );
+			$sh_pgap = is_numeric( $sh_pgap ) ? max( 0.0, (float) $sh_pgap ) : $sh_lh;
+			// #9: Figma JUSTIFIED → text-align: justify · hyphens: auto.
+			$sh_just = 'JUSTIFIED' === ( $sh_info['caption_align'] ?? ( $sh_font['align'] ?? '' ) );
+			$sh_paras = preg_split( '/[ \t]*\R(?:[ \t]*\R)*/u', $sh_caption );
+			$sh_paras = array_values( array_filter( array_map( 'rtrim', is_array( $sh_paras ) ? $sh_paras : array() ), static fn( $p ) => '' !== trim( $p ) ) );
 			$sh_body_c = $sh_hex( sh_get( 'sh_text_color', $sh_id ) );
 			$sh_body_c = '' !== $sh_body_c ? $sh_body_c : $sh_hex( $sh_cap['body_color'] ?? '' );
 			$sh_head   = is_string( $sh_label ) && '' !== $sh_label
-				? $sh_run( $sh_label, $sh_cap['label_weight'] ?? 700, $sh_hex( $sh_cap['label_color'] ?? '' ), 'sh-detail__caption-label' ) . str_repeat( "\n", $sh_breaks )
+				? $sh_run( $sh_label, $sh_cap['label_weight'] ?? 700, $sh_hex( $sh_cap['label_color'] ?? '' ), 'sh-detail__caption-label' )
 				: '';
-			$sh_style  = $sh_block_style( $sh_b, $sh_body_c ) . '--sh-d-fw:' . $sh_weight( $sh_cap['body_weight'] ?? 400 ) . ';';
-			// Label run and body pieces are escaped above.
-			echo '<p class="sh-detail__block sh-detail__caption" style="' . esc_attr( $sh_style ) . '">' . $sh_head . $sh_body . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			$sh_body = '';
+			foreach ( $sh_paras as $sh_i => $sh_para ) {
+				$sh_pad   = isset( $sh_indent[ $sh_i ] ) ? max( 0, min( 40, (int) $sh_indent[ $sh_i ] ) ) : 0;
+				$sh_text  = str_repeat( '&nbsp;', $sh_pad ) . esc_html( $sh_para );
+				$sh_body .= 0 === $sh_i && '' !== $sh_head && 0 === $sh_breaks
+					? '<p>' . $sh_head . ' ' . $sh_text . '</p>' // label on the first line.
+					: '<p>' . $sh_text . '</p>';
+			}
+			if ( '' !== $sh_head && $sh_breaks > 0 ) {
+				$sh_body = '<p class="sh-detail__caption-head">' . $sh_head . '</p>' . $sh_body;
+			}
+			$sh_style = $sh_block_style( $sh_b, $sh_body_c ) . '--sh-d-fw:' . $sh_weight( $sh_cap['body_weight'] ?? 400 ) . ';'
+				. '--sh-d-pgap:' . $sh_n( $sh_pgap ) . ';--sh-d-lgap:' . $sh_n( max( 0, $sh_breaks - 1 ) * $sh_lh ) . ';';
+			// Label run and paragraphs are escaped above.
+			echo '<div class="sh-detail__block sh-detail__caption' . ( $sh_just ? ' sh-detail__caption--justify' : '' ) . '" style="' . esc_attr( $sh_style ) . '">' . $sh_body . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 	if ( ! $sh_has_title ) {
