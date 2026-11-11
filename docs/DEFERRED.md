@@ -196,3 +196,8 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [reviewer timeline-v3 r2] [2026-10-28] กล่องชื่อ Pod Duang / การ์ด 6 ล้ำเข้ากล่อง mini-map 3.2 / 4.6px (ตัวอักษรอยู่ใต้กรอบครีม ไม่ทับภาพ)
 - [reviewer timeline-v3 r2] [2026-10-28] `timeline.js` fitTitles ขยายทุกชื่อที่เกิน 2 บรรทัดที่ 280 (c13 → 320 · c15 → 300 · Pod Duang → 440) · สเปก §4.5c.1 "max 280" ไม่มีข้อยกเว้น → design-dev เขียนข้อยกเว้นในสเปก หรือยอม 3 บรรทัด
 - [orchestrator] [2026-10-28] Pod Duang: prod แก้ `sh_title_raw` (object 171) เอาขึ้นบรรทัดออกแล้วตามเจ้าของ · แต่ seed `content/seed/objects.json` ยังมี "Chakra and\nGreat Crown" → install ใหม่จะได้ขึ้นบรรทัดอีก · design-dev แก้ seed รอบถัดไป (import mode missing ไม่ทับ prod)
+- [design-batch-hzd] [2026-11-11] spec หน้า trail 17 หน้า (`3153:1083`/`3161:3921…`) + หัวข้อ H1 ใหม่ (เช่น "Chicken & Rooster Trail") — ตาราง id อยู่ที่ §4.4 · ยังไม่ spec geometry/ข้อความรายหน้า (นอกขอบเขต D7 เดิม)
+- [design-batch-hzd] [2026-11-11] `Introduction (แก้ไขใหม่)` 4 หน้า (`3224:1553` People and Places · `3257:4653` Early Centres of Power · `3257:4698` Rice and Spice · `3257:4741` Animals, Folklore and Ecological Stewardship) + `Materials` section — ยังไม่อ่าน/ยังไม่ spec
+- [design-batch-hzd] [2026-11-11] detail ของ trail อื่นใน Page 2.1 (ไม่ใช่ช้าง) ไม่ได้เทียบกับ seed ใหม่ (ข้อความอาจเปลี่ยนเหมือนช้าง) · `objects.json` 105 ชิ้นอื่นยังเป็นค่า 2026-10-27
+- [design-batch-hzd] [2026-11-11] `design/detail-style.py` ใช้ `FINAL_PAGE='Page 2 Version'` + path worktree เก่า → ต้องแก้ก่อนรันกับไฟล์ใหม่ (P-245)
+- [design-batch-hzd] [2026-11-11] เลขหัวข้อ DESIGN-SPEC: brief ขอ §4.8 (Zone 4 chooser) / §4.9 (Zone 5) แต่ §4.8 = Detail และ §4.9 = Nav เดิม → ใช้ **§4.10** (chooser) และ **§4.11** (Zone 5 DRAFT) แทน

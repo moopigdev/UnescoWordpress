@@ -22,6 +22,16 @@
 | `0:1` | Page 1 | 19 | 2,122 | เวอร์ชันแรก (animation draft) — ไม่ใช้ |
 | `669:1259` | Page 3 Picture trails | 18 | 194 | รูปประกอบ trail (ร่าง) — ไม่ใช้ |
 
+### 1.1b Page ในไฟล์ **หลังอัปเดต 2026-11-11** (`lastModified 2026-11-11T08:23:07Z` · version `2420516781693135680` · นับจาก `design/figma-file.json` ใหม่ · ไฟล์เก่าเก็บที่ `design/figma-file.2026-10-27.json`) — **ตาราง §1.1 ข้างบนเป็นของ 2026-10-27 (6 page) ล้าสมัย: ตอนนี้ 5 page** · page เก่า Page 6 / Option / Page 1 / Picture trails **หายไปแล้ว**
+| page id | ชื่อ | children | node | Desktop frame | บทบาท |
+|---|---|---|---|---|---|
+| `670:860` | Master Page Version #Final 01092026 | 15 | 4,104 | 48 | หน้า final เดิม + **ใหม่:** `Section 43` `680:10489` (AAMM-01 รอยเท้า) · `Zone 4` `820:2615` (timeline) · `Section 51` `3083:924` (Detail text Zone 1–3 · Cover×4 · History) · **`All : 17 Trails` `3153:1083` (หน้า trail ครบ 17)** · **`Materials` `3159:1295`** (17 หัวข้อ + "Picture Cover Header All Trail") · **`Introduction (แก้ไขใหม่)` `3224:1529`** (4 หน้า: People and Places · Early Centres of Power · Rice and Spice · Animals, Folklore and Ecological Stewardship) |
+| `3117:3314` | Master Page Version (ปรับแก้ไข:1) | 10 | 2,293 | 27 | **หน้าที่ลูกค้าแก้ตามคอมเมนต์ (D37)** — Home · Intro · Zone 1–3 (+banner ใหม่) · Zone 4 (หน้าคั่น + Section 54 ภาพสัตว์) · Zone 5 (3 หน้า) · detail ช้าง 15 (เหมือน Final) |
+| `3101:609` | Page : Detail Zone4 ALL | 3 | 483 | 2 | detail วัตถุช้าง/timeline Zone 4 ทั้งชุด + Zone 5 `3246:4498` |
+| `998:952` | Page 2.1  ALL GIF trails (ข้อมูลสำคัญ) | 36 | 7,359 | 162 | detail วัตถุทุก trail (เพิ่ม 21 frame จากเดิม 141) + **17 หน้า trail `3161:3921…4335`** + "ไฟล์ที่ไม่ใช้แล้ว" |
+| `3224:1530` | Page 5 | 5 | 315 | 5 | 5 หน้า "Desktop — People and Places / … Reference match / Early Centres of Power / Rice and Spice / Animals, Folklore and Ecological Stewardship" (= ชุดเนื้อหา Introduction แก้ไขใหม่ · **ยังไม่ได้ spec** — DEFERRED) |
+**สิ่งที่เปลี่ยนแล้วกระทบสเปกเดิม:** node id ข้อความใน detail ช้าง 15 frame ถูกแทนใหม่ทั้งหมด (§4.8.2) · หัวข้อ/caption 14/15 ต่างจาก seed · หน้า trail 17 หน้ามีแล้ว (§4.4) · banner Zone 1–3 ใหม่ (§4.3b) · Zone 5 มีหน้าแล้ว (§4.11) · **id ในสเปกนี้ที่ไม่มีในไฟล์ใหม่ = 64 จาก 369** (นับด้วยสคริปต์: ทุก `NNN:NNN` ในสเปก) — กลุ่มหลัก: (ก) **Intro `670:1215` → ย้ายเป็น `3117:3656` (Desktop - 1471 · 1440×3186 เท่าเดิม)** · `670:1221…1237` = ลูกของ Intro (ถูกแทน) (ข) **Timeline `670:1551` → `1232:632` / `3101:611` (Desktop - zone 6)** และ node ข้างใน `1232:17xx` (การ์ด/ภาพ raster) ถูกแทน — เป็นของ design-dev timeline (§4.5c) · `797:2110` แถบไอคอน (ค) text node ของ detail ช้าง `670:2796…2813` `956:976…980` `964:1522…1808` `1057:1177` (§4.8.2) · (ง) page เก่า `263:362` `3004:4156` `669:1259` · **frame ที่ยังอยู่: Home `670:1152` (และสำเนา `3117:3607`) · Zone `670:1241/1296/1349` · Trail ช้าง `796:1795` · detail 15 frame (`670:2786` …)** · **ไม่ได้ diff เนื้อหา** Home/Intro/Zone ทั้งหน้า ยกเว้นที่ระบุใน §3.4 §3.5 §4.3b §4.4 §4.8.2
+
 **mobile frame:** ไม่มี (D5: ไม่บังคับ) · Figma มี tablet 768 เฉพาะ style guide ("TBD")
 
 ### 1.2 Frame หลักของ page Final (1440 กว้างทั้งหมด) + ไฟล์ภาพ
@@ -158,8 +168,10 @@ hover (variant `Frame 12770`): พื้น `#F8F9FA` · วงกลม glow �
 - Home (`Read more 1/3`): Komet-Regular 16/22 `#212529` → hover Komet-Bold 16/22 **underline `#D65F47`** (variant2)
 - หน้าอื่น: Barlow Condensed Regular 20/22 ขวา `#212529` (hover ไม่มี variant แยกใน Figma — ใช้พฤติกรรมเดียวกับ Home: เป็น P-2xx ย่อย ไม่เปิดเพิ่ม)
 - ข้อความ UI: `Read more >>`
+- **อัปเดต 2026-11-11 (BACKLOG #4 · Figma `3117:3314`):** component `Read more 3` (`886:1826`; ในหน้า `3117:4321`) มี 2 สถานะ — default **"Read more >>"** ↔ ขยายแล้ว **"Hide >>"** (`I3117:4318;3117:4321` · Komet 16/22 (500) กึ่งกลาง `#212529` · **ไม่มี underline** · กล่อง 58×22) · คลิก "Read more >>" → ขยาย + ตัวหนังสือปุ่มเปลี่ยนเป็น "Hide >>" · คลิก "Hide >>" → ยุบกลับ · smart-animate **0.3s** · hover (ทั้งสองสถานะ) = ตัวหนา 700 + underline `#D65F47` (`3117:4322`) · ใช้กับ: trails Home (`trails Detail text` set `3117:4306`: ยุบ 127px → ขยาย 277px · Hide อยู่ y 255; ย่อหน้าที่ขยาย 18/22 ชิด**ซ้าย** 2 ย่อหน้า 44+66px) และ Zone 1–3 (§4.3b)
 ### 3.5 Navigator (จุดข้างหน้า Home)
 **ตัวจริง (ตามหมายเหตุ Figma `929:1597`/ภาพ `annot-navigator.png`):** วงกลม 4 ดวง ไม่มี icon/ข้อความ — `Navigator [176,587 30×150]` แนวตั้ง gap 10 · แต่ละดวง 30×30 พื้น `#FFFFFF` stroke `#ADB5BD` 2 · คลิกเลื่อนไป: 1) Introduction (`670:9368`) 2) Zone 1-3 (`670:9479`) 3) Trails (`886:1795`) 4) Zone 4-5 (`670:9541`) · scroll-animate 0.3s
+**ยืนยันใน Figma ใหม่ 2026-11-11 (BACKLOG #3 · `3117:3638` ใน Home `3117:3607`):** `Navigator [176,587 30×150]` · 4 ดวง 30×30 gap 10 (y = 587/627/667/707) · พื้น `#FFFFFF` · stroke **2px `#ADB5BD`** · ไม่มีไอคอน/ข้อความ · ON_CLICK → SCROLL_TO (scroll-animate **0.3s**): 1 → Cover หน้าแรก `3117:3609` (บนสุดของหน้า) · 2 → Zone 1–3 `3117:3629` (`Frame 114481`) · 3 → Trails `3117:3622` (`Frame All trails`) · 4 → Zone 4–5 `3117:3625` (`Frame 12792`) · ภาพหมายเหตุของลูกค้า: `design/assets/2208bf9c….png` (ข้อความ "ขอเป็น 4 วงกลมขนาดประมาณในภาพครับ ไม่ต้องมี icon หรือ wording ข้างใน")
 (ตัวเก่า `Frame 12744 [1222,256 58×194]` วงกลม 58 พร้อมข้อความ Intro/Zone/Trails — ขัดกับหมายเหตุ → ไม่ใช้ · P-210)
 ### 3.6 Trail tile (กริด 184) + hover
 component set `Bird 1/Buffalo/…` (`1018:1372…`): default `184×184` (fill ภาพ FILL, clip) → hover `210×210` (ภาพคนละไฟล์: ภาพ "พื้นสี+วัตถุ" ขยาย) · 0.3s ease-in-out smart-animate · ช่องไฟ 50
@@ -206,6 +218,33 @@ slide 4 ชุด: ข้อความในหัวข้อ ": People, Plac
 | ปุ่ม Back | `[160,1521 115×50]` | |
 **หมายเหตุ:** กริด 15 tile ภาพ/ลำดับเหมือนกันทั้ง 3 zone ใน Figma (ต่างแค่ cover/banner) → ความสัมพันธ์ trail↔zone ยังไม่ระบุ (P-212)
 
+### 4.3b Zone 1/2/3 — **อัปเดต 2026-11-11** (คอมเมนต์ลูกค้า · BACKLOG #7 #8 · Figma page `3117:3314` "Master Page Version (ปรับแก้ไข:1)" · lastModified ไฟล์ `2026-11-11T08:23:07Z`) — **ทับ §4.3 เฉพาะที่ระบุ** (กริด 15 tile/Header/Back/ภาพแถบ ZONE ไม่เปลี่ยน)
+frame ใหม่: `3117:3684` (zone 1, Desktop - 1472) · `3117:3713` (zone 2, 1473) · `3117:3742` (zone 3, 1474) · 1440×**1930** (สถานะย่อ) · ภาพ render `design/frames/zone{1,2,3}-3117-147{2,3,4}.png`
+
+| section | พิกัด (เทียบ frame 1440) | รายละเอียด |
+|---|---|---|
+| Header #1/#02 | `[0,0]`,`[0,86]` | เหมือนเดิม |
+| Cover (banner) | `[160,150 1120×410]` | **ภาพ banner ใหม่ 3 ใบ** (ตัวหนังสืออยู่ในภาพ — ไม่ต้องวางข้อความทับ) · ไฟล์ 4096×1503 (**3.66×**) ที่ `design/assets/zone-banners-2026-11/zone1-animals-in-nature-and-mythology.png` · `zone2-beyond-the-visible-animals-and-cosmic-order.png` · `zone3-material-cultures-animals.png` (ชื่อไฟล์ = ref ต้นฉบับ `57fe08a9…` / `262bafe2…` / `1fda5191…` ในโฟลเดอร์ `design/assets/` ด้วย) |
+| แถบ ZONE 1–5 `Frame 12684` | `[160,580 1120×166]` r22 + shadow | ภาพ raster เดิม (zone 1 = `413791d6` · zone 2 = `e5dbe735` · zone 3 = `172ff28b`) |
+| **บล็อกข้อความ (ใหม่)** `Detail text Zone 1` (component set `3117:5051`) | `[160,826 1120×H]` H = 193 (zone 1 ย่อ) / 149 (zone 2 ย่อ) / 193 (zone 3 ย่อ) · ขยาย 303 / 523 / 347 | แนวตั้ง gap **20** · **หัวข้อ** Komet-Heavy **34/42.5** (800) กึ่งกลาง `#212529` · **ข้อความ** Komet 20/22 (500) กึ่งกลาง `#000000` (ย่อหน้า = ขึ้นบรรทัด 1 ครั้ง ไม่มีช่องว่างย่อหน้า) · **Read more** Komet 16/22 (500) กึ่งกลาง `#212529` |
+| กริด trail `Frame 114472` | `[160, 826+H+60]` 1120×652 | 3 แถว × 5 tile 184² gap 50 · ลำดับ tile เดิม (Bird · Buffalo · Chicken · Deer · Dragon / Fish · Garuda · Hornbill · Horse · Lion / Makara · Phoenix · Seashell · Serpent · Turtle) |
+| ปุ่ม Back | `[160, กริดล่าง+74]` (zone 1: y=1805) | ตำแหน่งใน Figma zone 2 = 1805 (ควรเป็น 1761) และ zone 3 = 1817 → **ไม่สม่ำเสมอ — ใช้กฎ "กริดล่าง+74"** (P-243) |
+
+**พฤติกรรม Read more (ใหม่)** — คลิก "Read more >>" → บล็อกขยายเป็นสถานะเต็ม (variant `Zone 1.1` / `Zone 2.1` / `Zone 3.1`: ข้อความเต็มแทนข้อความสั้น · ตัวอักษรปุ่มเปลี่ยนเป็น **"Hide >>"**) · คลิก "Hide >>" → ยุบกลับ (variant ย่อ) · smart-animate **0.3s** (zone 1 ระบุใน Figma · zone 2/3 ไม่ระบุ transition → ใช้ 0.3s เท่ากัน) · hover = ตัวหนา + ขีดเส้นใต้ `#D65F47` (variant `Property 1=Default` `3117:4322` = §3.4) · ทั้งสามหน้ากริด/Back เลื่อนลงตามความสูงที่เพิ่ม (flow)
+
+**ข้อความ (คัดลอกตรงจาก Figma → `content/seed/zones.json` zones[1–3].`intro_short` / `body_full`)** — Figma ไม่มีตัวแปร "ข้อความสั้นแยก": ข้อความสั้น = ข้อความในสถานะย่อ, ข้อความเต็ม = สถานะขยาย (zone 1: ย่อ = 2 ย่อหน้าแรก · zone 2/3: ย่อ = ย่อหน้าแรก) · ข้อความที่ซ่อน (`visible:false`) 2 ย่อหน้า "In this borderless digital world…" / "Forget rigid physical galleries!…" ในสถานะย่อ = สำเนาจาก Home → **ไม่แสดง** · ข้อความ zone 1 สถานะขยายจบที่ "…the Garuda" **ไม่มีจุด** (ตามต้นฉบับ — P-242)
+
+**ชื่อ zone — 3 รูปแบบใน Figma + ข้อเสนอว่าใช้ที่ไหน**
+| zone | A: ในภาพ banner (สั้น) | B: หัวข้อในหน้า (`3117:5053/5067/5063`) | C: การ์ด Home ใน Figma (`3117:3633…`) — **ยังเป็นชื่อเก่า** |
+|---|---|---|---|
+| 1 | Animals in Nature & Mythology | Animals in Nature and Mythology | Animals in Nature & Ecological Wisdom |
+| 2 | Beyond the Visible: Animals & Cosmic Order | Beyond the Visible: Animals and the Cosmic Order | Beyond the Visible: Animal Lore & Cosmic Order |
+| 3 | Material Cultures Animals | Material Cultures: Animals in Rituals and Daily Life | Material Cultures: Animals in Craft & Ritual |
+
+ข้อเสนอ (ตัดสินเอง · ถ้าไม่เห็นด้วยแก้ที่ seed ที่เดียว): **ชื่อ term zone (taxonomy) = B** · **H1 ในหน้า = B** (ตรงที่ Figma วางเป็นข้อความ) · **การ์ดหน้าแรก = B** (C เป็นชื่อเก่าที่ยังไม่ได้แก้ — P-241) · **alt ของภาพ banner = A** (ตรงตัวอักษรในภาพ) · แถบ ZONE = ภาพ raster ไม่มีข้อความ · ชื่อ zone 4/5 ไม่เปลี่ยน
+**⚠ ภาพ banner สลับที่ใน Figma:** ใน frame zone 1 (`3117:3684`) ภาพ Cover (`262bafe2`) เขียนว่า "Beyond the Visible…" และใน frame zone 2 (`3117:3713`) เขียนว่า "Animals in Nature & Mythology" → **ผูกภาพตามชื่อที่อยู่ในภาพ** (zone 1 = `57fe08a9` · zone 2 = `262bafe2`) ตามคำสั่งเจ้าของ #7 · zone 3 ตรง (P-240)
+banner Zone 4/5 ใหม่ใน tab เดียวกัน: **ไม่มี** (Zone 4 = Cover ที่เป็นภาพเส้นประ §4.10 · Zone 5 = หน้าหลักไม่มี banner กว้าง §4.11)
+
 ### 4.4 Trail page — Elephant's Trail `796:1795` (1440×1632, clip) · `trail-elephant-1501.png`
 | section | พิกัด | รายละเอียด |
 |---|---|---|
@@ -215,7 +254,30 @@ slide 4 ชุด: ข้อความในหัวข้อ ": People, Plac
 | กริดวัตถุ `Frame 114472` | `[160,829.2 1120×652]` แนวตั้ง gap 50 | 3 แถว × 5 tile 184×184 gap 50 ที่ y = 829.2 / 1063.2 / 1297.2 · **15 วัตถุ** (ลำดับ §4.8) |
 | ปุ่ม Back | `[160,1536 115×50]` | |
 tile ช้างพื้น `#E1DEC6` (render `#E0DEC9`) ภาพ FILL · hover 210 (`Ele NN` variants)
-trail อื่นอีก 16 trail **ไม่มีหน้า trail ใน Figma** → ใช้แม่แบบนี้ (P-201)
+~~trail อื่นอีก 16 trail ไม่มีหน้า trail ใน Figma~~ → **ล้าสมัย 2026-11-11:** ไฟล์ใหม่มีหน้า trail ครบ **17 หน้า** (ดูข้างล่าง · P-201 ส่วนนี้คลี่คลาย)
+
+**อัปเดต 2026-11-11 (BACKLOG #6 "ลบเส้นแนวนอนใต้ภาพ hero")** — Figma `796:1795` (ชื่อใหม่ "Desktop - Elephant Trails" · ตอนนี้อยู่ใน section "All : 17 Trails" `3153:1083` ของ page `670:860`):
+- `Frame 12685` เดิม = `[0,150 1440×497.228]` มี **stroke ล่างกว้าง 2px `#DEE2E6` ทั้งความกว้าง 1440** (เส้นแนวนอนใต้ hero) → **ใหม่ = `[160,150 1120×490]` ไม่มี stroke (`strokes: []`)** · ภาพ `Elephant_Zone2-1 1` (ref `ed0e5ee9`) **`[160,150 1120×490]`** (เดิม 497.228) → **ลบเส้น + hero สูง 490** · ตำแหน่ง/ขนาดส่วนล่างไม่ขยับ (หัวข้อ `[160,677 1120×112]` · กริด `[160,829…]` · Back `[160,1536]` ตามเดิม → ช่องว่าง hero→หัวข้อ 37px) · ภาพ render ยังไม่ดึง (ใช้ผลจาก JSON)
+- **หน้า trail ใหม่ทุก trail (17):** hero = `Hearder Trail : <ชื่อ>` `[160,150 1120×490]` **ไม่มีเส้น/stroke ทุกหน้า** · โครงเหมือน Elephant (Header · hero · หัวข้อ+คำอธิบาย `Frame 12683` `[160,677 1120×112]` · กริดวัตถุ `Frame 114472` · Back) · **ยังไม่ได้เขียนสเปกรายหน้า** (นอกขอบเขตรอบนี้ — DEFERRED) · ข้อมูลอ้างอิง (id ใน section "All : 17 Trails" · id สำเนาใน page 2.1 `998:952` · ความสูง frame · H1 ใน Figma):
+| trail | frame (section All : 17 Trails) | สำเนาใน page 2.1 | สูง | H1 ใน Figma |
+|---|---|---|---|---|
+| Bird Trails | `3153:1003` | `3161:3921` | 1416 | Bird Trail |
+| Buffalo Trails | `3153:1084` | `3161:3945` | 1184 | Buffalo Trail |
+| Chicken Trails | `3153:1129` | `3161:3969` | 1627 | Chicken & Rooster Trail |
+| Deer Trails | `3155:693` | `3161:3999` | 1287 | Deer Trail |
+| Elephant Trails | `796:1795` | `3161:4029` | 1632 | Elephant Trail |
+| Dragon Trails | `3155:747` | `3161:4059` | 1396 | Dragon Trail |
+| Fish Trails | `3155:821` | `3161:4083` | 1444 | Fish & Aquatic Mammals Trail |
+| Garuda Trails | `3156:884` | `3161:4107` | 1444 | Garuda Trail |
+| HornBill Trails | `3157:932` | `3161:4131` | 1416 | Hornbill Trail |
+| Horse Trails | `3159:780` | `3161:4155` | 1416 | Horse Trail |
+| Lion Trails | `3159:825` | `3161:4179` | 1416 | Lion Trail |
+| Makara Trails | `3159:870` | `3161:4203` | 1416 | Makara Trail |
+| Phoenix Trails | `3159:974` | `3161:4227` | 1416 | Phoenix Trail |
+| Seashell Trails | `3159:1031` | `3161:4251` | 1646 | Seashell &  Marine Invertebrates Trail |
+| Serpent Trails | `3159:1076` | `3161:4281` | 1646 | Serpentine & Naga Trail |
+| Turtle Trails | `3159:1121` | `3161:4311` | 1214 | Turtle Trail |
+| Waterbird Trails | `3159:1169` | `3161:4335` | 1637 | Waterbirds & Hamsa Trail |
 
 ### 4.5 Timeline แนวนอน — Zone 4 / trail ช้าง `670:1551` · `timeline-zone4.png` · `layout/timeline-zone4.md`
 frame 1440×1582 แต่เนื้อหาในแนวนอนกว้าง **11,197** (frame ไม่ clip) · พื้น `#FFFFFF`
@@ -476,9 +538,89 @@ frame 1440×1582 แต่เนื้อหาในแนวนอนกว้
 
 **ลำดับวัตถุในกริด trail ช้าง (ตรง tile Ele 2,3,4,5,6 / 7,01,8,9,10 / 11–15 และการ์ด timeline):** 1 Elephant Leg Bone · 2 Singhasari Ganesha · 3 Ganesha · 4 Elephant Molar Coconut Grater · 5 Embossed Brass Basin · 6 Ivory Fire Piston · 7 Elephant and Mahout Kendi · 8 Patola Cloth (Cindai) · 9 Elephant-Shaped Relic Containers · 10 Pod Duang · 11 Hand-Carved Ivory and Metal Opium Pipe · 12 Tin Ingot in the Shape of Elephant · 13 Wooden Cold-Press Cake Molds… · 14 Siwaih · 15 Procession of a King or Noble (Bas-relief…)
 
+### 4.8.2 Detail — **อัปเดต 2026-11-11** (BACKLOG #9 #10 #11 #12 · Figma ไฟล์ `lastModified 2026-11-11T08:23:07Z`) — เฉพาะ 15 frame Final trail ช้าง · ทับ §4.8/§4.8.1 เฉพาะที่ระบุ
+**ที่มา:** ลูกค้าแก้ใน Figma แล้ว (หน้า `670:860` "Master Page Version #Final" และสำเนา `3117:3314` — **ข้อความในสอง page ตรงกัน** (เทียบแล้ว: ต่างเฉพาะข้อความเมนู Header) · id ฝั่ง `3117:3314` อยู่ในตาราง) · ภาพ render `design/frames/detail-3117-1511.png` (opium pipe) · `detail-3117-1633.png` (brass basin)
+**node ข้อความถูกแทนใหม่ทุกตัว** (เช่น title Ganesha `670:2797` → `3083:813`) → **node id ใน `figma[].style.*` ของ seed (§4.8.1) เก่าแล้ว** (P-245: ต้องรัน design-detail-style ใหม่กับไฟล์ใหม่ — ค่าที่ให้ในตารางนี้คือค่าจริงตอนนี้)
+
+**1) โครงใต้หัวข้อ (#12)** — ใต้ชื่อวัตถุ (36/45 Heavy · สีตาม `detail_style.title_color` เดิมต่อวัตถุ) มี **บล็อก metadata ก้อนเดียว** (text node เดียว) บรรทัดละฟิลด์: **label ตัวหนา (Komet-Bold 700)** + ค่าตัวปกติ (500) · ขนาด 20/25 (บาง frame 20/26) · Patola 24/30 · Leg Bone (`1510`) = บรรทัดเดียว `Collection:` 24/26 w600 (สไตล์เดิม) · **ลำดับบรรทัดตายตัว:** `Period:` → `Place of production / Findspot:` → `Material:` → `Dimensions:` → `Collection:` → `Other information / Object biography:` (ข้ามบรรทัดที่ไม่มีค่า — ไม่มีบรรทัดว่าง) · ค่าไหนไม่มี = ไม่แสดง label · บรรทัด **`Section : …` เดิม หายไปจากทุก frame** (ไม่แสดงใต้หัวข้ออีก — ฟิลด์ `sh_thematic_section` เก็บไว้ แต่ไม่แสดงในหน้า detail) · "Other information / Object biography" ยาวหลายบรรทัดได้ (ตัดคำตามกล่อง 739/549 กว้าง) · label ในไฟล์สะกดไม่สม่ำเสมอ ("Other Information / Object Biography" ใน 1506) → **แสดง label มาตรฐาน "Other information / Object biography:"**
+**2) Caption (#9 #11):** `textAlignHorizontal = JUSTIFIED` ✔ (ครบ 15/15 — #9 มีใน Figma แล้ว → CSS `text-align: justify` + `hyphens: auto`) · ข้อความขึ้นต้น `Caption:` (Komet-Bold SC 700) + **บรรทัดว่าง 1 บรรทัดระหว่างย่อหน้า** (`\n\n` ในข้อความ — #11 มีใน Figma แล้ว → render `<p>` แยก + margin ≈ 1 บรรทัด = **24px**) · **ยกเว้น 6 จุดใน 5 frame** ที่ขึ้นย่อหน้าด้วย `\n` ตัวเดียว (ไม่เว้นบรรทัด): 1503 (ก่อน "Elephant molars are among…" และ "The idea of miniature elephant…") · 1468 (ก่อน "Beneath this Ganesha statue…") · 1476 (ก่อน "The elephant's form also carr…") · 1506 (ก่อน "Pod duang served as…") · 1508 (ก่อน "This Acehnese siwaih…") → seed แปลงเป็น `\n\n` ให้เท่ากัน (ตีความเจตนา #11 · P-246) · 18/24 · ข้อความ caption ใหม่ **ต่างจาก seed `caption` 14/15** → อยู่ใน seed `objects[].figma_2026_11.caption` (P-244)
+**3) ขอบบนภาพ (#10 "align กับ text ตามความเหมาะสม")** — Figma ไม่มีกฎเดียว: คอลัมน์รูปเริ่มที่ y เท่ากับ **บนสุดของบล็อก metadata** (ส่วนต่าง `+0`) ใน 1510 · 1476 · 1468 · 1503 · 1483 · เท่ากับ **บนสุดของหัวข้อ** ใน 1493 · 1512 · 1508 (ส่วนต่างเทียบ meta = −60/−60/−67) · ที่เหลือใกล้ meta (+3…+13, −12) · Bas-relief 1484 รูปเริ่มสูงกว่าหัวข้อ 30 → **ใช้ค่า y ต่อ frame ตามตารางข้างล่างเป๊ะ (เก็บใน `sh_layout`) — ไม่ต้องหากฎกลาง** · ภาพตัวอย่างคอมเมนต์ (`3117:4794` ref `a7bf0939`, `3117:4796` ref `85f70aee`): เส้นแดงจากขอบบนของภาพไปที่บรรทัดแรกของ metadata (หรือชื่อเรื่อง 2 บรรทัด)
+**ตาราง geometry ใหม่ (เทียบ frame 1440 · bbox `[x,y,w,h]` · P=Period Pl=Place M=Material D=Dimensions C=Collection O=Other info/Object biography · ⚠ = หัวข้อใน Figma ต่างจาก seed `title`)**
+| # | frame (Final / 3117) | หัวข้อ (Figma) | title node [bbox] | metadata node [bbox] ฟอนต์ | caption node [bbox] | ภาพในแผง [bbox] | ภาพบน − meta บน | แถวที่มี |
+|---|---|---|---|---|---|---|---|---|
+| 1 | `1041:1290` / `3117:4755` (1510) · h1764 | Elephant Leg Bone ⚠ | `1041:1379` [160,982,739,45] | `1041:1391` [160,1052,739,26] 24.0/26.0 | `1041:1403` [160,1103,739,504] | `1041:1452` [921,1052,360,589] | +0 | C |
+| 2 | `670:2802` / `3117:4391` (1476) · h2302 | Singhasari Ganesha | `3083:758` [160,1090,739,45] | `3083:770` [160,1160,739,260] 20.0/26.0 | `3083:782` [160,1445,739,720] | `3083:791` [921,1160,359,421] | +0 | P Pl M D C O |
+| 3 | `670:2786` / `3117:4367` (1468) · h2090 | Ganesha | `3083:813` [160,1090,739,45] | `3083:825` [160,1160,739,130] 20.0/26.0 | `3083:837` [160,1315,739,600] | `3083:846` [921,1160,359,421] | +0 | P Pl M D C |
+| 4 | `956:975` / `3117:4486` (1503) · h2577 | Elephant molar coconut grater ⚠ | `3083:868` [160,1101,684,45] | `3083:880` [160,1171,684,234] 20.0/26.0 | `3083:892` [160,1430,684,984] | `3083:901` [866,1171,414,283] | +0 | M D C O |
+| 5 | `3190:4671` / `3190:5587` (1633) · h2434 | Embossed brass basin with mythical animal motifs ⚠ | `3190:4949` [160,1020,843,45] | `3190:4961` [160,1087,739,150] 20.0/25.0 | `3190:4973` [160,1259,739,1032] | `3190:4984` [921,1100,359,269]<br>`3190:4993` [921,1399,359,271] | +13 | M D C O |
+| 6 | `1006:922` / `3117:4726` (1507) · h2217 | Fire Piston ⚠ | `1006:1198` [160,1020,176,45] | `1006:1210` [160,1087,739,200] 20.0/25.0 | `1006:1222` [160,1309,739,792] | `1006:1237` [941,1100,232,243]<br>`1006:1249` [1039,1110,221,244] | +13 | M D C O |
+| 7 | `670:2872` / `3117:4507` (1493) · h2150 | Elephant and Mahout Kendi | `670:2875` [160,1050,549,45] | `670:2876` [160,1110,549,125] 20.0/25.0 | `670:2878` [160,1250,549,744] | `670:2881` [731,1050,549,284]<br>`670:2883` [731,1354,549,284] | -60 | P Pl C |
+| 8 | `3004:804` / `3117:4534` (1512) · h2046 | Patola cloth | `3004:807` [160,940,739,45] | `3004:808` [160,1000,739,180] 24.0/30.0 | `3004:809` [160,1195,739,720] | `3004:812` [921,940,359,284]<br>`3004:814` [921,1244,359,544] | -60 | P Pl M D C |
+| 9 | `961:1024` / `3117:4563` (1504) · h2262 | Elephant-shaped containers ⚠ | `961:1219` [161,1020,474,45] | `961:1220` [161,1087,549,200] 20.0/25.0 | `961:1221` [161,1309,549,840] | `961:1231` [732,1090,549,302] | +3 | P Pl M D C O |
+| 10 | `964:2090` / `3117:4623` (1506) · h2043 | Pod duang stamped with the chakra and great crown marks ⚠ | `964:2111` [160,1020,994,45] | `964:2112` [160,1087,739,175] 20.0/25.0 | `964:2113` [160,1284,739,600] | `964:2117` [921,1100,359,365] | +13 | P Pl M D C O |
+| 11 | `1042:1719` / `3117:4775` (1511) · h2478 | Hand-carved opium pipe ⚠ | `1042:1944` [160,1020,418,45] | `1042:1956` [160,1087,739,225] 20.0/25.0 | `1042:1968` [160,1334,739,984] | `1042:1982` [921,1090,360,589] | +3 | M D C O |
+| 12 | `670:2828` / `3117:4441` (1483) · h1836 | Tin ingot in the shape of an elephant | `670:2841` [160,1075,739,45] | `670:2842` [160,1145,739,104] 20.0/26.0 | `670:2843` [160,1274,739,408] | `1041:1458` [921,1145,359,245] | +0 | P Pl M C |
+| 13 | `1041:866` / `3117:4682` (1509) · h2445 | Wooden cold-press cake moulds with elephant, horse and fowl motifs ⚠ | `1041:885` [160,1020,812,90] | `1041:886` [160,1132,739,275] 20.0/25.0 | `1041:887` [160,1429,739,912] | `1041:890` [921,1120,360,589] | -12 | Pl M D C O |
+| 14 | `1006:561` / `3117:4655` (1508) · h2065 | Siwaih | `1006:837` [160,1020,112,45] | `1006:849` [160,1087,739,100] 20.0/25.0 | `1006:861` [160,1209,739,696] | `1038:579` [921,1020,360,589] | -67 | P Pl M C |
+| 15 | `670:2847` / `3117:4461` (1484) · h2125 | Bas-relief of a procession, illustrating the life of the Buddha ⚠ | `670:2850` [160,1140,739,90] | `670:2851` [160,1255,739,200] 20.0/25.0 | `670:2852` [160,1480,739,480] | `670:2855` [921,1110,359,192]<br>`670:2856` [921,1332,359,171]<br>`670:2857` [921,1533,359,112] | -145 | P Pl M D C |
+
+**เทียบกับ CONTENT-MODEL (`sh_*` ที่มีอยู่แล้วครบ — ไม่ต้องเพิ่มฟิลด์เพื่อ #12):** `sh_period` ✔ · `sh_place_of_production` ✔ · `sh_material` ✔ · `sh_dimensions` ✔ · `sh_collection` ✔ · `sh_object_biography` ✔ (ป้ายแสดง "Other information / Object biography") · `sh_local_name` ✔ (ไม่มีใน 15 ชิ้นนี้) · **เสนอให้ core (ไม่บังคับ):** (ก) `sh_scientific_name` (text · "Scientific name / Taxonomy:" — มีใน Page 2.1 ของ trail อื่น ไม่มีใน 15 ชิ้นช้าง) · (ข) template แสดงบล็อกตามลำดับตายตัวข้างบน ข้ามค่าว่าง (ไม่ใช้ฟิลด์ใหม่) · (ค) `sh_thematic_section` เลิกแสดงในหน้า detail
+**seed:** `objects[15 ชิ้น].{period,place_of_production,material,dimensions,collection,object_biography}` = ค่าใหม่ตาม Figma · **`info_rows[]`** = ข้อความดิบตามลำดับ Figma `{label,key,value}` · `figma_2026_11.{title,caption,frame,*_node}` = ข้อความใหม่ที่ยังไม่ใช้ · `title`/`caption` ฟิลด์หลัก **ไม่ถูกแก้** (9/15 หัวข้อต่าง · 14/15 caption ต่าง — P-244)
+
 ### 4.9 Nav / ปุ่ม / component เสริมที่อยู่ใน Figma แต่ไม่ได้ใช้ในเฟรม Final
 - แถบ zone-nav 5 ช่อง `Frame 12723` (`670:1107`): Barlow Condensed 20/24 (active Bold 700 + พื้น `#D65F47`@20%, ไม่ active Medium 500) padding 12/12/10/10 — ตัวอย่างอยู่ใน style guide; ไม่ปรากฏในหน้า (อาจใช้เป็น sub-nav) → ใช้ถ้าต้องการ ไม่บังคับ
 - ปุ่ม `Button 1` (TH "นัดปรึกษาฟรี"), ไอคอน mobile/mail, `lucide:arrow-up` = ชิ้นส่วนแม่แบบเดิม ไม่เกี่ยวกับเว็บนี้
+
+### 4.10 Zone 4 chooser — หน้าคั่น "เลือกสัตว์" (D37 · BACKLOG #13 · Figma `3117:3946` **Desktop - 1513** · page `3117:3314` section "Zone 4" `3140:1357`) · ภาพ render `design/frames/zone4-chooser-1513.png` · `zone4-section54.png`
+**ที่มา/สถานะ:** คลิกการ์ด Zone 4 (Home) → หน้านี้ (D37) · Figma หน้า 1513 วาง **เฉพาะพื้นหลังเส้นประ + แถบ ZONE** — **ภาพสัตว์ยังไม่ได้วางลงหน้า** (อยู่เป็นไฟล์แยก 17 ตัวใน Section 54 `3140:1362` › "รูปภาพสัตว์แบบแยก แต่ละตัว" `3140:1398` + ภาพรวมการจัดวาง `3140:1359/3140:1360` ที่ข้อความ `3140:1401` สั่ง "***Zone 4 - ให้อิงตามรูปแบบที่เขาจัดวาง") → **ตำแหน่งต่อตัวด้านล่างวัดจากภาพรวม** (จับคู่ silhouette ไฟล์แยก ↔ ภาพรวม · IoU 0.89–0.99 · ±1–2 px) · ข้อมูลเต็ม: `content/seed/zone4-chooser.json`
+**โครง (frame 1440×1065 · ตำแหน่งเทียบ frame)**
+| section | พิกัด | รายละเอียด |
+|---|---|---|
+| Header #1/#02 | `[0,0 1440×86]` · `[0,86 1440×64]` | เหมือนทุกหน้า (§3) |
+| Cover = พื้นหลังเส้น `3117:3949` › `3117:3950` | `[160,150 1120×540]` | ภาพ `278fb0ba…` (4096×2304 ครอปหน้าต่าง y 7.9%–93.4% ตาม imageTransform แล้ว → ไฟล์ **`design/assets/zone4-animals/_chooser-bg-cover-1120x540.png`** 4096×1971 = 3.66×) · **เส้นทึบแนวนอน 2 เส้น** (บน y≈264 · ล่าง y≈658 เทียบ frame 1440 · สีเทาเข้ม ~1px · วัดจากภาพ render) + **เส้นประทแยง 8 เส้น** เอียงขวา (ล่างซ้าย → บนขวา · ขีดสั้นสีดำ ~1px) ตัดขอบซ้าย/ขวา · เส้นที่ 3 (จากซ้าย) ยื่นเหนือเส้นบน (ตามภาพ) |
+| **สัตว์ 17 ตัว** | ตามตาราง (กล่อง PNG รวมขอบโปร่งใส) | วางทับ Cover · ภาพพื้นโปร่ง · สเกล **0.14 × px จริง** ทุกตัว · เรียงเป็น 3 แถวคร่าว ๆ สลับตามเส้นประ (ดูภาพ `design/assets/zone4-animals/_composite-reference.png` = ตำแหน่งอ้างอิง ซึ่งมีเส้น+สัตว์ครบ) |
+| แถบ ZONE 1–5 `Frame 12684` `3117:3951` | `[160,710 1120×166]` r22 + shadow `0 1 4 #0C0C0D@5%` ×2 | ภาพ `56172917…` ครอปแล้ว → **`_zone-bar-zone4-active-1120x166.png`** (3886×576) · **Zone 4 active** (พื้น `#EC7966` ตัวหนังสือขาว) · 4 แถบอื่นจาง: Z1 `#D0E2DF` · Z2 `#EFDAE3` · Z3 `#F5BBB1` · Z5 `#B7E3DA` · แถบ = 5 ช่อง 224 กว้างที่ x = 160/384/608/832/1056 · y 833–878 · มีไอคอนกวาง (silhouette สีน้ำตาลเข้ม) + เส้นแนวนอน 2 เส้นเหนือแถบ Zone 4 (ฝังในภาพ) · แถบเป็นภาพทั้งก้อน — **ไม่ระบุว่ากดได้** (P-248) |
+| ปุ่ม Back `3117:3947` | `[160,940 115×50]` | §3.3 · ย้อนหน้า |
+**ตารางสัตว์ ↔ trail (17 ตัว = 17 trail · พิกัดเทียบ frame 1440 · `png` = กล่องไฟล์เต็ม · `ตัวจริง` = กล่องส่วนที่ไม่โปร่งใส)**
+| trail slug | Figma node | ไฟล์ (`design/assets/zone4-animals/`) | px จริง | png `[x,y w×h]` | ตัวจริง `[x,y w×h]` | คลิก |
+|---|---|---|---|---|---|---|
+| garuda | `3140:1390` (`Zone4 header-03`) | `garuda.png` | 939x1010 | `[214.6,172.5 131.5×141.7]` | `[224.8,193.6 107.7×109.9]` | ไม่ลิงก์ |
+| buffalo | `3140:1396` (`Zone4 header-09`) | `buffalo.png` | 989x862 | `[250.0,293.9 138.5×120.9]` | `[261.2,306.0 119.2×100.0]` | ไม่ลิงก์ |
+| naga | `3140:1391` (`Zone4 header-04`) | `naga.png` | 1038x1398 | `[446.3,157.7 145.3×196.1]` | `[470.9,172.5 95.4×168.5]` | ไม่ลิงก์ |
+| seashell | `3140:1392` (`Zone4 header-05`) | `seashell.png` | 953x883 | `[637.0,193.2 133.4×123.8]` | `[644.8,206.5 117.6×99.2]` | ไม่ลิงก์ |
+| phoenix | `3140:1393` (`Zone4 header-06`) | `phoenix.png` | 876x826 | `[892.2,203.8 122.6×115.9]` | `[902.1,212.5 105.3×98.9]` | ไม่ลิงก์ |
+| hornbill | `3140:1394` (`Zone4 header-07`) | `hornbill.png` | 798x791 | `[1051.9,208.7 111.7×110.9]` | `[1058.5,228.2 94.9×78.1]` | ไม่ลิงก์ |
+| dragon | `3140:1385` (`Zone4 header-15`) | `dragon.png` | 897x1440 | `[179.4,439.5 125.6×202.0]` | `[192.8,445.9 102.3×187.7]` | ไม่ลิงก์ |
+| lion | `3140:1380` (`Zone4 header-10`) | `lion.png` | 1271x911 | `[333.3,397.9 177.9×127.8]` | `[354.7,407.0 149.3×107.9]` | ไม่ลิงก์ |
+| fish | `3140:1381` (`Zone4 header-11`) | `fish.png` | 1186x918 | `[537.4,332.3 166.0×128.8]` | `[551.6,348.7 144.9×97.5]` | ไม่ลิงก์ |
+| water-bird | `3140:1387` (`Zone4 header-17`) | `water-bird.png` | 918x953 | `[691.7,433.5 128.5×133.7]` | `[697.0,455.3 120.6×100.0]` | ไม่ลิงก์ |
+| deer | `3140:1382` (`Zone4 header-12`) | `deer.png` | 1144x932 | `[714.9,307.5 160.2×130.7]` | `[721.1,324.3 150.4×94.8]` | ไม่ลิงก์ |
+| makara | `3140:1384` (`Zone4 header-14`) | `makara.png` | 1327x579 | `[904.0,336.5 185.8×81.2]` | `[910.9,360.2 168.4×45.5]` | ไม่ลิงก์ |
+| bird | `3140:1388` (`Zone4 header-18`) | `bird.png` | 699x636 | `[917.5,441.8 97.9×89.2]` | `[921.0,461.0 91.3×59.4]` | ไม่ลิงก์ |
+| rooster | `3140:1383` (`Zone4 header-13`) | `rooster.png` | 855x770 | `[1114.2,303.2 119.7×108.0]` | `[1130.4,320.2 85.3×76.7]` | ไม่ลิงก์ |
+| horse | `3140:1386` (`Zone4 header-16`) | `horse.png` | 1215x1095 | `[466.1,498.5 170.1×153.6]` | `[476.6,507.6 146.3×139.2]` | ไม่ลิงก์ |
+| turtle | `3140:1395` (`Zone4 header-08`) | `turtle.png` | 777x572 | `[803.5,556.2 108.8×80.2]` | `[809.7,578.8 90.5×51.2]` | ไม่ลิงก์ |
+| elephant | `3140:1389` (`Zone4 header-19`) | `elephant.png` | 1504x1052 | `[1023.8,481.7 210.6×147.6]` | `[1030.9,499.4 198.5×124.1]` | **`/timeline/`** |
+
+**พฤติกรรม**
+- **hover บนสัตว์ = ขยายใหญ่ขึ้น** (เจ้าของสั่ง) · Figma ไม่มี prototype interaction หรือ variant hover ของสัตว์ใน Section 54 → ขนาด/เวลา **`[P]`**: เสนอ ×**1.14** รอบกึ่งกลางกล่อง PNG (ยืมจาก tile trail 184→210 §3.6) · **0.3s ease-in-out** · ตัวที่ขยายอยู่ชั้นบนสุด (z-index) · `prefers-reduced-motion` = ไม่ขยาย (P-249)
+- **คลิก:** **ช้าง → `/timeline/`** · **สัตว์อีก 16 ตัวไม่ลิงก์** `[P]` ตาม D37 (ไม่มี timeline · D7) — แสดง cursor ปกติ ไม่ใช่ลิงก์ · ไม่ใส่ `href`/`role=link`
+- เส้นประ/เส้นทึบ = พื้นหลังคงที่ ไม่ขยับ ไม่ animate
+- ไอคอนแถบ trail 35² ×17 (`Frame trails` `3137:715` ใน Section 54 · ตัวหนึ่ง 45²) มีใน Figma แต่ **ไม่ได้วางในหน้า 1513** → ไม่ทำ (P-250)
+- มือถือ/แท็บเล็ต: ไม่มีใน Figma (D5) → ยุบเป็นกริด 2–3 คอลัมน์ตามดุลยพินิจ wp-dev (ไม่ใช่สเปก)
+
+### 4.11 Zone 5 — **DRAFT · บัญชีโครง (ยังไม่ใช่สเปกเต็ม · ให้เจ้าของตัดสินขอบเขต)** · Figma section "Zone 5" `3140:1356` (7368×3792) ใน page `3117:3314`
+ภาพ render: `design/frames/zone5-1514.png` · `zone5-detail1-1515.png` · `zone5-detail2-1516.png` · `zone5-action-zone.png` · เดิมใน seed: zone 5 `has_page:false` ("ไม่มี frame หน้า zone 5 ใน Figma" P-204) → **ตอนนี้มีแล้ว 3 หน้า + 1 แผ่น action**
+| # | frame | ชื่อ/หน้าที่ | ขนาด | ส่วนประกอบหลัก (เทียบ frame) | โต้ตอบ | ข้อความ/ข้อมูล |
+|---|---|---|---|---|---|---|
+| 1 | `3117:3955` **Desktop - 1514** | **หน้าหลัก Zone 5 "The Curious Minds’ Play Zone"** | 1440×2090 | Header · Cover [160,170 551×384] (ภาพการ์ด `4361cf0c`) + ข้อความ [731,170 549×347] H1 36/45 + 2 ย่อหน้า · แถบ ZONE [160,579 1120×166] (Zone 5 active · ภาพ `82bf391e`) · **การ์ด 4 คอลัมน์** [160,770 280×459 ×4] (`Cover`/`Cover2`/`Cover3`/`Cover4` = Passport / Card game / "Good day to you, Cast Brass Tabletop Horse" / Shared Histories folder) · แถวภาพ 4 ใบ [160,1254 280×123 ×4] · **History** [160,1402 1120×453] ("Shared Histories") · Back [160,1965] | hover การ์ด/History → สลับภาพ (smart-animate 0.3s) · **ลูกศรเชื่อม (annotation `3117:4047/4053`): การ์ด 1 → 1515 · การ์ด 2 → 1516** (ไม่มี click ที่ตั้งค่าใน prototype จริง) · การ์ด 3/4/History ไม่ระบุปลายทาง | ข้อความจริง (ไม่ใช่ lorem): "This zone invites you to carry the journey beyond the screen. Visiting one of our ten partner museums across five countries? Pick up a Shared Heritage Passport…" (2 ย่อหน้า) |
+| 2 | `3117:3983` **Desktop - 1515** | **Museum Passport** (หน้าย่อย) | 1440×1783 | hero สีชมพู `#D3AEC2` [160,150 1120×500] (2 ภาพ `b842bc29`) · หัวข้อ "Museum Passport" + ข้อความ [160,700 549×325] · ภาพปก "PASSPORT" 551×384 ("`.gif animate of 10 color cover.`" = หมายเหตุออกแบบ: ให้ทำ GIF วนสี 10 สี) · ตารางสี่เหลี่ยม 2 แถว × 5 (184² พื้น `#D96C4D` = **placeholder**) · Back | — | **เนื้อหาเป็น Lorem Ipsum** (ยังไม่มีจริง) |
+| 3 | `3117:4012` **Desktop - 1516** | **Card-and-Art Game** (หน้าย่อย) | 1440×3302 | hero [160,150 1120×499] (ภาพ `49118c0d`) · หัวข้อ + ข้อความ [160,699 739×241] · ปกเกม 361×384 (GIF วนสี) · ไพ่ 3 แถว (หลังไพ่ 172×250 ภาพ `1ff49559`) · ปุ่ม **"download template"** [592,2062 256×52 · 24px] (ลิงก์ไฟล์ไม่ระบุ) · ภาพ "(A5) draw your artefact" 600×852 (`e0269b3c`) · **"#sharedheritage"** 28px · Back | — | หัวข้อจริง · ข้อความ **Lorem Ipsum** |
+| 4 | `3117:4039` **Action Zone** (แผ่นอธิบาย) | สถานะ non-active/active ของ Cover×4 + History | 1379×847 | ภาพ `36bc17e8` 1255×524 + หมายเหตุ "Mouse Hover จะเกิดการเปลี่ยนของรูปที่เปลี่ยนไป" | hover | — (ไม่ใช่หน้า) |
+| 5 | `3117:4044` Section 52 · `3117:4050` Section 53 | ตัวอย่างการ์ดที่ลิงก์ไป 1515 / 1516 | — | `Cover` · `Cover2` + ลูกศร | — | — |
+component: `Cover` `3117:5082` · `Cover2` `3117:5097` · `Cover3` `3117:5087` · `Cover4` `3117:5092` (ตัวละ 2 variant = default / hover · ON_HOVER smart-animate 0.3s) · `History` `3117:5102` (History1 → History2 hover) · ข้อความ H1 `3117:3962` · ย่อหน้า `3117:3963`
+**เทียบ CONTENT-MODEL (zone 5):** term `zone-5` มี `sh_has_page = false` · ยัง**ไม่มี**: template หน้า zone 5 · เนื้อหา 2 ย่อหน้าของหน้าหลัก (zone term description ได้) · ภาพการ์ด 4 ใบ + hover 4 ใบ + แถวภาพ 4 + History 2 สถานะ (ฟิลด์ภาพ 14 ช่อง หรือเป็น page/Gutenberg ของหน้านี้) · หน้าย่อย 1515/1516 = 2 หน้าใหม่ (page post) · ปุ่ม "download template" (file) · ข้อความ Passport/Card game = Lorem (ไม่ควร import) · อาจต้องใหม่: GIF วนสี 10 สี (ภาพ/วิดีโอ)
+**คำถามให้เจ้าของ (P-251):** (ก) ทำ Zone 5 ในรอบนี้ไหม หรือแสดงการ์ด "เร็ว ๆ นี้" ไว้ก่อน · (ข) ทำเฉพาะหน้าหลัก 1514 (ข้อความจริงครบ) แล้วเว้น 1515/1516 ที่ยังเป็น Lorem · (ค) การ์ด 1/2 ลิงก์ไป 1515/1516 จริงไหม (Figma เป็นแค่ลูกศร) · (ง) GIF 10 สี ใครทำ · (จ) ปุ่ม "download template" ไฟล์อะไร
 
 ---
 ## 5. ฟิลด์ที่หน้าใช้ (ชื่อ · ชนิด · ที่มา node-id · ตัวอย่างจาก seed) — ให้ core-contract ทำ CONTENT-MODEL
@@ -533,6 +675,11 @@ frame 1440×1582 แต่เนื้อหาในแนวนอนกว้
 | `cover_image` | image 1120×410 | `1013:1289` ref `10247f33df7e…` (Zone 1) | — | `cover_node` |
 | `banner_image` | image 1120×166 (แถบ ZONE 1–5) | `1013:1292` ref `413791d606d5…` | — | (frame ใน `page_frame`) |
 | `has_page` | bool | — | zone 5 = false | `has_page` |
+| `page_title` (ใหม่ 2026-11-11 · zone 1–3) | text | `3117:5053` / `5067` / `5063` | "Animals in Nature and Mythology" | `page_title` (= `name`) · เดิมเก็บใน `name_previous` |
+| `name_banner` (ใหม่) | text (ตรงตัวอักษรในภาพ banner · ใช้เป็น alt) | ภาพ banner | "Animals in Nature & Mythology" | `name_banner` |
+| `intro_short` + `body_full` (ใหม่) | textarea (ย่อหน้า = `\n`) | `3117:5054` (ย่อ) · `3117:5060` / `5068` / `5064` (เต็ม) | zone 1 ย่อ = 2 ย่อหน้า · zone 2/3 ย่อ = 1 ย่อหน้า | `intro_short` `body_full` `intro_nodes` |
+| `read_more` labels (ใหม่) | UI string | `3117:4321` / Hide variant | "Read more >>" ↔ "Hide >>" | `read_more.collapsed/expanded` |
+| `banner_image` (ใหม่ · แทน cover เดิม 1120×410) | image 4096×1503 | `3117:3716` (zone 1 ref `57fe08a9…`) · `3117:3686` (zone 2 ref `262bafe2…`) · `3117:3745` (zone 3 ref `1fda5191…`) | ไฟล์ใน `design/assets/zone-banners-2026-11/` | `banner_image.file/ref/figma_node` |
 
 ### 5.4 `timeline_item` (trail ช้าง) — ใช้ใน: timeline  (seed: `timeline-elephant.json`)
 | ฟิลด์ | ชนิด | ที่มา (node) | ตัวอย่าง | seed key |

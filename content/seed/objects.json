@@ -13,7 +13,12 @@
    "detail_frames_page_2_1": 141,
    "objects_in_more_than_one_trail": 15
   },
-  "note": "ข้อความคัดลอกตรงจาก Figma (ยกเว้น \\xa0 -> space และตัด prefix \"Caption:\" ออกจาก caption) · ฟิลด์ที่ไม่มีใน Figma ไม่ใส่ (ไม่เดา) · status[] = ข้อสังเกตที่ต้องมีคนยืนยัน (ดู docs/PENDING-DECISIONS.md P-2xx)"
+  "note": "ข้อความคัดลอกตรงจาก Figma (ยกเว้น \\xa0 -> space และตัด prefix \"Caption:\" ออกจาก caption) · ฟิลด์ที่ไม่มีใน Figma ไม่ใส่ (ไม่เดา) · status[] = ข้อสังเกตที่ต้องมีคนยืนยัน (ดู docs/PENDING-DECISIONS.md P-2xx)",
+  "figma_2026_11": {
+   "by": "design-batch-hzd",
+   "lastModified": "2026-11-11T08:23:07Z",
+   "what": "15 objects trail ช้าง: info_rows (บรรทัดใต้หัวข้อตามลำดับ Figma) + ฟิลด์ metadata ปรับเป็นค่าใหม่ · figma_2026_11.{title,caption} = ข้อความใหม่ (ยังไม่ใช้) · NBSP→space, U+2028→newline"
+  }
  },
  "objects": [
   {
@@ -1628,7 +1633,7 @@
     "horse",
     "rooster"
    ],
-   "collection": "Folklore Museum, The Institute for Southern Thai Studies",
+   "collection": "Folklore Museum, The Institute for Southern Thai Studies, Thailand",
    "caption": "This phim yen (literally \"cold mold\") is a wooden pastry mold used to make Khanom Putu, a traditional pastry. Such molds are carved from durable local hardwoods such as jackfruit or velvet tamarind wood, with hollow cavities roughly 1 to 2 inches deep chiselled into detailed, recessed designs. This collection contains motifs of elephants, horses, and poultry, traditionally popular for Khanom Putu. The \"cold-press\" method gives the mold its name: the dough is shaped entirely inside the wooden matrix without baking or heat, then extracted with a sharp tap against a wooden table, releasing the pastry with sharp, embossed reliefs.\n\nThis heritage pastry has held an essential position within the daily life, rites of passage, and religious rituals of both Chinese and Malay-Javanese communities in Southern Thailand for centuries. It is used at births, cradle ceremonies, engagements, weddings, and circumcision rituals. During Songkran, younger generations arrange these pastries inside fine betel nut caddies or lacquerware to offer to elders in exchange for ancestral blessings. Within the Sathing Phra Peninsula, this pastry holds a profound allegorical connection to matrimony: its name sounds identical to the Thai word meaning \"to hold fast\" or \"to intertwine,\" making the cake an edible prayer for marital fidelity.\n\nCarving specific fauna onto the phim yen allowed families to embed unspoken blessings directly into the food served to guests. The Elephant (Chang) denotes absolute authority, spiritual merit, and structural prosperity — pastries stamped with this form are reserved for grand auspicious celebrations or offered to high-ranking Buddhist monks and Muslim leaders. The Horse (Ma) represents rapid progress and career advancement, standardly served at housewarmings or gifted to young adults. The Chicken (Kai), which awakens at dawn to forage, signifies industriousness, material abundance, and financial luck and is served more widely.\n\nThe phim yen tradition illustrates trans-regional interactions. Diasporic Chinese Hokkien and Baba-Peranakan communities introduced the technology of hand-carved wooden blocks for compressed pastries. They substituted Chinese mythological creatures with animals familiar to local agrarian life and folk belief: the elephant, the horse, and the chicken. Meanwhile, Malay-Javanese and Islamic traditions contributed to the pastry’s recipe.\n\nThis mold, encoding Chinese technological knowledge, Malay culinary tradition, and the symbolic vocabularies of the elephant, the horse, and the chicken, speaks to a layered process of exchange, adaptation, and sharing that shaped the Southern Thai-Malay Peninsula over centuries.",
    "thematic_section": "Craft of Everyday",
    "meta_source": {
@@ -1638,9 +1643,9 @@
     "dimensions": "timeline card 1232:1789",
     "object_biography": "timeline card 1232:1789"
    },
-   "place_of_production": "Mueang Pattani District, Pattani Province",
+   "place_of_production": "Mueang Pattani District, Pattani Province, Thailand",
    "material": "Hardwood",
-   "dimensions": "Carved Wood (Elephant Motif) — Width 7 cm, Length 26 cm, Thickness 2.5 cm. Carved Wood (Horse Motif) — Width 10.5 cm, ] Length 32.5 cm, Thickness 3 cm. Carved Wood (Twin Ducks & Single Chicken Motif) — Width 8.5 cm, Length 32 cm, Thickness 2.5 cm. Carved Wood (Combined Elephant & Horse Motif) — Width 9 cm, Length 35 cm, Thickness 2 cm.",
+   "dimensions": "Carved wood (elephant motif) – width 7 cm, length 26 cm, thickness 2.5 cm. Carved wood (horse motif) – width 10.5 cm, length 32.5 cm, thickness 3 cm. Carved wood (twin ducks and single chicken motif) – width 8.5 cm, length 32 cm, thickness 2.5 cm. Carved wood (combined elephant and horse motif) – width 9 cm, length 35 cm, thickness 2 cm.",
    "object_biography": "Exhibited in the Arts and Crafts Room, Folklore Museum, Institute of Southern Thai Studies.",
    "timeline": {
     "card_order": 13,
@@ -2450,7 +2455,50 @@
     "text_color": "#343A40",
     "source_frame": "1041:866"
    },
-   "status": []
+   "status": [],
+   "info_rows": [
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Mueang Pattani District, Pattani Province, Thailand"
+    },
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Hardwood"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Carved wood (elephant motif) – width 7 cm, length 26 cm, thickness 2.5 cm. Carved wood (horse motif) – width 10.5 cm, length 32.5 cm, thickness 3 cm. Carved wood (twin ducks and single chicken motif) – width 8.5 cm, length 32 cm, thickness 2.5 cm. Carved wood (combined elephant and horse motif) – width 9 cm, length 35 cm, thickness 2 cm."
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Folklore Museum, The Institute for Southern Thai Studies, Thailand"
+    },
+    {
+     "label": "Other information / Object biography",
+     "key": "object_biography",
+     "value": "Exhibited in the Arts and Crafts Room, Folklore Museum, Institute of Southern Thai Studies."
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "1041:866",
+    "frame_name": "Desktop - 1509",
+    "frame_in_3117": "3117:4682",
+    "title_node": "1041:885",
+    "meta_node": "1041:886",
+    "caption_node": "1041:887",
+    "title": "Wooden cold-press cake moulds with elephant, horse and fowl motifs",
+    "title_raw": "Wooden cold-press cake moulds with elephant, \nhorse and fowl motifs",
+    "title_differs_from_title_field": true,
+    "caption": "These are wooden moulds in the forms of elephants, horses and poultry. Such moulds were carved from durable local hardwoods such as jackfruit or velvet tamarind wood, with detailed recessed designs.\n\nThey are used to make traditional pastries The method involves shaping the dough entirely inside the wooden matrix without baking or heat. The pastry is then extracted with a sharp tap against a wooden table. Across Chinese, Malay-Javanese and southern Thai communities, traditional pastries made this way are served at key milestones and rites of passage, including births, cradle ceremonies, engagements, weddings and circumcision rituals, and are given as offerings in religious rituals. During Songkran (Thai New Year), younger family members arrange these pastries on fine betel nut trays or in lacquerware and offer them to their elders, receiving blessings in return. On the Sathing Phra Peninsula, this type of pastry holds a profound allegorical connection to matrimony: its name sounds identical to the Thai word meaning ‘to hold fast’ or ‘to intertwine’, making the pastry an edible prayer for marital fidelity.\n\nCarving motifs of auspicious animals into the moulds embedded blessings directly into the pastries. The elephant (chang) denotes authority, spiritual merit and prosperity, so pastries stamped with this form are reserved for grand auspicious celebrations or are offered to high-ranking Buddhist monks and Muslim leaders. The horse (ma) represents rapid progress and career advancement, so pastries with this form are served at housewarmings or are gifted to young adults. The chicken (kai), which awakens at dawn to forage, signifies industriousness, material abundance and financial luck, so pastries with this form are served more widely.\n\nThis type of traditional mould demonstrates the trans-regional transfer of technology and beliefs. Diasporic Hokkien and Baba-Peranakan communities introduced the Chinese technology of hand-carved wooden blocks for such pastries to South-East Asia but substituted Chinese mythological creatures with animals familiar to local agrarian life and folk belief: the elephant, the horse and the chicken. Meanwhile, Malay-Javanese and Islamic traditions contributed to adapting the pastry’s recipe.\n\nSuch moulds, encompassing Chinese technological knowledge, Malay culinary tradition and the symbolic vocabularies of the elephant, the horse and the chicken, speak to a layered process of exchange, sharing and adaptation that shaped cultural life in the southern Thai-Malay Peninsula over centuries.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว"
+   }
   },
   {
    "slug": "koffo-cloth",
@@ -9744,7 +9792,7 @@
     "lion",
     "naga"
    ],
-   "collection": "Folklore Museum, The Institute for Southern Thai Studies",
+   "collection": "Folklore Museum, The Institute for Southern Thai Studies, Thailand",
    "caption": "This repoussé and chased brass holy water basin (khan nam mon) is a prime specimen of Southern Thai metal artistry, produced historically in the major coastal principalities (hua mueang) of Southern Thailand — most notably Nakhon Si Thammarat and Songkhla — which served as metallurgical hubs intertwined with maritime trading networks, fostering cultural exchanges between the Thai, Malay, and Chinese worlds.\n\nThe artistic composition of the basin is anchored by a structured layout of auspicious animals embossed around its body, featuring the Elephant (Chang), the Tiger (Suea), the Naga (Phaya Nak), the Rajasiha (Ratchasiha, the mythical lion), the Garuda (Khrut), and the Bear (Mee). Each carries symbolic weight rooted in regional folklore and cosmological thought: the Elephant represents physical strength, institutional stability, and agricultural fertility; the Naga, the element of water, rainmaking, and subterranean abundance; the Rajasiha, sovereign command and divine protection; and the Garuda, supreme authority and power over evil spirits. Consolidating this specific pantheon of beasts onto a single vessel reflects an ancient ideological pursuit: channelling the balancing forces of nature to manifest comprehensive good fortune. In folk theology, these animal motifs are linked to the concept of Guardian Spirits (Sat Phu Phitak); arranging such a diverse assembly around the basin acts as a metaphor for summoning spiritual energies from all directional axes into the ritual space.\n\nThe vessel was hand-shaped from a single piece of brass and embellished using the repoussé technique (dun lai noon tam): the metalsmith works from the reverse side, hammering the metal outward to create raised, three-dimensional designs, before flipping the vessel over to execute precision chasing from the front — a craft demanding intimate mastery of metallurgy and intense concentration. Due to the highly intricate, labour-intensive and costly production process, such basins were exclusively commissioned for prominent temples or held by wealthy merchants, community leaders, and the elite.\n\nThe holy water basin is used to contain consecrated holy water (nam phra phuttha mon) for protective chanting assemblies, ordinations, weddings, monastic bathing rites, and housewarming blessings.Within these settings, the water serves as a conductor of collective faith and divine blessings, and, in the context of Southern Thai society historically shaped by riverine ecosystems, as a sanctified symbol of purity, seasonal abundance, and communal nourishment.\n\nBeyond ornament, the animals depicted on this basin — the elephant, naga, garuda, and mythical lion — represent a shared symbolic vocabulary that circulated across maritime Southeast Asia. Through the metalworking techniques that transformed these regional beliefs into a single crafted object, the basin reveals how knowledge, materials, and animal-inspired meanings travelled alongside the communities that shaped the region’s shared heritage.",
    "thematic_section": "Materials Science & Technology",
    "meta_source": {
@@ -9754,7 +9802,7 @@
     "object_biography": "timeline card 1232:1737"
    },
    "material": "Brass alloy",
-   "dimensions": "Rim Diameter: 19 cm, Base Diameter: 11.8 cm, Height: 14 cm",
+   "dimensions": "Rim diameter 19 cm, base diameter 11.8 cm, height 14 cm",
    "object_biography": "Contributed by Mr. Pracha and Mrs. Namthip Chantharadeeying. Exhibited in the Metalwork and Metallurgy Culture Room, Folklore Museum, Institute of Southern Thai Studies.",
    "timeline": {
     "card_order": 5,
@@ -10814,7 +10862,45 @@
     "text_color": "#343A40",
     "source_frame": "964:1522"
    },
-   "status": []
+   "status": [],
+   "info_rows": [
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Brass alloy"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Rim diameter 19 cm, base diameter 11.8 cm, height 14 cm"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Folklore Museum, The Institute for Southern Thai Studies, Thailand"
+    },
+    {
+     "label": "Other information / Object biography",
+     "key": "object_biography",
+     "value": "Contributed by Mr. Pracha and Mrs. Namthip Chantharadeeying. Exhibited in the Metalwork and Metallurgy Culture Room, Folklore Museum, Institute of Southern Thai Studies."
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "3190:4671",
+    "frame_name": "Desktop - 1633",
+    "frame_in_3117": "3190:5587",
+    "title_node": "3190:4949",
+    "meta_node": "3190:4961",
+    "caption_node": "3190:4973",
+    "title": "Embossed brass basin with mythical animal motifs",
+    "title_raw": "Embossed brass basin with mythical animal motifs",
+    "title_differs_from_title_field": true,
+    "caption": "This repoussé and chased brass basin (khan nam mon) was designed to hold consecrated holy water (nam phra phuttha mon) for protective chanting assemblies, ordinations, weddings, monastic bathing rites and housewarming blessings. Within such settings, the water serves as a conductor of collective faith and divine blessings, and, in the context of southern Thai society, which was shaped by riverine ecosystems, as a sanctified symbol of purity, seasonal abundance and communal nourishment.\n\nThe basin features a structured layout of auspicious animals embossed around its body, including the elephant (chang), the tiger (suea), the Naga (phaya nak), the Rajasiha (Ratchasiha, the mythical lion), the Garuda (Khrut) and the bear (mee). Each carries symbolic weight rooted in regional folklore and cosmological thought: the elephant represents physical strength, institutional stability and agricultural fertility; the Naga expresses water, rainmaking and subterranean abundance; the Rajasiha signifies sovereign command and divine protection; and the Garuda denotes supreme authority and power over evil spirits. Consolidating this specific pantheon of beasts onto a single vessel reflects an ancient ideological pursuit: channelling the balancing forces of nature to manifest comprehensive good fortune. In folk theology, these animal motifs are linked to the concept of guardian spirits (sat phu phitak) and arranging such a diverse assembly around the basin acts as a metaphor for summoning spiritual energies from all directional axes into the ritual space.\n\nThe vessel was hand-shaped from a single sheet of brass and embellished using the repoussé technique (dun lai noon tam), in which the metalsmith works from the reverse side, hammering the metal outward to create raised, three-dimensional designs, before flipping the vessel over to execute precision chasing from the front – a craft demanding intimate mastery of metallurgy and intense concentration. Due to the highly intricate, labour-intensive and costly production process, such basins were exclusively commissioned for prominent temples or held by community leaders and wealthy members of society.\n\nBasins such as this exemplify southern Thai metal artistry. They were historically produced in the major coastal principalities (hua mueang) of southern Thailand – most notably Nakhon Si Thammarat and Songkhla – metallurgical hubs linked with maritime trading networks that fostered cultural exchange between Thai, Malay and Chinese communities.\n\nThe animals depicted on this basin – the elephant, Naga, Garuda and mythical lion – represent a shared symbolic vocabulary that circulated across maritime South-East Asia over centuries. Through the metalworking techniques that encapsulated these regional beliefs into the form of a single crafted object, the basin reveals how knowledge, materials and animal-inspired meanings travelled along maritime networks with the communities that shaped the region’s shared heritage.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว"
+   }
   },
   {
    "slug": "flintlock-firearm-2",
@@ -19831,7 +19917,7 @@
    "period": "c. 780–830 CE (Sailendra period)",
    "place_of_production": "Borobudur Temple, Magelang Regency, Central Java, Indonesia (First Gallery, Chief Wall, Upper Register)",
    "material": "Andesite stone",
-   "dimensions": "In situ architectural relief; individual panel dimensions vary. Between 80–100 cm high",
+   "dimensions": "In situ architectural relief; individual panel-height dimensions vary between 80 cm and 100 cm.",
    "timeline": {
     "card_order": 15,
     "illustration_order": 2,
@@ -20551,7 +20637,50 @@
    "status": [
     "lorem_ipsum_in_frame",
     "caption_missing_lorem_ipsum_only"
-   ]
+   ],
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "c. 780–830 CE (Sailendra period)"
+    },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Borobudur Temple, Magelang Regency, Central Java, Indonesia (First Gallery, Chief Wall, Upper Register)"
+    },
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Andesite stone"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "In situ architectural relief; individual panel-height dimensions vary between 80 cm and 100 cm."
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Borobudur Temple Compounds (UNESCO World Heritage Site), Central Java, Indonesia"
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "670:2847",
+    "frame_name": "Desktop - 1484",
+    "frame_in_3117": "3117:4461",
+    "title_node": "670:2850",
+    "meta_node": "670:2851",
+    "caption_node": "670:2852",
+    "title": "Bas-relief of a procession, illustrating the life of the Buddha",
+    "title_raw": "Bas-relief of a procession, illustrating the life of the Buddha",
+    "title_differs_from_title_field": true,
+    "caption": "This relief forms part of the narrative cycle illustrating the life of the historical Buddha (Lalitavistara) carved along the first gallery of Borobudur. It depicts a royal or aristocratic procession, reflecting both Buddhist narrative traditions and the courtly life of eighth- and ninth-century Java. Inspired by Buddhist texts, the artists represented architecture, clothing, vehicles, ornaments, and ceremonial practices familiar to the Javanese world, making the relief an invaluable record of early Southeast Asian society as well as Buddhist visual culture. The panel remains in its original location within Borobudur, one of the world's largest Buddhist monuments, commissioned under the Sailendra dynasty in the late eighth and early ninth centuries.\n\nThroughout history, elephants have been deeply intertwined with the lives of Southeast Asian communities, both symbolically and practically. They served as transport in warfare, where elephant duelling (Yuttahatthi) between opposing kings was regarded as the highest form of martial honour, and facilitated the movement of goods along trade routes through forests and mountainous terrain. This relief bears witness to the enduring presence of elephants in the region from an early period. While it depicts a Bodhisattva riding an elephant in eighth-century Java, by the nineteenth century elephants had also become the primary workforce of the logging industry in northern Thailand.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว"
+   }
   },
   {
    "slug": "elephant-and-mahout-kendi",
@@ -20560,7 +20689,7 @@
    "trails": [
     "elephant"
    ],
-   "collection": "Brunei Darussalam Maritime Museum",
+   "collection": "Brunei Darussalam Maritime Museum, Brunei Darussalam",
    "caption": "A brown-glazed stoneware pouring vessel, shaped as an elephant with its rider, was recovered from a shipwreck off the coast of Brunei Darussalam in 1998. Crafted in the 15th–16th century at the Si Satchanalai kilns in Central Thailand, this striking object offers a vivid glimpse into Southeast Asia’s interconnected maritime world.\nElephants, symbols of wisdom, strength, and loyalty in Hindu-Buddhist traditions, were powerful cultural icons carried across the region by trade, ritual, and storytelling. As this elephant-shaped kendi travelled across seas, it became part of the vibrant networks that once linked Brunei, Thailand, and communities far beyond.\nToday, this remarkable vessel stands as a reminder of our shared heritage, shaped by the movement of goods, ideas, beliefs, and the ocean itself. Through birds, animals, and objects carried by maritime exchange, Southeast Asian museums continue to illuminate stories of creativity, connection, and cultural dialogue across the region.",
    "thematic_section": "Ceremonies Rituals & Festivals",
    "meta_source": {
@@ -20569,7 +20698,7 @@
     "place_of_production": "timeline card 1232:1751",
     "collection": "timeline card 1232:1751"
    },
-   "period": "15th–early 16th century CE",
+   "period": "Fifteenth and early sixteenth centuries CE",
    "place_of_production": "Si Satchanalai Kiln Site, Central Thailand",
    "timeline": {
     "card_order": 7,
@@ -21274,7 +21403,40 @@
    ],
    "status": [
     "caption_had_no_Caption_prefix"
-   ]
+   ],
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "Fifteenth and early sixteenth centuries CE"
+    },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Si Satchanalai Kiln Site, Central Thailand"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Brunei Darussalam Maritime Museum, Brunei Darussalam"
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "670:2872",
+    "frame_name": "Desktop - 1493",
+    "frame_in_3117": "3117:4507",
+    "title_node": "670:2875",
+    "meta_node": "670:2876",
+    "caption_node": "670:2878",
+    "title": "Elephant and Mahout Kendi",
+    "title_raw": "Elephant and Mahout Kendi",
+    "title_differs_from_title_field": false,
+    "caption": "This brown-glazed stoneware vessel (kendi), shaped as an elephant with its rider (mahout), was crafted at the Si Satchanalai kilns in central Thailand. Historically, kendi were used across South-East Asia as pouring and drinking vessels, including in rituals and ceremonies such as weddings. Recovered in 1998 from a shipwreck off the coast of Brunei Darussalam, this striking object reflects the interconnections between communities across maritime South-East Asia.\n\nThe form of the kendi mirrors the elephant’s own act of drawing and pouring water through its trunk, creating a direct connection between the vessel’s function and its imagery. In this way, the kendi does not merely depict the elephant but evokes its presence through both form and use.\n\nElephants are powerful cultural symbols associated with wisdom, strength and loyalty in Hindu-Buddhist traditions. By shaping this vessel in the form of an elephant, the makers of the kendi drew upon these associations, connecting the act of pouring with the auspicious qualities attributed to the animal.\n\nThese associations were spread across the region through storytelling, rituals and trade. As the elephant symbol was transferred across the seas, it became part of the cultural networks that linked communities in Brunei and Thailand with communities across South-East Asia. Its journey reveals how heritage was shared not only through religious sites and royal courts, but also through everyday objects that moved with people, beliefs and ideas across the maritime world.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว"
+   }
   },
   {
    "slug": "elephant-leg-bone",
@@ -21283,7 +21445,7 @@
    "trails": [
     "elephant"
    ],
-   "collection": "National Museum Bangkok",
+   "collection": "National Museum Bangkok, Thailand",
    "caption": "This bone originates from the Asian elephant (Elephas maximus). Identified as a femur (posterior thigh bone), it was received by the National Museum Bangkok from the Ministry of Finance. Elephant bones such as this one served a critical industrial function in the production of Pod Duang (Bullet Money), a silver currency used from the 14th to 20th century: artisans shaped the silver by hammering it on an elephant thigh bone, preferred for its toughness and elasticity that allowed it to absorb repeated impact without deforming the metal. An example of Pod Duang (Bullet Money) appears later in this trail.\n\nThe specimen displayed here belongs to the Indian subspecies (Elephas maximus indicus), which inhabits natural forests across the Asian mainland — from Nepal, Bhutan and India through Myanmar, Thailand, Laos, Vietnam, Cambodia, Malaysia, and Yunnan, China. Two further subspecies occur in the region: the Sumatran Elephant (Elephas maximus sumatranus), found only in Sumatra and generally smaller; and the Borneo Elephant (Elephas maximus borneacus), which shares a similar appearance to the Indian subspecies but carries a distinct genetic code.\n\nElephants are native to Southeast Asia, with elephant bones dating back to prehistoric times discovered in the region. A fossilised jaw identified as Stegodon insignis, believed to be related to modern Asian elephants and living approximately 2,000,000 to 10,000 years ago, was discovered at the headwaters of the Chao Phraya River in Thailand. Similar fossils have also been found in a limestone cave in Perak, Malaysia, and fossilised tusks in the Patiayam Mountains of Central Java, Indonesia.\n\nThroughout history, elephants have been deeply intertwined with the way of life of Southeast Asian peoples, both symbolically and practically. They served as transport in warfare, where elephant dueling (Yuttahatthi) between opposing kings was regarded as the highest form of martial honour, and facilitated the movement of goods along trade routes through forests and mountainous terrain. A relief on the 8th-century Candi Borobudur in Indonesia depicts a Bodhisattva riding an elephant, while in the 19th century, elephants became the primary workforce in the northern Thai logging industry, especially after its expansion following Britain and France obtaining permission to open forest sawmills in Myanmar.\n\nElephant body parts served practical ends too. Across Maritime Southeast Asia, ivory was used for kris handles, ornaments, and furnishings, while in Thailand, elephant bone was turned on a lathe to produce walking stick handles, betel nut grinders, and boxes.The flexible and impact resistant properties of elephant bone also lent it well to forms of delicate handicrafts, such as the manufacture of the reeds of the Khaen, a traditional woodwind instrument from Northeastern Thailand and Laos.",
    "thematic_section": "Land",
    "meta_source": {
@@ -21813,7 +21975,35 @@
     "text_color": "#343A40",
     "source_frame": "1041:1290"
    },
-   "status": []
+   "status": [],
+   "info_rows": [
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "National Museum Bangkok, Thailand"
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "1041:1290",
+    "frame_name": "Desktop - 1510",
+    "frame_in_3117": "3117:4755",
+    "title_node": "1041:1379",
+    "meta_node": "1041:1391",
+    "caption_node": "1041:1403",
+    "title": "Elephant Leg Bone",
+    "title_raw": "Elephant Leg Bone",
+    "title_differs_from_title_field": true,
+    "caption": "This femur (thigh bone) belonged to an Asian elephant (Elephas maximus indicus), a subspecies native to the mainland forests of South-East Asia and the Indian subcontinent. It was discovered in a prehistoric site. Such sites also contain ancient fossil remains of related species, such as Stegodon insignis.\n\nElephants have long played an important role in South-East Asian societies, serving as transport, as war mounts and as draft animals in the logging industry. Elephant bone has also played a role. Possessing specific mechanical qualities, including toughness and high impact resistance, elephant bone was historically used to make various craft objects. These included walking stick handles, betel nut grinders and boxes.\n\nIn some cases, elephant bones served as tools. A notable example is the use of elephant thigh bones in the production of pod duang (“bullet money”), the primary silver currency used in Thailand between the fourteenth and twentieth centuries. Mint artisans used the elephant femur as an anvil surface; its unique combination of strength and elasticity allowed it to absorb repeated heavy hammer strikes without deforming or marring the silver coins. Similarly, the reeds of the khaen, a traditional woodwind instrument from northeastern Thailand and Lao PDR, were historically made using elephant bone as a cutting surface.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [
+     "dimensions",
+     "object_biography",
+     "period",
+     "place_of_production"
+    ],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว"
+   }
   },
   {
    "slug": "elephant-molar-coconut-grater",
@@ -21822,9 +22012,9 @@
    "trails": [
     "elephant"
    ],
-   "collection": "Folklore Museum, The Institute for Southern Thai Studies",
-   "material": "Animal bone (specifically an elephant molar)",
-   "dimensions": "Length: 58 cm, Width: 33 cm, Height: 18 cm",
+   "collection": "Folklore Museum, The Institute for Southern Thai Studies, Thailand",
+   "material": "Animal bone (elephant molar)",
+   "dimensions": "Length 58 cm, width 33 cm, height 18 cm",
    "object_biography": "Contributed by Mrs. Sriya Kongyen, House No. 21, Ranot Sub-district, Ranot District, Songkhla Province. Data recorded on 28 January 1997. Exhibited in the Coconut Grater Room (Kratai Khud Maphrao Room), Folklore Museum, Institute of Southern Thai Studies.",
    "caption": "This coconut grater, known in Southern Thai as a lek khud maphrao, is distinguished by its base, which is fashioned from the large molar of a megafaunal animal. Attached to the front is a serrated iron blade used to shred coconut meat into fine flakes for pressing coconut milk. Elephant molars are among the densest and hardest skeletal structures in the animal kingdom, making them well suited to withstand repeated pressure and impact. The use of this material reflects local knowledge in repurposing durable natural resources for everyday life.\n\nElders around the Songkhla Lake Basin believe this molar belonged to the “dwarf elephant” (chang khrae or chang khom), which is said to have once inhabited the peat swamps and wetlands of Southern Thailand. Folk memory places these elephants across Songkhla Province, Nakhon Si Thammarat, and Phatthalung Province, before they vanished roughly eight decades ago. Some accounts tell of villagers spotting elephants foraging in the twilight hours or slipping into paddy fields to feed. These sightings prompted the community to band together in a regional herding cry to drive them back into the wilderness. Certain locals also compare these creatures to the pygmy elephants of Sabah, Malaysia. Though scientific evidence remains inconclusive, these oral histories and folklore preserve a community’s memory of its landscape and its long relationship with elephants.\n\nThe idea of miniature elephants also appears in classical Thai treatises on elephant lore (Kotchasat) and ancient Southern palm-leaf manuscripts (Nangshue Bod), which document unusual elephant phenotypes under names such as chang klaeb(husk-sized elephants) and chang khom (stunted elephants). Beyond folklore, elephant molars have long been regarded in Thai society as auspicious protective amulets, believed to bestow Metta Mahaniyom (loving-kindness and popularity) and ward off misfortune.\n\nThese beliefs were not confined to ritual or spiritual practice, but were also embedded in everyday life. Coconut is central to Southern Thai cuisine, and the coconut grater was an essential household tool as well as a focus of communal life during merit-making ceremonies, festivals, and weddings. Villagers often gathered to share labour in the tradition known as ok pak khud phrao (“asking for mouths to grate coconuts”). By transforming a molar attributed to the dwarf elephants of local folk memory into a tool of daily use, this coconut grater demonstrates how material culture preserves human relationships with elephants and the landscapes they once shared.",
    "thematic_section": "Materials Science & Technology",
@@ -22382,7 +22572,46 @@
     "text_color": "#343A40",
     "source_frame": "956:975"
    },
-   "status": []
+   "status": [],
+   "info_rows": [
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Animal bone (elephant molar)"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Length 58 cm, width 33 cm, height 18 cm"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Folklore Museum, The Institute for Southern Thai Studies, Thailand"
+    },
+    {
+     "label": "Other information / Object biography",
+     "key": "object_biography",
+     "value": "Contributed by Mrs. Sriya Kongyen, House No. 21, Ranot Sub-district, Ranot District, Songkhla Province. Data recorded on 28 January 1997. Exhibited in the Coconut Grater Room (Kratai Khud Maphrao Room), Folklore Museum, Institute of Southern Thai Studies."
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "956:975",
+    "frame_name": "Desktop - 1503",
+    "frame_in_3117": "3117:4486",
+    "title_node": "3083:868",
+    "meta_node": "3083:880",
+    "caption_node": "3083:892",
+    "title": "Elephant molar coconut grater",
+    "title_raw": "Elephant molar coconut grater",
+    "title_differs_from_title_field": true,
+    "caption": "This coconut grater (lek khud maphrao) is distinguished by its base, which is fashioned from a large molar of a megafaunal animal. Attached to the front is a serrated iron blade used to shred coconut meat into fine flakes for pressing coconut milk.\n\nThe coconut grater is an essential household tool in southern Thailand, as coconuts are central to the local cuisine. The tool is also an important part of traditional culture. During preparations for merit-making ceremonies, festivals and weddings, villagers historically gathered to share the labour of grating coconuts in the tradition known as ok pak khud phrao (asking for mouths to grate coconuts).\n\nElephant molars are among the densest and hardest skeletal structures in the animal kingdom, making them well suited to withstanding repeated pressure and impact. The use of this material to make a coconut grater reflects local knowledge of durable natural resources for use in everyday life.\n\nIn addition, elephant molars have long been regarded in Thai society as auspicious protective amulets, believed to bestow metta mahaniyom (loving-kindness and popularity) and ward off misfortune.\n\nElders around the Songkhla Lake Basin believe this molar belonged to the ‘dwarf elephant’ (chang khrae or chang khom), which is said to have once inhabited the peat swamps and wetlands of southern Thailand. Folk memory places these elephants across Songkhla Province, Nakhon Si Thammarat and Phatthalung Province before they vanished in the mid-twentieth century. Some accounts tell of villagers spotting elephants foraging in the twilight hours or slipping into paddy fields to feed. These sightings prompted the community to band together with a common herding cry to drive them back into the forest. Certain villagers compared these creatures to the pygmy elephants of Sabah in Malaysia. Though scientific evidence remains inconclusive, these oral histories and folklore preserve a community’s memory of its landscape and its long relationship with elephants.\n\nThe idea of miniature elephants also appears in classical Thai treatises on elephant lore (Kotchasat) and ancient southern palm-leaf manuscripts (Nangshue Bod), which document unusual elephant phenotypes under names such as chang klaeb (husk-sized elephants) and chang khom (stunted elephants).\n\nThis coconut grater demonstrates how material culture, in which a molar attributed to the dwarf elephants of local folk memory was used to make a tool for daily use, preserves memories of human relationships with elephants and the landscapes they once shared.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว",
+    "caption_paragraph_note": "ย่อหน้า = \\n\\n (จุดใน Figma ที่ใช้ \\n ตัวเดียว แปลงเป็น \\n\\n · P-246)"
+   }
   },
   {
    "slug": "elephant-shaped-relic-containers",
@@ -22391,13 +22620,13 @@
    "trails": [
     "elephant"
    ],
-   "collection": "National Museum Bangkok",
+   "collection": "National Museum Bangkok, Thailand",
    "thematic_section": "Ceremonies Rituals & Festivals",
-   "period": "Lanna period, 16th century",
+   "period": "Lanna period, sixteenth century CE",
    "place_of_production": "Wat Chedi Sung, Hod sub-district, Hod district, Chiang Mai province",
-   "material": "Quartz, Gold, Stone",
-   "dimensions": "Width 1.1 cm, Height 4.5 cm, Length 7 cm",
-   "object_biography": "Acquired from Wat Chedi Sung, Hod sub-district, Hod district, Chiang Mai province, in 1960.",
+   "material": "Quartz, gold, stone",
+   "dimensions": "Width 1.1 cm, height 4.5 cm, length 7 cm",
+   "object_biography": "Acquired in 1960 from Wat Chedi Sung, Hod, Chiang Mai Province, Thailand.",
    "caption": "These miniature relic containers, fashioned from quartz and semi-precious stones, were discovered in 1960 at Wat Chedi Sung in Chiang Mai province, Thailand. They date to the Lanna period of the 16th century.\nRelic containers of this type served as receptacles for Buddha’s relics, i.e., bodily fragments attributed to the historical Buddha. These relics were enshrined within a stupa or other sacred structures as objects of veneration. The animal forms chosen for such containers were not arbitrary. In fact creatures regarded as auspicious within Hindu-Buddhist traditions typically shaped these vessels to hold sacred material. Thus, the animal forms reinforced the sanctity and spiritual significance of what was held within.\nThe elephant form also evokes the Buddha’s previous lives as recounted in the Jataka tales, which are narratives of the Bodhisattva’s many births across human and animal forms. These tales are central to Buddhist traditions across mainland Southeast Asia. In one story, the Bodhisattva appears as an elephant king who willingly offers his tusks to a forester, thus embodying ideals of generosity and selflessness. In another, he is reborn as the king of the six-tusked elephants. Hunted because of a past grievance, the elephant king chooses not to harm the hunter upon seeing him dressed in the saffron robes of a monk, thus demonstrating compassion and restraint even in the face of suffering.\nThe elephant form connected these relic containers to the Buddha’s sacred presence by recalling narratives of compassion, sacrifice, and moral virtue. These narratives continued to be shared widely in Southeast Asian Buddhist traditions.",
    "timeline": {
     "card_order": 9,
@@ -23179,7 +23408,55 @@
     "text_color": "#212529",
     "source_frame": "961:1024"
    },
-   "status": []
+   "status": [],
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "Lanna period, sixteenth century CE"
+    },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Wat Chedi Sung, Hod sub-district, Hod district, Chiang Mai province"
+    },
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Quartz, gold, stone"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Width 1.1 cm, height 4.5 cm, length 7 cm"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "National Museum Bangkok, Thailand"
+    },
+    {
+     "label": "Other information / Object biography",
+     "key": "object_biography",
+     "value": "Acquired in 1960 from Wat Chedi Sung, Hod, Chiang Mai Province, Thailand."
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "961:1024",
+    "frame_name": "Desktop - 1504",
+    "frame_in_3117": "3117:4563",
+    "title_node": "961:1219",
+    "meta_node": "961:1220",
+    "caption_node": "961:1221",
+    "title": "Elephant-shaped containers",
+    "title_raw": "Elephant-shaped containers",
+    "title_differs_from_title_field": true,
+    "caption": "These miniature containers, fashioned from quartz and semi-precious stones, were discovered in 1960 at Wat Chedi Sung in Chiang Mai Province, Thailand. They date to the Lanna period of the sixteenth century.\n\nContainers of this type served as receptacles for Buddha’s relics, i.e. fragments of the physical remains of the historical Buddha, and were enshrined as objects of veneration within stupa and other sacred structures.\n\nThe animal forms chosen for such containers were not arbitrary. These vessels were typically shaped in the form of creatures regarded as auspicious within Hindu-Buddhist traditions. The animal shapes reinforced the sanctity and spiritual significance of what was held within.\n\nThe elephant form evokes the Buddha’s previous lives, as recounted in the Jataka tales, which are narratives of the Bodhisattva’s many births across human and animal forms. These tales are central to Buddhist traditions across mainland South-East Asia. In one story, the Bodhisattva appears as the king of the elephants, with six-tusks. Shot with a poisoned arrow by a hunter disguised in the saffron robes of a monk, the elephant king chooses not to harm the hunter, thus demonstrating compassion and restraint even in the face of suffering. In another tale, he is reborn as an elephant who allows a greedy man to take more and more of his tusks, thus embodying the ideals of generosity and selflessness.\n\nThe elephant form of these relic containers recalls the values of compassion, sacrifice and moral virtue of the Buddha. Such narratives continue to be shared widely in South-East Asian Buddhist traditions today.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว"
+   }
   },
   {
    "slug": "ganesha",
@@ -23188,12 +23465,12 @@
    "trails": [
     "elephant"
    ],
-   "collection": "National Museum Bangkok",
+   "collection": "National Museum Bangkok, Thailand",
    "thematic_section": "Cosmology Religion & Spirituality",
-   "period": "10th–11th century",
-   "place_of_production": "Candi Singhasari, East Java, Indonesia",
-   "material": "Andesite, ****Volcanic rock",
-   "dimensions": "Height: 172 cm",
+   "period": "Tenth to thirteenth centuries CE",
+   "place_of_production": "East Java, Indonesia",
+   "material": "Andesite, volcanic rock",
+   "dimensions": "Height 172 cm",
    "object_biography": "The Dutch government in Java presented this to King Chulalongkorn (Rama V) of Thailand during his visit in 1896.",
    "caption": "Carved from volcanic stone, this monumental statue depicts Ganesha, the elephant-headed deity associated with wisdom, learning, and the removal of obstacles. According to Hindu tradition, Ganesha acquired his elephant head after Shiva restored him to life using the head of the first living creature encountered by his attendants. As the deity invoked at the beginning of new undertakings, he came to embody knowledge, good fortune, and successful beginnings.\n\nThe elephant's form draws on meanings that extend beyond Ganesha himself. Across South and Southeast Asia, elephants were admired for their strength, intelligence, and close relationship with water and agricultural fertility. In Hindu tradition, these qualities were also expressed through Airavata, the celestial elephant of Indra, whose association with rain and abundance reflects the importance of elephants within agrarian societies. Ganesha's rounded body likewise came to symbolise the fullness of the harvest and prosperity.\n\nBeneath Ganesha appears his companion, the mouse. Although small, it represents the obstacles, desires, and disruptions that can hinder human life. By placing the mouse beneath him, Ganesha demonstrates his mastery over these forces, reinforcing his role as the remover of obstacles.\n\nThis sculpture reflects how communities across Southeast Asia continually reinterpreted the elephant through religious imagination and artistic practice. In the figure of Ganesha, one of the region's most familiar animals became a powerful expression of wisdom, protection, prosperity, and renewal.",
    "timeline": {
@@ -23864,7 +24141,53 @@
     "text_color": "#212529",
     "source_frame": "670:2786"
    },
-   "status": []
+   "status": [],
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "Tenth to thirteenth centuries CE"
+    },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "East Java, Indonesia"
+    },
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Andesite, volcanic rock"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Height 172 cm"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "National Museum Bangkok, Thailand"
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "670:2786",
+    "frame_name": "Desktop - 1468",
+    "frame_in_3117": "3117:4367",
+    "title_node": "3083:813",
+    "meta_node": "3083:825",
+    "caption_node": "3083:837",
+    "title": "Ganesha",
+    "title_raw": "Ganesha",
+    "title_differs_from_title_field": false,
+    "caption": "Carved from volcanic stone, this statue depicts Ganesha, the elephant-headed deity associated with wisdom, learning and the removal of obstacles. Ganesha's rounded body symbolizes the fullness of the harvest and prosperity.\n\nAccording to Hindu tradition, Ganesha acquired his elephant head after Shiva restored him to life using the head of the first living creature encountered by his attendants. As the deity invoked at the beginning of new undertakings, he also embodied good fortune and successful beginnings.\n\nThe elephant motif reflects meanings derived from the animal itself. Across South and South-East Asia, elephants were admired for their strength and intelligence, and they were associated with water and agricultural fertility. In Hindu tradition, such qualities were expressed through Airavata, the celestial elephant of Indra, whose association with rain and abundance reflects the importance of elephants within agrarian societies.\n\nBeneath this Ganesha statue appears his companion, the mouse. Although small, it represents the obstacles, desires and disruptions that can hinder human life. By placing the mouse beneath him, Ganesha demonstrates his mastery over these forces, reinforcing his role as the remover of obstacles.\n\nThis sculpture reflects how communities across South-East Asia interpreted the elephant in various ways in religious and artistic practice. In the figure of Ganesha, one of the region's most familiar animals became a powerful expression of wisdom, protection, prosperity and renewal.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [
+     "object_biography"
+    ],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว",
+    "caption_paragraph_note": "ย่อหน้า = \\n\\n (จุดใน Figma ที่ใช้ \\n ตัวเดียว แปลงเป็น \\n\\n · P-246)"
+   }
   },
   {
    "slug": "gringsing",
@@ -24035,7 +24358,7 @@
    "trails": [
     "elephant"
    ],
-   "collection": "Folklore Museum, The Institute for Southern Thai Studies",
+   "collection": "Folklore Museum, The Institute for Southern Thai Studies, Thailand",
    "caption": "This hand-carved ivory opium pipe (in Thai: Klong Sup Fin Nga Chang Kae Sa-lak) reflects the intersection of Chinese decorative traditions, maritime trade, and elite consumption in the Southern Thai Peninsula during the nineteenth and early twentieth centuries. Beyond its function as a smoking implement, its use of rare animal material and intricate craftsmanship transformed it into a prestige object associated with wealth, refinement, and social status.\n\nThe pipe’s long stem, measuring 50.5 centimetres, was designed for reclining while smoking, a practice widespread across China and Southeast Asia during this period. Its length was both functional and technical, allowing the smoke to cool before reaching the smoker and demonstrating a refined understanding of material properties and smoking practices developed over generations.\n\nThe main stem is constructed from carefully joined segments of ivory or dense bone, reinforced with blackened metal fittings.Its surface is carved in low relief with Taoist immortals and deities dressed in ceremonial robes, surrounded by auspicious clouds (xiangyun) symbolising the celestial realm and spiritual transcendence.\n\nIvory was a highly valued material across Southeast Asia, prized not only for its durability and smooth surface but also for its associations with rarity, power, and prestige. The choice of material connected the owner to wider cultural traditions in which elephants represented wealth, authority, and auspiciousness.\n\nIn Southern Thailand, opium pipes such as this one became closely linked to the growth of tin mining, maritime trade, and Chinese migration during the nineteenth and twentieth centuries. Following the expansion of coastal commerce, Chinese communities brought their smoking customs to port cities such as Songkhla and Phuket, where opium became both a commodity and a social practice. Under the Siamese state’s tax farming system and opium monopolies, finely crafted pipes made from ivory or other valuable materials became markers of elite status, owned by wealthy merchants, mine owners, and community leaders.\n\nAt the same time, opium occupied an ambivalent position within society. While opium dens served as spaces for social interaction, business exchange, and leisure, they were also criticised for their social and health consequences. With the later suppression of opium use and the destruction of smoking equipment, surviving pipes such as this became rare records of a period shaped by migration, trade, and cultural exchange.\n\nThis ivory opium pipe reveals how elephant-derived materials carried meanings beyond their physical properties. Ivory became a medium through which wealth, prestige,artistic skill, and social identity were expressed in a landscape of constant cultural exchange.\n\nOver the past century, Southeast Asia’s elephant populations have declined significantly, owing to habitat loss and illegal hunting for ivory. Despite the international ban on ivory trade under the Convention on International Trade in Endangered Species of Wild Fauna and Flora (CITES) in 1989, illegal trade remains a serious threat. Climate-driven droughts further affect the distribution of water sources critical for elephant survival. As a result,the International Union for Conservation of Nature (IUCN) classified the Asian elephant as an Endangered species on The IUCN Red List of Threatened Species in 2019.",
    "thematic_section": "Trade and Maritime Navigation",
    "meta_source": {
@@ -24044,8 +24367,8 @@
     "dimensions": "timeline card 1232:1777",
     "object_biography": "timeline card 1232:1777"
    },
-   "material": "Animal Ivory/Bone Elements, Blackened Structural Metal Alloy, and Hardened Resin or Ceramic Compound",
-   "dimensions": "Diameter 4 cm, Width 7 cm, Length 50.5 cm",
+   "material": "Animal bone / ivory elements, blackened structural metal alloy and hardened resin or ceramic compound",
+   "dimensions": "Diameter 4 cm, width 7 cm, length 50.5 cm",
    "object_biography": "Sourced from the private collection of Mr. Maitree Sawapanichphan, Residence No. 85 Pimonchai Road, Mueang Yala District, Yala Province. Official museum documentation recorded on 22 February 1995. Exhibited in the History and Ethnology Room (Hong Prawattisat lae Chattiphan), Folklore Museum, Institute of Southern Thai Studies.",
    "timeline": {
     "card_order": 11,
@@ -24538,7 +24861,45 @@
     "text_color": "#343A40",
     "source_frame": "1042:1719"
    },
-   "status": []
+   "status": [],
+   "info_rows": [
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Animal bone / ivory elements, blackened structural metal alloy and hardened resin or ceramic compound"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Diameter 4 cm, width 7 cm, length 50.5 cm"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Folklore Museum, The Institute for Southern Thai Studies, Thailand"
+    },
+    {
+     "label": "Other information / Object biography",
+     "key": "object_biography",
+     "value": "Sourced from the private collection of Mr. Maitree Sawapanichphan, Residence No. 85 Pimonchai Road, Mueang Yala District, Yala Province. Official museum documentation recorded on 22 February 1995. Exhibited in the History and Ethnology Room (Hong Prawattisat lae Chattiphan), Folklore Museum, Institute of Southern Thai Studies."
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "1042:1719",
+    "frame_name": "Desktop - 1511",
+    "frame_in_3117": "3117:4775",
+    "title_node": "1042:1944",
+    "meta_node": "1042:1956",
+    "caption_node": "1042:1968",
+    "title": "Hand-carved opium pipe",
+    "title_raw": "Hand-carved opium pipe",
+    "title_differs_from_title_field": true,
+    "caption": "The main stem of this hand-carved opium pipe from southern Thailand was constructed from carefully joined segments of dense bone or ivory, reinforced with blackened metal alloy fittings. Its surface is carved in low relief with Taoist immortals and deities dressed in ceremonial robes, surrounded by auspicious clouds symbolising the celestial realm and spiritual transcendence.\n\nThis pipe reveals how animal-derived materials carried meanings beyond their physical properties. Ivory was historically a highly valued material across South-East Asia, prized not only for its durability and smooth surface but also for its associations. The use of this material for an opium pipe connected the owner to wider cultural traditions in which elephants represented authority and auspiciousness. The pipe’s materials and intricate artisanship also made it an object associated with social status.\n\nThe pipe’s long stem, measuring 50.5 centimetres, was designed for smoking the pipe while reclining. Its length is both functional and technical, allowing the smoke to cool before reaching the smoker, demonstrating deep understanding of material properties and smoking practices developed in the region over generations.\n\nThis opium pipe reflects the intersection of cultural exchange and maritime trade in the southern Thai peninsula. As coastal commerce expanded during the nineteenth and twentieth centuries, Chinese communities brought their smoking customs to South-East Asia, and opium smoking became a widespread practice across the region. Under the Siamese state’s tax farming system and opium monopolies, finely crafted pipes made from valuable materials were owned by wealthy merchants, tin mine owners and community leaders and became markers of wealth and refinement.\n\nAt the same time, however, opium smoking occupied an ambivalent position within society. While opium dens served as spaces for leisure, interactions and business exchange, they were also criticized for their social and health consequences. Opium use was subsequently suppressed and much of the smoking equipment destroyed, with the result that surviving pipes such as this one became rare records of the opium trade.\n\nOver the past century, South-East Asia’s elephant populations have declined significantly owing to hunting and illegal trade. Despite the international ban on the trade of Asian ivory under the Convention on International Trade in Endangered Species of Wild Fauna and Flora (CITES) in 1975, illegal trade remains a serious threat to elephant populations. Habitat loss and droughts compounded by climate change are also impacting these populations severely. In 1986 the International Union for Conservation of Nature (IUCN) classified the Asian elephant as Endangered on the IUCN Red List of Threatened Species.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว"
+   }
   },
   {
    "slug": "ivory-fire-piston-ivory-fire-syringe",
@@ -24547,7 +24908,7 @@
    "trails": [
     "elephant"
    ],
-   "collection": "Folklore Museum, The Institute for Southern Thai Studies",
+   "collection": "Folklore Museum, The Institute for Southern Thai Studies, Thailand",
    "caption": "This ivory fire piston (in Thai: lek fai tob nga chang / taban fai nga chang) is a traditional indigenous fire-making tool widely used in Southern Thailand before the introduction of matches and modern lighting devices. In parts of Central Thailand, it is known as a taban fai. The device operates through the principle of rapid air compression: when air inside the cylinder is compressed, heat is generated rapidly enough to ignite tinder. It reflects the practical experimentation and technological knowledge of past generations, who developed tools closely adapted to their environment and natural resources.\n\nThe fire piston consists of two primary components: a hollow cylinder (tua mia) and a piston rod (tua phu) inserted into it. The tip of the piston contains a small cavity for holding dry tinder, such as fibre from the tao rang palm (fishtail palm), kapok fluff, or other flammable materials. A thread or natural gasket lubricated with animal fat or resin creates an airtight seal, allowing efficient compression. Through a swift downward strike, the compressed air produces a sharp rise in temperature, igniting the tinder into an ember that can then be transferred to other fuels to create a flame.\n\nBeyond its mechanical function, the fire piston reflects how communities incorporated animal-derived materials and knowledge of the natural world into everyday technologies. While commonly crafted from hardwood, bamboo, or animal horn, some fire pistons were made from ivory, a rare and valuable material associated with prosperity and protection. In regional folklore and animist traditions, ivory was believed to possess protective qualities, allowing an ivory fire piston to serve also as a talisman when travelling through forests or remote areas.\n\nThe fire piston is documented in Nangshue Bod, ancient Southern Thai manuscripts that preserve knowledge of traditional medicine, magical practices, and folklore. Within medical traditions, the fire piston was used to kindle fires for boiling herbal decoctions and preparing medicinal ingredients, reflecting its role in the practices of traditional healers.\n\nIts significance was especially evident in postpartum care, known in Southern Thailand as kao kam (entering the ritual restriction period) or non fai (lying near fire). According to traditional midwives and folk healers, the fire used during maternal confinement had to be newly created within the home, to prevent the bad luck and spiritual pollution that external flames may carry. The fire piston was therefore used to produce the first flame for the firewood beneath the postpartum bamboo bed. Specific medicinal woods, such as kaen nom sao (Anaxagorea luzonensis) and mai phlong (Memecylon species), were selected to support the mother’s recovery.",
    "thematic_section": "Harnessing Nature's Power",
    "meta_source": {
@@ -24557,7 +24918,7 @@
     "object_biography": "timeline card 1232:1743"
    },
    "material": "Ivory",
-   "dimensions": "Total Dimensions — Diameter 2.1 cm, Height 7.7 cm, Base Diameter 2.2 cm. Cylinder (Female Component / Tua Mia) — Height 6.4 cm, Base Diameter 1.8 cm. Piston (Male Component / Tua Phu) — Height 5.7 cm, Upper Section Diameter 0.8 cm.",
+   "dimensions": "Total dimensions – diameter 2.1 cm, height 7.7 cm, base diameter 2.2 cm. cylinder (female component / tua mia) – height 6.4 cm, base diameter 1.8 cm. piston (male component / tua phu) – height 5.7 cm, upper section diameter 0.8 cm.",
    "object_biography": "Stored in the Repository Room of the Folklore Museum, Institute of Southern Thai Studies.",
    "timeline": {
     "card_order": 6,
@@ -25242,7 +25603,45 @@
     "text_color": "#343A40",
     "source_frame": "1006:922"
    },
-   "status": []
+   "status": [],
+   "info_rows": [
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Ivory"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Total dimensions – diameter 2.1 cm, height 7.7 cm, base diameter 2.2 cm. cylinder (female component / tua mia) – height 6.4 cm, base diameter 1.8 cm. piston (male component / tua phu) – height 5.7 cm, upper section diameter 0.8 cm."
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Folklore Museum, The Institute for Southern Thai Studies, Thailand"
+    },
+    {
+     "label": "Other information / Object biography",
+     "key": "object_biography",
+     "value": "Stored in the Repository Room of the Folklore Museum, Institute of Southern Thai Studies."
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "1006:922",
+    "frame_name": "Desktop - 1507",
+    "frame_in_3117": "3117:4726",
+    "title_node": "1006:1198",
+    "meta_node": "1006:1210",
+    "caption_node": "1006:1222",
+    "title": "Fire Piston",
+    "title_raw": "Fire Piston",
+    "title_differs_from_title_field": true,
+    "caption": "A fire piston (lek fai tob) is a traditional indigenous fire-making tool that was widely used in southern Thailand before the introduction of matches and modern lighting devices. In parts of central Thailand, it is known as a taban fai. While commonly crafted from hardwood, bamboo or animal horn, some fire pistons, such as this one, were made from ivory. In animist traditions and regional folklore, ivory was believed to possess protective qualities, allowing an ivory fire piston to not only serve practical purposes but also act as a talisman when travelling through dangerous areas.\n\nThe fire piston reflects the practical experimentation and technological knowledge of past generations, who developed tools closely adapted to their environments and the resources available at the time. The device operates through the principle of rapid air compression: when air inside the cylinder is compressed, heat is generated rapidly enough to ignite tinder. It consists of two primary components: a hollow cylinder (tua mia) and a piston rod (tua phu) inserted into it. The tip of the piston contains a small cavity for holding flammable dry tinder, such as fibre from the fishtail palm (tao rang) or kapok fluff. A thread or natural gasket lubricated with animal fat or resin creates an airtight seal, allowing efficient compression. Through a swift downward strike, the compressed air produces a sharp rise in temperature, igniting the tinder into an ember that can then be transferred to other fuels to create a flame.’\n\nCertain practices reveal how this practical technology could simultaneously serve practical, spiritual and medical purposes. In some areas, for example, folk healers used the sharp ‘bang!’ produced by a fire piston as a protective act, believing it could frighten away harmful spirits and safeguard mothers and newborns.\n\nThe fire piston is documented in ancient Southern Thai manuscripts that preserve knowledge of traditional medicine, spiritual protection and folklore. Although the fire piston has today largely disappeared from daily use, it reveals how communities in Thailand transformed their understanding of the natural world and local materials into technologies that sustained everyday life.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว"
+   }
   },
   {
    "slug": "patola-cloth",
@@ -25261,10 +25660,10 @@
     "material": "timeline card 1232:1757",
     "dimensions": "timeline card 1232:1757"
    },
-   "period": "19th century",
+   "period": "Nineteenth century CE",
    "place_of_production": "Gujarat, India",
    "material": "Silk (double ikat weave)",
-   "dimensions": "Length 412 cm, Width 140 cm",
+   "dimensions": "Length 412 cm, width 140 cm",
    "timeline": {
     "card_order": 8,
     "illustration_order": 12,
@@ -25694,7 +26093,50 @@
    },
    "status": [
     "caption_had_no_Caption_prefix"
-   ]
+   ],
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "Nineteenth century CE"
+    },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Gujarat, India"
+    },
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Silk (double ikat weave)"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Length 412 cm, width 140 cm"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Department of Museums Malaysia (Jabatan Muzium Malaysia)"
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "3004:804",
+    "frame_name": "Desktop - 1512",
+    "frame_in_3117": "3117:4534",
+    "title_node": "3004:807",
+    "meta_node": "3004:808",
+    "caption_node": "3004:809",
+    "title": "Patola cloth",
+    "title_raw": "Patola cloth",
+    "title_differs_from_title_field": false,
+    "caption": "This silk cloth, known as patola in India and cendai in Malaysia, was imported from India by traders in the nineteenth century. With a ruby-red ground, it is woven with elephants, birds and stylised lozenge blossoms with two leaves on a stem, arranged in a diamond-shaped (potong wajik) pattern. Its rectangular form suggests that it was likely worn as a shawl or cummerbund (bengkung). The elephant motif woven into the textile represents associations with the elephant such as strength, power and protection, transforming the cloth into a symbolic safeguard.\n\nIn maritime South-East Asia, patola textiles such as this one were treasured possessions believed to carry spiritual protection and were given as gifts and used as coverings in ceremonies marking important life transitions, including birth, marriage and death. Patola also held protective meanings beyond ceremonial settings. Malay warriors were said to wrap the cloth around their waists before battle; along with the spiritual protection of the cloth, its many folds offered some physical protection against weapons.\n\nThe cloth was made using double ikat, one of the world’s rarest textile techniques, historically practised in only three regions: Gujarat in India, Bali in Indonesia and Okinawa in Japan. From the eleventh to the nineteenth centuries, patola were transported across the Indian Ocean by Gujarati Muslim merchants, reaching ports and courts in Sumatra, the Malay Peninsula, Java, Bali and the Spice Islands (the Moluccas). As these textiles circulated, they influenced weaving traditions in the region. In Bali, for example, the weavers of Tenganan Pegringsingan adopted elements of the patola into their own spiritually significant geringsing cloth. Accordingly, oral histories recount the arrival of a sacred patola from India that inspired their distinctive patterns.\n\nThe elephant reflects the visual and symbolic language of strength and auspiciousness. When woven into a textile, this language became part of India and South-East Asia’s shared beliefs and practices.",
+    "caption_differs_from_caption_field": false,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว"
+   }
   },
   {
    "slug": "pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king",
@@ -25703,7 +26145,7 @@
    "trails": [
     "elephant"
    ],
-   "collection": "National Museum Bangkok",
+   "collection": "National Museum Bangkok, Thailand",
    "caption": "Pod Duang (Bullet Money) is a form of silver currency produced by hammering a piece of silver into a compact, rounded shape resembling a bullet. Markings stamped onto Pod Duang are categorised into two types: the State Symbol, stamped on top to represent the kingdom, and the Royal Cypher, stamped on the front to represent the specific reign of the monarch. The specimen displayed here bears the Chakra and Great Crown marks of the reign of King Rama IV.\n\nThe production of Pod Duang was a form of traditional craftsmanship in which artisans shaped the silver by hammering it on an elephant thigh bone — preferred for its toughness and elasticity, allowing it to absorb repeated impact without deforming the metal. The elephant femur displayed in this trail was employed for precisely this purpose.\n\nPod Duang served as the primary currency for trade and exchange in Thai marketplaces from the Sukhothai and Ayutthaya dynasties through the 19th century. In 1904, King Chulalongkorn (Rama V) ordered the Royal Treasury Department to announce the end of Pod Duang. Growing trade with other countries made the traditional currency too slow to produce and too susceptible to forgery. From 1904, Thailand switched to banknotes and flat coins, which remain in use today.\n\nThe use of an elephant bone anvil in the production of the kingdom’s silver currency reveals how the elephant’s physical presence extended beyond symbolism into the material workings of the state. While absent from the finished coin, the elephant’s body supported the craftsmanship behind the currency that represented royal authority and economic exchange.",
    "thematic_section": "Trade and Maritime Navigation",
    "meta_source": {
@@ -25714,10 +26156,10 @@
     "dimensions": "timeline card 1232:1771",
     "object_biography": "timeline card 1232:1771"
    },
-   "period": "Rattanakosin period, 19th century",
+   "period": "Rattanakosin period, nineteenth century CE",
    "place_of_production": "Thailand",
    "material": "Silver",
-   "dimensions": "Width 1.2–1.5 cm",
+   "dimensions": "Width 1.2 cm to 1.5 cm",
    "object_biography": "Received by the National Museum Bangkok from the Ministry of Finance, Thailand.",
    "timeline": {
     "card_order": 10,
@@ -26399,7 +26841,56 @@
     "text_color": "#E9ECEF",
     "source_frame": "964:2090"
    },
-   "status": []
+   "status": [],
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "Rattanakosin period, nineteenth century CE"
+    },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Thailand"
+    },
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Silver"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Width 1.2 cm to 1.5 cm"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "National Museum Bangkok, Thailand"
+    },
+    {
+     "label": "Other Information / Object Biography",
+     "key": "object_biography",
+     "value": "Received by the National Museum Bangkok from the Ministry of Finance, Thailand."
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "964:2090",
+    "frame_name": "Desktop - 1506",
+    "frame_in_3117": "3117:4623",
+    "title_node": "964:2111",
+    "meta_node": "964:2112",
+    "caption_node": "964:2113",
+    "title": "Pod duang stamped with the chakra and great crown marks",
+    "title_raw": "Pod duang stamped with the chakra and great crown marks",
+    "title_differs_from_title_field": true,
+    "caption": "Pod duang (bullet money) is a form of silver currency produced by bending and hammering a silver bar into a rounded shape resembling a bullet. Two types of markings are stamped onto pod duang: the state symbol, stamped on top to represent the dynasty, and the royal cypher, stamped on the front to represent the specific monarch. The specimen displayed here bears the chakra and mongkut (great crown) marks from the reign of King Rama IV.\n\nThe production of pod duang was a form of traditional artisanship that involved hammering silver on an elephant thigh bone. Selected for its toughness and elasticity, the bone absorbed repeated hammer impacts without deforming the shape of the pod duang. The elephant femur described earlier in this trail was employed for precisely this purpose.\n\nPod duang served as the primary currency for trade and exchange in Thai marketplaces from the Sukhothai and Ayutthaya dynasties through to the nineteenth century. In 1904, as trade grew with other countries, it was decided that the production of the traditional currency was too slow and the currency was too susceptible to forgery, prompting King Chulalongkorn (Rama V) to order the Royal Treasury Department to announce the end of pod duang. From that year, Thailand switched to banknotes and flat coins, which remain in use today.\n\nThe use of an elephant bone in the production of the kingdom’s silver currency reveals how the elephant was more than a symbol representing royal authority; it was part of the physical material used by the royal mint. While absent from the currency, the elephant’s body supported the artisanship behind it.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว",
+    "caption_paragraph_note": "ย่อหน้า = \\n\\n (จุดใน Figma ที่ใช้ \\n ตัวเดียว แปลงเป็น \\n\\n · P-246)"
+   }
   },
   {
    "slug": "singhasari-ganesha",
@@ -26410,11 +26901,11 @@
    ],
    "collection": "Museum Nasional Indonesia",
    "thematic_section": "Cosmology Religion & Spirituality",
-   "period": "13th century",
+   "period": "Thirteenth century CE",
    "place_of_production": "Singasari Hindu-Buddhist temple complex, East Java, Indonesia",
-   "material": "Andesite, Volcanic rock",
-   "dimensions": "Height: 154 cm, Length: 105 cm, Width: 72 cm",
-   "object_biography": "This statue was formerly held by the Wereldmuseum Leiden in the Netherlands. It was returned to Indonesia in September 2023",
+   "material": "Andesite, volcanic rock",
+   "dimensions": "Height 154 cm, length 105 cm, width 72 cm",
+   "object_biography": "This statue was formerly held by the Wereldmuseum Leiden (National Museum of World Cultures) in the Netherlands. It was returned to Indonesia in September 2023 as part of the Dutch government's repatriation programme.",
    "caption": "Carved from volcanic andesite, this thirteenth-century statue depicts Ganesha, the elephant-headed deity associated with wisdom, learning, and the removal of obstacles. This Ganesha comes from the Singhasari temple complex in East Java, one of the last great centres of religious and artistic patronage in Java before the rise of Majapahit. Singhasari developed a distinctive artistic tradition that drew on Hindu-Buddhist cosmology crafted through local forms of kingship, devotion, and craftsmanship.\n\nIn Java, Ganesha became deeply rooted in religious life as a protector of sacred places and a patron of knowledge, appearing in temples and other sacred spaces where communities sought wisdom, good fortune, and successful beginnings. The elephant's form also carried meanings beyond Ganesha himself. Across Southeast Asia, elephants were admired for their strength, intelligence, and ability to work alongside people in forests, warfare, transport, and ceremony.\n\nRemoved from the Singhasari temple complex during the Dutch colonial period, the statue remained in the Netherlands for more than two centuries before being returned to Indonesia in September 2023. Provenance research established that it had been removed in 1802 by Dutch colonial administrator Nicolaus Engelhard. Ganesha, together with the statues of Bhairava and Nandi, was shipped to the Netherlands in 1819 and installed in the gardens of the Koninklijk-Nederlandsche Instituut in Amsterdam. Three companion sculptures that had remained in Buitenzorg were sent to the Netherlands in 1827–1828 and entered the collection of the National Museum of Antiquities in Leiden, where they were reunited with the first three statues in 1841. In 1904, all six sculptures were transferred to Museum Volkenkunde, now Wereldmuseum.",
    "timeline": {
     "card_order": 2,
@@ -27066,7 +27557,56 @@
     "text_color": "#212529",
     "source_frame": "670:2802"
    },
-   "status": []
+   "status": [],
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "Thirteenth century CE"
+    },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Singasari Hindu-Buddhist temple complex, East Java, Indonesia"
+    },
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Andesite, volcanic rock"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Height 154 cm, length 105 cm, width 72 cm"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Museum Nasional Indonesia"
+    },
+    {
+     "label": "Other information / Object biography",
+     "key": "object_biography",
+     "value": "This statue was formerly held by the Wereldmuseum Leiden (National Museum of World Cultures) in the Netherlands. It was returned to Indonesia in September 2023 as part of the Dutch government's repatriation programme."
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "670:2802",
+    "frame_name": "Desktop - 1476",
+    "frame_in_3117": "3117:4391",
+    "title_node": "3083:758",
+    "meta_node": "3083:770",
+    "caption_node": "3083:782",
+    "title": "Singhasari Ganesha",
+    "title_raw": "Singhasari Ganesha",
+    "title_differs_from_title_field": false,
+    "caption": "Carved from volcanic andesite, this statue depicts Ganesha, the elephant-headed deity associated with wisdom, learning and the removal of obstacles. This Ganesha comes from the Singhasari temple complex in East Java, one of the last great centres of religious and artistic patronage in Java before the rise of Majapahit. The Singhasari temple developed a distinctive artistic tradition that drew on Hindu-Buddhist cosmology and evolved through local forms of kingship, devotion and artisanship.\n\nIn Java, Ganesha became deeply rooted in religious life as a protector of sacred places and a patron of knowledge, appearing in temples and other sacred spaces where communities sought wisdom, good fortune and successful beginnings.\n\nThis Ganesha statue is seated on skull motifs, reflecting Tantric Shaiva practices - the worship of forms of Shiva such as Bhairava - and representing a power that transcends human mortality, overcoming the limitations of worldly existence and conquering death.\n\nThe elephant's form also carried meanings beyond Ganesha. Across South-East Asia, elephants were admired for their strength and intelligence and were appreciated for their usefulness in forestry work and their role as transport in warfare.\n\nProvenance research established that this statue was removed from the Singhasari temple complex in 1802, during the Dutch colonial period by the administrator Nicolaus Engelhard. This Ganesha statue, together with the statues of Bhairava and Nandi, was shipped to the Netherlands in 1819 and installed in the gardens of the Koninklijk-Nederlandsche Instituut in Amsterdam. Three companion sculptures that had remained in Buitenzorg were sent to the Netherlands between 1827 and 1828 and entered the collection of the National Museum of Antiquities in Leiden, where they were reunited with the first three statues in 1841. In 1904, all six sculptures were transferred to the Museum Volkenkunde, now the Wereldmuseum. The Ganesha statue was returned to Indonesia in September 2023.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว",
+    "caption_paragraph_note": "ย่อหน้า = \\n\\n (จุดใน Figma ที่ใช้ \\n ตัวเดียว แปลงเป็น \\n\\n · P-246)"
+   }
   },
   {
    "slug": "siwaih",
@@ -27084,9 +27624,9 @@
     "place_of_production": "timeline card 1232:1795",
     "material": "timeline card 1232:1795"
    },
-   "period": "20th century",
-   "place_of_production": "Aceh",
-   "material": "Metal, Ivory, Wood",
+   "period": "Twentieth century CE",
+   "place_of_production": "Aceh, Indonesia",
+   "material": "Metal, ivory, wood",
    "timeline": {
     "card_order": 14,
     "illustration_order": 15,
@@ -27722,7 +28262,46 @@
     "text_color": "#343A40",
     "source_frame": "1006:561"
    },
-   "status": []
+   "status": [],
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "Twentieth century CE"
+    },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Aceh, Indonesia"
+    },
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Metal, ivory, wood"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Museum Nasional Indonesia"
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "1006:561",
+    "frame_name": "Desktop - 1508",
+    "frame_in_3117": "3117:4655",
+    "title_node": "1006:837",
+    "meta_node": "1006:849",
+    "caption_node": "1006:861",
+    "title": "Siwaih",
+    "title_raw": "Siwaih",
+    "title_differs_from_title_field": false,
+    "caption": "A siwaih is a curved dagger derived from the Indian sewar and is traditionally worn through the belt. It features a chiselled metal blade, a crossguard of ivory, a collar of gold-copper alloy, a black coral pommel topped with high-carat gold filigree and enamelwork and a wooden scabbard. Its royal form, distinguished by a bulbous hilt and luxurious embellishments, was reserved for the sultan.\n\nThis dagger reveals how materials were woven into expressions of protection shared within and beyond the region. Its ivory crossguard – where a warrior's hand meets the blade – situates this protective material at the most physically and symbolically vulnerable juncture of combat. This barrier protects the hand while representing ivory’s associations with power and authority.\n\nThe construction and materials of the dagger reflect Aceh’s cosmopolitan networks of trade and craftsmanship. Aceh, located at the northern tip of Sumatra – commanding access to the Indian Ocean and the Malacca Strait – was, at its height, a major centre of Islamic learning and a gathering point for pilgrims travelling to Mecca. Renowned for its exceptional wealth and ceremonial processions, the court of Aceh sustained hundreds of specialist artisans, ranging from goldsmiths and silversmiths to weavers and wood-carvers.\n\nAcross much of Islamic South-East Asia, gold-adorned daggers were reserved for royals or as gifts from royals. An object like this siwaih was the concentrated expression of that accumulated cultural exchange, crafting technology and sovereign authority.\n\nThis Acehnese siwaih thus embodies the interconnected histories of the Islamic world in South-East Asia. It brings together the form of an Indian dagger, the techniques of Ottoman metalworking, the opulence of the Acehnese court and materials drawn from the natural world.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว",
+    "caption_paragraph_note": "ย่อหน้า = \\n\\n (จุดใน Figma ที่ใช้ \\n ตัวเดียว แปลงเป็น \\n\\n · P-246)"
+   }
   },
   {
    "slug": "tin-ingot-in-the-shape-of-an-elephant",
@@ -27734,7 +28313,7 @@
    "trails": [
     "elephant"
    ],
-   "collection": "Department of Museums Malaysia",
+   "collection": "Department of Museums, Malaysia",
    "caption": "The use of animal-shaped tin ingots was not confined to the Malay Peninsula. Archaeological findings and historical records reveal that ingots in the likeness of fish, crocodiles, and roosters served as currency in Sumatra, Southern Thailand, and \nthe \nPhilippines. This serves as testament to the active maritime trade networks connecting Southeast Asian kingdoms. The state of Perak was the primary producer of these \nzoomorphic ingots, crafting forms such as elephants, tortoises, crocodiles, goats, roosters, grasshoppers, fish, and crabs since the 16th century. In commerce, they were utilized as standard weights to ensure the accuracy of other tin blocks and goods. \nPeriodically, they functioned as a direct medium of exchange. The shared motifs of these animals across borders highlight a cultural continuity and economic interaction that transcends modern political boundaries, proving that traditional Southeast Asian economies were rooted in a system of values and symbols understood by the entire regional community.",
    "thematic_section": "Trade and Maritime Navigation",
    "meta_source": {
@@ -27744,8 +28323,8 @@
     "material": "timeline card 1232:1783",
     "dimensions": "timeline card 1232:1783"
    },
-   "period": "The 16th century",
-   "place_of_production": "Selangor, Malaysia",
+   "period": "Sixteenth century CE",
+   "place_of_production": "Perak State, Malaysia",
    "material": "Tin",
    "dimensions": "Length: 16.5 cm, Width: 10 cm, Height: 8.3 cm, Weight: 1.105 kg",
    "timeline": {
@@ -28258,7 +28837,47 @@
    },
    "status": [
     "caption_had_no_Caption_prefix"
-   ]
+   ],
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "Sixteenth century CE"
+    },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Perak State, Malaysia"
+    },
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Tin"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Department of Museums, Malaysia"
+    }
+   ],
+   "figma_2026_11": {
+    "source": "Figma file lastModified 2026-11-11 · page Final 670:860 (กระจกใน 3117:3314 เนื้อหาเหมือนกัน)",
+    "frame": "670:2828",
+    "frame_name": "Desktop - 1483",
+    "frame_in_3117": "3117:4441",
+    "title_node": "670:2841",
+    "meta_node": "670:2842",
+    "caption_node": "670:2843",
+    "title": "Tin ingot in the shape of an elephant",
+    "title_raw": "Tin ingot in the shape of an elephant",
+    "title_differs_from_title_field": false,
+    "caption": "This elephant-shaped tin ingot is one of the many ingots that were once used as standard weights to ensure the accuracy of other tin blocks and goods across South-East Asia, including in the Malay peninsula, Sumatra, southern Thailand and the Philippines, and which were sometimes also used as a direct medium of exchange.\n\nHistorically, ingots were made in the forms of elephants, tortoises, crocodiles, goats, grasshoppers, fish, crabs and roosters – shapes that represented cultural associations with these various animals. The state of Perak was the primary producer of these zoomorphic ingots, crafting such forms since the sixteenth century.\n\nThese animal motifs were rooted in a system of symbols understood by the entire community of South-East Asia, representing shared values and associations. This highlights the cultural continuity and longstanding economic interaction across borders in the region. Such ingots also serve as testament to the active maritime trade networks that once connected kingdoms and ports across South-East Asia.",
+    "caption_differs_from_caption_field": true,
+    "fields_in_seed_but_not_shown_in_figma_2026_11": [
+     "dimensions"
+    ],
+    "note": "title/caption ในฟิลด์หลัก \"ไม่ถูกแก้\" (สั่ง: ห้ามแก้ title) · ค่าใหม่จาก Figma อยู่ที่นี่ — รอ orchestrator ตัดสิน (P-244) · ฟิลด์ period/place_of_production/material/dimensions/collection/object_biography ในฟิลด์หลัก = ค่าใหม่จาก Figma แล้ว"
+   }
   },
   {
    "slug": "kain-hinggi-kombu",
