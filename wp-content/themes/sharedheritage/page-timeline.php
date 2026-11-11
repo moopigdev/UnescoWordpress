@@ -5,7 +5,7 @@
  * One stage (1440×723 under the header, scaled by k to fit the screen — §4.5c.5):
  *   trail icons ×17 · mini-map (15 thumbnails + cream viewport frame) · ‹ › · fixed time line ·
  *   objects on the line (all move together; the one nearest the centre grows + gets its title) ·
- *   under the line: the centred object's photo (D39/D41: `sh_below_image` when set, else `sh_thumbnail`) + metadata
+ *   under the line: the centred object's photo (D39/D41/D45: `sh_below_image` (+ `_2`) when set, else `sh_thumbnail` (+ `_2`)) + metadata
  *   (fixed at the centre, fade in by position · D35/D36: an object
  *   with `sh_line_art` shows that "before" image there first, then cross-fades to the colour photo when it settles).
  * State = c (continuous index of the object at the centre), driven by assets/js/timeline.js.

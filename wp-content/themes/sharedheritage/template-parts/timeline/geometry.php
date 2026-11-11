@@ -3,7 +3,7 @@
  * Timeline v3 (D26 · D27) — design constants that are layout, not content (DESIGN-SPEC §4.5c · §6.4c).
  *
  * Source: content/seed/timeline-elephant-v2.json key `v3` (read only · D39 `v3.d39_images`) + DESIGN-SPEC §4.5c.3 table
- * (#14 sizes 30/60/100) + §4.5c.3d (D39/D41 images on/under the line).
+ * (#14 sizes 30/60/100) + §4.5c.3d (D39/D41 images on/under the line · D45 swapped cards 1·7·9, same crops).
  * Content (title · images · metadata · link) comes from the timeline_item fields only (CONTENT-MODEL §3).
  *
  * `items` is keyed by the stable card number N (1–15) = the number in the import key `<key_prefix><N>` (post meta
@@ -12,8 +12,9 @@
  *   photo = [w, h] the on-line image contained in 320×265 (≤ the file's trimmed pixels — Pod Duang 226) = 100% of the
  *           size rule #14: the object on the line is photo × rule.rest (0.30) → × rule.active (0.60) · it is also the
  *           photo under the line (centred at y_rel 561) unless the card has `below`
- *   below / below_images = (D39/D41 · §4.5c.3d) the photo under the line when it is `sh_below_image` (cards 1·7·9):
- *           [w, h] contain 320×265 + the image(s) like `images` · used while that attachment is still the design file
+ *   below / below_images = (D39/D41 → D45 · §4.5c.3d) the photo under the line when it is `sh_below_image` (+ `_2`,
+ *           cards 1·7·9): [w, h] contain 320×265 + the image(s) like `images` · used while every attachment is still the
+ *           design file · below_ratio = w ÷ h of a 2-image group (else the single crop's ratio)
  *   before_scale / before_src = (D39 · card 5) the "before" image (`sh_line_art`) is contained in before_scale × the
  *           photo under the line, while it is still the design file before_src [w, h] (else the §4.5c.3b rule)
  *   mini  = [w, h] mini-map thumbnail (≤ 48×38)
@@ -44,12 +45,13 @@ return array(
 		'active' => 0.60,
 	),
 	'items' => array(
-		// D41: under the line = skeleton line drawing + standing man `bbc1e161` (Figma 3103:1037 · trim 1295×701).
+		// D45 (swap of D41): on the line + mini-map = skeleton line drawing + standing man `bbc1e161` (Figma 3103:1037 · trim
+		// 1295×701) · under the line = the colour leg bone `4953122e` (trim 1360×720 · the old on-line image).
 		1 => array( // elephant-leg-bone-elephas-maximus-indicus
-			'photo' => array( 320, 169 ), 'mini' => array( 48, 25 ), 'ratio' => 1360 / 720,
-			'images' => array( $sh_full( 'sh_thumbnail', array( 1920, 1080 ), array( 276, 188, 1636, 908 ) ) ),
-			'below'  => array( 320, 173 ),
-			'below_images' => array( $sh_full( 'sh_below_image', array( 1421, 1080 ), array( 54, 227, 1349, 928 ) ) ),
+			'photo' => array( 320, 173 ), 'mini' => array( 48, 26 ), 'ratio' => 1295 / 701,
+			'images' => array( $sh_full( 'sh_thumbnail', array( 1421, 1080 ), array( 54, 227, 1349, 928 ) ) ),
+			'below'  => array( 320, 169 ),
+			'below_images' => array( $sh_full( 'sh_below_image', array( 1920, 1080 ), array( 276, 188, 1636, 908 ) ) ),
 		),
 		2 => array( // singhasari-ganesha
 			'photo' => array( 188, 265 ), 'mini' => array( 27, 38 ), 'ratio' => 1340 / 1885,
@@ -80,29 +82,30 @@ return array(
 				array( 'field' => 'sh_thumbnail', 'src' => array( 4096, 3084 ), 'crop' => array( 1782, 1283, 2315, 2713 ), 'box' => array( 0.548, 0.204, 0.452, 0.796 ) ),
 			),
 		),
-		// D39: on the line = small kendi + water `621646b5` (Figma 3103:1181 · trim 2842×3844) · under the line = kendi + two
-		// line-drawn people `555d365b` (3103:1187 · trim 1150×898). Active 118×159 → title bottom y_rel 200.2 unchanged.
+		// D45 (swap of D39): on the line + mini-map = kendi + two line-drawn people `555d365b` (Figma 3103:1187 · trim 1150×898)
+		// · under the line = small kendi + water `621646b5` (3103:1181 · trim 2842×3844). Active 192×150 (≤ 192 wide · ≤ 159 high).
 		7 => array( // elephant-and-mahout-kendi
-			'photo' => array( 196, 265 ), 'mini' => array( 28, 38 ), 'ratio' => 2842 / 3844,
-			'images' => array( $sh_full( 'sh_thumbnail', array( 3403, 4096 ), array( 145, 76, 2987, 3920 ) ) ),
-			'below'  => array( 320, 250 ),
-			'below_images' => array( $sh_full( 'sh_below_image', array( 1421, 1080 ), array( 101, 111, 1251, 1009 ) ) ),
+			'photo' => array( 320, 250 ), 'mini' => array( 48, 37 ), 'ratio' => 1150 / 898,
+			'images' => array( $sh_full( 'sh_thumbnail', array( 1421, 1080 ), array( 101, 111, 1251, 1009 ) ) ),
+			'below'  => array( 196, 265 ),
+			'below_images' => array( $sh_full( 'sh_below_image', array( 3403, 4096 ), array( 145, 76, 2987, 3920 ) ) ),
 		),
 		8 => array( // patola-cloth-cindai
 			'photo' => array( 279, 265 ), 'mini' => array( 40, 38 ), 'ratio' => 611 / 580,
 			'images' => array( $sh_full( 'sh_thumbnail', array( 625, 589 ), array( 13, 1, 624, 581 ) ) ),
 		),
-		// Not in Slides → Figma Group 33 `1232:1764` 180×150 (§4.5c.3): 1765 [28.6,35.4 151.4×114.6] · 1766 [0,0 110.3×101.8]
-		// on top; crops = the nodes' imageTransform (UV × file px).
+		// D45 (swap of D41): on the line + mini-map = both containers outlined in one image `1c0fc05b` (Figma 3103:1220 · trim
+		// 3405×1940) · under the line = the old on-line group: Figma Group 33 `1232:1764` 180×150 (§4.5c.3): 1765 [28.6,35.4
+		// 151.4×114.6] · 1766 [0,0 110.3×101.8] on top; crops = the nodes' imageTransform (UV × file px).
 		9 => array( // elephant-shaped-relic-containers
-			'photo' => array( 318, 265 ), 'mini' => array( 46, 38 ), 'ratio' => 180 / 150,
-			'images' => array(
-				array( 'field' => 'sh_thumbnail', 'src' => array( 1381, 922 ), 'crop' => array( 298.25, 199.74, 991.2, 724.36 ), 'box' => array( 28.595 / 180, 35.377 / 150, 151.406 / 180, 114.623 / 150 ) ),
-				array( 'field' => 'sh_thumbnail_2', 'src' => array( 1381, 922 ), 'crop' => array( 214.58, 200.0, 703.0, 651.0 ), 'box' => array( 0, 0, 110.346 / 180, 101.792 / 150 ) ),
+			'photo' => array( 320, 182 ), 'mini' => array( 48, 27 ), 'ratio' => 3405 / 1940,
+			'images' => array( $sh_full( 'sh_thumbnail', array( 4096, 2305 ), array( 485, 250, 3890, 2190 ) ) ),
+			'below'  => array( 318, 265 ),
+			'below_ratio'  => 180 / 150,
+			'below_images' => array(
+				array( 'field' => 'sh_below_image', 'src' => array( 1381, 922 ), 'crop' => array( 298.25, 199.74, 991.2, 724.36 ), 'box' => array( 28.595 / 180, 35.377 / 150, 151.406 / 180, 114.623 / 150 ) ),
+				array( 'field' => 'sh_below_image_2', 'src' => array( 1381, 922 ), 'crop' => array( 214.58, 200.0, 703.0, 651.0 ), 'box' => array( 0, 0, 110.346 / 180, 101.792 / 150 ) ),
 			),
-			// D41: under the line = both containers outlined in one image `1c0fc05b` (Figma 3103:1220 · trim 3405×1940).
-			'below'  => array( 320, 182 ),
-			'below_images' => array( $sh_full( 'sh_below_image', array( 4096, 2305 ), array( 485, 250, 3890, 2190 ) ) ),
 		),
 		// Photo capped at the file (226 px, §4.5c.3 "ห้ามขยายเกินพิกเซลไฟล์").
 		10 => array( // pod-duang-bullet-money-stamped-with-the-chakra-and-great-crown-marks-reign-of-king-rama-iv
