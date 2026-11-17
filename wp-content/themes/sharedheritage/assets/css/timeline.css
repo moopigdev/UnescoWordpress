@@ -28,6 +28,8 @@
 	--tl-mini-line: #dfdfdf;
 	--mft: 8px;        /* mini-map frame y_rel 14.5 → 64.5 (the cream bar = the mini-map's own height · D51: trail tiles use it) */
 	--mfh: 50px;
+	--ms: 0.8;         /* D52 desktop: mini-map drawn ×0.8 (frame 50 → 40) so the 17 tiles (40) fit left of its frame · tablet/mobile 1 */
+	--mfhs: calc(var(--mfh) * var(--ms)); /* mini-map frame height as drawn */
 	--tl-hit: max(44px, calc(44px / var(--k)));
 	position: relative;
 	container-type: inline-size;
@@ -75,15 +77,16 @@
 }
 
 /*
- * ---- Trail tiles ×17 (D51) · as tall as the mini-map bar (--mfh = its cream frame, same y centre), square, x 19.2 →
- * mini-map −12 · gap 3 → 1 first, then the tile shrinks (desktop: 17 × 50 does not fit 608 px → P-2xx) · hover/focus = the tile grows (transform only) ----
+ * ---- Trail tiles ×17 (D51 · D52) · as tall as the mini-map bar as drawn (--mfhs = its cream frame · desktop 40), square, same y centre
+ * (frame centre y_rel 39.5) · x 19.2 → 8 before the frame's leftmost position (c = 1: 1413 + (19 − 97.5 − 774)·ms) ·
+ * gap 3 → 1 first, then the tile shrinks · hover/focus = the tile grows (transform only) ----
  */
 .sh-tl__trails {
-	--tarea: calc(639px + 19px - 97.5px - 8px - 19.2px); /* r1 F1: ends before the frame's leftmost x (c = 1 → 560.5) */
-	--tgap: clamp(1px, calc((var(--tarea) - 17 * var(--mfh)) / 16), 3px);
-	--tile: min(var(--mfh), calc((var(--tarea) - 16 * var(--tgap)) / 17));
+	--tarea: calc(1413px + (19px - 97.5px - 774px) * var(--ms) - 19.2px - 8px);
+	--tgap: clamp(1px, calc((var(--tarea) - 17 * var(--mfhs)) / 16), 3px);
+	--tile: min(var(--mfhs), calc((var(--tarea) - 16 * var(--tgap)) / 17));
 	position: absolute;
-	top: calc(6.5px + var(--mft) + (var(--mfh) - var(--tile)) / 2); /* r1 F2: + the mini-map's own top */
+	top: calc(39.5px - var(--tile) / 2);
 	left: 19.2px;
 	z-index: 6;
 	display: flex;
@@ -148,6 +151,8 @@ a.sh-tl__trail-link:focus-visible {
 	left: 639px;
 	z-index: 6;
 	width: 774px;
+	transform: scale(var(--ms)); /* D52: ×0.8 about (right end x 1413 · frame centre) → the frame keeps its centre y 39.5 */
+	transform-origin: 774px 33px;
 	height: 65px;
 }
 
@@ -606,6 +611,7 @@ html:not(.sh-js) .sh-tl__arrow {
 @media (max-width: 1279.98px) {
 	.sh-tl {
 		--k: 1;
+		--ms: 1;
 		--pitch: 26.15cqw;
 		--line-y: 464px;     /* default; timeline.js measures the tallest title + 19 + active object */
 		--line-l: 0px;
@@ -631,13 +637,14 @@ html:not(.sh-js) .sh-tl__arrow {
 		height: calc(var(--line-y) + 9px);
 	}
 
-	/* D51: the tile row is the full width here (mini-map sits under it) → gap 3 → 1 · tile = mini-map frame height, shrinks only when 17 do not fit. */
+	/* D51/D52: the tile row is the full width here (mini-map sits under it) → gap 3 → 1 · tile = mini-map frame height, shrinks only when 17 do not fit. */
 	.sh-tl__trails {
 		--tarea: calc(100cqw - 38.4px);
 		top: 10px;
 	}
 
 	.sh-tl__mini {
+		transform: none;
 		top: 66px;
 		right: 24px;
 		left: 24px;
