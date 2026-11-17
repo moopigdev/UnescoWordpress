@@ -47,6 +47,8 @@ function sh_import_refresh_steps_2026_11_17(): array {
 		'2026-11-17-zone-grid'  => 'Zone 1–3 object grid: sh_zone_tile_<n>_object / _image / _image_hover filled from zones-2026-11-17.json only where empty (an admin value stays: kept_admin) · tile images = the attachments the objects already have',
 		// fb-1117 (BACKLOG #36 · D58): belt buckle title as in Figma, every character.
 		'2026-11-17-belt-title' => 'object pending-3 title (+ title_raw): "Pending (Traditional Belt Buckle)" → "Pending (traditional belt buckle)" only while the site still has the value the importer wrote (slug unchanged · an admin edit stays: kept_admin)',
+		// multitrail-1117 (BACKLOG #41 · D59): an object in several trails opens in the look of the trail it was clicked from.
+		'2026-11-17-multitrail' => 'trail versions of the 19 multi-trail objects (sh_variant_<n>_*: hero video · colours · side images · layout · text that differs) added only where empty (an admin value stays: kept_admin) · zone grid tile trail (sh_zone_tile_<n>_trail) set only where empty and the tile still holds the seed object · nothing removed',
 	);
 }
 
@@ -772,6 +774,119 @@ function sh_import_refresh_belt_title_1117( array $seed ): void {
 }
 
 /**
+ * Fill the empty fields of an object with seed values and leave the rest alone (D59 step): an empty field gets the
+ * value · a field with the same value (text compared as stored) is fine · a field with another value (an admin
+ * changed it) stays and is listed in kept_admin. A missing file (0 · already a warning) writes nothing.
+ *
+ * @param int                  $id    Object id.
+ * @param array<string, mixed> $meta  key => value (null = nothing in the seed).
+ * @param array<string, mixed> $defs  name => field definition (sanitize rule of the text compare).
+ * @param string               $label Report label of the entity.
+ */
+function sh_import_fill_or_keep( int $id, array $meta, array $defs, string $label ): void {
+	$write = array();
+	foreach ( $meta as $key => $value ) {
+		if ( null === $value ) {
+			continue;
+		}
+		if ( is_bool( $value ) ) {
+			if ( ! metadata_exists( 'post', $id, $key ) ) {
+				$write[ $key ] = $value;
+			}
+			continue;
+		}
+		$cur = get_post_meta( $id, $key, true );
+		if ( '' === $cur || 0 === $cur || '0' === $cur ) {
+			if ( ! ( is_int( $value ) && 0 === $value ) && '' !== $value ) {
+				$write[ $key ] = $value;
+			}
+			continue;
+		}
+		$same = is_int( $value ) ? absint( $cur ) === $value : sh_imp_same_text( $cur, (string) $value, isset( $defs[ $key ] ) ? $defs[ $key ] : null );
+		if ( ! $same ) {
+			sh_imp_keep( "$label $key (site value kept · seed differs)" );
+		}
+	}
+	if ( $write ) {
+		sh_imp_meta( 'post', $id, $write );
+		sh_imp_count( 'updated', 'object_trail_version' );
+	}
+}
+
+/**
+ * Step 2026-11-17-multitrail (BACKLOG #41 · D59): (1) every seed object that sits in several trails gets one trail version
+ * (sh_variant_<n>_*, CONTENT-MODEL §2b) per trail other than its main one — the slot where that trail already is, else the
+ * first free slot; fields are filled only while empty (sh_import_fill_or_keep()) · an object not on the site, a trail that is
+ * not a term of the site or one the object was taken out of, is skipped · nothing is removed. (2) the Zone 1–3 grid tile
+ * gets its trail (sh_zone_tile_<n>_trail) only while empty and while the tile still holds the seed's object.
+ *
+ * @param array<string, mixed> $seed     Seed files.
+ * @param array<string, mixed> $map      image-map.json.
+ * @param array<string, mixed> $manifest Manifest.
+ */
+function sh_import_refresh_multitrail_1117( array $seed, array $map, array $manifest ): void {
+	$trail_ids = sh_imp_trail_ids();
+	$defs      = array();
+	foreach ( sh_core_group_fields( 'object_variant' ) as $f ) {
+		$defs[ (string) $f['name'] ] = $f;
+	}
+	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		$versions = sh_import_object_variants( $o );
+		$slug     = (string) $o['slug'];
+		$id       = $versions ? sh_imp_find_post( 'object', 'object:' . $slug ) : 0;
+		if ( ! $id ) {
+			continue;
+		}
+		foreach ( $versions as $trail => $ver ) {
+			if ( ! isset( $trail_ids[ $trail ] ) || ! has_term( $trail_ids[ $trail ], 'trail', $id ) ) {
+				continue;
+			}
+			$slot = 0;
+			$free = 0;
+			for ( $n = 1; $n <= SH_VARIANT_SLOTS; $n++ ) {
+				$cur = absint( get_post_meta( $id, "sh_variant_{$n}_trail", true ) );
+				if ( $cur === $trail_ids[ $trail ] ) {
+					$slot = $n;
+					break;
+				}
+				if ( ! $cur && ! $free ) {
+					$free = $n;
+				}
+			}
+			$slot = $slot ? $slot : $free;
+			if ( ! $slot ) {
+				sh_imp_keep( "object:$slug version $trail (no free trail version slot · not added)" );
+				continue;
+			}
+			sh_import_fill_or_keep( $id, sh_import_variant_meta( $o, $trail, $slot, $ver, $trail_ids, $map, $manifest ), $defs, "object:$slug version $trail" );
+		}
+	}
+	foreach ( sh_import_zone_grid_tiles( $seed ) as $zn => $slots ) {
+		$term = get_term_by( 'slug', 'zone-' . $zn, 'zone' );
+		if ( ! $term instanceof WP_Term ) {
+			continue;
+		}
+		foreach ( $slots as $slot => $t ) {
+			$obj = $t['object_slug'] ? sh_imp_find_post( 'object', 'object:' . $t['object_slug'] ) : 0;
+			if ( ! $obj || null === $t['trail'] || ! isset( $trail_ids[ $t['trail'] ] ) ) {
+				continue;
+			}
+			$cur_obj = absint( get_term_meta( $term->term_id, "sh_zone_tile_{$slot}_object", true ) );
+			$key     = "sh_zone_tile_{$slot}_trail";
+			$cur     = absint( get_term_meta( $term->term_id, $key, true ) );
+			if ( $cur_obj && $cur_obj !== $obj ) {
+				sh_imp_keep( "zone:$zn tile $slot trail (the tile holds another object · not set)" );
+			} elseif ( $cur_obj && ! $cur ) {
+				sh_imp_meta( 'term', $term->term_id, array( $key => $trail_ids[ $t['trail'] ] ) );
+				sh_imp_count( 'updated', 'zone_tile_trail' );
+			} elseif ( $cur && $cur !== $trail_ids[ $t['trail'] ] ) {
+				sh_imp_keep( "zone:$zn $key (admin value $cur · seed {$trail_ids[ $t['trail'] ]})" );
+			}
+		}
+	}
+}
+
+/**
  * Run one step of this file. Returns true when done (false = a file was missing: run again on the next import).
  *
  * @param string                                  $step     Step id.
@@ -815,6 +930,9 @@ function sh_import_refresh_2026_11_17( string $step, array $seed, array $map, ar
 			break;
 		case '2026-11-17-belt-title':
 			sh_import_refresh_belt_title_1117( $seed );
+			break;
+		case '2026-11-17-multitrail':
+			sh_import_refresh_multitrail_1117( $seed, $map, $manifest );
 			break;
 	}
 	return count( sh_imp_state()['warnings'] ) === $before;
