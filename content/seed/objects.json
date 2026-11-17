@@ -65,7 +65,7 @@
   "figma_2026_11_17_makara": {
    "by": "makara-1117",
    "lastModified": "2026-11-17T08:33:07Z",
-   "what": "เพิ่ม 2 record Makara จาก frame ใหม่ 3449:3862 (Saltwater crocodile skull) · 3449:3951 (Sungai Mas makara) · hero = ภาพนิ่งลายเส้น (ไม่มี WebM) · ภาพแผงด้านข้างว่าง (นักออกแบบจะเพิ่มทีหลัง · คงช่อง side_image_slot)",
+   "what": "เพิ่ม 2 record Makara จาก frame ใหม่ 3449:3862 (Saltwater crocodile skull) · 3449:3951 (Sungai Mas makara) · hero = ภาพนิ่งลายเส้น (ตอนนั้นไม่มี WebM → 2026-11-17 makarawebm-1117: ใส่ hero_video_src แล้ว · คง hero_still_ref เป็น poster/สำรอง) · ภาพแผงด้านข้างว่าง (นักออกแบบจะเพิ่มทีหลัง · คงช่อง side_image_slot)",
    "object_records": 123,
    "new_slugs": [
     "saltwater-crocodile-skull",
@@ -36363,8 +36363,10 @@
    },
    "detail_style_mode": "generic",
    "primary_frame": "3449:3862",
-   "hero_video_src": null,
-   "hero_video_by_trail": {},
+   "hero_video_src": "Makara/Saltwater crocodile skull.webm",
+   "hero_video_by_trail": {
+    "makara": "Makara/Saltwater crocodile skull.webm"
+   },
    "hero_still_ref": "d059fb72e82cb13dd546c51b8cb40b2708c824ff.png",
    "side_image_slot": {
     "state": "empty_awaiting_designer",
@@ -36408,7 +36410,7 @@
      "caption_node": "3449:3869",
      "collection_node": null,
      "meta_node": "3449:3868",
-     "hero_video_src": null,
+     "hero_video_src": "Makara/Saltwater crocodile skull.webm",
      "hero_gif_nodes": [
       "3449:3875"
      ],
@@ -36518,7 +36520,6 @@
     }
    ],
    "status": [
-    "hero_still_only_no_webm",
     "side_image_empty_slot_awaiting_designer"
    ]
   },
@@ -36581,8 +36582,10 @@
    },
    "detail_style_mode": "generic",
    "primary_frame": "3449:3951",
-   "hero_video_src": null,
-   "hero_video_by_trail": {},
+   "hero_video_src": "Makara/Sungai Mas makara.webm",
+   "hero_video_by_trail": {
+    "makara": "Makara/Sungai Mas makara.webm"
+   },
    "hero_still_ref": "1fa109361092e6be7b192998e04b960154de4663.png",
    "side_image_slot": {
     "state": "empty_awaiting_designer",
@@ -36626,7 +36629,7 @@
      "caption_node": "3449:3958",
      "collection_node": null,
      "meta_node": "3449:3957",
-     "hero_video_src": null,
+     "hero_video_src": "Makara/Sungai Mas makara.webm",
      "hero_gif_nodes": [
       "3449:3964"
      ],
@@ -36736,7 +36739,6 @@
     }
    ],
    "status": [
-    "hero_still_only_no_webm",
     "side_image_empty_slot_awaiting_designer"
    ]
   }
