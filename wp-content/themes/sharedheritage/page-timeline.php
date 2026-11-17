@@ -145,7 +145,7 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 						}
 						?>
 						<?php if ( ! empty( $sh_item['lines'] ) ) : ?>
-							<p class="sh-tl__meta"><?php echo implode( '<br>', array_map( 'esc_html', $sh_item['lines'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- each line escaped. ?></p>
+							<p class="sh-tl__meta"><?php echo implode( '<br>', array_map( 'sh_tl_meta_row_html', $sh_item['lines'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- each row escaped in sh_tl_meta_row_html(). ?></p>
 						<?php endif; ?>
 					</div>
 				<?php endforeach; ?>

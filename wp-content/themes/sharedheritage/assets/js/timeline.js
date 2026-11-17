@@ -117,7 +117,7 @@
 			s.setProperty( '--line-l', wide ? px( -ext ) : '31px' );
 			s.setProperty( '--line-r', wide ? px( -ext ) : '28px' );
 			s.setProperty( '--tr', Math.max( 1, 14 / ( 18 * k ) ).toFixed( 4 ) );
-			s.setProperty( '--mr', Math.max( 1, 12 / ( 14 * k ) ).toFixed( 4 ) );
+			s.setProperty( '--mr', Math.max( 1, 14 / ( 18 * k ) ).toFixed( 4 ) );
 			s.setProperty( '--m0', '19px' );
 			s.setProperty( '--mp', '51.6px' );
 			s.setProperty( '--mfw', '195px' );

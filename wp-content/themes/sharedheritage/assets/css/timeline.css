@@ -4,7 +4,7 @@
  * Every moving value comes from custom properties written by assets/js/timeline.js:
  *   --c      continuous index of the object at the centre (load: 1 = first object, D30)
  *   --k      stage scale · --pitch distance between objects · --line-l/--line-r time line insets
- *   --tr/--mr  text enlargement so title ≥ 14px and metadata ≥ 12px on screen when k < 1
+ *   --tr/--mr  text enlargement so title ≥ 14px and metadata (18px · D51) ≥ 14px on screen when k < 1
  *   per object: --p (0 rest → 1 centre) · --ta title alpha · per info: --pa photo alpha · --ma metadata alpha
  *   D35/D36 "before" image of the photo: --lpw width (contain 320×265 · px at 1440) · --lar file ratio · --la α ·
  *   --lbs (D39 card 5: 0.62) = its box is this × the photo, kept on tablet/mobile
@@ -436,14 +436,18 @@ html:not(.sh-js) .sh-tl__arrow {
 	position: absolute;
 	top: 496px;
 	left: 907px;
-	width: calc(442px * var(--mr));
+	width: min(calc(505px * var(--mr)), 525px); /* D51 [P]: to the time-line's right end (x 1412) so 18px text wraps late */
 	margin: 0;
 	font-family: var(--sh-font-komet);
-	font-size: calc(14px * var(--mr));
+	font-size: calc(18px * var(--mr)); /* D51: 18px (token --sh-type-body · line-height 24 = its) */
 	font-weight: var(--sh-fw-komet-medium);
-	line-height: calc(18.6px * var(--mr));
+	line-height: calc(24px * var(--mr));
 	color: var(--sh-color-neutral-900);
 	opacity: var(--ma);
+}
+
+.sh-tl__meta-h {
+	font-weight: var(--sh-fw-komet-bold); /* D51: heading up to ":" */
 }
 
 .sh-tl__info.is-center .sh-tl__photo,
@@ -658,8 +662,8 @@ html:not(.sh-js) .sh-tl__arrow {
 		top: auto;
 		left: auto;
 		width: min(560px, 100%);
-		font-size: 14px;
-		line-height: 18.6px;
+		font-size: 18px;
+		line-height: 24px;
 	}
 
 	/* D34: the stacked area grows to the Reflection text height (--refl-h, timeline.js) with its progress --rp. */
@@ -766,7 +770,6 @@ html:not(.sh-js) .sh-tl__arrow {
 
 	.sh-tl__meta {
 		width: 100%;
-		line-height: 20px;
 	}
 
 	.sh-tl__refl {

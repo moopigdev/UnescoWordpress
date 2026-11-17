@@ -128,12 +128,25 @@ function sh_tl_item( WP_Post $item, array $geo ): ?array {
 	$out['rest']  = array( $out['photo'][0] * $f_rest, $out['photo'][1] * $f_rest );
 	$out['scale'] = $f_active / $f_rest;
 
-	// Metadata: one line per row, without the "Section :" row (§4.5c.4 · DEFERRED: case-insensitive).
+	// Metadata rows (§4.5c.4 · D51): a row starts at a line that begins "Heading:" (≤ 6 words, letters / " / & ( ) -");
+	// every other line is a continuation of the row above → joined with a space, so the text wraps at the column width
+	// (the data keeps its own line breaks · only the display changes). The "Section :" row is not shown (DEFERRED: case-insensitive).
+	$rows = array();
+	foreach ( preg_split( '/\R/u', (string) sh_get( 'sh_card_meta', $item->ID ) ) as $line ) {
+		$line = trim( $line );
+		if ( '' === $line ) {
+			continue;
+		}
+		if ( $rows && ! sh_tl_meta_is_row_start( $line ) ) {
+			$rows[ count( $rows ) - 1 ] .= ' ' . $line;
+		} else {
+			$rows[] = $line;
+		}
+	}
 	$lines  = array();
 	$period = '';
-	foreach ( preg_split( '/\R/', (string) sh_get( 'sh_card_meta', $item->ID ) ) as $line ) {
-		$line = trim( $line );
-		if ( '' === $line || preg_match( '/^section\s*:/i', $line ) ) {
+	foreach ( $rows as $line ) {
+		if ( preg_match( '/^section\s*:/i', $line ) ) {
 			continue;
 		}
 		if ( '' === $period && preg_match( '/^period\s*:\s*(.+)$/i', $line, $m ) ) {
@@ -363,4 +376,27 @@ function sh_tl_pic( array $item, float $width, string $alt, string $loading, str
 		$html .= '<span class="sh-tl-pic__part" style="' . esc_attr( $style ) . '">' . $tag . '</span>';
 	}
 	return '<span class="sh-tl-pic">' . $html . '</span>';
+}
+
+/**
+ * D51: does this metadata line start a new row ("Period: …", "Place of Production / Findspot :…")? A heading is up to 6 words of
+ * letters / space / "/ & ( ) -" followed by ":" — a continuation line (no heading) is joined to the row above.
+ *
+ * @param string $line Trimmed line.
+ */
+function sh_tl_meta_is_row_start( $line ) {
+	return 1 === preg_match( '/^\p{Lu}[\p{L}\/&()\- ]{0,59}?\s*:/u', $line, $m ) && str_word_count( preg_replace( '/[^\p{L} ]/u', ' ', $m[0] ) ) <= 6;
+}
+
+/**
+ * D51: one metadata row as HTML — the heading up to the first ":" in <strong> (no ":" = the whole row normal) · escaped.
+ *
+ * @param string $row Row text.
+ */
+function sh_tl_meta_row_html( $row ) {
+	$pos = strpos( $row, ':' );
+	if ( false === $pos || ! sh_tl_meta_is_row_start( $row ) ) {
+		return esc_html( $row );
+	}
+	return '<strong class="sh-tl__meta-h">' . esc_html( substr( $row, 0, $pos + 1 ) ) . '</strong>' . esc_html( substr( $row, $pos + 1 ) );
 }
