@@ -71,6 +71,11 @@
     "saltwater-crocodile-skull",
     "sungai-mas-makara"
    ]
+  },
+  "figma_2026_11_17_rooster": {
+   "by": "rooster-1117",
+   "lastModified": "2026-11-17T08:55:13Z",
+   "what": "frame 1583 (1179:4624) มีข้อความครบ = วัตถุเดียวกับ mother-of-pearl-furniture-depicting-animals (ข้อความเท่ากันทุกตัวอักษร) -> record นั้นเพิ่ม trail rooster (ช่อง 11) · record pending คง hold (superseded)"
   }
  },
  "objects": [
@@ -1077,9 +1082,7 @@
      "value": "Folklore Museum, The Institute for Southern Thai Studies"
     }
    ],
-   "trail_order": {
-    "rooster": 11
-   },
+   "trail_order": {},
    "detail_style": {
     "panel_bg": "#6BB9A5",
     "title_color": "#534741",
@@ -1091,21 +1094,6 @@
    "detail_style_mode": "generic",
    "primary_frame": "1179:4624",
    "hero_video_src": "Chicken&Rooster/Mother of Pearl.webm",
-   "hero_video_by_trail": {
-    "rooster": "Chicken&Rooster/Mother of Pearl.webm"
-   },
-   "tile_image_ref": "7a2d1a27da5d9061023a4726f70f78e32161b1b6.png",
-   "tile_image_hover_ref": "77358795cb647ebc8bdbf2ca8c532b95db81633d.png",
-   "tiles_by_trail": {
-    "rooster": {
-     "order": 11,
-     "tile_image_ref": "7a2d1a27da5d9061023a4726f70f78e32161b1b6.png",
-     "tile_image_hover_ref": "77358795cb647ebc8bdbf2ca8c532b95db81633d.png",
-     "tile_node": "3377:4680",
-     "tile_hover_node": "3377:5590",
-     "materials_set": "3377:5588"
-    }
-   },
    "figma": [
     {
      "page": "Page 2.1 ALL Animal content (998:952)",
@@ -1228,9 +1216,13 @@
     }
    ],
    "status": [
-    "title_placeholder",
-    "hold_title_and_text_missing_in_figma"
-   ]
+    "hold_superseded_by_mother_of_pearl_furniture_depicting_animals"
+   ],
+   "superseded_by": {
+    "slug": "mother-of-pearl-furniture-depicting-animals",
+    "frame": "1179:4624",
+    "why": "frame 1583 มีข้อความครบแล้ว = วัตถุเดียวกับ record นี้ (P-360)"
+   }
   },
   {
    "slug": "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
@@ -19195,7 +19187,8 @@
    "title": "Mother-of-pearl furniture",
    "title_raw": "Mother-of-pearl furniture",
    "trails": [
-    "seashell"
+    "seashell",
+    "rooster"
    ],
    "collection": "Baba & Nyonya Heritage Museum, Malaysia",
    "period": "Eighteenth century CE",
@@ -19231,7 +19224,8 @@
     }
    ],
    "trail_order": {
-    "seashell": 11
+    "seashell": 11,
+    "rooster": 11
    },
    "detail_style": {
     "panel_bg": "#CFA5BA",
@@ -19245,7 +19239,8 @@
    "primary_frame": "1200:3112",
    "hero_video_src": "Seashell/Mother of Pearl.webm",
    "hero_video_by_trail": {
-    "seashell": "Seashell/Mother of Pearl.webm"
+    "seashell": "Seashell/Mother of Pearl.webm",
+    "rooster": "Chicken&Rooster/Mother of Pearl.webm"
    },
    "tile_image_ref": "68e5904f980a5b11b6ac7fff3ffce1d7fa3dd720.png",
    "tile_image_hover_ref": "5731dc701e9c3e4153d39c069572d2397b1ee3ea.png",
@@ -19257,6 +19252,14 @@
      "tile_node": "3377:4962",
      "tile_hover_node": "3377:5813",
      "materials_set": "3377:5811"
+    },
+    "rooster": {
+     "order": 11,
+     "tile_image_ref": "7a2d1a27da5d9061023a4726f70f78e32161b1b6.png",
+     "tile_image_hover_ref": "77358795cb647ebc8bdbf2ca8c532b95db81633d.png",
+     "tile_node": "3377:4680",
+     "tile_hover_node": "3377:5590",
+     "materials_set": "3377:5588"
     }
    },
    "figma": [
@@ -19390,6 +19393,127 @@
        }
       ]
      }
+    },
+    {
+     "page": "Page 2.1 ALL Animal content (998:952)",
+     "frame_id": "1179:4624",
+     "frame_name": "Desktop - 1583",
+     "trail": "rooster",
+     "is_primary": false,
+     "section_name_in_figma": "Chicken & Rooster",
+     "title_node": "3451:4147",
+     "caption_node": "3451:4171",
+     "collection_node": null,
+     "meta_node": "3451:4159",
+     "hero_video_src": "Chicken&Rooster/Mother of Pearl.webm",
+     "hero_gif_nodes": [
+      "1179:4720"
+     ],
+     "lastModified": "2026-11-17T08:55:13Z",
+     "style": {
+      "frame_size": [
+       1440.0,
+       2192.0
+      ],
+      "hero": [
+       {
+        "node": "1179:4636",
+        "name": "Frame 114493",
+        "bbox": [
+         0.0,
+         150.0,
+         1440.0,
+         810.0
+        ]
+       }
+      ],
+      "back_button": [
+       160.0,
+       2144.0,
+       115.0,
+       50.0
+      ],
+      "panel_padding_top_bottom": [
+       60.0,
+       60.0
+      ],
+      "panel_children": [
+       {
+        "node": "3451:4135",
+        "name": "Frame 12761",
+        "bbox": [
+         160.0,
+         1020.0,
+         739.0,
+         1085.0
+        ]
+       },
+       {
+        "node": "1179:4632",
+        "name": "Frame 12760",
+        "bbox": [
+         921.0,
+         1020.0,
+         359.0,
+         678.0
+        ]
+       }
+      ],
+      "panel_gap": 22.0,
+      "panel_node": "1179:4627",
+      "panel_bg": "#6BB9A5",
+      "panel_has_fill": true,
+      "panel_y": 960.0,
+      "panel_h": 1283.0,
+      "title_color": "#212529",
+      "collection_color": "#343A40",
+      "caption_color": "#343A40",
+      "meta_color": "#343A40",
+      "text_col": {
+       "node": "3451:4135",
+       "name": "Frame 12761",
+       "bbox": [
+        160.0,
+        1020.0,
+        739.0,
+        1085.0
+       ],
+       "padding_top": 0
+      },
+      "image_col": {
+       "node": "1179:4632",
+       "name": "Frame 12760",
+       "bbox": [
+        921.0,
+        1020.0,
+        359.0,
+        678.0
+       ]
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "1179:4633",
+        "name": "ex (3) 3",
+        "bbox": [
+         921.0,
+         1170.0,
+         359.0,
+         528.0
+        ],
+        "radius": 0,
+        "scale_mode": "FILL",
+        "source_image": "7c2cbeddb789fe1df197d0df530779873bc14543",
+        "crop_ref": "7c2cbeddb789fe1df197d0df530779873bc14543.crop-1179-4633.jpg",
+        "crop_size": [
+         628,
+         924
+        ],
+        "crop_scale": 1.75
+       }
+      ]
+     },
+     "text_differs_from_primary": []
     }
    ],
    "status": []
