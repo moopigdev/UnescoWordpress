@@ -43,6 +43,8 @@ function sh_import_refresh_steps_2026_11_17(): array {
 		'2026-11-17-makara-side' => 'Makara 2: side panel image (sh_extra_image_1) + its layout box filled only while no panel image is set — an image an admin put there stays (kept_admin)',
 		// hover-1117 (BACKLOG #35): the designer fixed the names inside two hover images (seashell #12 / #13).
 		'2026-11-17-hover'      => 'trail tile hover image replaced where the seed has a new one (tile_image_hover_ref_prev) · only while the field is still the attachment the importer made from the old image',
+		// fb-1117 (BACKLOG #39 · D57): Zone 1–3 pages show a grid of objects (numbered fields sh_zone_tile_<n>_* of the zone term).
+		'2026-11-17-zone-grid'  => 'Zone 1–3 object grid: sh_zone_tile_<n>_object / _image / _image_hover filled from zones-2026-11-17.json only where empty (an admin value stays: kept_admin) · tile images = the attachments the objects already have',
 	);
 }
 
@@ -610,6 +612,100 @@ function sh_import_refresh_hover_1117( array $seed ): void {
 }
 
 /**
+ * Existing attachment of a zone grid tile ref (no upload): the import key the objects' tiles were made under —
+ * asset:<file without extension> of the objects-1117 file or of the top-level file (elephant / image-map), or asset:<ref>.
+ *
+ * @param string $ref Figma imageRef of the zone seed.
+ */
+function sh_import_zone_tile_find( string $ref ): int {
+	$dir  = (string) sh_imp_config()['assets'];
+	$file = sh_import_zone_tile_file( $ref, $dir );
+	$keys = array( 'asset:' . $ref, 'asset:' . SH_IMPORT_OBJECTS_1117 . '/' . $ref );
+	if ( '' !== $file ) {
+		$ext    = (string) pathinfo( $file, PATHINFO_EXTENSION );
+		$keys[] = 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) );
+	}
+	foreach ( $keys as $key ) {
+		$id = sh_imp_find_attachment( $key );
+		if ( $id ) {
+			return $id;
+		}
+	}
+	return 0;
+}
+
+/**
+ * Attachment of a zone grid tile ref: the existing one, else created from the file (0 = no file in design/assets —
+ * the slot then shows the object's own tile image).
+ *
+ * @param string               $ref   Figma imageRef.
+ * @param string               $title Attachment title.
+ * @param array<string, mixed> $spec  sh_import_spec_tile() / sh_import_spec_tile_hover().
+ */
+function sh_import_zone_tile_attachment( string $ref, string $title, array $spec ): int {
+	$have = sh_import_zone_tile_find( $ref );
+	if ( $have ) {
+		return $have;
+	}
+	$dir  = (string) sh_imp_config()['assets'];
+	$file = sh_import_zone_tile_file( $ref, $dir );
+	if ( '' === $file ) {
+		sh_imp_count( 'skipped', 'zone_tile_no_file' );
+		return 0;
+	}
+	$ext = (string) pathinfo( $file, PATHINFO_EXTENSION );
+	return sh_imp_attachment( $dir . '/' . $file, 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) ), $title, array(), $spec );
+}
+
+/**
+ * Step 2026-11-17-zone-grid (fb-1117 · D57): the Zone 1–3 pages show a grid of objects — slot n of zone term zone-<k> =
+ * sh_zone_tile_<n>_object / _image / _image_hover (CONTENT-MODEL §5b) from seed zones-2026-11-17.json. Add only what is
+ * missing, never overwrite: an empty field is filled; a field with another value (an admin changed it) stays and is
+ * listed in kept_admin (one line per slot and field). Images = the attachments the objects' own tiles already have
+ * (found by import key — no second upload); only a picture no object has (zone 1 slot 8, Buffalo 6) is created from the
+ * bundle. A slot whose tile image has no file keeps an empty image (the object's own tile shows). A zone term not on
+ * the site is skipped (nothing is created here); an object not on the site leaves that slot a picture without a link.
+ *
+ * @param array<string, mixed> $seed Seed files.
+ */
+function sh_import_refresh_zone_grid_1117( array $seed ): void {
+	foreach ( sh_import_zone_grid_tiles( $seed ) as $zn => $slots ) {
+		$term = get_term_by( 'slug', 'zone-' . $zn, 'zone' );
+		if ( ! $term instanceof WP_Term ) {
+			continue;
+		}
+		foreach ( $slots as $slot => $t ) {
+			$title = $t['object_slug'] ? $t['object_slug'] : "zone $zn tile $slot";
+			$obj   = $t['object_slug'] ? sh_imp_find_post( 'object', 'object:' . $t['object_slug'] ) : 0;
+			$want  = array(
+				"sh_zone_tile_{$slot}_object"      => array( $obj, null ),
+				"sh_zone_tile_{$slot}_image"       => array( 0, array( $t['tile_ref'], sh_import_spec_tile(), "$title zone tile" ) ),
+				"sh_zone_tile_{$slot}_image_hover" => array( 0, '' !== $t['hover_ref'] ? array( $t['hover_ref'], sh_import_spec_tile_hover(), "$title zone tile hover" ) : null ),
+			);
+			$write = array();
+			foreach ( $want as $key => $w ) {
+				$cur = absint( get_term_meta( $term->term_id, $key, true ) );
+				if ( $cur ) {
+					$expect = $w[0] ? (int) $w[0] : ( is_array( $w[1] ) ? sh_import_zone_tile_find( $w[1][0] ) : 0 );
+					if ( $expect && $expect !== $cur ) {
+						sh_imp_keep( "zone:$zn $key (admin value $cur · seed $expect)" );
+					}
+					continue;
+				}
+				$val = $w[0] ? (int) $w[0] : ( is_array( $w[1] ) ? sh_import_zone_tile_attachment( $w[1][0], $w[1][2], $w[1][1] ) : 0 );
+				if ( $val ) {
+					$write[ $key ] = $val;
+				}
+			}
+			if ( $write ) {
+				sh_imp_meta( 'term', $term->term_id, $write );
+				sh_imp_count( 'updated', 'zone_grid_slot' );
+			}
+		}
+	}
+}
+
+/**
  * Run one step of this file. Returns true when done (false = a file was missing: run again on the next import).
  *
  * @param string                                  $step     Step id.
@@ -647,6 +743,9 @@ function sh_import_refresh_2026_11_17( string $step, array $seed, array $map, ar
 			break;
 		case '2026-11-17-hover':
 			sh_import_refresh_hover_1117( $seed );
+			break;
+		case '2026-11-17-zone-grid':
+			sh_import_refresh_zone_grid_1117( $seed );
 			break;
 	}
 	return count( sh_imp_state()['warnings'] ) === $before;

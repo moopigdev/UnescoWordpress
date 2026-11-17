@@ -52,7 +52,9 @@ function sh_tab( string $label ): array {
 /**
  * Number of numbered tile slots of the Zone 1–3 object grid (Figma: 15 · 42 · 83 tiles; room to add).
  */
-const SH_ZONE_GRID_SLOTS = 90;
+if ( ! defined( 'SH_ZONE_GRID_SLOTS' ) ) {
+	define( 'SH_ZONE_GRID_SLOTS', 90 );
+}
 
 /**
  * Fields of the "zone_grid" group: per slot n an object, the tile image (184×184) and its hover image (210×210),

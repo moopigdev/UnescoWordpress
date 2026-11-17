@@ -293,6 +293,88 @@ function sh_import_spec_guide_card(): array {
 	return sh_import_spec( 230, 363 );
 }
 
+// Slots of the zone grid fields (mu-plugin inc/fields.php); defined here too for the CLI bundle list (no WordPress).
+if ( ! defined( 'SH_ZONE_GRID_SLOTS' ) ) {
+	define( 'SH_ZONE_GRID_SLOTS', 90 );
+}
+
+/**
+ * Hover swaps of the seed (hover-1117): previous ref (no extension) => new ref (no extension) — the designer fixed the
+ * names inside a hover image, the zone grid of the same Figma still carries the previous one (fb-1117).
+ *
+ * @param array<string, mixed> $seed Seed files (objects).
+ * @return array<string, string>
+ */
+function sh_import_hover_prev_map( array $seed ): array {
+	$map  = array();
+	$walk = static function ( $node ) use ( &$walk, &$map ): void {
+		if ( ! is_array( $node ) ) {
+			return;
+		}
+		if ( ! empty( $node['tile_image_hover_ref_prev'] ) && ! empty( $node['tile_image_hover_ref'] ) && is_string( $node['tile_image_hover_ref_prev'] ) && is_string( $node['tile_image_hover_ref'] ) ) {
+			$map[ (string) preg_replace( '/\.[a-z]+$/i', '', $node['tile_image_hover_ref_prev'] ) ] = (string) preg_replace( '/\.[a-z]+$/i', '', $node['tile_image_hover_ref'] );
+		}
+		foreach ( $node as $child ) {
+			$walk( $child );
+		}
+	};
+	$walk( isset( $seed['objects']['objects'] ) ? $seed['objects']['objects'] : array() );
+	return $map;
+}
+
+/**
+ * File (relative to $dir) of a zone grid tile ref ('' = none): the objects-1117 file the objects' tiles were imported
+ * from (refs there carry an extension — same file, same attachment), else the top-level file (image-map / elephant).
+ *
+ * @param string $ref Figma imageRef (no extension) of the zone seed.
+ * @param string $dir design/assets directory.
+ */
+function sh_import_zone_tile_file( string $ref, string $dir ): string {
+	$ref = basename( trim( $ref ) );
+	if ( '' === $ref || '.' === $ref[0] ) {
+		return '';
+	}
+	foreach ( array( 'png', 'jpg', 'jpeg', 'webp' ) as $ext ) {
+		if ( is_file( $dir . '/' . SH_IMPORT_OBJECTS_1117 . '/' . $ref . '.' . $ext ) ) {
+			return SH_IMPORT_OBJECTS_1117 . '/' . $ref . '.' . $ext;
+		}
+	}
+	return sh_import_ref_file( array(), $ref, $dir );
+}
+
+/**
+ * Tiles of the Zone 1–3 object grid from seed zones-2026-11-17.json (D57), per zone number, by slot (= `order`):
+ * object_slug (null = a picture without a link) · tile_ref · hover_ref (a hover the designer replaced in hover-1117 is
+ * mapped to the new one). Evidence rows without a tile_ref are skipped.
+ *
+ * @param array<string, mixed> $seed Seed files (zones-2026-11-17 · objects).
+ * @return array<int, array<int, array{object_slug:string|null,tile_ref:string,hover_ref:string}>>
+ */
+function sh_import_zone_grid_tiles( array $seed ): array {
+	$out  = array();
+	$prev = sh_import_hover_prev_map( $seed );
+	foreach ( (array) ( isset( $seed['zones-2026-11-17']['zones'] ) ? $seed['zones-2026-11-17']['zones'] : array() ) as $z ) {
+		$n = isset( $z['zone'] ) ? (int) $z['zone'] : 0;
+		if ( $n < 1 || $n > 3 ) {
+			continue;
+		}
+		foreach ( (array) ( isset( $z['tiles'] ) ? $z['tiles'] : array() ) as $t ) {
+			$slot = isset( $t['order'] ) ? (int) $t['order'] : 0;
+			$tile = isset( $t['tile_ref'] ) && is_string( $t['tile_ref'] ) ? trim( $t['tile_ref'] ) : '';
+			if ( $slot < 1 || $slot > SH_ZONE_GRID_SLOTS || '' === $tile ) {
+				continue;
+			}
+			$hover                = isset( $t['hover_ref'] ) && is_string( $t['hover_ref'] ) ? trim( $t['hover_ref'] ) : '';
+			$out[ $n ][ $slot ] = array(
+				'object_slug' => ! empty( $t['object_slug'] ) && is_string( $t['object_slug'] ) ? $t['object_slug'] : null,
+				'tile_ref'    => $tile,
+				'hover_ref'   => isset( $prev[ $hover ] ) ? $prev[ $hover ] : $hover,
+			);
+		}
+	}
+	return $out;
+}
+
 /**
  * Every 2026-11-17 design/assets image the import reads: [label, value, sub, spec]. One list for the import and
  * the deploy bundle (sh_import_bundle_1117_files()).
@@ -335,6 +417,14 @@ function sh_import_1117_asset_values( array $seed ): array {
 		foreach ( sh_import_trail_static_tiles( $seed, $t ) as $st ) {
 			$add( "trail $slug static tile {$st['position']}", $st['image'], SH_IMPORT_OBJECTS_1117, sh_import_spec_tile() );
 			$add( "trail $slug static tile hover {$st['position']}", $st['hover'], SH_IMPORT_OBJECTS_1117, sh_import_spec_tile_hover() );
+		}
+	}
+	// D57 zone 1–3 object grid: tile images the importer may have to create (a file the objects' tiles already list is the same
+	// file — one bundle entry). Label "zone grid …": a missing file is not an error (the slot falls back to the object's tile).
+	foreach ( sh_import_zone_grid_tiles( $seed ) as $zn => $slots ) {
+		foreach ( $slots as $slot => $t ) {
+			$add( "zone grid $zn tile $slot", $t['tile_ref'], SH_IMPORT_OBJECTS_1117, sh_import_spec_tile() );
+			$add( "zone grid $zn tile hover $slot", $t['hover_ref'], SH_IMPORT_OBJECTS_1117, sh_import_spec_tile_hover() );
 		}
 	}
 	if ( isset( $seed['guides'] ) ) {
@@ -501,9 +591,11 @@ function sh_import_bundle_1117_files( array $seed, string $dir, string $mediadir
 	);
 	foreach ( sh_import_1117_asset_values( $seed ) as $v ) {
 		list( $label, $value, $sub, $spec ) = $v;
-		$file = sh_import_1117_file( $value, $dir, $sub );
+		$file = str_starts_with( $label, 'zone grid ' ) ? sh_import_zone_tile_file( $value, $dir ) : sh_import_1117_file( $value, $dir, $sub );
 		if ( '' === $file ) {
-			$out['missing'][] = "1117 $label: $value";
+			if ( ! str_starts_with( $label, 'zone grid ' ) ) {
+				$out['missing'][] = "1117 $label: $value";
+			}
 			continue;
 		}
 		$box = null === $spec ? '' : implode( 'x', sh_web_image_bundle_box( $spec ) ) . ( ! empty( $spec['matte'] ) ? '@' . ltrim( (string) $spec['matte'], '#' ) : '' );

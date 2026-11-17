@@ -68,6 +68,7 @@ $sh_1117 = sh_import_bundle_1117_files(
 		'guides'        => $sh_json( $sh_cont . '/seed/guides.json' ),
 		'site'          => $sh_json( $sh_cont . '/seed/site.json' ),
 		'intro-2026-11' => $sh_json( $sh_cont . '/seed/intro-2026-11.json' ),
+		'zones-2026-11-17' => $sh_json( $sh_cont . '/seed/zones-2026-11-17.json' ),
 		'manifest'      => $sh_json( $sh_cont . '/media-manifest.json' ),
 	),
 	$sh_dir,
