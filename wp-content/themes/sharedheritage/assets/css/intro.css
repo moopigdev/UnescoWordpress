@@ -1,232 +1,444 @@
 /*
- * Introduction page (Figma Desktop - 1471 · DESIGN-SPEC §4.2 / §4.7). Auto-enqueued for page-intro.php.
- * Geometry at 1440 (y from the page top): cover 150 · Introduction row 656 · body 960 · Knowing row 1380 · body 1687 ·
- * map 2015 (1120×620) · slide text 2655 · Back 3055 · frame end 3186. Only --sh-* tokens + Figma values from the spec.
+ * Introduction page (D50 · DESIGN-SPEC §9.4 · Figma 3339:6117–6228). Auto-enqueued for page-intro.php.
+ * Order at 1440 (y from the page top): header 0–150 (core) · orange head 150–1248 · heading 1248–1477 · map 1477–2286 ·
+ * chapter sections from 2285/2286 (ch1 → 4356 · ch2 → 5317 · ch3 → 5183 · ch4 → 3813).
+ * ≥1280: blocks are placed from the layout JSON (x, y inside the section, width) · <1280: everything stacks (§9.4 E.6).
+ * Komet is not installed yet (D6) → glyph metrics differ from Figma; sizes/line-heights/weights are the Figma values.
  */
 
 .sh-intro {
-	/* frame end 3186 − Back bottom 3105 */
-	padding-bottom: 81px;
+	--intro-margin: max(var(--sh-tablet-margin), calc((100% - var(--sh-container)) / 2));
+	--intro-text: var(--sh-color-neutral-800);
+	overflow-x: clip;
 }
 
-.sh-intro__img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+/* ---- B. Orange head [0,150 1440×1098] #DD7F6A ---- */
+.sh-intro__head {
+	position: relative;
+	background: var(--bg, #dd7f6a);
+	color: #fff9ef;
 }
 
-/*
- * Picture crops = Figma imageTransform of each fill (STRETCH of a sub-rect ≡ cover + vertical anchor):
- * cover 1013:1275 → bottom (100%) · Introduction 670:1221 → 32.4% · Knowing 670:1236 → 43.5% ·
- * map 670:1596 → cover zoomed ×1.0196 about the centre (x/y scale 0.9808/0.9652, centred).
- */
-
-/* ---- Cover [160,150 1120×466] ---- */
-.sh-intro__cover {
-	aspect-ratio: 1120 / 466;
-	overflow: hidden;
+.sh-intro__head-in {
+	padding: 66px var(--intro-margin) 70.9px;
 }
 
-.sh-intro__cover .sh-intro__img {
-	object-position: 50% 100%;
-}
-
-/* ---- Introduction (Frame 12685) / Knowing (Frame 12717): padding 20 · gap 20 · 20 between frames ---- */
-.sh-intro__section {
-	display: flex;
-	flex-direction: column;
-	gap: var(--sh-space-20);
-	margin-top: var(--sh-space-20);
-	padding-block: var(--sh-space-20);
-}
-
-.sh-intro__row {
+.sh-intro__head-top {
 	display: flex;
 	align-items: flex-start;
-	gap: var(--sh-space-22);
+	gap: 55.8px; /* emblem right 485.2 → title x 541 */
 }
 
-.sh-intro__wrap,
-.sh-intro__text {
-	flex: 1 1 0;
-	min-width: 0;
-}
-
-/*
- * Picture card 549×284 · radius 22 · Drop Shadow/200 (0 1px 4px #0C0C0D@5% + @10%). The pictures are transparent PNGs
- * on a fill-less frame, so the shadow follows the artwork (filter), not the box — as in the Figma render.
- */
-.sh-intro__wrap {
-	filter: drop-shadow(0 1px 4px rgba(12, 12, 13, 0.05)) drop-shadow(0 1px 4px rgba(12, 12, 13, 0.1));
-}
-
-.sh-intro__card {
-	aspect-ratio: 549 / 284;
+.sh-intro__emblem {
+	position: relative;
+	flex: 0 0 325.2px;
+	width: 325.2px;
+	height: 320.5px;
 	overflow: hidden;
-	border-radius: var(--sh-radius-card);
 }
 
-.sh-intro__section--intro .sh-intro__card .sh-intro__img { object-position: 50% 32.4%; }
-.sh-intro__section--knowing .sh-intro__card .sh-intro__img { object-position: 50% 43.5%; }
+.sh-intro__head-title {
+	flex: 0 1 739px;
+	min-width: 0;
+	margin-top: 118px; /* 334 − 216 */
+	color: var(--c, #f4f1e6);
+	font-family: var(--sh-font-komet);
+	font-size: var(--fs, 40px);
+	font-weight: var(--fw, var(--sh-fw-komet-heavy));
+	line-height: var(--lh, 51.85px);
+	text-align: var(--ta, left);
+}
 
-/* Text column (Frame 12683): padding-top 10 · gap 20 */
-.sh-intro__text,
-.sh-intro__slide {
+.sh-intro__head-text {
+	margin-top: 35.6px; /* 572.1 − 536.5 */
+}
+
+.sh-intro__head-p,
+.sh-intro__head-credit {
+	font-family: var(--sh-font-komet);
+	font-size: var(--fs, 20px);
+	font-weight: var(--fw, var(--sh-fw-komet-medium));
+	line-height: var(--lh, 26px);
+	color: var(--c, #fff9ef);
+	text-align: var(--ta, justify);
+}
+
+.sh-intro__head-p + .sh-intro__head-p,
+.sh-intro__head-p + .sh-intro__head-credit {
+	margin-top: 40px;
+}
+
+.sh-intro__head-credit {
+	font-weight: var(--fw, var(--sh-fw-komet-regular));
+	line-height: var(--lh, 28.28px);
+	text-align: var(--ta, left);
+}
+
+/* "Continue down" (P-273 default): 42.4×30.6 tab hanging 18.1 below the orange band, scrolls to the map. */
+.sh-intro__down {
+	position: absolute;
+	z-index: 2;
+	top: calc(100% - 11.5px);
+	left: calc(50% - 20px);
+	display: grid;
+	place-items: center;
+	width: 42.4px;
+	height: 30.6px;
+	border-radius: 0 0 4px 4px;
+	background: var(--bg, #dd7f6a);
+	color: #fff;
+}
+
+.sh-intro__down:focus-visible,
+.sh-intro__tab:focus-visible,
+.sh-intro__arrow:focus-visible {
+	outline: 2px solid #403b2f;
+	outline-offset: 2px;
+}
+
+/* ---- C. Heading [0,1248 1440×229] ---- */
+.sh-intro__env {
 	display: flex;
-	flex-direction: column;
-	gap: var(--sh-space-20);
-	padding-top: var(--sh-space-10);
+	align-items: center;
+	min-height: 229px;
+	padding: 30px var(--intro-margin);
 }
 
-.sh-intro__slide {
-	margin-top: var(--sh-space-20);
+.sh-intro__env-title {
+	color: var(--c, #403b2f);
+	font-family: var(--sh-font-komet);
+	font-size: clamp(24px, 5.2vw, var(--fs, 40px));
+	font-weight: var(--fw, var(--sh-fw-komet-heavy));
+	line-height: 53.03px;
+	text-align: left;
 }
 
-.sh-intro__slide[hidden] {
-	display: none;
-}
-
-/* Long body: a blank line (24px) between paragraphs; single line breaks come from <br>. */
-.sh-intro__body-p + .sh-intro__body-p {
-	margin-top: 24px;
-}
-
-/* ---- Map slider (Frame 12767): map 1120×620 · gap 20 to the slide text ---- */
-.sh-intro__map-section {
-	margin-top: var(--sh-space-20);
+/* ---- Map + controls ---- */
+.sh-intro__stage {
+	position: relative;
 }
 
 .sh-intro__map {
 	position: relative;
-	aspect-ratio: 1120 / 620;
+	max-width: 1440px;
+	margin-inline: auto;
+	aspect-ratio: var(--bw, 1440) / var(--bh, 809);
 	overflow: hidden;
-	background: var(--sh-color-map-bg);
 }
 
-.sh-intro__map .sh-intro__img {
-	transform: scale(1.0196);
-}
-
-/* Arrows 60×80, vertically centred; chevron 18.41×31.82 #343A40 (offset from the button: left 18.9 · right 22.7 · top 24.1). */
-.sh-intro__arrow {
+.sh-intro__fill {
 	position: absolute;
-	top: 50%;
-	z-index: 2;
-	width: 60px;
-	height: 80px;
-	padding: 0;
-	border: 0;
-	background: none;
-	color: var(--sh-color-neutral-800);
-	cursor: pointer;
-	transform: translateY(-50%);
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	max-width: none;
+	object-fit: cover;
 }
 
-.sh-intro__arrow svg {
+.sh-intro__map--fit .sh-intro__fill,
+.sh-intro__fig--fit .sh-intro__fill {
+	object-fit: contain;
+}
+
+.sh-intro__crop {
 	position: absolute;
-	top: 24.1px;
 	max-width: none;
 }
 
-.sh-intro__arrow--prev { left: 0; }
-.sh-intro__arrow--next { right: 0; }
-.sh-intro__arrow--prev svg { left: 18.9px; transform: scaleX(-1); }
-.sh-intro__arrow--next svg { left: 22.7px; }
-
-.sh-intro__arrow:focus-visible,
-.sh-intro__pin:focus-visible {
-	outline: 2px solid var(--sh-color-neutral-800);
-	outline-offset: 2px;
-}
-
-/* Number buttons [932,22 166×34] → top 22 · right 22 · 34×34 · gap 10 · fill #DEE2E6 · radius 20 */
-.sh-intro__pins {
+.sh-intro__controls {
 	position: absolute;
-	top: 22px;
-	right: 22px;
-	z-index: 2;
-	display: flex;
-	gap: var(--sh-space-10);
-	margin: 0;
-	padding: 0;
-	list-style: none;
+	z-index: 3;
+	top: 0;
+	right: 0;
+	left: 0;
+	max-width: 1440px;
+	margin-inline: auto;
+	aspect-ratio: 1440 / 809;
+	pointer-events: none;
 }
 
-.sh-intro__pin {
+.sh-intro__tabs {
+	position: absolute;
+	top: 30px;
+	right: 40px; /* 1440 − (1356 + 44) */
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 34px;
-	height: 34px;
+	gap: 12px;
+}
+
+.sh-intro__tab {
+	display: grid;
+	place-items: center;
+	width: 44px;
+	height: 44px;
+	border: 1.5px solid #403b2f;
+	border-radius: 23px;
+	background: var(--inactive, #dedcc3);
+	color: #403b2f;
+	font-family: var(--sh-font-komet);
+	font-size: 22px;
+	font-weight: var(--sh-fw-komet-regular);
+	line-height: 1;
+	text-decoration: none;
+	pointer-events: auto;
+}
+
+.sh-intro__tab.is-active {
+	background: var(--active, #d1cc5c);
+}
+
+.sh-intro__arrow {
+	position: absolute;
+	top: calc(362.9 / 809 * 100%);
+	display: grid;
+	place-items: center;
+	width: 28.3px;
+	height: 56.6px;
 	padding: 0;
-	border: 1px solid transparent;
-	border-radius: var(--sh-radius-map-pin);
-	background: var(--sh-color-neutral-300);
+	border: 0;
+	background: none;
+	color: #000;
 	cursor: pointer;
+	pointer-events: auto;
 }
 
-/* Active: stroke #D65F47 1 inside + number #D65F47 */
-.sh-intro__pin.is-active {
-	border-color: var(--sh-color-accent);
-	color: var(--sh-color-accent);
+.sh-intro__arrow[hidden] {
+	display: none;
 }
 
-/* ---- Back [160,3055]: 89 below the slide text ---- */
-.sh-intro__back {
-	margin-top: 89px;
+.sh-intro__arrow.is-off {
+	visibility: hidden;
 }
 
-/* ---- Desktop 1440: keep Figma block heights (15 / 12 lines of body at 24px) ---- */
-@media (min-width: 1168px) {
-	.sh-intro__section--intro .sh-intro__body { min-height: 360px; }
-	.sh-intro__section--knowing .sh-intro__body { min-height: 288px; }
-	.sh-intro__section--knowing .sh-intro__row { min-height: 287px; }
-	.sh-intro__section--intro .sh-intro__row { min-height: 284px; }
+.sh-intro__arrow--prev {
+	left: 35.4px;
+	transform: scaleX(-1);
 }
 
-/* ---- Mobile (<768): stacked ---- */
-@media (max-width: 767px) {
-	.sh-intro__row {
+.sh-intro__arrow--next {
+	right: 30.6px; /* 1440 − (1381.1 + 28.3) */
+}
+
+/* ---- D. Chapter content ---- */
+.sh-intro__chapter {
+	transition: opacity 0.2s var(--sh-ease);
+}
+
+.sh-intro__chapter.is-fading {
+	opacity: 0;
+}
+
+/* first paint with JS: only the chapter of the hash (page-intro.php inline script · removed by intro.js) */
+.sh-intro-js .sh-intro__chapter {
+	display: none;
+}
+
+.sh-intro-c1 #chapter-1,
+.sh-intro-c2 #chapter-2,
+.sh-intro-c3 #chapter-3,
+.sh-intro-c4 #chapter-4 {
+	display: block;
+}
+
+.sh-intro__sec {
+	background: var(--bg, #fff);
+}
+
+.sh-intro__sec-in {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	max-width: 1440px;
+	margin-inline: auto;
+	padding: 40px var(--intro-margin);
+}
+
+.sh-intro__block {
+	position: relative;
+	width: 100%;
+}
+
+.sh-intro__fig {
+	aspect-ratio: var(--bw) / var(--bh);
+	overflow: hidden;
+}
+
+.sh-intro__h,
+.sh-intro__p {
+	font-family: var(--sh-font-komet);
+	font-size: var(--fs, 20px);
+	font-weight: var(--fw, var(--sh-fw-komet-regular));
+	line-height: var(--lh, 32px);
+	color: var(--c, var(--intro-text));
+	text-align: left;
+}
+
+.sh-intro__h {
+	color: var(--c, var(--accent, var(--intro-text)));
+	font-size: min(var(--fs, 38px), 28px);
+	font-weight: var(--fw, var(--sh-fw-komet-heavy));
+	line-height: 1.35;
+	text-align: left;
+}
+
+.sh-intro__p p + p {
+	margin-top: 16px;
+}
+
+.sh-intro__p strong,
+.sh-intro__p b {
+	font-weight: var(--sh-fw-komet-bold);
+}
+
+.sh-intro__p em,
+.sh-intro__p i {
+	font-style: italic;
+}
+
+/* tablet 768–1279: justified text stays (§9.4 E.6) · phones: left */
+@media (min-width: 768px) {
+	.sh-intro__p {
+		text-align: var(--ta, justify);
+	}
+
+	.sh-intro__h {
+		font-size: min(var(--fs, 38px), 34px);
+		text-align: var(--ta, left);
+	}
+}
+
+@media (max-width: 767.98px) {
+	.sh-intro__head-in {
+		padding-bottom: 60px;
+	}
+
+	.sh-intro__head-top {
 		flex-direction: column;
-		gap: var(--sh-space-20);
+		align-items: center;
+		gap: 24px;
 	}
 
-	.sh-intro__wrap,
-	.sh-intro__text {
-		flex: none;
-		width: 100%;
+	.sh-intro__emblem {
+		flex-basis: auto;
+		width: min(70vw, 325.2px);
+		height: auto;
+		aspect-ratio: 325.2 / 320.5;
 	}
 
-	.sh-intro__text,
-	.sh-intro__slide {
-		padding-top: 0;
+	.sh-intro__head-title {
+		flex: 0 0 auto;
+		margin-top: 0;
+		font-size: min(var(--fs, 40px), 28px);
+		line-height: 1.3;
+		text-align: left;
 	}
 
-	.sh-intro__pins {
+	.sh-intro__head-text {
+		margin-top: 24px;
+	}
+
+	.sh-intro__head-p,
+	.sh-intro__head-credit {
+		font-size: 18px;
+		line-height: 1.5;
+		text-align: left;
+	}
+
+	.sh-intro__head-p + .sh-intro__head-p,
+	.sh-intro__head-p + .sh-intro__head-credit {
+		margin-top: 20px;
+	}
+
+	.sh-intro__env {
+		min-height: 0;
+		padding-block: 40px 24px;
+	}
+
+	.sh-intro__env-title {
+		line-height: 1.3;
+	}
+
+	.sh-intro__tabs {
 		top: 10px;
 		right: 10px;
+		gap: 8px;
+	}
+
+	.sh-intro__tab {
+		width: 36px;
+		height: 36px;
+		font-size: 18px;
 	}
 
 	.sh-intro__arrow {
-		width: 44px;
-		height: 60px;
+		top: 50%;
+		width: 14px;
+		height: 28px;
+		margin-top: -14px;
+	}
+
+	.sh-intro__arrow--prev {
+		left: 8px;
+	}
+
+	.sh-intro__arrow--next {
+		right: 8px;
 	}
 
 	.sh-intro__arrow svg {
-		top: 14px;
-		width: 13px;
-		height: auto;
+		width: 100%;
+		height: 100%;
 	}
 
-	.sh-intro__arrow--prev svg { left: 10px; }
-	.sh-intro__arrow--next svg { left: 21px; }
+	.sh-intro__sec-in {
+		padding-block: 32px;
+		gap: 24px;
+	}
+}
 
-	.sh-intro__back {
-		margin-top: var(--sh-space-40);
+/* ≥1280: place every block at its Figma x / y / width inside the section (scaled by the frame width / 1440) */
+@media (min-width: 1280px) {
+	.sh-intro__head-in,
+	.sh-intro__env,
+	.sh-intro__sec-in {
+		padding-inline: 0;
 	}
 
-	.sh-intro {
-		padding-bottom: var(--sh-space-40);
+	.sh-intro__head-in {
+		max-width: 1440px;
+		min-height: 1098px;
+		margin-inline: auto;
+		padding-inline: calc(160 / 1440 * 100%);
+	}
+
+	.sh-intro__env {
+		max-width: 1440px;
+		margin-inline: auto;
+		padding-inline: calc(160 / 1440 * 100%);
+	}
+
+	.sh-intro__sec-in {
+		display: block;
+		height: calc(var(--h) * 1px);
+		padding: 0;
+	}
+
+	.sh-intro__block {
+		position: absolute;
+		top: calc(var(--y) * 1px);
+		left: calc(var(--x) / 1440 * 100%);
+		width: calc(var(--bw) / 1440 * 100%);
+	}
+
+	.sh-intro__h {
+		font-size: var(--fs, 38px);
+		line-height: var(--lh, 56px);
+		text-align: var(--ta, left);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sh-intro__chapter {
+		transition: none;
 	}
 }
