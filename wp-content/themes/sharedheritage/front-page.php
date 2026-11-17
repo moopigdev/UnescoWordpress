@@ -23,6 +23,7 @@ $sh_home_args    = array( 'page_id' => $sh_home_page_id );
 	get_template_part( 'template-parts/home/intro', null, $sh_home_args );
 	get_template_part( 'template-parts/home/zonebar', null, $sh_home_args );
 	get_template_part( 'template-parts/home/zones', null, array( 'group' => 'main' ) );
+	get_template_part( 'template-parts/home/guide', null, $sh_home_args );
 	get_template_part( 'template-parts/home/trails', null, $sh_home_args );
 	get_template_part( 'template-parts/home/zones', null, array( 'group' => 'extra' ) );
 	get_template_part( 'template-parts/home/navigator', null, $sh_home_args );

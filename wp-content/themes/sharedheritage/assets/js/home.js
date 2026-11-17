@@ -2,6 +2,7 @@
  * Home behaviour (front-page.php) — DESIGN-SPEC §3.5 · §6.1 · §6.2.
  *  1. Navigator dots: scroll in 0.3s to the top / ZONE bar / Trails / Zone 4–5 (anchor href = no-JS fallback).
  *  2. Trails "Read more >>" ↔ "Hide >>": open / fold the two long paragraphs (0.3s).
+ *  2b. "Your animal guide is..." (D48 · §9.3): random card · Read more / Hide.
  *  3. Trails stage: the footprint video (walking.webm) plays once the section is on screen, then the 17 trail
  *     icons fade in (D12). No video support / reduced motion / error → icons straight away.
  */
@@ -138,6 +139,191 @@
 			}, 300 );
 		} );
 	}
+
+	/* 2b · "Your animal guide is..." (D48 · §9.3): random card · re-pick never repeats the one on show ·
+	   Read more >> / Hide >> · every page load starts at "?" (nothing stored) */
+	( function () {
+		var root = document.querySelector( '[data-sh-guide]' );
+		if ( ! root ) {
+			return;
+		}
+		var templates = Array.prototype.slice.call( root.querySelectorAll( 'template[data-sh-guide-card]' ) );
+		var picks = Array.prototype.slice.call( root.querySelectorAll( '[data-sh-guide-pick]' ) );
+		var card = root.querySelector( 'button.sh-guide__card' );
+		var result = root.querySelector( '[data-sh-guide-result]' );
+		var slot = root.querySelector( '[data-sh-guide-slot]' );
+		var live = root.querySelector( '[data-sh-guide-live]' );
+		if ( ! templates.length || ! card || ! result || ! slot || ! window.HTMLTemplateElement ) {
+			return;
+		}
+		var labelMore = root.getAttribute( 'data-label-more' ) || '';
+		var labelHide = root.getAttribute( 'data-label-hide' ) || labelMore;
+		var labelAgain = root.getAttribute( 'data-label-again' ) || '';
+		var current = null;
+		var busy = false;
+
+		// uniform integer 0..m-1 from crypto (rejection sampling · no modulo bias); Math.random only if crypto is missing
+		function rand( m ) {
+			var c = window.crypto || window.msCrypto;
+			if ( ! c || ! c.getRandomValues ) {
+				return Math.floor( Math.random() * m );
+			}
+			var buf = new Uint32Array( 1 );
+			var limit = Math.floor( 4294967296 / m ) * m;
+			do {
+				c.getRandomValues( buf );
+			} while ( buf[ 0 ] >= limit );
+			return buf[ 0 ] % m;
+		}
+
+		function nextIndex() {
+			var n = templates.length;
+			if ( current === null ) {
+				return rand( n );
+			}
+			if ( n < 2 ) {
+				return current;
+			}
+			var r = rand( n - 1 ); // the 16 others
+			return r >= current ? r + 1 : r;
+		}
+
+		// the 17 big pictures are fetched when the visitor shows interest (hover / focus / touch) — not at first paint
+		var warmed = false;
+		function warm() {
+			if ( warmed ) {
+				return;
+			}
+			warmed = true;
+			templates.forEach( function ( tpl ) {
+				var src = tpl.content.querySelector( 'img' );
+				if ( src ) {
+					var im = new Image();
+					im.sizes = '230px';
+					if ( src.getAttribute( 'srcset' ) ) {
+						im.srcset = src.getAttribute( 'srcset' );
+					}
+					im.src = src.getAttribute( 'src' );
+				}
+			} );
+		}
+
+		function cardImage() {
+			var img = card.querySelector( 'img' );
+			if ( ! img ) {
+				img = document.createElement( 'img' );
+				img.className = 'sh-guide__card-img';
+				img.alt = '';
+				var fb = card.querySelector( '.sh-guide__card-fallback' );
+				if ( fb ) {
+					fb.remove();
+				}
+				card.appendChild( img );
+			}
+			return img;
+		}
+
+		function setCardImage( img, big ) {
+			img.removeAttribute( 'srcset' );
+			if ( big.getAttribute( 'srcset' ) ) {
+				img.setAttribute( 'srcset', big.getAttribute( 'srcset' ) );
+			}
+			img.setAttribute( 'sizes', '230px' ); // same candidate as the big card → one download
+			img.setAttribute( 'loading', 'eager' );
+			img.setAttribute( 'src', big.getAttribute( 'src' ) );
+		}
+
+		function whenLoaded( img, done ) {
+			if ( img.complete ) {
+				done();
+				return;
+			}
+			var fired = false;
+			var fin = function () {
+				if ( ! fired ) {
+					fired = true;
+					done();
+				}
+			};
+			img.addEventListener( 'load', fin, { once: true } );
+			img.addEventListener( 'error', fin, { once: true } );
+			window.setTimeout( fin, 500 );
+		}
+
+		function wireToggle() {
+			var btn = slot.querySelector( '.sh-guide__toggle-btn' );
+			if ( ! btn ) {
+				return;
+			}
+			btn.addEventListener( 'click', function () {
+				var open = ! result.classList.contains( 'is-expanded' );
+				result.classList.toggle( 'is-expanded', open );
+				btn.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+				btn.textContent = open ? labelHide : labelMore;
+			} );
+		}
+
+		// swap in the content of card i (collapsed state)
+		function render( i ) {
+			var tpl = templates[ i ];
+			var frag = tpl.content.cloneNode( true );
+			var big = frag.querySelector( '.sh-guide__big-img' );
+			if ( big ) {
+				big.setAttribute( 'loading', 'eager' );
+			}
+			slot.textContent = '';
+			slot.appendChild( frag );
+			wireToggle();
+			result.classList.remove( 'is-expanded' );
+			result.classList.add( 'is-open' );
+			current = i;
+			card.setAttribute( 'aria-label', labelAgain );
+			var name = slot.querySelector( '.sh-guide__name' );
+			var words = slot.querySelector( '.sh-guide__words' );
+			if ( live ) {
+				live.textContent = ( name ? name.textContent : '' ) + ( words ? '. ' + words.textContent : '' );
+			}
+		}
+
+		function pick() {
+			if ( busy ) {
+				return;
+			}
+			warm();
+			var i = nextIndex();
+			var big = templates[ i ].content.querySelector( '.sh-guide__big-img' );
+			var img = cardImage();
+			if ( reduceMotion || ! big ) {
+				if ( big ) {
+					setCardImage( img, big );
+					img.alt = '';
+				}
+				render( i );
+				return;
+			}
+			busy = true;
+			img.classList.add( 'is-flip-out' ); // rotateY 0 → 90° (0.2s ease-in)
+			window.setTimeout( function () {
+				setCardImage( img, big );
+				whenLoaded( img, function () {
+					render( i );
+					img.classList.remove( 'is-flip-out' );
+					img.classList.add( 'is-flip-in' ); // 90° → 0 (0.2s ease-out)
+					window.setTimeout( function () {
+						img.classList.remove( 'is-flip-in' );
+						busy = false;
+					}, 200 );
+				} );
+			}, 200 );
+		}
+
+		picks.forEach( function ( el ) {
+			el.addEventListener( 'click', pick );
+			el.addEventListener( 'pointerenter', warm, { once: true } );
+			el.addEventListener( 'focus', warm, { once: true } );
+			el.addEventListener( 'touchstart', warm, { once: true, passive: true } );
+		} );
+	}() );
 
 	/* 3 · trails stage: footprint video → icons */
 	var stage = document.querySelector( '.sh-home-trails__stage[data-footprints]' );

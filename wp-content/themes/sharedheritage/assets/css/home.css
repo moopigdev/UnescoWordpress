@@ -450,3 +450,355 @@
 	}
 }
 
+/* ---- 5 · Your animal guide is... (D48 · §9.3 · Figma 3339:5265 [160,1849 1120×440]) ----
+   Section = padding 40/40 · gap 50 · 440 tall at start. The result block (name · 3 words · Read more) slides open under
+   the row (+50 gap) : 585 tall collapsed, 490 + H expanded. Type = Figma weights through the --sh-fw-komet-* tokens
+   (Figma w500 = Komet-Regular · w700 = Bold · w800 = Heavy). */
+.sh-guide {
+	--sh-guide-text: #494538; /* §9.3 text column colour (no token) */
+	--sh-guide-time: 0.3s;
+	padding-block: var(--sh-space-40);
+	margin-top: var(--sh-home-gap);
+	color: var(--sh-color-neutral-900);
+}
+
+.sh-guide__title {
+	margin: 0;
+	font: var(--sh-fw-komet-heavy) 30px/28px var(--sh-font-komet);
+	text-align: center;
+}
+
+.sh-guide__row {
+	display: flex;
+	align-items: center;
+	gap: var(--sh-space-30);
+	margin-top: 45px; /* title → row */
+	padding-left: min(190px, calc((100% - 720px) / 2)); /* 190 at 1440; centred when narrower */
+}
+
+.sh-guide__text {
+	display: flex;
+	flex-direction: column;
+	gap: 15.5px;
+	flex: 0 1 570px;
+	min-width: 0;
+	color: var(--sh-guide-text);
+	font: var(--sh-type-collection); /* Komet 20/25 · Figma w500 */
+}
+
+.sh-guide__p {
+	margin: 0;
+}
+
+.sh-guide__cta {
+	align-self: flex-start;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--sh-color-neutral-800);
+	font: var(--sh-type-collection-bold);
+	text-align: left;
+	cursor: pointer;
+}
+
+button.sh-guide__cta:hover,
+button.sh-guide__cta:focus-visible {
+	color: var(--sh-color-accent);
+	text-decoration: underline;
+}
+
+span.sh-guide__cta {
+	cursor: default;
+}
+
+/* card "?" / card of the animal on show · 120×190 · hand cursor (it is the random button) */
+.sh-guide__card {
+	position: relative;
+	flex: none;
+	width: 120px;
+	height: 190px;
+	padding: 0;
+	border: 0;
+	background: none;
+	perspective: 600px;
+	transition: transform 0.2s var(--sh-ease);
+}
+
+button.sh-guide__card {
+	cursor: pointer;
+}
+
+.sh-guide__card-img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transform-origin: 50% 50%;
+	transition: filter 0.2s var(--sh-ease);
+}
+
+.sh-guide__card-fallback {
+	display: grid;
+	width: 100%;
+	height: 100%;
+	place-items: center;
+	border: 2px solid var(--sh-color-neutral-800);
+	border-radius: 10px;
+	font: var(--sh-type-metadata);
+}
+
+/* flip (random): rotateY 0 → 90° (0.2s ease-in), swap, 90° → 0 (0.2s ease-out) */
+.sh-guide__card-img.is-flip-out {
+	transform: rotateY(90deg);
+	transition: transform 0.2s ease-in;
+}
+
+.sh-guide__card-img.is-flip-in {
+	transition: transform 0.2s ease-out;
+}
+
+@media (hover: hover) {
+	button.sh-guide__card:hover,
+	.sh-guide__big:hover {
+		transform: translateY(-4px);
+	}
+
+	button.sh-guide__card:hover .sh-guide__card-img,
+	.sh-guide__big:hover .sh-guide__big-img {
+		filter: drop-shadow(0 1px 4px rgba(12, 12, 13, 0.05)) drop-shadow(0 1px 4px rgba(12, 12, 13, 0.1)); /* Drop Shadow/200 */
+	}
+}
+
+.sh-guide__card:focus-visible,
+.sh-guide__cta:focus-visible,
+.sh-guide__big:focus-visible,
+.sh-guide__follow:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 4px;
+}
+
+/* ---- result block: opens 0 → auto with grid-template-rows (no fixed heights) ---- */
+.sh-guide__result {
+	display: grid;
+	grid-template-rows: 0fr;
+	visibility: hidden;
+	transition: grid-template-rows var(--sh-guide-time) var(--sh-ease), visibility 0s linear var(--sh-guide-time);
+}
+
+.sh-guide__result.is-open {
+	grid-template-rows: 1fr;
+	visibility: visible;
+	transition: grid-template-rows var(--sh-guide-time) var(--sh-ease), visibility 0s;
+}
+
+.sh-guide__result-clip {
+	min-height: 0;
+	overflow: hidden;
+}
+
+.sh-guide__result-pad {
+	padding-top: 50px; /* row → result */
+	text-align: center;
+}
+
+.sh-guide__name {
+	margin: 0;
+	font: var(--sh-fw-komet-heavy) 30px/28px var(--sh-font-komet);
+}
+
+.sh-guide__words {
+	margin: var(--sh-space-10) 0 0;
+	font: var(--sh-type-collection-bold);
+	transition: margin-top var(--sh-guide-time) var(--sh-ease);
+}
+
+/* Read more >> (centre) / Hide >> (right) · inner block unfolds with the same 0.3s */
+.sh-guide__more {
+	display: grid;
+	grid-template-rows: 0fr;
+	visibility: hidden;
+	text-align: left;
+	transition: grid-template-rows var(--sh-guide-time) var(--sh-ease), visibility 0s linear var(--sh-guide-time);
+}
+
+.sh-guide__more-clip {
+	min-height: 0;
+	overflow: hidden;
+}
+
+.sh-guide__more-pad {
+	padding-top: var(--sh-space-15);
+}
+
+.sh-guide__body {
+	display: flex;
+	align-items: center;
+	gap: var(--sh-space-20);
+	min-height: 363px;
+}
+
+.sh-guide__big {
+	display: flex;
+	flex: none;
+	justify-content: center;
+	width: 360px;
+	opacity: 0;
+	transition: transform 0.2s var(--sh-ease), opacity var(--sh-guide-time) var(--sh-ease);
+}
+
+.sh-guide__big-img {
+	display: block;
+	width: 230px;
+	height: 363px;
+	object-fit: cover;
+	transition: filter 0.2s var(--sh-ease);
+}
+
+.sh-guide__copy {
+	flex: 1 1 0;
+	min-width: 0;
+	font: var(--sh-fw-komet-regular) 20px/23px var(--sh-font-komet); /* Figma w500 · lh 23 (frame of the cards) */
+	text-align: justify; /* Figma: no hyphenation in the card text */
+}
+
+.sh-guide__copy p {
+	margin: 0;
+}
+
+.sh-guide__copy p + p {
+	margin-top: 23px; /* one blank line between paragraphs */
+}
+
+.sh-guide__follow {
+	display: block;
+	width: fit-content;
+	margin-top: var(--sh-space-15);
+	margin-left: 380px; /* x = 360 + 20 · under the text column */
+	color: var(--sh-color-neutral-900);
+	font: var(--sh-type-collection-bold);
+	text-decoration: none;
+}
+
+.sh-guide__follow:hover,
+.sh-guide__follow:focus-visible {
+	color: var(--sh-color-accent);
+	text-decoration: underline;
+}
+
+.sh-guide__toggle {
+	margin-top: var(--sh-space-10);
+	font: var(--sh-type-read-more-home); /* strut 22 = the row is 22 tall */
+	text-align: center;
+	transition: margin-top var(--sh-guide-time) var(--sh-ease);
+}
+
+.sh-guide__toggle .sh-read-more {
+	font: var(--sh-type-read-more-home);
+}
+
+.sh-guide__toggle .sh-read-more:hover,
+.sh-guide__toggle .sh-read-more:focus-visible {
+	font: var(--sh-type-read-more-home-hover);
+}
+
+/* expanded (state 3): gap 15 everywhere · Hide >> on the right */
+.sh-guide__result.is-expanded .sh-guide__words {
+	margin-top: var(--sh-space-15);
+}
+
+.sh-guide__result.is-expanded .sh-guide__more {
+	grid-template-rows: 1fr;
+	visibility: visible;
+	transition: grid-template-rows var(--sh-guide-time) var(--sh-ease), visibility 0s;
+}
+
+.sh-guide__result.is-expanded .sh-guide__big {
+	opacity: 1;
+}
+
+.sh-guide__result.is-expanded .sh-guide__toggle {
+	margin-top: var(--sh-space-15);
+	text-align: right;
+}
+
+/* no JS → nothing to pick: the card "?" and the text stay (the buttons do nothing) */
+
+/* ---- tablet: the card slot narrows ---- */
+@media (max-width: 1023px) {
+	.sh-guide__big {
+		width: 250px;
+	}
+
+	.sh-guide__follow {
+		margin-left: 270px;
+	}
+}
+
+/* ---- mobile: everything stacks, the card goes under the text ---- */
+@media (max-width: 767px) {
+	.sh-guide {
+		padding-block: var(--sh-space-30);
+	}
+
+	.sh-guide__title {
+		font-size: 26px;
+		line-height: 30px;
+	}
+
+	.sh-guide__row {
+		flex-direction: column;
+		margin-top: var(--sh-space-25);
+		padding-left: 0;
+		gap: var(--sh-space-25);
+	}
+
+	.sh-guide__text {
+		flex-basis: auto;
+		width: 100%;
+	}
+
+	.sh-guide__result-pad {
+		padding-top: var(--sh-space-30);
+	}
+
+	.sh-guide__name {
+		font-size: 26px;
+		line-height: 30px;
+	}
+
+	.sh-guide__body {
+		flex-direction: column;
+		min-height: 0;
+	}
+
+	.sh-guide__copy {
+		text-align: left; /* justify in ~330px leaves wide gaps */
+	}
+
+	.sh-guide__big {
+		width: auto;
+	}
+
+	.sh-guide__follow {
+		margin-left: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sh-guide__card,
+	.sh-guide__card-img,
+	.sh-guide__result,
+	.sh-guide__result.is-open,
+	.sh-guide__result.is-expanded .sh-guide__more,
+	.sh-guide__more,
+	.sh-guide__words,
+	.sh-guide__toggle,
+	.sh-guide__big,
+	.sh-guide__big-img {
+		transition: none;
+	}
+
+	.sh-guide__card-img.is-flip-out {
+		transform: none;
+	}
+}
