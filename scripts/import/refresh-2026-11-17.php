@@ -39,6 +39,8 @@ function sh_import_refresh_steps_2026_11_17(): array {
 		'2026-11-17-makara'     => 'Makara: objects saltwater-crocodile-skull + sungai-mas-makara created when missing · their old tile-without-a-page removed (only the one the import wrote) · trail order (only while the old list)',
 		// rooster-1117 (BACKLOG #34): Rooster #11 = the multi-trail object mother-of-pearl-furniture-depicting-animals.
 		'2026-11-17-rooster'    => 'Rooster #11 links to mother-of-pearl-furniture-depicting-animals: rooster term + its rooster tile added to the object (only where missing) · the old tile-without-a-page removed (only the one the import wrote) · trail order (only while the old list)',
+		// fb-1117 (BACKLOG #37): the designer put the side image into the two Makara frames (the slot was empty).
+		'2026-11-17-makara-side' => 'Makara 2: side panel image (sh_extra_image_1) + its layout box filled only while no panel image is set — an image an admin put there stays (kept_admin)',
 	);
 }
 
@@ -394,6 +396,73 @@ function sh_import_refresh_rooster_1117( array $seed, array $map, array $manifes
 }
 
 /**
+ * Step 2026-11-17-makara-side (fb-1117 · BACKLOG #37): the designer's side image of the two Makara objects
+ * (style.images[0].crop_ref → sh_extra_image_1 · DESIGN-SPEC §8.6). A fresh import already has it; a site imported
+ * before has the empty slot (layout image_slot_empty · no panel image). Rules — nothing of an admin overwritten:
+ *   panel image   sh_extra_image_1..6 all empty → sh_extra_image_1 = the crop · already that crop = nothing to do ·
+ *                 any other panel image (an admin put it there) → kept_admin, nothing written, no unused file created
+ *   sh_layout     only when the panel image is the designer's (filled now or before) and the layout is still the empty-slot one
+ *                 (image_slot_empty set · no images) → the seed layout (image placed at its box) · else kept as is
+ * An object not on the site is not created (step 2026-11-17-makara does that).
+ *
+ * @param array<string, mixed> $seed Seed files.
+ * @param array<string, mixed> $map  image-map.json.
+ */
+function sh_import_refresh_makara_side_1117( array $seed, array $map ): void {
+	$dir = (string) sh_imp_config()['assets'];
+	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		$slug = (string) $o['slug'];
+		if ( ! isset( SH_IMPORT_MAKARA_1117[ $slug ] ) ) {
+			continue;
+		}
+		$id = sh_imp_find_post( 'object', 'object:' . $slug );
+		if ( ! $id ) {
+			continue;
+		}
+		$title  = sh_import_object_text_2026_11( $o )['post_title'];
+		$frame  = sh_import_primary_frame( $o );
+		$images = isset( $frame['style']['images'] ) && is_array( $frame['style']['images'] ) ? array_values( $frame['style']['images'] ) : array();
+		$ref    = isset( $images[0]['crop_ref'] ) ? (string) $images[0]['crop_ref'] : '';
+		if ( '' === $ref ) {
+			continue; // The seed has no side image for it.
+		}
+
+		$current = array();
+		for ( $i = 1; $i <= 6; $i++ ) {
+			$att = absint( get_post_meta( $id, 'sh_extra_image_' . $i, true ) );
+			if ( $att ) {
+				$current[ $i ] = $att;
+			}
+		}
+		// The attachment this step would write, found without creating it (key = asset:<file without extension>).
+		$file   = sh_import_ref_file( $map, $ref, $dir );
+		$ext    = '' === $file ? '' : (string) pathinfo( $file, PATHINFO_EXTENSION );
+		$have   = '' === $file ? 0 : sh_imp_find_attachment( 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) ) );
+		if ( $have && isset( $current[1] ) && $current[1] === $have ) {
+			$att = $have; // Already the designer's image (fresh import · an earlier run): only the layout may still need it.
+		} elseif ( $current ) {
+			sh_imp_keep( "object:$slug sh_extra_image_" . (int) array_key_first( $current ) . ' (panel image set in admin · the designer side image not filled)' );
+			continue;
+		} else {
+			$att = sh_imp_asset_ref( $map, $ref, $title . ' image' ); // Creates the attachment (a warning + 0 when the file is missing).
+			if ( ! $att ) {
+				continue;
+			}
+			sh_imp_meta( 'post', $id, array( 'sh_extra_image_1' => $att ) );
+			sh_imp_count( 'updated', 'makara_side_image' );
+		}
+
+		$layout = json_decode( (string) get_post_meta( $id, 'sh_layout', true ), true );
+		if ( is_array( $layout ) && ! empty( $layout['image_slot_empty'] ) && empty( $layout['images'] ) ) {
+			sh_imp_meta( 'post', $id, array( 'sh_layout' => sh_import_layout( $frame, $map, $title ) ) );
+			sh_imp_count( 'updated', 'makara_side_layout' );
+		} elseif ( ! is_array( $layout ) || empty( $layout['images'] ) ) {
+			sh_imp_keep( "object:$slug sh_layout (not the empty-slot layout the import wrote · image placed in the column box)" );
+		} // Else the layout already places images (fresh import): nothing to do.
+	}
+}
+
+/**
  * Run one step of this file. Returns true when done (false = a file was missing: run again on the next import).
  *
  * @param string                                  $step     Step id.
@@ -425,6 +494,9 @@ function sh_import_refresh_2026_11_17( string $step, array $seed, array $map, ar
 			break;
 		case '2026-11-17-rooster':
 			sh_import_refresh_rooster_1117( $seed, $map, $manifest );
+			break;
+		case '2026-11-17-makara-side':
+			sh_import_refresh_makara_side_1117( $seed, $map );
 			break;
 	}
 	return count( sh_imp_state()['warnings'] ) === $before;
