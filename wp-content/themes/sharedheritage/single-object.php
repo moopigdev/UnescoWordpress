@@ -56,7 +56,9 @@ while ( have_posts() ) :
 	$sh_pad         = isset( $sh_layout['panel_padding_top_bottom'] ) && is_array( $sh_layout['panel_padding_top_bottom'] ) ? array_values( $sh_layout['panel_padding_top_bottom'] ) : array();
 	$sh_pad_top     = $sh_num( $sh_pad[0] ?? null, 60.0 );
 	$sh_pad_bottom  = $sh_num( $sh_pad[1] ?? null, 60.0 );
-	$sh_gap         = $sh_num( $sh_layout['panel_gap'] ?? null, 22.0 );
+	$sh_gap         = $sh_num( $sh_layout['panel_gap'] ?? null, 22.0 ); // gap between the panel columns.
+	// Generic mode: spacing inside the text column (title → info rows → Caption) = Figma `Frame 12683` itemSpacing 25 (102/102 frames) — not the 22 between columns.
+	$sh_text_gap    = empty( $sh_layout['text_blocks'] ) ? 25.0 : $sh_gap;
 
 	/*
 	 * Panel columns: the leftmost children form the text column (one frame, or the title/metadata/caption
@@ -135,10 +137,10 @@ while ( have_posts() ) :
 		}
 		/*
 		 * Generic mode (D49 · no text_blocks): the first info row sits one title line (45) + gap under the column top
-		 * (Figma 1087 = 1020 + 45 + 22) — same D43 rule, so the media column does not carry the Figma slack above the first image.
+		 * (Figma 1090 = 1020 + 45 + 25) — same D43 rule, so the media column does not carry the Figma slack above the first image.
 		 */
 		if ( null === $sh_info_y && $sh_text_col && empty( $sh_layout['text_blocks'] ) ) {
-			$sh_info_y = $sh_text_col[1] + $sh_text_pad + 45.0 + $sh_gap;
+			$sh_info_y = $sh_text_col[1] + $sh_text_pad + 45.0 + $sh_text_gap;
 		}
 		if ( null !== $sh_info_y ) {
 			$sh_media_bottom = null !== $sh_img_top ? $sh_info_y + ( $sh_img_bottom - $sh_img_top ) : $sh_media_col[1] + $sh_media_col[3];
@@ -175,6 +177,7 @@ while ( have_posts() ) :
 		'pad_bottom'   => $sh_pad_bottom,
 		'tail'         => $sh_tail,
 		'gap'          => $sh_gap,
+		'text_gap'     => $sh_text_gap,
 		'text_col'     => $sh_text_col,
 		'text_pad'     => $sh_text_pad,
 		'text_nodes'   => $sh_text_nodes,

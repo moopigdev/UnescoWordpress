@@ -66,7 +66,7 @@
 	flex: none;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: calc(var(--sh-d-gap, 22) * var(--sh-d-u));
+	gap: calc(var(--sh-d-text-gap, var(--sh-d-gap, 22)) * var(--sh-d-u));
 	width: calc(var(--sh-d-text-w, 1120) * var(--sh-d-u));
 	min-height: calc(var(--sh-d-text-h, 0) * var(--sh-d-u));
 }
@@ -316,7 +316,10 @@
 		aspect-ratio: var(--sh-d-img-w, 1) / var(--sh-d-img-h, 1);
 	}
 
-	.sh-detail__text:not(.sh-detail__text--blocks),
+	.sh-detail__text:not(.sh-detail__text--blocks) {
+		gap: calc(var(--sh-d-text-gap, 22) * 1px);
+	}
+
 	.sh-detail__media {
 		gap: var(--sh-space-22);
 	}

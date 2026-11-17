@@ -75,6 +75,7 @@ $sh_vars = array(
 	'--sh-d-pad-bottom' => $sh_num( $sh_geo['pad_bottom'] ?? 60 ),
 	'--sh-d-tail'       => $sh_num( $sh_geo['tail'] ?? 0 ),
 	'--sh-d-gap'        => $sh_num( $sh_geo['gap'] ?? 22 ),
+	'--sh-d-text-gap'   => $sh_num( $sh_geo['text_gap'] ?? ( $sh_geo['gap'] ?? 22 ) ),
 	'--sh-d-back-gap'   => $sh_num( $sh_geo['back_gap'] ?? 22 ),
 	'--sh-d-text-w'     => $sh_num( $sh_two_cols ? $sh_text_w : max( $sh_text_w, $sh_cw ) ),
 	'--sh-d-text-h'     => $sh_num( $sh_text_col ? $sh_text_col[3] : 0 ),
