@@ -170,6 +170,9 @@ def fig_items():
 
 
 res.extend(sorted(fig_items(), key=lambda r: r["id"]))
+# entry ของ encode-1117.sh (id ขึ้นต้น drive-1117/ หรือ intro-1117/) เก็บไว้ ไม่ให้หายเมื่อรัน encode.sh ซ้ำ
+if os.path.exists(dest):
+    res.extend(e for e in json.load(open(dest))["files"] if str(e.get("id", "")).startswith(("drive-1117/", "intro-1117/")))
 doc = {"limit_bytes": LIMIT, "generated_by": "scripts/media/encode.sh", "files": res}
 os.makedirs(os.path.dirname(os.path.abspath(dest)), exist_ok=True)
 with open(dest, "w") as fh:
