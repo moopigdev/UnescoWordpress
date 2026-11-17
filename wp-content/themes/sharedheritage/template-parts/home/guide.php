@@ -22,7 +22,22 @@ foreach ( array( 'opening', 'heritage', 'question', 'instructions' ) as $sh_key 
 		$sh_paras[] = $sh_text;
 	}
 }
-$sh_cards = sh_guide_cards();
+// A card whose picture is gone (file deleted from the Media Library, meta still points at it) is left out of the draw (CONTENT-MODEL: no picture = not in the draw).
+$sh_cards = array();
+foreach ( sh_guide_cards() as $sh_c ) {
+	$sh_img = sh_home_img(
+		(int) $sh_c['card'],
+		array(
+			'alt_fallback' => $sh_c['name'],
+			'class'        => 'sh-guide__big-img',
+			'sizes'        => '230px',
+		)
+	);
+	if ( '' !== $sh_img ) {
+		$sh_c['img'] = $sh_img;
+		$sh_cards[]  = $sh_c;
+	}
+}
 if ( '' === $sh_title && ! $sh_paras && ! $sh_cards ) {
 	return;
 }
@@ -57,7 +72,7 @@ $sh_kses_html = array(
 );
 $sh_pick = $sh_cards ? 'button' : 'span'; // no cards (admin emptied them) → inert, nothing broken.
 ?>
-<section id="sh-home-guide" class="sh-guide sh-container" aria-labelledby="sh-guide-title"
+<section id="sh-home-guide" class="sh-guide sh-container"<?php echo '' !== $sh_title ? ' aria-labelledby="sh-guide-title"' : ''; ?>
 	data-sh-guide data-label-more="<?php echo esc_attr( $sh_more ); ?>" data-label-hide="<?php echo esc_attr( $sh_hide ); ?>"
 	data-label-first="<?php esc_attr_e( 'Pick a card', 'sharedheritage' ); ?>" data-label-again="<?php esc_attr_e( 'Pick another card', 'sharedheritage' ); ?>">
 	<?php if ( '' !== $sh_title ) : ?>
@@ -89,16 +104,7 @@ $sh_pick = $sh_cards ? 'button' : 'span'; // no cards (admin emptied them) → i
 		</div>
 
 		<?php foreach ( $sh_cards as $sh_i => $sh_c ) : ?>
-			<?php
-			$sh_big = sh_home_img(
-				(int) $sh_c['card'],
-				array(
-					'alt_fallback' => $sh_c['name'],
-					'class'        => 'sh-guide__big-img',
-					'sizes'        => '230px',
-				)
-			);
-			?>
+			<?php $sh_big = $sh_c['img']; ?>
 			<template data-sh-guide-card="<?php echo (int) $sh_i; ?>">
 				<h3 class="sh-guide__name"><?php echo esc_html( $sh_c['name'] ); ?></h3>
 				<p class="sh-guide__words"><?php echo esc_html( $sh_c['words'] ); ?></p>

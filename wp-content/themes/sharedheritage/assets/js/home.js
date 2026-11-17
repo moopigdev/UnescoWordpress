@@ -161,6 +161,8 @@
 		var labelAgain = root.getAttribute( 'data-label-again' ) || '';
 		var current = null;
 		var busy = false;
+		var backImg = card.querySelector( 'img' );
+		var back = backImg ? { src: backImg.getAttribute( 'src' ), srcset: backImg.getAttribute( 'srcset' ), sizes: backImg.getAttribute( 'sizes' ) } : null;
 
 		// uniform integer 0..m-1 from crypto (rejection sampling · no modulo bias); Math.random only if crypto is missing
 		function rand( m ) {
@@ -293,11 +295,23 @@
 			var i = nextIndex();
 			var big = templates[ i ].content.querySelector( '.sh-guide__big-img' );
 			var img = cardImage();
-			if ( reduceMotion || ! big ) {
-				if ( big ) {
-					setCardImage( img, big );
-					img.alt = '';
+			if ( ! big ) {
+				// a card without a picture must never leave another animal's picture on the small card → back to "?"
+				if ( back ) {
+					img.setAttribute( 'sizes', back.sizes || '120px' );
+					if ( back.srcset ) {
+						img.setAttribute( 'srcset', back.srcset );
+					} else {
+						img.removeAttribute( 'srcset' );
+					}
+					img.setAttribute( 'src', back.src );
 				}
+				render( i );
+				return;
+			}
+			if ( reduceMotion ) {
+				setCardImage( img, big );
+				img.alt = '';
 				render( i );
 				return;
 			}
