@@ -1033,6 +1033,186 @@ scroll-snap, parallax, transition ระหว่างหน้านอกจ�
 **ที่มา:** `design/figma-file.json` lastModified **`2026-11-17T03:50:23Z`** (ไม่ดึงทั้งไฟล์ซ้ำ) · page `3117:3314` · Home ใหม่ `3339:5227` (Desktop - 1634 · 1440×3786) · ตัวอย่างการสุ่ม `3339:6016` · การ์ด 17 ใบ `3339:5488` · Intro ใหม่ `3339:6117` · render 0.5x: `design/frames/2026-11-17/` · ทับ §3/§4.1/§4.2 เฉพาะที่ระบุในหัวข้อนี้ · ค่ามาจาก node จริง (ข้าม `visible:false`) · ป้ายที่มา: `[N]` node Figma · `[C]` คำขอลูกค้า/เจ้าของ (D-xx) · `[P]` ข้อเสนอ (Figma/ลูกค้าไม่ระบุ — ตัดสินเองตามรูปแบบเดิม) · P-27x = PENDING §DEV ของรอบนี้
 **ตารางค่าที่ใช้:** ฟอนต์ Komet (P-205 ยังรอไฟล์) · สี neutral/accent ตาม §2.1 · ฟิลด์ที่หน้าใช้ → §9.6 · seed: `content/seed/site.json` (header/footer/ป้าย) · `guides.json` · `intro-2026-11.json`
 
+### 9.1 Header ใหม่ + Footer (ใช้ทุกหน้า · D47 · BACKLOG #25 #27)
+**Header ใหม่ — Figma `3339:5445` "Header" [0,0 1440×150] (ใน Home `3339:5227` · ตัวเดียวกันใน Zone 1–3 ใหม่ `3339:5450/5463/5476` · Intro ใหม่ `3339:6342/…`)** = component เดิม `Header #1` (`3220:3970`) + `Header #02` (`670:1143`) แต่เนื้อใน **เปลี่ยน**:
+| ชิ้น | พิกัด/ค่า (px ที่ 1440) | ที่มา |
+|---|---|---|
+| Header #1 พื้น | `[0,0 1440×86]` fill `#FFFFFF` · Drop Shadow/100 (`0 1px 4px #0C0C0D@5%`) · auto-layout แนวนอน padding-left/right **160** · กึ่งกลางแนวตั้ง · **ไม่มีเส้นล่าง** (stroke `#AACFD8` 1.5 bottom = `visible:false` ในทุก frame ของ page `3339:*` — Home · Zone 1–3 ใหม่ · Intro ใหม่) | `[N]` `3339:5285` |
+| **โลโก้ Shared Heritage** (แทนภาพพื้นเดิม + UNESCO vector + เมนู utility) | **`[160,4.5 220×77]`** ชิดซ้ายที่ x=160 · กึ่งกลางแนวตั้ง (4.5+38.5 = 43 = 86/2) · ภาพ `877fd074` (1802×612 PNG · แสดงจริงแบบ crop x 0.0738 / y 0.1013 / w 0.8768 / h 0.8987 — ใช้ไฟล์ `design/assets/pages-1117/fills/877fd074….png` · `site.json` `brand.header_logo`) · ลิงก์ → หน้าแรก `[P]` · `alt` "Shared Heritage — Museums in South-East Asia" | `[N]` `I3339:5285;3307:1972` |
+| ❌ ที่ **หายไป** จาก Header #1 | โลโก้ UNESCO vector `[160,14 171×36]` · เมนู utility (Visit · Exhibition and Events · Art · Research · About · Contact) · ภาพพื้น `709572bf` (มี Temasek) — **ไม่มีใน header ใหม่** (Header #1 มี child เดียว = โลโก้) · UNESCO + Temasek ย้ายไป footer (ด้านล่าง) | `[N]` D47 |
+| Header #02 พื้น | `[0,86 1440×64]` fill `#FFFFFF` · Drop Shadow/100 · ไม่มี stroke · padding 160/160 · ชิดขวา · แถว `Frame 12653` gap **30** | `[N]` `3339:5284` — **ค่าเดิม §3.2 ทั้งหมด** |
+| เมนู 6 รายการ | Komet-Medium **14px / w600 / lh 17.5** สี `#343A40` · ข้อความสูง 18 ที่ y=109 (กึ่งกลางแถว 86+32) · x (กว้าง): **Main Page** 437 (68) · **Shared Heritage Framework** 535 (177) · **Museums and Partnership** 742 (167) · **Index** 939 (36) · **Events and Activities** 1005 (132) · **About the Project** 1167 (113) · ปลายขวา = 1280 (= container 160→1280) · ช่องไฟ 30 · ผลรวมกว้าง 843 | `[N]` `I3339:5284;670:1146…1150` + **`3220:3745` (ใหม่)** |
+| About the Project | รายการที่ 6 (ใหม่) = **ลิงก์ภายนอก** `https://www.unesco.org/en/articles/shared-heritage-museums-south-east-asia` · **`target="_blank" rel="noopener noreferrer"`** · ตัวอักษร/สี/ระยะเหมือนรายการอื่น · ไม่มีไอคอน "ลิงก์ออก" ใน Figma → ไม่ใส่ (`aria-label` "About the Project (opens in a new tab)" `[P]`) · admin แก้ URL ได้ (option) | `[C]` D47 · seed `site.json` `nav_primary_links` |
+| ปลายทางเมนูอื่น | Figma ON_CLICK ทุกรายการ → Main Page (prototype ยังไม่กำหนดจริง) · ค่าเดิม P-211 (ใช้หน้าของเว็บเมื่อมี) | เดิม |
+| เส้นล่าง Header #1 | **หน้าใน page `3339:*` (Home · Zone 1–3 · Intro) = ไม่มีเส้น** · หน้า trail/detail/timeline/zone4 chooser/zone 5 (frame เก่าใน Figma ยังใช้ instance เดิม `visible:true`) = เส้น `#AACFD8` 1.5 bottom ตาม §2.4 · **ทำตามค่าต่อหน้าเหมือนเดิม** `[P]` → P-276 | `[N]` นับจาก instance ของ `3220:3970`: ใน page `3339:*` ทั้ง 12 ไม่มีเส้น · instance เก่าอีก 22 (zone เดิม 3 · zone4/5 4 · trail/detail/timeline 15) มีเส้น |
+**Responsive `[P]`:** โครงสองแถว (โลโก้ / เมนู) เหมือนเดิม → ใช้ responsive เดิมของธีมได้ · เปลี่ยนเฉพาะ (1) โลโก้ 220×77 → ย่อตามสัดส่วน (≥ 120 กว้างบนมือถือ) (2) เมนู 6 รายการกว้างรวม 843 → ที่ ≥1024 ยังพอดีแถวเดียว (container ≥ 843+2·24) · < 1024 ใช้พฤติกรรมพับ/แฮมเบอร์เกอร์เดิมของธีม (รายการที่ 6 เข้าเมนูพับ ลำดับท้าย) · ตรวจที่ 1024/768/390
+**ความต่างจาก §3.1/§3.2 เดิม (ตาราง):** Header #1: โลโก้ UNESCO 171×36 + utility 6 รายการ + ภาพพื้น Temasek/SH → **โลโก้ SH 220×77 ตัวเดียว** · Header #02: 5 รายการ → **6 รายการ** (+About the Project) · สูง/สี/เงา/พิกัด y **ไม่เปลี่ยน** (150 รวม) · เส้นล่าง: ตามต่อหน้า (ข้างบน)
+
+**Footer (D47 · โลโก้ UNESCO + Temasek ล่างสุดทุกหน้า) — Figma `3339:5248` `Frame 114511` ใน Home**
+| ชิ้น | ค่า | ที่มา |
+|---|---|---|
+| กรอบ | `[160,3556 1120×95]` (Home) · auto-layout แนวนอน **padding-left/right 267 · padding-top/bottom 5 · gap 20 · จัดชิดล่าง** · ห่างบน = **40** จาก Zone 4/5 (3516→3556) · ใต้กรอบ (3651) ถึงท้ายหน้า (3786) = **135** | `[N]` |
+| โลโก้ UNESCO | `3339:5249` group `[427,3586 283.1×60]` (= x กรอบ+267 · y ชิดล่าง: ขอบล่าง 3646) · **SVG** `design/assets/pages-1117/svg/unesco-footer-logo-3339-5249.svg` (284×60 · สี `#0069B4` + `#FFFFFF`) — **คนละตัวกับโลโก้ UNESCO 171×36 เดิม (`unesco-logo.svg`)** | `[N]` |
+| Temasek | `Frame 114512` `[730.1,3561 208×85]` (x = 427+283.1+20) · แนวตั้ง กึ่งกลาง gap **7**: ข้อความ **"With the Support of"** Komet-Regular 14/17.5 w500 สี **`#49176D`** (127×18 · กึ่งกลาง) + ภาพ `2. Temasek Foundation original` `[730.1,3586 208×60]` (FILL · `8bffcba6` 3886×1124 — ใช้ไฟล์ `…/fills/8bffcba6….png`) | `[N]` `3339:5254/5255/5256` |
+| ความสูงโลโก้ | UNESCO **60** · Temasek **60** (+ ข้อความ 18 + 7 = 85) · ขอบล่างของสองตัว **ตรงกัน (3646)** | `[N]` |
+| การจัดแนวนอน | **ตาม Figma = ชิดซ้ายที่ x=427 (padding 267) ไม่ใช่กึ่งกลางหน้า** — กลุ่มโลโก้กว้างรวม 511.1 กึ่งกลาง x=682.5 (ซ้ายของกึ่งกลาง 720 อยู่ 37.5px · เห็นได้ใน render 0.5x) → **ทำตาม Figma** แล้วถามเจ้าของว่าต้องการกึ่งกลางไหม (P-274) · ตัวแปร CSS `--footer-pad-left: 267px` · responsive: < 1280 → `padding-left = 267/1120 · container` · < 768 → เรียงแนวตั้ง กึ่งกลาง gap 20 `[P]` | `[N]` / `[P]` |
+| ใช้ทุกหน้า | Figma วาด footer เฉพาะ Home → ทุกหน้าใช้ component เดียวกัน (partial `footer.php`) `[P]` · ระยะบน/ล่าง: บน 40 (ขั้นต่ำ · หน้าที่มีพื้นสีเต็มกว้าง เช่น detail/intro "Living heritage" ต่อด้วยพื้นขาวใหม่) · ล่าง 135 ตาม Home `[P]` | `[P]` |
+
+### 9.2 Home ใหม่ — `3339:5227` Desktop - 1634 (1440×3786) · ภาพ 1x `design/frames/2026-11-17/1x-home-3339-5227.png`
+ทับ §4.1 เฉพาะที่ระบุ · ลำดับ section ใหม่ (บน → ล่าง) · พิกัดเทียบ frame · ทุก section กว้าง 1120 ที่ x=160 · หมายเหตุ: ช่วง 616→2289 อยู่ใน auto-layout แนวตั้ง `Frame 114482`/`Frame 12685` (gap 50) — ค่าด้านล่างคือผลลัพธ์จริง
+| # | section | พิกัด [x,y w×h] | รายละเอียด (ต่างจาก §4.1) |
+|---|---|---|---|
+| — | Header (§9.1) | `[0,0 1440×150]` | ใหม่ — โลโก้ SH + เมนู 6 รายการ · ไม่มีเส้นล่าง |
+| 1 | Cover | `[160,150 1120×466]` | ภาพ `88d09cb8` (Figma 11-11+ · ใน seed/§4.1 ยังเป็น `2e3fa9c4` → ตรวจว่า live ใช้ตัวไหน · `site.json` `home.refs_2026_11_17`) |
+| 2 | Introduction `Frame 12685` | `[160,616 1120×364]` padding บน/ล่าง **40** gap 22 | **เหลือแค่แถว intro** (เดิม 552 รวมแถบ Zone): แถว `[160,656 1120×284]` — การ์ดรูป `[160,656 551×284]` r22 + shadow200 (`3f4cfd00` STRETCH crop 1.723×0.891) · ข้อความ `[731,656 549×281]` ตามเดิม §4.1 แถว 2 ทุกค่า · **แถบ Zone ถูกย้ายออก** |
+| 3 | Zone bar `Frame 12684` | `[160,1030 1120×166]` r22 + shadow200 (2 ชั้น) | `30d9d301` · **ลง 68px** จากเดิม 962 (ห่างจากพื้นล่าง Introduction 980 = **50**) · ⚠ มี frame ซ้ำ `3339:5239` ที่ y=962 **ซ่อน (`visible:false`)** — ไม่ใช้ |
+| 4 | Zone 1-2-3 `Zone 123` | `[160,1246 1120×553]` (ห่างแถบ **50**) | 3 การ์ด x = 160 / 533.3 / 906.7 กว้าง 373.3 · รูป 373.3×487 · gap 16 · ชื่อ Komet-Heavy 20/25 กึ่งกลาง `#212529` ที่ y=1749 · **ข้อความ (ตัวอักษรตรง Figma): "Animals in Nature and Mythology" · "Beyond the Visible: \nAnimals and the Cosmic Order" · "Material Cultures: \nAnimals in Rituals and Daily Life"** (ตรง `zones.json` `name_raw` ของ zone 1–3 ที่มีอยู่แล้ว (ตรวจแล้ว) — ต่างจาก §4.1 แถว 4 ที่คัดจาก frame เก่า) · hover ตามเดิม §3.7 |
+| 5 | **Your animal guide (ใหม่)** | `[160,1849 1120×440]` (ห่าง Zone **50**) พื้น `#FFFFFF` · padding 40/40 · gap 50 · **clip** | สถานะเริ่ม = การ์ด ? · สเปกเต็ม **§9.3** · ความสูงเปลี่ยนตามสถานะ: 440 → 585 → 1156–1409 |
+| 6 | Trails `Frame 114476` | `[160,2339 1120×1312]` (ห่างกลุ่มบน **50**) gap 40 | ข้อความ `trails Detail text` `[160,2339 1120×127]` + AAMM `[160,2486 1120×630]` ตามเดิม §4.1 แถว 5 / §3.4 (Read more 3 ยุบ→ขยาย) · **ระยะ Zone→Trails = ผ่านการ์ดสัตว์: Zone จบ 1799 → การ์ด 1849–2289 → Trails 2339 (50 + 50 · ภาพเห็นจริง 90 + 90 เพราะการ์ดมี padding 40)** → แทนค่า **120 ของ D46** (D46 ใช้กับ layout เดิมที่ไม่มีการ์ดสัตว์) — ตาม Figma ใหม่ (`[P]` ว่าไม่ขัดเจตนา D46: ช่องว่างระหว่าง Zone กับ Trails ยังโล่งกว่าเดิม) |
+| 7 | Zone 4 + Zone 5 `Frame 12792` | `[160,3156 1120×360]` (ห่าง AAMM 3116 = **40**) | เดิม §4.1 แถว 6 (560×360 สองใบ · ชื่อ 20/25) |
+| 8 | **Footer (โลโก้)** | `[160,3556 1120×95]` (ห่าง **40**) | §9.1 |
+| — | ท้ายหน้า | 3651 → 3786 | ว่าง 135 (§9.1) |
+| — | Navigator 4 จุด | `[176,587 30×150]` | ไม่เปลี่ยน §3.5 · Figma ใหม่: จุด 1 → Cover · จุด 3 → Trails `3339:5242` · จุด 4 → Zone 4–5 `3339:5245` · **จุด 2 ไม่มี interaction ใน Figma** → ใช้ Zone 1–3 ตามเดิม `[P]` (ไม่มีจุดให้การ์ดสัตว์) |
+**ส่วนที่ไม่เปลี่ยน → อ้าง §4.1/§3:** Hero · การ์ดรูป+ข้อความ Introduction · Zone bar ภาพ · Zone cards hover · Trails animation (§6.2) · Zone 4/5 hover · Navigator · Read more · seed `site.json` `home.*`
+
+
+### 9.3 การ์ดสัตว์สุ่ม "Your animal guide is..." (D48 · BACKLOG #26) — Figma `3339:5265` (ในหน้า) · ตัวอย่างสถานะ `3339:6016` (`Desktop - 1636` ? · `1637` ยุบ · `1635` ขยาย) · การ์ด 17 ใบ `3339:5488` · seed `content/seed/guides.json` (17 ใบ · ตรวจแล้วตรง Figma ทุกใบ) · ภาพ 1x `1x-guide-initial-3339-6039` · `1x-guide-collapsed-3339-6059` · `1x-guide-expanded-3339-6017` · `1x-card-chicken-3339-5489` (+ bird · dragon · seashell)
+**ภาพรวมโครง (เทียบขอบบน section = 0 · กว้าง 1120 · พื้น `#FFFFFF` · padding บน/ล่าง 40 · gap ระหว่างก้อน 50 · `clipsContent:true` ⇒ section **ต้องยืดสูงตามสถานะ ไม่ปล่อยเนื้อล้น**)** — ก้อนบน (หัวข้อ + แถว intro + การ์ด) **อยู่ตลอดทุกสถานะ** · ก้อนล่าง (ผลสุ่ม) ปรากฏที่ y=450 หลังสุ่ม
+**สถานะ 1 — เริ่ม (การ์ด ?)** `Desktop - 1636` = 1440×440 → section สูง **440**
+| ชิ้น | พิกัด [x,y w×h] | ค่า | node |
+|---|---|---|---|
+| หัวข้อ | `[0,40 1120×28]` | "Your animal guide is..." Komet-Heavy **30px / w800 / lh 28** (lh < size ตาม Figma) กึ่งกลาง `#212529` | `3339:5267` |
+| แถว intro | `[0,113 1120×287]` | auto-layout แนวนอน **padding 190/190 · gap 30 · กึ่งกลางแนวตั้ง** (หัวข้อ→แถว ห่าง **45**) | `3339:5268` |
+| คอลัมน์ข้อความ | `[190,113 570×287]` | แนวตั้ง gap **15.5** · ทุกย่อหน้า Komet **20px / w500 / lh 25** ชิดซ้าย สี **`#494538`** (ยกเว้น CTA) | `3339:5269` |
+| Opening | `[190,113 570×50]` | "An animal has crossed your path... Can you figure out where it went?" | `3339:5270` |
+| Heritage | `[190,178.5 570×75]` | "For centuries, animals have inspired artists, craftspeople, families and spiritual seekers, who brought them to life in art you can still see today." | `3339:5271` |
+| Question | `[190,269 570×25]` | "Which animal will guide you?" | `3339:5272` |
+| Instructions | `[190,309.5 570×50]` | "Pick a card to meet your animal guide, then follow its tracks through the heritage Southeast Asia shares." | `3339:5273` |
+| CTA | `[190,375 570×25]` | **"CHOOSE A CARD"** Komet **20/700** lh25 สี **`#343A40`** ชิดซ้าย · ปุ่ม/ลิงก์ = สุ่ม (D48) | `3339:5274` |
+| **การ์ด "?"** | **`[790,161.5 120×190]`** (กึ่งกลางแนวตั้งของแถว · x = 190+570+30) | ภาพ `c632e52f` (1716×2710 · STRETCH crop x .016 y .017 w .968 h .971 · ไฟล์ `design/assets/pages-1117/guides/_card-back.png`) · ภาพมีขอบ/มุมมน/ตัว "?" ฝังในภาพ (ไม่มี text node) · **เคอร์เซอร์เปลี่ยนเป็นมือ** (ปุ่มสุ่ม) | `3339:5275` |
+| ข้อความ ย่อหน้าใน Figma มี `\n` ตัดบรรทัดเอง (ตัด ~58–60 ตัวอักษร/บรรทัด ให้พอดี 570) | | **ตัดสินเอง:** seed เก็บ 2 ฟิลด์ — `*_raw` ตรงตัวอักษร Figma · ฟิลด์ปกติยุบ `\n`→ช่องว่าง (ให้ธีม reflow ที่กว้าง 570 ได้ผลเท่าเดิมแต่ไม่ตัดแข็งเมื่อจอแคบ) | seed `guides.json` `section` |
+**สถานะ 2 — หลังสุ่ม · ยุบ (ชื่อ + คำ 3 คำ + Read more)** `Desktop - 1637` = 1440×585 → section สูง **585** (= 40 + 360 + 50 + 95 + 40)
+| ชิ้น | พิกัด | ค่า |
+|---|---|---|
+| การ์ดบนแถว intro | `[790,161.5 120×190]` | **เปลี่ยนจากการ์ด ? เป็นภาพการ์ดของสัตว์ที่สุ่มได้** (ภาพเดียวกับ `card_image` ใน guides.json · เปลี่ยนมาจาก `c632e52f` เป็นเช่น `f8162319`) ตำแหน่ง/ขนาดเดิม · กดได้ = **สุ่มใหม่** (D48) |
+| ก้อนผล `Frame 114515` | `[0,450 1120×95]` | แนวตั้ง · gap **10** |
+| ชื่อการ์ด | `[0,450 1120×28]` | เช่น "The Chicken & Rooster" Komet-Heavy **30/800/lh 28** กึ่งกลาง `#212529` (ชื่อตรง `guides.json` `cards[].name`) |
+| คำ 3 คำ | `[0,488 1120×25]` | เช่น "Renewal · Homeliness · Abundance" Komet **20/700/lh 25** กึ่งกลาง `#212529` |
+| Read more | `[0,523 1120×22]` | "Read more >>" Komet **16/500/lh 22** `#212529` · **กึ่งกลาง** (ข้อความกว้าง 102 ที่ x 509–611) · ใช้ component Read more §3.4 ได้ (พฤติกรรม/hover เดียวกัน: ตัวหนา 700 + underline `#D65F47`) |
+**สถานะ 3 — ขยาย (Read more → Hide)** `Desktop - 1635`/การ์ด 17 ใบ → section สูง = **40 + 360 + 50 + H + 40** เมื่อ **H = R + 160** (R = ความสูงข้อความ = บรรทัด × 23 · แต่ละการ์ดต่างกัน: seed `cards[].expanded_block_h` = H · 666 (ไก่) · 597 (ฮอร์นบิล · การ์ด 3) · … · 919 (มังกร) · section 1087–1409)
+| ชิ้น | พิกัด (ก้อนผลเริ่ม y=450) | ค่า |
+|---|---|---|
+| ก้อนผล `Frame 114514` | `[0,450 1120×H]` | แนวตั้ง gap **15** (ต่างจากสถานะยุบ 10) |
+| ชื่อ | `[0,450 1120×28]` | เหมือนสถานะ 2 |
+| คำ 3 คำ | `[0,493 1120×25]` | เหมือนสถานะ 2 (ห่างชื่อ 15) |
+| แถวเนื้อหา `Frame 114515` | `[0,533 1120×R]` | แนวนอน gap **20** · **การ์ดใหญ่ซ้าย + ข้อความขวา** |
+| ช่องการ์ด `Frame 114517` | `[0,533 360×R]` | ภาพการ์ด **`[65, 533+(R−363)/2, 230×363]`** (กึ่งกลางช่อง 360 · กึ่งกลางแนวตั้งของแถว) · **ภาพเดียวกับการ์ดเล็ก** (FILL cover ที่ 230×363) · มุมมน/ขอบอยู่ในภาพ · **คลิกการ์ดใหญ่ = ไปหน้า trail ของสัตว์** (D48) `[P]` ดู P-275 |
+| ข้อความเนื้อหา | `[380,533 740×R]` | Komet **20/500/lh 23** **justified** สี `#212529` · `\n\n` = ย่อหน้า (เว้น 1 บรรทัดว่าง) · `\n` เดี่ยว = ขึ้นบรรทัดที่ตั้งใจ (`<br>` · เช่น ไก่/นก: บรรทัดนำ "…thousands of years." แยก) · ตัวเอียง `<em>` เฉพาะ **dragon** ("long" 2 ที่) · ข้อความอยู่ใน `guides.json` `cards[].body` / `body_html` · ⚠ lh 23 (frame การ์ด) ≠ 25 (ตัวอย่าง `3339:6035`) → ใช้ **23** (frame การ์ด = ต้นฉบับของเนื้อหา) |
+| FOLLOW | `[380,533+R+15 740×25]` | **"→ FOLLOW THE <NAME> TRAIL"** Komet **20/700/lh 25** ชิดซ้าย `#212529` · ลิงก์ → หน้า trail (`trail_slug`) · hover ตัวหนา+underline `#D65F47` `[P]` ตาม §3.4 · ข้อความต่อสัตว์ตรง `cards[].follow_text` (⚠ seashell ต้นฉบับสะกด "INVERTABRATES" → คัดลอกตรง · P-272) |
+| Hide | `[0,533+R+55 1120×22]` | "Hide >>" Komet **16/500/lh 22** **ชิดขวา** (ข้อความ x 1062–1120) `#212529` · คลิก = กลับสถานะ 2 |
+**สีการ์ด/ไอคอน:** ภาพการ์ด = raster ใบเดียว (สี + ไอคอนสัตว์ฝังในภาพ · 1469×2392) ไม่มี text/vector แยก · สีพื้นการ์ด 4 กลุ่ม (ตัวอย่างพิกเซลจากภาพ · `cards[].card_color`): **green `#428B75`** (ไก่ · นก · ฮอร์นบิล · ฮัมสา/นกน้ำ) · **red `#E6553D`** (ครุฑ · ฟีนิกซ์ · มังกร · นาค) · **mustard `#C2BB83`** (ควาย · ช้าง · ม้า · กวาง · สิงโต) · **purple `#B37092`** (มกร · เต่า · ปลา · หอย) = กลุ่มสีไอคอน trail §2.1 · ไฟล์ `design/assets/pages-1117/guides/<slug>.png` + `_card-back.png`
+**17 การ์ด ↔ trail (slug ตาม `trails.json`):** rooster ("The Chicken & Rooster") · bird · hornbill · water-bird ("The Hamsa & Water Birds") · garuda · phoenix · dragon · naga ("The Naga & Snake") · buffalo · elephant · horse · deer · lion · makara · turtle · fish ("The Fish & Aquatic Mammals") · seashell ("The Seashell & Marine Invertebrates") — **ครบ 17 · ทุกใบมี trail จริง · ไม่มี trail ที่ไม่มีการ์ด** (Etc. ไม่ใช่ trail) · ชื่อการ์ด ≠ `trails.json` `name` ("Rooster", "Water bird" …) → ใช้ **ชื่อการ์ดจาก Figma** ในส่วนนี้เท่านั้น
+**พฤติกรรม (Figma ไม่มี prototype ของการสุ่ม — มีแค่ hover ของ Read more `886:1824` · ทั้งหมดนี้ `[C]` D48 หรือ `[P]`):**
+1. **โหลดหน้า = สถานะ 1 เสมอ** (ไม่จำผลเดิม · ไม่เก็บ localStorage) `[C]` D48
+2. **คลิกการ์ด ? หรือ "CHOOSE A CARD"** → สุ่ม 1 จาก 17 · ไปสถานะ 2 (ยุบ) `[C]`
+3. **คลิกการ์ดเล็กบนแถว intro (ตอนมีผล) หรือ CHOOSE A CARD ซ้ำ → สุ่มใหม่** · ⛔ ไม่ซ้ำตัวที่แสดงอยู่ (สุ่มจาก 16 ที่เหลือ) · กลับสถานะ 2 ทุกครั้ง (ยุบ) `[C]` + ยุบ `[P]` · ใช้ `crypto.getRandomValues` (ไม่ใช่ Math.random ที่ซ้ำง่าย) `[P]`
+4. **Read more >>** → ขยาย (สถานะ 3) · **Hide >>** → ยุบ (สถานะ 2) · ข้อความปุ่มสลับ · ใช้ common read-more (§3.4: toggle label · hover 700 + underline `#D65F47`) **ได้** — ต่างแค่ตำแหน่ง (ยุบ=กึ่งกลาง · ขยาย=ชิดขวา) → ตัวแปร CSS · ไม่ต้องมี component ใหม่
+5. **FOLLOW หรือการ์ดใหญ่ → หน้า trail** ของสัตว์นั้น (`/trail/<slug>/` ตามที่ธีมมี · D49 ลิงก์ได้ทุก 17) `[C]`
+6. **animation `[P]` (Figma ไม่กำหนด):** (ก) สุ่ม: การ์ดเล็กพลิก `rotateY` 0→90° (0.2s ease-in) สลับภาพ แล้ว 90→0° (0.2s ease-out) · ก้อนผลเลื่อนเปิด `max-height`/`opacity` 0→1 ใน **0.3s ease-in-out** (เท่าเวลา Read more §3.4 ใน Figma) (ข) ขยาย/ยุบ: ความสูง section 0.3s ease-in-out · การ์ดใหญ่ fade-in 0.3s (ค) `prefers-reduced-motion: reduce` = ไม่พลิก ไม่เลื่อน สลับทันที (ง) hover การ์ด (เล็ก/ใหญ่): ยก `translateY(-4px)` + Drop Shadow/200 0.2s `[P]` · focus ring ตามปกติ
+7. **a11y `[P]`:** การ์ด ?/เล็ก = `<button>` (`aria-label` "Pick a card" / "Pick another card") · CTA เป็น `<button>` · บริเวณผล `aria-live="polite"` · Read more/Hide = `<button aria-expanded>` · FOLLOW เป็น `<a>`
+8. **ไฟล์ภาพ:** โหลดเฉพาะการ์ด ? ตอนแรก · ภาพ 17 ใบ preload ตอน idle หรือเมื่อ hover CTA (ใบละ ≈ 55–90 KB ที่ 1469×2392 → ให้ media-dev ทำ 2 ขนาด 240×380 / 460×726 @2x) `[P]`
+**ความสูง section ต่อสถานะ (ใช้ตรวจ):** 1 = **440** · 2 = **585** · 3 = **490 + H** (H = `expanded_block_h` ต่อการ์ด 597–919) → ไก่ H=666 = **1156** ✓ (ตรง Figma `3339:5493`) · ฮอร์นบิล 597 = **1087** ✓ · มังกร 919 = **1409** ✓
+
+### 9.4 Introduction ใหม่ 4 ตอน (D50 · BACKLOG #29) — Figma section `3339:6117` "Introduction (แก้ไขใหม่)" · 4 frame 1440 กว้าง: ตอน 1 `3339:6118` (1440×4356) · ตอน 2 `3339:6155` (×5317) · ตอน 3 `3339:6192` (×5183) · ตอน 4 `3339:6228` (×3813) · ภาพ 1x `1x-intro1…4-3339-6118/6155/6192/6228.png` · seed `content/seed/intro-2026-11.json` (ข้อความ/ภาพ/พิกัดครบ)
+**หลักการ D50:** หน้าเดียว · ส่วนที่คงเดิมทุกตอน (ตรวจตัวอักษรครบทุกตัวแล้ว: header ส้ม + หัวข้อ "Southeast Asians and the Environment") = ข้อ A–B · ส่วนที่เปลี่ยนตามตอน = **แผนที่ + ส่วนเนื้อหาด้านล่าง** (ข้อ C–D) · URL `#1`–`#4` · ทับ §4.2 ทั้งหมด (โครง "Introduction block + Knowing SEA + Map slider + popup" เดิม **เลิกใช้** — หน้าใหม่ไม่มี cover/ย่อหน้า Introduction/Knowing SEA/popup แผนที่)
+**A. Header (§9.1) `[0,0 1440×150]`** · ไม่มีเส้นล่าง · Navigator ไม่มี
+**B. ส่วนหัวสีส้ม `Heritage introduction` `[0,150 1440×1098]` fill `#DD7F6A` (คงเดิมทุกตอน)**
+| ชิ้น | node | พิกัด [x,y w×h] | ค่า |
+|---|---|---|---|
+| emblem (ลายมังกรวงกลม) | `3339:6123` | `[160,216 325.2×320.5]` | ภาพ `dc039836` (2617×2486) STRETCH crop x .109 y .108 w .756 h .784 · = Drive `1.1 People and Place/1.1People and Place-01.png` (ไฟล์เดียวกับ `Intro logo.png` ของตอน 2/3) |
+| หัวข้อใหญ่ | `3339:6124` | `[541,334 739×104]` | "Across Southeast Asia, creatures travel\nwhere borders cannot…" (ตัดบรรทัดตามต้นฉบับ 2 บรรทัด) Komet-Heavy **40/800/lh 51.85** สี `#F4F1E6` ชิดซ้าย |
+| ย่อหน้า 1–4 | `3339:6126/6127/6128/6129` | `[160,572.1 1120×78]` · `[160,690.1 ×130]` · `[160,860.1 ×156]` · `[160,1056.1 ×52]` (ห่างกัน 40) | Komet-Medium **20/600/lh 26** สี `#FFF9EF` **justified** · ข้อความตรง seed `header.paragraphs[]` |
+| เครดิต | `3339:6130` | `[160,1148.1 1120×29]` | "Presented by the UNESCO Regional Office in Bangkok with the generous support of Temasek Foundation." Komet-Regular **20/500/lh 28.28** `#FFF9EF` ชิดซ้าย |
+| ตัวชี้ (3 ชิ้น) | `6131/6132/6133` | markers `[40.1,503.5 28.3×82.5]` · scroll `[1388.2,331.5 25.9×82.5]` · continue-down `[700,1236.5 42.4×30.6]` | **ภาพครอปจาก screenshot ทั้งหน้า** (fill `0e54c12c` 4000×13102) ไม่ใช่ element จริง · ไม่มี interaction · ส่งออก PNG 2x: `design/assets/pages-1117/intro-icons/` (พื้นส้มฝังในภาพ) → **P-273** (ค่าเริ่มต้น `[P]`: แสดง "continue down" เป็นปุ่มเลื่อนลงไปที่แผนที่ · markers/scroll indicator ไม่แสดง จนกว่าเจ้าของยืนยัน) |
+**C. หัวข้อ + แผนที่ (โครงคงเดิม · เนื้อเปลี่ยนตามตอน)**
+| ชิ้น | พิกัด | ค่า |
+|---|---|---|
+| หัวข้อ `Environment heading` | `[0,1248 1440×229]` · ข้อความ `[160,1309 1120×107]` | "Southeast Asians and the Environment:\nRelationships Between People, Places, and Landscapes" Komet-Heavy **40/800/lh 53.03** สี `#403B2F` ซ้าย (2 บรรทัดตั้งใจ) · ตรงกันทั้ง 4 ตอน |
+| แผนที่ | `[0,1477 1440×808.4]` (ตอน 1) / `1440×809` (ตอน 2–4) เต็มความกว้างจอ | ตอน 1 = **GIF เคลื่อนไหว** (fill `6d949ac7` 8000×4500 = ภาพนิ่ง/poster) FILL · ตอน 2–4 ภาพนิ่ง FIT 8000×4500 (16:9 พอดี — ไม่มีขอบเว้น) · ไฟล์ตามตารางตอน |
+| ปุ่มเลขตอน 1–4 | `Map pages` `[1188,1507 212×44]` → **44×44 ×4 · gap 12** x = 1188 / 1244 / 1300 / 1356 · y = แผนที่ + 30 | วงกลม radius 23 · stroke **`#403B2F` 1.5** · พื้น active **`#D1CC5C`** / inactive **`#DEDCC3`** · ตัวเลข Komet-Regular **22/500/lh 44.8** `#403B2F` กึ่งกลาง · ปุ่ม active = ตอนปัจจุบัน (ตอน n → ปุ่ม n) · **คลิก = สลับตอน** · ⚠ ไม่ใช่ปุ่ม 34×34 coral ใน §2.4/§4.2 เดิม (แทนที่) |
+| ลูกศร ‹ › | `Previous map` `[35.4,1839.9 28.3×56.6]` · `Next map` `[1381.1,1839.9 28.3×56.6]` | ไอคอน chevron 17.4×30 ดำ (`svg/map-next-3339-6140.svg` · ซ้าย = กลับด้าน) · **ตอน 1 ซ่อน ‹ (`visible:false`) · ตอน 4 ซ่อน ›** → `visibility:hidden` (ไม่โฟกัส/ไม่คลิก) · คลิก = ตอนก่อน/ถัดไป |
+**D. ส่วนเนื้อหาของตอน (เริ่ม y ≈ 2285–2286 · พื้นขาว ยกเว้นที่ระบุ)** — พิกัดทุกชิ้น = ค่าจาก Figma ที่ frame 1440 (คัดจากสคริปต์ `design/tools/build-intro-pages1117.py` อ่าน `figma-file.json` ไม่พิมพ์มือ) · "crop" = สัดส่วนของภาพต้นฉบับที่ Figma แสดงจริง {x,y,w,h เป็นเศษ 0..1 · ค่าติดลบ/>1 = ภาพเล็กกว่ากล่อง มีขอบว่าง} · วิธีทำใน CSS: กล่อง `overflow:hidden; position:relative` + `<img>` `position:absolute; width:calc(100%/w); left:calc(-100%·x/w); top:calc(-100%·y/h)` (ภาพ/วิดีโอสัดส่วนเดิม) · ภาพ FILL = `object-fit: cover` กึ่งกลาง · FIT = `contain`
+
+**ตอน 1 `people-and-places` (#1) — Figma `3339:6118` (1440×4356)** · ชื่อหัวข้อ (ตัวอักษรตรง): **People and Places** · สีหัวข้อ `#D85A40` · แผนที่: `3339:6137` → ไฟล์ `1.1 People and Place/map1.1 people place.gif` (GIF เคลื่อนไหว) · ปุ่มที่ active = **1** · ลูกศร ‹ **ซ่อน** · › แสดง
+| ชิ้น | node | พิกัด [x,y w×h] (เทียบ frame) | รายละเอียด |
+|---|---|---|---|
+| แผนที่ | `3339:6137` | [0,1477.0 1440×808.4] | FILL · box 1440.0×808.4 · crop {'x': 0, 'y': 0.001, 'w': 1, 'h': 0.998} |
+| **section `People and Places`** | `3339:6141` | [0,2285 1440×1368] | พื้น `#FFFFFF` |
+| ข้อความ หัวข้อ | `3339:6143` | [160.0,2386.1 548.0×57.0] | Komet 38.0/800 lh56.56 left `#D85A40` · "People and Places…" |
+| ภาพ | `3339:6145` | [747.0,2386.5 532.6×351.2] | FILL · `1.1 People and Place/1.1People and Place-02.png` · crop {'x': 0, 'y': 0.0548, 'w': 1, 'h': 0.8904} · fill `f08c8c90` |
+| ตัวชี้เลื่อน (decor) | `3339:6148` | [1418.5,2382.0 25.9×84.8] | ภาพครอปจาก screenshot · `intro-icons/section-scroll-indicator-3339-6148.png` · P-273 |
+| ข้อความ เนื้อหา | `3339:6144` | [160.0,2475.1 548.0×198.0] | Komet 20.0/500 lh33.0 justified `#343A40` · "Southeast Asia’s history is defined by…" |
+| ภาพ (GIF) | `3339:6146` | [160.0,2839.5 1120.0×448.0] | STRETCH · `1.1 People and Place/Hae Nang Maew.gif` · crop {'x': 0.0, 'y': 0.1442, 'w': 1.0, 'h': 0.7111} · fill `64338c81` |
+| ข้อความ เนื้อหา | `3339:6147` | [160.0,3357.5 1120.0×132.0] | Komet 20.0/500 lh33.0 justified `#343A40` · "Rather than trying to dominate nature,…" |
+| **section `Living heritage`** | `3339:6149` | [0,3653 1440×703] | พื้น `#7EB7A6` |
+| ภาพ (GIF) | `3339:6150` | [160.0,3557.5 1120.0×156.0] | STRETCH · `1.1 People and Place/Boat.gif` · crop {'x': 0.0, 'y': 0.3849, 'w': 1.0, 'h': 0.2302} · fill `74a3cb7f` |
+| ภาพ | `3339:6151` | [132.0,3816.0 434.0×369.0] | STRETCH · `1.1 People and Place/1.1People and Place-03.png` · crop {'x': 0.0718, 'y': 0.1218, 'w': 0.9002, 'h': 0.8057} · fill `39c9ec27` |
+| ข้อความ เนื้อหา | `3339:6153` | [599.0,3816.0 681.0×196.0] | Komet 20.0/500 lh32.52 justified `#343A40` · "Museum collections preserve the materi…" |
+| ข้อความ เนื้อหา | `3339:6154` | [599.0,4087.0 681.0×131.0] | Komet 20.0/500 lh32.52 justified `#343A40` · "From the forests of mainland Southeast…" |
+
+**ตอน 2 `early-centres-of-power` (#2) — Figma `3339:6155` (1440×5317)** · ชื่อหัวข้อ (ตัวอักษรตรง): **Early Centres of Power** · สีหัวข้อ `#43695D` · แผนที่: `3339:6174` → ไฟล์ `1.2 Early Centres of Power/1.2 power.png` (ภาพนิ่ง) · ปุ่มที่ active = **2** · ลูกศร ‹ แสดง · › แสดง
+| ชิ้น | node | พิกัด [x,y w×h] (เทียบ frame) | รายละเอียด |
+|---|---|---|---|
+| แผนที่ | `3339:6174` | [0,1477.0 1440×809.0] | FIT · box 1440.0×809.0 · crop None |
+| **section `Early centres of power`** | `3339:6178` | [0,2286 1440×1083] | พื้น `#FFFFFF` |
+| ภาพ | `3339:6179` | [160.0,2386.0 1120.0×302.0] | STRETCH · `1.2 Early Centres of Power/1.1People and Place-05.png` · crop {'x': 0.0153, 'y': 0.199, 'w': 0.9691, 'h': 0.6746} · fill `1cb4caf4` |
+| ข้อความ หัวข้อ | `3339:6181` | [160.0,2771.1 1120.0×54.0] | Komet 38.0/800 lh54.0 center `#43695D` · "Early Centres of Power…" |
+| ข้อความ เนื้อหา | `3339:6182` | [160.0,2875.1 1120.0×96.0] | Komet 20.0/400 lh32.0 justified `#343A40` · "Over time, small river and coastal set…" |
+| ข้อความ เนื้อหา | `3339:6183` | [160.0,3021.1 1120.0×248.0] | Komet 20.0/400 lh31.0 justified `#343A40` · "Natural transit routes made this growt…" |
+| **section `Temple connections`** | `3339:6184` | [0,3369 1440×824] | พื้น `#FFFFFF` |
+| ภาพ | `3339:6186` | [160.0,3469.0 1120.0×344.0] | STRETCH · `1.2 Early Centres of Power/1.1People and Place-06.png` · crop {'x': -0.0794, 'y': 0.183, 'w': 1.1564, 'h': 0.7685} · fill `a62481c8` |
+| ข้อความ เนื้อหา | `3339:6187` | [160.0,3933.0 1120.0×160.0] | Komet 20.0/400 lh32.0 justified `#343A40` · "The monumental architecture of Southea…" |
+| **section `Sacred landscapes`** | `3339:6188` | [0,4193 1440×1124] | พื้น `#FFFFFF` |
+| ภาพ | `3339:6190` | [160.0,4293.0 1120.0×580.0] | STRETCH · `1.2 Early Centres of Power/1.1People and Place-07.png` · crop {'x': -0.6263, 'y': 0.025, 'w': 2.2525, 'h': 0.9609} · fill `648a787a` |
+| ข้อความ เนื้อหา | `3339:6191` | [160.0,4993.0 1120.0×224.0] | Komet 20.0/500 lh32.0 justified `#343A40` · "The regional networks connecting South…" |
+
+**ตอน 3 `rice-and-spice` (#3) — Figma `3339:6192` (1440×5183)** · ชื่อหัวข้อ (ตัวอักษรตรง): **Rice and Spice: Platforms of Interconnection** · สีหัวข้อ `#887A61` · แผนที่: `3339:6211` → ไฟล์ `1.3 Rice and Spice_ Platforms of Interconnection/Map 1.3 Environment.jpg` (ภาพนิ่ง) · ปุ่มที่ active = **3** · ลูกศร ‹ แสดง · › แสดง
+| ชิ้น | node | พิกัด [x,y w×h] (เทียบ frame) | รายละเอียด |
+|---|---|---|---|
+| แผนที่ | `3339:6211` | [0,1477.0 1440×809.0] | FIT · box 1440.0×809.0 · crop None |
+| **section `Rice and spice`** | `3339:6215` | [0,2286 1440×1237] | พื้น `#FFFFFF` |
+| ข้อความ หัวข้อ | `3339:6216` | [160.0,2386.0 1120.0×55.0] | Komet 38.0/800 lh55.0 center `#887A61` · "Rice and Spice: Platforms of Interconn…" |
+| ภาพ (GIF) | `3339:6217` | [160.0,2541.0 1120.0×489.0] | STRETCH · `1.3 Rice and Spice_ Platforms of Interconnection/1.3 Rice and Spice-farmer.gif` · crop {'x': -0.043, 'y': 0.0762, 'w': 1.085, 'h': 0.8422} · fill `832a2e1a` |
+| ข้อความ เนื้อหา | `3339:6219` | [160.0,3097.0 1120.0×64.0] | Komet 20.0/500 lh32.0 justified `#343A40` · "Rice is a sacred source of food for pe…" |
+| ข้อความ เนื้อหา | `3339:6220` | [160.0,3231.0 1120.0×192.0] | Komet 20.0/500 lh32.0 justified `#343A40` · "Rice cultivation depended on fertile l…" |
+| **section `Pawangs and rice rituals`** | `3339:6221` | [0,3523 1440×1060] | พื้น `#FFFFFF` |
+| ภาพ | `3339:6222` | [731.0,3563.0 548.0×501.0] | STRETCH · `1.3 Rice and Spice_ Platforms of Interconnection/PAWANG.png` · crop {'x': -0.1979, 'y': 0.0763, 'w': 1.1669, 'h': 0.8985} · fill `dad6bba0` |
+| ข้อความ เนื้อหา | `3339:6223` | [160.0,3767.0 549.0×256.0] | Komet 20.0/400 lh32.0 justified `#343A40` · "Pawangs spent their lives clearing for…" |
+| ข้อความ เนื้อหา | `3339:6224` | [160.0,4157.0 1119.0×96.0] | Komet 20.0/500 lh32.0 justified `#343A40` · "In Brunei Darussalam, the durung, a tr…" |
+| ข้อความ เนื้อหา | `3339:6225` | [160.0,4313.0 1119.0×160.0] | Komet 20.0/500 lh32.0 justified `#343A40` · "Across Southeast Asia, animals serve a…" |
+| **section `Harvest illustration`** | `3339:6226` | [0,4583 1440×600] | พื้น `#FFFFFF` |
+| ภาพ | `3339:6227` | [0.0,4627.0 1440.0×556.0] | FIT · `1.3 Rice and Spice_ Platforms of Interconnection/Chicken1.3.png` · crop None · fill `b5179331` |
+
+**ตอน 4 `animals-folklore-and-ecological-stewardship` (#4) — Figma `3339:6228` (1440×3813)** · ชื่อหัวข้อ (ตัวอักษรตรง): **Animals, Folklore, and Ecological Stewardship** · สีหัวข้อ `#3F4036` · แผนที่: `3339:6247` → ไฟล์ `1.4 Animals, Folklore, and Ecological Stewardship/map1.4.jpg` (ภาพนิ่ง) · ปุ่มที่ active = **4** · ลูกศร ‹ แสดง · › **ซ่อน**
+| ชิ้น | node | พิกัด [x,y w×h] (เทียบ frame) | รายละเอียด |
+|---|---|---|---|
+| แผนที่ | `3339:6247` | [0,1477.0 1440×809.0] | FIT · box 1440.0×809.0 · crop None |
+| **section `Animals, folklore and ecological stewardship`** | `3339:6251` | [0,2286 1440×1527] | พื้น `#FFFFFF` |
+| ข้อความ หัวข้อ | `3339:6252` | [160.0,2386.0 1120.0×55.0] | Komet 38.0/800 lh55.0 left `#3F4036` · "Animals, Folklore, and Ecological Stew…" |
+| ข้อความ เนื้อหา | `3339:6253` | [160.0,2487.0 1120.0×160.0] | Komet 20.0/500 lh32.0 justified `#343A40` · "Across Southeast Asia, human culture a…" |
+| ข้อความ เนื้อหา | `3339:6254` | [160.0,2737.0 1120.0×192.0] | Komet 20.0/500 lh32.0 justified `#343A40` · "In oral literature and cosmological tr…" |
+| ข้อความ เนื้อหา | `3339:6255` | [160.0,3019.0 1120.0×224.0] | Komet 20.0/500 lh32.0 justified `#343A40` · "Beyond actual species, mythical beings…" |
+| ภาพ | `3339:6256` | [160.0,3333.0 1120.0×380.0] | STRETCH · `1.4 Animals, Folklore, and Ecological Stewardship/1.1Animals.png` · crop {'x': 0.0664, 'y': 0.0837, 'w': 0.8673, 'h': 0.8411} · fill `33c0fb7a` |
+
+**E. พฤติกรรมสลับตอน (D50 · Figma ไม่มี prototype ของ Intro ใหม่ — มีแค่ "Main Page → Home" ในเมนู · ที่เหลือ `[C]` D50 หรือ `[P]`)**
+1. หน้าเดียว `/introduction/` · ตอนปัจจุบัน = ปุ่มที่ active · **โหลดหน้าด้วย `#1`–`#4` → แสดงตอนนั้นตรง ๆ** · ไม่มี hash / hash ไม่ถูกต้อง → ตอน 1 `[C]`
+2. **คลิกปุ่ม 1–4 หรือ ‹ ›** → เปลี่ยน **แผนที่ + เนื้อหาด้านล่าง (ข้อ D)** ในที่ · header สีส้ม/หัวข้อ/ปุ่ม/ลูกศรไม่โหลดใหม่ · อัปเดต hash ด้วย `history.replaceState` (ไม่เพิ่มรายการ history `[P]`) · ฟัง `hashchange` (ย้อน/แชร์ลิงก์) `[C]`
+3. animation `[P]`: cross-fade 0.4s ease-in-out (เท่า dissolve ของ page nav §2.4) ทั้งแผนที่และเนื้อหา · ความสูงหน้าเปลี่ยนตามตอน (4356 / 5317 / 5183 / 3813) · **ไม่เลื่อนหน้ากระโดด** — ถ้าผู้ใช้อยู่ล่างกว่าแผนที่ เลื่อนกลับให้ขอบบนแผนที่อยู่ใน viewport (`scrollIntoView({block:'start'})` + `scroll-margin-top` = ความสูง header)
+4. GIF/วิดีโอ (ตอน 1: แผนที่ · Hae Nang Maew · Boat · ตอน 3: farmer) = `<video autoplay muted loop playsinline>` จาก media-1117 + `poster` = ภาพนิ่ง Figma (`figma_fill_file`) · `prefers-reduced-motion` = แสดง poster เฉย ๆ · โหลดเฉพาะตอนที่แสดง (lazy) `[P]`
+5. ลูกศร/ปุ่มกด a11y: `role="tablist"` ปุ่ม 1–4 `role="tab" aria-selected` · เนื้อหา `role="tabpanel"` · ‹ › = `<button aria-label="Previous chapter|Next chapter">`
+6. **Responsive `[P]`:** ≥1280 ตามพิกัด ×(W/1440) สำหรับแผนที่เต็มกว้าง · 768–1279 คอลัมน์คู่ (ตอน 1 "People and Places"/ตอน 3 "Pawangs") เรียงซ้อน · ภาพ crop คงสัดส่วน กว้าง 100% · ข้อความ 20px lh 32 คงเดิม (justified → left ที่ <768) · <768 ฟอนต์หัวข้อ 38→28 · ปุ่มเลข 44→36 · แผนที่สูง auto (16:9)
+**ข้อมูลที่ขาด/ไม่ตรง → P:** ตัวชี้เลื่อน (P-273) · "ภาพ GIF ไม่มีใน Figma นอกจากเฟรมแรก" (ไม่ใช่ปัญหา — Drive มีครบ 18 ไฟล์ จับคู่ได้ทั้งหมด: PNG/JPG ตรง sha256 กับ fill 14 ไฟล์ · GIF 4 ไฟล์ = เวอร์ชันเคลื่อนไหวของ fill ภาพนิ่ง 4 ใบ · `Intro logo.png` ×2 + `…-01.png` เป็นไฟล์เดียวกัน = emblem) · ไม่มีภาพ Intro ที่ Drive ไม่มี
+
 ### 9.5 Zone 4 (หน้า timeline) — feedback ลูกค้า D51 (BACKLOG #31 #32) · เขียนก่อนให้ `tl-1117` อ่าน
 **ขอบเขต:** แก้เฉพาะ (ก) ข้อความ metadata ใต้เส้น (ข) แถบช่อง trail 17 ช่องซ้ายบน · ที่เหลือใน §4.5c/§6.4c **ไม่เปลี่ยน** (stage 1440×723 · เส้นเวลา · mini-map 639→1413 สูง 65 · ลูกศร · Back · ภาพใต้เส้น) · Figma `3101:609` **ไม่มีค่าใหม่สำหรับสองข้อนี้** (ตรวจ: `Frame trails` `3101:738` ยังเป็นไอคอน 35×35 pitch 40 active 45 `[N]` — ดีไซน์ Figma ไม่ได้ทำตาม D51) → ค่าด้านล่างมาจาก D51 + ค่าเดิมของสเปก `[C]`/`[P]` · **ไม่มีภาพเจ้าของ 10:49–10:52 อยู่ในไฟล์** (อยู่ในแชท) → ค่าที่ไม่ใช่ข้อความ D51 ตรง ๆ ทำเป็น CSS variable ให้ปรับทีเดียวได้ · P-270
 
@@ -1058,3 +1238,15 @@ scroll-snap, parallax, transition ระหว่างหน้านอกจ�
 | ไม่เปลี่ยน | ไม่มีช่อง "active ใหญ่" (D26 ตาม Slides) · ลำดับ z (§4.5c.1 ท้ายตาราง) · mini-map/กรอบ `#EDEBDA` | เดิม |
 | Responsive | ≥1280: ตามนี้ ×k · 768–1279: แถบกว้างเต็ม (mini-map ลงใต้แถบ ตาม §4.5c.6) ช่องกว้าง = (W − 2·19.2 − 16·2)/17 สูง 56 · <768: เลื่อนแนวนอนได้ 1 แถว ช่อง 40×56 (ตาม §4.5c.6 เดิม) · hover เฉพาะ `@media (hover:hover)` | `[P]` |
 
+### 9.6 ฟิลด์ที่หน้าใช้ (รอบ 2026-11-17) — ⛔ ผมไม่แก้ CONTENT-MODEL · เสนอให้ core-1117 ยก
+| ฟิลด์ (ชื่อเสนอ) | ชนิด | ที่ | node | seed ตัวอย่าง |
+|---|---|---|---|---|
+| `sh_about_url` + เมนู About the Project (เป็นรายการเมนู ลิงก์ภายนอก · new tab) | url / menu item | options/เมนู (ทุกหน้า) | `3220:3745` | `site.json` `nav_primary_links["About the Project"].url` |
+| `sh_logo_header` | image (PNG · crop ตามค่า) | options (ทุกหน้า) | `I3339:5285;3307:1972` | `brand.header_logo` (ไฟล์ `877fd074…png`) |
+| `sh_logo_unesco_footer` | image/SVG | options (footer ทุกหน้า) | `3339:5249` | `brand.footer.unesco` |
+| `sh_logo_temasek` + `sh_footer_support_text` ("With the Support of") | image + text | options (footer) | `3339:5256` · `3339:5255` | `brand.footer.temasek` |
+| `sh_label_hide` ("Hide >>") | text | options (labels) | `I3339:5283;886:1820` | `labels.hide` |
+| **การ์ดสัตว์ (ฟิลด์บน trail term · 17 ตัว)** `sh_guide_name` · `sh_guide_words` (3 คำ คั่น " · ") · `sh_guide_body` (ข้อความยาว · `\n\n` ย่อหน้า · `\n` ขึ้นบรรทัด · ตัวเอียงได้) · `sh_guide_follow` (ข้อความลิงก์เต็ม) · `sh_guide_card` (image) | text/textarea/image | trail term (D48 · admin แก้ได้ D1/D10) | `3339:5488` frames | `guides.json` `cards[]` (key = `trail_slug`) |
+| **ข้อความหัว section การ์ด** `sh_guide_title` · `_opening` · `_heritage` · `_question` · `_instructions` · `_cta` · `sh_guide_card_back` (image ?) | text/image | options หน้าแรก | `3339:5267…5275` | `guides.json` `section` |
+| **Intro 4 ตอน** — ส่วนหัว: `sh_intro_title` · `_p1.._p4` · `_credit` · `_emblem` · `sh_intro_env_heading` · ตอนละชุด (n=1..4): `sh_intro_n_title` · `_accent` (สี) · `_map` (image/วิดีโอ + poster) · `_sections` (repeater: ชนิด text/image/video · พื้นสี · ภาพ+crop · ข้อความ) | text/image/video/repeater | options หน้า Introduction (D50 · admin แก้ได้) | `3339:6117` | `intro-2026-11.json` |
+| ตัวแปร layout ที่ไม่ใช่เนื้อหา (ไม่เป็นฟิลด์ admin) | CSS/config | ธีม | — | `--tl-strip-h`/`--tl-strip-cell-w` (§9.5) · `--footer-pad-left` (§9.1) · crop {x,y,w,h} ต่อภาพ Intro |
