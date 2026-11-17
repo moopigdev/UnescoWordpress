@@ -136,18 +136,18 @@
 }
 
 /* (210 − 184) / 2 / 184 = 7.0652% */
-.sh-trail-tile:not(.sh-trail-tile--static):hover,
-.sh-trail-tile:not(.sh-trail-tile--static):focus-visible {
+.sh-trail-tile:hover,
+.sh-trail-tile:focus-visible {
 	z-index: 2;
 }
 
-.sh-trail-tile:not(.sh-trail-tile--static):hover .sh-trail-tile__box,
-.sh-trail-tile:not(.sh-trail-tile--static):focus-visible .sh-trail-tile__box {
+.sh-trail-tile:hover .sh-trail-tile__box,
+.sh-trail-tile:focus-visible .sh-trail-tile__box {
 	inset: -7.0652%;
 }
 
-.sh-trail-tile:not(.sh-trail-tile--static):hover .sh-trail-tile__img--hover,
-.sh-trail-tile:not(.sh-trail-tile--static):focus-visible .sh-trail-tile__img--hover {
+.sh-trail-tile:hover .sh-trail-tile__img--hover,
+.sh-trail-tile:focus-visible .sh-trail-tile__img--hover {
 	opacity: 1;
 }
 
@@ -156,7 +156,7 @@
 	outline-offset: 4px;
 }
 
-/* Tile without a detail page (Makara 2 · Chicken & Rooster #11 · §8.2): plain image — no link, no hover, no zoom */
+/* Tile without a detail page (Makara 2 · Chicken & Rooster #11 · §8.2): not a link — same hover zoom as the others, normal cursor, not focusable */
 .sh-trail-tile--static {
 	cursor: default;
 }

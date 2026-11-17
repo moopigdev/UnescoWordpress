@@ -3,7 +3,7 @@
  * Trail object grid — Frame 114472 [160,829.2 1120×652]: 5 columns of 184×184 tiles, gap 50 (§4.4).
  * Tile = trail background colour (sh_tile_bg) + object tile image; hover = 210×210 image (§3.6).
  * Tiles come from sh_trail_tiles(): each object links to its detail page; a tile without a page (url '' — Makara 2 ·
- * Chicken & Rooster #11, DESIGN-SPEC §8.2) is a plain image: no link, no hover.
+ * Chicken & Rooster #11, DESIGN-SPEC §8.2) is a plain image: no link (same hover zoom, normal cursor).
  *
  * @package sharedheritage
  */
@@ -56,7 +56,7 @@ $sh_style   = $sh_bg ? '--sh-trail-tile-bg:' . $sh_bg . ';' : '';
 							<?php elseif ( '' !== $sh_name ) : ?>
 								<span class="sh-trail-tile__name" aria-hidden="true"><?php echo esc_html( $sh_name ); ?></span>
 							<?php endif; ?>
-							<?php if ( $sh_link && $sh_hover_id ) : ?>
+							<?php if ( $sh_hover_id ) : ?>
 								<?php
 								echo wp_get_attachment_image( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core escapes.
 									$sh_hover_id,
