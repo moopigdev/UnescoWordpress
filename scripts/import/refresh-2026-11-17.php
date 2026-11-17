@@ -35,6 +35,8 @@ function sh_import_refresh_steps_2026_11_17(): array {
 		'2026-11-17-site'    => 'header logo · footer logos / text (only never set) · Primary menu "About the Project" (only when missing)',
 		// core-1117b (P-340): sh_trail_layout gains "grid" (tile grid box) — sites imported by core-1117 have it without.
 		'2026-11-17-trail-grid' => 'trail sh_trail_layout + grid box (only while empty or still the layout the core-1117 import wrote)',
+		// makara-1117 (BACKLOG #33): Makara tiles 1 / 3 get a page — sites imported before show them as "tiles without a page".
+		'2026-11-17-makara'     => 'Makara: objects saltwater-crocodile-skull + sungai-mas-makara created when missing · their old tile-without-a-page removed (only the one the import wrote) · trail order (only while the old list)',
 	);
 }
 
@@ -177,6 +179,85 @@ function sh_import_refresh_trail_grid_1117( array $seed ): void {
 	}
 }
 
+/** Makara tiles 1 / 3 (makara-1117): slug => [position, label the core-1117 import wrote on the tile without a page]. */
+const SH_IMPORT_MAKARA_1117 = array(
+	'saltwater-crocodile-skull' => array( 1, 'Skull of Saltwater Crocodile' ),
+	'sungai-mas-makara'         => array( 3, 'Sungai Mas Makara' ),
+);
+
+/**
+ * Step 2026-11-17-makara (BACKLOG #33): the two new Makara objects (created when missing, an object made in admin
+ * with the slug is adopted and only filled where empty) · on the Makara trail the "tile without a page" the earlier
+ * import made at their position is removed (only when position + label are still what the import wrote — an admin's
+ * tile stays) · sh_object_order gets the two only while it is still the old list of the other three (else the new ones
+ * come after the admin order, A–Z).
+ *
+ * @param array<string, mixed> $seed     Seed files.
+ * @param array<string, mixed> $map      image-map.json.
+ * @param array<string, mixed> $manifest Manifest.
+ */
+function sh_import_refresh_makara_1117( array $seed, array $map, array $manifest ): void {
+	$slugs = array_keys( SH_IMPORT_MAKARA_1117 );
+	sh_import_objects_1117( $seed, $map, $manifest, true, $slugs );
+	$term = get_term_by( 'slug', 'makara', 'trail' );
+	if ( ! $term instanceof WP_Term ) {
+		return; // No Makara trail on this site: the refresh creates no term.
+	}
+	$new = array();
+	$old = array();
+	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		$id = sh_imp_find_post( 'object', 'object:' . $o['slug'] );
+		if ( ! $id || 'publish' !== get_post_status( $id ) || ! isset( $o['trail_order']['makara'] ) ) {
+			continue;
+		}
+		$new[ $id ] = (int) $o['trail_order']['makara'];
+		if ( ! in_array( (string) $o['slug'], $slugs, true ) ) {
+			$old[ $id ] = (int) $o['trail_order']['makara'];
+		}
+	}
+	asort( $new );
+	asort( $old );
+
+	// Tiles without a page of the two positions (sh_static_tile_1..3).
+	for ( $n = 1; $n <= 3; $n++ ) {
+		$pos   = (int) get_term_meta( $term->term_id, "sh_static_tile_{$n}_position", true );
+		$label = (string) get_term_meta( $term->term_id, "sh_static_tile_{$n}_label", true );
+		foreach ( SH_IMPORT_MAKARA_1117 as $slug => $was ) {
+			$obj = sh_imp_find_post( 'object', 'object:' . $slug );
+			if ( $pos !== $was[0] || ! $obj || 'publish' !== get_post_status( $obj ) ) {
+				continue;
+			}
+			if ( sh_imp_same_text( $label, $was[1], null ) ) {
+				sh_imp_meta(
+					'term',
+					$term->term_id,
+					array(
+						"sh_static_tile_{$n}_position"    => '',
+						"sh_static_tile_{$n}_image"       => '',
+						"sh_static_tile_{$n}_image_hover" => '',
+						"sh_static_tile_{$n}_label"       => '',
+					)
+				);
+				sh_imp_count( 'updated', 'trail_static_tile_removed' );
+			} else {
+				sh_imp_keep( "trail:makara tile without a page $n (admin edited · position $pos \"$label\")" );
+			}
+		}
+	}
+
+	$cur = get_term_meta( $term->term_id, 'sh_object_order', true );
+	$cur = is_array( $cur ) ? array_values( array_map( 'intval', $cur ) ) : array();
+	if ( array_keys( $new ) === $cur ) {
+		return;
+	}
+	if ( ! $cur || array_keys( $old ) === $cur ) {
+		sh_imp_meta( 'term', $term->term_id, array( 'sh_object_order' => array_keys( $new ) ) );
+		sh_imp_count( 'updated', 'trail_object_order' );
+	} else {
+		sh_imp_keep( 'trail:makara sh_object_order (admin order kept · new objects come after it, A–Z)' );
+	}
+}
+
 /**
  * Run one step of this file. Returns true when done (false = a file was missing: run again on the next import).
  *
@@ -203,6 +284,9 @@ function sh_import_refresh_2026_11_17( string $step, array $seed, array $map, ar
 			break;
 		case '2026-11-17-trail-grid':
 			sh_import_refresh_trail_grid_1117( $seed );
+			break;
+		case '2026-11-17-makara':
+			sh_import_refresh_makara_1117( $seed, $map, $manifest );
 			break;
 	}
 	return count( sh_imp_state()['warnings'] ) === $before;
