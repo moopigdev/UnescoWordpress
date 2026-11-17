@@ -65,7 +65,13 @@ if ( ! $sh_items ) {
 		);
 	}
 }
-$sh_two_cols = $sh_media_col && $sh_items;
+/*
+ * Empty image slot (makara-1117 · DESIGN-SPEC §8.6): the layout keeps the image column of a frame whose side image the
+ * designer adds later (style.image_slot_empty). Without panel images the column stays — nothing is drawn in it and the
+ * text does not take its place; an image the admin adds (sh_extra_image_*) lands in the column box (images.php).
+ */
+$sh_slot     = ! $sh_placed && $sh_media_col && isset( $sh_layout['image_slot_empty'] ) && is_array( $sh_layout['image_slot_empty'] );
+$sh_two_cols = $sh_media_col && ( $sh_items || $sh_slot );
 
 // Geometry → CSS custom properties (numbers = px at the 1440 frame).
 $sh_vars = array(
@@ -148,12 +154,13 @@ if ( is_array( $sh_trails ) && $sh_trails ) {
 					'layout'  => $sh_layout,
 				)
 			);
-			if ( $sh_items ) {
+			if ( $sh_items || $sh_slot ) {
 				get_template_part(
 					'template-parts/detail/images',
 					null,
 					array(
 						'items'     => $sh_items,
+						'slot'      => $sh_slot,
 						'placed'    => $sh_placed,
 						'media_col' => $sh_media_col,
 						'img_top'   => $sh_geo['img_top'] ?? null,
