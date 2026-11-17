@@ -69,12 +69,38 @@ function sh_imp_attachment( string $src, string $key, string $title, array $vide
 	$name = wp_unique_filename( $up['path'], $name );
 	$dest = $up['path'] . '/' . $name;
 	if ( null !== $spec && str_starts_with( (string) $check['type'], 'image/' ) ) {
-		$res = sh_web_image_write( $src, $dest, $spec['box'], isset( $spec['crop'] ) ? $spec['crop'] : null );
+		$res = sh_web_image_write( $src, $dest, $spec['box'], isset( $spec['crop'] ) ? $spec['crop'] : null, isset( $spec['matte'] ) ? (string) $spec['matte'] : '' );
 		if ( '' === $res ) {
 			throw new RuntimeException( 'copy failed: ' . $src );
 		}
-		if ( str_starts_with( $res, 'resized' ) ) {
+		if ( 'nogd' === $res ) { // Never silent (core-1117b): the file went in at full size / uncropped.
+			sh_imp_warn( 'PHP GD missing: image copied without crop/shrink/JPEG: ' . $src . ' (' . $title . ')' );
+		} elseif ( ! str_starts_with( $res, 'copied' ) ) {
 			sh_imp_count( 'updated', 'resized_2x' );
+		}
+		// The written type may differ from the source name (PNG → JPEG rule · a bundle file shrunk to JPEG bytes):
+		// name and mime follow the bytes.
+		$real = @getimagesize( $dest ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		$real = is_array( $real ) && ! empty( $real['mime'] ) ? (string) $real['mime'] : '';
+		$exts = array(
+			'image/jpeg' => 'jpg',
+			'image/png'  => 'png',
+			'image/webp' => 'webp',
+		);
+		if ( '' !== $real && $real !== $check['type'] && isset( $exts[ $real ] ) ) {
+			$name2 = wp_unique_filename( $up['path'], sanitize_file_name( sanitize_title( $title ) . '.' . $exts[ $real ] ) );
+			if ( ! rename( $dest, $up['path'] . '/' . $name2 ) ) {
+				throw new RuntimeException( 'rename failed: ' . $dest );
+			}
+			$name  = $name2;
+			$dest  = $up['path'] . '/' . $name;
+			$check = array(
+				'ext'  => $exts[ $real ],
+				'type' => $real,
+			);
+			if ( 'image/jpeg' === $real ) {
+				sh_imp_count( 'updated', 'png_to_jpeg' );
+			}
 		}
 	} elseif ( ! copy( $src, $dest ) ) {
 		throw new RuntimeException( 'copy failed: ' . $src );
@@ -240,8 +266,9 @@ function sh_imp_asset_ref( array $map, string $value, string $title ): int {
 	$dir  = sh_imp_config()['assets'];
 	$file = sh_import_ref_file( $map, $value, $dir ); // refs.php — the same rule deploy.sh bundles by.
 	if ( '' !== $file ) {
-		$ext = (string) pathinfo( $file, PATHINFO_EXTENSION );
-		return sh_imp_attachment( $dir . '/' . $file, 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) ), $title );
+		$ext  = (string) pathinfo( $file, PATHINFO_EXTENSION );
+		$spec = str_starts_with( $file, SH_IMPORT_OBJECTS_1117 . '/' ) ? sh_import_spec_as_is() : null; // 2026-11-17 crops: size kept · PNG → JPEG rule.
+		return sh_imp_attachment( $dir . '/' . $file, 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) ), $title, array(), $spec );
 	}
 	sh_imp_warn( 'style *_ref without file (kept as text): ' . $value . ' (' . $title . ')' );
 	return 0;

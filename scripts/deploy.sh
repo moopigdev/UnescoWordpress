@@ -154,10 +154,12 @@ if [ "$IMPORT" != 0 ]; then
           */*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
         esac
         [ -f "$ASSETS/$f" ] || sh_die "ไม่พบ $ASSETS/$f"
+        # box = WxH (0x0 = ไม่จำกัดขนาด · กฎ PNG > 1 MB → JPEG เท่านั้น) [@RRGGBB = สีพื้นที่ภาพวางเสมอ → PNG ใหญ่แปลงเป็น JPEG บนพื้นนั้น]
         case "$box" in ''|[0-9]*x[0-9]*) ;; *) sh_die "bundle-files: ขนาดไม่ถูกต้อง ($f $box)" ;; esac
-        case "$box" in *[!0-9x]*) sh_die "bundle-files: ขนาดไม่ถูกต้อง ($f $box)" ;; esac
+        case "${box%@*}" in *[!0-9x]*) sh_die "bundle-files: ขนาดไม่ถูกต้อง ($f $box)" ;; esac
+        case "$box" in *@*) case "${box#*@}" in [0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]) ;; *) sh_die "bundle-files: สีพื้นไม่ถูกต้อง ($f $box)" ;; esac ;; esac
         if [ "$kind" = map ]; then NA=$((NA + 1)); else NR=$((NR + 1)); REFS="$REFS $f"; fi
-        [ -z "$box" ] || NS=$((NS + 1))
+        [ -z "$box" ] || [ "${box%@*}" = 0x0 ] || NS=$((NS + 1))   # 0x0 = ขนาดเดิม (กฎ PNG → JPEG เท่านั้น)
         FILES="$FILES$f	$box
 " ;;
       media)
@@ -181,14 +183,16 @@ if [ "$IMPORT" != 0 ]; then
   mkdir -p "$LB/scripts" "$LB/assets" "$LB/media"
   cp -R "$REPO/scripts/import" "$LB/scripts/import"
   cp -R "$REPO/content" "$LB/content"
-  ORIG=0
+  ORIG=0; NJ=0; JPEGS=""
   while IFS="$(printf '\t')" read -r f box; do
     [ -n "$f" ] || continue
     mkdir -p "$(dirname "$LB/assets/$f")"
     ORIG=$((ORIG + $(wc -c < "$ASSETS/$f")))
-    if [ -n "$box" ]; then   # ภาพต้นฉบับใหญ่ → ย่อไม่เกินกล่อง (GD · ไม่ขยาย · ไม่ครอป — ครอปตอน import)
-      "$PHP" "$REPO/scripts/import/web-image.php" "$ASSETS/$f" "$LB/assets/$f" "${box%x*}" "${box#*x}" >/dev/null \
-        || sh_die "ย่อภาพไม่สำเร็จ: $f"
+    if [ -n "$box" ]; then   # ภาพต้นฉบับใหญ่ → ย่อไม่เกินกล่อง · PNG > 1 MB → JPEG (GD · ไม่ขยาย · ไม่ครอป — ครอปตอน import)
+      size="${box%@*}"; matte=(); case "$box" in *@*) matte=("#${box#*@}") ;; esac
+      res="$("$PHP" "$REPO/scripts/import/web-image.php" "$ASSETS/$f" "$LB/assets/$f" "${size%x*}" "${size#*x}" "${matte[@]+"${matte[@]}"}")" \
+        || sh_die "ย่อภาพไม่สำเร็จ (หรือ PHP ในเครื่องไม่มี GD): $f"
+      case "$res" in jpeg*) NJ=$((NJ + 1)); JPEGS="$JPEGS $f" ;; esac   # ชื่อไฟล์คงเดิม (import อ่านชนิดจากเนื้อไฟล์ → .jpg)
     else
       cp "$ASSETS/$f" "$LB/assets/$f"
     fi
@@ -198,6 +202,8 @@ if [ "$IMPORT" != 0 ]; then
     mkdir -p "$(dirname "$LB/media/$f")" && cp "$MEDIA/$f" "$LB/media/$f"
   done <<< "$MFILES"
   kb() { du -sk "$1" | cut -f1; }
+  sh_say "PNG > 1 MB → JPEG: $NJ ไฟล์"
+  for f in $JPEGS; do sh_say "  jpeg: $f ($(( $(wc -c < "$ASSETS/$f") / 1024 )) KB → $(( $(wc -c < "$LB/assets/$f") / 1024 )) KB)"; done
   sh_say "ขนาด bundle: assets $(( $(kb "$LB/assets") / 1024 )) MB (ต้นฉบับ $(( ORIG / 1048576 )) MB) · media $(( $(kb "$LB/media") / 1024 )) MB · scripts+content $(( ( $(kb "$LB/scripts") + $(kb "$LB/content") ) / 1024 )) MB · รวม $(( $(kb "$LB") / 1024 )) MB"
   if [ "$DRY" = 1 ]; then
     rm -rf "$LB"; LB=""
