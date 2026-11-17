@@ -5,6 +5,14 @@
    "lastModified": "2026-10-27T09:48:30Z",
    "extracted_by": "design-extract",
    "pages": "Page 2 Version #Final 01092026 (elephant detail frames) + Page 2.1 ALL GIF trails (all trails)"
+  },
+  "_source3": {
+   "figma_file_key": "EhcqSXTMEArlrfSGUQVCwl",
+   "lastModified": "2026-11-17T03:50:23Z",
+   "page": "3117:3314",
+   "by": "design-pages-1117 (D47 D48 D50)",
+   "nodes": "Home 3339:5227 · Header 3339:5445 · Intro 3339:6118",
+   "note": "เพิ่ม nav_primary 6 รายการ + About the Project (ลิงก์ภายนอก new tab) · header_logo ใหม่ · footer โลโก้ UNESCO+Temasek (ย้ายจาก header) · labels.hide · ชี้ guides.json/intro-2026-11.json — ค่าเดิมที่ไม่เกี่ยวคงไว้"
   }
  },
  "brand": {
@@ -14,14 +22,96 @@
    "SHARED HERITAGE · MUSEUMS IN SOUTH-EAST ASIA (raster)"
   ],
   "header_component": "670:1057 Header #1 (component set) / 670:1142 Header #02 (component set)",
-  "note": "โลโก้ UNESCO ส่งออกเป็น SVG แล้ว: design/assets/svg/unesco-logo.svg · โลโก้ TEMASEK FOUNDATION + SHARED HERITAGE ฝังในภาพพื้น Header #1 (imageRef 709572bf…, ไฟล์ design/assets/709572bf7eca….jpg) ไม่มีไฟล์แยก"
+  "note": "โลโก้ UNESCO ส่งออกเป็น SVG แล้ว: design/assets/svg/unesco-logo.svg · โลโก้ TEMASEK FOUNDATION + SHARED HERITAGE ฝังในภาพพื้น Header #1 (imageRef 709572bf…, ไฟล์ design/assets/709572bf7eca….jpg) ไม่มีไฟล์แยก",
+  "header_logo": {
+   "ref": "877fd074d2b30bd7d41c948e9600c547d85e3c72",
+   "file": "design/assets/pages-1117/fills/877fd074d2b30bd7d41c948e9600c547d85e3c72.png",
+   "file_px": [
+    1802,
+    612
+   ],
+   "node": "I3339:5285;3307:1972",
+   "name": "01_Header (1) 1",
+   "box": [
+    220,
+    77
+   ],
+   "rel_in_header": [
+    160,
+    4.5
+   ],
+   "crop": {
+    "x": 0.0738,
+    "y": 0.1013,
+    "w": 0.8768,
+    "h": 0.8987
+   },
+   "alt": "Shared Heritage — Museums in South-East Asia",
+   "note": "โลโก้ Shared Heritage ซ้ายบน (แทนภาพพื้น Header #1 เดิม 709572bf ที่มี UNESCO+Temasek ฝังอยู่) · crop = สัดส่วนที่ Figma เห็นจริงของภาพ 1802×612 · ลิงก์โลโก้ → หน้าแรก [P]"
+  },
+  "footer": {
+   "node": "3339:5248",
+   "rel_in_page": [
+    160,
+    3556,
+    1120,
+    95
+   ],
+   "layout": "แถวเดียว padding-left/right 267 · padding-top/bottom 5 · gap 20 · จัดชิดล่าง (counterAxis MAX) · ไม่อยู่กึ่งกลางหน้าตาม Figma (ดู §9.1)",
+   "unesco": {
+    "file": "design/assets/pages-1117/svg/unesco-footer-logo-3339-5249.svg",
+    "node": "3339:5249",
+    "size": [
+     283.1,
+     60
+    ],
+    "rel_in_footer": [
+     267,
+     30
+    ],
+    "colors": [
+     "#0069B4",
+     "#FFFFFF"
+    ],
+    "alt": "UNESCO"
+   },
+   "temasek": {
+    "file": "design/assets/pages-1117/fills/8bffcba6038526af7d1347026c431b3c872d6878.png",
+    "ref": "8bffcba6038526af7d1347026c431b3c872d6878",
+    "file_px": [
+     3886,
+     1124
+    ],
+    "node": "3339:5256",
+    "size": [
+     208,
+     60
+    ],
+    "fill_mode": "FILL",
+    "alt": "Temasek Foundation",
+    "caption": {
+     "text": "With the Support of",
+     "node": "3339:5255",
+     "font": "Komet 14/17.5 w500",
+     "color": "#49176D",
+     "gap_below": 7,
+     "size": [
+      127,
+      18
+     ],
+     "align": "center"
+    }
+   },
+   "note": "D47: โลโก้ UNESCO + Temasek ย้ายจาก header มาล่างสุดของทุกหน้า · ความสูงโลโก้ UNESCO 60 / Temasek 60 (+ข้อความ 18 + gap 7 = 85) ตาม Figma · ทุกหน้าใช้ footer เดียวกัน [P] (Figma วาดเฉพาะ Home)"
+  }
  },
  "nav_primary": [
   "Main Page",
   "Shared Heritage Framework",
   "Museums and Partnership",
   "Index",
-  "Events and Activities"
+  "Events and Activities",
+  "About the Project"
  ],
  "nav_utility": [
   "Visit",
@@ -35,7 +125,10 @@
  "labels": {
   "read_more": "Read more >>",
   "back": "Back",
-  "zone_prefix": "ZONE"
+  "zone_prefix": "ZONE",
+  "hide": "Hide >>",
+  "about_the_project": "About the Project",
+  "choose_a_card": "CHOOSE A CARD"
  },
  "home": {
   "hero": {
@@ -134,7 +227,8 @@
    "container": "871:2239 Navigator [176,587 30x150]",
    "style": "วงกลม 30x30 พื้น #FFFFFF stroke #ADB5BD 2px inside · gap 10 · ไม่มี icon/ข้อความ",
    "interaction": "ON_CLICK -> SCROLL_TO (scroll-animate 0.3s) ตาม interactions ใน figma-file.json",
-   "note": "ตามหมายเหตุ Figma 929:1597 + ภาพ annot-navigator.png · navigator เก่า 670:9542 (วงกลม 58px ป้าย Intro/Zone/Trails) ไม่ใช้"
+   "note": "ตามหมายเหตุ Figma 929:1597 + ภาพ annot-navigator.png · navigator เก่า 670:9542 (วงกลม 58px ป้าย Intro/Zone/Trails) ไม่ใช้",
+   "note_2026_11_17": "Home ใหม่ 3339:5286: จุดที่ 2 (3339:5288) ไม่มี interaction ใน Figma · จุด 1 → Cover 3339:5229 · จุด 3 → Trails 3339:5242 · จุด 4 → Zone 4-5 3339:5245 → จุดที่ 2 ใช้ Zone 1–3 ตามเดิม [P] · ไม่มีจุดสำหรับ section การ์ดสัตว์"
   },
   "zone_tabs": [
    "ZONE 1",
@@ -143,6 +237,41 @@
    "ZONE 4",
    "ZONE 5"
   ],
-  "zone_tabs_note": "ข้อความ \"ZONE n\" ในแถบสีอยู่ในภาพ (ไม่มี text node)"
- }
+  "zone_tabs_note": "ข้อความ \"ZONE n\" ในแถบสีอยู่ในภาพ (ไม่มี text node)",
+  "animal_guide": {
+   "seed": "content/seed/guides.json",
+   "position": "ระหว่าง Zone 1-2-3 กับ Trails",
+   "figma": "3339:5265",
+   "sample_states": "3339:6016",
+   "note": "D48 · ข้อความ/การ์ด 17 ใบ/ป้าย Hide ทั้งหมดอยู่ใน guides.json · ที่นี่ชี้ตำแหน่งเท่านั้น"
+  },
+  "refs_2026_11_17": {
+   "cover": "88d09cb8d98972fdbc8ac3e00f508f867032f8b0",
+   "intro_image": "3f4cfd00",
+   "zone_bar": "30d9d301",
+   "zone1": "342629af",
+   "zone2": "42f23205",
+   "zone3": "26c17a47",
+   "zone4": "0c5c09f6",
+   "zone5": "728a2a8d",
+   "trails_anim_state1": "5ebfca80",
+   "note": "ref ใน Home ใหม่ 3339:5227 — cover = 88d09cb8 (เปลี่ยนจาก `hero.cover` 2e3fa9c4 ใน seed เดิม · Figma 11-11 มี 88d09cb8 อยู่แล้ว · ไฟล์อยู่ design/assets/) → core/home ตรวจว่า live ใช้ตัวไหน (DEFERRED)"
+  },
+  "intro_page": {
+   "seed": "content/seed/intro-2026-11.json",
+   "figma": "3339:6117",
+   "note": "D50 หน้า Introduction ใหม่ 4 ตอน (หน้าเดียว สลับตอนในที่ · #1–#4)"
+  }
+ },
+ "nav_primary_links": {
+  "About the Project": {
+   "url": "https://www.unesco.org/en/articles/shared-heritage-museums-south-east-asia",
+   "target": "_blank",
+   "rel": "noopener noreferrer",
+   "external": true,
+   "node": "I3339:5284;3220:3745",
+   "note": "D47: URL ที่เจ้าของให้มี `?utm_source=chatgpt.com` ติดมาจากการคัดลอก → ตัดออก · admin แก้ URL ได้ · เมนูอื่น ๆ ปลายทาง = P-211 เดิม (ใช้ลิงก์เว็บภายในเมื่อมีหน้า)"
+  }
+ },
+ "nav_utility_note": "ไม่แสดงบน header ใหม่ (D47 · Figma 3339:5445 มีเฉพาะโลโก้ Shared Heritage + เมนู 6 รายการ) — ค่า nav_utility เก็บไว้เป็นประวัติ ห้ามใช้ render"
 }
