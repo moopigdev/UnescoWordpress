@@ -253,6 +253,37 @@ function sh_import_objects_1117( array $seed, array $map, array $manifest, bool 
 }
 
 /**
+ * sh_trail_layout of a seed trail (DESIGN-SPEC §8.1): trail_page_layout + "grid" [x, y, w, h] = the tile grid box
+ * (Frame 114472) from the seed tiles' bboxes (P-340: Garuda's grid sits at y 875.2, Water-bird/Seashell at 829.2 with
+ * the same heading height — the page reads it as is). null = no layout in the seed.
+ *
+ * @param array<string, mixed> $t Seed trail.
+ * @return array<string, mixed>|null
+ */
+function sh_import_trail_layout_1117( array $t ): ?array {
+	if ( empty( $t['trail_page_layout'] ) || ! is_array( $t['trail_page_layout'] ) ) {
+		return null;
+	}
+	$layout = $t['trail_page_layout'];
+	$top    = null;
+	$bottom = null;
+	$left   = null;
+	foreach ( (array) ( isset( $t['tiles'] ) ? $t['tiles'] : array() ) as $tile ) {
+		$b = isset( $tile['bbox'] ) && is_array( $tile['bbox'] ) ? array_values( $tile['bbox'] ) : array();
+		if ( 4 !== count( $b ) ) {
+			continue;
+		}
+		$top    = null === $top ? (float) $b[1] : min( $top, (float) $b[1] );
+		$left   = null === $left ? (float) $b[0] : min( $left, (float) $b[0] );
+		$bottom = null === $bottom ? (float) $b[1] + (float) $b[3] : max( $bottom, (float) $b[1] + (float) $b[3] );
+	}
+	if ( null !== $top ) {
+		$layout['grid'] = array( $left, $top, 1120.0, round( $bottom - $top, 1 ) ); // Frame 114472 is 1120 wide (§8.1).
+	}
+	return $layout;
+}
+
+/**
  * Trail term meta of the 2026-11-17 seed (16 trails · elephant keeps its values): H1 · cover · layout · tiles without
  * a page · animal guide card. The description is a term field (sh_import_trail_description()).
  *
@@ -267,7 +298,8 @@ function sh_import_trail_meta_1117( array $seed, array $t ): array {
 	if ( 'elephant' !== $slug ) {
 		$meta['sh_title_on_trail_page'] = isset( $t['title_on_trail_page'] ) ? (string) $t['title_on_trail_page'] : null;
 		$meta['sh_cover_image']         = sh_imp_1117_image( isset( $t['cover_crop_ref'] ) ? $t['cover_crop_ref'] : null, SH_IMPORT_OBJECTS_1117, sh_import_spec_trail_cover(), $name . ' trail cover' );
-		$meta['sh_trail_layout']        = isset( $t['trail_page_layout'] ) && is_array( $t['trail_page_layout'] ) ? (string) wp_json_encode( $t['trail_page_layout'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) : null;
+		$layout                         = sh_import_trail_layout_1117( $t );
+		$meta['sh_trail_layout']        = null !== $layout ? (string) wp_json_encode( $layout, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) : null;
 		foreach ( array_slice( sh_import_trail_static_tiles( $seed, $t ), 0, 3 ) as $i => $st ) {
 			$n                                       = $i + 1;
 			$meta[ "sh_static_tile_{$n}_position" ]    = $st['position'];
@@ -516,7 +548,10 @@ function sh_import_menu_1117( array $seed ): int {
 				continue 2; // Already there (maybe edited by an admin): keep it.
 			}
 		}
-		$args['menu-item-position'] = count( $items ) + 1 + $added;
+		// After the last item: max(menu_order) + 1 (orders may have gaps after admin edits · count + 1 could collide).
+		// The stored menu_order (wp_get_nav_menu_items() renumbers its result 1..n, gaps hidden).
+		$last                       = $items ? max( array_map( static fn( $it ): int => (int) get_post_field( 'menu_order', (int) $it->ID, 'raw' ), $items ) ) : 0;
+		$args['menu-item-position'] = $last + 1 + $added;
 		$res                        = wp_update_nav_menu_item( $menu->term_id, 0, $args );
 		if ( is_wp_error( $res ) ) {
 			throw new RuntimeException( 'menu item ' . $label . ': ' . $res->get_error_message() );

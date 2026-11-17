@@ -33,6 +33,8 @@ function sh_import_refresh_steps_2026_11_17(): array {
 		'2026-11-17-trails'  => 'trail description / H1 / cover / layout / tiles without a page / animal guide card (only empty) · object order (only while the old import list)',
 		'2026-11-17-pages'   => 'Home animal guide section · Introduction 4 chapters (only empty fields)',
 		'2026-11-17-site'    => 'header logo · footer logos / text (only never set) · Primary menu "About the Project" (only when missing)',
+		// core-1117b (P-340): sh_trail_layout gains "grid" (tile grid box) — sites imported by core-1117 have it without.
+		'2026-11-17-trail-grid' => 'trail sh_trail_layout + grid box (only while empty or still the layout the core-1117 import wrote)',
 	);
 }
 
@@ -141,6 +143,41 @@ function sh_import_refresh_site_1117( array $seed ): void {
 }
 
 /**
+ * Step 2026-11-17-trail-grid (P-340): sh_trail_layout → seed layout + "grid" while it is empty or still exactly the
+ * layout the core-1117 import wrote (seed trail_page_layout, compared with refs.php sh_import_layout_fingerprint():
+ * key order / number format ignored). An admin's layout is kept (kept_admin). Elephant has no layout (untouched).
+ *
+ * @param array<string, mixed> $seed Seed files.
+ */
+function sh_import_refresh_trail_grid_1117( array $seed ): void {
+	foreach ( (array) $seed['trails']['trails'] as $t ) {
+		if ( ! is_array( $t ) || ! empty( $t['not_a_trail'] ) || 'elephant' === $t['slug'] ) {
+			continue;
+		}
+		$new  = sh_import_trail_layout_1117( $t );
+		$term = get_term_by( 'slug', (string) $t['slug'], 'trail' );
+		if ( null === $new || ! $term instanceof WP_Term ) {
+			continue;
+		}
+		$raw = (string) get_term_meta( $term->term_id, 'sh_trail_layout', true );
+		$cur = json_decode( $raw, true );
+		if ( '' !== trim( $raw ) && ! is_array( $cur ) ) {
+			sh_imp_keep( "trail:{$t['slug']} sh_trail_layout (not JSON — admin value kept)" );
+			continue;
+		}
+		if ( is_array( $cur ) && sh_import_layout_fingerprint( $cur ) === sh_import_layout_fingerprint( $new ) ) {
+			continue; // Already the current layout.
+		}
+		if ( is_array( $cur ) && sh_import_layout_fingerprint( $cur ) !== sh_import_layout_fingerprint( (array) $t['trail_page_layout'] ) ) {
+			sh_imp_keep( "trail:{$t['slug']} sh_trail_layout (edited in admin — no grid added)" );
+			continue;
+		}
+		sh_imp_meta( 'term', $term->term_id, array( 'sh_trail_layout' => (string) wp_json_encode( $new, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ) );
+		sh_imp_count( 'updated', 'trail_layout_grid' );
+	}
+}
+
+/**
  * Run one step of this file. Returns true when done (false = a file was missing: run again on the next import).
  *
  * @param string                                  $step     Step id.
@@ -163,6 +200,9 @@ function sh_import_refresh_2026_11_17( string $step, array $seed, array $map, ar
 			break;
 		case '2026-11-17-site':
 			sh_import_refresh_site_1117( $seed );
+			break;
+		case '2026-11-17-trail-grid':
+			sh_import_refresh_trail_grid_1117( $seed );
 			break;
 	}
 	return count( sh_imp_state()['warnings'] ) === $before;
