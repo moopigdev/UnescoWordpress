@@ -79,11 +79,11 @@
  * mini-map −12 · gap 3 → 1 first, then the tile shrinks (desktop: 17 × 50 does not fit 608 px → P-2xx) · hover/focus = the tile grows (transform only) ----
  */
 .sh-tl__trails {
-	--tarea: calc(639px - 19.2px - 12px);
+	--tarea: calc(639px + 19px - 97.5px - 8px - 19.2px); /* r1 F1: ends before the frame's leftmost x (c = 1 → 560.5) */
 	--tgap: clamp(1px, calc((var(--tarea) - 17 * var(--mfh)) / 16), 3px);
 	--tile: min(var(--mfh), calc((var(--tarea) - 16 * var(--tgap)) / 17));
 	position: absolute;
-	top: calc(var(--mft) + (var(--mfh) - var(--tile)) / 2);
+	top: calc(6.5px + var(--mft) + (var(--mfh) - var(--tile)) / 2); /* r1 F2: + the mini-map's own top */
 	left: 19.2px;
 	z-index: 6;
 	display: flex;
@@ -122,7 +122,7 @@
 	object-fit: cover;
 }
 
-a.sh-tl__trail-link:hover,
+.sh-tl__trail-link:hover,
 a.sh-tl__trail-link:focus-visible {
 	transform: scale(1.5);
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -556,14 +556,14 @@ html:not(.sh-js) .sh-tl__arrow {
 
 .sh-tl__refl-body {
 	font-family: var(--sh-font-komet);
-	font-size: calc(14px * var(--mr)); /* floor 12px on screen, as the metadata */
+	font-size: calc(14px * max(1, 12 / (14 * var(--k)))); /* floor 12px on screen (§4.5c.5) — own multiplier, not the metadata --mr (D51: 18px) */
 	font-weight: var(--sh-fw-komet-medium);
-	line-height: calc(17.5px * var(--mr));
+	line-height: calc(17.5px * max(1, 12 / (14 * var(--k))));
 	letter-spacing: 0;
 }
 
 .sh-tl__refl-body p {
-	margin: 0 0 calc(17.5px * var(--mr));
+	margin: 0 0 calc(17.5px * max(1, 12 / (14 * var(--k))));
 }
 
 .sh-tl__refl-body p:last-child {
@@ -762,7 +762,7 @@ html:not(.sh-js) .sh-tl__arrow {
 		scrollbar-width: none;
 	}
 
-	a.sh-tl__trail-link:hover,
+	.sh-tl__trail-link:hover,
 	a.sh-tl__trail-link:focus-visible {
 		transform: none;
 		box-shadow: none;
