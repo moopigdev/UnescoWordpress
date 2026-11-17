@@ -5,6 +5,7 @@
 usage: objects_1117.py <src_root> <out_root> <manifest.json>
   src_root = <Unesco>/media/src/drive-2026-11-17   out_root = <Unesco>/media/out
 env: LIMIT_BYTES (3000000) MAXW (1440) MAXFPS (30) POSTER_AT (0.35) FALLBACK_FPS (10) INTRO_MAXW (2880) FORCE (0) JOBS (4)
+     ONLY = รายชื่อ "<Trail>/<ไฟล์>.webm" คั่นด้วย "|" -> ทำเฉพาะไฟล์เหล่านี้ (ไม่แตะ Intro · entry อื่นไม่เปลี่ยน · ใช้เมื่อ Drive เพิ่มไฟล์ใหม่ทีหลัง)
 
 มาตรฐานเดียวกับ encode.sh: src <= 3MB และกว้าง <= 1440 -> copy (ไม่ re-encode) · เกิน -> VP9 2-pass -an ลดกว้าง/บิตเรต
 poster = เฟรม 35% WebP q80 กว้าง <= 640 · alpha จริง (decode libvpx-vp9 วัด alpha min < 250) -> HEVC-alpha .hevc.mov · ทึบ -> fallback = poster
@@ -22,6 +23,7 @@ FALLBACK_FPS = int(E("FALLBACK_FPS", "10"))
 INTRO_MAXW = int(E("INTRO_MAXW", "2880"))  # 2x ความกว้างแสดงผล 1440
 FORCE = E("FORCE", "0") == "1"
 JOBS = int(E("JOBS", "4"))
+ONLY = [x for x in E("ONLY", "").split("|") if x]
 
 MEDIA_ROOT = os.path.dirname(OUT)  # <Unesco>/media
 KEY_PREFIX_OBJ, KEY_PREFIX_INTRO = "drive-1117/", "intro-1117/"
@@ -314,8 +316,33 @@ def process_intro(folder, f):
 
 def main():
     objs = collect_objects()
+    if ONLY:
+        sel = [o for o in objs if (o["trail"] + "/" + o["file"]) in ONLY]
+        missing = set(ONLY) - {o["trail"] + "/" + o["file"] for o in sel}
+        if missing:
+            raise SystemExit("ONLY ไม่พบในต้นฉบับ: %r" % sorted(missing))
+        objs = sel
     with ThreadPoolExecutor(JOBS) as ex:
         obj_entries = list(ex.map(process_object, objs))
+    doc = json.load(open(DEST)) if os.path.exists(DEST) else {"limit_bytes": LIMIT, "generated_by": "scripts/media/encode.sh", "files": []}
+    if ONLY:
+        # เพิ่ม/แทนเฉพาะ entry วัตถุที่ระบุ · entry อื่น (รวม Intro) คงไบต์เดิม · เรียงวัตถุตาม key เหมือนรันเต็ม · คำนวณ dup_of ใหม่ทั้งชุดด้วยกติกาเดิม
+        new_ids = {e["id"] for e in obj_entries}
+        old_obj = [e for e in doc["files"] if str(e.get("id", "")).startswith(KEY_PREFIX_OBJ) and e["id"] not in new_ids]
+        keep = [e for e in doc["files"] if not str(e.get("id", "")).startswith(KEY_PREFIX_OBJ)]
+        allobj = sorted(old_obj + obj_entries, key=lambda e: e["key"])
+        first = {}
+        for e in allobj:
+            e["dup_of"] = first.get(e["src_content_md5"])
+            first.setdefault(e["src_content_md5"], e["key"])
+        intro_part = [e for e in keep if str(e.get("id", "")).startswith(KEY_PREFIX_INTRO)]
+        other = [e for e in keep if not str(e.get("id", "")).startswith(KEY_PREFIX_INTRO)]
+        doc["files"] = other + allobj + intro_part
+        with open(DEST, "w") as fh:
+            json.dump(doc, fh, indent=2, ensure_ascii=False)
+            fh.write("\n")
+        print("manifest: %s (ONLY +%d objects, total objects %d)" % (DEST, len(obj_entries), len(allobj)))
+        return
     intro = collect_intro()
     for fo, f in intro:
         k = ascii_slug(os.path.splitext(f)[0])
@@ -330,7 +357,6 @@ def main():
         first.setdefault(k, e["key"])
     new = sorted(obj_entries, key=lambda e: e["key"]) + sorted(intro_entries, key=lambda e: e["key"])
     assert len({e["out"] or e["still"] for e in new}) == len(new), "out ชนกัน"
-    doc = json.load(open(DEST)) if os.path.exists(DEST) else {"limit_bytes": LIMIT, "generated_by": "scripts/media/encode.sh", "files": []}
     keep = [e for e in doc["files"] if not str(e.get("id", "")).startswith((KEY_PREFIX_OBJ, KEY_PREFIX_INTRO))]
     doc["files"] = keep + new
     with open(DEST, "w") as fh:
