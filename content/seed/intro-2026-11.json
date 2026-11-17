@@ -1,0 +1,1378 @@
+{
+ "_meta": {
+  "_source": {
+   "figma_file_key": "EhcqSXTMEArlrfSGUQVCwl",
+   "lastModified": "2026-11-17T03:50:23Z",
+   "page": "3117:3314",
+   "section": "3339:6117 \"Introduction (แก้ไขใหม่)\"",
+   "by": "design-pages-1117 (D50)"
+  },
+  "rules": [
+   "ข้อความคัดลอกตรงตัวอักษร (`text`) · `html` = \\n\\n→ย่อหน้า · \\n เดี่ยว→<br> (ตามที่นักออกแบบตั้งใจ) · ตัวหนา (Pawangs) = <strong>",
+   "ส่วนหัวสีส้ม + หัวข้อ \"Southeast Asians and the Environment\" เหมือนกันทั้ง 4 ตอน (ตรวจตัวอักษรทุกตัวแล้ว) · เปลี่ยนตามตอน = แผนที่ + ส่วนเนื้อหาด้านล่าง",
+   "ภาพ: `drive_file` อยู่ใต้ media/src/drive-2026-11-17/introduction/ · `figma_fill_file` ใต้ design/assets/pages-1117/ (ภาพนิ่ง/poster เดียวกับที่ Figma ใช้ — ใช้เป็น fallback ของ GIF) · `crop` = สัดส่วนที่ Figma เห็นจริง (x,y,w,h ของภาพต้นฉบับ 0..1)",
+   "ตอนที่ 1 ใช้ GIF 4 ไฟล์ (map · Hae Nang Maew · Boat) · ตอนที่ 3 ใช้ GIF farmer 1 ไฟล์ — Figma มีแต่ภาพนิ่งเฟรมแรก → media-1117 ทำ WebM/MP4 + poster"
+  ]
+ },
+ "url": {
+  "pattern": "/introduction/#N (N=1..4)",
+  "default": 1,
+  "note": "D50 หน้าเดียว สลับตอนในที่ · hash `#1`–`#4` แชร์ตรงตอนได้"
+ },
+ "header": {
+  "node": "3339:6122",
+  "bg": "#DD7F6A",
+  "rel": [
+   0,
+   150,
+   1440,
+   1098
+  ],
+  "emblem": {
+   "node": "3339:6123",
+   "name": "Shared heritage emblem",
+   "figma_fill_ref": "dc039836b8dcd5a92d00465dc51b37d84f512c56",
+   "figma_fill_file": "fills/dc039836b8dcd5a92d00465dc51b37d84f512c56.png",
+   "figma_fill_px": [
+    2617,
+    2486
+   ],
+   "drive_file": "1.2 Early Centres of Power/Intro logo.png",
+   "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+   "animated": false,
+   "box": [
+    325.2,
+    320.5
+   ],
+   "fill_mode": "STRETCH",
+   "crop": {
+    "x": 0.1087,
+    "y": 0.1081,
+    "w": 0.7556,
+    "h": 0.7839
+   },
+   "rel": [
+    160.0,
+    216.0
+   ],
+   "drive_files_identical": [
+    "1.2 Early Centres of Power/Intro logo.png",
+    "1.3 Rice and Spice_ Platforms of Interconnection/Intro logo.png",
+    "1.1 People and Place/1.1People and Place-01.png"
+   ]
+  },
+  "title": {
+   "node": "3339:6124",
+   "text": "Across Southeast Asia, creatures travel\nwhere borders cannot…",
+   "html": "<p>Across Southeast Asia, creatures travel<br>where borders cannot…</p>",
+   "font": {
+    "size": 40.0,
+    "weight_figma": 800,
+    "line_height": 51.85,
+    "align": "left",
+    "color": "#F4F1E6"
+   },
+   "box": [
+    739.0,
+    104.0
+   ],
+   "rel": [
+    541.0,
+    334.0
+   ]
+  },
+  "paragraphs": [
+   {
+    "node": "3339:6126",
+    "text": "The movement of people, ideas, beliefs, goods, and living beings has long defined Southeast Asia. Across winding rivers, dense forests, coastlines, and monsoon-driven maritime routes, animals have always travelled alongside human communities—becoming integral to everyday life, ritual practices, trade networks, and local systems of knowledge.",
+    "html": "<p>The movement of people, ideas, beliefs, goods, and living beings has long defined Southeast Asia. Across winding rivers, dense forests, coastlines, and monsoon-driven maritime routes, animals have always travelled alongside human communities—becoming integral to everyday life, ritual practices, trade networks, and local systems of knowledge.</p>",
+    "font": {
+     "size": 20.0,
+     "weight_figma": 600,
+     "line_height": 26.0,
+     "align": "justified",
+     "color": "#FFF9EF"
+    },
+    "box": [
+     1120.0,
+     78.0
+    ],
+    "rel": [
+     160.0,
+     572.1
+    ]
+   },
+   {
+    "node": "3339:6127",
+    "text": "From ancient cosmologies and artistic traditions to ceremonies, stories, and foodways, animals occupy a foundational place in the region’s heritage. This exhibition explores how creatures sit at the heart of Southeast Asia’s shared histories. Looking beyond modern borders, it reveals an interconnected world shaped by deep ecological relationships, showcasing how humans have connected with and been inspired by the animal kingdom in their myths, legends, rituals, and material creations across millennia.",
+    "html": "<p>From ancient cosmologies and artistic traditions to ceremonies, stories, and foodways, animals occupy a foundational place in the region’s heritage. This exhibition explores how creatures sit at the heart of Southeast Asia’s shared histories. Looking beyond modern borders, it reveals an interconnected world shaped by deep ecological relationships, showcasing how humans have connected with and been inspired by the animal kingdom in their myths, legends, rituals, and material creations across millennia.</p>",
+    "font": {
+     "size": 20.0,
+     "weight_figma": 600,
+     "line_height": 26.0,
+     "align": "justified",
+     "color": "#FFF9EF"
+    },
+    "box": [
+     1120.0,
+     130.0
+    ],
+    "rel": [
+     160.0,
+     690.1
+    ]
+   },
+   {
+    "node": "3339:6128",
+    "text": "Drawing together remarkable collections from ten regional institutions—the Malay Technology Museum and Maritime Museum (Brunei Darussalam); the National Museum of Indonesia and Ada Garuda Museum (Indonesia); the National Museum of Malaysia and Baba & Nyonya Heritage Museum (Malaysia); the Asian Civilisations Museum and Lee Kong Chian Natural History Museum (Singapore); and the National Museum Bangkok and the Folklore Museum, Institute for Southern Thai Studies (Thailand)—this exhibition celebrates Southeast Asia’s shared environments and the enduring bonds between its communities and the natural world.",
+    "html": "<p>Drawing together remarkable collections from ten regional institutions—the Malay Technology Museum and Maritime Museum (Brunei Darussalam); the National Museum of Indonesia and Ada Garuda Museum (Indonesia); the National Museum of Malaysia and Baba &amp; Nyonya Heritage Museum (Malaysia); the Asian Civilisations Museum and Lee Kong Chian Natural History Museum (Singapore); and the National Museum Bangkok and the Folklore Museum, Institute for Southern Thai Studies (Thailand)—this exhibition celebrates Southeast Asia’s shared environments and the enduring bonds between its communities and the natural world.</p>",
+    "font": {
+     "size": 20.0,
+     "weight_figma": 600,
+     "line_height": 26.0,
+     "align": "justified",
+     "color": "#FFF9EF"
+    },
+    "box": [
+     1120.0,
+     156.0
+    ],
+    "rel": [
+     160.0,
+     860.1
+    ]
+   },
+   {
+    "node": "3339:6129",
+    "text": "As societies, we continuously shape and reshape our heritage through our ongoing relationships with animals, landscapes, and material culture.",
+    "html": "<p>As societies, we continuously shape and reshape our heritage through our ongoing relationships with animals, landscapes, and material culture.</p>",
+    "font": {
+     "size": 20.0,
+     "weight_figma": 600,
+     "line_height": 26.0,
+     "align": "justified",
+     "color": "#FFF9EF"
+    },
+    "box": [
+     1120.0,
+     52.0
+    ],
+    "rel": [
+     160.0,
+     1056.1
+    ]
+   }
+  ],
+  "credit": {
+   "node": "3339:6130",
+   "text": "Presented by the UNESCO Regional Office in Bangkok with the generous support of Temasek Foundation.",
+   "html": "<p>Presented by the UNESCO Regional Office in Bangkok with the generous support of Temasek Foundation.</p>",
+   "font": {
+    "size": 20.0,
+    "weight_figma": 500,
+    "line_height": 28.28,
+    "align": "left",
+    "color": "#FFF9EF"
+   },
+   "box": [
+    1120.0,
+    29.0
+   ],
+   "rel": [
+    160.0,
+    1148.1
+   ]
+  },
+  "decor": {
+   "note": "Section markers / Scroll indicator / Continue down = ภาพครอปจาก screenshot ทั้งหน้า (fill 0e54c12c 4000×13102) — ไม่มี interaction ใน Figma · ส่งออก PNG 2x แล้ว → P-273",
+   "section_markers": {
+    "node": "3339:6131",
+    "file": "intro-icons/section-markers-3339-6131.png",
+    "rel": [
+     40.1,
+     503.5,
+     28.3,
+     82.5
+    ]
+   },
+   "scroll_indicator": {
+    "node": "3339:6132",
+    "file": "intro-icons/scroll-indicator-3339-6132.png",
+    "rel": [
+     1388.2,
+     331.5,
+     25.9,
+     82.5
+    ]
+   },
+   "continue_down": {
+    "node": "3339:6133",
+    "file": "intro-icons/continue-down-3339-6133.png",
+    "rel": [
+     700.0,
+     1236.5,
+     42.4,
+     30.6
+    ]
+   }
+  }
+ },
+ "environment_heading": {
+  "node": "3339:6135",
+  "text": "Southeast Asians and the Environment:\nRelationships Between People, Places, and Landscapes",
+  "html": "Southeast Asians and the Environment:<br>Relationships Between People, Places, and Landscapes",
+  "font": {
+   "size": 40,
+   "weight_figma": 800,
+   "color": "#403B2F"
+  }
+ },
+ "map_ui": {
+  "button": {
+   "size": 44,
+   "radius": 23,
+   "gap": 12,
+   "fill_active": "#D1CC5C",
+   "fill_inactive": "#DEDCC3",
+   "stroke": "#403B2F",
+   "stroke_w": 1.5,
+   "font": "Komet 22/500 #403B2F",
+   "rel_x": [
+    1188,
+    1244,
+    1300,
+    1356
+   ],
+   "rel_y_in_map": 30
+  },
+  "arrows": {
+   "size": [
+    28.3,
+    56.6
+   ],
+   "prev_x": 35.4,
+   "next_x": 1381.1,
+   "y_in_map": 362.9,
+   "svg": "svg/map-next-3339-6140.svg",
+   "note": "ลูกศรขวา · ซ้าย = กลับด้าน (Figma ไม่ได้ export อันซ้ายเพราะ hidden ในตอนที่ 1)"
+  }
+ },
+ "chapters": [
+  {
+   "n": 1,
+   "slug": "people-and-places",
+   "hash": "#1",
+   "button": "1",
+   "frame": "3339:6118",
+   "frame_name": "Desktop — People and Places",
+   "frame_h": 4356,
+   "title": "People and Places",
+   "accent_color": "#D85A40",
+   "map": {
+    "node": "3339:6137",
+    "name": "Illustrated map of Southeast Asia",
+    "figma_fill_ref": "6d949ac7fbfcb27d217e837eec144111bff3b27c",
+    "figma_fill_file": "fills/6d949ac7fbfcb27d217e837eec144111bff3b27c.jpg",
+    "figma_fill_px": [
+     8000,
+     4500
+    ],
+    "drive_file": "1.1 People and Place/map1.1 people place.gif",
+    "drive_kind": "gif เคลื่อนไหว (fill = ภาพนิ่งเฟรมแรก/poster)",
+    "animated": true,
+    "box": [
+     1440.0,
+     808.4
+    ],
+    "fill_mode": "FILL",
+    "crop": {
+     "x": 0,
+     "y": 0.001,
+     "w": 1,
+     "h": 0.998
+    },
+    "rel": [
+     0,
+     1477.0,
+     1440,
+     808.4
+    ],
+    "section": "3339:6136"
+   },
+   "map_buttons": {
+    "active": 1,
+    "count": 4
+   },
+   "arrows": {
+    "prev_visible": false,
+    "next_visible": true
+   },
+   "sections": [
+    {
+     "node": "3339:6141",
+     "name": "People and Places",
+     "bg": "#FFFFFF",
+     "rel": [
+      0,
+      2285,
+      1440,
+      1368
+     ],
+     "blocks": [
+      {
+       "node": "3339:6143",
+       "text": "People and Places",
+       "html": "<p>People and Places</p>",
+       "font": {
+        "size": 38.0,
+        "weight_figma": 800,
+        "line_height": 56.56,
+        "align": "left",
+        "color": "#D85A40"
+       },
+       "box": [
+        548.0,
+        57.0
+       ],
+       "rel": [
+        160.0,
+        2386.1
+       ],
+       "role": "heading",
+       "kind": "text",
+       "name": "People and Places heading"
+      },
+      {
+       "node": "3339:6145",
+       "name": "Many cultures, one Southeast Asia",
+       "figma_fill_ref": "f08c8c90849f5bb7d1a351753a03878e43b4bb8a",
+       "figma_fill_file": "fills/f08c8c90849f5bb7d1a351753a03878e43b4bb8a.png",
+       "figma_fill_px": [
+        3357,
+        2486
+       ],
+       "drive_file": "1.1 People and Place/1.1People and Place-02.png",
+       "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+       "animated": false,
+       "box": [
+        532.6,
+        351.2
+       ],
+       "fill_mode": "FILL",
+       "crop": {
+        "x": 0,
+        "y": 0.0548,
+        "w": 1,
+        "h": 0.8904
+       },
+       "rel": [
+        747.0,
+        2386.5
+       ],
+       "kind": "image"
+      },
+      {
+       "node": "3339:6148",
+       "name": "Section scroll indicator",
+       "figma_fill_ref": "0e54c12cf0f98b33285f7c4451db2620d218b476",
+       "figma_fill_file": "fills/0e54c12cf0f98b33285f7c4451db2620d218b476.jpg",
+       "figma_fill_px": [
+        4000,
+        13102
+       ],
+       "drive_file": null,
+       "drive_kind": null,
+       "animated": false,
+       "box": [
+        25.9,
+        84.8
+       ],
+       "fill_mode": "STRETCH",
+       "crop": {
+        "x": 0.964,
+        "y": 0.5162,
+        "w": 0.018,
+        "h": 0.018
+       },
+       "rel": [
+        1418.5,
+        2382.0
+       ],
+       "decor": true,
+       "file": "intro-icons/section-scroll-indicator-3339-6148.png",
+       "note": "ภาพครอปจาก screenshot — ไม่ใช่เนื้อหา · P-273",
+       "kind": "image"
+      },
+      {
+       "node": "3339:6144",
+       "text": "Southeast Asia’s history is defined by its remarkable topographical diversity and deep human connections. For thousands of years, communities living in the mountains, river valleys, plains, and coastal islands built shared cultural traditions despite differences in language, religion, and local identity.",
+       "html": "<p>Southeast Asia’s history is defined by its remarkable topographical diversity and deep human connections. For thousands of years, communities living in the mountains, river valleys, plains, and coastal islands built shared cultural traditions despite differences in language, religion, and local identity.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 33.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        548.0,
+        198.0
+       ],
+       "rel": [
+        160.0,
+        2475.1
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "People and landscapes"
+      },
+      {
+       "node": "3339:6146",
+       "name": "Rainmaking procession and prayer ritual",
+       "figma_fill_ref": "64338c8191e8117e875c4907374b994f40ebe190",
+       "figma_fill_file": "fills/64338c8191e8117e875c4907374b994f40ebe190.png",
+       "figma_fill_px": [
+        1920,
+        1080
+       ],
+       "drive_file": "1.1 People and Place/Hae Nang Maew.gif",
+       "drive_kind": "gif เคลื่อนไหว (fill = ภาพนิ่งเฟรมแรก/poster)",
+       "animated": true,
+       "box": [
+        1120.0,
+        448.0
+       ],
+       "fill_mode": "STRETCH",
+       "crop": {
+        "x": 0.0,
+        "y": 0.1442,
+        "w": 1.0,
+        "h": 0.7111
+       },
+       "rel": [
+        160.0,
+        2839.5
+       ],
+       "kind": "image"
+      },
+      {
+       "node": "3339:6147",
+       "text": "Rather than trying to dominate nature, people historically maintained a constant dialogue with it. Rituals asking for rain, good harvests, or safe passage at sea served to respect the spiritual owners of the land and water. Artisans carved and wove this worldview directly into practical objects. By adding symbols of protection, fertility, and cosmic balance to everyday items—like woven cloth, house pillars, and boats—they turned tools into sacred objects.",
+       "html": "<p>Rather than trying to dominate nature, people historically maintained a constant dialogue with it. Rituals asking for rain, good harvests, or safe passage at sea served to respect the spiritual owners of the land and water. Artisans carved and wove this worldview directly into practical objects. By adding symbols of protection, fertility, and cosmic balance to everyday items—like woven cloth, house pillars, and boats—they turned tools into sacred objects.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 33.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1120.0,
+        132.0
+       ],
+       "rel": [
+        160.0,
+        3357.5
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Rituals and material culture"
+      }
+     ]
+    },
+    {
+     "node": "3339:6149",
+     "name": "Living heritage",
+     "bg": "#7EB7A6",
+     "rel": [
+      0,
+      3653,
+      1440,
+      703
+     ],
+     "blocks": [
+      {
+       "node": "3339:6150",
+       "name": "Boat crossing into living heritage",
+       "figma_fill_ref": "74a3cb7fcb5c129974f3dadea525105bb84777b6",
+       "figma_fill_file": "fills/74a3cb7fcb5c129974f3dadea525105bb84777b6.png",
+       "figma_fill_px": [
+        1920,
+        1080
+       ],
+       "drive_file": "1.1 People and Place/Boat.gif",
+       "drive_kind": "gif เคลื่อนไหว (fill = ภาพนิ่งเฟรมแรก/poster)",
+       "animated": true,
+       "box": [
+        1120.0,
+        156.0
+       ],
+       "fill_mode": "STRETCH",
+       "crop": {
+        "x": 0.0,
+        "y": 0.3849,
+        "w": 1.0,
+        "h": 0.2302
+       },
+       "rel": [
+        160.0,
+        3557.5
+       ],
+       "kind": "image"
+      },
+      {
+       "node": "3339:6151",
+       "name": "Traditional boatbuilders",
+       "figma_fill_ref": "39c9ec27ce444881445bf89ebf2e3d46c67a241e",
+       "figma_fill_file": "fills/39c9ec27ce444881445bf89ebf2e3d46c67a241e.png",
+       "figma_fill_px": [
+        2617,
+        2486
+       ],
+       "drive_file": "1.1 People and Place/1.1People and Place-03.png",
+       "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+       "animated": false,
+       "box": [
+        434.0,
+        369.0
+       ],
+       "fill_mode": "STRETCH",
+       "crop": {
+        "x": 0.0718,
+        "y": 0.1218,
+        "w": 0.9002,
+        "h": 0.8057
+       },
+       "rel": [
+        132.0,
+        3816.0
+       ],
+       "kind": "image"
+      },
+      {
+       "node": "3339:6153",
+       "text": "Museum collections preserve the material traces of these belief systems. Shipwrecks, sculptures, textiles, ceramics, and ceremonial items directly connect visitors to these ancient practices. An embroidered garment, carved boat, or ritualistic artifact is not merely art piece, but a living shorthand for cosmology and a remnant of the intangible heritage that maintained the balance between communities and their natural worlds.",
+       "html": "<p>Museum collections preserve the material traces of these belief systems. Shipwrecks, sculptures, textiles, ceramics, and ceremonial items directly connect visitors to these ancient practices. An embroidered garment, carved boat, or ritualistic artifact is not merely art piece, but a living shorthand for cosmology and a remnant of the intangible heritage that maintained the balance between communities and their natural worlds.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 32.52,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        681.0,
+        196.0
+       ],
+       "rel": [
+        599.0,
+        3816.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Museum collections and belief systems"
+      },
+      {
+       "node": "3339:6154",
+       "text": "From the forests of mainland Southeast Asia to the islands of the Coral Triangle, communities have been and continue to be shaped by the landscapes they inhabit. These enduring relationships form the foundation of the region's shared heritage.",
+       "html": "<p>From the forests of mainland Southeast Asia to the islands of the Coral Triangle, communities have been and continue to be shaped by the landscapes they inhabit. These enduring relationships form the foundation of the region's shared heritage.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 32.52,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        681.0,
+        131.0
+       ],
+       "rel": [
+        599.0,
+        4087.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Landscapes and shared heritage"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "slug": "early-centres-of-power",
+   "hash": "#2",
+   "button": "2",
+   "frame": "3339:6155",
+   "frame_name": "Desktop — Early Centres of Power",
+   "frame_h": 5317,
+   "title": "Early Centres of Power",
+   "accent_color": "#43695D",
+   "map": {
+    "node": "3339:6174",
+    "name": "Historical mandalas map — original image",
+    "figma_fill_ref": "9dc6434b61f7e1deaab4b19af83951cf58c60b3e",
+    "figma_fill_file": "fills/9dc6434b61f7e1deaab4b19af83951cf58c60b3e.png",
+    "figma_fill_px": [
+     8000,
+     4500
+    ],
+    "drive_file": "1.2 Early Centres of Power/1.2 power.png",
+    "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+    "animated": false,
+    "box": [
+     1440.0,
+     809.0
+    ],
+    "fill_mode": "FIT",
+    "crop": null,
+    "rel": [
+     0,
+     1477.0,
+     1440,
+     809.0
+    ],
+    "section": "3339:6173"
+   },
+   "map_buttons": {
+    "active": 2,
+    "count": 4
+   },
+   "arrows": {
+    "prev_visible": true,
+    "next_visible": true
+   },
+   "sections": [
+    {
+     "node": "3339:6178",
+     "name": "Early centres of power",
+     "bg": "#FFFFFF",
+     "rel": [
+      0,
+      2286,
+      1440,
+      1083
+     ],
+     "blocks": [
+      {
+       "node": "3339:6179",
+       "name": "People, pilgrims, merchants and seafarers — original image",
+       "figma_fill_ref": "1cb4caf48be9999ebf6ffc8830e479444f1899c6",
+       "figma_fill_file": "fills/1cb4caf48be9999ebf6ffc8830e479444f1899c6.png",
+       "figma_fill_px": [
+        6418,
+        2486
+       ],
+       "drive_file": "1.2 Early Centres of Power/1.1People and Place-05.png",
+       "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+       "animated": false,
+       "box": [
+        1120.0,
+        302.0
+       ],
+       "fill_mode": "STRETCH",
+       "crop": {
+        "x": 0.0153,
+        "y": 0.199,
+        "w": 0.9691,
+        "h": 0.6746
+       },
+       "rel": [
+        160.0,
+        2386.0
+       ],
+       "kind": "image"
+      },
+      {
+       "node": "3339:6181",
+       "text": "Early Centres of Power",
+       "html": "<p>Early Centres of Power</p>",
+       "font": {
+        "size": 38.0,
+        "weight_figma": 800,
+        "line_height": 54.0,
+        "align": "center",
+        "color": "#43695D"
+       },
+       "box": [
+        1120.0,
+        54.0
+       ],
+       "rel": [
+        160.0,
+        2771.1
+       ],
+       "role": "heading",
+       "kind": "text",
+       "name": "Early Centres of Power"
+      },
+      {
+       "node": "3339:6182",
+       "text": "Over time, small river and coastal settlements and maritime routes grew into Southeast Asia's earliest polities. These centres of power were connected less by fixed borders than by shifting networks of influence, often called mandalas. Power spread outward from royal courts, ports, and sacred centres through alliances, trade, ritual authority, and mobility.",
+       "html": "<p>Over time, small river and coastal settlements and maritime routes grew into Southeast Asia's earliest polities. These centres of power were connected less by fixed borders than by shifting networks of influence, often called mandalas. Power spread outward from royal courts, ports, and sacred centres through alliances, trade, ritual authority, and mobility.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 400,
+        "line_height": 32.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1120.0,
+        96.0
+       ],
+       "rel": [
+        160.0,
+        2875.1
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "The emergence of mandalas"
+      },
+      {
+       "node": "3339:6183",
+       "text": "Natural transit routes made this growth possible. Rivers systems and overland trails linked inland communities to coastal ports, carrying humans, goods, plants, animals, ideas, and technologies across the region. Crucial hubs—such as Oc Eo in the Mekong Delta, Palembang in Sumatra, and Butuan in the Philippines—connected local resources to international sea lanes, fueling the rise of major states like Srivijaya, Majapahit, the Khmer Empire, and Ayutthaya. These centres were linked by the movement of merchants, pilgrims, artisans, and seafarers who travelled across seas and river systems carrying objects, skills, beliefs, and artistic traditions. Far from passively absorbing outside ideas from China, India, and West Asia, Southeast Asian societies intentionally adapted external influences on their own terms, forming a dynamic crossroads connecting the broader continent by the 13th century.",
+       "html": "<p>Natural transit routes made this growth possible. Rivers systems and overland trails linked inland communities to coastal ports, carrying humans, goods, plants, animals, ideas, and technologies across the region. Crucial hubs—such as Oc Eo in the Mekong Delta, Palembang in Sumatra, and Butuan in the Philippines—connected local resources to international sea lanes, fueling the rise of major states like Srivijaya, Majapahit, the Khmer Empire, and Ayutthaya. These centres were linked by the movement of merchants, pilgrims, artisans, and seafarers who travelled across seas and river systems carrying objects, skills, beliefs, and artistic traditions. Far from passively absorbing outside ideas from China, India, and West Asia, Southeast Asian societies intentionally adapted external influences on their own terms, forming a dynamic crossroads connecting the broader continent by the 13th century.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 400,
+        "line_height": 31.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1120.0,
+        248.0
+       ],
+       "rel": [
+        160.0,
+        3021.1
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Trade routes and cultural exchanges"
+      }
+     ]
+    },
+    {
+     "node": "3339:6184",
+     "name": "Temple connections",
+     "bg": "#FFFFFF",
+     "rel": [
+      0,
+      3369,
+      1440,
+      824
+     ],
+     "blocks": [
+      {
+       "node": "3339:6186",
+       "name": "Borobudur temple — original image",
+       "figma_fill_ref": "a62481c8898310c1d5e26871fefc2e77631eaa3a",
+       "figma_fill_file": "fills/a62481c8898310c1d5e26871fefc2e77631eaa3a.png",
+       "figma_fill_px": [
+        5379,
+        2486
+       ],
+       "drive_file": "1.2 Early Centres of Power/1.1People and Place-06.png",
+       "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+       "animated": false,
+       "box": [
+        1120.0,
+        344.0
+       ],
+       "fill_mode": "STRETCH",
+       "crop": {
+        "x": -0.0794,
+        "y": 0.183,
+        "w": 1.1564,
+        "h": 0.7685
+       },
+       "rel": [
+        160.0,
+        3469.0
+       ],
+       "kind": "image"
+      },
+      {
+       "node": "3339:6187",
+       "text": "The monumental architecture of Southeast Asia reflects these connections. Temple complexes such as Borobudur and the pagodas of mainland Southeast Asia demonstrate how shared religious traditions took distinctive local forms, while the sculptures, ceramics, metalwork, and textiles produced in these centres reveal centuries of artistic innovation and exchange. The objects in this exhibition bear witness to these networks, showing how movement and encounter shaped the material cultures of Southeast Asia.",
+       "html": "<p>The monumental architecture of Southeast Asia reflects these connections. Temple complexes such as Borobudur and the pagodas of mainland Southeast Asia demonstrate how shared religious traditions took distinctive local forms, while the sculptures, ceramics, metalwork, and textiles produced in these centres reveal centuries of artistic innovation and exchange. The objects in this exhibition bear witness to these networks, showing how movement and encounter shaped the material cultures of Southeast Asia.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 400,
+        "line_height": 32.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1120.0,
+        160.0
+       ],
+       "rel": [
+        160.0,
+        3933.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Architecture and shared traditions"
+      }
+     ]
+    },
+    {
+     "node": "3339:6188",
+     "name": "Sacred landscapes",
+     "bg": "#FFFFFF",
+     "rel": [
+      0,
+      4193,
+      1440,
+      1124
+     ],
+     "blocks": [
+      {
+       "node": "3339:6190",
+       "name": "Stupa — original image",
+       "figma_fill_ref": "648a787ac87d8c853487081a0b9fcd2e670a1084",
+       "figma_fill_file": "fills/648a787ac87d8c853487081a0b9fcd2e670a1084.png",
+       "figma_fill_px": [
+        2777,
+        3371
+       ],
+       "drive_file": "1.2 Early Centres of Power/1.1People and Place-07.png",
+       "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+       "animated": false,
+       "box": [
+        1120.0,
+        580.0
+       ],
+       "fill_mode": "STRETCH",
+       "crop": {
+        "x": -0.6263,
+        "y": 0.025,
+        "w": 2.2525,
+        "h": 0.9609
+       },
+       "rel": [
+        160.0,
+        4293.0
+       ],
+       "kind": "image"
+      },
+      {
+       "node": "3339:6191",
+       "text": "The regional networks connecting Southeast Asian societies extended beyond the exchange of goods and continental trade; they reflected a deeply shared worldview that mirrored these physical connections on a sacred scale. Interconnection in the region was not merely geographic or economic, but ecological and cosmological—linking human communities to their natural surroundings, and the mundane world to the divine order. As Kaja McGowan notes, an enduring historical theme across Southeast Asia has been the belief in a sacred alignment:\n“...the effect of cosmology on built forms, the belief that there exists a magic relationship between the microcosm and the macrocosm, between the human body and the natural world.” (p. 241)",
+       "html": "<p>The regional networks connecting Southeast Asian societies extended beyond the exchange of goods and continental trade; they reflected a deeply shared worldview that mirrored these physical connections on a sacred scale. Interconnection in the region was not merely geographic or economic, but ecological and cosmological—linking human communities to their natural surroundings, and the mundane world to the divine order. As Kaja McGowan notes, an enduring historical theme across Southeast Asia has been the belief in a sacred alignment:<br>“...the effect of cosmology on built forms, the belief that there exists a magic relationship between the microcosm and the macrocosm, between the human body and the natural world.” (p. 241)</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 32.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1120.0,
+        224.0
+       ],
+       "rel": [
+        160.0,
+        4993.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Sacred alignment and cosmology"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "slug": "rice-and-spice",
+   "hash": "#3",
+   "button": "3",
+   "frame": "3339:6192",
+   "frame_name": "Desktop — Rice and Spice",
+   "frame_h": 5183,
+   "title": "Rice and Spice: Platforms of Interconnection",
+   "accent_color": "#887A61",
+   "map": {
+    "node": "3339:6211",
+    "name": "River valleys and mountain corridors — original map",
+    "figma_fill_ref": "0f1d3d8b55350330af1b0e49bb2d1919e5c71b70",
+    "figma_fill_file": "fills/0f1d3d8b55350330af1b0e49bb2d1919e5c71b70.jpg",
+    "figma_fill_px": [
+     8000,
+     4500
+    ],
+    "drive_file": "1.3 Rice and Spice_ Platforms of Interconnection/Map 1.3 Environment.jpg",
+    "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+    "animated": false,
+    "box": [
+     1440.0,
+     809.0
+    ],
+    "fill_mode": "FIT",
+    "crop": null,
+    "rel": [
+     0,
+     1477.0,
+     1440,
+     809.0
+    ],
+    "section": "3339:6210"
+   },
+   "map_buttons": {
+    "active": 3,
+    "count": 4
+   },
+   "arrows": {
+    "prev_visible": true,
+    "next_visible": true
+   },
+   "sections": [
+    {
+     "node": "3339:6215",
+     "name": "Rice and spice",
+     "bg": "#FFFFFF",
+     "rel": [
+      0,
+      2286,
+      1440,
+      1237
+     ],
+     "blocks": [
+      {
+       "node": "3339:6216",
+       "text": "Rice and Spice: Platforms of Interconnection",
+       "html": "<p>Rice and Spice: Platforms of Interconnection</p>",
+       "font": {
+        "size": 38.0,
+        "weight_figma": 800,
+        "line_height": 55.0,
+        "align": "center",
+        "color": "#887A61"
+       },
+       "box": [
+        1120.0,
+        55.0
+       ],
+       "rel": [
+        160.0,
+        2386.0
+       ],
+       "role": "heading",
+       "kind": "text",
+       "name": "Rice and Spice: Platforms of Interconnection"
+      },
+      {
+       "node": "3339:6217",
+       "name": "Rice farmers and cultivation — original illustration",
+       "figma_fill_ref": "832a2e1a6baedff1bf4b11a5fb7b8150b3fdeb63",
+       "figma_fill_file": "fills/832a2e1a6baedff1bf4b11a5fb7b8150b3fdeb63.png",
+       "figma_fill_px": [
+        1920,
+        1080
+       ],
+       "drive_file": "1.3 Rice and Spice_ Platforms of Interconnection/1.3 Rice and Spice-farmer.gif",
+       "drive_kind": "gif เคลื่อนไหว (fill = ภาพนิ่งเฟรมแรก/poster)",
+       "animated": true,
+       "box": [
+        1120.0,
+        489.0
+       ],
+       "fill_mode": "STRETCH",
+       "crop": {
+        "x": -0.043,
+        "y": 0.0762,
+        "w": 1.085,
+        "h": 0.8422
+       },
+       "rel": [
+        160.0,
+        2541.0
+       ],
+       "kind": "image"
+      },
+      {
+       "node": "3339:6219",
+       "text": "Rice is a sacred source of food for people in Southeast Asia and as such holds a special place in arts and design. Rice and spices have shaped the histories, landscapes, and cultures of Southeast Asia for centuries.",
+       "html": "<p>Rice is a sacred source of food for people in Southeast Asia and as such holds a special place in arts and design. Rice and spices have shaped the histories, landscapes, and cultures of Southeast Asia for centuries.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 32.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1120.0,
+        64.0
+       ],
+       "rel": [
+        160.0,
+        3097.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Rice as a sacred source of food"
+      },
+      {
+       "node": "3339:6220",
+       "text": "Rice cultivation depended on fertile land and specialized knowledge passed down through generations. Across Southeast Asia, communities continually migrated along river valleys and mountain corridors, carrying their agricultural traditions to new landscapes. One notable early 20th-century movement occurred on the Malay Peninsula, where highland migrants brought their established rice-growing practices down to the lowlands. This labor-intensive work relied heavily on Pawangs—agricultural sages or nature mediators in the Malay-speaking world, whose guidance blended empirical farming science, environmental knowledge with spiritual rituals to ensure a bountiful harvest.",
+       "html": "<p>Rice cultivation depended on fertile land and specialized knowledge passed down through generations. Across Southeast Asia, communities continually migrated along river valleys and mountain corridors, carrying their agricultural traditions to new landscapes. One notable early 20th-century movement occurred on the Malay Peninsula, where highland migrants brought their established rice-growing practices down to the lowlands. This labor-intensive work relied heavily on Pawangs—agricultural sages or nature mediators in the Malay-speaking world, whose guidance blended empirical farming science, environmental knowledge with spiritual rituals to ensure a bountiful harvest.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 32.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1120.0,
+        192.0
+       ],
+       "rel": [
+        160.0,
+        3231.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Agricultural traditions and Pawangs"
+      }
+     ]
+    },
+    {
+     "node": "3339:6221",
+     "name": "Pawangs and rice rituals",
+     "bg": "#FFFFFF",
+     "rel": [
+      0,
+      3523,
+      1440,
+      1060
+     ],
+     "blocks": [
+      {
+       "node": "3339:6222",
+       "name": "Pawangs and rice ritual — original image",
+       "figma_fill_ref": "dad6bba0a08aa0892dde270b8de3a60601359243",
+       "figma_fill_file": "fills/dad6bba0a08aa0892dde270b8de3a60601359243.png",
+       "figma_fill_px": [
+        2617,
+        3107
+       ],
+       "drive_file": "1.3 Rice and Spice_ Platforms of Interconnection/PAWANG.png",
+       "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+       "animated": false,
+       "box": [
+        548.0,
+        501.0
+       ],
+       "fill_mode": "STRETCH",
+       "crop": {
+        "x": -0.1979,
+        "y": 0.0763,
+        "w": 1.1669,
+        "h": 0.8985
+       },
+       "rel": [
+        731.0,
+        3563.0
+       ],
+       "kind": "image"
+      },
+      {
+       "node": "3339:6223",
+       "text": "Pawangs spent their lives clearing forests, growing rice, trapping elephants, mining tin and gold, and making guns and bullets. They also passed down ilmu, sacred knowledge connected to shooting, protection, and the unseen world. Their manuscripts recorded miracle stories, genealogies, incantations, charms, and ways of communicating with spirits. Pawangs remain inseparable from the religious histories of Southeast Asia’s rice worlds.",
+       "html": "<p><strong>Pawangs</strong> spent their lives clearing forests, growing rice, trapping elephants, mining tin and gold, and making guns and bullets. They also passed down ilmu, sacred knowledge connected to shooting, protection, and the unseen world. Their manuscripts recorded miracle stories, genealogies, incantations, charms, and ways of communicating with spirits. Pawangs remain inseparable from the religious histories of Southeast Asia’s rice worlds.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 400,
+        "line_height": 32.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        549.0,
+        256.0
+       ],
+       "rel": [
+        160.0,
+        3767.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Pawangs and sacred knowledge"
+      },
+      {
+       "node": "3339:6224",
+       "text": "In Brunei Darussalam, the durung, a traditional rice storehouse, reflects generations of environmental knowledge and sustainable design. Elevated above the ground and carefully constructed to protect harvests, it illustrates how communities adapted architecture to local climates and ecosystems.",
+       "html": "<p>In Brunei Darussalam, the durung, a traditional rice storehouse, reflects generations of environmental knowledge and sustainable design. Elevated above the ground and carefully constructed to protect harvests, it illustrates how communities adapted architecture to local climates and ecosystems.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 32.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1119.0,
+        96.0
+       ],
+       "rel": [
+        160.0,
+        4157.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Rice storehouses in Brunei"
+      },
+      {
+       "node": "3339:6225",
+       "text": "Across Southeast Asia, animals serve as potent symbols in rituals surrounding rice—a crop that itself represents life, fertility, and cosmic fecundity. Bird motifs, in particular, mirror these themes of vitality and generation. In Thailand, the rooster embodies the warmth, dawn, and domestic abundance associated with a bountiful harvest. Similarly, among the Peranakan communities of Southeast Asia, the mythical phoenix is revered as an emblem of harmony, rebirth, and enduring good fortune, aligning human prosperity with the cyclic renewal of the natural world.",
+       "html": "<p>Across Southeast Asia, animals serve as potent symbols in rituals surrounding rice—a crop that itself represents life, fertility, and cosmic fecundity. Bird motifs, in particular, mirror these themes of vitality and generation. In Thailand, the rooster embodies the warmth, dawn, and domestic abundance associated with a bountiful harvest. Similarly, among the Peranakan communities of Southeast Asia, the mythical phoenix is revered as an emblem of harmony, rebirth, and enduring good fortune, aligning human prosperity with the cyclic renewal of the natural world.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 32.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1119.0,
+        160.0
+       ],
+       "rel": [
+        160.0,
+        4313.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Birds, rice and renewal"
+      }
+     ]
+    },
+    {
+     "node": "3339:6226",
+     "name": "Harvest illustration",
+     "bg": "#FFFFFF",
+     "rel": [
+      0,
+      4583,
+      1440,
+      600
+     ],
+     "blocks": [
+      {
+       "node": "3339:6227",
+       "name": "Phoenix, rooster and rice fields — original image",
+       "figma_fill_ref": "b51793315c34f356a7c3a5e098076c048ad5c252",
+       "figma_fill_file": "fills/b51793315c34f356a7c3a5e098076c048ad5c252.png",
+       "figma_fill_px": [
+        8000,
+        3089
+       ],
+       "drive_file": "1.3 Rice and Spice_ Platforms of Interconnection/Chicken1.3.png",
+       "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+       "animated": false,
+       "box": [
+        1440.0,
+        556.0
+       ],
+       "fill_mode": "FIT",
+       "crop": null,
+       "rel": [
+        0.0,
+        4627.0
+       ],
+       "kind": "image"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "slug": "animals-folklore-and-ecological-stewardship",
+   "hash": "#4",
+   "button": "4",
+   "frame": "3339:6228",
+   "frame_name": "Desktop — Animals, Folklore and Ecological Stewardship",
+   "frame_h": 3813,
+   "title": "Animals, Folklore, and Ecological Stewardship",
+   "accent_color": "#3F4036",
+   "map": {
+    "node": "3339:6247",
+    "name": "Southeast Asia rivers map — original image",
+    "figma_fill_ref": "0f94af29f4502249935c45cfd8ba90d80635f1fb",
+    "figma_fill_file": "fills/0f94af29f4502249935c45cfd8ba90d80635f1fb.jpg",
+    "figma_fill_px": [
+     8000,
+     4500
+    ],
+    "drive_file": "1.4 Animals, Folklore, and Ecological Stewardship/map1.4.jpg",
+    "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+    "animated": false,
+    "box": [
+     1440.0,
+     809.0
+    ],
+    "fill_mode": "FIT",
+    "crop": null,
+    "rel": [
+     0,
+     1477.0,
+     1440,
+     809.0
+    ],
+    "section": "3339:6246"
+   },
+   "map_buttons": {
+    "active": 4,
+    "count": 4
+   },
+   "arrows": {
+    "prev_visible": true,
+    "next_visible": false
+   },
+   "sections": [
+    {
+     "node": "3339:6251",
+     "name": "Animals, folklore and ecological stewardship",
+     "bg": "#FFFFFF",
+     "rel": [
+      0,
+      2286,
+      1440,
+      1527
+     ],
+     "blocks": [
+      {
+       "node": "3339:6252",
+       "text": "Animals, Folklore, and Ecological Stewardship",
+       "html": "<p>Animals, Folklore, and Ecological Stewardship</p>",
+       "font": {
+        "size": 38.0,
+        "weight_figma": 800,
+        "line_height": 55.0,
+        "align": "left",
+        "color": "#3F4036"
+       },
+       "box": [
+        1120.0,
+        55.0
+       ],
+       "rel": [
+        160.0,
+        2386.0
+       ],
+       "role": "heading",
+       "kind": "text",
+       "name": "Animals, Folklore, and Ecological Stewardship"
+      },
+      {
+       "node": "3339:6253",
+       "text": "Across Southeast Asia, human culture and the natural environment have evolved together for thousands of years. Animals feature prominently throughout the region’s history—not merely as wildlife or livestock, but as spiritual protectors, symbols of royal power, and guides through the landscape.\nBy displaying museum artifacts alongside the species that inspired them, this virtual exhibition highlights how deep ecological knowledge has been embedded in local belief systems, craftsmanship, and daily life.",
+       "html": "<p>Across Southeast Asia, human culture and the natural environment have evolved together for thousands of years. Animals feature prominently throughout the region’s history—not merely as wildlife or livestock, but as spiritual protectors, symbols of royal power, and guides through the landscape.<br>By displaying museum artifacts alongside the species that inspired them, this virtual exhibition highlights how deep ecological knowledge has been embedded in local belief systems, craftsmanship, and daily life.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 32.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1120.0,
+        160.0
+       ],
+       "rel": [
+        160.0,
+        2487.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Animals, people and ecological knowledge"
+      },
+      {
+       "node": "3339:6254",
+       "text": "In oral literature and cosmological traditions, animals anchor communities to specific landscapes and moral principles. Along the Mekong Basin, folk tales trace the origin of the endangered Irrawaddy dolphin (psaot) to a young woman transformed by fate, preserving an ancient memory of river stewardship. Other traditions use wildlife to teach ethics: the \"Lament of the Gibbons\" addresses habitat loss, the call of the kone lok bird signifies maternal sacrifice, and the popular Judge Rabbit fables feature a clever hare who outsmarts corrupt authorities. On a broader scale, the regional animal zodiac ties individual temperament and the passage of years directly to the traits of real creatures.",
+       "html": "<p>In oral literature and cosmological traditions, animals anchor communities to specific landscapes and moral principles. Along the Mekong Basin, folk tales trace the origin of the endangered Irrawaddy dolphin (psaot) to a young woman transformed by fate, preserving an ancient memory of river stewardship. Other traditions use wildlife to teach ethics: the \"Lament of the Gibbons\" addresses habitat loss, the call of the kone lok bird signifies maternal sacrifice, and the popular Judge Rabbit fables feature a clever hare who outsmarts corrupt authorities. On a broader scale, the regional animal zodiac ties individual temperament and the passage of years directly to the traits of real creatures.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 32.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1120.0,
+        192.0
+       ],
+       "rel": [
+        160.0,
+        2737.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Oral literature and cosmological traditions"
+      },
+      {
+       "node": "3339:6255",
+       "text": "Beyond actual species, mythical beings dominate Southeast Asian art and architecture. The Garuda—a divine bird-human figure from the Ramayana—appears on temple reliefs, royal seals, and performance costumes as a symbol of protection and the sky realm. Equally vital is the Naga, a sacred water serpent associated with fertility and the underworld. Naga balustrades line temple causeways like those at Angkor Wat to bridge the earthly and heavenly realms, while regional creation myths credit the serpent with carving out river channels and bringing life-giving water to the soil.\nTogether, these artifacts illustrate how Southeast Asia's shared heritage was forged through enduring relationships between human communities, animal life, and the landscapes they inhabit.",
+       "html": "<p>Beyond actual species, mythical beings dominate Southeast Asian art and architecture. The Garuda—a divine bird-human figure from the Ramayana—appears on temple reliefs, royal seals, and performance costumes as a symbol of protection and the sky realm. Equally vital is the Naga, a sacred water serpent associated with fertility and the underworld. Naga balustrades line temple causeways like those at Angkor Wat to bridge the earthly and heavenly realms, while regional creation myths credit the serpent with carving out river channels and bringing life-giving water to the soil.<br>Together, these artifacts illustrate how Southeast Asia's shared heritage was forged through enduring relationships between human communities, animal life, and the landscapes they inhabit.</p>",
+       "font": {
+        "size": 20.0,
+        "weight_figma": 500,
+        "line_height": 32.0,
+        "align": "justified",
+        "color": "#343A40"
+       },
+       "box": [
+        1120.0,
+        224.0
+       ],
+       "rel": [
+        160.0,
+        3019.0
+       ],
+       "role": "body",
+       "kind": "text",
+       "name": "Mythical beings and shared heritage"
+      },
+      {
+       "node": "3339:6256",
+       "name": "Gibbon, Irrawaddy dolphin and rabbit — original image",
+       "figma_fill_ref": "33c0fb7a4d5a135c415e63c926eb3738c6083e58",
+       "figma_fill_file": "fills/33c0fb7a4d5a135c415e63c926eb3738c6083e58.png",
+       "figma_fill_px": [
+        7106,
+        2486
+       ],
+       "drive_file": "1.4 Animals, Folklore, and Ecological Stewardship/1.1Animals.png",
+       "drive_kind": "png/jpg (ไฟล์เดียวกับ fill · sha256 ตรง)",
+       "animated": false,
+       "box": [
+        1120.0,
+        380.0
+       ],
+       "fill_mode": "STRETCH",
+       "crop": {
+        "x": 0.0664,
+        "y": 0.0837,
+        "w": 0.8673,
+        "h": 0.8411
+       },
+       "rel": [
+        160.0,
+        3333.0
+       ],
+       "kind": "image"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
