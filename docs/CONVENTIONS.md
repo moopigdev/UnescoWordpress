@@ -6,7 +6,7 @@
 - **enqueue อัตโนมัติตาม slug** (core ทำใน `inc/enqueue.php`): มี `assets/css/<slug>.css` / `assets/js/<slug>.js` ของ template ปัจจุบัน → enqueue เอง (version = filemtime · js ใน footer แบบ defer) · หน้าไม่ต้องแก้ functions.php
   - slug = ชื่อไฟล์ template ที่ WP เลือก (ไม่มี `.php`) ผ่านตาราง `sh_template_slug_map()` (= ตาราง route ใน PLAN): `front-page`→`home` · `page-intro`→`intro` · `taxonomy-zone`→`zone` · `taxonomy-trail`→`trail` · `page-timeline`→`timeline` · `single-object`→`detail` · template อื่นใช้ชื่อไฟล์ตรงๆ (เช่น `index`→`index.css`)
   - ทุกหน้าได้ `tokens.css` → `base.css` (+ `assets/js/base.js` ถ้ามี) ก่อนเสมอ · css หน้า depend `sh-base` · handle = `sh-page-<slug>`
-- `header.php` เปิด `<main id="main" class="sh-main">` · `footer.php` ปิด — template หน้าเรียก `get_header()` / `get_footer()` แล้ววางเนื้อหาข้างในเลย · ใช้ได้เฉพาะตัวแปร `--sh-*` จาก `tokens.css`
+- `header.php` เปิด `<main id="main" class="sh-main">` · `footer.php` ปิด แล้ววาด footer โลโก้ UNESCO + Temasek (D47 · ระยะบน 40 ล่าง 135 — หน้าไม่ต้องเว้นท้ายเอง) — template หน้าเรียก `get_header()` / `get_footer()` แล้ววางเนื้อหาข้างในเลย · เส้นล่าง header: `get_header( null, array( 'header_rule' => bool ) )` (ค่าเริ่ม: ไม่มีเส้นที่หน้าแรก + Zone 1–3 · §9.1/P-276) · ใช้ได้เฉพาะตัวแปร `--sh-*` จาก `tokens.css`
 
 ## PHP / WP
 - ข้อมูล: อ่านตาม `docs/CONTENT-MODEL.md` ผ่าน API ของ mu-plugin (`sh_get()` `sh_trail_objects()` …) หรือ `get_post_meta`/`get_term_meta` — ห้ามใช้ `get_field()` ของ ACF ใน template (ACF อาจไม่ active) · เพิ่ม/แก้ฟิลด์ = `inc/fields.php` + CONTENT-MODEL พร้อมกัน แล้วรัน `python3 scripts/import/check-contract.py`

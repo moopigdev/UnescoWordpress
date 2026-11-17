@@ -238,3 +238,202 @@ function sh_object_layout( int $post_id ): array {
 	$data = json_decode( (string) get_post_meta( $post_id, 'sh_layout', true ), true );
 	return is_array( $data ) ? $data : array();
 }
+
+/**
+ * A format=inline_html textarea as paragraphs of safe HTML (blank line = paragraph · single line break = <br> ·
+ * only <strong>/<b>/<em>/<i>/<br> kept, no attributes). Ready to echo inside <p> — no further escaping.
+ *
+ * @param string $text Raw value.
+ * @return string[]
+ */
+function sh_rich_paragraphs( string $text ): array {
+	$out = array();
+	foreach ( sh_paragraphs( $text ) as $p ) {
+		$out[] = nl2br( wp_kses( $p, sh_core_inline_tags() ), false );
+	}
+	return $out;
+}
+
+/**
+ * JSON object stored in a meta/option value as an array ([] when empty/invalid).
+ *
+ * @param mixed $value Stored value.
+ * @return array<string, mixed>
+ */
+function sh_json_value( $value ): array {
+	$data = is_string( $value ) ? json_decode( $value, true ) : null;
+	return is_array( $data ) ? $data : array();
+}
+
+/**
+ * Tile images of an object in one trail: its "Tiles in other trails" entry for that trail when it has an image,
+ * else sh_tile_image / sh_tile_image_hover.
+ *
+ * @param int         $post_id Object id.
+ * @param int|WP_Term $trail   Trail term or id.
+ * @return array{image:int,hover:int}
+ */
+function sh_object_trail_tile( int $post_id, $trail ): array {
+	$term_id = $trail instanceof WP_Term ? $trail->term_id : (int) $trail;
+	for ( $n = 1; $n <= 4; $n++ ) {
+		if ( $term_id && absint( get_post_meta( $post_id, "sh_trail_tile_{$n}_trail", true ) ) === $term_id ) {
+			$image = absint( get_post_meta( $post_id, "sh_trail_tile_{$n}_image", true ) );
+			if ( $image ) {
+				return array(
+					'image' => $image,
+					'hover' => absint( get_post_meta( $post_id, "sh_trail_tile_{$n}_image_hover", true ) ),
+				);
+			}
+		}
+	}
+	return array(
+		'image' => absint( get_post_meta( $post_id, 'sh_tile_image', true ) ),
+		'hover' => absint( get_post_meta( $post_id, 'sh_tile_image_hover', true ) ),
+	);
+}
+
+/**
+ * Tiles of a trail page grid in order: published objects (sh_trail_objects() order · tile images for this trail ·
+ * link to the object) with the trail's "tiles without a page" (sh_static_tile_<n>_*: image, no link) placed at their
+ * position (1 = first; a position past the end = after the objects).
+ *
+ * @param int|WP_Term $trail Trail term or id.
+ * @return array<int, array{object:WP_Post|null,url:string,label:string,image:int,hover:int}>
+ */
+function sh_trail_tiles( $trail ): array {
+	$term_id = $trail instanceof WP_Term ? $trail->term_id : (int) $trail;
+	$static  = array();
+	for ( $n = 1; $n <= 3; $n++ ) {
+		$pos   = (int) get_term_meta( $term_id, "sh_static_tile_{$n}_position", true );
+		$image = absint( get_term_meta( $term_id, "sh_static_tile_{$n}_image", true ) );
+		if ( $pos > 0 && $image ) {
+			$static[] = array(
+				'pos'  => $pos,
+				'tile' => array(
+					'object' => null,
+					'url'    => '',
+					'label'  => (string) get_term_meta( $term_id, "sh_static_tile_{$n}_label", true ),
+					'image'  => $image,
+					'hover'  => absint( get_term_meta( $term_id, "sh_static_tile_{$n}_image_hover", true ) ),
+				),
+			);
+		}
+	}
+	usort( $static, static fn( array $a, array $b ): int => $a['pos'] <=> $b['pos'] );
+	$objects = array();
+	foreach ( sh_trail_objects( $term_id ) as $post ) {
+		$url       = get_permalink( $post );
+		$objects[] = array(
+			'object' => $post,
+			'url'    => is_string( $url ) ? $url : '',
+			'label'  => get_the_title( $post ),
+		) + sh_object_trail_tile( $post->ID, $term_id );
+	}
+	$out = array();
+	while ( $objects || $static ) {
+		if ( $static && ( count( $out ) + 1 >= $static[0]['pos'] || ! $objects ) ) {
+			$out[] = array_shift( $static )['tile'];
+		} else {
+			$out[] = array_shift( $objects );
+		}
+	}
+	return $out;
+}
+
+/**
+ * Home "Your animal guide is..." cards (D48): every trail with a card image (sh_guide_card), in home icon order.
+ * body = sh_rich_paragraphs() of sh_guide_body (safe HTML) · url = the trail page.
+ *
+ * @return array<int, array{trail:WP_Term,name:string,words:string,body:string[],follow:string,card:int,url:string}>
+ */
+function sh_guide_cards(): array {
+	$out = array();
+	foreach ( sh_trails( 'home' ) as $t ) {
+		$card = absint( get_term_meta( $t->term_id, 'sh_guide_card', true ) );
+		if ( ! $card ) {
+			continue;
+		}
+		$url   = get_term_link( $t );
+		$out[] = array(
+			'trail'  => $t,
+			'name'   => (string) get_term_meta( $t->term_id, 'sh_guide_name', true ),
+			'words'  => (string) get_term_meta( $t->term_id, 'sh_guide_words', true ),
+			'body'   => sh_rich_paragraphs( (string) get_term_meta( $t->term_id, 'sh_guide_body', true ) ),
+			'follow' => (string) get_term_meta( $t->term_id, 'sh_guide_follow', true ),
+			'card'   => $card,
+			'url'    => is_string( $url ) ? $url : '',
+		);
+	}
+	return $out;
+}
+
+/**
+ * Introduction page (D50) — header part shared by the four chapters. Texts raw (escape on output) except
+ * paragraphs (non-empty sh_intro_head_paragraph_1..5, raw strings).
+ *
+ * @param int $page_id Intro page (0 = sh_page_id( 'intro' )).
+ * @return array{emblem:int,title:string,paragraphs:string[],credit:string,env_heading:string,layout:array<string,mixed>}
+ */
+function sh_intro_head( int $page_id = 0 ): array {
+	$page_id    = $page_id ? $page_id : sh_page_id( 'intro' );
+	$paragraphs = array();
+	for ( $k = 1; $k <= 5; $k++ ) {
+		$p = (string) get_post_meta( $page_id, "sh_intro_head_paragraph_{$k}", true );
+		if ( '' !== trim( $p ) ) {
+			$paragraphs[] = $p;
+		}
+	}
+	return array(
+		'emblem'      => absint( get_post_meta( $page_id, 'sh_intro_head_emblem', true ) ),
+		'title'       => (string) get_post_meta( $page_id, 'sh_intro_head_title', true ),
+		'paragraphs'  => $paragraphs,
+		'credit'      => (string) get_post_meta( $page_id, 'sh_intro_head_credit', true ),
+		'env_heading' => (string) get_post_meta( $page_id, 'sh_intro_env_heading', true ),
+		'layout'      => sh_json_value( get_post_meta( $page_id, 'sh_intro_head_layout', true ) ),
+	);
+}
+
+/**
+ * Introduction chapters 1–4 (D50). texts[k] = sh_rich_paragraphs() of sh_intro_ch<n>_text_<k> (safe HTML, slot k
+ * 1..7, empty slots left out) · images[k] = {id: still image, animation: animated image or 0} (slot 1..5, empty
+ * left out) · layout = sh_intro_ch<n>_layout (sections → blocks that point to text/image slots).
+ *
+ * @param int $page_id Intro page (0 = sh_page_id( 'intro' )).
+ * @return array<int, array{n:int,title:string,accent:string,map_image:int,map_animation:int,texts:array<int,string[]>,images:array<int,array{id:int,animation:int}>,layout:array<string,mixed>}>
+ */
+function sh_intro_chapters( int $page_id = 0 ): array {
+	$page_id = $page_id ? $page_id : sh_page_id( 'intro' );
+	$get     = static fn( string $key ) => get_post_meta( $page_id, $key, true );
+	$out     = array();
+	for ( $n = 1; $n <= 4; $n++ ) {
+		$texts = array();
+		for ( $k = 1; $k <= 7; $k++ ) {
+			$p = sh_rich_paragraphs( (string) $get( "sh_intro_ch{$n}_text_{$k}" ) );
+			if ( $p ) {
+				$texts[ $k ] = $p;
+			}
+		}
+		$images = array();
+		for ( $k = 1; $k <= 5; $k++ ) {
+			$id   = absint( $get( "sh_intro_ch{$n}_image_{$k}" ) );
+			$anim = absint( $get( "sh_intro_ch{$n}_image_{$k}_animation" ) );
+			if ( $id || $anim ) {
+				$images[ $k ] = array(
+					'id'        => $id,
+					'animation' => $anim,
+				);
+			}
+		}
+		$out[ $n ] = array(
+			'n'             => $n,
+			'title'         => (string) $get( "sh_intro_ch{$n}_title" ),
+			'accent'        => (string) $get( "sh_intro_ch{$n}_accent" ),
+			'map_image'     => absint( $get( "sh_intro_ch{$n}_map_image" ) ),
+			'map_animation' => absint( $get( "sh_intro_ch{$n}_map_animation" ) ),
+			'texts'         => $texts,
+			'images'        => $images,
+			'layout'        => sh_json_value( $get( "sh_intro_ch{$n}_layout" ) ),
+		);
+	}
+	return $out;
+}

@@ -39,12 +39,14 @@ function sh_imp_find_attachment( string $key ): int {
 /**
  * Copy a file into uploads and create its attachment (once per key). 0 when the file is missing.
  *
- * @param string               $src   Absolute source path.
- * @param string               $key   Import key.
- * @param string               $title Attachment title (also the file name).
- * @param array<string, mixed> $video Video metadata (width/height/length) for video files.
+ * @param string                    $src   Absolute source path.
+ * @param string                    $key   Import key.
+ * @param string                    $title Attachment title (also the file name).
+ * @param array<string, mixed>      $video Video metadata (width/height/length) for video files.
+ * @param array<string, mixed>|null $spec  Web spec {box, crop} (refs-2026-11-17.php): image cropped + shrunk to at
+ *                                         most 2× its display size while copying (web-image.php) · null = as is.
  */
-function sh_imp_attachment( string $src, string $key, string $title, array $video = array() ): int {
+function sh_imp_attachment( string $src, string $key, string $title, array $video = array(), ?array $spec = null ): int {
 	$found = sh_imp_find_attachment( $key );
 	if ( $found ) {
 		return $found;
@@ -66,7 +68,15 @@ function sh_imp_attachment( string $src, string $key, string $title, array $vide
 	}
 	$name = wp_unique_filename( $up['path'], $name );
 	$dest = $up['path'] . '/' . $name;
-	if ( ! copy( $src, $dest ) ) {
+	if ( null !== $spec && str_starts_with( (string) $check['type'], 'image/' ) ) {
+		$res = sh_web_image_write( $src, $dest, $spec['box'], isset( $spec['crop'] ) ? $spec['crop'] : null );
+		if ( '' === $res ) {
+			throw new RuntimeException( 'copy failed: ' . $src );
+		}
+		if ( str_starts_with( $res, 'resized' ) ) {
+			sh_imp_count( 'updated', 'resized_2x' );
+		}
+	} elseif ( ! copy( $src, $dest ) ) {
 		throw new RuntimeException( 'copy failed: ' . $src );
 	}
 	if ( sh_imp_icc_normalize( $dest, (string) $check['type'] ) ) { // Display P3 etc. → sRGB as Figma shows it (icc.php).
@@ -186,9 +196,11 @@ function sh_imp_video( ?array $entry, string $title ): array {
 	if ( null === $entry ) {
 		return $out;
 	}
+	// Path from the manifest (P-303: media-1117 files sit in media/out/<sub>/<sub>/) · key = that path (= the basename
+	// for the older top-level files, so their attachments are found again).
 	$dir  = sh_imp_config()['media'];
-	$file = static fn( string $p ): string => $dir . '/' . basename( $p );
-	$key  = static fn( string $p ): string => 'media:' . basename( $p );
+	$file = static fn( string $p ): string => $dir . '/' . ( '' !== sh_import_media_rel( $p ) ? sh_import_media_rel( $p ) : basename( $p ) );
+	$key  = static fn( string $p ): string => 'media:' . ( '' !== sh_import_media_rel( $p ) ? sh_import_media_rel( $p ) : basename( $p ) );
 	if ( isset( $entry['kind'] ) && 'still' === $entry['kind'] ) {
 		if ( ! empty( $entry['still'] ) ) {
 			$out['still'] = sh_imp_attachment( $file( (string) $entry['still'] ), $key( (string) $entry['still'] ), $title . ' hero' );
@@ -272,4 +284,34 @@ function sh_imp_below_image( array $map, string $value, string $title ): int {
 	}
 	sh_imp_warn( 'below_ref without file: ' . $value . ' (' . $title . ')' );
 	return 0;
+}
+
+/**
+ * Image attachments of a manifest entry for the Introduction (media-1117): kind "still" → still · kind "animation" →
+ * still = poster (shown where animated WebP cannot play) + animation = out (animated WebP). Paths from the manifest.
+ *
+ * @param array<string, mixed>|null $entry Manifest entry.
+ * @param string                    $title Title.
+ * @return array{still:int,animation:int}
+ */
+function sh_imp_manifest_images( ?array $entry, string $title ): array {
+	$out = array(
+		'still'     => 0,
+		'animation' => 0,
+	);
+	if ( null === $entry ) {
+		return $out;
+	}
+	$dir = sh_imp_config()['media'];
+	$one = static function ( $p, string $t ) use ( $dir ): int {
+		$rel = is_string( $p ) ? sh_import_media_rel( $p ) : '';
+		return '' === $rel ? 0 : sh_imp_attachment( $dir . '/' . $rel, 'media:' . $rel, $t );
+	};
+	if ( isset( $entry['kind'] ) && 'animation' === $entry['kind'] ) {
+		$out['still']     = $one( isset( $entry['poster'] ) ? $entry['poster'] : null, $title );
+		$out['animation'] = $one( isset( $entry['out'] ) ? $entry['out'] : null, $title . ' animation' );
+		return $out;
+	}
+	$out['still'] = $one( isset( $entry['still'] ) ? $entry['still'] : ( isset( $entry['out'] ) ? $entry['out'] : null ), $title );
+	return $out;
 }

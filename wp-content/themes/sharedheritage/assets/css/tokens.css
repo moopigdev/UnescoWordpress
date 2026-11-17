@@ -77,6 +77,7 @@
 	--sh-color-accent-tint: rgba(214, 95, 71, 0.2);   /* zone-nav active fill #D65F47 @20% */
 	--sh-color-detail-title-red: #d75f47;             /* Detail title (frame 1479) */
 	--sh-color-header-rule: #aacfd8;                  /* Header #1 bottom stroke */
+	--sh-color-footer-support: #49176d;               /* D47 footer "With the Support of" 3339:5255 */
 	--sh-color-cream: #f1f1e5;                        /* Frame 12789 / 114477 (hidden in pages) */
 	--sh-color-map-bg: #f2f2f2;                       /* map Frame 12655 fill (§4.2/§4.7) */
 	--sh-color-back-bg: rgba(0, 0, 0, 0.1);           /* Back button fill #000000 @10% */
@@ -151,6 +152,7 @@
 	--sh-type-metadata-medium: var(--sh-fw-komet-medium) 24px/30px var(--sh-font-komet);
 	--sh-type-timeline-meta: var(--sh-fw-komet-regular) 14px/24px var(--sh-font-komet);
 	--sh-type-nav: var(--sh-fw-komet-medium) 14px/17.5px var(--sh-font-komet);
+	--sh-type-footer-support: var(--sh-fw-komet-regular) 14px/17.5px var(--sh-font-komet); /* D47 3339:5255 Komet-Regular 14/17.5 */
 	--sh-type-read-more-home: var(--sh-fw-komet-regular) 16px/22px var(--sh-font-komet);
 	--sh-type-read-more-home-hover: var(--sh-fw-komet-bold) 16px/22px var(--sh-font-komet);
 	--sh-type-read-more: var(--sh-fw-regular) 20px/22px var(--sh-font-barlow-condensed);
@@ -197,6 +199,18 @@
 	--sh-header-height: 150px;          /* content starts at y=150 */
 	--sh-header-nav-gap: 30px;          /* Frame 12653 gap */
 	--sh-header-rule-width: 1.5px;      /* Header #1 bottom stroke, INSIDE */
+	--sh-header-logo-width: 220px;      /* D47 §9.1 Shared Heritage logo 220×77 at [160,4.5] */
+	--sh-header-logo-height: 77px;
+	--sh-header-logo-min-width: 120px;  /* §9.1 responsive: logo ≥ 120 wide on phones */
+	--sh-footer-gap-top: 40px;          /* §9.1 footer: 40 above (Zone 4/5 → footer on Home) */
+	--sh-footer-gap-bottom: 135px;      /* §9.1 footer: 135 below the logo row (Home 3651 → 3786) */
+	--sh-footer-pad-left: 23.8393%;     /* §9.1 padding-left 267 of the 1120 row (P-274: not centred) */
+	--sh-footer-pad-block: 5px;
+	--sh-footer-gap: 20px;              /* UNESCO ↔ Temasek */
+	--sh-footer-logo-height: 60px;      /* UNESCO 283.1×60 · Temasek 208×60 */
+	--sh-footer-unesco-width: 283.1px;
+	--sh-footer-temasek-width: 208px;
+	--sh-footer-support-gap: 7px;       /* "With the Support of" → Temasek logo */
 	--sh-tile-size: 184px;
 	--sh-tile-size-hover: 210px;
 	--sh-tile-gap: 50px;

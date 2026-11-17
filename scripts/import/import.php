@@ -1,7 +1,8 @@
 <?php
 /**
  * Seed importer — content/seed/*.json + content/media-manifest.json + scripts/import/image-map.json
- * → WordPress (D7: trail elephant only — 15 objects, 15 timeline cards; all 17 trail terms; zones; pages).
+ * → WordPress: objects of all 17 trails (D49 · core-1117 — was D7 elephant only), 15 timeline cards, 17 trail terms
+ * (+ animal guide cards), zones, pages (Home · Introduction 4 chapters · Timeline), options, menus.
  *
  * Run inside WordPress:
  *   local:  scripts/local.sh (blueprint step, automatic)
@@ -10,8 +11,10 @@
  *   SH_IMPORT_MODE missing (default: never touch what exists) | overwrite (seed wins)
  *   SH_IMPORT_REPORT=<file.json> · SH_IMPORT_SUBSIZES=1 (generate image sub-sizes)
  *   SH_IMPORT_REFRESH=<id>|all  re-run a refresh step (refresh.php) that this site already ran
- *   SH_IMPORT_ONLY=refresh  run only the refresh steps on a site that already has the content: creates no post,
- *     term, page, option or menu (finds the existing ones by _sh_import_key) — deploy.sh --refresh-only
+ *   SH_IMPORT_ONLY=refresh  run only the refresh steps on a site that already has the content (finds the existing
+ *     ones by _sh_import_key) — deploy.sh --refresh-only. Creates no term/page; the 2026-11-17 steps add only what
+ *     is missing (new objects · empty fields · options never set · the About the Project menu item) and never
+ *     overwrite an admin's value (listed in the report "kept_admin").
  * Idempotent: running twice creates nothing new (lookup by _sh_import_key / term slug / page path).
  * Fixes to values an older importer wrote: refresh.php steps (once per site, never over an admin's own file).
  *
@@ -71,7 +74,7 @@ function sh_import_run(): array {
 	}
 	$cfg  = sh_imp_config();
 	$seed = array();
-	foreach ( array( 'objects', 'trails', 'zones', 'timeline-elephant', 'articles', 'site', 'zone4-chooser' ) as $name ) {
+	foreach ( array( 'objects', 'trails', 'zones', 'timeline-elephant', 'articles', 'site', 'zone4-chooser', 'guides', 'intro-2026-11' ) as $name ) {
 		$seed[ $name ] = sh_imp_json( $cfg['content'] . '/seed/' . $name . '.json' );
 	}
 	$manifest = sh_imp_json( $cfg['content'] . '/media-manifest.json' );
@@ -85,6 +88,7 @@ function sh_import_run(): array {
 		$trails  = sh_import_trails( $seed, $map, $pages );
 		$zones   = sh_import_zones( $seed, $map, $pages );
 		$objects = sh_import_objects( $seed, $map, $manifest, $trails );
+		$objects = sh_import_objects_1117( $seed, $map, $manifest ) + $objects; // D49: the 16 other trails.
 		sh_import_trail_order( $seed, $trails, $objects );
 		sh_import_timeline( $seed, $map, $trails, $objects, $pages );
 		sh_import_site( $seed, $map );
@@ -94,6 +98,7 @@ function sh_import_run(): array {
 	$s      = sh_imp_state();
 	$counts = array(
 		'object'        => (int) wp_count_posts( 'object' )->publish,
+		'object_draft'  => (int) wp_count_posts( 'object' )->draft,
 		'timeline_item' => (int) wp_count_posts( 'timeline_item' )->publish,
 		'trail'         => (int) wp_count_terms( array( 'taxonomy' => 'trail', 'hide_empty' => false ) ),
 		'zone'          => (int) wp_count_terms( array( 'taxonomy' => 'zone', 'hide_empty' => false ) ),
@@ -101,14 +106,15 @@ function sh_import_run(): array {
 		'attachment'    => (int) wp_count_posts( 'attachment' )->inherit,
 	);
 	return array(
-		'mode'     => $cfg['mode'],
-		'only'     => $cfg['only'],
-		'refresh'  => $refresh,
-		'counts'   => $counts,
-		'created'  => $s['created'],
-		'updated'  => $s['updated'],
-		'skipped'  => $s['skipped'],
-		'warnings' => $s['warnings'],
+		'mode'       => $cfg['mode'],
+		'only'       => $cfg['only'],
+		'refresh'    => $refresh,
+		'counts'     => $counts,
+		'created'    => $s['created'],
+		'updated'    => $s['updated'],
+		'skipped'    => $s['skipped'],
+		'kept_admin' => $s['kept'],
+		'warnings'   => $s['warnings'],
 	);
 }
 

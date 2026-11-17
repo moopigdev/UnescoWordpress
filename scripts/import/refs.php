@@ -79,6 +79,10 @@ function sh_import_ref_file( array $map, string $value, string $dir ): string {
 			return $file;
 		}
 	}
+	// 2026-11-17 objects (DESIGN-SPEC §8.4): "*_ref" = file name in design/assets/objects-1117/ (hash names, unique).
+	if ( '' !== $name && '.' !== $name[0] && is_file( $dir . '/objects-1117/' . $name ) ) {
+		return 'objects-1117/' . $name;
+	}
 	return '';
 }
 
@@ -195,12 +199,14 @@ function sh_import_bundle_files( array $seed, array $map, string $dir ): array {
  * @return string[]
  */
 function sh_import_asset_subdirs(): array {
-	return array( 'zone-banners-2026-11', 'zone4-animals', 'zone5' );
+	// 2026-11-17 (core-1117): objects-1117 (DESIGN-SPEC §8.4) · pages-1117/<fills|guides|intro-icons> (§9) — the only
+	// two-level folders; every name is a whole folder path ("<sub>/<file>" with exactly that sub).
+	return array( 'zone-banners-2026-11', 'zone4-animals', 'zone5', 'objects-1117', 'pages-1117/fills', 'pages-1117/guides', 'pages-1117/intro-icons' );
 }
 
 /**
  * File (relative to $dir) a seed asset value points to ('' = none). Accepts "design/assets/<sub>/<file>",
- * "<sub>/<file>" (sub in sh_import_asset_subdirs(), one level, no dot-files) or a top-level file / Figma imageRef
+ * "<sub>/<file>" (sub = exactly one entry of sh_import_asset_subdirs(), no dot-files) or a top-level file / Figma imageRef
  * (sh_import_ref_file()). Text after the first space is a note in the seed ("file.png (4096×1971 …)") and is ignored.
  *
  * @param array<string, mixed> $map   image-map.json.
@@ -218,8 +224,9 @@ function sh_import_seed_asset_file( array $map, string $value, string $dir ): st
 	if ( ! str_contains( $value, '/' ) ) {
 		return sh_import_ref_file( $map, $value, $dir );
 	}
-	$parts = explode( '/', $value );
-	if ( 2 !== count( $parts ) || ! in_array( $parts[0], sh_import_asset_subdirs(), true ) || '' === $parts[1] || '.' === $parts[1][0] ) {
+	$sub  = dirname( $value );
+	$name = basename( $value );
+	if ( ! in_array( $sub, sh_import_asset_subdirs(), true ) || $sub . '/' . $name !== $value || '' === $name || '.' === $name[0] ) {
 		return '';
 	}
 	return is_file( $dir . '/' . $value ) ? $value : '';

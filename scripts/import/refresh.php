@@ -16,6 +16,7 @@
  * attachment an older import put there · sh_below_image only while empty · done only when no file is missing.
  * Step 2026-11-11-timeline-swap (sh_import_refresh_timeline_swap()): cards 1·7·9 only while every image field is still
  * the imported image of that card (before or after D45) · an admin's own image = card skipped + warning.
+ * Steps 2026-11-17-* (refresh-2026-11-17.php): add only what is missing (new objects · empty fields · About menu item).
  * Re-run a step on purpose: SH_IMPORT_REFRESH=<id>[,<id>] (or "all").
  *
  * @package sharedheritage-core
@@ -24,6 +25,7 @@
 defined( 'ABSPATH' ) || exit;
 
 require_once __DIR__ . '/refresh-2026-11.php'; // Figma 2026-11-11 round (core-hzd): own rules, see that file.
+require_once __DIR__ . '/refresh-2026-11-17.php'; // 2026-11-17 round (core-1117): add what is missing, never overwrite.
 
 /**
  * Steps in order: id => what it fixes.
@@ -44,7 +46,7 @@ function sh_import_refresh_steps(): array {
 		'2026-11-11-timeline-images' => 'timeline_item sh_thumbnail cards 5/7 (only while still the old imported file) · sh_below_image from seed below_ref (only where empty)',
 		// timeline-swap 2026-11-11 (D45): cards 1·7·9 swap the image on the line (+ mini-map) and the one under the line.
 		'2026-11-11-timeline-swap'   => 'timeline_item cards 1·7·9 on/under the line swapped (only while every field is still the imported image of that card)',
-	);
+	) + sh_import_refresh_steps_2026_11_17();
 }
 
 /**
@@ -439,6 +441,15 @@ function sh_import_refresh( array $seed, array $map, array $manifest, array $obj
 	$ran   = array();
 	foreach ( array_keys( sh_import_refresh_steps() ) as $step ) {
 		if ( isset( $done[ $step ] ) && ! in_array( $step, $force, true ) && ! in_array( 'all', $force, true ) ) {
+			continue;
+		}
+		if ( array_key_exists( $step, sh_import_refresh_steps_2026_11_17() ) ) {
+			$ran[] = $step;
+			if ( sh_import_refresh_2026_11_17( $step, $seed, $map, $manifest, $pages ) ) {
+				$done[ $step ] = gmdate( 'c' );
+			} else {
+				unset( $done[ $step ] ); // Files still missing: try again on the next import.
+			}
 			continue;
 		}
 		if ( array_key_exists( $step, sh_import_refresh_steps_2026_11() ) ) {

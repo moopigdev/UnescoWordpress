@@ -5,6 +5,7 @@
 #   scripts/deploy.sh [staging|production] [--dry-run] [--discover] [--no-import | --refresh-only]
 #     (ไม่ระบุ = staging)
 #   --dry-run    พิมพ์ทุกคำสั่งที่จะรัน (ssh · rsync · wp-cli ฝั่ง server) ⛔ ไม่เชื่อมต่อ server
+#                (สร้าง bundle import ในเครื่องจริงเพื่อรายงานรายการ + ขนาด แล้วลบทิ้ง)
 #   --discover   อ่านอย่างเดียว: SSH ไปหา WordPress ใต้ ~/domains → พิมพ์ path + siteurl ให้ยืนยัน (ไม่เขียนอะไร)
 #   --no-import  ส่งแค่โค้ด (theme + mu-plugin) + ACF/theme/permalink/purge · ไม่ import seed
 #   --refresh-only  site ที่มีเนื้อหาแล้ว (production ด้วย): ไม่ส่งโค้ด · ไม่แตะ ACF/theme/permalink · ส่ง bundle import แล้วรัน
@@ -35,7 +36,7 @@ for a in "$@"; do
     --discover) DISCOVER=1 ;;
     --no-import) IMPORT=0; NOIMP=$((NOIMP + 1)) ;;
     --refresh-only) IMPORT=refresh; NOIMP=$((NOIMP + 1)) ;;
-    -h|--help) sed -n '2,23p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,24p' "$0"; exit 0 ;;
     *) sh_die "ไม่รู้จัก argument: $a (ดู --help)" ;;
   esac
 done
@@ -120,7 +121,8 @@ EXCL=(--exclude=.git --exclude=.playground --exclude=node_modules --exclude=.DS_
 RS=(-rlptzv -e "$RSH")   # ไม่ใช้ -a (-o -g ตั้ง owner ไม่ได้บน shared host) · flag ที่ openrsync ของ macOS รองรับเท่านั้น
 
 # bundle import (ทุกไฟล์ที่ import อ่าน): scripts/import · content · ภาพ design/assets ตาม scripts/import/bundle-files.php
-# (image-map "files" + ไฟล์ของ style *_ref ทุกตัวของวัตถุที่ import — กฎเดียวกับ import: refs.php) · media/out
+# (image-map "files" + ไฟล์ของ style *_ref ทุกตัวของวัตถุที่ import + seed 2026-11-17 — กฎเดียวกับ import: refs.php ·
+# refs-2026-11-17.php · ภาพใหญ่ย่อเหลือ 2× ขนาดแสดงผลก่อนส่ง) · media/out เฉพาะไฟล์ใน content/media-manifest.json
 LB=""
 cleanup_local() { if [ -n "$LB" ]; then case "$LB" in */sh-deploy-bundle.*) rm -rf "$LB" ;; esac; fi; }
 trap cleanup_local EXIT
@@ -135,42 +137,72 @@ if [ "$IMPORT" != 0 ]; then
   [ -n "$PHP" ] || { [ -x "$HOME/Library/Application Support/Herd/bin/php" ] && PHP="$HOME/Library/Application Support/Herd/bin/php"; }
   [ -n "$PHP" ] || sh_die "ไม่พบ php ในเครื่อง (ใช้หารายการไฟล์ที่ import อ่าน) — ยังไม่ได้เชื่อมต่อ server"
   # <kind>\t<file> ต่อบรรทัด (map | ref) · ไฟล์ที่อ้างแต่ไม่มี / ชื่อไม่ปลอดภัย = php exit ≠ 0 → หยุดก่อนเชื่อมต่อ
-  LIST="$("$PHP" "$REPO/scripts/import/bundle-files.php" "$ASSETS" "$REPO/content" "$REPO/scripts/import/image-map.json")" \
-    || sh_die "ภาพที่ import อ้าง (image-map / style *_ref) ไม่ครบใน $ASSETS — ดูรายการด้านบน · ยังไม่ได้เชื่อมต่อ server"
-  NA=0; NR=0; FILES=""; REFS=""
-  while IFS="$(printf '\t')" read -r kind f; do
+  # <kind>\t<file>[\t<WxH>] ต่อบรรทัด: map | ref (WxH = ย่อให้ไม่เกินกล่องนี้ = 2× ขนาดแสดงผล · core-1117) | media (path ใต้ media/out
+  # ตาม content/media-manifest.json) · ไฟล์ที่อ้างแต่ไม่มี / ชื่อไม่ปลอดภัย = php exit ≠ 0 → หยุดก่อนเชื่อมต่อ
+  LIST="$("$PHP" "$REPO/scripts/import/bundle-files.php" "$ASSETS" "$REPO/content" "$REPO/scripts/import/image-map.json" "$MEDIA")" \
+    || sh_die "ไฟล์ที่ import อ้าง (image-map / style *_ref / seed 2026-11-17 / media manifest) ไม่ครบ — ดูรายการด้านบน · ยังไม่ได้เชื่อมต่อ server"
+  NA=0; NR=0; NS=0; NM=0; FILES=""; MFILES=""; REFS=""
+  while IFS="$(printf '\t')" read -r kind f box; do
     [ -n "$f" ] || continue
-    # sub-folder ที่ยอม = ชั้นเดียว · รายชื่อตายตัว (refs.php sh_import_asset_subdirs() + lineart/ ของ timeline · P-164)
-    case "$f" in
-      lineart/*/*|lineart/.*|zone-banners-2026-11/*/*|zone-banners-2026-11/.*|zone4-animals/*/*|zone4-animals/.*|zone5/*/*|zone5/.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
-      lineart/?*|zone-banners-2026-11/?*|zone4-animals/?*|zone5/?*) ;;
-      */*|.*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
-    esac
-    [ -f "$ASSETS/$f" ] || sh_die "ไม่พบ $ASSETS/$f"
     case "$kind" in
-      map) NA=$((NA + 1)) ;;
-      ref) NR=$((NR + 1)); REFS="$REFS $f" ;;
+      map|ref)
+        # sub-folder ที่ยอม = รายชื่อตายตัว (refs.php sh_import_asset_subdirs() + lineart/ ของ timeline · P-164) · ชื่อไฟล์ชั้นเดียวใต้ folder นั้น
+        case "$f" in
+          .*|*/.*|*..*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
+          lineart/*/*|zone-banners-2026-11/*/*|zone4-animals/*/*|zone5/*/*|objects-1117/*/*|pages-1117/fills/*/*|pages-1117/guides/*/*|pages-1117/intro-icons/*/*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
+          lineart/?*|zone-banners-2026-11/?*|zone4-animals/?*|zone5/?*|objects-1117/?*|pages-1117/fills/?*|pages-1117/guides/?*|pages-1117/intro-icons/?*) ;;
+          */*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
+        esac
+        [ -f "$ASSETS/$f" ] || sh_die "ไม่พบ $ASSETS/$f"
+        case "$box" in ''|[0-9]*x[0-9]*) ;; *) sh_die "bundle-files: ขนาดไม่ถูกต้อง ($f $box)" ;; esac
+        case "$box" in *[!0-9x]*) sh_die "bundle-files: ขนาดไม่ถูกต้อง ($f $box)" ;; esac
+        if [ "$kind" = map ]; then NA=$((NA + 1)); else NR=$((NR + 1)); REFS="$REFS $f"; fi
+        [ -z "$box" ] || NS=$((NS + 1))
+        FILES="$FILES$f	$box
+" ;;
+      media)
+        # media/out: ไฟล์ชั้นบน (ชุดช้าง) · objects-1117/<trail>/<file> · intro-1117/<บท>/<file> (media-1117 · P-303)
+        case "$f" in
+          .*|*/.*|*..*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
+          objects-1117/*/*/*|intro-1117/*/*/*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
+          objects-1117/?*/?*|intro-1117/?*/?*) ;;
+          */*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
+        esac
+        [ -f "$MEDIA/$f" ] || sh_die "ไม่พบ $MEDIA/$f"
+        NM=$((NM + 1)); MFILES="$MFILES$f
+" ;;
       *) sh_die "bundle-files: ชนิดไม่รู้จัก ($kind)" ;;
     esac
-    FILES="$FILES$f
-"
   done <<< "$LIST"
-  sh_say "bundle import: scripts/import + content + ภาพ $((NA + NR)) ไฟล์ (image-map $NA + style *_ref $NR) + media/out"
+  sh_say "bundle import: scripts/import + content + ภาพ $((NA + NR)) ไฟล์ (image-map $NA + style *_ref/seed $NR · ย่อเหลือ 2× $NS) + media/out $NM ไฟล์"
   if [ "$DRY" = 1 ]; then for f in $REFS; do sh_say "  *_ref: $f"; done; fi
-  if [ "$DRY" = 0 ]; then
-    LB="$(mktemp -d "${TMPDIR:-/tmp}/sh-deploy-bundle.XXXXXX")"
-    mkdir -p "$LB/scripts" "$LB/assets" "$LB/media"
-    cp -R "$REPO/scripts/import" "$LB/scripts/import"
-    cp -R "$REPO/content" "$LB/content"
-    while IFS= read -r f; do [ -n "$f" ] && mkdir -p "$(dirname "$LB/assets/$f")" && cp "$ASSETS/$f" "$LB/assets/$f"; done <<< "$FILES"
-    for f in "$MEDIA"/*; do
-      [ -f "$f" ] || continue
-      case "$f" in *.html) continue ;; esac            # preview.html = หน้าเทสในเครื่อง
-      cp "$f" "$LB/media/"
-    done
-  else
+  # สร้าง bundle ในเครื่องเสมอ (dry-run ก็สร้าง เพื่อรายงานขนาดจริง แล้วลบ · ยังไม่เชื่อมต่อ server)
+  LB="$(mktemp -d "${TMPDIR:-/tmp}/sh-deploy-bundle.XXXXXX")"
+  mkdir -p "$LB/scripts" "$LB/assets" "$LB/media"
+  cp -R "$REPO/scripts/import" "$LB/scripts/import"
+  cp -R "$REPO/content" "$LB/content"
+  ORIG=0
+  while IFS="$(printf '\t')" read -r f box; do
+    [ -n "$f" ] || continue
+    mkdir -p "$(dirname "$LB/assets/$f")"
+    ORIG=$((ORIG + $(wc -c < "$ASSETS/$f")))
+    if [ -n "$box" ]; then   # ภาพต้นฉบับใหญ่ → ย่อไม่เกินกล่อง (GD · ไม่ขยาย · ไม่ครอป — ครอปตอน import)
+      "$PHP" "$REPO/scripts/import/web-image.php" "$ASSETS/$f" "$LB/assets/$f" "${box%x*}" "${box#*x}" >/dev/null \
+        || sh_die "ย่อภาพไม่สำเร็จ: $f"
+    else
+      cp "$ASSETS/$f" "$LB/assets/$f"
+    fi
+  done <<< "$FILES"
+  while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    mkdir -p "$(dirname "$LB/media/$f")" && cp "$MEDIA/$f" "$LB/media/$f"
+  done <<< "$MFILES"
+  kb() { du -sk "$1" | cut -f1; }
+  sh_say "ขนาด bundle: assets $(( $(kb "$LB/assets") / 1024 )) MB (ต้นฉบับ $(( ORIG / 1048576 )) MB) · media $(( $(kb "$LB/media") / 1024 )) MB · scripts+content $(( ( $(kb "$LB/scripts") + $(kb "$LB/content") ) / 1024 )) MB · รวม $(( $(kb "$LB") / 1024 )) MB"
+  if [ "$DRY" = 1 ]; then
+    rm -rf "$LB"; LB=""
     LB_SHOW="<local-bundle>"
-    sh_say "  <local-bundle> = mktemp ในเครื่อง: scripts/import/ · content/ · assets/ ($((NA + NR)) ไฟล์จาก $ASSETS) · media/ (จาก $MEDIA ยกเว้น *.html)"
+    sh_say "  <local-bundle> = mktemp ในเครื่อง: scripts/import/ · content/ · assets/ ($((NA + NR)) ไฟล์จาก $ASSETS · $NS ไฟล์ย่อ 2×) · media/ ($NM ไฟล์จาก $MEDIA ตาม manifest)"
   fi
 fi
 

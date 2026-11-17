@@ -10,6 +10,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once __DIR__ . '/objects.php';
 require_once __DIR__ . '/content-2026-11.php';
+require_once __DIR__ . '/content-2026-11-17.php';
 
 /**
  * Create a page by route slug (adopts an existing page with that path). Returns [id, write].
@@ -98,7 +99,7 @@ function sh_import_pages( array $seed, array $map, array $manifest ): array {
 				'sh_home_trails_paragraph_2'  => $home['trails_section']['paragraph_2'],
 				'sh_home_trails_video_webm'   => $video['webm'],
 				'sh_home_trails_video_poster' => $video['poster'],
-			)
+			) + sh_import_home_meta_1117( $seed ) // D48 animal guide section.
 		);
 	}
 
@@ -127,7 +128,7 @@ function sh_import_pages( array $seed, array $map, array $manifest ): array {
 			$meta[ "sh_intro_map_slide_{$n}_title" ] = $a['title'];
 			$meta[ "sh_intro_map_slide_{$n}_body" ]  = implode( "\n\n", array_map( static fn( $p ) => (string) $p['text'], $a['paragraphs'] ) );
 		}
-		sh_imp_meta( 'post', $pages['intro']['id'], $meta );
+		sh_imp_meta( 'post', $pages['intro']['id'], $meta + sh_import_intro_meta_1117( $seed, $manifest ) ); // D50 4 chapters.
 	}
 	return $pages;
 }
@@ -190,6 +191,7 @@ function sh_import_trails( array $seed, array $map, array $pages ): array {
 				'sh_chooser_image'        => sh_import_trail_chooser_image( $seed, $map, $slug, (string) $t['name'] ),
 			)
 		);
+		sh_imp_meta( 'term', $id, sh_import_trail_meta_1117( $seed, $t ) ); // 2026-11-17: trail page + guide card (wins).
 	}
 	return $out;
 }
@@ -252,7 +254,7 @@ function sh_import_site( array $seed, array $map ): void {
 		'sh_label_back'        => $labels['back'],
 		'sh_label_zone_prefix' => $labels['zone_prefix'],
 		'sh_header_image'      => sh_imp_image( $map, $map['site']['header_image'], 'Header background' ),
-	);
+	) + sh_import_site_options_1117( $seed ); // D47 header logo · footer logos/text.
 	foreach ( $options as $name => $value ) {
 		if ( $overwrite || false === get_option( $name, false ) ) {
 			update_option( $name, $value );
@@ -278,8 +280,12 @@ function sh_import_site( array $seed, array $map ): void {
 					'menu-item-status'   => 'publish',
 					'menu-item-position' => $i + 1,
 				);
-				// "Main Page" = Home 1470 (every prototype link targets 670:1152); the rest have no target yet (P-211).
-				if ( 'Main Page' === $label && $front_id ) {
+				// "Main Page" = Home 1470 (every prototype link targets 670:1152) · About the Project = external link in a
+				// new tab (D47 · site.json nav_primary_links); the rest have no target yet (P-211).
+				$ext = 'nav_primary' === $seed_key ? sh_import_menu_link_1117( $seed, (string) $label ) : null;
+				if ( null !== $ext ) {
+					$item = array_merge( $item, $ext );
+				} elseif ( 'Main Page' === $label && $front_id ) {
 					$item = array_merge(
 						$item,
 						array(

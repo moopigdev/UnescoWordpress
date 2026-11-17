@@ -2,11 +2,14 @@
 /**
  * List every design/assets file the import reads (CLI · no WordPress) — scripts/deploy.sh bundles exactly these.
  *
- *   php scripts/import/bundle-files.php <assets-dir> [content-dir] [image-map.json]
+ *   php scripts/import/bundle-files.php <assets-dir> [content-dir] [image-map.json] [media-dir]
  *
- * stdout: one line per file "map<TAB><file>" (image-map "files") or "ref<TAB><file>" (style *_ref, e.g. design-dev
- * crops "<ref>.crop-<node>.png" · timeline line_art_ref "lineart/<file>" · below_ref "<file>" · 2026-11 seed assets
- * "<sub>/<file>" for sh_import_asset_subdirs() — path relative to <assets-dir>, at most one sub-folder). stderr: summary.
+ * stdout: one line per file "map<TAB><file>" (image-map "files") or "ref<TAB><file>[<TAB><W>x<H>]" (style *_ref, e.g.
+ * design-dev crops "<ref>.crop-<node>.png" · timeline line_art_ref "lineart/<file>" · below_ref "<file>" · 2026-11
+ * seed assets "<sub>/<file>" for sh_import_asset_subdirs() — path relative to <assets-dir> · 2026-11-17 images with
+ * the box deploy.sh shrinks them to before upload: 2× the display size, refs-2026-11-17.php) or "media<TAB><path>"
+ * (every media/out file of content/media-manifest.json, path relative to <media-dir>, e.g. objects-1117/bird/x.webm ·
+ * only when media-dir is given). stderr: summary.
  * Exit 1 = a referenced file is missing / unsafe (nothing printed
  * on stdout) · exit 2 = bad arguments / unreadable JSON.
  *
@@ -18,11 +21,13 @@ if ( 'cli' !== PHP_SAPI ) {
 }
 define( 'SH_IMPORT_CLI', true );
 require __DIR__ . '/refs.php';
+require __DIR__ . '/refs-2026-11-17.php';
 
 $sh_repo   = dirname( __DIR__, 2 );
 $sh_dir    = rtrim( isset( $argv[1] ) ? (string) $argv[1] : '', '/' );
 $sh_cont   = rtrim( isset( $argv[2] ) ? (string) $argv[2] : $sh_repo . '/content', '/' );
 $sh_mapf   = isset( $argv[3] ) ? (string) $argv[3] : __DIR__ . '/image-map.json';
+$sh_media  = rtrim( isset( $argv[4] ) ? (string) $argv[4] : '', '/' );
 $sh_stderr = fopen( 'php://stderr', 'w' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
 
 if ( '' === $sh_dir || ! is_dir( $sh_dir ) ) {
@@ -55,6 +60,32 @@ $sh_res = sh_import_bundle_seed_files(
 	$sh_res
 );
 
+// 2026-11-17 (core-1117): objects of all trails · trail pages · guide cards · logos · Introduction + media/out files.
+$sh_1117 = sh_import_bundle_1117_files(
+	array(
+		'objects'       => $sh_json( $sh_cont . '/seed/objects.json' ),
+		'trails'        => $sh_json( $sh_cont . '/seed/trails.json' ),
+		'guides'        => $sh_json( $sh_cont . '/seed/guides.json' ),
+		'site'          => $sh_json( $sh_cont . '/seed/site.json' ),
+		'intro-2026-11' => $sh_json( $sh_cont . '/seed/intro-2026-11.json' ),
+		'manifest'      => $sh_json( $sh_cont . '/media-manifest.json' ),
+	),
+	$sh_dir,
+	'' !== $sh_media ? $sh_media : $sh_dir
+);
+$sh_box = array();
+foreach ( $sh_1117['refs'] as $sh_f => $sh_b ) {
+	if ( in_array( $sh_f, $sh_res['map'], true ) ) {
+		continue; // Already listed (image-map file): copied as is.
+	}
+	if ( ! in_array( $sh_f, $sh_res['refs'], true ) ) {
+		$sh_res['refs'][] = $sh_f;
+	}
+	$sh_box[ $sh_f ] = $sh_b;
+}
+sort( $sh_res['refs'] );
+$sh_res['missing'] = array_merge( $sh_res['missing'], '' !== $sh_media ? $sh_1117['missing'] : array_values( array_filter( $sh_1117['missing'], static fn( $m ) => ! str_starts_with( $m, 'media ' ) ) ) );
+
 if ( $sh_res['unsafe'] || $sh_res['missing'] ) {
 	foreach ( $sh_res['unsafe'] as $sh_f ) {
 		fwrite( $sh_stderr, "bundle-files: unsafe file name in image-map: $sh_f\n" ); // phpcs:ignore
@@ -68,6 +99,11 @@ foreach ( $sh_res['map'] as $sh_f ) {
 	echo "map\t$sh_f\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI output.
 }
 foreach ( $sh_res['refs'] as $sh_f ) {
-	echo "ref\t$sh_f\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI output.
+	echo "ref\t$sh_f" . ( ! empty( $sh_box[ $sh_f ] ) ? "\t" . $sh_box[ $sh_f ] : '' ) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI output.
 }
-fwrite( $sh_stderr, 'bundle-files: image-map ' . count( $sh_res['map'] ) . ' · *_ref ' . count( $sh_res['refs'] ) . ' · total ' . ( count( $sh_res['map'] ) + count( $sh_res['refs'] ) ) . "\n" ); // phpcs:ignore
+if ( '' !== $sh_media ) {
+	foreach ( $sh_1117['media'] as $sh_f ) {
+		echo "media\t$sh_f\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI output.
+	}
+}
+fwrite( $sh_stderr, 'bundle-files: image-map ' . count( $sh_res['map'] ) . ' · *_ref ' . count( $sh_res['refs'] ) . ' (shrink to 2× ' . count( array_filter( $sh_box ) ) . ') · total ' . ( count( $sh_res['map'] ) + count( $sh_res['refs'] ) ) . ( '' !== $sh_media ? ' · media/out ' . count( $sh_1117['media'] ) : '' ) . "\n" ); // phpcs:ignore
