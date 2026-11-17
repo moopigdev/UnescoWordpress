@@ -24,12 +24,12 @@ $sh_paragraphs = sh_paragraphs( (string) sh_get( 'sh_caption', $sh_id ) );
 $sh_meta_rows  = array(
 	array( __( 'Scientific name / Taxonomy:', 'sharedheritage' ), 'sh_scientific_name' ),
 	array( __( 'Period:', 'sharedheritage' ), 'sh_period' ),
-	array( __( 'Place of Production / Findspot:', 'sharedheritage' ), 'sh_place_of_production' ),
+	array( __( 'Place of production / Findspot:', 'sharedheritage' ), 'sh_place_of_production' ),
 	array( __( 'Material:', 'sharedheritage' ), 'sh_material' ),
 	array( __( 'Dimensions:', 'sharedheritage' ), 'sh_dimensions' ),
 	array( __( 'Local Name:', 'sharedheritage' ), 'sh_local_name' ),
 	array( __( 'Collection:', 'sharedheritage' ), 'sh_collection' ),
-	array( __( 'Other Information / Object Biography:', 'sharedheritage' ), 'sh_object_biography' ),
+	array( __( 'Other information / Object biography:', 'sharedheritage' ), 'sh_object_biography' ),
 );
 $sh_meta_rows = array_values(
 	array_filter(
