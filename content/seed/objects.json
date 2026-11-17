@@ -76,6 +76,11 @@
    "by": "rooster-1117",
    "lastModified": "2026-11-17T08:55:13Z",
    "what": "frame 1583 (1179:4624) มีข้อความครบ = วัตถุเดียวกับ mother-of-pearl-furniture-depicting-animals (ข้อความเท่ากันทุกตัวอักษร) -> record นั้นเพิ่ม trail rooster (ช่อง 11) · record pending คง hold (superseded)"
+  },
+  "figma_2026_11_17_hover": {
+   "by": "hover-1117",
+   "lastModified": "2026-11-17T11:28:55Z",
+   "what": "ตรวจ tile_hover_node ครบ 127 ช่อง + tile_node 127 ช่อง เทียบ imageRef ใน Figma (GET /files/:key/nodes 1 คำขอ) -> เปลี่ยน 2 hover: seashell #12 dragon-shaped-mother-of-pearl-inlaid-incense-tray (3377:5816) 59e52f9e…->dc3709ea… · seashell #13 kalung (3377:5819) 14afb75a…->5e9b806b… · ref เดิมเก็บใน tile_image_hover_ref_prev (objects.json tiles_by_trail + ระดับ record kalung · trails.json tiles) · ช่องอื่น/tile ปกติไม่เปลี่ยน"
   }
  },
  "objects": [
@@ -6159,7 +6164,8 @@
     "seashell": {
      "order": 12,
      "tile_image_ref": "9d48caa0a2c382a9687cea44132ddf313e8eb970.png",
-     "tile_image_hover_ref": "59e52f9e970687d87d88a4948cc953934a81200a.png",
+     "tile_image_hover_ref": "dc3709eae792995bc8a3d3fabb0bffb5bfc1d81b.png",
+     "tile_image_hover_ref_prev": "59e52f9e970687d87d88a4948cc953934a81200a.png",
      "tile_node": "3377:4963",
      "tile_hover_node": "3377:5816",
      "materials_set": "3377:5814"
@@ -19048,12 +19054,14 @@
     "seashell": "Seashell/kalung.webm"
    },
    "tile_image_ref": "b00ba4af508d8549c5ade5a97685497f9dadbee2.png",
-   "tile_image_hover_ref": "14afb75a6762da3c6b7c5a89a1807ee788bf09ce.png",
+   "tile_image_hover_ref": "5e9b806b1fad49f0a6068899156debd15ff602b8.png",
+   "tile_image_hover_ref_prev": "14afb75a6762da3c6b7c5a89a1807ee788bf09ce.png",
    "tiles_by_trail": {
     "seashell": {
      "order": 13,
      "tile_image_ref": "b00ba4af508d8549c5ade5a97685497f9dadbee2.png",
-     "tile_image_hover_ref": "14afb75a6762da3c6b7c5a89a1807ee788bf09ce.png",
+     "tile_image_hover_ref": "5e9b806b1fad49f0a6068899156debd15ff602b8.png",
+     "tile_image_hover_ref_prev": "14afb75a6762da3c6b7c5a89a1807ee788bf09ce.png",
      "tile_node": "3377:4964",
      "tile_hover_node": "3377:5819",
      "materials_set": "3377:5817"
