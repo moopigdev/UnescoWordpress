@@ -1027,3 +1027,97 @@ scroll-snap, parallax, transition ระหว่างหน้านอกจ�
 ---
 ## 7. ข้อสังเกต / ข้อขัดกัน (รายละเอียดที่ `docs/PENDING-DECISIONS.md` P-201…P-215)
 สรุป: P-201 page final vs 2.1 · P-202 จำนวนวัตถุ 121/119 · P-203 Patola vs Gringsing · P-204 ชื่อ Zone 4/5 + frame zone 5 หาย · P-205 ฟอนต์ Komet · P-206 น้ำหนัก caption/collection ไม่สม่ำเสมอ · P-207 ข้อความฝังในภาพ · P-208 timeline (ลำดับ+ช้างเดิน+ลิงก์ Slides) · P-209 hero GIF/WebM · P-210 ชื่อ intro "Scales, Feathers & Fins" / map placeholder / navigator ตัวเก่า · P-211 ปลายทางเมนู + footer · P-212 trail↔zone + กริด 15 vs 17 · P-213 ข้อความ lorem/ตกค้าง/placeholder · P-214 สีแผง detail ต่อวัตถุ · P-215 Figma render rate limit · **P-217…P-220 (D23 Timeline v2): P-217/P-218 ✅ ปิดแล้ว แต่ **D24/D25 ถูกแทนด้วย D26 (Timeline v3 §4.5c/§6.4c)** · P-221…P-225 (v3) · P-219 ของ Slides นอก layout zone 4 · P-220 คุณภาพ/trim asset**
+
+
+---
+## 8. หน้า Trail ทั้ง 17 + Detail วัตถุของ 16 trail (D49 · BACKLOG #28 #30 · task `design-objects-1117` · Figma `lastModified 2026-11-17T03:50:23Z` · นับจาก `design/figma-file.json`)
+**ที่มา:** page `998:952` "ALL Animal content" (section ต่อ trail · detail 125 frame ใน 16 trail · ข้าม section "ไฟล์ที่ไม่ใช้แล้ว" `1051:6782` และ "ไฟล์ที่ไม่ได้ใช้ (ห้ามลบ)" `3218:3744` · frame "Frame Name" = โน้ตนักออกแบบ ไม่ใช่หน้า) · page `3117:3314` section `All : 17 Trails` `3377:4608` (17 frame) + `Materials` `3377:5466` (17 แถบ) · ภาพเคลื่อนไหว = WebM จาก Drive (126 ไฟล์ · จับคู่แล้ว 125 · เหลือ `Buffalo/Sumatran Serow.webm`) · ผลแปลง = `content/seed/objects.json` + `trails.json` (สร้างด้วย `design/tools/build-objects-1117.py` · ตรวจด้วย `design/tools/verify-objects-1117.py` · ไฟล์ภาพ `design/assets/objects-1117/`)
+
+### 8.1 หน้า Trail ทั่วไป (ทั้ง 17 · โครงเดียวกับ §4.4 Elephant — ค่าเฉพาะต่อ trail อยู่ใน seed `trails.json[].trail_page_layout` และตารางข้างล่าง)
+frame `1440 × (ตามตาราง)` พื้น `#FFFFFF` · layout grid 6 คอลัมน์ offset 160 gutter 22 · Header #1/#02 ตาม §3 (header ใหม่ D47)
+| section | พิกัด [x,y w×h] เทียบ frame | รายละเอียด |
+|---|---|---|
+| Cover `Hearder Trail : <ชื่อ>` | `[160,150 1120×490]` **ไม่มี stroke** | ภาพ `Elephant_Zone2-1` (ชื่อ node เหมือนกันทุก trail) · fill **FILL** · ต้นฉบับ 4096×2304 (16:9) → ครอปกึ่งกลางเป็น 1120×490 ที่ **2x = 2240×980** แล้วใน seed `cover_crop_ref` (ตรงภาพ render Figma `design/frames/2026-11-17/3377-4609.png`) · `cover_ref` = ต้นฉบับเต็ม |
+| หัวข้อ + คำอธิบาย `Frame 12683` | แถวเดียว gap 30 · เริ่ม y≈677 · จัดกลางแนวตั้ง | **H1** `x=160` ความกว้างตามข้อความ Komet-Heavy 800 **36/45** `#212529` · **คำอธิบาย** `x = 160 + กว้าง H1 + 30` · กว้างที่เหลือถึง 1280 · Komet 500 **18/22.5** `#212529` **justify** · สูง 69/92/115/138 ตามจำนวนบรรทัด (ตาราง) · "Read more >>" มีใน Figma แต่ `visible:false` ทุก trail → ไม่แสดง |
+| กริดช่อง `Frame 114472` | `[160,829.2 1120×…]` (Fish · Garuda: `y=875.2`) แนวตั้ง gap 50 | **5 คอลัมน์** × N แถว · ช่อง `184×184` ช่องไฟ 50 (x = 160 / 394 / 628 / 862 / 1096 · แถว y +234) · แถวสุดท้ายชิดซ้าย · ช่องไม่เต็มแถวไม่เติมช่องว่าง |
+| ปุ่ม Back | `[160, สูง frame − 96, 115×50]` | §3.3 · ใต้ปุ่มเหลือ 46 → frame สูง = Back y + 96 |
+**ตาราง ค่าต่อ trail** (ทุกค่าอ่านจาก Figma · "ช่อง" = ช่องที่เห็นในหน้า trail · "detail frame" = frame detail ของ trail ใน page `998:952` · Elephant = ของเดิม §4.4/§4.8 ไม่แตะ)
+| trail (slug) | H1 ใน Figma | frame สูง | H1 y | H1 กว้าง | คำอธิบาย x | กว้าง | สูง | Back y | ช่อง | detail frame | วัตถุที่มี record |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| bird | Bird Trail | 1416.0 | 699.2 | 151.0 | 341.0 | 939.0 | 69.0 | 1320.0 | 8 | 8 | 8 |
+| buffalo | Buffalo Trail | 1184.0 | 710.7 | 206.0 | 396.0 | 884.0 | 92.0 | 1088.0 | 5 | 5 | 5 |
+| rooster | Chicken & Rooster Trail | 1627.0 | 710.7 | 388.0 | 578.0 | 702.0 | 92.0 | 1531.0 | 11 | 11 | 11 |
+| deer | Deer Trail | 1287.0 | 699.2 | 162.0 | 352.0 | 928.0 | 69.0 | 1191.0 | 4 | 4 | 4 |
+| elephant | Elephant Trail | 1632.0 | 710.7 | 233.0 | 423.0 | 857.0 | 92.0 | 1536.0 | 15 | — | 15 |
+| dragon | Dragon Trail | 1396.0 | 699.2 | 206.0 | 396.0 | 884.0 | 69.0 | 1300.0 | 10 | 10 | 10 |
+| fish | Fish & Aquatic Mammals Trail | 1444.0 | 733.7 | 498.0 | 688.0 | 592.0 | 138.0 | 1348.0 | 8 | 8 | 8 |
+| garuda | Garuda Trail | 1444.0 | 722.2 | 206.0 | 396.0 | 884.0 | 115.0 | 1348.0 | 5 | 5 | 5 |
+| hornbill | Hornbill Trail | 1416.0 | 699.2 | 221.0 | 411.0 | 869.0 | 69.0 | 1320.0 | 7 | 7 | 7 |
+| horse | Horse Trail | 1416.0 | 699.2 | 181.0 | 371.0 | 909.0 | 69.0 | 1320.0 | 7 | 7 | 7 |
+| lion | Lion Trail | 1416.0 | 699.2 | 155.0 | 345.0 | 935.0 | 69.0 | 1320.0 | 6 | 6 | 6 |
+| makara | Makara Trail | 1416.0 | 710.7 | 214.0 | 404.0 | 876.0 | 92.0 | 1320.0 | 5 | 3 | 3 |
+| phoenix | Phoenix Trail | 1416.0 | 699.2 | 221.0 | 411.0 | 869.0 | 69.0 | 1320.0 | 8 | 8 | 8 |
+| seashell | Seashell & ⏎Marine Invertebrates Trail | 1646.0 | 699.7 | 436.0 | 626.0 | 654.0 | 115.0 | 1550.0 | 14 | 14 | 14 |
+| naga | Serpentine & Naga Trail | 1646.0 | 710.7 | 396.0 | 586.0 | 694.0 | 92.0 | 1550.0 | 13 | 13 | 13 |
+| turtle | Turtle Trail | 1214.0 | 710.7 | 183.0 | 373.0 | 907.0 | 92.0 | 1118.0 | 5 | 5 | 5 |
+| water-bird | Waterbirds & Hamsa Trail | 1637.0 | 722.2 | 427.0 | 617.0 | 663.0 | 115.0 | 1541.0 | 11 | 11 | 11 |
+- **ข้อสังเกต:** H1 ของ Elephant ใน Figma ใหม่ = **"Elephant Trail"** (เดิม seed/prod = "Elephant’s Trail") · Seashell H1 ขึ้น 2 บรรทัด `Seashell & ⏎Marine Invertebrates Trail` (แถวหัวสูง 90) · ช่องที่ node มี `opacity:0` (ตกค้างจากช้าง เช่น `Ele 18/19` ใน Bird/Deer/Fish) = **ไม่แสดง** (ตรงภาพ render) · ชื่อ instance "Ele NN" ไม่ใช่ตัวระบุวัตถุ → ลำดับช่อง ↔ วัตถุ ผูกด้วยภาพ (ดู 8.2)
+- **ค่าใน seed `trails.json` (ต่อ trail):** `title_on_trail_page` (H1 · ต่อบรรทัด→ช่องว่าง) · `title_on_trail_page_raw` · `description` · `cover_ref` · `cover_crop_ref` · `tiles[]` (ลำดับ · ภาพช่อง/hover · `object_slug`) · `object_slugs` (ตามลำดับช่อง) · `object_count` · `trail_page_layout` · ของ **elephant** ไม่แตะค่าเดิม → ค่า Figma ใหม่อยู่ใน `elephant.figma_2026_11_17` (+ `differs_from_current`)
+- `tile_bg` ของ 16 trail ตรงกับสีพื้นช่องในภาพจริง (สุ่มพิกเซล · Turtle ต่าง 1 ระดับจาก JPEG → คงค่าเดิม)
+
+### 8.2 ช่องวัตถุ + hover (Materials `3377:5466`)
+- ช่อง = `INSTANCE` ใน frame trail · ภาพ fill = ภาพ **พื้นสี + วัตถุ** (พื้นสีอยู่ในภาพ) · hover = ตัวแปรที่สองของ component set ในแถบ `Materials` ของ trail นั้น (default `184×184` → hover `210×210` · **ภาพคนละไฟล์**) · interaction `ON_HOVER → CHANGE_TO (SMART_ANIMATE · EASE_IN_AND_OUT · 300ms)` = **0.3s ease-in-out** → การขยายจากกึ่งกลาง (210−184)/2/184 = 7.0652% ต่อด้าน **ตรงกับที่ทำแล้วใน `assets/css/trail.css`** (ช้าง) → ใช้ร่วมกันทุก trail
+- ลำดับช่อง = ลำดับ (แถว→คอลัมน์) ของ instance ที่เห็น · **ไม่ตรงลำดับ frame/ตัวอักษร** (นักออกแบบวางเอง) → seed `objects[].trail_order[<trail>]` = ลำดับช่อง 1-based (ตรวจด้วยตา: ภาพช่อง ↔ ภาพในแผง detail ของทุกช่อง 125 ช่อง)
+- ภาพช่อง/hover ต่อวัตถุ: `objects[].tile_image_ref` / `tile_image_hover_ref` (ของ trail หลัก) · **วัตถุที่อยู่หลาย trail ใช้ภาพช่องคนละไฟล์ต่อ trail** → `objects[].tiles_by_trail.<trail>.{order,tile_image_ref,tile_image_hover_ref}` (core: trail page อ่านภาพจาก trail นั้น; ถ้าโครงข้อมูลเก็บภาพช่องได้ชุดเดียวต่อวัตถุ ให้ใช้ของ trail หลัก + เปิด P-xxx)
+- **Makara: 5 ช่องในหน้า trail แต่มี detail frame 3** → ช่อง 1 "Skull of Saltwater Crocodile" และช่อง 3 "Sungai Mas Makara" **ไม่มี frame detail/ข้อความ/WebM** (โน้ตนักออกแบบ `1170:2981` `1170:2985`: "ยังไมมีไฟล์ .PNG") → seed `trails.json makara.tiles[]` มีช่อง (ภาพช่อง+hover) แต่ `object_slug:null` · **แสดงช่อง ไม่ลิงก์** (D15 · D49 "ซ่อนส่วนที่ Figma ไม่มี") · ไม่สร้าง record วัตถุ
+- Buffalo: หน้า trail 5 ช่อง แต่ Materials มี 6 ชุด (`Buffalo 6` `3377:5554` = Sumatran Serow ที่ไม่มีช่อง/ไม่มี detail frame ใน Figma ใหม่) → record `sumatran-serow` คงข้อมูลเดิมแต่ `trail_order` ว่าง + `status: hold_no_frame_in_figma_2026_11_17` (ไม่แสดงในกริด)
+
+### 8.3 Detail วัตถุ trail อื่น — pattern เดียวกับช้าง (D49) · ใช้ **โหมด generic** ได้ (ไม่ต้องทำ geometry รายวัตถุเอง)
+- โครง: Header → hero `[0,150 1440×810]` (WebM) → แผงพื้นสี `[0,960 1440×H]` padding **160/60/160/60** gap **22** → คอลัมน์ข้อความ `[160,1020 739×h]` (ชื่อ 36/45 Heavy → บล็อกข้อมูล 20/25 label ตัวหนา Komet-Bold → "Caption:" + ย่อหน้า justify 18/24 · ช่องว่างย่อหน้า = 1 บรรทัด 24px) + คอลัมน์ภาพ `[921,1020 359×h]` (1–2 ภาพ · ภาพละ 359 กว้าง · gap 30 ระหว่างภาพ) → ปุ่ม Back `[160, …,115×50]` · **กฎ D42 (แสดงทุกช่องที่มีค่า ลำดับตายตัว ข้ามค่าว่าง) + D43 (justify · hyphens · ขอบบนภาพแรก = บรรทัดแรกของข้อมูล)** ใช้เหมือนช้าง
+- เทียบ template: `template-parts/detail/text-generic.php` (ไม่มี `text_blocks`) รับข้อความได้ครบ · **แถวข้อมูลที่ generic ยังไม่มี: `Scientific name / Taxonomy` (13 วัตถุ)** → ต้องมีฟิลด์ใหม่ `sh_scientific_name` (ดู 8.4 · D42 เสนอไว้แล้ว) · ตำแหน่งแถวใน Figma **ไม่คงที่** (แถวแรก 9 ชิ้น · หลัง Period 3 ชิ้น · หลัง Place 1 ชิ้น — ดู `info_rows[]` ต่อวัตถุ = ลำดับดิบ) → **ข้อเสนอ: ลำดับตายตัวของ D42 โดยเติม Scientific name ไว้ก่อน Period** (ตรงกับกรณีส่วนใหญ่ · เจ้าของเปลี่ยนได้) · **Giant Clams มี 2 ตัวอย่าง** (แถว Scientific name/Collection ซ้ำ) → ฟิลด์เรียบต่อค่าด้วย `\n` (แสดงหลายบรรทัดในแถวเดียว) · `info_rows` เก็บแถวดิบ 6 แถว
+- **รูปแบบที่ต้องใช้ต่อวัตถุ = seed `objects[].detail_style_mode: "generic"`** + `detail_style{panel_bg,title_color,text_color,collection_color,meta_color,source_frame}` + `figma[<trail หลัก>].style` (คีย์เดียวกับ 15 frame ช้าง ยกเว้นไม่มี `text_blocks`/`caption`/`info_layout`): `frame_size hero back_button panel_* title_color caption_color meta_color text_col image_col images[]` · `images[].crop_ref` = ภาพที่ครอปตาม Figma แล้ว (imageTransform/FILL ที่ 2x) วางที่ bbox ใน `image_col` (importer เดิมแปลง `*_ref` เป็น attachment id ได้เลย) · ไม่ต้องทำ geometry ราย frame เพิ่ม
+- **สีแผง (`panel_bg`) ตามกลุ่ม trail:** เขียว `#6BB9A5` = Bird · Hornbill · Chicken & Rooster · Waterbirds | ชมพู `#F1ADA0` = Phoenix · Dragon · Garuda · Serpent | ม่วงอ่อน `#CFA5BA` = Fish · Seashell · Turtle · Makara | เบจ `#DEDCC3` = Horse · Lion · Buffalo · Deer · สีตัวอักษร: ชื่อ `#212529` (บางชิ้น `#413B2F` `#534741`) · caption `#343A40` (บางชิ้น `#413B2F` `#495057`) · บล็อกข้อมูล `#343A40`/`#212529`/`#413B2F` → **ค่าต่อวัตถุอยู่ใน `detail_style`** (ไม่ใช้ค่ากลางต่อ trail)
+- **ข้อยกเว้นเรขาคณิตจากมาตรฐาน (11 frame · ไม่กระทบโหมด generic เพราะค่าต่อ frame อยู่ใน `figma[].style`):** panel_y ≠ 960: Phoenix 1577 (1117) · Horse 1556 / Garuda 1545 (943) · Fish 1458 / Makara 1568 (976) · Bird 1510 (990) · Naga 1602 (1110) · Naga 1609 (1009) — สาเหตุ = hero สูงต่างจาก 810 (825.6 / 793 / 859 / 960 / 967 ตามขนาด WebM) · Bird 1510 hero 810 แต่เว้น 30 ก่อนแผง · Buffalo 1487 / Dragon 1489 = frame รุ่นเก่า hero เริ่ม y=89 (แผง y=899) → seed เลื่อนลง +61 ให้ hero เริ่ม y=150 (`y_shift_applied`) · Buffalo 1504 คอลัมน์ภาพ `x=923 w=358` (ต่าง 1px) · **ภาพในแผง 1–2 ภาพทุก frame** (120 frame ของ record generic: 101 frame 1 ภาพ · 19 frame 2 ภาพ) — ไม่มีแกลเลอรี >6 (Buffalo 1487 / Dragon 1489 มี 11–13 ภาพซ้อนเป็นเฟรม GIF ใน hero ซึ่งไม่ใช่ภาพแผง)
+- **hero:** ใช้ WebM (`hero_video_src` = path ใต้ `animals-webm/` · **ตรงตัวอักษรกับส่วนหลัง `drive-1117/` ของ key ใน `content/media-manifest.json`** · ตรวจแล้ว 126/126) · ทุกวัตถุที่มี frame มี WebM (ไม่ต้องใช้ภาพนิ่ง) · วิดีโอพื้นทึบ ไม่มี alpha (media-1117) · **วัตถุที่อยู่หลาย trail:** WebM ต่อ trail เป็นคนละไฟล์/คนละแอนิเมชัน (8 ชื่อ — ดู docs/MEDIA.md) → `hero_video_src` = ไฟล์ของ **trail หลัก** · ไฟล์ของ trail อื่น = `hero_video_by_trail` (ข้อมูล · ไม่ import) · trail หลัก = ลำดับ `trails[0]` ของ record เดิม (record ใหม่ = trail เดียว)
+- **ข้อความ:** คัดลอกตรง · NBSP→ช่องว่าง · U+2028→`\n` · ตัด `Caption:` · **`\n` เดี่ยวในคำบรรยายแปลงเป็น `\n\n`** (เหมือน P-246 · แจ้งลูกค้า) · label "Place of Production / Findspot" ในไฟล์สะกดต่างกัน → ใช้ label มาตรฐาน (`info_rows[].label`) · `thematic_section` เก็บค่าเดิม (ไม่แสดง)
+- **D53 คำสะกดผิด:** แก้ใน seed แล้ว 2 คำ (`Studie`→`Studies` krutor-trut · `Lee Kong Chain`→`Lee Kong Chian` giant-clams) · รายการ+เหตุผลที่ไม่แก้ใน P-270 ข้อ 8
+- **ข้อความที่ Figma ขาด (D49 = ซ่อนส่วนนั้น ไม่เดา):** ดู PENDING §DEV P-270 (บัญชี: ไม่มีข้อมูลใต้หัวข้อ · หัวข้อ placeholder · ช่อง Makara 2 · Sumatran Serow · ข้อความ/ภาพคนละตัวใน Deer · frame ซ้ำที่ข้อความต่างกัน)
+
+### 8.4 ฟิลด์ที่หน้าใช้ (เพิ่ม/เปลี่ยนจาก §5.1/§5.2 — ให้ core ยก CONTENT-MODEL)
+| ฟิลด์ (seed key) | ชนิด | ใช้ใน | ที่มา (node) | ตัวอย่าง |
+|---|---|---|---|---|
+| `scientific_name` → ใหม่ `sh_scientific_name` (text) | text | detail (แถว "Scientific name / Taxonomy:") | meta node ใน frame detail (เช่น `1179:4174`) | Domestic Chicken: "Gallus gallus domesticus (Linnaeus, 1758); Galliformes: Phasianidae" · 13 วัตถุ |
+| `hero_video_src` (string) | path ใต้ `animals-webm/` | detail hero (ผูกกับ manifest `drive-1117/<path>`) | Drive | `Bird/Kalakati.webm` |
+| `hero_video_by_trail` (map) | ข้อมูล | — (บันทึกไฟล์ของ trail อื่น) | Drive | `{"phoenix":"Phoenix/Pending (Traditional Belt Buckle).webm","bird":"Bird/…"}` |
+| `tile_image_ref` · `tile_image_hover_ref` | ชื่อไฟล์ใน `design/assets/objects-1117/` (basename ไม่มี subfolder) | trail grid → `sh_tile_image` · `sh_tile_image_hover` | tile default/hover (Materials) | `77d84c86….png` |
+| `tiles_by_trail.<trail>` | map | trail grid ของ trail นั้น | 〃 | ดู 8.2 |
+| `trail_order.<trail>` | int | ลำดับช่อง | ลำดับ instance | pending-3: `{"phoenix":2,"bird":4}` |
+| `detail_style_mode` = `generic` · `primary_frame` | string | เลือก text-generic + frame หลักของ `figma[].style` | — | — |
+| `figma[].style.images[].crop_ref` | ชื่อไฟล์ | detail panel image (`sh_layout.images[]`) | `ex 3`/`ex 5` ใน `Frame 12760` | `2607188d….crop-1220-3089.jpg` |
+| `trails[].cover_crop_ref` · `title_on_trail_page` · `description` · `tiles[]` | ฟิลด์ trail (ใช้ `sh_cover_image` `sh_title_on_trail_page` + term description เดิม) | trail page | `3377:46xx`… | — |
+- **`*_ref` ทั้งหมดเป็นชื่อไฟล์เดี่ยว ๆ (basename) ที่อยู่ใน `design/assets/objects-1117/`** — importer (`refs.php sh_import_ref_file`) ปัจจุบันค้นเฉพาะรากของ `design/assets/` (+ `lineart/`) → **core ต้องเพิ่ม `objects-1117/` เป็นโฟลเดอร์ค้นหา (ชื่อไฟล์เป็น hash/`<hash>.crop-<node>` ไม่ซ้ำกัน)** และ `scripts/deploy.sh` bundle ไฟล์ที่ seed อ้าง (เหมือน `zone5/` `lineart/`)
+- slug: คงของเดิมทุกชิ้นที่ยังเป็นวัตถุเดิม · **ใหม่ 5:** `swan-shaped-holy-water-pot` · `krutor-trut` · `turtle-shaped-gold-plaque` · `the-red-barking-deer` · `gold-naga-earrings` · **ถูกรวม/เลิก 4** (record เก่าซ้ำ/stub · ไม่เคย import ขึ้น prod): `pending-2`→`pending-3` · `bronze-drum-ng-s-n-drum`→`ng-s-n-drum` · `flintlock-firearm-2` (frame 1608 กลายเป็น Gold Naga earrings) · `tin-ingots-in-the-shape-of-chicken-2` (frame 1618 กลายเป็น Turtle-shaped gold plaque) · รายการใน `objects.json _meta.figma_2026_11_17.dropped_slugs`
+- **15 วัตถุช้าง (+Gringsing) ไม่เปลี่ยน** ยกเว้น 2 ชิ้นที่อยู่หลาย trail (`wooden-cold-press-cake-molds…` · `embossed-brass-basin…`): ปรับ `trail_order` ของ trail **อื่น**ตามลำดับช่องใหม่ (rooster 10→8 · garuda 1→3 · lion 3 · naga 5 · horse 7) + เพิ่ม `tiles_by_trail` / `hero_video_by_trail` / `figma_2026_11_17_frames` · ค่าของ trail ช้างและข้อความเดิมไม่แตะ
+
+### 8.5 จำนวนวัตถุต่อ trail (นับจาก Figma `figma-file.json` และ seed · ตรวจด้วย `verify-objects-1117.py`)
+| trail | ช่องในหน้า trail | detail frame | record ใน seed (มี trail_order) | WebM ใน Drive | WebM จับคู่ได้ |
+|---|---|---|---|---|---|
+| bird | 8 | 8 | 8 | 8 | 8 |
+| buffalo | 5 | 5 | 5 | 6 | 5 |
+| rooster | 11 | 11 | 11 | 11 | 11 |
+| deer | 4 | 4 | 4 | 4 | 4 |
+| dragon | 10 | 10 | 10 | 10 | 10 |
+| fish | 8 | 8 | 8 | 8 | 8 |
+| garuda | 5 | 5 | 5 | 5 | 5 |
+| hornbill | 7 | 7 | 7 | 7 | 7 |
+| horse | 7 | 7 | 7 | 7 | 7 |
+| lion | 6 | 6 | 6 | 6 | 6 |
+| makara | 5 | 3 | 3 | 3 | 3 |
+| phoenix | 8 | 8 | 8 | 8 | 8 |
+| seashell | 14 | 14 | 14 | 14 | 14 |
+| naga | 13 | 13 | 13 | 13 | 13 |
+| turtle | 5 | 5 | 5 | 5 | 5 |
+| water-bird | 11 | 11 | 11 | 11 | 11 |
+| **รวม 16 trail** | 127 | 125 | 125 (นับซ้ำข้าม trail · record ไม่ซ้ำ = 104) | 126 | 125 |
+| elephant | 15 | (เดิม §4.8) | 15 (+Gringsing) | ไม่มีโฟลเดอร์ใน Drive รอบนี้ | — |
+ผลรวม record: **121 record** ใน `objects.json` (เดิม 120 → +5 ใหม่ −4 รวม/เลิก) · วัตถุที่อยู่หลาย trail = record เดียว (125 frame → 104 วัตถุ: 17 วัตถุอยู่หลาย trail = 21 frame ซ้ำ · รวม 15 record generic + 2 record ช้าง) · `trails.json`: 16 trail ได้ข้อความ/cover/ช่อง ใหม่ · elephant เก็บค่า Figma ใหม่ในบล็อกแยก
