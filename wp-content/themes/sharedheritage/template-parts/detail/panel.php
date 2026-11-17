@@ -7,7 +7,10 @@
  * placed at the bbox) · without them sh_object_extra_images() (contained in the column box).
  * Colours: sh_panel_bg (empty = no fill) · sh_title_color · sh_text_color · sh_meta_color · sh_collection_color.
  *
- * Args: post_id (int) · geometry (array from single-object.php) · layout (sh_object_layout()).
+ * Trail version (D59): variant = sh_object_variant() of the trail the visitor came from — its colours replace the object's (field by
+ * field), its side images replace the layout images in order, its title/caption/info rows go to the text column.
+ *
+ * Args: post_id (int) · geometry (array from single-object.php) · layout (sh_object_layout() or the version's layout) · variant (array|null).
  *
  * @package sharedheritage
  */
@@ -18,10 +21,12 @@ $sh_args   = ( isset( $args ) && is_array( $args ) ) ? $args : array();
 $sh_id     = isset( $sh_args['post_id'] ) ? (int) $sh_args['post_id'] : (int) get_the_ID();
 $sh_geo    = isset( $sh_args['geometry'] ) && is_array( $sh_args['geometry'] ) ? $sh_args['geometry'] : array();
 $sh_layout = isset( $sh_args['layout'] ) && is_array( $sh_args['layout'] ) ? $sh_args['layout'] : array();
+$sh_ver    = isset( $sh_args['variant'] ) && is_array( $sh_args['variant'] ) ? $sh_args['variant'] : null;
 
 $sh_num   = static fn( $v ): string => (string) round( (float) $v, 3 );
-$sh_color = static function ( string $key ) use ( $sh_id ): string {
-	$c = sanitize_hex_color( (string) sh_get( $key, $sh_id ) );
+$sh_color = static function ( string $key ) use ( $sh_id, $sh_ver ): string {
+	$own = $sh_ver && ! empty( $sh_ver['colors'][ $key ] ) ? $sh_ver['colors'][ $key ] : sh_get( $key, $sh_id ); // D59: the version's colour first.
+	$c   = sanitize_hex_color( (string) $own );
 	return is_string( $c ) ? $c : '';
 };
 
@@ -56,6 +61,13 @@ foreach ( (array) ( $sh_layout['images'] ?? array() ) as $sh_img ) {
 	}
 }
 usort( $sh_items, static fn( $a, $b ) => $a['order'] <=> $b['order'] );
+if ( $sh_ver && ! empty( $sh_ver['images'] ) ) { // D59: a side image the admin set on the version replaces the layout's image at that place.
+	foreach ( $sh_ver['images'] as $sh_k => $sh_aid ) {
+		if ( isset( $sh_items[ $sh_k - 1 ] ) && wp_attachment_is_image( (int) $sh_aid ) ) {
+			$sh_items[ $sh_k - 1 ]['id'] = (int) $sh_aid;
+		}
+	}
+}
 $sh_placed = $sh_items && $sh_media_col;
 if ( ! $sh_items ) {
 	foreach ( array_filter( sh_object_extra_images( $sh_id ), 'wp_attachment_is_image' ) as $sh_aid ) {
@@ -136,7 +148,7 @@ if ( is_array( $sh_trails ) && $sh_trails ) {
 			break;
 		}
 	}
-	$sh_link = get_term_link( $sh_main );
+	$sh_link = get_term_link( $sh_ver ? $sh_ver['trail'] : $sh_main ); // D59: the trail the version belongs to (the one the visitor came from).
 	if ( is_string( $sh_link ) ) {
 		$sh_back_url = $sh_link;
 	}
@@ -164,6 +176,7 @@ if ( '' !== $sh_from ) {
 				array(
 					'post_id' => $sh_id,
 					'layout'  => $sh_layout,
+					'variant' => $sh_ver,
 				)
 			);
 			if ( $sh_items || $sh_slot ) {
