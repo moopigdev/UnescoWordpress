@@ -75,6 +75,7 @@ $sh_vars = array(
 	'--sh-d-pad-bottom' => $sh_num( $sh_geo['pad_bottom'] ?? 60 ),
 	'--sh-d-tail'       => $sh_num( $sh_geo['tail'] ?? 0 ),
 	'--sh-d-gap'        => $sh_num( $sh_geo['gap'] ?? 22 ),
+	'--sh-d-text-gap'   => $sh_num( $sh_geo['text_gap'] ?? ( $sh_geo['gap'] ?? 22 ) ),
 	'--sh-d-back-gap'   => $sh_num( $sh_geo['back_gap'] ?? 22 ),
 	'--sh-d-text-w'     => $sh_num( $sh_two_cols ? $sh_text_w : max( $sh_text_w, $sh_cw ) ),
 	'--sh-d-text-h'     => $sh_num( $sh_text_col ? $sh_text_col[3] : 0 ),
@@ -111,11 +112,25 @@ $sh_panel_cls = 'sh-detail__panel'
 	. ( $sh_two_cols ? ' sh-detail__panel--cols' : '' )
 	. ( (int) ( $sh_geo['text_nodes'] ?? 0 ) > 1 ? ' sh-detail__panel--meta-lg' : '' );
 
-// Back: history back (base.js); fallback = the object's first trail page, else home.
+// Back: history back (base.js) when the visitor came from this site — i.e. from the trail they clicked, also for an
+// object that sits in several trails; fallback href = the object's main trail (the one that is not listed in its
+// other-trail tile fields sh_trail_tile_<n>_trail · D49), else home.
 $sh_back_url = home_url( '/' );
 $sh_trails   = get_the_terms( $sh_id, 'trail' );
 if ( is_array( $sh_trails ) && $sh_trails ) {
-	$sh_link = get_term_link( $sh_trails[0] );
+	$sh_others = array();
+	for ( $sh_n = 1; $sh_n <= 4; $sh_n++ ) {
+		$sh_others[] = absint( sh_get( 'sh_trail_tile_' . $sh_n . '_trail', $sh_id ) );
+	}
+	usort( $sh_trails, static fn( $a, $b ) => $a->term_id <=> $b->term_id );
+	$sh_main = $sh_trails[0];
+	foreach ( $sh_trails as $sh_t ) {
+		if ( ! in_array( $sh_t->term_id, $sh_others, true ) ) {
+			$sh_main = $sh_t;
+			break;
+		}
+	}
+	$sh_link = get_term_link( $sh_main );
 	if ( is_string( $sh_link ) ) {
 		$sh_back_url = $sh_link;
 	}

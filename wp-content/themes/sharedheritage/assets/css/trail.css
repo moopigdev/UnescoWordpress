@@ -67,6 +67,10 @@
 	color: var(--sh-color-neutral-900);
 }
 
+.sh-trail__desc--justify {
+	text-align: justify; /* D49 trails (Figma JUSTIFIED · §8.1); Elephant keeps its built look */
+}
+
 .sh-trail__desc p + p {
 	margin-top: var(--sh-space-10);
 }
@@ -152,10 +156,31 @@
 	outline-offset: 4px;
 }
 
+/* Tile without a detail page (Makara 2 · Chicken & Rooster #11 · §8.2): not a link — same hover zoom as the others, normal cursor, not focusable */
+.sh-trail-tile--static {
+	cursor: default;
+}
+
 /* ---- Back: [160,1536] — 54.772 below the grid (1481.228 → 1536) · 46 below to the frame end 1632 ---- */
 .sh-trail__back {
 	margin-top: calc(1536px - 1481.228px);
 	padding-bottom: calc(1632px - 1586px);
+}
+
+/* ---- D49 trails (sh_trail_layout → vars set by taxonomy-trail.php, px at 1440): heading height · grid y · Back y ---- */
+@media (min-width: 1168px) {
+	.sh-trail__intro {
+		min-height: var(--sh-trail-intro-min, 112px);
+	}
+
+	.sh-trail__grid-wrap {
+		margin-top: var(--sh-trail-grid-gap, var(--sh-space-40));
+	}
+
+	.sh-trail__back {
+		margin-top: var(--sh-trail-back-gap, calc(1536px - 1481.228px));
+		padding-bottom: var(--sh-trail-back-pad, calc(1632px - 1586px));
+	}
 }
 
 /* ---- Fluid below the full 1440 layout (D5: responsive as appropriate) ---- */

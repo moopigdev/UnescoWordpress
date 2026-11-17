@@ -7,6 +7,9 @@
  * (never cropped or stretched). No video and no image → nothing is printed and the panel follows the
  * header (DOD B6). Plays once (no loop, D22), starting when the video first enters the viewport (assets/js/detail.js).
  *
+ * Solid video (generic D49 objects: no alpha, white ground · P-304): `--solid` brightens the media 0.8% so the poster (a
+ * 253 white after WebP encoding) and the video (255) both melt into the white page — no visible frame around e.g. the Shiva hero.
+ *
  * Args: post_id (int) · geometry (array from single-object.php).
  *
  * @package sharedheritage
@@ -39,7 +42,7 @@ $sh_style = sprintf(
 $sh_alt   = $sh_image_ok ? (string) get_post_meta( $sh_image_id, '_wp_attachment_image_alt', true ) : '';
 $sh_alt   = '' !== $sh_alt ? $sh_alt : get_the_title( $sh_id );
 ?>
-<div class="sh-detail__hero" style="<?php echo esc_attr( $sh_style ); ?>">
+<div class="sh-detail__hero<?php echo ! empty( $sh_geo['generic'] ) && $sh_has_video ? ' sh-detail__hero--solid' : ''; ?>" style="<?php echo esc_attr( $sh_style ); ?>">
 	<div class="sh-detail__hero-box">
 		<?php if ( $sh_has_video ) : ?>
 			<video class="sh-detail__hero-media" muted playsinline preload="metadata" data-sh-autoplay
