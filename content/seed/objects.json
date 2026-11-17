@@ -81,6 +81,11 @@
    "by": "hover-1117",
    "lastModified": "2026-11-17T11:28:55Z",
    "what": "ตรวจ tile_hover_node ครบ 127 ช่อง + tile_node 127 ช่อง เทียบ imageRef ใน Figma (GET /files/:key/nodes 1 คำขอ) -> เปลี่ยน 2 hover: seashell #12 dragon-shaped-mother-of-pearl-inlaid-incense-tray (3377:5816) 59e52f9e…->dc3709ea… · seashell #13 kalung (3377:5819) 14afb75a…->5e9b806b… · ref เดิมเก็บใน tile_image_hover_ref_prev (objects.json tiles_by_trail + ระดับ record kalung · trails.json tiles) · ช่องอื่น/tile ปกติไม่เปลี่ยน"
+  },
+  "figma_2026_11_17_fb": {
+   "by": "fb-1117",
+   "lastModified": "2026-11-17T11:28:55Z",
+   "what": "pending-3 หัวข้อ+เรขาคณิต · Makara 2 ภาพแผงด้านข้าง (ดู record.figma_2026_11_17_fb) · zones-2026-11-17.json (หลักฐานช่อง zone 1–3 · ยังไม่มีใครใช้)"
   }
  },
  "objects": [
@@ -23928,8 +23933,8 @@
   },
   {
    "slug": "pending-3",
-   "title": "Pending (Traditional Belt Buckle)",
-   "title_raw": "Pending (Traditional Belt Buckle)",
+   "title": "Pending (traditional belt buckle)",
+   "title_raw": "Pending (traditional belt buckle)",
    "trails": [
     "bird",
     "phoenix"
@@ -24039,7 +24044,7 @@
          160.0,
          1020.0,
          739.0,
-         768.0
+         745.0
         ]
        },
        {
@@ -24070,7 +24075,7 @@
         160.0,
         1020.0,
         739.0,
-        768.0
+        745.0
        ],
        "padding_top": 0
       },
@@ -24127,11 +24132,7 @@
        }
       ]
      },
-     "text_differs_from_primary": [
-      "title",
-      "caption",
-      "meta"
-     ]
+     "lastModified": "2026-11-17T11:28:55Z"
     },
     {
      "page": "Page 2.1 ALL Animal content (998:952)",
@@ -24169,7 +24170,7 @@
       ],
       "back_button": [
        160.0,
-       1766.0,
+       1810.0,
        115.0,
        50.0
       ],
@@ -24185,7 +24186,7 @@
          160.0,
          1020.0,
          739.0,
-         721.0
+         745.0
         ]
        },
        {
@@ -24195,7 +24196,7 @@
          921.0,
          1020.0,
          359.0,
-         560.1
+         560.0872802734375
         ]
        }
       ],
@@ -24204,7 +24205,7 @@
       "panel_bg": "#6BB9A5",
       "panel_has_fill": true,
       "panel_y": 960.0,
-      "panel_h": 905.0,
+      "panel_h": 949.0,
       "title_color": "#212529",
       "collection_color": "#343A40",
       "caption_color": "#343A40",
@@ -24216,7 +24217,7 @@
         160.0,
         1020.0,
         739.0,
-        721.0
+        745.0
        ],
        "padding_top": 0
       },
@@ -24227,7 +24228,7 @@
         921.0,
         1020.0,
         359.0,
-        560.1
+        560.0872802734375
        ]
       },
       "images": [
@@ -24284,10 +24285,17 @@
         "crop_scale": 2.0
        }
       ]
-     }
+     },
+     "lastModified": "2026-11-17T11:28:55Z"
     }
    ],
-   "status": []
+   "status": [],
+   "figma_2026_11_17_fb": {
+    "by": "fb-1117",
+    "lastModified": "2026-11-17T11:28:55Z",
+    "what": "นักออกแบบเติมข้อความ Phoenix 1574 (เดิม \"Pending (รอไฟล์)\") → ข้อความ 2 frame (1509 · 1574) เท่ากันทุกตัวอักษร (หัวข้อ · 2 แถว meta · caption) = ชิ้นเดียวกัน · หัวข้อเปลี่ยนจาก \"Pending (Traditional Belt Buckle)\" เป็น \"Pending (traditional belt buckle)\" (ตัวเล็ก · ตรง Figma) · caption/meta ไม่เปลี่ยน · ไม่มี Period/Material/Dimensions/Other information ใน Figma · ภาพ hero/ภาพแผง (ex 3/ex 5) ไม่เปลี่ยน · slug pending-3 คงเดิม (URL live)",
+    "slug_proposal": "pending-traditional-belt-buckle (ยังไม่ใช้ · P-381)"
+   }
   },
   {
    "slug": "quail-shaped-silver-casket",
@@ -36500,24 +36508,6 @@
     "makara": "Makara/Saltwater crocodile skull.webm"
    },
    "hero_still_ref": "d059fb72e82cb13dd546c51b8cb40b2708c824ff.png",
-   "side_image_slot": {
-    "state": "empty_awaiting_designer",
-    "frame_node": "3449:3871",
-    "bbox": [
-     921.0,
-     1090.0,
-     359.0,
-     489.0
-    ],
-    "scale_mode": "FILL",
-    "column_bbox": [
-     921.0,
-     1020.0,
-     359.0,
-     559.0
-    ],
-    "column_node": "3449:3870"
-   },
    "tile_image_ref": "77d84c86e681408da172e84a8e60c68e68c001bd.png",
    "tile_image_hover_ref": "9a4ee322ba8d0d32314b67f00ee019ea9aaea41b.png",
    "tiles_by_trail": {
@@ -36551,7 +36541,7 @@
       1440,
       810
      ],
-     "lastModified": "2026-11-17T08:33:07Z",
+     "lastModified": "2026-11-17T11:28:55Z",
      "style": {
       "frame_size": [
        1440.0,
@@ -36632,28 +36622,54 @@
         559.0
        ]
       },
-      "images": [],
-      "image_slot_empty": {
-       "node": "3449:3871",
-       "name": "ex 3",
-       "bbox": [
-        921.0,
-        1090.0,
-        359.0,
-        489.0
-       ],
-       "scale_mode": "FILL",
-       "radius": 0,
-       "state": "empty_awaiting_designer",
-       "figma_fill_opacity": 0,
-       "note": "นักออกแบบเว้นช่อง (rect fill opacity 0 · ภาพที่ฝังอยู่ = ภาพแผงของ Makara palanquin ornament ตกค้าง ไม่ใช่ภาพของวัตถุนี้ → ไม่ใช้) · ว่างจนกว่า admin ใส่ภาพ · ภาพที่ใส่ลงตำแหน่ง bbox นี้"
-      }
+      "images": [
+       {
+        "order": 1,
+        "node": "3449:3871",
+        "name": "ex 3",
+        "bbox": [
+         921.0,
+         1090.0,
+         359.0,
+         489.0
+        ],
+        "radius": 0,
+        "scale_mode": "FILL",
+        "source_image": "91de53b6507246001b12e97bf6a466826863db17",
+        "source_file": "91de53b6507246001b12e97bf6a466826863db17.jpg",
+        "crop_ref": "91de53b6507246001b12e97bf6a466826863db17.crop-3449-3871.png",
+        "crop_size": [
+         718,
+         978
+        ],
+        "crop_scale": 2.0,
+        "crop_method": "cover-crop กึ่งกลาง (Figma FILL) ที่ 2× ของกรอบ · หมุนตาม EXIF orientation 6 แล้ว (ภาพดิบ 4000×3000 = แนวตั้งหลังหมุน)"
+       }
+      ],
+      "images_hidden": [
+       {
+        "node": "3449:3872",
+        "name": "ex 5",
+        "bbox": [
+         921.0,
+         1479.0,
+         359.0,
+         279.0
+        ],
+        "source_image": "ff21ec51161e414d762659f12082abe241102976",
+        "visible": false,
+        "note": "ซ่อนใน Figma (visible:false) → ไม่แสดง · ref เดียวกันทั้ง 2 วัตถุ"
+       }
+      ]
      }
     }
    ],
-   "status": [
-    "side_image_empty_slot_awaiting_designer"
-   ]
+   "status": [],
+   "figma_2026_11_17_fb": {
+    "by": "fb-1117",
+    "lastModified": "2026-11-17T11:28:55Z",
+    "what": "นักออกแบบใส่ภาพแผงด้านข้างแล้ว: ex 3 3449:3871 ref 91de53b6 (เดิมเป็น 285c8b60 ที่ fill โปร่ง) · ข้อความ/hero ไม่เปลี่ยน"
+   }
   },
   {
    "slug": "sungai-mas-makara",
@@ -36719,24 +36735,6 @@
     "makara": "Makara/Sungai Mas makara.webm"
    },
    "hero_still_ref": "1fa109361092e6be7b192998e04b960154de4663.png",
-   "side_image_slot": {
-    "state": "empty_awaiting_designer",
-    "frame_node": "3449:3960",
-    "bbox": [
-     921.0,
-     1090.0,
-     359.0,
-     489.0
-    ],
-    "scale_mode": "FILL",
-    "column_bbox": [
-     921.0,
-     1020.0,
-     359.0,
-     559.0
-    ],
-    "column_node": "3449:3959"
-   },
    "tile_image_ref": "e7f33e8789619ca1ee06fbde6b8e589b8d5b0631.png",
    "tile_image_hover_ref": "a7610fef452528f0aae4578c9e417b24176710e3.png",
    "tiles_by_trail": {
@@ -36770,7 +36768,7 @@
       1440,
       811
      ],
-     "lastModified": "2026-11-17T08:33:07Z",
+     "lastModified": "2026-11-17T11:28:55Z",
      "style": {
       "frame_size": [
        1440.0,
@@ -36816,7 +36814,7 @@
          921.0,
          1020.0,
          359.0,
-         559.0
+         361.0
         ]
        }
       ],
@@ -36848,31 +36846,57 @@
         921.0,
         1020.0,
         359.0,
-        559.0
+        361.0
        ]
       },
-      "images": [],
-      "image_slot_empty": {
-       "node": "3449:3960",
-       "name": "ex 3",
-       "bbox": [
-        921.0,
-        1090.0,
-        359.0,
-        489.0
-       ],
-       "scale_mode": "FILL",
-       "radius": 0,
-       "state": "empty_awaiting_designer",
-       "figma_fill_opacity": 0,
-       "note": "นักออกแบบเว้นช่อง (rect fill opacity 0 · ภาพที่ฝังอยู่ = ภาพแผงของ Makara palanquin ornament ตกค้าง ไม่ใช่ภาพของวัตถุนี้ → ไม่ใช้) · ว่างจนกว่า admin ใส่ภาพ · ภาพที่ใส่ลงตำแหน่ง bbox นี้"
-      }
+      "images": [
+       {
+        "order": 1,
+        "node": "3449:3960",
+        "name": "ex 3",
+        "bbox": [
+         921.0,
+         1090.0,
+         359.0,
+         291.0
+        ],
+        "radius": 0,
+        "scale_mode": "FILL",
+        "source_image": "ea68fcba7a124ed7fb405d0b2ef197dfdf307676",
+        "source_file": "ea68fcba7a124ed7fb405d0b2ef197dfdf307676.jpg",
+        "crop_ref": "ea68fcba7a124ed7fb405d0b2ef197dfdf307676.crop-3449-3960.png",
+        "crop_size": [
+         718,
+         582
+        ],
+        "crop_scale": 2.0,
+        "crop_method": "cover-crop กึ่งกลาง (Figma FILL) ที่ 2× ของกรอบ"
+       }
+      ],
+      "images_hidden": [
+       {
+        "node": "3449:3961",
+        "name": "ex 5",
+        "bbox": [
+         921.0,
+         1479.0,
+         359.0,
+         279.0
+        ],
+        "source_image": "ff21ec51161e414d762659f12082abe241102976",
+        "visible": false,
+        "note": "ซ่อนใน Figma (visible:false) → ไม่แสดง · ref เดียวกันทั้ง 2 วัตถุ"
+       }
+      ]
      }
     }
    ],
-   "status": [
-    "side_image_empty_slot_awaiting_designer"
-   ]
+   "status": [],
+   "figma_2026_11_17_fb": {
+    "by": "fb-1117",
+    "lastModified": "2026-11-17T11:28:55Z",
+    "what": "นักออกแบบใส่ภาพแผงด้านข้างแล้ว: ex 3 3449:3960 ref ea68fcba (เดิมเป็น 285c8b60 ที่ fill โปร่ง) · ข้อความ/hero ไม่เปลี่ยน"
+   }
   }
  ]
 }

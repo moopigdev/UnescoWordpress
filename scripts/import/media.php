@@ -108,6 +108,9 @@ function sh_imp_attachment( string $src, string $key, string $title, array $vide
 	if ( sh_imp_icc_normalize( $dest, (string) $check['type'] ) ) { // Display P3 etc. → sRGB as Figma shows it (icc.php).
 		sh_imp_count( 'updated', 'icc_to_srgb' );
 	}
+	if ( 'image/png' === $check['type'] && sh_imp_png_drop_exif_rotation( $dest ) ) {
+		sh_imp_count( 'updated', 'png_exif_rotation_dropped' );
+	}
 	$id = wp_insert_attachment(
 		wp_slash(
 			array(
@@ -131,6 +134,58 @@ function sh_imp_attachment( string $src, string $key, string $title, array $vide
 	$s['att'][ $key ] = (int) $id;
 	sh_imp_count( 'created', 'attachment' );
 	return (int) $id;
+}
+
+/**
+ * A PNG whose pixels are already upright but whose eXIf chunk still says "rotate" (Orientation 2–8): browsers rotate it
+ * a second time (fb-1117: design/assets/objects-1117 crop of saltwater-crocodile-skull — design-dev cropped it after
+ * applying EXIF orientation 6 and kept the tag). The chunk is removed (no other chunk changes; PNG chunks are
+ * self-contained). Orientation 1 / no eXIf chunk = untouched. Returns true when the file was rewritten.
+ *
+ * @param string $file Absolute PNG path.
+ */
+function sh_imp_png_drop_exif_rotation( string $file ): bool {
+	$data = is_readable( $file ) ? file_get_contents( $file ) : false; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	if ( ! is_string( $data ) || 0 !== strncmp( $data, "\x89PNG\r\n\x1a\n", 8 ) ) {
+		return false;
+	}
+	$len = strlen( $data );
+	$pos = 8;
+	while ( $pos + 12 <= $len ) {
+		$size = (int) unpack( 'N', substr( $data, $pos, 4 ) )[1];
+		$type = substr( $data, $pos + 4, 4 );
+		if ( 'IDAT' === $type ) {
+			return false; // eXIf comes before the image data: none here.
+		}
+		if ( 'eXIf' === $type ) {
+			$exif  = substr( $data, $pos + 8, $size );
+			$order = substr( $exif, 0, 2 );
+			if ( strlen( $exif ) < 8 || ( 'MM' !== $order && 'II' !== $order ) ) {
+				return false;
+			}
+			$u16 = 'MM' === $order ? 'n' : 'v';
+			$u32 = 'MM' === $order ? 'N' : 'V';
+			$off = (int) unpack( $u32, substr( $exif, 4, 4 ) )[1];
+			if ( $off + 2 > strlen( $exif ) ) {
+				return false;
+			}
+			$count = (int) unpack( $u16, substr( $exif, $off, 2 ) )[1];
+			$turn  = false;
+			for ( $i = 0; $i < $count && $off + 2 + 12 * ( $i + 1 ) <= strlen( $exif ); $i++ ) {
+				$entry = substr( $exif, $off + 2 + 12 * $i, 12 );
+				if ( 0x0112 === (int) unpack( $u16, substr( $entry, 0, 2 ) )[1] ) {
+					$turn = (int) unpack( $u16, substr( $entry, 8, 2 ) )[1] > 1;
+				}
+			}
+			if ( ! $turn ) {
+				return false;
+			}
+			$out = substr( $data, 0, $pos ) . substr( $data, $pos + 12 + $size );
+			return false !== file_put_contents( $file, $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		}
+		$pos += 12 + $size;
+	}
+	return false;
 }
 
 /**

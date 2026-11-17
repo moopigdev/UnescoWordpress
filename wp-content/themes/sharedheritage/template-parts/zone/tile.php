@@ -1,38 +1,43 @@
 <?php
 /**
- * Trail tile (§3.6 · component set `Bird 1` 1018:1372): default 184×184 image; hover swaps to the 210×210 image
- * (coloured background + object, a different file) · 0.3s ease-in-out. D15 (P-101): a tile links to /trail/<slug>/
- * only when the trail has published objects; otherwise it renders the same but without a link.
+ * Zone object tile (§3.6 · §8.2 · D57): default 184×184 image; hover swaps to the 210×210 image (a different file) ·
+ * 0.3s ease-in-out. A tile with a published object links to its detail page (`?from=zone-<n>` tells the Back button
+ * which zone page the visitor came from · see template-parts/detail/panel.php); a tile without one is the same
+ * picture, no link (same hover, normal cursor).
  *
- * Args: trail (WP_Term).
+ * Args: tile (array from sh_zone_grid(): object · url · label · image · hover) · zone (WP_Term).
  *
  * @package sharedheritage
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$sh_args  = ( isset( $args ) && is_array( $args ) ) ? $args : array();
-$sh_trail = isset( $sh_args['trail'] ) && $sh_args['trail'] instanceof WP_Term ? $sh_args['trail'] : null;
-if ( ! $sh_trail ) {
+$sh_args = ( isset( $args ) && is_array( $args ) ) ? $args : array();
+$sh_tile = isset( $sh_args['tile'] ) && is_array( $sh_args['tile'] ) ? $sh_args['tile'] : array();
+$sh_zone = isset( $sh_args['zone'] ) && $sh_args['zone'] instanceof WP_Term ? $sh_args['zone'] : null;
+$sh_img  = (int) ( $sh_tile['image'] ?? 0 );
+if ( ! $sh_img ) {
 	return;
 }
+$sh_hover = (int) ( $sh_tile['hover'] ?? 0 );
+$sh_name  = (string) ( $sh_tile['label'] ?? '' );
+$sh_url   = (string) ( $sh_tile['url'] ?? '' );
+if ( '' !== $sh_url && $sh_zone ) {
+	$sh_url = add_query_arg( 'from', $sh_zone->slug, $sh_url );
+}
 
-$sh_bg    = sanitize_hex_color( (string) sh_get_term( 'sh_tile_bg', $sh_trail ) );
-$sh_img   = absint( sh_get_term( 'sh_tile_zone_grid', $sh_trail ) );
-$sh_hover = absint( sh_get_term( 'sh_tile_zone_grid_hover', $sh_trail ) );
-
-$sh_img_html   = $sh_img ? wp_get_attachment_image(
+$sh_img_html   = wp_get_attachment_image(
 	$sh_img,
 	'full',
 	false,
 	array(
 		'class'    => 'sh-tile__img',
-		'alt'      => $sh_trail->name,
+		'alt'      => '' !== $sh_url ? '' : $sh_name,
 		'loading'  => 'lazy',
 		'decoding' => 'async',
 		'sizes'    => '(min-width: 1168px) 184px, 20vw',
 	)
-) : '';
+);
 $sh_hover_html = $sh_hover ? wp_get_attachment_image(
 	$sh_hover,
 	'full',
@@ -46,22 +51,18 @@ $sh_hover_html = $sh_hover ? wp_get_attachment_image(
 		'sizes'       => '(min-width: 1168px) 210px, 23vw',
 	)
 ) : '';
-
-$sh_link  = sh_trail_objects( $sh_trail ) ? get_term_link( $sh_trail ) : '';
-$sh_link  = ( '' !== $sh_link && ! is_wp_error( $sh_link ) ) ? (string) $sh_link : '';
+if ( '' === $sh_img_html ) {
+	return;
+}
 $sh_class = 'sh-tile' . ( '' === $sh_hover_html ? ' sh-tile--no-hover' : '' );
 ?>
-<li class="<?php echo esc_attr( $sh_class ); ?>"<?php echo $sh_bg ? ' style="' . esc_attr( '--sh-tile-bg:' . $sh_bg ) . '"' : ''; ?>>
-	<?php if ( '' !== $sh_link ) : ?>
-		<a class="sh-tile__link" href="<?php echo esc_url( $sh_link ); ?>">
+<li class="<?php echo esc_attr( $sh_class ); ?>">
+	<?php if ( '' !== $sh_url ) : ?>
+		<a class="sh-tile__link" href="<?php echo esc_url( $sh_url ); ?>"<?php echo '' !== $sh_name ? ' aria-label="' . esc_attr( $sh_name ) . '"' : ''; ?>>
 	<?php endif; ?>
-	<?php if ( '' !== $sh_img_html ) : ?>
-		<?php echo $sh_img_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() output. ?>
-	<?php else : ?>
-		<span class="sh-tile__name sh-t-card-title"><?php echo esc_html( $sh_trail->name ); ?></span>
-	<?php endif; ?>
+	<?php echo $sh_img_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() output. ?>
 	<?php echo $sh_hover_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() output. ?>
-	<?php if ( '' !== $sh_link ) : ?>
+	<?php if ( '' !== $sh_url ) : ?>
 		</a>
 	<?php endif; ?>
 </li>

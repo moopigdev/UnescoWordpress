@@ -39,8 +39,14 @@ function sh_import_refresh_steps_2026_11_17(): array {
 		'2026-11-17-makara'     => 'Makara: objects saltwater-crocodile-skull + sungai-mas-makara created when missing · their old tile-without-a-page removed (only the one the import wrote) · trail order (only while the old list)',
 		// rooster-1117 (BACKLOG #34): Rooster #11 = the multi-trail object mother-of-pearl-furniture-depicting-animals.
 		'2026-11-17-rooster'    => 'Rooster #11 links to mother-of-pearl-furniture-depicting-animals: rooster term + its rooster tile added to the object (only where missing) · the old tile-without-a-page removed (only the one the import wrote) · trail order (only while the old list)',
+		// fb-1117 (BACKLOG #37): the designer put the side image into the two Makara frames (the slot was empty).
+		'2026-11-17-makara-side' => 'Makara 2: side panel image (sh_extra_image_1) + its layout box filled only while no panel image is set — an image an admin put there stays (kept_admin)',
 		// hover-1117 (BACKLOG #35): the designer fixed the names inside two hover images (seashell #12 / #13).
 		'2026-11-17-hover'      => 'trail tile hover image replaced where the seed has a new one (tile_image_hover_ref_prev) · only while the field is still the attachment the importer made from the old image',
+		// fb-1117 (BACKLOG #39 · D57): Zone 1–3 pages show a grid of objects (numbered fields sh_zone_tile_<n>_* of the zone term).
+		'2026-11-17-zone-grid'  => 'Zone 1–3 object grid: sh_zone_tile_<n>_object / _image / _image_hover filled from zones-2026-11-17.json only where empty (an admin value stays: kept_admin) · tile images = the attachments the objects already have',
+		// fb-1117 (BACKLOG #36 · D58): belt buckle title as in Figma, every character.
+		'2026-11-17-belt-title' => 'object pending-3 title (+ title_raw): "Pending (Traditional Belt Buckle)" → "Pending (traditional belt buckle)" only while the site still has the value the importer wrote (slug unchanged · an admin edit stays: kept_admin)',
 	);
 }
 
@@ -396,6 +402,73 @@ function sh_import_refresh_rooster_1117( array $seed, array $map, array $manifes
 }
 
 /**
+ * Step 2026-11-17-makara-side (fb-1117 · BACKLOG #37): the designer's side image of the two Makara objects
+ * (style.images[0].crop_ref → sh_extra_image_1 · DESIGN-SPEC §8.6). A fresh import already has it; a site imported
+ * before has the empty slot (layout image_slot_empty · no panel image). Rules — nothing of an admin overwritten:
+ *   panel image   sh_extra_image_1..6 all empty → sh_extra_image_1 = the crop · already that crop = nothing to do ·
+ *                 any other panel image (an admin put it there) → kept_admin, nothing written, no unused file created
+ *   sh_layout     only when the panel image is the designer's (filled now or before) and the layout is still the empty-slot one
+ *                 (image_slot_empty set · no images) → the seed layout (image placed at its box) · else kept as is
+ * An object not on the site is not created (step 2026-11-17-makara does that).
+ *
+ * @param array<string, mixed> $seed Seed files.
+ * @param array<string, mixed> $map  image-map.json.
+ */
+function sh_import_refresh_makara_side_1117( array $seed, array $map ): void {
+	$dir = (string) sh_imp_config()['assets'];
+	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		$slug = (string) $o['slug'];
+		if ( ! isset( SH_IMPORT_MAKARA_1117[ $slug ] ) ) {
+			continue;
+		}
+		$id = sh_imp_find_post( 'object', 'object:' . $slug );
+		if ( ! $id ) {
+			continue;
+		}
+		$title  = sh_import_object_text_2026_11( $o )['post_title'];
+		$frame  = sh_import_primary_frame( $o );
+		$images = isset( $frame['style']['images'] ) && is_array( $frame['style']['images'] ) ? array_values( $frame['style']['images'] ) : array();
+		$ref    = isset( $images[0]['crop_ref'] ) ? (string) $images[0]['crop_ref'] : '';
+		if ( '' === $ref ) {
+			continue; // The seed has no side image for it.
+		}
+
+		$current = array();
+		for ( $i = 1; $i <= 6; $i++ ) {
+			$att = absint( get_post_meta( $id, 'sh_extra_image_' . $i, true ) );
+			if ( $att ) {
+				$current[ $i ] = $att;
+			}
+		}
+		// The attachment this step would write, found without creating it (key = asset:<file without extension>).
+		$file   = sh_import_ref_file( $map, $ref, $dir );
+		$ext    = '' === $file ? '' : (string) pathinfo( $file, PATHINFO_EXTENSION );
+		$have   = '' === $file ? 0 : sh_imp_find_attachment( 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) ) );
+		if ( $have && isset( $current[1] ) && $current[1] === $have ) {
+			$att = $have; // Already the designer's image (fresh import · an earlier run): only the layout may still need it.
+		} elseif ( $current ) {
+			sh_imp_keep( "object:$slug sh_extra_image_" . (int) array_key_first( $current ) . ' (panel image set in admin · the designer side image not filled)' );
+			continue;
+		} else {
+			$att = sh_imp_asset_ref( $map, $ref, $title . ' image' ); // Creates the attachment (a warning + 0 when the file is missing).
+			if ( ! $att ) {
+				continue;
+			}
+			sh_imp_meta( 'post', $id, array( 'sh_extra_image_1' => $att ) );
+			sh_imp_count( 'updated', 'makara_side_image' );
+		}
+
+		$layout = json_decode( (string) get_post_meta( $id, 'sh_layout', true ), true );
+		if ( is_array( $layout ) && ! empty( $layout['image_slot_empty'] ) && empty( $layout['images'] ) ) {
+			sh_imp_meta( 'post', $id, array( 'sh_layout' => sh_import_layout( $frame, $map, $title ) ) );
+			sh_imp_count( 'updated', 'makara_side_layout' );
+		} elseif ( ! is_array( $layout ) || empty( $layout['images'] ) ) {
+			sh_imp_keep( "object:$slug sh_layout (not the empty-slot layout the import wrote · image placed in the column box)" );
+		} // Else the layout already places images (fresh import): nothing to do.
+	}
+}
+
+/**
  * Hover swaps of the seed (hover-1117 · BACKLOG #35): every tile whose seed carries tile_image_hover_ref_prev (the
  * ref an older import used) next to the new tile_image_hover_ref. Generic — nothing is listed by slug. Where the
  * image lives follows the import (content-2026-11-17.php):
@@ -541,6 +614,164 @@ function sh_import_refresh_hover_1117( array $seed ): void {
 }
 
 /**
+ * Existing attachment of a zone grid tile ref (no upload): the import key the objects' tiles were made under —
+ * asset:<file without extension> of the objects-1117 file or of the top-level file (elephant / image-map), or asset:<ref>.
+ *
+ * @param string $ref Figma imageRef of the zone seed.
+ */
+function sh_import_zone_tile_find( string $ref ): int {
+	$dir  = (string) sh_imp_config()['assets'];
+	$file = sh_import_zone_tile_file( $ref, $dir );
+	$keys = array( 'asset:' . $ref, 'asset:' . SH_IMPORT_OBJECTS_1117 . '/' . $ref );
+	if ( '' !== $file ) {
+		$ext    = (string) pathinfo( $file, PATHINFO_EXTENSION );
+		$keys[] = 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) );
+	}
+	foreach ( $keys as $key ) {
+		$id = sh_imp_find_attachment( $key );
+		if ( $id ) {
+			return $id;
+		}
+	}
+	return 0;
+}
+
+/**
+ * Attachment of a zone grid tile ref: the existing one, else created from the file (0 = no file in design/assets —
+ * the slot then shows the object's own tile image).
+ *
+ * @param string               $ref   Figma imageRef.
+ * @param string               $title Attachment title.
+ * @param array<string, mixed> $spec  sh_import_spec_tile() / sh_import_spec_tile_hover().
+ */
+function sh_import_zone_tile_attachment( string $ref, string $title, array $spec ): int {
+	$have = sh_import_zone_tile_find( $ref );
+	if ( $have ) {
+		return $have;
+	}
+	$dir  = (string) sh_imp_config()['assets'];
+	$file = sh_import_zone_tile_file( $ref, $dir );
+	if ( '' === $file ) {
+		sh_imp_count( 'skipped', 'zone_tile_no_file' );
+		return 0;
+	}
+	$ext = (string) pathinfo( $file, PATHINFO_EXTENSION );
+	return sh_imp_attachment( $dir . '/' . $file, 'asset:' . ( '' === $ext ? $file : substr( $file, 0, -strlen( $ext ) - 1 ) ), $title, array(), $spec );
+}
+
+/**
+ * Step 2026-11-17-zone-grid (fb-1117 · D57): the Zone 1–3 pages show a grid of objects — slot n of zone term zone-<k> =
+ * sh_zone_tile_<n>_object / _image / _image_hover (CONTENT-MODEL §5b) from seed zones-2026-11-17.json. Add only what is
+ * missing, never overwrite: an empty field is filled; a field with another value (an admin changed it) stays, the rest
+ * of that slot is left alone too (a picture beside his object would not match), and it is listed in kept_admin (one line
+ * per field). Images = the attachments the objects' own tiles already have
+ * (found by import key — no second upload); only a picture no object has (zone 1 slot 8, Buffalo 6) is created from the
+ * bundle. A slot whose tile image has no file keeps an empty image (the object's own tile shows). A zone term not on
+ * the site is skipped (nothing is created here); an object not on the site leaves that slot a picture without a link.
+ *
+ * @param array<string, mixed> $seed Seed files.
+ */
+function sh_import_refresh_zone_grid_1117( array $seed ): void {
+	foreach ( sh_import_zone_grid_tiles( $seed ) as $zn => $slots ) {
+		$term = get_term_by( 'slug', 'zone-' . $zn, 'zone' );
+		if ( ! $term instanceof WP_Term ) {
+			continue;
+		}
+		foreach ( $slots as $slot => $t ) {
+			$title = $t['object_slug'] ? $t['object_slug'] : "zone $zn tile $slot";
+			$obj   = $t['object_slug'] ? sh_imp_find_post( 'object', 'object:' . $t['object_slug'] ) : 0;
+			$want  = array(
+				"sh_zone_tile_{$slot}_object"      => array( $obj, null ),
+				"sh_zone_tile_{$slot}_image"       => array( 0, array( $t['tile_ref'], sh_import_spec_tile(), "$title zone tile" ) ),
+				"sh_zone_tile_{$slot}_image_hover" => array( 0, '' !== $t['hover_ref'] ? array( $t['hover_ref'], sh_import_spec_tile_hover(), "$title zone tile hover" ) : null ),
+			);
+			// A slot an admin changed stays whole (a picture filled next to his object would not match): when any field holds
+			// another value than the seed's → nothing of the slot is written · one kept_admin line per such field.
+			$expect_of = static fn( array $w ): int => $w[0] ? (int) $w[0] : ( is_array( $w[1] ) ? sh_import_zone_tile_find( $w[1][0] ) : 0 );
+			$admin     = false;
+			foreach ( $want as $key => $w ) {
+				$cur    = absint( get_term_meta( $term->term_id, $key, true ) );
+				$expect = $cur ? $expect_of( $w ) : 0;
+				if ( $cur && $expect && $expect !== $cur ) {
+					sh_imp_keep( "zone:$zn $key (admin value $cur · seed $expect · slot kept)" );
+					$admin = true;
+				}
+			}
+			if ( $admin ) {
+				continue;
+			}
+			$write = array();
+			foreach ( $want as $key => $w ) {
+				if ( absint( get_term_meta( $term->term_id, $key, true ) ) ) {
+					continue; // Already the seed's value.
+				}
+				$val = $w[0] ? (int) $w[0] : ( is_array( $w[1] ) ? sh_import_zone_tile_attachment( $w[1][0], $w[1][2], $w[1][1] ) : 0 );
+				if ( $val ) {
+					$write[ $key ] = $val;
+				}
+			}
+			if ( $write ) {
+				sh_imp_meta( 'term', $term->term_id, $write );
+				sh_imp_count( 'updated', 'zone_grid_slot' );
+			}
+		}
+	}
+}
+
+/** Belt buckle (pending-3 · D58): the title the earlier import wrote (the new one comes from the seed). */
+const SH_IMPORT_BELT_1117 = array(
+	'slug' => 'pending-3',
+	'old'  => 'Pending (Traditional Belt Buckle)',
+);
+
+/**
+ * Step 2026-11-17-belt-title (fb-1117 · D58): post_title of object pending-3 (and sh_title_raw when it is the old title)
+ * becomes the seed's Figma title only while the site still holds exactly what the earlier import wrote; any other value
+ * (an admin edited it) stays and is listed in kept_admin. The slug (live URL) is never touched. An object not on the
+ * site is skipped.
+ *
+ * @param array<string, mixed> $seed Seed files.
+ */
+function sh_import_refresh_belt_title_1117( array $seed ): void {
+	$slug = SH_IMPORT_BELT_1117['slug'];
+	$old  = SH_IMPORT_BELT_1117['old'];
+	$post = null;
+	$id   = sh_imp_find_post( 'object', 'object:' . $slug );
+	if ( $id ) {
+		$post = get_post( $id );
+	}
+	$seed_o = null;
+	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		if ( $slug === (string) $o['slug'] ) {
+			$seed_o = $o;
+		}
+	}
+	if ( ! $post instanceof WP_Post || ! is_array( $seed_o ) ) {
+		return;
+	}
+	$text  = sh_import_object_text_2026_11( $seed_o );
+	$new   = $text['post_title'];
+	if ( '' === $new || sh_imp_same_text( $post->post_title, $new, null ) ) {
+		return; // Fresh import / already the Figma title.
+	}
+	if ( ! sh_imp_same_text( $post->post_title, $old, null ) ) {
+		sh_imp_keep( "object:$slug post_title (site \"" . $post->post_title . '" · seed "' . $new . '")' );
+		return;
+	}
+	wp_update_post(
+		array(
+			'ID'         => $post->ID,
+			'post_title' => wp_slash( $new ),
+		)
+	);
+	$raw = (string) get_post_meta( $post->ID, 'sh_title_raw', true );
+	if ( '' === $raw || sh_imp_same_text( $raw, $old, null ) ) {
+		update_post_meta( $post->ID, 'sh_title_raw', wp_slash( $text['sh_title_raw'] ) );
+	}
+	sh_imp_count( 'updated', 'belt_title' );
+}
+
+/**
  * Run one step of this file. Returns true when done (false = a file was missing: run again on the next import).
  *
  * @param string                                  $step     Step id.
@@ -573,8 +804,17 @@ function sh_import_refresh_2026_11_17( string $step, array $seed, array $map, ar
 		case '2026-11-17-rooster':
 			sh_import_refresh_rooster_1117( $seed, $map, $manifest );
 			break;
+		case '2026-11-17-makara-side':
+			sh_import_refresh_makara_side_1117( $seed, $map );
+			break;
 		case '2026-11-17-hover':
 			sh_import_refresh_hover_1117( $seed );
+			break;
+		case '2026-11-17-zone-grid':
+			sh_import_refresh_zone_grid_1117( $seed );
+			break;
+		case '2026-11-17-belt-title':
+			sh_import_refresh_belt_title_1117( $seed );
 			break;
 	}
 	return count( sh_imp_state()['warnings'] ) === $before;

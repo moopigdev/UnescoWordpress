@@ -2,6 +2,7 @@
 /**
  * Home section 3 — Zone bar (Frame 12684 [160,1030 1120×166] · DESIGN-SPEC §9.2 row 3): the ZONE 1–5 strip image.
  * Own section since 2026-11-17 (it used to live inside Introduction). Field: sh_home_zone_bar_image.
+ * The five tabs link to their zone pages (D56 · template-parts/zone/tabs.php · no current zone on Home).
  *
  * @package sharedheritage
  */
@@ -23,6 +24,11 @@ $sh_bar  = sh_home_img(
 	<div class="sh-home-zonebar__scroll">
 		<div class="sh-home-zonebar__box">
 			<?php echo sh_home_kses( $sh_bar ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in sh_home_img() + kses. ?>
+			<?php
+			if ( '' !== $sh_bar ) {
+				get_template_part( 'template-parts/zone/tabs', null, array( 'current' => null ) );
+			}
+			?>
 		</div>
 	</div>
 </section>

@@ -50,6 +50,43 @@ function sh_tab( string $label ): array {
 }
 
 /**
+ * Number of numbered tile slots of the Zone 1–3 object grid (Figma: 15 · 42 · 83 tiles; room to add).
+ */
+if ( ! defined( 'SH_ZONE_GRID_SLOTS' ) ) {
+	define( 'SH_ZONE_GRID_SLOTS', 90 );
+}
+
+/**
+ * Fields of the "zone_grid" group: per slot n an object, the tile image (184×184) and its hover image (210×210),
+ * grouped in tabs of 10 slots. Image empty = the object's own tile (sh_tile_image / sh_tile_image_hover).
+ *
+ * @param callable $img Image field builder of sh_core_field_groups().
+ * @return array<int, array<string, mixed>>
+ */
+function sh_core_zone_grid_fields( callable $img ): array {
+	$fields = array();
+	for ( $n = 1; $n <= SH_ZONE_GRID_SLOTS; $n++ ) {
+		if ( 1 === $n % 10 ) {
+			$last     = min( $n + 9, SH_ZONE_GRID_SLOTS );
+			$fields[] = sh_tab( sprintf( 'Tiles %d–%d', $n, $last ) );
+		}
+		$fields[] = sh_f(
+			"sh_zone_tile_{$n}_object",
+			'post_object',
+			"Tile {$n}: object",
+			array(
+				'instructions' => 1 === $n ? 'The tile links to this object\'s page (published objects only). Empty = no tile in this slot, or a picture without a link when the image below is set. Slots are shown in this order (1 = first, 5 per row).' : '',
+				'post_type'    => array( 'object' ),
+				'allow_null'   => 1,
+			)
+		);
+		$fields[] = $img( "sh_zone_tile_{$n}_image", "Tile {$n}: image (184×184)", 1 === $n ? 'Empty = the object\'s own tile image.' : '' );
+		$fields[] = $img( "sh_zone_tile_{$n}_image_hover", "Tile {$n}: image — hover (210×210)", 1 === $n ? 'Empty = the object\'s own hover image.' : '' );
+	}
+	return $fields;
+}
+
+/**
  * All field groups, keyed by group id.
  * target: post_type => <type> | taxonomy => <tax> | page => front|intro|timeline | option => true
  *
@@ -319,6 +356,13 @@ function sh_core_field_groups(): array {
 				$img( 'sh_page_history_image', 'History panel image (1120×453)' ),
 				$img( 'sh_page_history_image_hover', 'History panel image — hover' ),
 			),
+		),
+		// D57 (fb-1117): the Zone 1–3 pages show a grid of OBJECT tiles (not trail tiles). Numbered slots: slot n = n-th tile
+		// (order of the grid, 1 = first). A slot with an object links to its page; with no object it is a picture only.
+		'zone_grid'     => array(
+			'title'  => 'Zone object grid',
+			'target' => array( 'taxonomy' => 'zone' ),
+			'fields' => sh_core_zone_grid_fields( $img ),
 		),
 		'home'          => array(
 			'title'  => 'Home page',

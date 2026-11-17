@@ -341,6 +341,47 @@ function sh_trail_tiles( $trail ): array {
 }
 
 /**
+ * Tiles of the Zone 1–3 page grid (D57) in slot order: sh_zone_tile_<n>_object / _image / _image_hover of the zone term.
+ * A published object links to its page (image/hover empty = the object's own tile · sh_object_trail_tile() without a
+ * trail); no object or an unpublished one = a picture without a link (needs an image). Empty slots are skipped.
+ *
+ * @param int|WP_Term $zone Zone term or id.
+ * @return array<int, array{slot:int,object:WP_Post|null,url:string,label:string,image:int,hover:int}>
+ */
+function sh_zone_grid( $zone ): array {
+	$term_id = $zone instanceof WP_Term ? $zone->term_id : (int) $zone;
+	$out     = array();
+	if ( ! $term_id ) {
+		return $out;
+	}
+	for ( $n = 1; $n <= SH_ZONE_GRID_SLOTS; $n++ ) {
+		$obj_id = absint( get_term_meta( $term_id, "sh_zone_tile_{$n}_object", true ) );
+		$image  = absint( get_term_meta( $term_id, "sh_zone_tile_{$n}_image", true ) );
+		$hover  = absint( get_term_meta( $term_id, "sh_zone_tile_{$n}_image_hover", true ) );
+		$post   = $obj_id ? get_post( $obj_id ) : null;
+		$post   = ( $post instanceof WP_Post && 'object' === $post->post_type && 'publish' === $post->post_status ) ? $post : null;
+		if ( $post ) {
+			$own   = sh_object_trail_tile( $post->ID, 0 );
+			$image = $image ? $image : $own['image'];
+			$hover = $hover ? $hover : $own['hover'];
+		}
+		if ( ! $image ) {
+			continue; // Nothing to show (an empty slot, or an unpublished object without its own picture).
+		}
+		$url   = $post ? get_permalink( $post ) : '';
+		$out[] = array(
+			'slot'   => $n,
+			'object' => $post,
+			'url'    => is_string( $url ) ? $url : '',
+			'label'  => $post ? get_the_title( $post ) : '',
+			'image'  => $image,
+			'hover'  => $hover,
+		);
+	}
+	return $out;
+}
+
+/**
  * Home "Your animal guide is..." cards (D48): every trail with a card image (sh_guide_card), in home icon order.
  * body = sh_rich_paragraphs() of sh_guide_body (safe HTML) · url = the trail page.
  *

@@ -19,7 +19,7 @@
 |---|---|---|---|---|
 | Home 1470 | `front-page.php` | home | Page "Home" (slug `home`) ตั้งเป็นหน้าแรก (`show_on_front=page`) · group `home` §6 · zone/trail terms | `/` |
 | Intro 1471 (+ map slider) | `page-intro.php` | intro | Page slug **`intro`** · group `intro` §7 | `/intro/` |
-| Zone 1–3 (1472–1474 · ใหม่ `3117:3684/3713/3742` §4.3b) | `taxonomy-zone.php` | zone | taxonomy `zone` term `zone-<n>` §5 · กริด = `sh_trails('zone_grid')` · ข้อความ `sh_intro` → Read more `sh_intro_full` | `/zone/zone-1/` `/zone/zone-2/` `/zone/zone-3/` |
+| Zone 1–3 (1472–1474 · ใหม่ `3117:3684/3713/3742` §4.3b) | `taxonomy-zone.php` | zone | taxonomy `zone` term `zone-<n>` §5 · กริด = **วัตถุ** `sh_zone_grid()` §5b (D57 · เดิม `sh_trails('zone_grid')`) · ข้อความ `sh_intro` → Read more `sh_intro_full` | `/zone/zone-1/` `/zone/zone-2/` `/zone/zone-3/` |
 | **Zone 4 หน้าคั่นเลือกสัตว์** (1513 `3117:3946` · D37 · §4.10) | `taxonomy-zone.php` (WP เลือก `taxonomy-zone-zone-4.php` ก่อนถ้า theme มี → asset slug = ชื่อไฟล์) | zone (หรือชื่อไฟล์) | term `zone-4` §5 (`sh_cover_image` = พื้นเส้นประ · `sh_banner_image` = แถบ ZONE (Zone 4 active)) · สัตว์ = `sh_trails('home')` ที่มี `sh_chooser_image` §4 · ลิงก์ = `sh_timeline_page` ของ trail (มี = ลิงก์ · ไม่มี = ไม่ลิงก์ D37/D40) · ตำแหน่ง/ขนาดต่อตัว = ค่าคงที่ใน theme (§4.10 · seed `zone4-chooser.json`) | `/zone/zone-4/` |
 | **Zone 5 หน้าหลัก** (1514 `3117:3955` · D40 · §4.11) | `taxonomy-zone.php` (หรือ `taxonomy-zone-zone-5.php`) | zone (หรือชื่อไฟล์) | term `zone-5` §5 (`sh_has_page` · `sh_cover_image` · `sh_intro` · `sh_banner_image` · tab "Zone page cards") | `/zone/zone-5/` |
 | Trail ทั้ง 17 (ช้าง 1501 · 16 trail `3377:4608` D49) | `taxonomy-trail.php` | trail | taxonomy `trail` §4 · ช่องกริด = `sh_trail_tiles()` (วัตถุ + ช่องไม่มีหน้า · ภาพช่องของ trail นั้น) · เดิม `sh_trail_objects()` | `/trail/elephant/` `/trail/bird/` … (ครบใน `docs/smoke-urls`) |
@@ -181,6 +181,286 @@ Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ข�
 | `sh_page_history_image` | `image` → integer | — (zone 5) | `History` `3117:5102` History1 `[160,1402 1120×453]` | "Shared Histories" | zone 5 | ✔ |
 | `sh_page_history_image_hover` | `image` → integer | — (zone 5) | History2 (hover) | | zone 5 | ✔ |
 ชื่อ zone (D38 · §4.3b): term name = B ("Animals in Nature and Mythology" …) = H1 + การ์ดหน้าแรก (`sh_card_title`) · ชื่อ A (ตัวหนังสือในภาพ banner) = alt ของ attachment banner (`_wp_attachment_image_alt` ตั้งตอน import ถ้าว่าง) · tab "Zone page cards" ใช้กับ zone 5 (zone อื่นเว้นว่าง) · การ์ดที่ไม่มีภาพ = ไม่แสดง
+
+## 5b. `zone` (term) — กริดวัตถุ Zone 1–3 (D57 · fb-1117 · BACKLOG #39) — group: zone_grid
+หน้า Zone 1–3 แสดง**กริดวัตถุ** (ช่อง = วัตถุ ไม่ใช่ trail) — Figma `Frame zone1/2/3` `3377:4473` · `3454:5695` (zone 2 = frame ที่นักออกแบบแก้แล้ว `3117:3713` · 42 ช่อง) · `3454:5354` · 15 / 42 / 83 ช่อง · seed `content/seed/zones-2026-11-17.json` (`zones[].tiles[]` = `order` · `object_slug` · `tile_ref` · `hover_ref`) · **โครงข้อมูล = ช่องเลขลำดับต่อ term** (แบบเดียวกับ `sh_page_card_<n>_*` / `sh_static_tile_<n>_*` · ACF ฟรีไม่มี repeater): ช่อง `n` = ช่องที่ n ของกริด (1 = ซ้ายบน · แถวละ 5 · เรียงแถว→คอลัมน์) · **90 ช่องต่อ zone** (`SH_ZONE_GRID_SLOTS` · seed สูงสุด 83 · เผื่อเพิ่ม) · แท็บละ 10 ช่องในหน้าแก้ term
+- `sh_zone_tile_<n>_object` = วัตถุ (post type `object`) · **publish เท่านั้นที่ลิงก์** ไปหน้า detail · ว่าง/ไม่ publish = **ภาพไม่ลิงก์** (ต้องมี `_image` · ไม่มีภาพ = ไม่แสดงช่อง) · ช่องที่ว่างทั้ง object และ image = ข้าม (ช่องถัดไปเลื่อนขึ้น)
+- `sh_zone_tile_<n>_image` / `_image_hover` = ภาพช่อง 184² / hover 210² (attachment เดียวกับภาพช่องของวัตถุใน trail นั้น — importer ใช้ attachment เดิมถ้ามี `_sh_import_key` ตรง ไม่อัปโหลดซ้ำ) · **ว่าง = ภาพช่อง/hover ของวัตถุเอง** (`sh_object_trail_tile( $id, 0 )` = `sh_tile_image` / `sh_tile_image_hover`)
+- ภาพช่อง = เวอร์ชันของ trail ที่ Figma ใช้ในกริด zone (วัตถุหลาย trail มีภาพคนละพื้นสี → ช่องซ้ำของวัตถุเดียวกันได้คนละภาพ เช่น `pending-3` เขียว/ชมพู) → **เก็บภาพต่อช่อง** ไม่ดึงจากวัตถุเสมอ
+- ฟิลด์กริด trail เดิม (`sh_show_in_zone_grid` · `sh_zone_grid_order` · `sh_tile_zone_grid` · `sh_tile_zone_grid_hover` ในกลุ่ม trail §4) **ไม่ลบ** แต่หน้า zone 1–3 ไม่ใช้แล้ว
+- เติมโดย importer fresh + refresh step `2026-11-17-zone-grid` (§12) · API `sh_zone_grid( $zone )` (§11)
+| ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `zones-2026-11-17.json`) | ใช้ในหน้า | REST |
+|---|---|---|---|---|---|---|
+| `sh_zone_tile_1_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | `Frame zone1/2/3` instance ช่อง 1 · `tiles[].object_slug` | zone 1 ช่อง 1: `green-peafowl` | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_1_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) | `4c493fdc…` (Bird 2 · 184²) | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_1_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) | `f8cdca6e…` (210²) | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_2_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_2_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_2_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_3_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_3_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_3_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_4_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_4_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_4_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_5_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_5_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_5_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_6_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_6_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_6_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_7_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_7_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_7_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_8_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_8_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_8_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_9_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_9_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_9_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_10_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_10_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_10_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_11_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_11_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_11_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_12_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_12_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_12_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_13_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_13_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_13_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_14_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_14_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_14_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_15_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_15_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_15_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_16_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_16_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_16_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_17_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_17_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_17_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_18_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_18_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_18_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_19_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_19_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_19_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_20_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_20_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_20_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_21_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_21_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_21_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_22_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_22_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_22_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_23_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_23_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_23_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_24_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_24_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_24_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_25_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_25_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_25_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_26_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_26_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_26_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_27_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_27_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_27_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_28_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_28_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_28_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_29_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_29_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_29_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_30_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_30_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_30_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_31_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_31_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_31_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_32_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_32_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_32_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_33_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_33_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_33_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_34_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_34_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_34_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_35_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_35_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_35_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_36_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_36_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_36_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_37_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_37_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_37_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_38_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_38_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_38_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_39_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_39_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_39_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_40_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_40_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_40_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_41_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_41_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_41_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_42_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_42_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_42_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_43_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_43_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_43_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_44_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_44_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_44_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_45_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_45_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_45_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_46_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_46_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_46_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_47_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_47_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_47_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_48_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_48_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_48_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_49_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_49_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_49_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_50_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_50_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_50_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_51_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_51_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_51_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_52_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_52_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_52_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_53_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_53_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_53_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_54_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_54_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_54_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_55_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_55_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_55_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_56_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_56_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_56_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_57_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_57_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_57_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_58_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_58_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_58_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_59_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_59_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_59_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_60_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_60_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_60_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_61_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_61_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_61_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_62_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_62_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_62_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_63_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_63_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_63_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_64_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_64_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_64_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_65_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_65_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_65_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_66_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_66_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_66_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_67_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_67_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_67_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_68_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_68_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_68_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_69_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_69_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_69_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_70_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_70_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_70_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_71_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_71_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_71_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_72_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_72_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_72_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_73_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_73_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_73_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_74_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_74_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_74_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_75_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_75_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_75_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_76_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_76_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_76_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_77_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_77_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_77_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_78_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_78_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_78_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_79_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_79_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_79_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_80_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_80_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_80_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_81_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_81_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_81_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_82_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_82_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_82_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_83_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_83_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_83_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_84_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_84_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_84_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_85_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_85_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_85_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_86_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_86_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_86_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_87_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_87_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_87_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_88_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_88_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_88_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_89_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_89_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_89_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_90_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
+| `sh_zone_tile_90_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
+| `sh_zone_tile_90_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
 
 ## 6. Home (front page) — group: home
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `site.json` home) | ใช้ในหน้า | REST |
@@ -360,7 +640,7 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
 - hero GIF หลายเฟรม (`hero_images[]` 3–24 เฟรม) → เก็บ `sh_hero_image` ภาพนิ่ง 1 ใบ + วิดีโอ (D13: media-dev ต่อเฟรมเป็น WebM) · `hero_still` ที่ซ่อนใน Figma ไม่ใช้
 - หมุดแผนที่ (`pins[]` x,y) — ไม่มีใน seed · popup ใช้ข้อความ slide เดียวกัน (DESIGN-SPEC §5.5)
 - `home.side_navigator` · `home.trails_animation_frames[12]` (ใช้วิดีโอ `walking` แทน) · `status[]` (ข้อสังเกตภายในของ seed) · `tile_bg.group` (ชื่อกลุ่ม ไม่ใช้แสดงผล)
-- ความสัมพันธ์ zone ↔ trail/object (P-212) — กริด zone ใช้ `sh_show_in_zone_grid` ตาม seed
+- ความสัมพันธ์ zone ↔ trail/object (P-212) — กริด zone 1–3 = ช่องเลขลำดับ `sh_zone_tile_<n>_*` §5b (D57) · `sh_show_in_zone_grid` เดิมไม่ใช้บนหน้า zone แล้ว
 
 ## 11. API สำหรับ template (mu-plugin `inc/api.php` · คืนค่าดิบ — template ต้อง escape เอง)
 | ฟังก์ชัน | คืน |
@@ -375,6 +655,7 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
 | `sh_object_extra_images( $id )` · `sh_object_layout( $id )` · `sh_paragraphs( $text )` | id ภาพแผง · layout array · ย่อหน้า string[] |
 | `sh_rich_paragraphs( $text )` | ย่อหน้า HTML ที่ปลอดภัยแล้ว (`<strong>` `<em>` `<br>` เท่านั้น) ของฟิลด์ inline HTML (`sh_guide_body` · `sh_intro_ch<n>_text_<k>`) — echo ได้เลย |
 | `sh_trail_tiles( $trail )` | ช่องกริดหน้า trail ตามลำดับ: `{object (WP_Post\|null), url ('' = ไม่ลิงก์), label, image, hover}` = วัตถุ publish (ภาพช่องของ trail นั้น) + ช่องไม่มีหน้า `sh_static_tile_<n>_*` ที่ตำแหน่งของมัน |
+| `sh_zone_grid( $zone )` | ช่องกริดหน้า Zone 1–3 ตามลำดับช่อง `n`: `{slot, object (WP_Post\|null), url ('' = ไม่ลิงก์), label, image, hover}` · วัตถุ publish = ลิงก์ (ภาพว่าง = ภาพของวัตถุ) · ไม่มีวัตถุ/ไม่ publish = ภาพไม่ลิงก์ · ช่องที่ไม่มีภาพถูกข้าม |
 | `sh_object_trail_tile( $id, $trail )` | `{image, hover}` ของวัตถุใน trail นั้น (`sh_trail_tile_<n>_*` ?: `sh_tile_image(_hover)`) |
 | `sh_guide_cards()` | การ์ดสัตว์หน้าแรก: `{trail, name, words, body (string[] HTML), follow, card, url}` ของ trail ที่มี `sh_guide_card` (ลำดับ home icons) |
 | `sh_intro_head( $page_id = 0 )` | `{emblem, title, paragraphs[], credit, env_heading, layout}` |
@@ -407,5 +688,6 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
   - **ย่อภาพไม่เกิน 2× ขนาดแสดงผล (web spec · `refs-2026-11-17.php`):** ช่อง 184 → 368² · hover 210 → 420² · ปก trail 2240×980 (ครอปมาแล้ว) · การ์ดสัตว์ 460×726 · หลังการ์ด ครอป .016/.017/.968/.971 → 240×380 · โลโก้ header ครอปตาม seed → 440×154 · Temasek 416×120 · ภาพ Intro ที่ไม่มีใน manifest = 2× กล่อง · ครอปภาพแผง `crop_ref` (2× อยู่แล้ว) = คัดลอกตรง · import ย่อ/ครอปตอนคัดลอก (`sh_imp_attachment()` + GD · ไม่มี GD = คัดลอกตรง · นับใน report `updated.resized_2x`) · `deploy.sh` ย่อ bundle ก่อนส่ง (กล่องก่อนครอป · ครอปทำครั้งเดียวตอน import) · ภาพของ image-map/ชุดช้างเดิม = ไม่ย่อ (เหมือน prod)
   - **refresh step (site ที่ import ก่อนรอบนี้ = production · `SH_IMPORT_ONLY=refresh` ได้):** `2026-11-17-objects` สร้างวัตถุที่ยังไม่มี (hold = draft · วัตถุที่ admin สร้างเองด้วย slug เดียวกัน = รับเป็นของ import แต่ไม่ทับ) · วัตถุที่มีแล้ว = เติมเฉพาะฟิลด์ว่าง (`sh_scientific_name` · `sh_trail_tile_*`) ไม่แตะชื่อ/ข้อความ · `2026-11-17-trails` description/H1/cover/layout/ช่องไม่มีหน้า/การ์ดสัตว์ = เติมเมื่อว่าง · `sh_object_order` แทนเฉพาะเมื่อยังเป็นรายการที่ import รุ่นก่อนเขียนพอดี (วัตถุช้างของ trail นั้นตามลำดับ seed) · `2026-11-17-pages` Home การ์ดสัตว์ + Intro 4 ตอน = เติมเมื่อว่าง · `2026-11-17-trail-grid` (core-1117b · P-340) `sh_trail_layout` + `grid` เฉพาะเมื่อว่างหรือยังเท่า layout ที่ core-1117 เขียน (fingerprint) · `2026-11-17-site` option โลโก้/ข้อความ footer = เมื่อยังไม่เคยตั้ง · เมนู Primary เพิ่ม "About the Project" ท้ายเมนู (ลำดับ = max(menu_order ที่เก็บจริง)+1) เมื่อไม่มีรายการชื่อ/URL เดียวกัน (ไม่ลบ/ไม่เรียง/ไม่เปลี่ยนชื่อรายการเดิม) · **ค่าที่ไม่แตะเพราะ admin แก้ = report `kept_admin[]` (อะไร + ค่าที่ site) + `skipped.kept_admin_value`** · มีคำเตือน (ไฟล์ขาด) ระหว่าง step = ยังไม่บันทึกว่าเสร็จ
   - ผลตรวจ (local 2026-11-17 · core-1117): fresh `SH_IMPORT_RUNS=2` → object publish 116 · draft 2 · trail 17 · การ์ดสัตว์ 17 · Intro ตอน 1–4 ข้อความ 5/5/6/4 ช่อง ภาพ 4/3/3/1 · attachment 908 · ย่อ 274 · คำเตือน 0 · รอบ 2 สร้าง/แก้ 0 · ช่องกริด 16 trail ตรง `trails.json tiles[]` ทุกช่อง (ภาพ+วัตถุ) · จำลอง prod (import ด้วย 9fc08ce → admin แก้ 3 จุด → refresh-only ×2) = ค่าเดียวกับ fresh · `kept_admin` 3 รายการ · รอบ 2 แก้ 0 (`orchestrator/evidence/core-1117/`)
+  - **กริดวัตถุ Zone 1–3 (fb-1117 · D57 · §5b):** step `2026-11-17-zone-grid` (รันตอน fresh import ท้ายรอบด้วย + บน prod `SH_IMPORT_ONLY=refresh`) เติม `sh_zone_tile_<n>_object/_image/_image_hover` ของ term `zone-1..3` จาก seed `zones-2026-11-17.json` (`zones[].tiles[]` · `order` = ช่อง `n`) **เฉพาะช่องที่ว่าง** · ค่าที่ไม่ว่างและต่างจาก seed (admin แก้) = คงไว้ **และไม่เติมฟิลด์อื่นของช่องนั้น** (ภาพของ seed ข้างวัตถุของ admin จะไม่ตรงกัน) + `kept_admin` (1 บรรทัดต่อฟิลด์) · วัตถุ = `_sh_import_key object:<slug>` (ไม่มีบนไซต์ = ช่องเป็นภาพไม่ลิงก์) · ภาพ = attachment ที่วัตถุมีอยู่แล้ว (หาด้วย import key `asset:<ไฟล์ไม่มีนามสกุล>` ของไฟล์ `objects-1117/<ref>.png` หรือไฟล์ราก/image-map · ไม่อัปโหลดซ้ำ) · มีเฉพาะภาพที่ไม่มีวัตถุไหนถือ (zone 1 ช่อง 8 Buffalo 6 · ไม่ลิงก์) ที่สร้างใหม่จาก bundle (+2 ไฟล์ · นับ `resized_2x`) · hover ที่ Figma ฝั่ง zone ยังเป็นภาพรุ่นเก่า (`tile_image_hover_ref_prev` ของ hover-1117 · kalung · dragon-shaped…tray) แมปเป็นภาพใหม่ · ช่อง `tile_ref` ไม่มีไฟล์ใน `design/assets` (zone 3 ช่อง 21 `elephant-and-mahout-kendi` `1afa6a7f…`) = `_image` ว่าง → ใช้ภาพช่องของวัตถุ (นับ `skipped.zone_tile_no_file` · ไม่ใช่คำเตือน · P-395) · bundle-files: label `zone grid …` ไม่มีไฟล์ = ไม่ error · ผลตรวจ fresh `SH_IMPORT_RUNS=2`: 140 ช่อง (15/42/83) · รอบ 2 แก้ 0 · คำเตือน 0
 - ผลนับ (local 2026-10-27 · core-import-refresh): object 15 · timeline_item 15 · trail 17 · zone 5 · page 3 · attachment 205 · menu 2 · ICC→sRGB 67 ไฟล์ · คำเตือน 0 · รอบที่ 2 สร้างใหม่ 0 / แก้ 0 · import เก่า→ใหม่บน site เดียวกัน: วิดีโอ 7→14 · HEVC 4→6 · แผนที่ → 39907d2c · ICC 68 · ภาพ hero ที่ admin ตั้งเองคงเดิม
 - ภาพนำเข้าโดยไม่สร้าง sub-size (ต้นฉบับใหญ่ · playground ช้า) · server ใช้ `SH_IMPORT_SUBSIZES=1`
