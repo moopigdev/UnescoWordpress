@@ -281,3 +281,12 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - 2026-11-17 [reviewer core-1117] host ไม่มี GD → `web-image.php` คัดลอกเฉย ๆ ไม่ครอป (โลโก้ header · หลังการ์ด ไม่ครอป) → ตรวจ GD บน Hostinger ก่อน deploy
 - 2026-11-17 [reviewer core-1117] cover trail PNG 2240×980 4–5MB ×17 (อยู่ในกฎ 2× แต่หนัก) → JPEG/WebP
 - 2026-11-17 [reviewer core-1117] header มือถือสูงคงที่ 150 (เดิม 128 ที่ 390) — เรื่องรสนิยม ไม่ผิด B1b
+- 2026-11-17 [home-1117] การ์ดสัตว์ §9.3: ไม่มี token สำหรับ Komet-Heavy 30/28 (ชื่อ/หัวข้อ) · Komet-Regular 20/23 (เนื้อ) · สี `#494538` (ข้อความ) → ประกอบจาก `--sh-fw-komet-*` + `--sh-font-komet` และตัวแปรท้องถิ่น `--sh-guide-text` ใน home.css · ถ้าต้องการ token กลาง ให้ core เพิ่ม
+- 2026-11-17 [home-1117] ย่อหน้าหัวข้อการ์ดสุ่ม reflow ที่กว้าง 570 (seed ยุบ `\n`) → Opening ตัดบรรทัดเป็น "…where it / went?" ต่างจาก Figma "…where / it went?" (ตัดแข็ง) · ถ้าต้องการตรงเป๊ะต้องมีฟิลด์ที่เก็บ `\n` (core/design) · บนมือถือ ≤767 เนื้อการ์ดขยายชิดซ้าย (justify ที่ ~330px ช่องไฟกว้าง)
+- 2026-11-17 [home-1117] ผลสุ่มบนมือถือ/จอเตี้ย: ก้อนผลโผล่ใต้การ์ดโดยไม่เลื่อนหน้า (Figma ไม่กำหนด) → อาจต้อง scrollIntoView หลังสุ่มถ้าเจ้าของเห็นว่าไม่เห็นผล · aria-live ใช้ `<p role=status>` ที่ซ่อนอ่านชื่อ+คำ 3 คำ (ไม่ใช่ทั้งก้อน — กันอ่านเนื้อเต็มซ้ำตอน Read more)
+- 2026-11-17 [home-1117] Trails Home สูง 776.5 (Figma 777 · ชื่อ 34/42.5) → Zone 4/5 เริ่ม 3155.5 (Figma 3156) หน้ารวม 3785 (Figma 3786) · เป็นเศษ 0.5px จาก token title ไม่ได้ปรับ
+- 2026-11-17 [home-1117] ภาพการ์ดสุ่ม 17 ใบโหลดเมื่อ hover/focus/touch การ์ด ? หรือ CTA ครั้งแรก (~17 × 55–90KB) · ไม่ preload ตอน idle (ประหยัดมือถือ) · ไอคอน trail Home ยังลิงก์ตาม `sh_trail_objects()` (query 17 ครั้ง · DEFERRED เดิม trail-links)
+- 2026-11-17 [reviewer home-1117] การ์ด dragon "long" 2 ที่: Figma ใช้ Komet-RegularSCItalic (italic + small caps · node 3339:5660 override 11) แต่ DESIGN-SPEC §9.3 ระบุแค่ <em> → เว็บเป็นตัวเอียงตัวเล็ก · design-dev เติม §9.3 แล้วหน้าเพิ่ม .sh-guide__copy em { font-variant-caps: small-caps; } (หรือรอ Komet SC · P-205)
+- 2026-11-17 [reviewer home-1117] guide.php `aria-labelledby="sh-guide-title"` ค้างเมื่อ admin ลบหัวข้อ → แก้แล้วใน fix F1 (ใส่ attribute เฉพาะเมื่อมีหัวข้อ)
+- 2026-11-17 [reviewer home-1117 r2] โหมด inert (ไม่มีการ์ดเหลือ) ภาพหลังการ์ดยังมี alt="Pick a card" ทั้งที่กดไม่ได้ → เมื่อ $sh_cards ว่าง ให้ alt ว่าง/ข้อความกลาง
+- 2026-11-17 [reviewer home-1117 r2] home.js กิ่ง !big ถ้าไม่มีภาพหลังการ์ด (back = null) → cardImage() ลบ "?" แล้วสร้าง img ว่าง · ตอนนี้ไม่ถึงกิ่งนี้ (guide.php กรองแล้ว) · ถ้าใช้ภายหลังควรคง "?"
