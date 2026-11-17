@@ -1,0 +1,2823 @@
+{
+ "_meta": {
+  "task": "fb-1117",
+  "source": "Figma EhcqSXTMEArlrfSGUQVCwl · page Final 670:860 · Section 3 (670:1151) · frames Desktop - 1472/1473/1474 (สำเนาตรงกันใน page 3117:3314 section \"Zone 1,2,3\" 3140:1403 · ลำดับ+ภาพช่องเท่ากันทุกช่อง)",
+  "figma_lastModified": "2026-11-17T11:28:55Z",
+  "status": "evidence_only_not_consumed_by_theme_yet",
+  "note": "ช่อง = instance 184×184 ใน grid (5 คอลัมน์ · gap 50) · Figma มีแต่ ON_HOVER (CHANGE_TO variant hover 210) ไม่มี ON_CLICK ไปหน้าวัตถุ · \"เชื่อมไปหน้าข้อมูล\" = คำสั่งเจ้าของจากสไลด์ ไม่ใช่ prototype · object_slug จับคู่ด้วย imageRef ช่อง/ภาพ hover เทียบ objects.json (tiles_by_trail.*) + ON_CLICK ในหน้า trail ที่ใช้ภาพเดียวกัน (ช้างไม่มี ref ใน seed) · object_slug null = หลักฐานไม่พอ (ดู candidate_slug)",
+  "match_basis_codes": {
+   "tile+hover": "ref ช่องและ ref hover ชี้ object เดียวกันใน objects.json",
+   "tile": "ref ช่องตรง (hover ไม่ยืนยัน)",
+   "hover": "เฉพาะ ref hover",
+   "click_chain": "ref ช่องตรง ON_CLICK ในหน้า trail → frame วัตถุ → objects.json"
+  }
+ },
+ "zones": [
+  {
+   "zone": 1,
+   "title": "Animals in Nature and Mythology",
+   "page_frame": "670:1241",
+   "page_frame_3117": "3117:3684",
+   "grid_node": "3377:4473",
+   "grid_node_3117": "3454:5674",
+   "tile_count": 15,
+   "matched_slug": 14,
+   "unmatched_orders": [
+    8
+   ],
+   "unique_slugs": 14,
+   "duplicate_tile_refs": {},
+   "tiles": [
+    {
+     "order": 1,
+     "row": 1,
+     "col": 1,
+     "object_slug": "green-peafowl",
+     "match_basis": "tile+hover",
+     "tile_name": "Bird 2",
+     "tile_ref": "4c493fdc4a29e8f97679610b3f1cad52d5d08b9e",
+     "hover_ref": "f8cdca6ed2122344a967c09723c63a2c6f630690",
+     "hover_node": "3117:664",
+     "tile_component": "3117:663",
+     "figma_node": "3377:4475",
+     "bbox": [
+      160.0,
+      1079.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 2,
+     "row": 1,
+     "col": 2,
+     "object_slug": "common-kingfisher",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "fbae798f53509fdab76cf3e2d87df6b0b177a95a",
+     "hover_ref": "c03a2fe7530dd508747902486dfe073a5dba291a",
+     "hover_node": "3153:744",
+     "tile_component": "3153:743",
+     "figma_node": "3377:4476",
+     "bbox": [
+      394.0,
+      1079.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 3,
+     "row": 1,
+     "col": 3,
+     "object_slug": "oriental-pied-hornbill-and-rhinoceros-hornbill",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 17",
+     "tile_ref": "4ce4a412dc95e49a6e49de56d5b2c69d86eba8e7",
+     "hover_ref": "e3c45a09561d0988ebd72b1b4eb39ef7d3396cc1",
+     "hover_node": "3117:891",
+     "tile_component": "3117:890",
+     "figma_node": "3377:4477",
+     "bbox": [
+      628.0,
+      1079.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 4,
+     "row": 1,
+     "col": 4,
+     "object_slug": "greater-mousedeer",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "c1a8fb82673c3ab15b7b5da47a4cc230ccc0f31f",
+     "hover_ref": "65d217b76a74d4479df610dade21e336e419b4b3",
+     "hover_node": "3117:777",
+     "tile_component": "3117:776",
+     "figma_node": "3377:4478",
+     "bbox": [
+      862.0,
+      1079.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 5,
+     "row": 1,
+     "col": 5,
+     "object_slug": "domestic-chicken",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "342701ac0798ff180cfac759317c472a546cf9ed",
+     "hover_ref": "64fe0e4ee4bc04898863d19512ce5350123921bd",
+     "hover_node": "3117:725",
+     "tile_component": "3117:724",
+     "figma_node": "3377:4479",
+     "bbox": [
+      1096.0,
+      1079.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 6,
+     "row": 2,
+     "col": 1,
+     "object_slug": "sunda-pangolin",
+     "match_basis": "tile+hover",
+     "tile_name": "Dragon 1",
+     "tile_ref": "e4a3a4bad9a3e6ab55cb8b20ee35d1bf365af91e",
+     "hover_ref": "790fc2f2c88c1293da9cc1c7a6c8f59d2210ff91",
+     "hover_node": "3117:789",
+     "tile_component": "3117:788",
+     "figma_node": "3377:4481",
+     "bbox": [
+      160.0,
+      1313.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 7,
+     "row": 2,
+     "col": 2,
+     "object_slug": "the-red-barking-deer",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "2337a3b31975629ab80ce5183a209da77891765f",
+     "hover_ref": "36e3f7e77857fb19af98f344320961a7a1071df0",
+     "hover_node": "3117:772",
+     "tile_component": "3117:771",
+     "figma_node": "3377:4482",
+     "bbox": [
+      394.0,
+      1313.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 8,
+     "row": 2,
+     "col": 3,
+     "object_slug": null,
+     "match_basis": null,
+     "tile_name": "Ele 17",
+     "tile_ref": "17ca901679fbccd2201ee208d5718a801ad1f905",
+     "hover_ref": "ae0eeb5d0b3083ca430f5b2931eb08ac018c450a",
+     "hover_node": "3377:4471",
+     "tile_component": "3377:4470",
+     "figma_node": "3377:4483",
+     "bbox": [
+      628.0,
+      1313.0,
+      184.0,
+      184.0
+     ],
+     "candidate_slug": "sumatran-serow",
+     "candidate_basis": "component set \"Buffalo 6\" (Materials section \"Buffalo\" 3377:5538 · variant 3377:5555) = ช่องที่ 6 ของ Buffalo trail · sumatran-serow = วัตถุ Buffalo ที่ seed ถือไว้เป็นลำดับ 6 (trail_order null · hold_no_frame_in_figma_2026_11_17 · ไม่มี frame รายละเอียดใน Figma) · seed ไม่มี imageRef ของวัตถุนี้ → ไม่ยืนยันได้ → P-383"
+    },
+    {
+     "order": 9,
+     "row": 2,
+     "col": 4,
+     "object_slug": "elephant-leg-bone",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 18",
+     "tile_ref": "70cf8ed707243f7c812a1f0171dd4a6500b35b0c",
+     "hover_ref": "e978e4de5e9bcd4380ef4aa99371487b85171615",
+     "hover_node": "939:776",
+     "tile_component": "939:775",
+     "figma_node": "3377:4484",
+     "bbox": [
+      862.0,
+      1313.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 10,
+     "row": 2,
+     "col": 5,
+     "object_slug": "spotted-white-eagle-ray-bone",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "714b58f2f853554783a62c9a8f05f792d678d0ec",
+     "hover_ref": "caee637dcf6e25fc3b2a96b69659fb6d34d977a8",
+     "hover_node": "3117:835",
+     "tile_component": "3117:834",
+     "figma_node": "3377:4485",
+     "bbox": [
+      1096.0,
+      1313.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 11,
+     "row": 3,
+     "col": 1,
+     "object_slug": "saltwater-crocodile-skull",
+     "match_basis": "tile+hover",
+     "tile_name": "Makara 1",
+     "tile_ref": "77d84c86e681408da172e84a8e60c68e68c001bd",
+     "hover_ref": "9a4ee322ba8d0d32314b67f00ee019ea9aaea41b",
+     "hover_node": "3153:701",
+     "tile_component": "3153:700",
+     "figma_node": "3377:4487",
+     "bbox": [
+      160.0,
+      1547.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 12,
+     "row": 3,
+     "col": 2,
+     "object_slug": "estuarine-crocodile",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "c8066c17ab1dbd423bb454a284c3b9d11476dbdc",
+     "hover_ref": "21b45dbee42192ce26b624f1663273071a52dccb",
+     "hover_node": "3153:706",
+     "tile_component": "3153:705",
+     "figma_node": "3377:4488",
+     "bbox": [
+      394.0,
+      1547.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 13,
+     "row": 3,
+     "col": 3,
+     "object_slug": "skeleton-of-singapore-s-first-recorded-sperm-whale",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 17",
+     "tile_ref": "aa14ecd1303c9a6907ad37a756a610b7d0c78cd2",
+     "hover_ref": "8db0a0732ff66a57031a009651b602df5d8d9b0b",
+     "hover_node": "3117:840",
+     "tile_component": "3117:839",
+     "figma_node": "3377:4489",
+     "bbox": [
+      628.0,
+      1547.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 14,
+     "row": 3,
+     "col": 4,
+     "object_slug": "neptune-cup-sponge",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "1f0ecd7d4ad6d67066f8a17bd99c937acd405fb4",
+     "hover_ref": "438b5d18e7836d393b7f75243a603dce9da63672",
+     "hover_node": "3153:852",
+     "tile_component": "3153:851",
+     "figma_node": "3377:4490",
+     "bbox": [
+      862.0,
+      1547.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 15,
+     "row": 3,
+     "col": 5,
+     "object_slug": "giant-clams",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "33b1445224b55b21998bcb815d1c87a519ff9577",
+     "hover_ref": "73d5da8215e1e1cae75933d75fc85c9300d1639f",
+     "hover_node": "3153:729",
+     "tile_component": "3153:728",
+     "figma_node": "3377:4491",
+     "bbox": [
+      1096.0,
+      1547.0,
+      184.0,
+      184.0
+     ]
+    }
+   ]
+  },
+  {
+   "zone": 2,
+   "title": "Beyond the Visible: Animals and the Cosmic Order",
+   "page_frame": "670:1296",
+   "page_frame_3117": "3117:3713",
+   "grid_node": "3454:5615",
+   "grid_node_3117": "3454:5695",
+   "tile_count": 46,
+   "matched_slug": 45,
+   "unmatched_orders": [
+    42
+   ],
+   "unique_slugs": 32,
+   "duplicate_tile_refs": {
+    "d80d8081": [
+     31,
+     36
+    ],
+    "da3cac7c": [
+     32,
+     37
+    ],
+    "74c582e4": [
+     33,
+     38
+    ],
+    "41e28ea0": [
+     35,
+     43
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "row": 1,
+     "col": 1,
+     "object_slug": "perminaken",
+     "match_basis": "tile+hover",
+     "tile_name": "Bird 2",
+     "tile_ref": "66928328a1ad08315ded476c7ecf9bdcb2945150",
+     "hover_ref": "0c77d9ee88e94f72a41b8265f639991012b12905",
+     "hover_node": "3117:707",
+     "tile_component": "3117:706",
+     "figma_node": "3454:5617",
+     "bbox": [
+      160.0,
+      1035.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 2,
+     "row": 1,
+     "col": 2,
+     "object_slug": "quail-shaped-silver-casket",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "e8f86ca0a69e441375fc1d5ab74e313feda3545d",
+     "hover_ref": "cfe56b765b0a84e3f7fca36aeebe99f5371752a4",
+     "hover_node": "3117:673",
+     "tile_component": "3117:672",
+     "figma_node": "3454:5618",
+     "bbox": [
+      394.0,
+      1035.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 3,
+     "row": 1,
+     "col": 3,
+     "object_slug": "oracle-bone",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 17",
+     "tile_ref": "87938c71354cfc0fd72db85bcb1b4c6e3568a658",
+     "hover_ref": "2f3a8b9cea789395a68499e9a5f91c96fc7defe5",
+     "hover_node": "3151:645",
+     "tile_component": "3151:644",
+     "figma_node": "3454:5619",
+     "bbox": [
+      628.0,
+      1035.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 4,
+     "row": 1,
+     "col": 4,
+     "object_slug": "sandstone-garuda",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "1827500b6a2c137b872269ee2ecf8b8b8b62124c",
+     "hover_ref": "fb1658b6575e2e25bde1e5c05b58f49e931146ec",
+     "hover_node": "3117:869",
+     "tile_component": "3117:868",
+     "figma_node": "3454:5620",
+     "bbox": [
+      862.0,
+      1035.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 5,
+     "row": 1,
+     "col": 5,
+     "object_slug": "ng-s-n-drum",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "498f2430e6b410f9fffd62e9be0fab760910aa92",
+     "hover_ref": "2d07e11f2753322cfd756146a07890f217952b6f",
+     "hover_node": "3153:748",
+     "tile_component": "3153:747",
+     "figma_node": "3454:5621",
+     "bbox": [
+      1096.0,
+      1035.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 6,
+     "row": 2,
+     "col": 1,
+     "object_slug": "blackened-brass-ritual-holy-water-vessel",
+     "match_basis": "tile+hover",
+     "tile_name": "Dragon 2",
+     "tile_ref": "f9cde421abd84696b5d570c547fcd611c1853b0b",
+     "hover_ref": "95c2c3cc3f72f2a36790e5a86286d956b4af0de5",
+     "hover_node": "3117:794",
+     "tile_component": "3117:793",
+     "figma_node": "3454:5623",
+     "bbox": [
+      160.0,
+      1269.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 7,
+     "row": 2,
+     "col": 2,
+     "object_slug": "blackened-brass-ritual-holy-water-vessel",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "b7f8271c26ebf05e3b043bd9f0c596126f9a79eb",
+     "hover_ref": "b52ddbff4427209bd942f9f0855198d463405a06",
+     "hover_node": "3377:5826",
+     "tile_component": "3377:5825",
+     "figma_node": "3454:5624",
+     "bbox": [
+      394.0,
+      1269.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 8,
+     "row": 2,
+     "col": 3,
+     "object_slug": "shell-beads-blood-cockle",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "55733a7e702dc09d0a8434646d6e72a3a86d0b5a",
+     "hover_ref": "f53967ff3141891593b5e2da088dbac44099df27",
+     "hover_node": "3153:860",
+     "tile_component": "3153:859",
+     "figma_node": "3454:5625",
+     "bbox": [
+      628.0,
+      1269.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 9,
+     "row": 2,
+     "col": 4,
+     "object_slug": "sacred-conch-shell",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 17",
+     "tile_ref": "d9a1eb11c0fa6fb900cbf222021e4ed763d74117",
+     "hover_ref": "7e21af207340cb3bda965802975e741d7caa3b26",
+     "hover_node": "3153:856",
+     "tile_component": "3153:855",
+     "figma_node": "3454:5626",
+     "bbox": [
+      862.0,
+      1269.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 10,
+     "row": 2,
+     "col": 5,
+     "object_slug": "rostrum-of-the-largetooth-sawfish",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "2a4772448ace0b4d46a8d268a8a59e7a0089331d",
+     "hover_ref": "7df229de12649f4fba050c2b415aeb2beade7bd0",
+     "hover_node": "3117:844",
+     "tile_component": "3117:843",
+     "figma_node": "3454:5627",
+     "bbox": [
+      1096.0,
+      1269.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 11,
+     "row": 3,
+     "col": 1,
+     "object_slug": "monk-s-alms-bowl",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "15a860b12fe386df535c6160cc09bb450a5cbee9",
+     "hover_ref": "b98e9d5b241adb1fbd6e776c5aa18b066a645a21",
+     "hover_node": "3117:711",
+     "tile_component": "3117:710",
+     "figma_node": "3454:5629",
+     "bbox": [
+      160.0,
+      1503.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 12,
+     "row": 3,
+     "col": 2,
+     "object_slug": "monk-s-alms-bowl",
+     "match_basis": "tile+hover",
+     "tile_name": "Lion 1",
+     "tile_ref": "ee5ec39e88fc65b027019bf95f46c91fc7616e0f",
+     "hover_ref": "9250a1ef9572dde3a0a13bb6c9ed5f63a59a6c61",
+     "hover_node": "3151:675",
+     "tile_component": "3151:674",
+     "figma_node": "3454:5630",
+     "bbox": [
+      394.0,
+      1503.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 13,
+     "row": 3,
+     "col": 3,
+     "object_slug": "singhasari-ganesha",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 3",
+     "tile_ref": "8ac7f98bc70e717330451ca7e8d30c061542268f",
+     "hover_ref": "08849e4a56875c3cfda45651c35f71ce42d5dfec",
+     "hover_node": "940:780",
+     "tile_component": "940:779",
+     "figma_node": "3454:5631",
+     "bbox": [
+      628.0,
+      1503.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 14,
+     "row": 3,
+     "col": 4,
+     "object_slug": "phra-upagutta-enshrined-in-a-conch-shell",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "1b328ddc48b5cbef2593a47928795f741a54f2a7",
+     "hover_ref": "6fbf97f95db307c8d3875449cb25abe16f0659e5",
+     "hover_node": "3153:864",
+     "tile_component": "3153:863",
+     "figma_node": "3454:5632",
+     "bbox": [
+      862.0,
+      1503.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 15,
+     "row": 3,
+     "col": 5,
+     "object_slug": "krutor-trut",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 17",
+     "tile_ref": "5a455b4c4eef527162475d8a1f3fd4466d1becde",
+     "hover_ref": "8ec22e73c8e35031beeb942d317d25738dae44d1",
+     "hover_node": "3117:730",
+     "tile_component": "3117:729",
+     "figma_node": "3454:5633",
+     "bbox": [
+      1096.0,
+      1503.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 16,
+     "row": 4,
+     "col": 1,
+     "object_slug": "iban-s-hornbill-image",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "a9cc9bbb1520cc7d78dc084cbe1de8b640282a85",
+     "hover_ref": "ca062ff04c783c63e36e516e8bd8ce937d25e976",
+     "hover_node": "3117:896",
+     "tile_component": "3117:895",
+     "figma_node": "3454:5635",
+     "bbox": [
+      160.0,
+      1737.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 17,
+     "row": 4,
+     "col": 2,
+     "object_slug": "ganesha",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 19",
+     "tile_ref": "ce053c2bf4aca30fa7f70b380fa5ef8a41173c70",
+     "hover_ref": "fb5e1f7e330178705eb29ce778bb44bfe972a023",
+     "hover_node": "940:784",
+     "tile_component": "940:783",
+     "figma_node": "3454:5636",
+     "bbox": [
+      394.0,
+      1737.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 18,
+     "row": 4,
+     "col": 3,
+     "object_slug": "garuda-sculptures",
+     "match_basis": "tile+hover",
+     "tile_name": "Garuda 4",
+     "tile_ref": "8428e71bcc441ecea1da55185080518897c441fd",
+     "hover_ref": "0e852035a30f543a9a2e79cd36a8198d9dd0cf37",
+     "hover_node": "3117:882",
+     "tile_component": "3117:881",
+     "figma_node": "3454:5637",
+     "bbox": [
+      628.0,
+      1737.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 19,
+     "row": 4,
+     "col": 4,
+     "object_slug": "sungai-mas-makara",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "e7f33e8789619ca1ee06fbde6b8e589b8d5b0631",
+     "hover_ref": "a7610fef452528f0aae4578c9e417b24176710e3",
+     "hover_node": "3153:710",
+     "tile_component": "3153:709",
+     "figma_node": "3454:5638",
+     "bbox": [
+      862.0,
+      1737.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 20,
+     "row": 4,
+     "col": 5,
+     "object_slug": "garment-for-buddhist-prostration-featuring-garuda-and-peacock-motifs",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "354862ca83cf6da20a1bdac4c7bb6af0af9dd975",
+     "hover_ref": "31071b459bc4c2e66cfc10525b0f8f6bae47f538",
+     "hover_node": "3117:874",
+     "tile_component": "3117:873",
+     "figma_node": "3454:5639",
+     "bbox": [
+      1096.0,
+      1737.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 21,
+     "row": 5,
+     "col": 1,
+     "object_slug": "garment-for-buddhist-prostration-featuring-garuda-and-peacock-motifs",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "ede17f66f8eceae230d49144785f1f5ab2840430",
+     "hover_ref": "c5a6b8cbff61d03d83422eed01785a4bdf9ef882",
+     "hover_node": "3377:5522",
+     "tile_component": "3377:5521",
+     "figma_node": "3454:5641",
+     "bbox": [
+      160.0,
+      1971.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 22,
+     "row": 5,
+     "col": 2,
+     "object_slug": "offering-vessel-in-the-form-of-a-hinta-bird",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "cc54bb23ef72275c93277c13cf7865601a124bbd",
+     "hover_ref": "4c85f5653db7e0152df7b526ce0aff1c368e31ba",
+     "hover_node": "3153:752",
+     "tile_component": "3153:751",
+     "figma_node": "3454:5642",
+     "bbox": [
+      394.0,
+      1971.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 23,
+     "row": 5,
+     "col": 3,
+     "object_slug": "large-tile-with-dragons",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "84bf8f57a745d310bbbd9cd266aec7c97f92d9ac",
+     "hover_ref": "3ae66ae5a1a1b0ba001959bca1a3293d2ae2534d",
+     "hover_node": "3117:798",
+     "tile_component": "3117:797",
+     "figma_node": "3454:5643",
+     "bbox": [
+      628.0,
+      1971.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 24,
+     "row": 5,
+     "col": 4,
+     "object_slug": "porcelain-plate-depicting-phoenix",
+     "match_basis": "tile+hover",
+     "tile_name": "Phoenix 1",
+     "tile_ref": "a75844334120ed6cdbd9c86786970fb7021ea96e",
+     "hover_ref": "fdb25d4387a9be0f7e137ed30548533ed83bb975",
+     "hover_node": "3153:723",
+     "tile_component": "3153:722",
+     "figma_node": "3454:5644",
+     "bbox": [
+      862.0,
+      1971.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 25,
+     "row": 5,
+     "col": 5,
+     "object_slug": "a-sandstone-lintel-depicting-vishnu-anantashayana",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "acacca8d56229027b79d51ad074c06f79a8fcc88",
+     "hover_ref": "e1904067777b15ea8d0e2b11ef31978380e1e7a1",
+     "hover_node": "3153:804",
+     "tile_component": "3153:803",
+     "figma_node": "3454:5645",
+     "bbox": [
+      1096.0,
+      1971.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 26,
+     "row": 6,
+     "col": 1,
+     "object_slug": "balinese-singha",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 17",
+     "tile_ref": "2dd1b2eb919eed5c8f3a67ba4a1e8b4cd22fd023",
+     "hover_ref": "0b0dc3c8c5a95d6a0e4b323fb76f39f80f36b7ba",
+     "hover_node": "3151:680",
+     "tile_component": "3151:679",
+     "figma_node": "3454:5647",
+     "bbox": [
+      160.0,
+      2205.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 27,
+     "row": 6,
+     "col": 2,
+     "object_slug": "statue-of-shiva",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "ea808b049a6499bf57c356c1bfae144012535ca1",
+     "hover_ref": "2e3f563cfb481dec2055cab5e42132e7460c58dc",
+     "hover_node": "3153:808",
+     "tile_component": "3153:807",
+     "figma_node": "3454:5648",
+     "bbox": [
+      394.0,
+      2205.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 28,
+     "row": 6,
+     "col": 3,
+     "object_slug": "buffalo-shaped-water-container",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "2c06cf0749801e5fb58d38967f6e20b0c789ae29",
+     "hover_ref": "41b7bfb28b8ca69b3626c606f71a0a7c44f0dd8b",
+     "hover_node": "3117:715",
+     "tile_component": "3117:714",
+     "figma_node": "3454:5649",
+     "bbox": [
+      628.0,
+      2205.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 29,
+     "row": 6,
+     "col": 4,
+     "object_slug": "cast-brass-tabletop-horse-shaped-lighter",
+     "match_basis": "tile+hover",
+     "tile_name": "Horse 2",
+     "tile_ref": "e1c168a68d352b7be48d30f8377ad0278e4ad96d",
+     "hover_ref": "c5d19e075e4bbc02822c7ee2e125a1db72b7841b",
+     "hover_node": "3151:650",
+     "tile_component": "3151:649",
+     "figma_node": "3454:5650",
+     "bbox": [
+      862.0,
+      2205.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 30,
+     "row": 6,
+     "col": 5,
+     "object_slug": "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "552d1b341b8ab53b9e6a5b0d436df623d7466a7a",
+     "hover_ref": "55626b208efee95e92bb9dcd8f34812155014287",
+     "hover_node": "3377:5764",
+     "tile_component": "3377:5763",
+     "figma_node": "3454:5651",
+     "bbox": [
+      1096.0,
+      2205.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 31,
+     "row": 7,
+     "col": 1,
+     "object_slug": "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+     "match_basis": "tile+hover",
+     "tile_name": "Dragon 4",
+     "tile_ref": "d80d8081a7a9d0d238f74eba26031472526b7367",
+     "hover_ref": "6293a1f920eee88ea523428d64b13060dbdfb068",
+     "hover_node": "3377:5616",
+     "tile_component": "3377:5615",
+     "figma_node": "3454:5653",
+     "bbox": [
+      160.0,
+      2439.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 32,
+     "row": 7,
+     "col": 2,
+     "object_slug": "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "da3cac7c2bc072c9997766ed9b44578084bf42ad",
+     "hover_ref": "77d6492f92aea1ba9fe4ee40f9f6480163160b6e",
+     "hover_node": "3117:734",
+     "tile_component": "3117:733",
+     "figma_node": "3454:5654",
+     "bbox": [
+      394.0,
+      2439.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 33,
+     "row": 7,
+     "col": 3,
+     "object_slug": "wooden-chalk-line-reels",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 17",
+     "tile_ref": "74c582e4a87171299117239d712e8d5678c6bb6f",
+     "hover_ref": "47b3fb6d5cdfa8b61abeb2aecab5ccacab4d354b",
+     "hover_node": "3117:848",
+     "tile_component": "3117:847",
+     "figma_node": "3454:5655",
+     "bbox": [
+      628.0,
+      2439.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 34,
+     "row": 7,
+     "col": 4,
+     "object_slug": "wooden-chalk-line-reels",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "a1d2d0a28fd2dea8bdcf1d323a1bcba190a520e6",
+     "hover_ref": "d09458145e675c309ee651eda67c63d3692231e9",
+     "hover_node": "3377:5841",
+     "tile_component": "3377:5840",
+     "figma_node": "3454:5656",
+     "bbox": [
+      862.0,
+      2439.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 35,
+     "row": 7,
+     "col": 5,
+     "object_slug": "langguai-with-frog-and-snake-motifs",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "41e28ea01339a9433437f4e0950b9ff02426ec81",
+     "hover_ref": "f5d34b73a411a3ccdfdf613535880cd329d01301",
+     "hover_node": "3153:812",
+     "tile_component": "3153:811",
+     "figma_node": "3454:5657",
+     "bbox": [
+      1096.0,
+      2439.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 36,
+     "row": 8,
+     "col": 1,
+     "object_slug": "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+     "match_basis": "tile+hover",
+     "tile_name": "Dragon 4",
+     "tile_ref": "d80d8081a7a9d0d238f74eba26031472526b7367",
+     "hover_ref": "6293a1f920eee88ea523428d64b13060dbdfb068",
+     "hover_node": "3377:5616",
+     "tile_component": "3377:5615",
+     "figma_node": "3454:5659",
+     "bbox": [
+      160.0,
+      2673.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 37,
+     "row": 8,
+     "col": 2,
+     "object_slug": "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "da3cac7c2bc072c9997766ed9b44578084bf42ad",
+     "hover_ref": "77d6492f92aea1ba9fe4ee40f9f6480163160b6e",
+     "hover_node": "3117:734",
+     "tile_component": "3117:733",
+     "figma_node": "3454:5660",
+     "bbox": [
+      394.0,
+      2673.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 38,
+     "row": 8,
+     "col": 3,
+     "object_slug": "wooden-chalk-line-reels",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 17",
+     "tile_ref": "74c582e4a87171299117239d712e8d5678c6bb6f",
+     "hover_ref": "47b3fb6d5cdfa8b61abeb2aecab5ccacab4d354b",
+     "hover_node": "3117:848",
+     "tile_component": "3117:847",
+     "figma_node": "3454:5661",
+     "bbox": [
+      628.0,
+      2673.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 39,
+     "row": 8,
+     "col": 4,
+     "object_slug": "embossed-brass-basin-with-mythical-animal-motifs",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "089647e64e38d7328d8f563f9da119bf554818e3",
+     "hover_ref": "e1afa01e9af5ddd5c7055161320365a0f9f7cbd9",
+     "hover_node": "3377:5669",
+     "tile_component": "3377:5668",
+     "figma_node": "3454:5662",
+     "bbox": [
+      862.0,
+      2673.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 40,
+     "row": 8,
+     "col": 5,
+     "object_slug": "embossed-brass-basin-with-mythical-animal-motifs",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "00ee3e3e56a14a3d38c8d17a988cc32ff848d88b",
+     "hover_ref": "d041cffd72e6216eb4ebae2e9b061fe818d24a20",
+     "hover_node": "3151:684",
+     "tile_component": "3151:683",
+     "figma_node": "3454:5663",
+     "bbox": [
+      1096.0,
+      2673.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 41,
+     "row": 9,
+     "col": 1,
+     "object_slug": "embossed-brass-basin-with-mythical-animal-motifs",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "5dcf291571cff5117cd119aad66f1b890e95fc30",
+     "hover_ref": "5e4cdb682dc582a42e000037cd672fc32ff13d84",
+     "hover_node": "3377:5838",
+     "tile_component": "3377:5837",
+     "figma_node": "3454:5665",
+     "bbox": [
+      160.0,
+      2907.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 42,
+     "row": 9,
+     "col": 2,
+     "object_slug": null,
+     "match_basis": null,
+     "tile_name": "Ele 18",
+     "tile_ref": "b4177480ca6c29287bfb9b0b66744c26c3dda5b4",
+     "hover_ref": "7a0556b8dc388cdfdaace3022d1eac18ae0144bb",
+     "hover_node": "940:792",
+     "tile_component": "940:791",
+     "figma_node": "3454:5666",
+     "bbox": [
+      394.0,
+      2907.0,
+      184.0,
+      184.0
+     ],
+     "candidate_slug": "embossed-brass-basin-with-mythical-animal-motifs",
+     "candidate_basis": "ref b4177480 = ช่อง Ele 19 ลำดับ 5 ในหน้า Elephant trail (942:841) ที่ไม่มี ON_CLICK · วัตถุ elephant trail_order 1–15 ตัวอื่นถูกช่องอื่นอ้างผ่าน ON_CLICK ครบแล้ว เหลือ embossed-brass-basin (trail_order 5) ตัวเดียว = ตัดตามการคัดออก+ลำดับ · ไม่มี ON_CLICK/ref ใน seed ยืนยัน → P-383"
+    },
+    {
+     "order": 43,
+     "row": 9,
+     "col": 3,
+     "object_slug": "langguai-with-frog-and-snake-motifs",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "41e28ea01339a9433437f4e0950b9ff02426ec81",
+     "hover_ref": "f5d34b73a411a3ccdfdf613535880cd329d01301",
+     "hover_node": "3153:812",
+     "tile_component": "3153:811",
+     "figma_node": "3454:5667",
+     "bbox": [
+      628.0,
+      2907.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 44,
+     "row": 9,
+     "col": 4,
+     "object_slug": "pending-3",
+     "match_basis": "tile+hover",
+     "tile_name": "Bird 4",
+     "tile_ref": "d8d6913ad0e60a61274ea08200343489c838b551",
+     "hover_ref": "34af4c3773431093fc2747eedde9828f057e877e",
+     "hover_node": "3117:681",
+     "tile_component": "3117:680",
+     "figma_node": "3454:5668",
+     "bbox": [
+      862.0,
+      2907.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 45,
+     "row": 9,
+     "col": 5,
+     "object_slug": "pending-3",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 22",
+     "tile_ref": "040949b280aff82dbddd0397fb719c2b2cc17117",
+     "hover_ref": "4ed83a39693b23241f3090b1d1590baead38fb74",
+     "hover_node": "3377:5761",
+     "tile_component": "3377:5760",
+     "figma_node": "3454:5669",
+     "bbox": [
+      1096.0,
+      2907.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 46,
+     "row": 10,
+     "col": 1,
+     "object_slug": "elephant-molar-coconut-grater",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 17",
+     "tile_ref": "e6107260af94f3c942b4fbcf2b07040a37805f89",
+     "hover_ref": "bc3b0037bd5f5871ca71283adf4f54e9f5e68919",
+     "hover_node": "940:788",
+     "tile_component": "940:787",
+     "figma_node": "3454:5671",
+     "bbox": [
+      160.0,
+      3141.0,
+      184.0,
+      184.0
+     ]
+    }
+   ]
+  },
+  {
+   "zone": 3,
+   "title": "Material Cultures: Animals in Rituals and Daily Life",
+   "page_frame": "670:1349",
+   "page_frame_3117": "3117:3742",
+   "grid_node": "3454:5354",
+   "grid_node_3117": "3454:5754",
+   "tile_count": 83,
+   "matched_slug": 83,
+   "unmatched_orders": [],
+   "unique_slugs": 72,
+   "duplicate_tile_refs": {},
+   "tiles": [
+    {
+     "order": 1,
+     "row": 1,
+     "col": 1,
+     "object_slug": "turtle-shaped-gold-plaque",
+     "match_basis": "tile+hover",
+     "tile_name": "Bird 2",
+     "tile_ref": "7f39c5221616abceba6e2ad5e169185dcd8cb6a6",
+     "hover_ref": "9188a25499956fc87de6b8bd5de533f833fd3eff",
+     "hover_node": "3153:739",
+     "tile_component": "3153:738",
+     "figma_node": "3454:5356",
+     "bbox": [
+      160.0,
+      1079.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 2,
+     "row": 1,
+     "col": 2,
+     "object_slug": "swan-shaped-holy-water-pot",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "d70d18a25d9ec4b0378d0e932b4098f576098e38",
+     "hover_ref": "497939303811a106c9f99a74a181c55d9fcf31bd",
+     "hover_node": "3153:756",
+     "tile_component": "3153:755",
+     "figma_node": "3454:5357",
+     "bbox": [
+      394.0,
+      1079.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 3,
+     "row": 1,
+     "col": 3,
+     "object_slug": "ivory-fire-piston-ivory-fire-syringe",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 17",
+     "tile_ref": "a32f030f2dac179a29c54c7be49480be25b6a760",
+     "hover_ref": "909199a89ee7443b972251906ddca30b61bab3a5",
+     "hover_node": "940:796",
+     "tile_component": "940:795",
+     "figma_node": "3454:5358",
+     "bbox": [
+      628.0,
+      1079.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 4,
+     "row": 1,
+     "col": 4,
+     "object_slug": "copper-pot",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "a193078e0c86e7d300692f9d8f512cc7ddd20511",
+     "hover_ref": "d3f0d33100684f17d6169b4eaf73d6b28537a3fd",
+     "hover_node": "3117:900",
+     "tile_component": "3117:899",
+     "figma_node": "3454:5359",
+     "bbox": [
+      862.0,
+      1079.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 5,
+     "row": 1,
+     "col": 5,
+     "object_slug": "ayam-ayam-bernaga",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "c4f5c940d9b2f2f2f3551b0ae7d32b588527e735",
+     "hover_ref": "9d59f18e08a1f23cde6d057b279fd073595b993f",
+     "hover_node": "3117:806",
+     "tile_component": "3117:805",
+     "figma_node": "3454:5360",
+     "bbox": [
+      1096.0,
+      1079.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 6,
+     "row": 2,
+     "col": 1,
+     "object_slug": "ayam-ayam-bernaga",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "0902fcb7fc4c50a6a6e717b3aa9392808dd10e4c",
+     "hover_ref": "9a6ae6f415326a0885d0d896fa8c66b741a040fd",
+     "hover_node": "3117:738",
+     "tile_component": "3117:737",
+     "figma_node": "3454:5362",
+     "bbox": [
+      160.0,
+      1313.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 7,
+     "row": 2,
+     "col": 2,
+     "object_slug": "bronze-cock-standing-on-the-coop",
+     "match_basis": "tile+hover",
+     "tile_name": "Chcken 5",
+     "tile_ref": "e1d26d13616daefd8dd1e09916c102fe42be0eab",
+     "hover_ref": "95b4159d5971552fb6240ecfb6f27c85ab3ae728",
+     "hover_node": "3117:742",
+     "tile_component": "3117:741",
+     "figma_node": "3454:5363",
+     "bbox": [
+      394.0,
+      1313.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 8,
+     "row": 2,
+     "col": 3,
+     "object_slug": "ng-s-n-drum",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "5a7acb777270f4925e7726b4aecebe5e6b19ce28",
+     "hover_ref": "0646a3e0980336119f1b6576ea33bf3644250a5d",
+     "hover_node": "3153:872",
+     "tile_component": "3153:871",
+     "figma_node": "3454:5364",
+     "bbox": [
+      628.0,
+      1313.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 9,
+     "row": 2,
+     "col": 4,
+     "object_slug": "offering-dish",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "14e6b18a260e4c48a507e10688fe1e1a505595c1",
+     "hover_ref": "67cb401abb4b63a3214f60d5d4c6b9b071425dd2",
+     "hover_node": "3153:912",
+     "tile_component": "3153:911",
+     "figma_node": "3454:5365",
+     "bbox": [
+      862.0,
+      1313.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 10,
+     "row": 2,
+     "col": 5,
+     "object_slug": "chanap",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 22",
+     "tile_ref": "346978f59bedc597a29ee01de73c7e6138b044c2",
+     "hover_ref": "0294cc12cc1a104cc9f3f56113329ba2e5401f05",
+     "hover_node": "3153:880",
+     "tile_component": "3153:879",
+     "figma_node": "3454:5366",
+     "bbox": [
+      1096.0,
+      1313.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 11,
+     "row": 3,
+     "col": 1,
+     "object_slug": "hamsa-bird-water-container",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "28e77533206f82cc799127fdbf59146dda3aa901",
+     "hover_ref": "1df02bdba4da7908d379dea7c6e0f9b00c40aac2",
+     "hover_node": "3153:784",
+     "tile_component": "3153:783",
+     "figma_node": "3454:5368",
+     "bbox": [
+      160.0,
+      1547.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 12,
+     "row": 3,
+     "col": 2,
+     "object_slug": "gold-swan-commemorative-fan-for-the-cremation-of-mom-suphab-kridakorn",
+     "match_basis": "tile+hover",
+     "tile_name": "Waterbird 5",
+     "tile_ref": "6e433d6e5b1a3e72d4a76e8e739f91a30c8f4963",
+     "hover_ref": "3b34d10fc9f77e29331d83416741732c6cf8e820",
+     "hover_node": "3153:760",
+     "tile_component": "3153:759",
+     "figma_node": "3454:5369",
+     "bbox": [
+      394.0,
+      1547.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 13,
+     "row": 3,
+     "col": 3,
+     "object_slug": "bencha-for-water-pouring-tradition",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "ae23bda0d4604aeeec1658ab24612ef04612ab69",
+     "hover_ref": "9687d06190c436f6717fee452a72f56c72775eb2",
+     "hover_node": "3153:824",
+     "tile_component": "3153:823",
+     "figma_node": "3454:5370",
+     "bbox": [
+      628.0,
+      1547.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 14,
+     "row": 3,
+     "col": 4,
+     "object_slug": "unglazed-stoneware-conches",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "bcd46d3d81029fefcb4104754c333fa79894640d",
+     "hover_ref": "1510fa1eeb4d6aac5042db6966caa69144b948fc",
+     "hover_node": "3153:876",
+     "tile_component": "3153:875",
+     "figma_node": "3454:5371",
+     "bbox": [
+      862.0,
+      1547.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 15,
+     "row": 3,
+     "col": 5,
+     "object_slug": "elephant-shaped-relic-containers",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 22",
+     "tile_ref": "9e10caee6f9128f7addacd727d65478276063de6",
+     "hover_ref": "2733b6a7223e7f828c9a0728822a996d20d454e6",
+     "hover_node": "940:804",
+     "tile_component": "940:803",
+     "figma_node": "3454:5372",
+     "bbox": [
+      1096.0,
+      1547.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 16,
+     "row": 4,
+     "col": 1,
+     "object_slug": "dastar-head-cloth-with-horse-motif",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "1493cabcadc60bed1b9a01a954418d7e974f251e",
+     "hover_ref": "c6f95ddecb9438155eba7d38758c28c5c31e3b03",
+     "hover_node": "3151:654",
+     "tile_component": "3151:653",
+     "figma_node": "3454:5374",
+     "bbox": [
+      160.0,
+      1781.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 17,
+     "row": 4,
+     "col": 2,
+     "object_slug": "liturgical-pulpit-covers",
+     "match_basis": "tile+hover",
+     "tile_name": "Horse 4",
+     "tile_ref": "eaaa06632eeac0336f7dc3b6937537ea2ca69aa7",
+     "hover_ref": "82cf63e92fe41d6850746da9760cc3f9e30a6058",
+     "hover_node": "3151:658",
+     "tile_component": "3151:657",
+     "figma_node": "3454:5375",
+     "bbox": [
+      394.0,
+      1781.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 18,
+     "row": 4,
+     "col": 3,
+     "object_slug": "liturgical-pulpit-covers",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "8e2fad27bc5dccecc95cd732189e8f665aaf4fc2",
+     "hover_ref": "7b9e3263519c5d7701bd13d294165ace965118ab",
+     "hover_node": "3117:886",
+     "tile_component": "3117:885",
+     "figma_node": "3454:5376",
+     "bbox": [
+      628.0,
+      1781.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 19,
+     "row": 4,
+     "col": 4,
+     "object_slug": "makara-palanquin-ornament",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "7837aa43adf883e2d1e765bbcb6057ad3f092295",
+     "hover_ref": "34d0caaed27d36c78003821a12b51e4c3bee0777",
+     "hover_node": "3153:714",
+     "tile_component": "3153:713",
+     "figma_node": "3454:5377",
+     "bbox": [
+      862.0,
+      1781.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 20,
+     "row": 4,
+     "col": 5,
+     "object_slug": "patola-cloth",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 17",
+     "tile_ref": "fd0013b9f60c2cecb5ba97cb752628c0ce04bd2a",
+     "hover_ref": "5e5b3d261ca9c171ce8b4ed35f89325dff42f506",
+     "hover_node": "940:800",
+     "tile_component": "940:799",
+     "figma_node": "3454:5378",
+     "bbox": [
+      1096.0,
+      1781.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 21,
+     "row": 5,
+     "col": 1,
+     "object_slug": "elephant-and-mahout-kendi",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 18",
+     "tile_ref": "1afa6a7f979ea552fb04113f75774f2bb107e1db",
+     "hover_ref": "8d13f99968832945085da7a31d4d07487f941977",
+     "hover_node": "797:1924",
+     "tile_component": "797:1923",
+     "figma_node": "3454:5380",
+     "bbox": [
+      160.0,
+      2015.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 22,
+     "row": 5,
+     "col": 2,
+     "object_slug": "koffo-cloth",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "7d563195c879ac259b7c60054ab4688b3000ab85",
+     "hover_ref": "240445d6c2dbf67eb03e868c4b2dd4f0e8896cae",
+     "hover_node": "3153:796",
+     "tile_component": "3153:795",
+     "figma_node": "3454:5381",
+     "bbox": [
+      394.0,
+      2015.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 23,
+     "row": 5,
+     "col": 3,
+     "object_slug": "traditional-maritime-boxes-in-horse-design",
+     "match_basis": "tile+hover",
+     "tile_name": "Horse 5",
+     "tile_ref": "95537e60ff9d3c8c0de15f3192f5d70cf43474b4",
+     "hover_ref": "e837047d39c021baed1a945be1792b7c112709b4",
+     "hover_node": "3151:662",
+     "tile_component": "3151:661",
+     "figma_node": "3454:5382",
+     "bbox": [
+      628.0,
+      2015.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 24,
+     "row": 5,
+     "col": 4,
+     "object_slug": "traditional-maritime-boxes-in-horse-and-turtle-design",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "b47a27f5e163e867749c5c48cba4301f92394773",
+     "hover_ref": "f5c03cfdb6f0c51889ea4f3ce66f74a8e5e517f8",
+     "hover_node": "3153:788",
+     "tile_component": "3153:787",
+     "figma_node": "3454:5383",
+     "bbox": [
+      862.0,
+      2015.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 25,
+     "row": 5,
+     "col": 5,
+     "object_slug": "hand-carved-ivory-and-metal-opium-pipe",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 21",
+     "tile_ref": "bb70007222b8d8aea29ae505041fd824fbc12106",
+     "hover_ref": "4aae1591a9b6aa9f97ddf11c7e8f102500716071",
+     "hover_node": "940:812",
+     "tile_component": "940:811",
+     "figma_node": "3454:5384",
+     "bbox": [
+      1096.0,
+      2015.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 26,
+     "row": 6,
+     "col": 1,
+     "object_slug": "pod-duang-stamped-with-the-chakra-and-great-crown-marks-reign-of-king",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 18",
+     "tile_ref": "4727b9182ca17f373e904459cb30eb46315a5e9f",
+     "hover_ref": "7847f8ce21ef80789787d936ca54cbf72487260c",
+     "hover_node": "940:808",
+     "tile_component": "940:807",
+     "figma_node": "3454:5386",
+     "bbox": [
+      160.0,
+      2249.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 27,
+     "row": 6,
+     "col": 2,
+     "object_slug": "tin-ingots-in-the-shape-of-chicken",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "86f71e7dc57a4b6136c19cd62ec759599b775c95",
+     "hover_ref": "2eb17e57f051876454d3b270b18c6ef495a83f36",
+     "hover_node": "3117:746",
+     "tile_component": "3117:745",
+     "figma_node": "3454:5387",
+     "bbox": [
+      394.0,
+      2249.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 28,
+     "row": 6,
+     "col": 3,
+     "object_slug": "blue-and-white-dish-with-flattened-foliate-rim-decorated-with-a-pale-b",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "3753979deadd9568233bcd8434a78a276a0a29ed",
+     "hover_ref": "ee757442c988574095cec6744152b5ff228cbf46",
+     "hover_node": "3153:768",
+     "tile_component": "3153:767",
+     "figma_node": "3454:5388",
+     "bbox": [
+      628.0,
+      2249.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 29,
+     "row": 6,
+     "col": 4,
+     "object_slug": "sukhothai-celadon-bowl-fragment-with-fish-design",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "b2246e3952e2ae9c39ccd4333d450fa122ca4923",
+     "hover_ref": "bb3358fc6d43f49ef5f83c249b3238aaa3a1da6f",
+     "hover_node": "3117:852",
+     "tile_component": "3117:851",
+     "figma_node": "3454:5389",
+     "bbox": [
+      862.0,
+      2249.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 30,
+     "row": 6,
+     "col": 5,
+     "object_slug": "blue-and-white-qinghua-porcelain-plate",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 22",
+     "tile_ref": "a2e15483e7d0071fbdfcc7f1e3a669f8dc30806a",
+     "hover_ref": "fd231c38faef0c95026747c7cbaa6e58bc31a69b",
+     "hover_node": "3153:916",
+     "tile_component": "3153:915",
+     "figma_node": "3454:5390",
+     "bbox": [
+      1096.0,
+      2249.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 31,
+     "row": 7,
+     "col": 1,
+     "object_slug": "naga-motifs-on-a-kolek-boat-in-the-style-of-southern-thailand",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "949281a71b05f5132590be087781b24e303022dc",
+     "hover_ref": "ce22d735de382fd27e0e020cfcf330a6dab083ca",
+     "hover_node": "3153:828",
+     "tile_component": "3153:827",
+     "figma_node": "3454:5392",
+     "bbox": [
+      160.0,
+      2483.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 32,
+     "row": 7,
+     "col": 2,
+     "object_slug": "tin-ingot-in-the-shape-of-an-elephant",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 12",
+     "tile_ref": "64812b89ef37f38a317fd61eb91abee1964c317c",
+     "hover_ref": "97ac147df1c5b3ac00b9e465712124507f42aeaa",
+     "hover_node": "940:816",
+     "tile_component": "940:815",
+     "figma_node": "3454:5393",
+     "bbox": [
+      394.0,
+      2483.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 33,
+     "row": 7,
+     "col": 3,
+     "object_slug": "jar-decorated-with-fish-and-a-beast",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "89c7fa0aedfa7005e95470aa7682c190244f5d87",
+     "hover_ref": "7bbc09438bd58e5543692c5dbcd6de1c6c812cb7",
+     "hover_node": "3117:856",
+     "tile_component": "3117:855",
+     "figma_node": "3454:5394",
+     "bbox": [
+      628.0,
+      2483.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 34,
+     "row": 7,
+     "col": 4,
+     "object_slug": "jar-decorated-with-fish-and-a-beast",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 17",
+     "tile_ref": "2167bde85884225c23ec15b5b52171d29a3924ba",
+     "hover_ref": "46733b80e993a023dbdd73dd3fc721dc1daa3a27",
+     "hover_node": "3377:5754",
+     "tile_component": "3377:5753",
+     "figma_node": "3454:5395",
+     "bbox": [
+      862.0,
+      2483.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 35,
+     "row": 7,
+     "col": 5,
+     "object_slug": "cowrie-shells",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "eaf31d16c0733a48aa19560ca5ddf40ebf34a4b3",
+     "hover_ref": "bdbc2ce6dc2cac1cd6af7098494e11f12078c142",
+     "hover_node": "3153:884",
+     "tile_component": "3153:883",
+     "figma_node": "3454:5396",
+     "bbox": [
+      1096.0,
+      2483.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 36,
+     "row": 8,
+     "col": 1,
+     "object_slug": "kijang-gold-coins",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "820ff47ead50ad14ed515661fca3cec931854380",
+     "hover_ref": "8e2cf7306c50fcfdf405b259334fa1f0c7bdd93f",
+     "hover_node": "3117:781",
+     "tile_component": "3117:780",
+     "figma_node": "3454:5398",
+     "bbox": [
+      160.0,
+      2717.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 37,
+     "row": 8,
+     "col": 2,
+     "object_slug": "nang-talung-puppetry-deer",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "dd2a3faafca9299daf8daa28b7276a5d030d79d9",
+     "hover_ref": "9af8d7b2f606ba8db3aa1288a3fb6e5ae609021d",
+     "hover_node": "3117:785",
+     "tile_component": "3117:784",
+     "figma_node": "3454:5399",
+     "bbox": [
+      394.0,
+      2717.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 38,
+     "row": 8,
+     "col": 3,
+     "object_slug": "nang-talung-puppetry-horse",
+     "match_basis": "tile+hover",
+     "tile_name": "Horse 6",
+     "tile_ref": "e2e43a52a24aea11ed1a69354c00384be0186714",
+     "hover_ref": "19b96b4a6b8f9b6896bb62ca62010d60cb52a865",
+     "hover_node": "3151:666",
+     "tile_component": "3151:665",
+     "figma_node": "3454:5400",
+     "bbox": [
+      628.0,
+      2717.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 39,
+     "row": 8,
+     "col": 4,
+     "object_slug": "singabarong-cloth",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "2a33f63656cc956e44c1dd612945a54c4d026e05",
+     "hover_ref": "d4f599b0fd48ec44cabc175761796efdea0573a1",
+     "hover_node": "3151:688",
+     "tile_component": "3151:687",
+     "figma_node": "3454:5401",
+     "bbox": [
+      862.0,
+      2717.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 40,
+     "row": 8,
+     "col": 5,
+     "object_slug": "zoomorphic-lime-container",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "e3622bd14db8e56f05f53fe61b9e9bed85cfd7b8",
+     "hover_ref": "ce3169a52b0025e78e766c50223af5556319fdfe",
+     "hover_node": "3153:792",
+     "tile_component": "3153:791",
+     "figma_node": "3454:5402",
+     "bbox": [
+      1096.0,
+      2717.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 41,
+     "row": 9,
+     "col": 1,
+     "object_slug": "kalung",
+     "match_basis": "tile",
+     "tile_name": "Ele 18",
+     "tile_ref": "b00ba4af508d8549c5ade5a97685497f9dadbee2",
+     "hover_ref": "14afb75a6762da3c6b7c5a89a1807ee788bf09ce",
+     "hover_node": "3377:5819",
+     "tile_component": "3377:5818",
+     "figma_node": "3454:5404",
+     "bbox": [
+      160.0,
+      2951.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 42,
+     "row": 9,
+     "col": 2,
+     "object_slug": "gold-naga-earrings",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "6570fcc318cd1ffb21b2311b5b880a8e29465df4",
+     "hover_ref": "d9c21bec7f1a627d52d9e38e2ed8e6f505047691",
+     "hover_node": "3153:836",
+     "tile_component": "3153:835",
+     "figma_node": "3454:5405",
+     "bbox": [
+      394.0,
+      2951.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 43,
+     "row": 9,
+     "col": 3,
+     "object_slug": "balinese-naga-corbels",
+     "match_basis": "tile+hover",
+     "tile_name": "Serpent&Naga 11",
+     "tile_ref": "401cd46400425a16a437f122a905e0abb2c4aa9a",
+     "hover_ref": "8183c0035a98da23a0c74736a98df93e74970ccf",
+     "hover_node": "3377:5856",
+     "tile_component": "3377:5855",
+     "figma_node": "3454:5406",
+     "bbox": [
+      628.0,
+      2951.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 44,
+     "row": 9,
+     "col": 4,
+     "object_slug": "naga-shaped-carved-wooden-corbel",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "1cddc43198329855f04d495dbda032122d259e5f",
+     "hover_ref": "f8d1e1420b3a5eda42bac6e6f8416608be4f3714",
+     "hover_node": "3377:5850",
+     "tile_component": "3377:5849",
+     "figma_node": "3454:5407",
+     "bbox": [
+      862.0,
+      2951.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 45,
+     "row": 9,
+     "col": 5,
+     "object_slug": "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "c25719ac4ab5507397554f3a8c45ad564704ea39",
+     "hover_ref": "6264014d8d024ad706479cb847a952385af26601",
+     "hover_node": "3117:754",
+     "tile_component": "3117:753",
+     "figma_node": "3454:5408",
+     "bbox": [
+      1096.0,
+      2951.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 46,
+     "row": 10,
+     "col": 1,
+     "object_slug": "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "8e8012c469307548464985e27f28dcd9011ae8f9",
+     "hover_ref": "877a983c9319ab26d3af57eb55186527142a186a",
+     "hover_node": "3377:5719",
+     "tile_component": "3377:5718",
+     "figma_node": "3454:5410",
+     "bbox": [
+      160.0,
+      3185.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 47,
+     "row": 10,
+     "col": 2,
+     "object_slug": "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 17",
+     "tile_ref": "d02a2ee07191109d18581fa8f1118197fcbc0d72",
+     "hover_ref": "614dedb5ac96ea12c65979cdc901ac749c6c9727",
+     "hover_node": "3377:5506",
+     "tile_component": "3377:5505",
+     "figma_node": "3454:5411",
+     "bbox": [
+      394.0,
+      3185.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 48,
+     "row": 10,
+     "col": 3,
+     "object_slug": "batik-hokokai-long-cloth",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "811b911b46a6d70227fc4111c40b9219f80a1dc1",
+     "hover_ref": "3de7ee185bb8b355576c3485ff3bd23da2062571",
+     "hover_node": "3377:5528",
+     "tile_component": "3377:5527",
+     "figma_node": "3454:5412",
+     "bbox": [
+      628.0,
+      3185.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 49,
+     "row": 10,
+     "col": 4,
+     "object_slug": "antique-chinese-blue-and-white-porcelain-pillow",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "0e446a04f187bbaf13fe2bee3bed85f271b9205c",
+     "hover_ref": "06b1b32b42ee06ed8e5b33410089c25a2b19c75e",
+     "hover_node": "3151:692",
+     "tile_component": "3151:691",
+     "figma_node": "3454:5413",
+     "bbox": [
+      862.0,
+      3185.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 50,
+     "row": 10,
+     "col": 5,
+     "object_slug": "kalakati",
+     "match_basis": "tile+hover",
+     "tile_name": "Bird 6",
+     "tile_ref": "410e483e3582c01a940bd8f329ed129eca356433",
+     "hover_ref": "a1449d4d677257f37202640ee2b3342a46692651",
+     "hover_node": "3377:5531",
+     "tile_component": "3377:5530",
+     "figma_node": "3454:5414",
+     "bbox": [
+      1096.0,
+      3185.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 51,
+     "row": 11,
+     "col": 1,
+     "object_slug": "celadon-glazed-kendi-in-goose-form",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "48c24ff314a9b54bc9b0af6cdc31b05cc1402c9b",
+     "hover_ref": "a6e56b16b57a808d170a933442b7a3a7b815ad0a",
+     "hover_node": "3377:5903",
+     "tile_component": "3377:5902",
+     "figma_node": "3454:5416",
+     "bbox": [
+      160.0,
+      3419.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 52,
+     "row": 11,
+     "col": 2,
+     "object_slug": "kam-cheng",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "6b6735eb5bfe5bb4e811dafa66f90a13f4b45274",
+     "hover_ref": "194d515194c409738c53b8fa1171c926da053649",
+     "hover_node": "3377:5773",
+     "tile_component": "3377:5772",
+     "figma_node": "3454:5417",
+     "bbox": [
+      394.0,
+      3419.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 53,
+     "row": 11,
+     "col": 3,
+     "object_slug": "tempayan-large-earthen-storage-jars",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "97af03392126f0cf1c976b260335f7ed5aae8541",
+     "hover_ref": "d6a119c260fbc096030db4861d91798acd7863eb",
+     "hover_node": "3377:5578",
+     "tile_component": "3377:5577",
+     "figma_node": "3454:5418",
+     "bbox": [
+      628.0,
+      3419.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 54,
+     "row": 11,
+     "col": 4,
+     "object_slug": "vessel-in-the-form-of-a-fish",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "02ac5b3ff188b817354154ccae9f869317113cb7",
+     "hover_ref": "c0b54c98d5e5f869864dd6995d8edf5e61bd3ee4",
+     "hover_node": "3377:5656",
+     "tile_component": "3377:5655",
+     "figma_node": "3454:5419",
+     "bbox": [
+      862.0,
+      3419.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 55,
+     "row": 11,
+     "col": 5,
+     "object_slug": "mother-of-pearl-furniture-depicting-animals",
+     "match_basis": "tile+hover",
+     "tile_name": "Seashell 11",
+     "tile_ref": "68e5904f980a5b11b6ac7fff3ffce1d7fa3dd720",
+     "hover_ref": "5731dc701e9c3e4153d39c069572d2397b1ee3ea",
+     "hover_node": "3377:5813",
+     "tile_component": "3377:5812",
+     "figma_node": "3454:5420",
+     "bbox": [
+      1096.0,
+      3419.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 56,
+     "row": 12,
+     "col": 1,
+     "object_slug": "mother-of-pearl-furniture-depicting-animals",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 16",
+     "tile_ref": "7a2d1a27da5d9061023a4726f70f78e32161b1b6",
+     "hover_ref": "77358795cb647ebc8bdbf2ca8c532b95db81633d",
+     "hover_node": "3117:767",
+     "tile_component": "3117:766",
+     "figma_node": "3454:5422",
+     "bbox": [
+      160.0,
+      3653.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 57,
+     "row": 12,
+     "col": 2,
+     "object_slug": "sulang",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 17",
+     "tile_ref": "c4ba0162275740d045a4e79d6251ee071bb00e9d",
+     "hover_ref": "ea5de1ab090da995c938e1be19e97eed45ec9f4a",
+     "hover_node": "3377:5584",
+     "tile_component": "3377:5583",
+     "figma_node": "3454:5423",
+     "bbox": [
+      394.0,
+      3653.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 58,
+     "row": 12,
+     "col": 3,
+     "object_slug": "sulang",
+     "match_basis": "tile+hover",
+     "tile_name": "hornbill 5",
+     "tile_ref": "7291ca4a157342b0ae06e240029b119f4b16b875",
+     "hover_ref": "17663b8281af43eb492c2771417e20d7bb27c9d5",
+     "hover_node": "3377:5691",
+     "tile_component": "3377:5690",
+     "figma_node": "3454:5424",
+     "bbox": [
+      628.0,
+      3653.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 59,
+     "row": 12,
+     "col": 4,
+     "object_slug": "calapa-with-bird-motif",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "d2f4e85750c47beb1e9ea5d5bcabc2efcdb9f517",
+     "hover_ref": "b070139ac97b2f3dba06bedb220ad0223202c2ba",
+     "hover_node": "3377:5688",
+     "tile_component": "3377:5687",
+     "figma_node": "3454:5425",
+     "bbox": [
+      862.0,
+      3653.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 60,
+     "row": 12,
+     "col": 5,
+     "object_slug": "tiga-negeri-cloth",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "6bf6674046a1f6f1a467e1b1ba856fa04f3f310c",
+     "hover_ref": "5b8c7a279db5c2bd5f9a75e511998abf02346a05",
+     "hover_node": "3377:5776",
+     "tile_component": "3377:5775",
+     "figma_node": "3454:5426",
+     "bbox": [
+      1096.0,
+      3653.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 61,
+     "row": 13,
+     "col": 1,
+     "object_slug": "calapa-with-buffalo-shape",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "dabf695eff4c2f190b9800dd05ba6ea0c0791572",
+     "hover_ref": "70a313144649046f262577067f86d982a3323738",
+     "hover_node": "3377:5553",
+     "tile_component": "3377:5552",
+     "figma_node": "3454:5428",
+     "bbox": [
+      160.0,
+      3887.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 62,
+     "row": 13,
+     "col": 2,
+     "object_slug": "lawi-ayam-cock-feather-dagger",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "5138560792c296e08a4a019006356e86dacefdbf",
+     "hover_ref": "84f8b0bb5a799df59bda1211aa69a67f20045fa4",
+     "hover_node": "3117:763",
+     "tile_component": "3117:762",
+     "figma_node": "3454:5429",
+     "bbox": [
+      394.0,
+      3887.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 63,
+     "row": 13,
+     "col": 3,
+     "object_slug": "naga-headed-walking-stick",
+     "match_basis": "tile+hover",
+     "tile_name": "Serpent&Naga 13",
+     "tile_ref": "70eb068742ccf43dc11056667ecf87891e97e753",
+     "hover_ref": "ae47dcea20a04293087620e49b9b3c1dee26ca6c",
+     "hover_node": "3377:5862",
+     "tile_component": "3377:5861",
+     "figma_node": "3454:5430",
+     "bbox": [
+      628.0,
+      3887.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 64,
+     "row": 13,
+     "col": 4,
+     "object_slug": "containers-with-mother-of-pearl-inlay",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "03d5a93c3218b41858f36df59c201dc7d5648b37",
+     "hover_ref": "df72e1c39dbe4945ce5cee411dfe52c373b379d2",
+     "hover_node": "3377:5822",
+     "tile_component": "3377:5821",
+     "figma_node": "3454:5431",
+     "bbox": [
+      862.0,
+      3887.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 65,
+     "row": 13,
+     "col": 5,
+     "object_slug": "stingray-barb-dagger",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "b0f8fdb14d5c3bf319bb7d777021b83972a22ce3",
+     "hover_ref": "45594ce54d045b89fe4d9eff1df2d89a940173a2",
+     "hover_node": "3377:5659",
+     "tile_component": "3377:5658",
+     "figma_node": "3454:5432",
+     "bbox": [
+      1096.0,
+      3887.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 66,
+     "row": 14,
+     "col": 1,
+     "object_slug": "gold-sheathed-lion-shaped-betel-nut-cutter",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "eb262726af09c911a98693af27599c4ad7706e88",
+     "hover_ref": "c61585858b27c5cf67cf85dd2568ea99c3ab9246",
+     "hover_node": "3377:5738",
+     "tile_component": "3377:5737",
+     "figma_node": "3454:5434",
+     "bbox": [
+      160.0,
+      4121.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 67,
+     "row": 14,
+     "col": 2,
+     "object_slug": "canang",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "2a72e1bd2ea11ea3d0ea3d41c7c6d34a2820256d",
+     "hover_ref": "896c494bbe6dc97f17effb1fa4497018bfbf0a8d",
+     "hover_node": "3377:5622",
+     "tile_component": "3377:5621",
+     "figma_node": "3454:5435",
+     "bbox": [
+      394.0,
+      4121.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 68,
+     "row": 14,
+     "col": 3,
+     "object_slug": "flintlock-firearm",
+     "match_basis": "tile+hover",
+     "tile_name": "Dragon 8",
+     "tile_ref": "3722fc1d6c40daff9e3efe73ab146471e78242bd",
+     "hover_ref": "eaea22e98912b2933f8b128ae4f1a288ec67f252",
+     "hover_node": "3377:5628",
+     "tile_component": "3377:5627",
+     "figma_node": "3454:5436",
+     "bbox": [
+      628.0,
+      4121.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 69,
+     "row": 14,
+     "col": 4,
+     "object_slug": "flintlock-firearm",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "f334cbddd17a33ae042f5d4e13d0ca2ca1bf9236",
+     "hover_ref": "4a15d17cb92b7d0c57c27715d6111520c6a22191",
+     "hover_node": "3153:844",
+     "tile_component": "3153:843",
+     "figma_node": "3454:5437",
+     "bbox": [
+      862.0,
+      4121.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 70,
+     "row": 14,
+     "col": 5,
+     "object_slug": "betel-box-set-of-sultan-abdul-samad",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "1949dc089bc2ffd3dc8fdbaca1143006df05400a",
+     "hover_ref": "b00f7af8ed959c661dcabc0080b60487cb03df42",
+     "hover_node": "3377:5534",
+     "tile_component": "3377:5533",
+     "figma_node": "3454:5438",
+     "bbox": [
+      1096.0,
+      4121.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 71,
+     "row": 15,
+     "col": 1,
+     "object_slug": "covered-box-decorated-with-phoenixes",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "dd7d34c58dabdcdefc3f20023aa1f68c1373260a",
+     "hover_ref": "c96e30802b0a40b044148a67b85cdebce7a1a514",
+     "hover_node": "3377:5779",
+     "tile_component": "3377:5778",
+     "figma_node": "3454:5440",
+     "bbox": [
+      160.0,
+      4355.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 72,
+     "row": 15,
+     "col": 2,
+     "object_slug": "bedil-cannon-with-dragon-motif",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 19",
+     "tile_ref": "1ee3bbc062114970038d1c91d6f566390ba44f8f",
+     "hover_ref": "bb387004ea3bba5edc0cb0471c7e0d8d46e99dc3",
+     "hover_node": "3117:814",
+     "tile_component": "3117:813",
+     "figma_node": "3454:5441",
+     "bbox": [
+      394.0,
+      4355.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 73,
+     "row": 15,
+     "col": 3,
+     "object_slug": "the-dragon-head-tortoise-and-crane-ornament",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "c2417adc4c2acbbb3d3f24754a7a2275d5c8eaf1",
+     "hover_ref": "7fb484c66976a065cd34a84b66d5d19266a4422b",
+     "hover_node": "3377:5878",
+     "tile_component": "3377:5877",
+     "figma_node": "3454:5442",
+     "bbox": [
+      628.0,
+      4355.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 74,
+     "row": 15,
+     "col": 4,
+     "object_slug": "the-dragon-head-tortoise-and-crane-ornament",
+     "match_basis": "tile+hover",
+     "tile_name": "Dragon 10",
+     "tile_ref": "439391dac3f11e783f42076a6fc7cf584904189a",
+     "hover_ref": "97d9d733a8c3ae78301ed49352126a5ed03c4513",
+     "hover_node": "3377:5634",
+     "tile_component": "3377:5633",
+     "figma_node": "3454:5443",
+     "bbox": [
+      862.0,
+      4355.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 75,
+     "row": 15,
+     "col": 5,
+     "object_slug": "the-dragon-head-tortoise-and-crane-ornament",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "ae3277ba12de8e5fa5c7ca8e4c526121543f7fcf",
+     "hover_ref": "c35f41f3c7389d60c53dde241adb81fb8cdb02ea",
+     "hover_node": "3377:5909",
+     "tile_component": "3377:5908",
+     "figma_node": "3454:5444",
+     "bbox": [
+      1096.0,
+      4355.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 76,
+     "row": 16,
+     "col": 1,
+     "object_slug": "dragon-shaped-mother-of-pearl-inlaid-incense-tray",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 18",
+     "tile_ref": "76508d99213ca130ee698e77136118ab62328612",
+     "hover_ref": "384a62be0bde30fb0068d96e722b53b459da6ed6",
+     "hover_node": "3377:5631",
+     "tile_component": "3377:5630",
+     "figma_node": "3454:5446",
+     "bbox": [
+      160.0,
+      4589.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 77,
+     "row": 16,
+     "col": 2,
+     "object_slug": "dragon-shaped-mother-of-pearl-inlaid-incense-tray",
+     "match_basis": "tile",
+     "tile_name": "Ele 19",
+     "tile_ref": "9d48caa0a2c382a9687cea44132ddf313e8eb970",
+     "hover_ref": "59e52f9e970687d87d88a4948cc953934a81200a",
+     "hover_node": "3377:5816",
+     "tile_component": "3377:5815",
+     "figma_node": "3454:5447",
+     "bbox": [
+      394.0,
+      4589.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 78,
+     "row": 16,
+     "col": 3,
+     "object_slug": "keris-pekaka",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "ed93ec9ebb329c0631c0b9bab9d9d853082ed6df",
+     "hover_ref": "2b8ccdd3736b45ad21497d7c64b793b66e5667be",
+     "hover_node": "3377:5906",
+     "tile_component": "3377:5905",
+     "figma_node": "3454:5448",
+     "bbox": [
+      628.0,
+      4589.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 79,
+     "row": 16,
+     "col": 4,
+     "object_slug": "badau",
+     "match_basis": "tile+hover",
+     "tile_name": "hornbill 7",
+     "tile_ref": "b340cfd76a109c6a275c5d412c745c06d297908f",
+     "hover_ref": "4a5bc0149aee259acdcc986253245c95d8897d3b",
+     "hover_node": "3377:5697",
+     "tile_component": "3377:5696",
+     "figma_node": "3454:5449",
+     "bbox": [
+      862.0,
+      4589.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 80,
+     "row": 16,
+     "col": 5,
+     "object_slug": "noken",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 21",
+     "tile_ref": "12ddaf805b293df0d2ab738e48ecfdae0345e002",
+     "hover_ref": "a89aa420ebd1cc2f47929a8b835c2d21a0b497a5",
+     "hover_node": "3377:5537",
+     "tile_component": "3377:5536",
+     "figma_node": "3454:5450",
+     "bbox": [
+      1096.0,
+      4589.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 81,
+     "row": 17,
+     "col": 1,
+     "object_slug": "siwaih",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 18",
+     "tile_ref": "49ee53f853f362a1cb012db4674186cbaf53ba68",
+     "hover_ref": "2ef26c9beb3b808b906755ee7e5f565943f966c7",
+     "hover_node": "3377:5509",
+     "tile_component": "3377:5508",
+     "figma_node": "3454:5452",
+     "bbox": [
+      160.0,
+      4823.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 82,
+     "row": 17,
+     "col": 2,
+     "object_slug": "bas-relief-of-a-royal-or-noble-procession-illustrating-the-life-of-the",
+     "match_basis": "click_chain",
+     "tile_name": "Ele 19",
+     "tile_ref": "ccacbdf1823c7ec789a79ddc546b0db4cb63d410",
+     "hover_ref": "0522e0ee2b555c1651d1e7ccce59fa7ea6f2f334",
+     "hover_node": "3377:5512",
+     "tile_component": "3377:5511",
+     "figma_node": "3454:5453",
+     "bbox": [
+      394.0,
+      4823.0,
+      184.0,
+      184.0
+     ]
+    },
+    {
+     "order": 83,
+     "row": 17,
+     "col": 3,
+     "object_slug": "kalimantan-war-helmet",
+     "match_basis": "tile+hover",
+     "tile_name": "Ele 20",
+     "tile_ref": "95f705e375f035bd625d64750b883f8666f15344",
+     "hover_ref": "e87a52ee98a38699abd612b74994d6c64456eaa8",
+     "hover_node": "3377:5694",
+     "tile_component": "3377:5693",
+     "figma_node": "3454:5454",
+     "bbox": [
+      628.0,
+      4823.0,
+      184.0,
+      184.0
+     ]
+    }
+   ]
+  }
+ ]
+}
