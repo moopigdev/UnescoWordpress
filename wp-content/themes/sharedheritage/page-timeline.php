@@ -61,7 +61,7 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 						<?php
 						foreach ( $sh_nav as $sh_nav_term ) :
 							$sh_icon = absint( sh_get_term( 'sh_icon_timeline', $sh_nav_term ) );
-							$sh_img  = $sh_icon ? wp_get_attachment_image( $sh_icon, 'full', false, array( 'class' => 'sh-tl__trail-img', 'alt' => $sh_nav_term->name, 'loading' => 'eager', 'decoding' => 'async', 'draggable' => 'false', 'sizes' => '26px' ) ) : '';
+							$sh_img  = $sh_icon ? wp_get_attachment_image( $sh_icon, 'full', false, array( 'class' => 'sh-tl__trail-img', 'alt' => $sh_nav_term->name, 'loading' => 'eager', 'decoding' => 'async', 'draggable' => 'false', 'sizes' => '50px' ) ) : '';
 							$sh_img  = '' !== $sh_img ? $sh_img : '<span class="sh-tl__trail-img screen-reader-text">' . esc_html( $sh_nav_term->name ) . '</span>';
 							$sh_link = sh_trail_objects( $sh_nav_term ) ? get_term_link( $sh_nav_term ) : '';
 							$sh_cur  = $sh_trail && $sh_trail->term_id === $sh_nav_term->term_id;
