@@ -45,6 +45,8 @@ function sh_import_refresh_steps_2026_11_17(): array {
 		'2026-11-17-hover'      => 'trail tile hover image replaced where the seed has a new one (tile_image_hover_ref_prev) · only while the field is still the attachment the importer made from the old image',
 		// fb-1117 (BACKLOG #39 · D57): Zone 1–3 pages show a grid of objects (numbered fields sh_zone_tile_<n>_* of the zone term).
 		'2026-11-17-zone-grid'  => 'Zone 1–3 object grid: sh_zone_tile_<n>_object / _image / _image_hover filled from zones-2026-11-17.json only where empty (an admin value stays: kept_admin) · tile images = the attachments the objects already have',
+		// fb-1117 (BACKLOG #36 · D58): belt buckle title as in Figma, every character.
+		'2026-11-17-belt-title' => 'object pending-3 title (+ title_raw): "Pending (Traditional Belt Buckle)" → "Pending (traditional belt buckle)" only while the site still has the value the importer wrote (slug unchanged · an admin edit stays: kept_admin)',
 	);
 }
 
@@ -705,6 +707,59 @@ function sh_import_refresh_zone_grid_1117( array $seed ): void {
 	}
 }
 
+/** Belt buckle (pending-3 · D58): the title the earlier import wrote (the new one comes from the seed). */
+const SH_IMPORT_BELT_1117 = array(
+	'slug' => 'pending-3',
+	'old'  => 'Pending (Traditional Belt Buckle)',
+);
+
+/**
+ * Step 2026-11-17-belt-title (fb-1117 · D58): post_title of object pending-3 (and sh_title_raw when it is the old title)
+ * becomes the seed's Figma title only while the site still holds exactly what the earlier import wrote; any other value
+ * (an admin edited it) stays and is listed in kept_admin. The slug (live URL) is never touched. An object not on the
+ * site is skipped.
+ *
+ * @param array<string, mixed> $seed Seed files.
+ */
+function sh_import_refresh_belt_title_1117( array $seed ): void {
+	$slug = SH_IMPORT_BELT_1117['slug'];
+	$old  = SH_IMPORT_BELT_1117['old'];
+	$post = null;
+	$id   = sh_imp_find_post( 'object', 'object:' . $slug );
+	if ( $id ) {
+		$post = get_post( $id );
+	}
+	$seed_o = null;
+	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		if ( $slug === (string) $o['slug'] ) {
+			$seed_o = $o;
+		}
+	}
+	if ( ! $post instanceof WP_Post || ! is_array( $seed_o ) ) {
+		return;
+	}
+	$text  = sh_import_object_text_2026_11( $seed_o );
+	$new   = $text['post_title'];
+	if ( '' === $new || sh_imp_same_text( $post->post_title, $new, null ) ) {
+		return; // Fresh import / already the Figma title.
+	}
+	if ( ! sh_imp_same_text( $post->post_title, $old, null ) ) {
+		sh_imp_keep( "object:$slug post_title (site \"" . $post->post_title . '" · seed "' . $new . '")' );
+		return;
+	}
+	wp_update_post(
+		array(
+			'ID'         => $post->ID,
+			'post_title' => wp_slash( $new ),
+		)
+	);
+	$raw = (string) get_post_meta( $post->ID, 'sh_title_raw', true );
+	if ( '' === $raw || sh_imp_same_text( $raw, $old, null ) ) {
+		update_post_meta( $post->ID, 'sh_title_raw', wp_slash( $text['sh_title_raw'] ) );
+	}
+	sh_imp_count( 'updated', 'belt_title' );
+}
+
 /**
  * Run one step of this file. Returns true when done (false = a file was missing: run again on the next import).
  *
@@ -746,6 +801,9 @@ function sh_import_refresh_2026_11_17( string $step, array $seed, array $map, ar
 			break;
 		case '2026-11-17-zone-grid':
 			sh_import_refresh_zone_grid_1117( $seed );
+			break;
+		case '2026-11-17-belt-title':
+			sh_import_refresh_belt_title_1117( $seed );
 			break;
 	}
 	return count( sh_imp_state()['warnings'] ) === $before;
