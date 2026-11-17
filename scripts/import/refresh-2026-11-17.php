@@ -662,8 +662,9 @@ function sh_import_zone_tile_attachment( string $ref, string $title, array $spec
 /**
  * Step 2026-11-17-zone-grid (fb-1117 · D57): the Zone 1–3 pages show a grid of objects — slot n of zone term zone-<k> =
  * sh_zone_tile_<n>_object / _image / _image_hover (CONTENT-MODEL §5b) from seed zones-2026-11-17.json. Add only what is
- * missing, never overwrite: an empty field is filled; a field with another value (an admin changed it) stays and is
- * listed in kept_admin (one line per slot and field). Images = the attachments the objects' own tiles already have
+ * missing, never overwrite: an empty field is filled; a field with another value (an admin changed it) stays, the rest
+ * of that slot is left alone too (a picture beside his object would not match), and it is listed in kept_admin (one line
+ * per field). Images = the attachments the objects' own tiles already have
  * (found by import key — no second upload); only a picture no object has (zone 1 slot 8, Buffalo 6) is created from the
  * bundle. A slot whose tile image has no file keeps an empty image (the object's own tile shows). A zone term not on
  * the site is skipped (nothing is created here); an object not on the site leaves that slot a picture without a link.
@@ -684,15 +685,25 @@ function sh_import_refresh_zone_grid_1117( array $seed ): void {
 				"sh_zone_tile_{$slot}_image"       => array( 0, array( $t['tile_ref'], sh_import_spec_tile(), "$title zone tile" ) ),
 				"sh_zone_tile_{$slot}_image_hover" => array( 0, '' !== $t['hover_ref'] ? array( $t['hover_ref'], sh_import_spec_tile_hover(), "$title zone tile hover" ) : null ),
 			);
+			// A slot an admin changed stays whole (a picture filled next to his object would not match): when any field holds
+			// another value than the seed's → nothing of the slot is written · one kept_admin line per such field.
+			$expect_of = static fn( array $w ): int => $w[0] ? (int) $w[0] : ( is_array( $w[1] ) ? sh_import_zone_tile_find( $w[1][0] ) : 0 );
+			$admin     = false;
+			foreach ( $want as $key => $w ) {
+				$cur    = absint( get_term_meta( $term->term_id, $key, true ) );
+				$expect = $cur ? $expect_of( $w ) : 0;
+				if ( $cur && $expect && $expect !== $cur ) {
+					sh_imp_keep( "zone:$zn $key (admin value $cur · seed $expect · slot kept)" );
+					$admin = true;
+				}
+			}
+			if ( $admin ) {
+				continue;
+			}
 			$write = array();
 			foreach ( $want as $key => $w ) {
-				$cur = absint( get_term_meta( $term->term_id, $key, true ) );
-				if ( $cur ) {
-					$expect = $w[0] ? (int) $w[0] : ( is_array( $w[1] ) ? sh_import_zone_tile_find( $w[1][0] ) : 0 );
-					if ( $expect && $expect !== $cur ) {
-						sh_imp_keep( "zone:$zn $key (admin value $cur · seed $expect)" );
-					}
-					continue;
+				if ( absint( get_term_meta( $term->term_id, $key, true ) ) ) {
+					continue; // Already the seed's value.
 				}
 				$val = $w[0] ? (int) $w[0] : ( is_array( $w[1] ) ? sh_import_zone_tile_attachment( $w[1][0], $w[1][2], $w[1][1] ) : 0 );
 				if ( $val ) {
