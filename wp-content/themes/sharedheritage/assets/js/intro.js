@@ -1,7 +1,7 @@
 /**
  * Introduction page (DESIGN-SPEC §9.4 E · D50): one page, four chapters switched in place.
  * - Buttons 1–4 and ‹ › show one chapter (map + content) and hide the others; header / heading / buttons stay.
- * - URL hash #1–#4 = chapter (open with a hash · browser back/forward switch chapters) · no or bad hash = chapter 1.
+ * - URL hash #1–#4 (or #chapter-1…4) = chapter (open with a hash · browser back/forward switch chapters) · no or bad hash = chapter 1.
  * - Animated images (data-sh-anim) load only once their chapter is shown and near the viewport; not at all with
  *   prefers-reduced-motion (the still stays).
  * - Without JS every chapter is visible one after another (the page is not broken).
@@ -32,7 +32,7 @@
 	var observer = null;
 
 	function fromHash() {
-		var n = parseInt( window.location.hash.replace( '#', '' ), 10 );
+		var n = parseInt( window.location.hash.replace( /^#(chapter-)?/, '' ), 10 ); // #3 or #chapter-3 (the no-JS link)
 		return n >= 1 && n <= count ? n : 1;
 	}
 

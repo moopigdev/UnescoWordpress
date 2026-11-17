@@ -39,7 +39,7 @@ $sh_map_ui   = isset( $sh_head['layout']['map_ui'] ) && is_array( $sh_head['layo
 	<?php endif; ?>
 	<?php if ( $sh_chapters ) : ?>
 		<?php // Show only the chapter of the URL hash from the first paint (intro.js removes these classes once it runs; without JS all chapters stay visible). ?>
-		<script>(function(){var n=parseInt(location.hash.slice(1),10),c=<?php echo (int) count( $sh_chapters ); ?>,d=document.documentElement;n=n>=1&&n<=c?n:1;d.classList.add('sh-intro-js','sh-intro-c'+n);}());</script>
+		<script>(function(){var n=parseInt(location.hash.replace(/^#(chapter-)?/,''),10),c=<?php echo (int) count( $sh_chapters ); ?>,d=document.documentElement;n=n>=1&&n<=c?n:1;d.classList.add('sh-intro-js','sh-intro-c'+n);}());</script>
 	<?php endif; ?>
 	<div class="sh-intro__stage" data-sh-stage>
 		<?php
