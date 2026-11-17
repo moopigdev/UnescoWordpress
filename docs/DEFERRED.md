@@ -331,3 +331,7 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - 2026-11-17 [wp-dev fb-1117 B2] ลิงก์ช่องกริด zone ต่อ `?from=zone-<n>` (ให้ Back fallback กลับ zone · history back ยังเป็นหลัก) → URL ซ้ำพารามิเตอร์ (canonical ของ WP ชี้ permalink เดิม) · ถ้าไม่ต้องการ query ให้ตัด `?from` แล้วพึ่ง history อย่างเดียว
 - 2026-11-17 [wp-dev fb-1117 B2] refresh `2026-11-17-belt-title` แก้เฉพาะหัวข้อ `pending-3` · geometry ใหม่ของ frame belt (คอลัมน์ข้อความ 745 · Back y) อยู่ใน seed เฉพาะ fresh import — prod เดิมยังใช้ `sh_layout` เดิม (ไม่ refresh layout ตามกฎ "ไม่ทับ")
 - 2026-11-17 [wp-dev fb-1117 B2] เทียบภาพ zone 2: frame ที่นักออกแบบแก้ (`3117:3713`) ไม่มี render ใน `design/frames` → เทียบกับ frame 1473 (ยังมีแถวซ้ำ) ได้เฉพาะช่อง 1–34 (diff 0.56/255) · ช่อง 35–42 ตามตำแหน่ง seed (frame แก้แล้ว) ยังไม่ได้เทียบสายตา
+- 2026-11-17 [reviewer fb-1117 r1] refresh-2026-11-17.php:690 step zone-grid: ถ้า admin มีค่าแต่ importer หา object/attachment ของ seed บนเว็บไม่เจอ → ไม่นับเป็นช่องที่ admin แก้ → เติมฟิลด์ว่างอื่นของช่องนั้น (ไม่ทับค่า)
+- 2026-11-17 [reviewer fb-1117 r1] template-parts/zone/tile.php:35 ช่องไม่ลิงก์ (zone 1 ช่อง 8 sumatran-serow) alt="" → ควร fallback alt ของ attachment/ชื่อวัตถุ
+- 2026-11-17 [reviewer fb-1117 r1] scripts/import/media.php:147 eXIf drop ใช้กับทุก PNG ที่ import ต่อจากนี้ (สมมติพิกเซลตั้งตรงแล้ว) · แก้จริง = design-dev re-export crop croc
+- 2026-11-17 [reviewer fb-1117 r1] ยังไม่มีหลักฐานบังคับรันซ้ำ (SH_IMPORT_REFRESH) ของ step makara-side / zone-grid / belt-title
