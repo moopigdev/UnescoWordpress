@@ -64,6 +64,12 @@ scripts/deploy.sh [staging|production] [--dry-run] [--discover] [--no-import | -
 - `2026-11-11-media-replace` ไฟล์ใน `media/out` ที่เปลี่ยนแต่ชื่อเดิม (`walking.webm` v2 · BACKLOG #5): attachment ที่ import สร้าง (key `media:walking.webm`) ถ้า sha256 ของไฟล์บน site = ไฟล์รุ่นเก่า (`legacy-values.json` `media`) → **เขียนทับไฟล์เดิม** (id/URL เดิม) + อัปเดต `_wp_attachment_metadata` (filesize · length · width/height) · admin เปลี่ยนไฟล์แล้ว = ไม่ทับ · poster ไม่เปลี่ยน · ⚠ URL เดิม → หลัง deploy ต้อง purge LiteSpeed (ขั้น 5 ทำอยู่แล้ว) · browser ที่ cache ไฟล์เก่าอาจเห็นของเก่าจนหมดอายุ (DEFERRED)
 ลำดับ (orchestrator · หลังหน้า theme ของรอบนี้ merge แล้ว): `deploy.sh staging` (หรือ `production --no-import` ส่งโค้ด) → `deploy.sh production --refresh-only --dry-run` → `--refresh-only` · คาด `runs[-1].refresh` = 5 step (zone5 ซ้ำได้จนมี seed) · `warnings` [] · รันซ้ำ = แก้ 0
 
+## รอบ 2026-11-18 (elephanttext-1118 · D61) — refresh step `2026-11-18-elephant-text` (`scripts/import/refresh-2026-11-18.php`)
+- วัตถุช้าง 15: `post_title` · `sh_title_raw` · `sh_caption` → ข้อความ Figma ใหม่ **เฉพาะเมื่อค่าบน site ยังเป็นของ importer** (`title_prev` · `title_raw_prev` · `caption_prev` ใน seed + ค่าใน `legacy-values.json`) · `sh_title_raw` เทียบหลังยุบช่องว่าง/ขึ้นบรรทัดเป็นช่องว่างเดียว (Pod Duang ที่ทีมแก้ 2026-10-28 ยังนับเป็นของ importer · P-401) · caption ว่างของ Bas-relief = เติม (P-403) · ค่าที่เท่าของใหม่อยู่แล้ว = ไม่แตะ · admin แก้ = ไม่ทับ (`kept_admin`) · `sh_title_raw` ไม่ถูกเขียนถ้า title ถูก admin แก้ · slug/URL ไม่เปลี่ยน · ไม่สร้าง/ไม่ลบ
+- การ์ด timeline `post_title` (items[].title_prev: card 7 "Elephant and mahout kendi" · card 8 "Patola cloth") ตามกติกาเดียวกัน
+- ⚠ prod ณ cf3b01a **หน้า detail แสดงข้อความ Figma ใหม่อยู่แล้ว** (importer รอบ D40 อ่าน `figma_2026_11` · ตรวจ 2026-11-18 ด้วย GET หน้าสาธารณะ 15 ชิ้น) → คาด `runs[-1].updated` = `timeline_card_title: 2` เท่านั้น · `refresh` = `["2026-11-18-elephant-text"]` · warnings [] · รันซ้ำ = แก้ 0
+- ลำดับ: `deploy.sh production --refresh-only --dry-run` → `--refresh-only` (ไม่ต้องส่งไฟล์ภาพเพิ่ม · ไม่มี theme เปลี่ยน)
+
 ## ขั้นตอน staging (orchestrator)
 1. เจ้าของเปิด SSH + เพิ่ม public key (O-6) → `scripts/deploy.sh staging --discover` → ยืนยัน path ที่ siteurl = `https://staging.sharedheritage.net` → `cp scripts/deploy/hosts.env.example scripts/deploy/hosts.env` แล้วใส่ `SH_STAGING_WP_PATH` (+ `SH_PRODUCTION_WP_PATH` ถ้าเห็นในผล discover)
 2. `scripts/deploy.sh staging --dry-run` → อ่านแผน → `scripts/deploy.sh staging`
