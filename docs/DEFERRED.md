@@ -280,3 +280,7 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - 2026-11-17 [trails-1117] Back ของหน้า detail ต่างจาก Figma +0–42px (96 จาก 101 ชิ้น ≤ 19px) (วัดทุก detail generic · Figma `text_col` สูงกว่า/ต่ำกว่าข้อความจริง: Komet wrap + hyphens D43 ต่างจากข้อความ Figma) — ปุ่ม Back ยังอยู่ใต้คอลัมน์ล่างสุดตามกฎ (ไม่ทับ) · ไม่แก้ (ต้องเลื่อนตามเนื้อหาจริง)
 - 2026-11-17 [trails-1117] hero วิดีโอ detail ของ 16 trail มีพื้นหลังในไฟล์ (ไม่ alpha) สีอาจต่างจากพื้นขาว 1–2 ระดับ (เห็นขอบกรอบ hero เช่น Statue of Shiva) — ตามไฟล์ที่ media ส่งมา · ถ้าจะกลืน: ปรับที่ไฟล์/พื้น hero ต่อชิ้น
 - 2026-11-17 [trails-1117] detail ช้าง 2 ชิ้นที่อยู่หลาย trail (wooden-cold-press… · embossed-brass-basin…) ใช้ hero/ภาพช่องของ trail ช้างเท่านั้น (hero_video_by_trail ไม่ import ตาม core) — Back fallback = trail หลัก (ช้าง) · ตอนมาจากหน้า trail อื่นปุ่ม Back ใช้ history.back (base.js) กลับ trail ที่มาถูกต้องอยู่แล้ว
+- 2026-11-17 [reviewer core-1117] refresh เพิ่มเมนู About ด้วย `menu-item-position = count+1` → ถ้า menu_order มีช่องว่างอาจชนกับรายการเดิม (ทดสอบได้ 5 = Main Page) · ใช้ max(menu_order)+1 ปลอดภัยกว่า (บันทึกเมนูใน admin เรียงใหม่ได้)
+- 2026-11-17 [reviewer core-1117] host ไม่มี GD → `web-image.php` คัดลอกเฉย ๆ ไม่ครอป (โลโก้ header · หลังการ์ด ไม่ครอป) → ตรวจ GD บน Hostinger ก่อน deploy
+- 2026-11-17 [reviewer core-1117] cover trail PNG 2240×980 4–5MB ×17 (อยู่ในกฎ 2× แต่หนัก) → JPEG/WebP
+- 2026-11-17 [reviewer core-1117] header มือถือสูงคงที่ 150 (เดิม 128 ที่ 390) — เรื่องรสนิยม ไม่ผิด B1b
