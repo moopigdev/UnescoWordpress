@@ -858,7 +858,12 @@ function sh_import_refresh_drum_split_1117( array $seed, array $map, array $mani
 	}
 	if ( has_term( $term->term_id, 'trail', $old_id ) ) {
 		$slugs = wp_get_object_terms( $old_id, 'trail', array( 'fields' => 'slugs' ) );
-		if ( is_array( $slugs ) && ! array_diff( $slugs, $c['was_trails'] ) ) {
+		$want  = $c['was_trails'];
+		sort( $want );
+		if ( is_array( $slugs ) ) {
+			sort( $slugs );
+		}
+		if ( is_array( $slugs ) && $slugs === $want ) { // exactly the trails the import gave it (any other set = an admin changed it).
 			wp_remove_object_terms( $old_id, (int) $term->term_id, 'trail' );
 			sh_imp_count( 'updated', 'object_trail_term_removed' );
 		} else {
