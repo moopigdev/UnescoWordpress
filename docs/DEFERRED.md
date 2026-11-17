@@ -277,3 +277,7 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - 2026-11-17 [core-1117] header มือถือ: Header #1 สูง 86 ทุกขนาด (เดิมแถบโลโก้ย่อตามจอ → 390 รวม 128 · ตอนนี้ 150) — เมนู < 1024 เป็นปุ่ม Menu (6 รายการกว้าง 843 ไม่พอแถวเดียว · §9.1) · ถ้าต้องการ header มือถือเตี้ยลง แก้ `--sh-header-top-height` ใน media query ได้ที่เดียว
 - 2026-11-17 [core-1117] ภาพตกแต่ง Intro (P-273 markers/scroll indicator/continue-down/section scroll) import เป็น attachment และอยู่ใน `sh_intro_head_layout.header.decor.*.image_ref` / block `kind: decor` (หน้าเลือกแสดงตาม P-273) · `hero_video_by_trail` (WebM ของ trail รอง 8 ชื่อ) ไม่ import ตาม seed/P-306(6)
 - 2026-11-17 [core-1117] การ์ดสัตว์ `card_color` / `expanded_block_h` / `tile_group` (geometry/สีที่ฝังในภาพ) ไม่เป็นฟิลด์ — หน้า home ใช้ค่าคงที่/วัดจริง (สีอยู่ในภาพการ์ด)
+- 2026-11-17 [reviewer core-1117] refresh เพิ่มเมนู About ด้วย `menu-item-position = count+1` → ถ้า menu_order มีช่องว่างอาจชนกับรายการเดิม (ทดสอบได้ 5 = Main Page) · ใช้ max(menu_order)+1 ปลอดภัยกว่า (บันทึกเมนูใน admin เรียงใหม่ได้)
+- 2026-11-17 [reviewer core-1117] host ไม่มี GD → `web-image.php` คัดลอกเฉย ๆ ไม่ครอป (โลโก้ header · หลังการ์ด ไม่ครอป) → ตรวจ GD บน Hostinger ก่อน deploy
+- 2026-11-17 [reviewer core-1117] cover trail PNG 2240×980 4–5MB ×17 (อยู่ในกฎ 2× แต่หนัก) → JPEG/WebP
+- 2026-11-17 [reviewer core-1117] header มือถือสูงคงที่ 150 (เดิม 128 ที่ 390) — เรื่องรสนิยม ไม่ผิด B1b
