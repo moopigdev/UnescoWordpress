@@ -1,11 +1,13 @@
 /*
- * Home (front-page.php) — Figma "Desktop - 1470" 670:1152 · DESIGN-SPEC §4.1 · tokens only (--sh-*).
- * Desktop 1440 geometry (container 1120 at x=160): hero 150–616 · intro 616–1168 · zones 1198–1751 ·
- * trails 1766–2543 · zone 4/5 2575–2935 · frame ends 3222. Tablet/mobile = responsive (D5, no frame).
+ * Home (front-page.php) — Figma "Desktop - 1634" 3339:5227 · DESIGN-SPEC §9.2 · tokens only (--sh-*).
+ * Desktop 1440 geometry (container 1120 at x=160): hero 150–616 · intro 616–980 · zone bar 1030–1196 ·
+ * zones 1246–1799 · animal guide 1849–2289 (440 → 585 → 1087–1409) · trails 2339–3116 · zone 4/5 3156–3516 ·
+ * footer 3556 (40 = --sh-footer-gap-top in base.css). Gaps between sections = 50 (40 above the footer / zone 4/5).
+ * Tablet/mobile = responsive (D5, no frame).
  */
 
 .sh-home {
-	padding-bottom: 60px; /* mobile/tablet: breathing room; desktop restores the Figma tail below */
+	--sh-home-gap: var(--sh-space-40); /* section gap: 50 on desktop, 40 below 1024 */
 }
 
 /* ---- 1 · Hero cover [160,150 1120×466] ---- */
@@ -44,7 +46,7 @@
 	--sh-crop-h: 1.0943367;
 }
 
-/* ---- 2 · Introduction (padding 40/40 · gap 22) ---- */
+/* ---- 2 · Introduction (padding 40/40 → section 364 tall) ---- */
 .sh-home-intro {
 	padding-block: var(--sh-space-40);
 }
@@ -88,8 +90,9 @@
 	font: var(--sh-type-read-more-home); /* strut = 22px so the row is 22 tall */
 }
 
+/* ---- 3 · Zone bar [160,1030 1120×166] (own section, 50 under Introduction) ---- */
 .sh-home-zonebar {
-	margin-top: var(--sh-space-22);
+	margin-top: var(--sh-home-gap);
 }
 
 .sh-home-zonebar__box {
@@ -110,7 +113,7 @@
 }
 
 .sh-home-zones--main {
-	margin-top: 30px; /* 1168 → 1198 */
+	margin-top: var(--sh-home-gap); /* 1196 → 1246 */
 }
 
 .sh-home-zones--main .sh-home-zones__row {
@@ -118,7 +121,7 @@
 }
 
 .sh-home-zones--extra {
-	margin-top: 32px; /* trails frame gap */
+	margin-top: var(--sh-space-40); /* AAMM 3116 → 3156 (and 40 more to the footer: base.css) */
 }
 
 .sh-home-zones--extra .sh-home-zones__row {
@@ -190,9 +193,9 @@
 
 /* ---- 5 · Trails ---- */
 .sh-home-trails {
-	/* D46: Zone 123 bottom → Trails title. Figma 3117:3607: Zone 123 ends y -118, Frame All trails starts y 2 = 120.
-	   Tablet/phone have no frame (D5): scaled down, 80 / 60. */
-	margin-top: 60px;
+	/* §9.2 row 6: the animal guide (1849–2289) sits between Zone 123 and Trails → guide 2289 → Trails 2339 = 50
+	   (D46's 120 applied to the layout without the guide). */
+	margin-top: var(--sh-home-gap);
 }
 
 .sh-home-trails__text {
@@ -358,12 +361,8 @@
 
 /* ---- Desktop ---- */
 @media (min-width: 1024px) {
-	.sh-home-trails {
-		margin-top: 120px;
-	}
-
 	.sh-home {
-		padding-bottom: 287px; /* 2935 → 3222 (frame tail, P-211: no footer in Figma) */
+		--sh-home-gap: var(--sh-space-50);
 	}
 }
 
@@ -377,10 +376,6 @@
 /* ---- Tablet: icons wrap, 4 per row. The icon grid is taller than the video here, so the stage shows the
    video first and swaps to the icons (no empty overlay area). ---- */
 @media (max-width: 1023px) {
-	.sh-home-trails {
-		margin-top: 80px;
-	}
-
 	.sh-home-trails__stage.is-armed:not(.is-revealed) .sh-home-trails__icons {
 		display: none;
 	}
@@ -406,10 +401,6 @@
 
 /* ---- Mobile ---- */
 @media (max-width: 767px) {
-	.sh-home-trails {
-		margin-top: 60px;
-	}
-
 	.sh-home-intro {
 		padding-block: var(--sh-space-25);
 	}
@@ -458,3 +449,4 @@
 		transition: none;
 	}
 }
+

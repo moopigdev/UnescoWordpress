@@ -1,7 +1,7 @@
 <?php
 /**
- * Home section 2 — Introduction (Frame 12685 670:9368 [160,616 1120×552]): image card + text, then the zone bar image.
- * Fields: sh_home_intro_* · sh_home_zone_bar_image (CONTENT-MODEL §6).
+ * Home section 2 — Introduction (Frame 12685 [160,616 1120×364] · DESIGN-SPEC §9.2 row 2): image card + text.
+ * The zone bar moved to its own section (zonebar.php). Fields: sh_home_intro_* (CONTENT-MODEL §6).
  *
  * @package sharedheritage
  */
@@ -22,14 +22,6 @@ $sh_card = sh_home_img(
 		'alt_fallback' => $sh_title,
 		'class'        => 'sh-home-intro__img',
 		'sizes'        => '(min-width: 1168px) 551px, (min-width: 768px) 50vw, calc(100vw - 48px)',
-	)
-);
-$sh_bar  = sh_home_img(
-	(int) sh_get( 'sh_home_zone_bar_image', $sh_pid ),
-	array(
-		'alt_fallback' => __( 'Zones 1 to 5', 'sharedheritage' ),
-		'class'        => 'sh-home-zonebar__img',
-		'sizes'        => '(min-width: 1168px) 1120px, 100vw',
 	)
 );
 ?>
@@ -62,14 +54,6 @@ $sh_bar  = sh_home_img(
 				);
 			}
 			?>
-		</div>
-	</div>
-
-	<div id="sh-home-zonebar" class="sh-home-zonebar">
-		<div class="sh-home-zonebar__scroll">
-			<div class="sh-home-zonebar__box">
-				<?php echo sh_home_kses( $sh_bar ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in sh_home_img() + kses. ?>
-			</div>
 		</div>
 	</div>
 </section>
