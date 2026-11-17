@@ -298,6 +298,41 @@ if ( ! defined( 'SH_ZONE_GRID_SLOTS' ) ) {
 	define( 'SH_ZONE_GRID_SLOTS', 90 );
 }
 
+// Trail version slots of an object (mu-plugin inc/fields.php); defined here too for the CLI bundle list (no WordPress).
+if ( ! defined( 'SH_VARIANT_SLOTS' ) ) {
+	define( 'SH_VARIANT_SLOTS', 4 );
+}
+
+/**
+ * Trail versions of a seed object (D59 · multitrail-1117): the objects.json `variants_by_trail` entries that are NOT the
+ * main trail's (is_primary false — the main trail's look is the object's own fields) with the Figma record of their
+ * frame (figma[].frame_id = variant.figma_frame · its style = the version's layout). Ordered like the object's `trails`,
+ * at most SH_VARIANT_SLOTS. [trail slug => {variant, frame}] — an entry whose frame is not in figma[] is left out.
+ *
+ * @param array<string, mixed> $o Seed object.
+ * @return array<string, array{variant:array<string,mixed>,frame:array<string,mixed>}>
+ */
+function sh_import_object_variants( array $o ): array {
+	$out = array();
+	$vb  = isset( $o['variants_by_trail'] ) && is_array( $o['variants_by_trail'] ) ? $o['variants_by_trail'] : array();
+	foreach ( (array) ( isset( $o['trails'] ) ? $o['trails'] : array() ) as $t ) {
+		$t = (string) $t;
+		if ( ! isset( $vb[ $t ] ) || ! is_array( $vb[ $t ] ) || ! empty( $vb[ $t ]['is_primary'] ) || count( $out ) >= SH_VARIANT_SLOTS ) {
+			continue;
+		}
+		foreach ( (array) ( isset( $o['figma'] ) ? $o['figma'] : array() ) as $f ) {
+			if ( is_array( $f ) && isset( $f['frame_id'], $f['style'] ) && (string) $f['frame_id'] === (string) ( isset( $vb[ $t ]['figma_frame'] ) ? $vb[ $t ]['figma_frame'] : '' ) ) {
+				$out[ $t ] = array(
+					'variant' => $vb[ $t ],
+					'frame'   => $f,
+				);
+				break;
+			}
+		}
+	}
+	return $out;
+}
+
 /**
  * Hover swaps of the seed (hover-1117): previous ref (no extension) => new ref (no extension) — the designer fixed the
  * names inside a hover image, the zone grid of the same Figma still carries the previous one (fb-1117).
@@ -348,7 +383,7 @@ function sh_import_zone_tile_file( string $ref, string $dir ): string {
  * mapped to the new one). Evidence rows without a tile_ref are skipped.
  *
  * @param array<string, mixed> $seed Seed files (zones-2026-11-17 · objects).
- * @return array<int, array<int, array{object_slug:string|null,tile_ref:string,hover_ref:string}>>
+ * @return array<int, array<int, array{object_slug:string|null,tile_ref:string,hover_ref:string,trail:string|null}>>
  */
 function sh_import_zone_grid_tiles( array $seed ): array {
 	$out  = array();
@@ -369,6 +404,7 @@ function sh_import_zone_grid_tiles( array $seed ): array {
 				'object_slug' => ! empty( $t['object_slug'] ) && is_string( $t['object_slug'] ) ? $t['object_slug'] : null,
 				'tile_ref'    => $tile,
 				'hover_ref'   => isset( $prev[ $hover ] ) ? $prev[ $hover ] : $hover,
+				'trail'       => ! empty( $t['trail'] ) && is_string( $t['trail'] ) ? $t['trail'] : null, // D59: the trail the tile belongs to.
 			);
 		}
 	}
@@ -391,10 +427,15 @@ function sh_import_1117_asset_values( array $seed ): array {
 		}
 	};
 	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		$slug = (string) $o['slug'];
+		foreach ( sh_import_object_variants( $o ) as $vt => $ver ) { // D59: side images (crops) of the trail versions.
+			foreach ( sh_import_style_refs( (array) $ver['frame']['style'] ) as $ref ) {
+				$add( "object $slug version $vt " . implode( '.', $ref[0] ), $ref[1], SH_IMPORT_OBJECTS_1117, sh_import_spec_as_is() );
+			}
+		}
 		if ( ! sh_import_object_generic( $o ) && empty( $o['tiles_by_trail'] ) ) {
 			continue; // Elephant records without other trails: image-map (refs.php) as before.
 		}
-		$slug = (string) $o['slug'];
 		if ( sh_import_object_generic( $o ) ) {
 			$add( "object $slug tile", isset( $o['tile_image_ref'] ) ? $o['tile_image_ref'] : null, SH_IMPORT_OBJECTS_1117, sh_import_spec_tile() );
 			$add( "object $slug tile hover", isset( $o['tile_image_hover_ref'] ) ? $o['tile_image_hover_ref'] : null, SH_IMPORT_OBJECTS_1117, sh_import_spec_tile_hover() );

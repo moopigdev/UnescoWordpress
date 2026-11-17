@@ -211,21 +211,142 @@ function sh_object_extra_images( int $post_id ): array {
  * Hero media of an object as URLs ('' when missing).
  *
  * @param int $post_id Object id.
+ * @param int $variant Trail version slot (sh_variant_<n>_hero_*, D59) · 0 = the object's own hero. A version has no still image.
  * @return array{webm:string,hevc:string,poster:string,image_id:int,has_alpha:bool}
  */
-function sh_object_hero( int $post_id ): array {
+function sh_object_hero( int $post_id, int $variant = 0 ): array {
+	$p   = $variant > 0 ? "sh_variant_{$variant}_hero_" : 'sh_hero_';
 	$url = static function ( string $key ) use ( $post_id ): string {
 		$id = absint( get_post_meta( $post_id, $key, true ) );
 		$u  = $id ? wp_get_attachment_url( $id ) : false;
 		return is_string( $u ) ? $u : '';
 	};
 	return array(
-		'webm'      => $url( 'sh_hero_video_webm' ),
-		'hevc'      => $url( 'sh_hero_video_hevc' ),
-		'poster'    => $url( 'sh_hero_poster' ),
-		'image_id'  => absint( get_post_meta( $post_id, 'sh_hero_image', true ) ),
-		'has_alpha' => (bool) get_post_meta( $post_id, 'sh_hero_video_has_alpha', true ),
+		'webm'      => $url( $p . 'video_webm' ),
+		'hevc'      => $url( $p . 'video_hevc' ),
+		'poster'    => $url( $p . 'poster' ),
+		'image_id'  => $variant > 0 ? 0 : absint( get_post_meta( $post_id, 'sh_hero_image', true ) ),
+		'has_alpha' => (bool) get_post_meta( $post_id, $p . 'video_has_alpha', true ),
 	);
+}
+
+/**
+ * Trail versions of an object (D59): slot n => trail term id, for every slot that has a trail
+ * (meta sh_variant_<n>_trail · CONTENT-MODEL §2b). The main trail's look is the object's own fields (no slot).
+ *
+ * @param int $post_id Object id.
+ * @return array<int, int>
+ */
+function sh_object_variant_slots( int $post_id ): array {
+	$out = array();
+	for ( $n = 1; $n <= SH_VARIANT_SLOTS; $n++ ) {
+		$term_id = absint( get_post_meta( $post_id, "sh_variant_{$n}_trail", true ) );
+		if ( $term_id && ! in_array( $term_id, $out, true ) ) {
+			$out[ $n ] = $term_id;
+		}
+	}
+	return $out;
+}
+
+/**
+ * Trail version of an object for the trail the visitor came from (D59): null = show the object as it is (main trail ·
+ * unknown/forged trail · trail the object is not in · trail without a version). The look is the object's own fields
+ * overridden field by field — a version field that is empty keeps the object's value, except the info rows (any filled
+ * = only the filled rows).
+ *
+ * @param int    $post_id    Object id.
+ * @param string $trail_slug Trail slug asked for (untrusted: sanitized and checked against the object's trails).
+ * @return array{slot:int,trail:WP_Term,hero:array{webm:string,hevc:string,poster:string,image_id:int,has_alpha:bool},layout:array<string,mixed>,colors:array<string,string>,images:array<int,int>,title:string,caption:string,info:array<string,string>}|null
+ */
+function sh_object_variant( int $post_id, string $trail_slug ): ?array {
+	$trail_slug = sanitize_key( $trail_slug );
+	if ( '' === $trail_slug || ! $post_id ) {
+		return null;
+	}
+	$term = get_term_by( 'slug', $trail_slug, 'trail' );
+	if ( ! $term instanceof WP_Term || ! has_term( $term->term_id, 'trail', $post_id ) ) {
+		return null;
+	}
+	$slot = array_search( (int) $term->term_id, sh_object_variant_slots( $post_id ), true );
+	if ( false === $slot ) {
+		return null;
+	}
+	$n    = (int) $slot;
+	$meta = static fn( string $key ): string => trim( (string) get_post_meta( $post_id, "sh_variant_{$n}_{$key}", true ) );
+
+	$hero = sh_object_hero( $post_id, $n );
+	if ( '' === $hero['webm'] && '' === $hero['hevc'] ) {
+		$hero = sh_object_hero( $post_id ); // No video in this version: the object's own hero.
+	}
+	$colors = array();
+	foreach ( array( 'panel_bg', 'title_color', 'text_color', 'meta_color', 'collection_color' ) as $key ) {
+		$hex = sanitize_hex_color( $meta( $key ) );
+		if ( is_string( $hex ) && '' !== $hex ) {
+			$colors[ 'sh_' . $key ] = $hex;
+		}
+	}
+	$images = array();
+	for ( $k = 1; $k <= 2; $k++ ) {
+		$id = absint( get_post_meta( $post_id, "sh_variant_{$n}_image_{$k}", true ) );
+		if ( $id ) {
+			$images[ $k ] = $id;
+		}
+	}
+	$info = array();
+	foreach ( array_keys( sh_core_variant_info_keys() ) as $key ) {
+		if ( '' !== $meta( $key ) ) {
+			$info[ $key ] = $meta( $key );
+		}
+	}
+	return array(
+		'slot'    => $n,
+		'trail'   => $term,
+		'hero'    => $hero,
+		'layout'  => sh_json_value( get_post_meta( $post_id, "sh_variant_{$n}_layout", true ) ),
+		'colors'  => $colors,
+		'images'  => $images,
+		'title'   => $meta( 'title' ),
+		'caption' => $meta( 'caption' ),
+		'info'    => $info,
+	);
+}
+
+/**
+ * Value of one info row (sh_<key>: period · place_of_production · material · dimensions · local_name · collection ·
+ * object_biography · scientific_name) as the detail page shows it: the object's own value, or — when the trail version
+ * (sh_object_variant()) has any info row filled — only the version's rows ('' for the others).
+ *
+ * @param int                       $post_id Object id.
+ * @param string                    $key     Info key without the sh_ prefix.
+ * @param array<string, mixed>|null $variant Result of sh_object_variant() or null.
+ */
+function sh_object_info_value( int $post_id, string $key, ?array $variant = null ): string {
+	if ( is_array( $variant ) && ! empty( $variant['info'] ) && is_array( $variant['info'] ) ) {
+		return isset( $variant['info'][ $key ] ) ? (string) $variant['info'][ $key ] : '';
+	}
+	return trim( (string) get_post_meta( $post_id, 'sh_' . $key, true ) );
+}
+
+/**
+ * Link to an object as shown from a trail: the permalink, plus ?sh_trail=<slug> when the object has a trail version for
+ * that trail (D59) — the detail page then opens in that trail's look. Without a version (single-trail object · the
+ * object's main trail · empty trail) the plain permalink. The query name is not "trail" — that is WordPress's own
+ * taxonomy query var (a forged value would 404 the page).
+ *
+ * @param WP_Post|int   $post  Object.
+ * @param int|WP_Term|string $trail Trail the link is shown in (term, term id; 0/'' = none).
+ */
+function sh_object_trail_url( $post, $trail ): string {
+	$post_id = $post instanceof WP_Post ? (int) $post->ID : (int) $post;
+	$url     = $post_id ? get_permalink( $post_id ) : false;
+	if ( ! is_string( $url ) ) {
+		return '';
+	}
+	$term = $trail instanceof WP_Term ? $trail : ( $trail ? get_term( (int) $trail, 'trail' ) : null );
+	if ( $term instanceof WP_Term && in_array( (int) $term->term_id, sh_object_variant_slots( $post_id ), true ) ) {
+		return add_query_arg( 'sh_trail', $term->slug, $url );
+	}
+	return $url;
 }
 
 /**
@@ -322,10 +443,9 @@ function sh_trail_tiles( $trail ): array {
 	usort( $static, static fn( array $a, array $b ): int => $a['pos'] <=> $b['pos'] );
 	$objects = array();
 	foreach ( sh_trail_objects( $term_id ) as $post ) {
-		$url       = get_permalink( $post );
 		$objects[] = array(
 			'object' => $post,
-			'url'    => is_string( $url ) ? $url : '',
+			'url'    => sh_object_trail_url( $post, $term_id ), // D59: ?sh_trail= when the object has a version for this trail.
 			'label'  => get_the_title( $post ),
 		) + sh_object_trail_tile( $post->ID, $term_id );
 	}
@@ -343,7 +463,8 @@ function sh_trail_tiles( $trail ): array {
 /**
  * Tiles of the Zone 1–3 page grid (D57) in slot order: sh_zone_tile_<n>_object / _image / _image_hover of the zone term.
  * A published object links to its page (image/hover empty = the object's own tile · sh_object_trail_tile() without a
- * trail); no object or an unpublished one = a picture without a link (needs an image). Empty slots are skipped.
+ * trail); no object or an unpublished one = a picture without a link (needs an image). Empty slots are skipped. The link
+ * carries ?sh_trail= of the tile's trail (sh_zone_tile_<n>_trail) when the object has a version for it (D59).
  *
  * @param int|WP_Term $zone Zone term or id.
  * @return array<int, array{slot:int,object:WP_Post|null,url:string,label:string,image:int,hover:int}>
@@ -368,11 +489,11 @@ function sh_zone_grid( $zone ): array {
 		if ( ! $image ) {
 			continue; // Nothing to show (an empty slot, or an unpublished object without its own picture).
 		}
-		$url   = $post ? get_permalink( $post ) : '';
+		$trail = absint( get_term_meta( $term_id, "sh_zone_tile_{$n}_trail", true ) );
 		$out[] = array(
 			'slot'   => $n,
 			'object' => $post,
-			'url'    => is_string( $url ) ? $url : '',
+			'url'    => $post ? sh_object_trail_url( $post, $trail ) : '', // D59: the trail of the tile decides which look the page opens in.
 			'label'  => $post ? get_the_title( $post ) : '',
 			'image'  => $image,
 			'hover'  => $hover,

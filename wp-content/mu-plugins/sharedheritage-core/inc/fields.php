@@ -57,13 +57,15 @@ if ( ! defined( 'SH_ZONE_GRID_SLOTS' ) ) {
 }
 
 /**
- * Fields of the "zone_grid" group: per slot n an object, the tile image (184×184) and its hover image (210×210),
- * grouped in tabs of 10 slots. Image empty = the object's own tile (sh_tile_image / sh_tile_image_hover).
+ * Fields of the "zone_grid" group: per slot n an object, the tile image (184×184), its hover image (210×210) and the trail
+ * the tile came from (multitrail-1117 · D59), grouped in tabs of 10 slots. Image empty = the object's own tile
+ * (sh_tile_image / sh_tile_image_hover).
  *
- * @param callable $img Image field builder of sh_core_field_groups().
+ * @param callable $img   Image field builder of sh_core_field_groups().
+ * @param callable $trail Trail field builder of sh_core_field_groups().
  * @return array<int, array<string, mixed>>
  */
-function sh_core_zone_grid_fields( callable $img ): array {
+function sh_core_zone_grid_fields( callable $img, callable $trail ): array {
 	$fields = array();
 	for ( $n = 1; $n <= SH_ZONE_GRID_SLOTS; $n++ ) {
 		if ( 1 === $n % 10 ) {
@@ -82,6 +84,84 @@ function sh_core_zone_grid_fields( callable $img ): array {
 		);
 		$fields[] = $img( "sh_zone_tile_{$n}_image", "Tile {$n}: image (184×184)", 1 === $n ? 'Empty = the object\'s own tile image.' : '' );
 		$fields[] = $img( "sh_zone_tile_{$n}_image_hover", "Tile {$n}: image — hover (210×210)", 1 === $n ? 'Empty = the object\'s own hover image.' : '' );
+		$fields[] = $trail( "sh_zone_tile_{$n}_trail", "Tile {$n}: trail", 1 === $n ? 'The trail this tile belongs to. An object that sits in several trails opens its page as that trail shows it (animation, panel colour, side image · Object › Trail versions). Empty = the object\'s main trail.' : '' );
+	}
+	return $fields;
+}
+
+/**
+ * Number of "trail version" slots of an object (D59 · multitrail-1117): an object that sits in several trails can show
+ * its detail page in the look of each trail. The main trail's look is the object's own fields; each other trail is one
+ * slot (sh_variant_<n>_*). 4 = as many as the "tiles in other trails" slots (an object in up to 5 trails).
+ */
+if ( ! defined( 'SH_VARIANT_SLOTS' ) ) {
+	define( 'SH_VARIANT_SLOTS', 4 );
+}
+
+/**
+ * Info rows a trail version can replace (key = suffix of sh_variant_<n>_<key> and of the object's own sh_<key>).
+ *
+ * @return array<string, array{0:string,1:string}> key => [label, field type].
+ */
+function sh_core_variant_info_keys(): array {
+	return array(
+		'scientific_name'     => array( 'Scientific name / Taxonomy', 'textarea' ),
+		'period'              => array( 'Period', 'text' ),
+		'place_of_production' => array( 'Place of production / findspot', 'text' ),
+		'material'            => array( 'Material', 'text' ),
+		'dimensions'          => array( 'Dimensions', 'text' ),
+		'local_name'          => array( 'Local name', 'text' ),
+		'collection'          => array( 'Collection', 'textarea' ),
+		'object_biography'    => array( 'Other information / Object biography', 'textarea' ),
+	);
+}
+
+/**
+ * Fields of the "object_variant" group (D59): per trail version n the trail, hero video (+ Safari fallback · poster),
+ * panel colours, side images, layout JSON and the text that differs from the object's own (title · caption · info rows).
+ * Every empty field = the object's own value (colours · hero · images · text) — except the info rows, which replace the
+ * whole set when any of them is filled.
+ *
+ * @param array<string, callable> $b Builders of sh_core_field_groups(): img · area · color · bool · trail · video.
+ * @return array<int, array<string, mixed>>
+ */
+function sh_core_variant_fields( array $b ): array {
+	$fields = array();
+	for ( $n = 1; $n <= SH_VARIANT_SLOTS; $n++ ) {
+		$first    = 1 === $n;
+		$fields[] = sh_tab( "Trail version {$n}" );
+		$fields[] = $b['trail']( "sh_variant_{$n}_trail", "Version {$n}: trail", $first ? 'An object in several trails can look different in each trail (animation, panel colour, side image; the text only where Figma differs). The object\'s own fields are its main trail. Choose the other trail here; empty = this slot is not used. A visitor who comes from that trail\'s page (or its zone grid tile) sees this version; everyone else sees the main version.' : '' );
+		$fields[] = $b['video']( "sh_variant_{$n}_hero_video_webm", "Version {$n}: hero video (WebM)", 'webm', $first ? 'Empty = the object\'s own hero.' : '' );
+		$fields[] = $b['video']( "sh_variant_{$n}_hero_video_hevc", "Version {$n}: hero video fallback for Safari/iOS (HEVC with alpha, .mov)", 'mov', $first ? 'Only for videos with transparency.' : '' );
+		$fields[] = $b['bool']( "sh_variant_{$n}_hero_video_has_alpha", "Version {$n}: hero video has transparency" );
+		$fields[] = $b['img']( "sh_variant_{$n}_hero_poster", "Version {$n}: hero video poster" );
+		$fields[] = $b['color']( "sh_variant_{$n}_panel_bg", "Version {$n}: panel background", $first ? 'Empty = the object\'s own colour (this and the four colours below).' : '' );
+		$fields[] = $b['color']( "sh_variant_{$n}_title_color", "Version {$n}: title colour" );
+		$fields[] = $b['color']( "sh_variant_{$n}_text_color", "Version {$n}: text / caption colour" );
+		$fields[] = $b['color']( "sh_variant_{$n}_meta_color", "Version {$n}: metadata colour" );
+		$fields[] = $b['color']( "sh_variant_{$n}_collection_color", "Version {$n}: collection colour" );
+		$fields[] = $b['img']( "sh_variant_{$n}_image_1", "Version {$n}: side image 1", $first ? 'Replaces the image at that place of the layout below. Empty = the image of the layout.' : '' );
+		$fields[] = $b['img']( "sh_variant_{$n}_image_2", "Version {$n}: side image 2" );
+		$fields[] = sh_f(
+			"sh_variant_{$n}_layout",
+			'textarea',
+			"Version {$n}: detail layout (JSON from Figma)",
+			array(
+				'instructions' => $first ? 'Geometry of this trail\'s Figma detail frame (same keys as the object\'s Detail layout). Empty = the object\'s own layout. Must be a JSON object.' : '',
+				'rows'         => 6,
+				'format'       => 'json',
+			)
+		);
+		$fields[] = $b['area']( "sh_variant_{$n}_title", "Version {$n}: title", $first ? 'Only when this trail\'s Figma title differs (line breaks stay). Empty = the object\'s title.' : '', 2 );
+		$fields[] = $b['area']( "sh_variant_{$n}_caption", "Version {$n}: caption", $first ? 'Only when this trail\'s Figma caption differs. Paragraphs separated by a blank line. Empty = the object\'s caption.' : '', 12 );
+		$info     = sh_core_variant_info_keys();
+		$last     = array_key_last( $info );
+		foreach ( $info as $key => $def ) {
+			$help     = $first && 'scientific_name' === $key ? 'Info rows that differ in this trail\'s Figma. When any is filled, ONLY the filled rows show for this trail (the object\'s own rows are replaced). All empty = the object\'s own rows.' : '';
+			$fields[] = 'textarea' === $def[1]
+				? $b['area']( "sh_variant_{$n}_{$key}", "Version {$n}: {$def[0]}", $help, $key === $last ? 3 : 2 )
+				: $b['text']( "sh_variant_{$n}_{$key}", "Version {$n}: {$def[0]}", $help );
+		}
 	}
 	return $fields;
 }
@@ -228,6 +308,22 @@ function sh_core_field_groups(): array {
 				),
 			),
 		),
+		// D59 (multitrail-1117): an object that sits in several trails shows its detail page as the trail the visitor came from.
+		'object_variant' => array(
+			'title'  => 'Trail versions',
+			'target' => array( 'post_type' => 'object' ),
+			'fields' => sh_core_variant_fields(
+				array(
+					'img'   => $img,
+					'text'  => $text,
+					'area'  => $area,
+					'color' => $color,
+					'bool'  => $bool,
+					'trail' => $trail,
+					'video' => $video,
+				)
+			),
+		),
 		'timeline_item' => array(
 			'title'  => 'Timeline card',
 			'target' => array( 'post_type' => 'timeline_item' ),
@@ -362,7 +458,7 @@ function sh_core_field_groups(): array {
 		'zone_grid'     => array(
 			'title'  => 'Zone object grid',
 			'target' => array( 'taxonomy' => 'zone' ),
-			'fields' => sh_core_zone_grid_fields( $img ),
+			'fields' => sh_core_zone_grid_fields( $img, $trail ),
 		),
 		'home'          => array(
 			'title'  => 'Home page',

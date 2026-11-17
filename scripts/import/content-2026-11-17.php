@@ -160,6 +160,81 @@ function sh_import_object_trail_tiles_meta( array $o, array $trail_ids, string $
 }
 
 /**
+ * Meta of one trail version of an object (D59 · multitrail-1117 · CONTENT-MODEL §2b): sh_variant_<slot>_* from the seed
+ * variant (objects.json variants_by_trail.<trail> + the Figma record of its frame): trail · hero (manifest key
+ * drive-1117/<hero_video_src> → WebM + poster + HEVC only for alpha) · colours · side images (the frame's crops, same
+ * attachments as in the layout) · layout JSON · text that differs from the object's (title · caption · info rows).
+ * Empty array = the trail is not a term of this site. A seed value that is null leaves the field out (untouched).
+ *
+ * @param array<string, mixed> $o         Seed object.
+ * @param string               $trail     Trail slug of the version.
+ * @param int                  $slot      Slot n (1..SH_VARIANT_SLOTS) on the site.
+ * @param array<string, mixed> $ver       {variant, frame} of sh_import_object_variants().
+ * @param array<string, int>   $trail_ids slug => term id.
+ * @param array<string, mixed> $map       image-map.json.
+ * @param array<string, mixed> $manifest  Media manifest.
+ * @return array<string, mixed>
+ */
+function sh_import_variant_meta( array $o, string $trail, int $slot, array $ver, array $trail_ids, array $map, array $manifest ): array {
+	if ( ! isset( $trail_ids[ $trail ] ) ) {
+		return array();
+	}
+	$v     = $ver['variant'];
+	$frame = $ver['frame'];
+	$title = sh_import_object_text_2026_11( $o )['post_title'] . " ($trail)";
+	$p     = "sh_variant_{$slot}_";
+	$hex   = static fn( $c ) => is_string( $c ) && '' !== $c ? $c : null;
+	$meta  = array(
+		$p . 'trail' => $trail_ids[ $trail ],
+	);
+	if ( ! empty( $v['hero_video_src'] ) ) {
+		$entry = sh_import_manifest_by_key( $manifest, 'drive-1117/' . $v['hero_video_src'] );
+		if ( null === $entry ) {
+			sh_imp_warn( "variant hero without manifest entry: drive-1117/{$v['hero_video_src']} ($title)" );
+		} else {
+			$video                               = sh_imp_video( $entry, $title );
+			$meta[ $p . 'hero_video_webm' ]      = $video['webm'];
+			$meta[ $p . 'hero_video_hevc' ]      = $video['hevc'];
+			$meta[ $p . 'hero_video_has_alpha' ] = $video['has_alpha'];
+			$meta[ $p . 'hero_poster' ]          = $video['poster'];
+		}
+	}
+	$meta[ $p . 'panel_bg' ]         = $hex( isset( $v['panel_bg'] ) ? $v['panel_bg'] : null );
+	$meta[ $p . 'title_color' ]      = $hex( isset( $v['title_color'] ) ? $v['title_color'] : null );
+	$meta[ $p . 'text_color' ]       = $hex( isset( $v['caption_color'] ) ? $v['caption_color'] : null );
+	$meta[ $p . 'meta_color' ]       = $hex( isset( $v['meta_color'] ) ? $v['meta_color'] : null );
+	$meta[ $p . 'collection_color' ] = $hex( isset( $v['collection_color'] ) ? $v['collection_color'] : null );
+
+	$images = isset( $frame['style']['images'] ) && is_array( $frame['style']['images'] ) ? array_values( $frame['style']['images'] ) : array();
+	usort( $images, static fn( $a, $b ): int => (int) ( $a['order'] ?? 0 ) <=> (int) ( $b['order'] ?? 0 ) );
+	for ( $k = 1; $k <= 2; $k++ ) {
+		$ref = isset( $images[ $k - 1 ]['crop_ref'] ) ? (string) $images[ $k - 1 ]['crop_ref'] : '';
+		if ( '' !== $ref ) {
+			$meta[ $p . 'image_' . $k ] = sh_imp_asset_ref( $map, $ref, "$title side image $k" );
+		}
+	}
+	$meta[ $p . 'layout' ] = sh_import_layout( $frame, $map, $title );
+
+	$to = isset( $v['text_override'] ) && is_array( $v['text_override'] ) ? $v['text_override'] : array();
+	foreach ( array( 'title_raw', 'title' ) as $k ) { // title_raw keeps the Figma line breaks.
+		if ( ! empty( $to[ $k ] ) && is_string( $to[ $k ] ) ) {
+			$meta[ $p . 'title' ] = $to[ $k ];
+			break;
+		}
+	}
+	if ( ! empty( $to['caption'] ) && is_string( $to['caption'] ) ) {
+		$meta[ $p . 'caption' ] = $to['caption'];
+	}
+	$keys = sh_core_variant_info_keys();
+	foreach ( (array) ( isset( $to['info_rows'] ) ? $to['info_rows'] : array() ) as $row ) {
+		if ( is_array( $row ) && isset( $row['key'], $row['value'] ) && isset( $keys[ (string) $row['key'] ] ) && is_string( $row['value'] ) && '' !== $row['value'] ) {
+			$meta[ $p . $row['key'] ] = $row['value'];
+		}
+	}
+	return $meta;
+}
+
+/**
  * Real trails of a seed object that exist on the site (term ids).
  *
  * @param array<string, mixed> $o         Seed object.
