@@ -493,7 +493,7 @@
 
 .sh-guide__title {
 	margin: 0;
-	font: var(--sh-fw-komet-heavy) 30px/28px var(--sh-font-komet);
+	font: var(--sh-fw-komet-heavy) 26px/28px var(--sh-font-komet); /* 26 per owner slide p.7 (Figma 30 · P-380) */
 	text-align: center;
 }
 
@@ -632,7 +632,7 @@ button.sh-guide__card {
 
 .sh-guide__name {
 	margin: 0;
-	font: var(--sh-fw-komet-heavy) 30px/28px var(--sh-font-komet);
+	font: var(--sh-fw-komet-heavy) 26px/28px var(--sh-font-komet); /* 26 per owner slide p.7 (Figma 30 · P-380) */
 }
 
 .sh-guide__words {
