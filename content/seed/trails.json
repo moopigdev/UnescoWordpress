@@ -6,7 +6,12 @@
    "extracted_by": "design-extract",
    "pages": "Page 2 Version #Final 01092026 (elephant detail frames) + Page 2.1 ALL GIF trails (all trails)"
   },
-  "note": "17 trails ตาม \"Action Trails\" (670:9724) + ข้อความหน้าแรก \"17 interconnected trails\" · ชื่อ Serpent(2.1)=Naga(tile) · มีคำอธิบายเฉพาะ Elephant ใน Figma"
+  "note": "17 trails ตาม \"Action Trails\" (670:9724) + ข้อความหน้าแรก \"17 interconnected trails\" · ชื่อ Serpent(2.1)=Naga(tile) · มีคำอธิบายเฉพาะ Elephant ใน Figma",
+  "figma_2026_11_17": {
+   "by": "design-objects-1117",
+   "lastModified": "2026-11-17T03:50:23Z",
+   "what": "หน้า trail 17 (3377:4608) + Materials (3377:5466): ข้อความ H1/คำอธิบาย · cover · ลำดับช่อง + ภาพช่องปกติ/hover · ช้างไม่แตะค่าเดิม (บล็อก figma_2026_11_17)"
+  }
  },
  "trails": [
   {
@@ -25,18 +30,248 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
+    "domestic-chicken",
+    "krutor-trut",
+    "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
     "ayam-ayam-bernaga",
     "bronze-cock-standing-on-the-coop",
-    "domestic-chicken",
-    "lawi-ayam-cock-feather-dagger",
-    "pending",
-    "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
-    "sulang",
-    "tempayan-large-earthen-storage-jars",
     "tin-ingots-in-the-shape-of-chicken",
-    "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs"
+    "tempayan-large-earthen-storage-jars",
+    "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs",
+    "sulang",
+    "lawi-ayam-cock-feather-dagger",
+    "pending"
    ],
-   "object_count": 10
+   "object_count": 11,
+   "title_on_trail_page": "Chicken & Rooster Trail",
+   "title_on_trail_page_raw": "Chicken & Rooster Trail",
+   "description": "Few animals have lived as closely alongside the peoples of Southeast Asia as the chicken. Descended from the region's wild red junglefowl, it became part of farming, ritual, artisanship and household life. This trail explores the transformation of this familiar fowl into an enduring expression of protection, prosperity and renewal.",
+   "cover_ref": "ae2639b85dece0a2592b30c1fa3adb1371c36526.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4657",
+   "trail_cover_node": "3377:4660",
+   "trail_title_node": "3377:4663",
+   "trail_description_node": "3377:4664",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1627.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     710.7,
+     388.0,
+     45.0
+    ],
+    "description": [
+     578.0,
+     687.2,
+     702.0,
+     92.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1531.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "342701ac0798ff180cfac759317c472a546cf9ed.png",
+     "tile_image_hover_ref": "64fe0e4ee4bc04898863d19512ce5350123921bd.png",
+     "tile_node": "3377:4668",
+     "tile_hover_node": "3377:5560",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "domestic-chicken",
+     "frame_id": "1179:4168"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "5a455b4c4eef527162475d8a1f3fd4466d1becde.png",
+     "tile_image_hover_ref": "8ec22e73c8e35031beeb942d317d25738dae44d1.png",
+     "tile_node": "3377:4669",
+     "tile_hover_node": "3377:5563",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "krutor-trut",
+     "frame_id": "3179:2702"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "da3cac7c2bc072c9997766ed9b44578084bf42ad.png",
+     "tile_image_hover_ref": "77d6492f92aea1ba9fe4ee40f9f6480163160b6e.png",
+     "tile_node": "3377:4670",
+     "tile_hover_node": "3377:5566",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+     "frame_id": "1179:4723"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "0902fcb7fc4c50a6a6e717b3aa9392808dd10e4c.png",
+     "tile_image_hover_ref": "9a6ae6f415326a0885d0d896fa8c66b741a040fd.png",
+     "tile_node": "3377:4671",
+     "tile_hover_node": "3377:5569",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "ayam-ayam-bernaga",
+     "frame_id": "1179:3861"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "e1d26d13616daefd8dd1e09916c102fe42be0eab.png",
+     "tile_image_hover_ref": "95b4159d5971552fb6240ecfb6f27c85ab3ae728.png",
+     "tile_node": "3377:4672",
+     "tile_hover_node": "3377:5572",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "bronze-cock-standing-on-the-coop",
+     "frame_id": "1179:3764"
+    },
+    {
+     "order": 6,
+     "tile_image_ref": "86f71e7dc57a4b6136c19cd62ec759599b775c95.png",
+     "tile_image_hover_ref": "2eb17e57f051876454d3b270b18c6ef495a83f36.png",
+     "tile_node": "3377:4674",
+     "tile_hover_node": "3377:5575",
+     "bbox": [
+      160.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "tin-ingots-in-the-shape-of-chicken",
+     "frame_id": "1179:4946"
+    },
+    {
+     "order": 7,
+     "tile_image_ref": "97af03392126f0cf1c976b260335f7ed5aae8541.png",
+     "tile_image_hover_ref": "d6a119c260fbc096030db4861d91798acd7863eb.png",
+     "tile_node": "3377:4675",
+     "tile_hover_node": "3377:5578",
+     "bbox": [
+      394.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "tempayan-large-earthen-storage-jars",
+     "frame_id": "1179:4852"
+    },
+    {
+     "order": 8,
+     "tile_image_ref": "c25719ac4ab5507397554f3a8c45ad564704ea39.png",
+     "tile_image_hover_ref": "6264014d8d024ad706479cb847a952385af26601.png",
+     "tile_node": "3377:4676",
+     "tile_hover_node": "3377:5581",
+     "bbox": [
+      628.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs",
+     "frame_id": "1179:5042"
+    },
+    {
+     "order": 9,
+     "tile_image_ref": "c4ba0162275740d045a4e79d6251ee071bb00e9d.png",
+     "tile_image_hover_ref": "ea5de1ab090da995c938e1be19e97eed45ec9f4a.png",
+     "tile_node": "3377:4677",
+     "tile_hover_node": "3377:5584",
+     "bbox": [
+      862.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "sulang",
+     "frame_id": "1179:4264"
+    },
+    {
+     "order": 10,
+     "tile_image_ref": "5138560792c296e08a4a019006356e86dacefdbf.png",
+     "tile_image_hover_ref": "84f8b0bb5a799df59bda1211aa69a67f20045fa4.png",
+     "tile_node": "3377:4678",
+     "tile_hover_node": "3377:5587",
+     "bbox": [
+      1096.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "lawi-ayam-cock-feather-dagger",
+     "frame_id": "1179:4515"
+    },
+    {
+     "order": 11,
+     "tile_image_ref": "7a2d1a27da5d9061023a4726f70f78e32161b1b6.png",
+     "tile_image_hover_ref": "77358795cb647ebc8bdbf2ca8c532b95db81633d.png",
+     "tile_node": "3377:4680",
+     "tile_hover_node": "3377:5590",
+     "bbox": [
+      160.0,
+      1297.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "pending",
+     "frame_id": "1179:4624"
+    }
+   ],
+   "tile_bg_page_sampled": "#7EB7A6",
+   "tiles_total": 11,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4657",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "ae2639b85dece0a2592b30c1fa3adb1371c36526.crop-3377-4660.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "turtle",
@@ -54,13 +289,152 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
-    "koffo-cloth",
-    "the-dragon-head-tortoise-and-crane-ornament",
-    "tin-ingots-in-the-shape-of-chicken-2",
+    "turtle-shaped-gold-plaque",
     "traditional-maritime-boxes-in-horse-and-turtle-design",
-    "zoomorphic-lime-container"
+    "zoomorphic-lime-container",
+    "koffo-cloth",
+    "the-dragon-head-tortoise-and-crane-ornament"
    ],
-   "object_count": 5
+   "object_count": 5,
+   "title_on_trail_page": "Turtle Trail",
+   "title_on_trail_page_raw": "Turtle Trail",
+   "description": "Living in rivers, wetlands, mangroves and seas, turtles have long inspired communities across Southeast Asia. Represented in various cultural contexts, from temple foundations and ritual objects to maritime traditions and household ornaments, turtles are enduring symbols of protection, continuity and the connections between land and water.",
+   "cover_ref": "b940d93b6283021d96953324a63206defa61e464.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4999",
+   "trail_cover_node": "3377:5002",
+   "trail_title_node": "3377:5005",
+   "trail_description_node": "3377:5006",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1214.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     710.7,
+     183.0,
+     45.0
+    ],
+    "description": [
+     373.0,
+     687.2,
+     907.0,
+     92.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1118.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "7f39c5221616abceba6e2ad5e169185dcd8cb6a6.jpg",
+     "tile_image_hover_ref": "9188a25499956fc87de6b8bd5de533f833fd3eff.jpg",
+     "tile_node": "3377:5010",
+     "tile_hover_node": "3377:5866",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "turtle-shaped-gold-plaque",
+     "frame_id": "1220:2843"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "b47a27f5e163e867749c5c48cba4301f92394773.jpg",
+     "tile_image_hover_ref": "f5c03cfdb6f0c51889ea4f3ce66f74a8e5e517f8.jpg",
+     "tile_node": "3377:5011",
+     "tile_hover_node": "3377:5869",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "traditional-maritime-boxes-in-horse-and-turtle-design",
+     "frame_id": "1220:2753"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "e3622bd14db8e56f05f53fe61b9e9bed85cfd7b8.jpg",
+     "tile_image_hover_ref": "ce3169a52b0025e78e766c50223af5556319fdfe.jpg",
+     "tile_node": "3377:5012",
+     "tile_hover_node": "3377:5872",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "zoomorphic-lime-container",
+     "frame_id": "1220:2933"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "7d563195c879ac259b7c60054ab4688b3000ab85.jpg",
+     "tile_image_hover_ref": "240445d6c2dbf67eb03e868c4b2dd4f0e8896cae.jpg",
+     "tile_node": "3377:5013",
+     "tile_hover_node": "3377:5875",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "koffo-cloth",
+     "frame_id": "1220:2568"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "c2417adc4c2acbbb3d3f24754a7a2275d5c8eaf1.jpg",
+     "tile_image_hover_ref": "7fb484c66976a065cd34a84b66d5d19266a4422b.jpg",
+     "tile_node": "3377:5014",
+     "tile_hover_node": "3377:5878",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "the-dragon-head-tortoise-and-crane-ornament",
+     "frame_id": "1220:2663"
+    }
+   ],
+   "tile_bg_page_sampled": "#CFA5B9",
+   "tiles_total": 5,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4999",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "b940d93b6283021d96953324a63206defa61e464.crop-3377-5002.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "deer",
@@ -78,11 +452,136 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
+    "the-red-barking-deer",
     "greater-mousedeer",
     "kijang-gold-coins",
     "nang-talung-puppetry-deer"
    ],
-   "object_count": 3
+   "object_count": 4,
+   "title_on_trail_page": "Deer Trail",
+   "title_on_trail_page_raw": "Deer Trail",
+   "description": "Deer have lived alongside the peoples of Southeast Asia's forests and woodlands for millennia. Across the region, the relationships between communities and the environments they inhabit have given rise to stories, artistic traditions and material culture, contributing to the region’s shared heritage.",
+   "cover_ref": "8c1f22f9b43aad5bbc23f2a8ad44c7d9f1ec92cc.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4687",
+   "trail_cover_node": "3377:4690",
+   "trail_title_node": "3377:4693",
+   "trail_description_node": "3377:4694",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1287.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     699.2,
+     162.0,
+     45.0
+    ],
+    "description": [
+     352.0,
+     687.2,
+     928.0,
+     69.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1191.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "2337a3b31975629ab80ce5183a209da77891765f.png",
+     "tile_image_hover_ref": "36e3f7e77857fb19af98f344320961a7a1071df0.png",
+     "tile_node": "3377:4698",
+     "tile_hover_node": "3377:5594",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "the-red-barking-deer",
+     "frame_id": "1096:4432"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "c1a8fb82673c3ab15b7b5da47a4cc230ccc0f31f.png",
+     "tile_image_hover_ref": "65d217b76a74d4479df610dade21e336e419b4b3.png",
+     "tile_node": "3377:4699",
+     "tile_hover_node": "3377:5597",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "greater-mousedeer",
+     "frame_id": "1096:6226"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "820ff47ead50ad14ed515661fca3cec931854380.png",
+     "tile_image_hover_ref": "8e2cf7306c50fcfdf405b259334fa1f0c7bdd93f.png",
+     "tile_node": "3377:4700",
+     "tile_hover_node": "3377:5600",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "kijang-gold-coins",
+     "frame_id": "1096:4746"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "dd2a3faafca9299daf8daa28b7276a5d030d79d9.png",
+     "tile_image_hover_ref": "9af8d7b2f606ba8db3aa1288a3fb6e5ae609021d.png",
+     "tile_node": "3377:4701",
+     "tile_hover_node": "3377:5603",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "nang-talung-puppetry-deer",
+     "frame_id": "1096:5757"
+    }
+   ],
+   "tile_bg_page_sampled": "#DEDCC3",
+   "tiles_total": 4,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4687",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "8c1f22f9b43aad5bbc23f2a8ad44c7d9f1ec92cc.crop-3377-4690.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "dragon",
@@ -100,17 +599,232 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
-    "ayam-ayam-bernaga",
-    "the-dragon-head-tortoise-and-crane-ornament",
-    "bedil-cannon-with-dragon-motif",
+    "sunda-pangolin",
     "blackened-brass-ritual-holy-water-vessel",
-    "canang",
-    "dragon-shaped-mother-of-pearl-inlaid-incense-tray",
-    "flintlock-firearm",
     "large-tile-with-dragons",
-    "sunda-pangolin"
+    "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+    "ayam-ayam-bernaga",
+    "canang",
+    "bedil-cannon-with-dragon-motif",
+    "flintlock-firearm",
+    "dragon-shaped-mother-of-pearl-inlaid-incense-tray",
+    "the-dragon-head-tortoise-and-crane-ornament"
    ],
-   "object_count": 9
+   "object_count": 10,
+   "title_on_trail_page": "Dragon Trail",
+   "title_on_trail_page_raw": "Dragon Trail",
+   "description": "Over centuries of trade, migration and cultural exchange, dragon imagery travelled with people and communities from China across the seas to Southeast Asia, bringing with it the associations the dragon represented, including heavenly power, authority, water and rainfall.",
+   "cover_ref": "3df5a9c4f46b522fbdd1f1173dfc6797e85937c5.png",
+   "cover_size": [
+    4000,
+    2250
+   ],
+   "trail_page_frame": "3377:4747",
+   "trail_cover_node": "3377:4750",
+   "trail_title_node": "3377:4753",
+   "trail_description_node": "3377:4754",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1396.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     699.2,
+     206.0,
+     45.0
+    ],
+    "description": [
+     396.0,
+     687.2,
+     884.0,
+     69.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1300.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "e4a3a4bad9a3e6ab55cb8b20ee35d1bf365af91e.png",
+     "tile_image_hover_ref": "790fc2f2c88c1293da9cc1c7a6c8f59d2210ff91.png",
+     "tile_node": "3377:4758",
+     "tile_hover_node": "3377:5607",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "sunda-pangolin",
+     "frame_id": "1131:1108"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "f9cde421abd84696b5d570c547fcd611c1853b0b.png",
+     "tile_image_hover_ref": "95c2c3cc3f72f2a36790e5a86286d956b4af0de5.png",
+     "tile_node": "3377:4759",
+     "tile_hover_node": "3377:5610",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "blackened-brass-ritual-holy-water-vessel",
+     "frame_id": "1115:1466"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "84bf8f57a745d310bbbd9cd266aec7c97f92d9ac.png",
+     "tile_image_hover_ref": "3ae66ae5a1a1b0ba001959bca1a3293d2ae2534d.png",
+     "tile_node": "3377:4760",
+     "tile_hover_node": "3377:5613",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "large-tile-with-dragons",
+     "frame_id": "1131:893"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "d80d8081a7a9d0d238f74eba26031472526b7367.png",
+     "tile_image_hover_ref": "6293a1f920eee88ea523428d64b13060dbdfb068.png",
+     "tile_node": "3377:4761",
+     "tile_hover_node": "3377:5616",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+     "frame_id": "3212:4589"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "c4f5c940d9b2f2f2f3551b0ae7d32b588527e735.png",
+     "tile_image_hover_ref": "9d59f18e08a1f23cde6d057b279fd073595b993f.png",
+     "tile_node": "3377:4762",
+     "tile_hover_node": "3377:5619",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "ayam-ayam-bernaga",
+     "frame_id": "1111:1430"
+    },
+    {
+     "order": 6,
+     "tile_image_ref": "2a72e1bd2ea11ea3d0ea3d41c7c6d34a2820256d.png",
+     "tile_image_hover_ref": "896c494bbe6dc97f17effb1fa4497018bfbf0a8d.png",
+     "tile_node": "3377:4764",
+     "tile_hover_node": "3377:5622",
+     "bbox": [
+      160.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "canang",
+     "frame_id": "1117:1691"
+    },
+    {
+     "order": 7,
+     "tile_image_ref": "1ee3bbc062114970038d1c91d6f566390ba44f8f.png",
+     "tile_image_hover_ref": "bb387004ea3bba5edc0cb0471c7e0d8d46e99dc3.png",
+     "tile_node": "3377:4765",
+     "tile_hover_node": "3377:5625",
+     "bbox": [
+      394.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "bedil-cannon-with-dragon-motif",
+     "frame_id": "1113:1812"
+    },
+    {
+     "order": 8,
+     "tile_image_ref": "3722fc1d6c40daff9e3efe73ab146471e78242bd.png",
+     "tile_image_hover_ref": "eaea22e98912b2933f8b128ae4f1a288ec67f252.png",
+     "tile_node": "3377:4766",
+     "tile_hover_node": "3377:5628",
+     "bbox": [
+      628.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "flintlock-firearm",
+     "frame_id": "1120:1918"
+    },
+    {
+     "order": 9,
+     "tile_image_ref": "76508d99213ca130ee698e77136118ab62328612.png",
+     "tile_image_hover_ref": "384a62be0bde30fb0068d96e722b53b459da6ed6.png",
+     "tile_node": "3377:4767",
+     "tile_hover_node": "3377:5631",
+     "bbox": [
+      862.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "dragon-shaped-mother-of-pearl-inlaid-incense-tray",
+     "frame_id": "1120:2138"
+    },
+    {
+     "order": 10,
+     "tile_image_ref": "439391dac3f11e783f42076a6fc7cf584904189a.png",
+     "tile_image_hover_ref": "97d9d733a8c3ae78301ed49352126a5ed03c4513.png",
+     "tile_node": "3377:4768",
+     "tile_hover_node": "3377:5634",
+     "bbox": [
+      1096.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "the-dragon-head-tortoise-and-crane-ornament",
+     "frame_id": "1131:1329"
+    }
+   ],
+   "tile_bg_page_sampled": "#F1ADA0",
+   "tiles_total": 10,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4747",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "3df5a9c4f46b522fbdd1f1173dfc6797e85937c5.crop-3377-4750.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "fish",
@@ -128,16 +842,200 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
-    "jar-decorated-with-fish-and-a-beast",
-    "rostrum-of-the-largetooth-sawfish",
-    "skeleton-of-singapore-s-first-recorded-sperm-whale",
     "spotted-white-eagle-ray-bone",
-    "stingray-barb-dagger",
+    "skeleton-of-singapore-s-first-recorded-sperm-whale",
+    "rostrum-of-the-largetooth-sawfish",
+    "wooden-chalk-line-reels",
     "sukhothai-celadon-bowl-fragment-with-fish-design",
+    "jar-decorated-with-fish-and-a-beast",
     "vessel-in-the-form-of-a-fish",
-    "wooden-chalk-line-reels"
+    "stingray-barb-dagger"
    ],
-   "object_count": 8
+   "object_count": 8,
+   "title_on_trail_page": "Fish & Aquatic Mammals Trail",
+   "title_on_trail_page_raw": "Fish & Aquatic Mammals Trail",
+   "description": "Life in Southeast Asia has been shaped by water. Rivers, seas, mangroves and wetlands have sustained communities for thousands of years, while the creatures that inhabit them have inspired stories and have been incorporated into objects of everyday life and rituals. This trail explores how fish and aquatic mammals reveal enduring relationships between people, water and the natural world.",
+   "cover_ref": "21084d83a23da8934b1d27402a5edf989a95a3cc.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4771",
+   "trail_cover_node": "3377:4774",
+   "trail_title_node": "3377:4777",
+   "trail_description_node": "3377:4778",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1444.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     733.7,
+     498.0,
+     45.0
+    ],
+    "description": [
+     688.0,
+     687.2,
+     592.0,
+     138.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1348.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "714b58f2f853554783a62c9a8f05f792d678d0ec.png",
+     "tile_image_hover_ref": "caee637dcf6e25fc3b2a96b69659fb6d34d977a8.png",
+     "tile_node": "3377:4782",
+     "tile_hover_node": "3377:5638",
+     "bbox": [
+      160.0,
+      875.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "spotted-white-eagle-ray-bone",
+     "frame_id": "1134:1921"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "aa14ecd1303c9a6907ad37a756a610b7d0c78cd2.png",
+     "tile_image_hover_ref": "8db0a0732ff66a57031a009651b602df5d8d9b0b.png",
+     "tile_node": "3377:4783",
+     "tile_hover_node": "3377:5641",
+     "bbox": [
+      394.0,
+      875.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "skeleton-of-singapore-s-first-recorded-sperm-whale",
+     "frame_id": "1134:1827"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "2a4772448ace0b4d46a8d268a8a59e7a0089331d.png",
+     "tile_image_hover_ref": "7df229de12649f4fba050c2b415aeb2beade7bd0.png",
+     "tile_node": "3377:4784",
+     "tile_hover_node": "3377:5644",
+     "bbox": [
+      628.0,
+      875.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "rostrum-of-the-largetooth-sawfish",
+     "frame_id": "1134:1731"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "74c582e4a87171299117239d712e8d5678c6bb6f.png",
+     "tile_image_hover_ref": "47b3fb6d5cdfa8b61abeb2aecab5ccacab4d354b.png",
+     "tile_node": "3377:4785",
+     "tile_hover_node": "3377:5647",
+     "bbox": [
+      862.0,
+      875.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "wooden-chalk-line-reels",
+     "frame_id": "1145:1368"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "b2246e3952e2ae9c39ccd4333d450fa122ca4923.png",
+     "tile_image_hover_ref": "bb3358fc6d43f49ef5f83c249b3238aaa3a1da6f.png",
+     "tile_node": "3377:4786",
+     "tile_hover_node": "3377:5650",
+     "bbox": [
+      1096.0,
+      875.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "sukhothai-celadon-bowl-fragment-with-fish-design",
+     "frame_id": "1145:1181"
+    },
+    {
+     "order": 6,
+     "tile_image_ref": "89c7fa0aedfa7005e95470aa7682c190244f5d87.png",
+     "tile_image_hover_ref": "7bbc09438bd58e5543692c5dbcd6de1c6c812cb7.png",
+     "tile_node": "3377:4788",
+     "tile_hover_node": "3377:5653",
+     "bbox": [
+      160.0,
+      1109.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "jar-decorated-with-fish-and-a-beast",
+     "frame_id": "1051:3381"
+    },
+    {
+     "order": 7,
+     "tile_image_ref": "02ac5b3ff188b817354154ccae9f869317113cb7.png",
+     "tile_image_hover_ref": "c0b54c98d5e5f869864dd6995d8edf5e61bd3ee4.png",
+     "tile_node": "3377:4789",
+     "tile_hover_node": "3377:5656",
+     "bbox": [
+      394.0,
+      1109.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "vessel-in-the-form-of-a-fish",
+     "frame_id": "1145:1276"
+    },
+    {
+     "order": 8,
+     "tile_image_ref": "b0f8fdb14d5c3bf319bb7d777021b83972a22ce3.png",
+     "tile_image_hover_ref": "45594ce54d045b89fe4d9eff1df2d89a940173a2.png",
+     "tile_node": "3377:4790",
+     "tile_hover_node": "3377:5659",
+     "bbox": [
+      628.0,
+      1109.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "stingray-barb-dagger",
+     "frame_id": "1145:1083"
+    }
+   ],
+   "tile_bg_page_sampled": "#CFA5BA",
+   "tiles_total": 8,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4771",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "21084d83a23da8934b1d27402a5edf989a95a3cc.crop-3377-4774.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "hornbill",
@@ -155,15 +1053,184 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
-    "sulang",
-    "badau",
-    "calapa-with-bird-motif",
-    "copper-pot",
+    "oriental-pied-hornbill-and-rhinoceros-hornbill",
     "iban-s-hornbill-image",
+    "copper-pot",
+    "calapa-with-bird-motif",
+    "sulang",
     "kalimantan-war-helmet",
-    "oriental-pied-hornbill-and-rhinoceros-hornbill"
+    "badau"
    ],
-   "object_count": 7
+   "object_count": 7,
+   "title_on_trail_page": "Hornbill Trail",
+   "title_on_trail_page_raw": "Hornbill Trail",
+   "description": "Living high in the forest canopy, hornbills have long shaped the ecological and cultural landscapes of Southeast Asia. This trail shows how communities in Southeast Asia have incorporated the hornbill and its associated meanings into ceremonies, art and everyday life.",
+   "cover_ref": "3436c731045cdfe8b35e2fa472a6db35e3ff1220.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4819",
+   "trail_cover_node": "3377:4822",
+   "trail_title_node": "3377:4825",
+   "trail_description_node": "3377:4826",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1416.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     699.2,
+     221.0,
+     45.0
+    ],
+    "description": [
+     411.0,
+     687.2,
+     869.0,
+     69.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1320.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "4ce4a412dc95e49a6e49de56d5b2c69d86eba8e7.jpg",
+     "tile_image_hover_ref": "e3c45a09561d0988ebd72b1b4eb39ef7d3396cc1.jpg",
+     "tile_node": "3377:4830",
+     "tile_hover_node": "3377:5679",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "oriental-pied-hornbill-and-rhinoceros-hornbill",
+     "frame_id": "1161:2604"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "a9cc9bbb1520cc7d78dc084cbe1de8b640282a85.jpg",
+     "tile_image_hover_ref": "ca062ff04c783c63e36e516e8bd8ce937d25e976.jpg",
+     "tile_node": "3377:4831",
+     "tile_hover_node": "3377:5682",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "iban-s-hornbill-image",
+     "frame_id": "1161:2486"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "a193078e0c86e7d300692f9d8f512cc7ddd20511.jpg",
+     "tile_image_hover_ref": "d3f0d33100684f17d6169b4eaf73d6b28537a3fd.jpg",
+     "tile_node": "3377:4832",
+     "tile_hover_node": "3377:5685",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "copper-pot",
+     "frame_id": "1161:2398"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "d2f4e85750c47beb1e9ea5d5bcabc2efcdb9f517.jpg",
+     "tile_image_hover_ref": "b070139ac97b2f3dba06bedb220ad0223202c2ba.jpg",
+     "tile_node": "3377:4833",
+     "tile_hover_node": "3377:5688",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "calapa-with-bird-motif",
+     "frame_id": "1161:2298"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "7291ca4a157342b0ae06e240029b119f4b16b875.jpg",
+     "tile_image_hover_ref": "17663b8281af43eb492c2771417e20d7bb27c9d5.jpg",
+     "tile_node": "3377:4834",
+     "tile_hover_node": "3377:5691",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "sulang",
+     "frame_id": "1161:2808"
+    },
+    {
+     "order": 6,
+     "tile_image_ref": "95f705e375f035bd625d64750b883f8666f15344.jpg",
+     "tile_image_hover_ref": "e87a52ee98a38699abd612b74994d6c64456eaa8.jpg",
+     "tile_node": "3377:4836",
+     "tile_hover_node": "3377:5694",
+     "bbox": [
+      160.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "kalimantan-war-helmet",
+     "frame_id": "1161:2706"
+    },
+    {
+     "order": 7,
+     "tile_image_ref": "b340cfd76a109c6a275c5d412c745c06d297908f.jpg",
+     "tile_image_hover_ref": "4a5bc0149aee259acdcc986253245c95d8897d3b.jpg",
+     "tile_node": "3377:4837",
+     "tile_hover_node": "3377:5697",
+     "bbox": [
+      394.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "badau",
+     "frame_id": "1159:2198"
+    }
+   ],
+   "tile_bg_page_sampled": "#7EB7A6",
+   "tiles_total": 7,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4819",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "3436c731045cdfe8b35e2fa472a6db35e3ff1220.crop-3377-4822.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "horse",
@@ -181,15 +1248,184 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
-    "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs",
+    "oracle-bone",
     "cast-brass-tabletop-horse-shaped-lighter",
     "dastar-head-cloth-with-horse-motif",
     "liturgical-pulpit-covers",
+    "traditional-maritime-boxes-in-horse-design",
     "nang-talung-puppetry-horse",
-    "oracle-bone",
-    "traditional-maritime-boxes-in-horse-design"
+    "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs"
    ],
-   "object_count": 7
+   "object_count": 7,
+   "title_on_trail_page": "Horse Trail",
+   "title_on_trail_page_raw": "Horse Trail",
+   "description": "While horses are not native to Southeast Asia, they travelled with the region's peoples over centuries via trade and warfare. By joining diverse communities, they became part of beliefs and artistic traditions across the region. Today, they reveal how shared heritage emerges through movement, encounter and cultural exchange.",
+   "cover_ref": "a0a3da322630160430cdd9e9fc00f4c473cdbe0f.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4843",
+   "trail_cover_node": "3377:4846",
+   "trail_title_node": "3377:4849",
+   "trail_description_node": "3377:4850",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1416.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     699.2,
+     181.0,
+     45.0
+    ],
+    "description": [
+     371.0,
+     687.2,
+     909.0,
+     69.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1320.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "87938c71354cfc0fd72db85bcb1b4c6e3568a658.png",
+     "tile_image_hover_ref": "2f3a8b9cea789395a68499e9a5f91c96fc7defe5.png",
+     "tile_node": "3377:4854",
+     "tile_hover_node": "3377:5701",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "oracle-bone",
+     "frame_id": "1161:3352"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "e1c168a68d352b7be48d30f8377ad0278e4ad96d.png",
+     "tile_image_hover_ref": "c5d19e075e4bbc02822c7ee2e125a1db72b7841b.png",
+     "tile_node": "3377:4855",
+     "tile_hover_node": "3377:5704",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "cast-brass-tabletop-horse-shaped-lighter",
+     "frame_id": "1161:2959"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "1493cabcadc60bed1b9a01a954418d7e974f251e.png",
+     "tile_image_hover_ref": "c6f95ddecb9438155eba7d38758c28c5c31e3b03.png",
+     "tile_node": "3377:4856",
+     "tile_hover_node": "3377:5707",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "dastar-head-cloth-with-horse-motif",
+     "frame_id": "1161:3056"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "eaaa06632eeac0336f7dc3b6937537ea2ca69aa7.png",
+     "tile_image_hover_ref": "82cf63e92fe41d6850746da9760cc3f9e30a6058.png",
+     "tile_node": "3377:4857",
+     "tile_hover_node": "3377:5710",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "liturgical-pulpit-covers",
+     "frame_id": "1161:3157"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "95537e60ff9d3c8c0de15f3192f5d70cf43474b4.png",
+     "tile_image_hover_ref": "e837047d39c021baed1a945be1792b7c112709b4.png",
+     "tile_node": "3377:4858",
+     "tile_hover_node": "3377:5713",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "traditional-maritime-boxes-in-horse-design",
+     "frame_id": "1161:3450"
+    },
+    {
+     "order": 6,
+     "tile_image_ref": "e2e43a52a24aea11ed1a69354c00384be0186714.png",
+     "tile_image_hover_ref": "19b96b4a6b8f9b6896bb62ca62010d60cb52a865.png",
+     "tile_node": "3377:4860",
+     "tile_hover_node": "3377:5716",
+     "bbox": [
+      160.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "nang-talung-puppetry-horse",
+     "frame_id": "1161:3257"
+    },
+    {
+     "order": 7,
+     "tile_image_ref": "8e8012c469307548464985e27f28dcd9011ae8f9.png",
+     "tile_image_hover_ref": "877a983c9319ab26d3af57eb55186527142a186a.png",
+     "tile_node": "3377:4861",
+     "tile_hover_node": "3377:5719",
+     "bbox": [
+      394.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs",
+     "frame_id": "1161:3543"
+    }
+   ],
+   "tile_bg_page_sampled": "#DEDCC3",
+   "tiles_total": 7,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4843",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "a0a3da322630160430cdd9e9fc00f4c473cdbe0f.crop-3377-4846.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "naga",
@@ -208,20 +1444,279 @@
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
     "blackened-brass-ritual-holy-water-vessel",
-    "flintlock-firearm",
-    "wooden-chalk-line-reels",
     "a-sandstone-lintel-depicting-vishnu-anantashayana",
-    "balinese-naga-corbels",
-    "bencha-for-water-pouring-tradition",
-    "embossed-brass-basin-with-mythical-animal-motifs",
-    "flintlock-firearm-2",
+    "statue-of-shiva",
     "langguai-with-frog-and-snake-motifs",
+    "embossed-brass-basin-with-mythical-animal-motifs",
+    "wooden-chalk-line-reels",
+    "bencha-for-water-pouring-tradition",
     "naga-motifs-on-a-kolek-boat-in-the-style-of-southern-thailand",
-    "naga-headed-walking-stick",
     "naga-shaped-carved-wooden-corbel",
-    "statue-of-shiva"
+    "gold-naga-earrings",
+    "balinese-naga-corbels",
+    "flintlock-firearm",
+    "naga-headed-walking-stick"
    ],
-   "object_count": 13
+   "object_count": 13,
+   "title_on_trail_page": "Serpentine & Naga Trail",
+   "title_on_trail_page_raw": "Serpentine & Naga Trail",
+   "description": "Long before the Naga became part of Southeast Asia's religious traditions, communities across the region revered serpents as guardians of water, fertility and the natural world. This trail explores how these longstanding relationships have shaped ritual, art and everyday life.",
+   "cover_ref": "d8ac01c25d7a73429c5d2aebf97cb53e4a3e4c8f.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4969",
+   "trail_cover_node": "3377:4972",
+   "trail_title_node": "3377:4975",
+   "trail_description_node": "3377:4976",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1646.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     710.7,
+     396.0,
+     45.0
+    ],
+    "description": [
+     586.0,
+     687.2,
+     694.0,
+     92.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1550.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "b7f8271c26ebf05e3b043bd9f0c596126f9a79eb.png",
+     "tile_image_hover_ref": "b52ddbff4427209bd942f9f0855198d463405a06.png",
+     "tile_node": "3377:4980",
+     "tile_hover_node": "3377:5826",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "blackened-brass-ritual-holy-water-vessel",
+     "frame_id": "1203:3994"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "acacca8d56229027b79d51ad074c06f79a8fcc88.png",
+     "tile_image_hover_ref": "e1904067777b15ea8d0e2b11ef31978380e1e7a1.png",
+     "tile_node": "3377:4981",
+     "tile_hover_node": "3377:5829",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "a-sandstone-lintel-depicting-vishnu-anantashayana",
+     "frame_id": "1203:3714"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "ea808b049a6499bf57c356c1bfae144012535ca1.png",
+     "tile_image_hover_ref": "2e3f563cfb481dec2055cab5e42132e7460c58dc.png",
+     "tile_node": "3377:4982",
+     "tile_hover_node": "3377:5832",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "statue-of-shiva",
+     "frame_id": "1218:2378"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "41e28ea01339a9433437f4e0950b9ff02426ec81.png",
+     "tile_image_hover_ref": "f5d34b73a411a3ccdfdf613535880cd329d01301.png",
+     "tile_node": "3377:4983",
+     "tile_hover_node": "3377:5835",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "langguai-with-frog-and-snake-motifs",
+     "frame_id": "1205:4573"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "5dcf291571cff5117cd119aad66f1b890e95fc30.png",
+     "tile_image_hover_ref": "5e4cdb682dc582a42e000037cd672fc32ff13d84.png",
+     "tile_node": "3377:4984",
+     "tile_hover_node": "3377:5838",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "embossed-brass-basin-with-mythical-animal-motifs",
+     "frame_id": "1203:4085"
+    },
+    {
+     "order": 6,
+     "tile_image_ref": "a1d2d0a28fd2dea8bdcf1d323a1bcba190a520e6.png",
+     "tile_image_hover_ref": "d09458145e675c309ee651eda67c63d3692231e9.png",
+     "tile_node": "3377:4986",
+     "tile_hover_node": "3377:5841",
+     "bbox": [
+      160.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "wooden-chalk-line-reels",
+     "frame_id": "1218:2469"
+    },
+    {
+     "order": 7,
+     "tile_image_ref": "ae23bda0d4604aeeec1658ab24612ef04612ab69.png",
+     "tile_image_hover_ref": "9687d06190c436f6717fee452a72f56c72775eb2.png",
+     "tile_node": "3377:4987",
+     "tile_hover_node": "3377:5844",
+     "bbox": [
+      394.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "bencha-for-water-pouring-tradition",
+     "frame_id": "1203:3903"
+    },
+    {
+     "order": 8,
+     "tile_image_ref": "949281a71b05f5132590be087781b24e303022dc.png",
+     "tile_image_hover_ref": "ce22d735de382fd27e0e020cfcf330a6dab083ca.png",
+     "tile_node": "3377:4988",
+     "tile_hover_node": "3377:5847",
+     "bbox": [
+      628.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "naga-motifs-on-a-kolek-boat-in-the-style-of-southern-thailand",
+     "frame_id": "1218:2104"
+    },
+    {
+     "order": 9,
+     "tile_image_ref": "1cddc43198329855f04d495dbda032122d259e5f.png",
+     "tile_image_hover_ref": "f8d1e1420b3a5eda42bac6e6f8416608be4f3714.png",
+     "tile_node": "3377:4989",
+     "tile_hover_node": "3377:5850",
+     "bbox": [
+      862.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "naga-shaped-carved-wooden-corbel",
+     "frame_id": "1218:2288"
+    },
+    {
+     "order": 10,
+     "tile_image_ref": "6570fcc318cd1ffb21b2311b5b880a8e29465df4.png",
+     "tile_image_hover_ref": "d9c21bec7f1a627d52d9e38e2ed8e6f505047691.png",
+     "tile_node": "3377:4990",
+     "tile_hover_node": "3377:5853",
+     "bbox": [
+      1096.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "gold-naga-earrings",
+     "frame_id": "1205:4482"
+    },
+    {
+     "order": 11,
+     "tile_image_ref": "401cd46400425a16a437f122a905e0abb2c4aa9a.png",
+     "tile_image_hover_ref": "8183c0035a98da23a0c74736a98df93e74970ccf.png",
+     "tile_node": "3377:4992",
+     "tile_hover_node": "3377:5856",
+     "bbox": [
+      160.0,
+      1297.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "balinese-naga-corbels",
+     "frame_id": "1203:3812"
+    },
+    {
+     "order": 12,
+     "tile_image_ref": "f334cbddd17a33ae042f5d4e13d0ca2ca1bf9236.png",
+     "tile_image_hover_ref": "4a15d17cb92b7d0c57c27715d6111520c6a22191.png",
+     "tile_node": "3377:4993",
+     "tile_hover_node": "3377:5859",
+     "bbox": [
+      394.0,
+      1297.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "flintlock-firearm",
+     "frame_id": "1205:4177"
+    },
+    {
+     "order": 13,
+     "tile_image_ref": "70eb068742ccf43dc11056667ecf87891e97e753.png",
+     "tile_image_hover_ref": "ae47dcea20a04293087620e49b9b3c1dee26ca6c.png",
+     "tile_node": "3377:4994",
+     "tile_hover_node": "3377:5862",
+     "bbox": [
+      628.0,
+      1297.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "naga-headed-walking-stick",
+     "frame_id": "1218:2195"
+    }
+   ],
+   "tile_bg_page_sampled": "#F1ADA0",
+   "tiles_total": 13,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4969",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "d8ac01c25d7a73429c5d2aebf97cb53e4a3e4c8f.crop-3377-4972.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "water-bird",
@@ -239,18 +1734,248 @@
    },
    "in_zone_grid_frame_1472_1474": false,
    "object_slugs": [
-    "the-dragon-head-tortoise-and-crane-ornament",
+    "common-kingfisher",
+    "ng-s-n-drum",
+    "offering-vessel-in-the-form-of-a-hinta-bird",
+    "swan-shaped-holy-water-pot",
     "gold-swan-commemorative-fan-for-the-cremation-of-mom-suphab-kridakorn",
     "bangau-and-okok",
     "blue-and-white-dish-with-flattened-foliate-rim-decorated-with-a-pale-b",
     "celadon-glazed-kendi-in-goose-form",
-    "common-kingfisher",
-    "hamsa-bird-water-container",
     "keris-pekaka",
-    "offering-vessel-in-the-form-of-a-hinta-bird",
-    "ng-s-n-drum"
+    "the-dragon-head-tortoise-and-crane-ornament",
+    "hamsa-bird-water-container"
    ],
-   "object_count": 10
+   "object_count": 11,
+   "title_on_trail_page": "Waterbirds & Hamsa Trail",
+   "title_on_trail_page_raw": "Waterbirds & Hamsa Trail",
+   "description": "Communities in Southeast Asia have long shared with waterbirds the places where rivers meet the sea, and the coasts, wetlands and floodplains of the region. This trail explores how knowledge of these birds, gained through close observation, gave rise to stories, rituals and objects that continue to connect people with the region's waterscapes.",
+   "cover_ref": "107eca8d566e2378541138c2164c85d849d5417a.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:5023",
+   "trail_cover_node": "3377:5026",
+   "trail_title_node": "3377:5029",
+   "trail_description_node": "3377:5030",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1637.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     722.2,
+     427.0,
+     45.0
+    ],
+    "description": [
+     617.0,
+     687.2,
+     663.0,
+     115.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1541.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "fbae798f53509fdab76cf3e2d87df6b0b177a95a.png",
+     "tile_image_hover_ref": "c03a2fe7530dd508747902486dfe073a5dba291a.png",
+     "tile_node": "3377:5034",
+     "tile_hover_node": "3377:5882",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "common-kingfisher",
+     "frame_id": "1223:3313"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "498f2430e6b410f9fffd62e9be0fab760910aa92.png",
+     "tile_image_hover_ref": "2d07e11f2753322cfd756146a07890f217952b6f.png",
+     "tile_node": "3377:5035",
+     "tile_hover_node": "3377:5885",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "ng-s-n-drum",
+     "frame_id": "1223:3409"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "cc54bb23ef72275c93277c13cf7865601a124bbd.png",
+     "tile_image_hover_ref": "4c85f5653db7e0152df7b526ce0aff1c368e31ba.png",
+     "tile_node": "3377:5036",
+     "tile_hover_node": "3377:5888",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "offering-vessel-in-the-form-of-a-hinta-bird",
+     "frame_id": "1223:3776"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "d70d18a25d9ec4b0378d0e932b4098f576098e38.png",
+     "tile_image_hover_ref": "497939303811a106c9f99a74a181c55d9fcf31bd.png",
+     "tile_node": "3377:5037",
+     "tile_hover_node": "3377:5891",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "swan-shaped-holy-water-pot",
+     "frame_id": "3161:8461"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "6e433d6e5b1a3e72d4a76e8e739f91a30c8f4963.png",
+     "tile_image_hover_ref": "3b34d10fc9f77e29331d83416741732c6cf8e820.png",
+     "tile_node": "3377:5038",
+     "tile_hover_node": "3377:5894",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "gold-swan-commemorative-fan-for-the-cremation-of-mom-suphab-kridakorn",
+     "frame_id": "1223:3504"
+    },
+    {
+     "order": 6,
+     "tile_image_ref": "c4f2cddad8b617c831f06f37d9945c921cd7d98c.png",
+     "tile_image_hover_ref": "29c920d0bd41a8a4fa081c28bf5814b4b143fa80.png",
+     "tile_node": "3377:5040",
+     "tile_hover_node": "3377:5897",
+     "bbox": [
+      160.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "bangau-and-okok",
+     "frame_id": "1220:3036"
+    },
+    {
+     "order": 7,
+     "tile_image_ref": "3753979deadd9568233bcd8434a78a276a0a29ed.png",
+     "tile_image_hover_ref": "ee757442c988574095cec6744152b5ff228cbf46.png",
+     "tile_node": "3377:5041",
+     "tile_hover_node": "3377:5900",
+     "bbox": [
+      394.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "blue-and-white-dish-with-flattened-foliate-rim-decorated-with-a-pale-b",
+     "frame_id": "1220:3131"
+    },
+    {
+     "order": 8,
+     "tile_image_ref": "48c24ff314a9b54bc9b0af6cdc31b05cc1402c9b.png",
+     "tile_image_hover_ref": "a6e56b16b57a808d170a933442b7a3a7b815ad0a.png",
+     "tile_node": "3377:5042",
+     "tile_hover_node": "3377:5903",
+     "bbox": [
+      628.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "celadon-glazed-kendi-in-goose-form",
+     "frame_id": "1220:3222"
+    },
+    {
+     "order": 9,
+     "tile_image_ref": "ed93ec9ebb329c0631c0b9bab9d9d853082ed6df.png",
+     "tile_image_hover_ref": "2b8ccdd3736b45ad21497d7c64b793b66e5667be.png",
+     "tile_node": "3377:5043",
+     "tile_hover_node": "3377:5906",
+     "bbox": [
+      862.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "keris-pekaka",
+     "frame_id": "1223:3685"
+    },
+    {
+     "order": 10,
+     "tile_image_ref": "ae3277ba12de8e5fa5c7ca8e4c526121543f7fcf.png",
+     "tile_image_hover_ref": "c35f41f3c7389d60c53dde241adb81fb8cdb02ea.png",
+     "tile_node": "3377:5044",
+     "tile_hover_node": "3377:5909",
+     "bbox": [
+      1096.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "the-dragon-head-tortoise-and-crane-ornament",
+     "frame_id": "1223:3867"
+    },
+    {
+     "order": 11,
+     "tile_image_ref": "28e77533206f82cc799127fdbf59146dda3aa901.png",
+     "tile_image_hover_ref": "1df02bdba4da7908d379dea7c6e0f9b00c40aac2.png",
+     "tile_node": "3377:5046",
+     "tile_hover_node": "3377:5912",
+     "bbox": [
+      160.0,
+      1297.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "hamsa-bird-water-container",
+     "frame_id": "1223:3594"
+    }
+   ],
+   "tile_bg_page_sampled": "#7EB7A6",
+   "tiles_total": 11,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:5023",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "107eca8d566e2378541138c2164c85d849d5417a.crop-3377-5026.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "makara",
@@ -268,11 +1993,154 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
-    "jar-decorated-with-fish-and-a-beast",
     "estuarine-crocodile",
-    "makara-palanquin-ornament"
+    "makara-palanquin-ornament",
+    "jar-decorated-with-fish-and-a-beast"
    ],
-   "object_count": 3
+   "object_count": 3,
+   "title_on_trail_page": "Makara Trail",
+   "title_on_trail_page_raw": "Makara Trail",
+   "description": "What happens when communities combine the qualities of different animals into a single mythical being? Inspired by the crocodile and other creatures of land and water, the makara became one of Southeast Asia's enduring guardians. This trail follows how communities reimagined the makara through ritual, architecture and everyday life.",
+   "cover_ref": "04139aa52f5de4c89f16d1aafb98c1c2d29eae98.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4891",
+   "trail_cover_node": "3377:4894",
+   "trail_title_node": "3377:4897",
+   "trail_description_node": "3377:4898",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1416.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     710.7,
+     214.0,
+     45.0
+    ],
+    "description": [
+     404.0,
+     687.2,
+     876.0,
+     92.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1320.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "77d84c86e681408da172e84a8e60c68e68c001bd.png",
+     "tile_image_hover_ref": "9a4ee322ba8d0d32314b67f00ee019ea9aaea41b.png",
+     "tile_node": "3377:4902",
+     "tile_hover_node": "3377:5742",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": null,
+     "title_note": "Skull of Saltwater Crocodile",
+     "note_node": "1170:2981",
+     "status": "no_detail_frame_in_figma"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "c8066c17ab1dbd423bb454a284c3b9d11476dbdc.png",
+     "tile_image_hover_ref": "21b45dbee42192ce26b624f1663273071a52dccb.png",
+     "tile_node": "3377:4903",
+     "tile_hover_node": "3377:5745",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "estuarine-crocodile",
+     "frame_id": "1170:2694"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "e7f33e8789619ca1ee06fbde6b8e589b8d5b0631.png",
+     "tile_image_hover_ref": "a7610fef452528f0aae4578c9e417b24176710e3.png",
+     "tile_node": "3377:4904",
+     "tile_hover_node": "3377:5748",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": null,
+     "title_note": "Sungai Mas Makara",
+     "note_node": "1170:2985",
+     "status": "no_detail_frame_in_figma"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "7837aa43adf883e2d1e765bbcb6057ad3f092295.png",
+     "tile_image_hover_ref": "34d0caaed27d36c78003821a12b51e4c3bee0777.png",
+     "tile_node": "3377:4905",
+     "tile_hover_node": "3377:5751",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "makara-palanquin-ornament",
+     "frame_id": "1170:2886"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "2167bde85884225c23ec15b5b52171d29a3924ba.png",
+     "tile_image_hover_ref": "46733b80e993a023dbdd73dd3fc721dc1daa3a27.png",
+     "tile_node": "3377:4906",
+     "tile_hover_node": "3377:5754",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "jar-decorated-with-fish-and-a-beast",
+     "frame_id": "1170:2791"
+    }
+   ],
+   "tile_bg_page_sampled": "#CFA5BA",
+   "tiles_total": 5,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4891",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "04139aa52f5de4c89f16d1aafb98c1c2d29eae98.crop-3377-4894.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "lion",
@@ -290,14 +2158,168 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
-    "embossed-brass-basin-with-mythical-animal-motifs",
-    "antique-chinese-blue-and-white-porcelain-pillow",
-    "balinese-singha",
-    "gold-sheathed-lion-shaped-betel-nut-cutter",
     "monk-s-alms-bowl",
-    "singabarong-cloth"
+    "balinese-singha",
+    "embossed-brass-basin-with-mythical-animal-motifs",
+    "singabarong-cloth",
+    "antique-chinese-blue-and-white-porcelain-pillow",
+    "gold-sheathed-lion-shaped-betel-nut-cutter"
    ],
-   "object_count": 6
+   "object_count": 6,
+   "title_on_trail_page": "Lion Trail",
+   "title_on_trail_page_raw": "Lion Trail",
+   "description": "While lions have never inhabited Southeast Asia, communities across the region incorporated them into their artistic, religious and material traditions. Reimagined through local beliefs and practices, the lion is part of the region’s shared heritage, which emerged through creativity, encounter and cultural exchange.",
+   "cover_ref": "757fcf264de946f5678d7cdeee2675b3dec02b92.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4867",
+   "trail_cover_node": "3377:4870",
+   "trail_title_node": "3377:4873",
+   "trail_description_node": "3377:4874",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1416.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     699.2,
+     155.0,
+     45.0
+    ],
+    "description": [
+     345.0,
+     687.2,
+     935.0,
+     69.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1320.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "ee5ec39e88fc65b027019bf95f46c91fc7616e0f.png",
+     "tile_image_hover_ref": "9250a1ef9572dde3a0a13bb6c9ed5f63a59a6c61.png",
+     "tile_node": "3377:4878",
+     "tile_hover_node": "3377:5723",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "monk-s-alms-bowl",
+     "frame_id": "1170:2497"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "2dd1b2eb919eed5c8f3a67ba4a1e8b4cd22fd023.png",
+     "tile_image_hover_ref": "0b0dc3c8c5a95d6a0e4b323fb76f39f80f36b7ba.png",
+     "tile_node": "3377:4879",
+     "tile_hover_node": "3377:5726",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "balinese-singha",
+     "frame_id": "1168:2216"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "00ee3e3e56a14a3d38c8d17a988cc32ff848d88b.png",
+     "tile_image_hover_ref": "d041cffd72e6216eb4ebae2e9b061fe818d24a20.png",
+     "tile_node": "3377:4880",
+     "tile_hover_node": "3377:5729",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "embossed-brass-basin-with-mythical-animal-motifs",
+     "frame_id": "1168:2307"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "2a33f63656cc956e44c1dd612945a54c4d026e05.png",
+     "tile_image_hover_ref": "d4f599b0fd48ec44cabc175761796efdea0573a1.png",
+     "tile_node": "3377:4881",
+     "tile_hover_node": "3377:5732",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "singabarong-cloth",
+     "frame_id": "1170:2592"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "0e446a04f187bbaf13fe2bee3bed85f271b9205c.png",
+     "tile_image_hover_ref": "06b1b32b42ee06ed8e5b33410089c25a2b19c75e.png",
+     "tile_node": "3377:4882",
+     "tile_hover_node": "3377:5735",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "antique-chinese-blue-and-white-porcelain-pillow",
+     "frame_id": "1167:2113"
+    },
+    {
+     "order": 6,
+     "tile_image_ref": "eb262726af09c911a98693af27599c4ad7706e88.png",
+     "tile_image_hover_ref": "c61585858b27c5cf67cf85dd2568ea99c3ab9246.png",
+     "tile_node": "3377:4884",
+     "tile_hover_node": "3377:5738",
+     "bbox": [
+      160.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "gold-sheathed-lion-shaped-betel-nut-cutter",
+     "frame_id": "1169:2406"
+    }
+   ],
+   "tile_bg_page_sampled": "#DEDCC3",
+   "tiles_total": 6,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4867",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "757fcf264de946f5678d7cdeee2675b3dec02b92.crop-3377-4870.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "seashell",
@@ -315,22 +2337,296 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
-    "dragon-shaped-mother-of-pearl-inlaid-incense-tray",
-    "monk-s-alms-bowl",
-    "bronze-drum-ng-s-n-drum",
-    "chanap",
-    "containers-with-mother-of-pearl-inlay",
-    "cowrie-shells",
     "giant-clams",
-    "kalung",
-    "mother-of-pearl-furniture-depicting-animals",
     "neptune-cup-sponge",
-    "phra-upagutta-enshrined-in-a-conch-shell",
     "sacred-conch-shell",
     "shell-beads-blood-cockle",
-    "unglazed-stoneware-conches"
+    "phra-upagutta-enshrined-in-a-conch-shell",
+    "monk-s-alms-bowl",
+    "ng-s-n-drum",
+    "unglazed-stoneware-conches",
+    "chanap",
+    "cowrie-shells",
+    "mother-of-pearl-furniture-depicting-animals",
+    "dragon-shaped-mother-of-pearl-inlaid-incense-tray",
+    "kalung",
+    "containers-with-mother-of-pearl-inlay"
    ],
-   "object_count": 14
+   "object_count": 14,
+   "title_on_trail_page": "Seashell & Marine Invertebrates Trail",
+   "title_on_trail_page_raw": "Seashell & \nMarine Invertebrates Trail",
+   "description": "Seashells and marine invertebrates, such as giant clams and sponges, were transported throughout Southeast Asia over centuries as ornaments, currency, ritual objects and works of art. This trail follows their remarkable journeys, revealing how communities transformed seashells and marine invertebrates into enduring expressions of belief and identity.",
+   "cover_ref": "93c58bc38f4d5d48afb42885fb1dc0431eabc383.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4939",
+   "trail_cover_node": "3377:4942",
+   "trail_title_node": "3377:4945",
+   "trail_description_node": "3377:4946",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1646.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     699.7,
+     436.0,
+     90.0
+    ],
+    "description": [
+     626.0,
+     687.2,
+     654.0,
+     115.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1550.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "33b1445224b55b21998bcb815d1c87a519ff9577.png",
+     "tile_image_hover_ref": "73d5da8215e1e1cae75933d75fc85c9300d1639f.png",
+     "tile_node": "3377:4950",
+     "tile_hover_node": "3377:5783",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "giant-clams",
+     "frame_id": "1200:2838"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "1f0ecd7d4ad6d67066f8a17bd99c937acd405fb4.png",
+     "tile_image_hover_ref": "438b5d18e7836d393b7f75243a603dce9da63672.png",
+     "tile_node": "3377:4951",
+     "tile_hover_node": "3377:5786",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "neptune-cup-sponge",
+     "frame_id": "1200:3203"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "d9a1eb11c0fa6fb900cbf222021e4ed763d74117.png",
+     "tile_image_hover_ref": "7e21af207340cb3bda965802975e741d7caa3b26.png",
+     "tile_node": "3377:4952",
+     "tile_hover_node": "3377:5789",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "sacred-conch-shell",
+     "frame_id": "1200:3385"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "55733a7e702dc09d0a8434646d6e72a3a86d0b5a.png",
+     "tile_image_hover_ref": "f53967ff3141891593b5e2da088dbac44099df27.png",
+     "tile_node": "3377:4953",
+     "tile_hover_node": "3377:5792",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "shell-beads-blood-cockle",
+     "frame_id": "1200:3476"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "1b328ddc48b5cbef2593a47928795f741a54f2a7.png",
+     "tile_image_hover_ref": "6fbf97f95db307c8d3875449cb25abe16f0659e5.png",
+     "tile_node": "3377:4954",
+     "tile_hover_node": "3377:5795",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "phra-upagutta-enshrined-in-a-conch-shell",
+     "frame_id": "1200:3295"
+    },
+    {
+     "order": 6,
+     "tile_image_ref": "7e0169400b377d0fa2097f9e0e4c2d53f1c2c1b9.png",
+     "tile_image_hover_ref": "4a44cf5a74917973789c07d520b8d1d53e261105.png",
+     "tile_node": "3377:4956",
+     "tile_hover_node": "3377:5798",
+     "bbox": [
+      160.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "monk-s-alms-bowl",
+     "frame_id": "1200:3021"
+    },
+    {
+     "order": 7,
+     "tile_image_ref": "5a7acb777270f4925e7726b4aecebe5e6b19ce28.png",
+     "tile_image_hover_ref": "0646a3e0980336119f1b6576ea33bf3644250a5d.png",
+     "tile_node": "3377:4957",
+     "tile_hover_node": "3377:5801",
+     "bbox": [
+      394.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "ng-s-n-drum",
+     "frame_id": "1194:2376"
+    },
+    {
+     "order": 8,
+     "tile_image_ref": "bcd46d3d81029fefcb4104754c333fa79894640d.png",
+     "tile_image_hover_ref": "1510fa1eeb4d6aac5042db6966caa69144b948fc.png",
+     "tile_node": "3377:4958",
+     "tile_hover_node": "3377:5804",
+     "bbox": [
+      628.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "unglazed-stoneware-conches",
+     "frame_id": "1200:3568"
+    },
+    {
+     "order": 9,
+     "tile_image_ref": "346978f59bedc597a29ee01de73c7e6138b044c2.png",
+     "tile_image_hover_ref": "0294cc12cc1a104cc9f3f56113329ba2e5401f05.png",
+     "tile_node": "3377:4959",
+     "tile_hover_node": "3377:5807",
+     "bbox": [
+      862.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "chanap",
+     "frame_id": "1200:2473"
+    },
+    {
+     "order": 10,
+     "tile_image_ref": "eaf31d16c0733a48aa19560ca5ddf40ebf34a4b3.png",
+     "tile_image_hover_ref": "bdbc2ce6dc2cac1cd6af7098494e11f12078c142.png",
+     "tile_node": "3377:4960",
+     "tile_hover_node": "3377:5810",
+     "bbox": [
+      1096.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "cowrie-shells",
+     "frame_id": "1200:2655"
+    },
+    {
+     "order": 11,
+     "tile_image_ref": "68e5904f980a5b11b6ac7fff3ffce1d7fa3dd720.png",
+     "tile_image_hover_ref": "5731dc701e9c3e4153d39c069572d2397b1ee3ea.png",
+     "tile_node": "3377:4962",
+     "tile_hover_node": "3377:5813",
+     "bbox": [
+      160.0,
+      1297.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "mother-of-pearl-furniture-depicting-animals",
+     "frame_id": "1200:3112"
+    },
+    {
+     "order": 12,
+     "tile_image_ref": "9d48caa0a2c382a9687cea44132ddf313e8eb970.png",
+     "tile_image_hover_ref": "59e52f9e970687d87d88a4948cc953934a81200a.png",
+     "tile_node": "3377:4963",
+     "tile_hover_node": "3377:5816",
+     "bbox": [
+      394.0,
+      1297.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "dragon-shaped-mother-of-pearl-inlaid-incense-tray",
+     "frame_id": "1200:2747"
+    },
+    {
+     "order": 13,
+     "tile_image_ref": "b00ba4af508d8549c5ade5a97685497f9dadbee2.png",
+     "tile_image_hover_ref": "14afb75a6762da3c6b7c5a89a1807ee788bf09ce.png",
+     "tile_node": "3377:4964",
+     "tile_hover_node": "3377:5819",
+     "bbox": [
+      628.0,
+      1297.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "kalung",
+     "frame_id": "1200:2929"
+    },
+    {
+     "order": 14,
+     "tile_image_ref": "03d5a93c3218b41858f36df59c201dc7d5648b37.png",
+     "tile_image_hover_ref": "df72e1c39dbe4945ce5cee411dfe52c373b379d2.png",
+     "tile_node": "3377:4965",
+     "tile_hover_node": "3377:5822",
+     "bbox": [
+      862.0,
+      1297.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "containers-with-mother-of-pearl-inlay",
+     "frame_id": "1200:2564"
+    }
+   ],
+   "tile_bg_page_sampled": "#CFA5BA",
+   "tiles_total": 14,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4939",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "93c58bc38f4d5d48afb42885fb1dc0431eabc383.crop-3377-4942.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "buffalo",
@@ -348,13 +2644,159 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
+    "oracle-bone",
+    "perminaken",
     "monk-s-alms-bowl",
     "buffalo-shaped-water-container",
-    "calapa-with-buffalo-shape",
-    "perminaken",
-    "sumatran-serow"
+    "calapa-with-buffalo-shape"
    ],
-   "object_count": 5
+   "object_count": 5,
+   "title_on_trail_page": "Buffalo Trail",
+   "title_on_trail_page_raw": "Buffalo Trail",
+   "description": "The water buffalo (Bubalus bubalis) has lived alongside the peoples of Southeast Asia for centuries. Domesticated from wild ancestors, it became an indispensable companion in monsoon agriculture, wet-rice fields and the village economies that sustained communities across the region. Through its role in farming and daily life, the buffalo has helped shape both the landscapes and livelihoods of Southeast Asia.",
+   "cover_ref": "3114e8d68368447995ae59b86fca1bb2c528c5b5.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4633",
+   "trail_cover_node": "3377:4636",
+   "trail_title_node": "3377:4639",
+   "trail_description_node": "3377:4640",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1184.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     710.7,
+     206.0,
+     45.0
+    ],
+    "description": [
+     396.0,
+     687.2,
+     884.0,
+     92.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1088.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "be6776dc1b027f97ca6ca4023def091d454fa62f.png",
+     "tile_image_hover_ref": "fc9a9ab46421b916b155f1e55f6cce198fb09807.png",
+     "tile_node": "3377:4644",
+     "tile_hover_node": "3377:5541",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "oracle-bone",
+     "frame_id": "3218:3649"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "66928328a1ad08315ded476c7ecf9bdcb2945150.png",
+     "tile_image_hover_ref": "0c77d9ee88e94f72a41b8265f639991012b12905.png",
+     "tile_node": "3377:4645",
+     "tile_hover_node": "3377:5544",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "perminaken",
+     "frame_id": "1079:1014"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "15a860b12fe386df535c6160cc09bb450a5cbee9.png",
+     "tile_image_hover_ref": "b98e9d5b241adb1fbd6e776c5aa18b066a645a21.png",
+     "tile_node": "3377:4646",
+     "tile_hover_node": "3377:5547",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "monk-s-alms-bowl",
+     "frame_id": "1075:1164"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "2c06cf0749801e5fb58d38967f6e20b0c789ae29.png",
+     "tile_image_hover_ref": "41b7bfb28b8ca69b3626c606f71a0a7c44f0dd8b.png",
+     "tile_node": "3377:4647",
+     "tile_hover_node": "3377:5550",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "buffalo-shaped-water-container",
+     "frame_id": "1075:1522"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "dabf695eff4c2f190b9800dd05ba6ea0c0791572.png",
+     "tile_image_hover_ref": "70a313144649046f262577067f86d982a3323738.png",
+     "tile_node": "3377:4648",
+     "tile_hover_node": "3377:5553",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "calapa-with-buffalo-shape",
+     "frame_id": "1079:573"
+    }
+   ],
+   "tile_bg_page_sampled": "#DEDCC3",
+   "tiles_total": 5,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4633",
+    "materials_section": "3377:5466"
+   },
+   "materials_without_tile": [
+    {
+     "materials_set": "3377:5554",
+     "set_name": "Buffalo 6",
+     "default_ref": "17ca901679fbccd2201ee208d5718a801ad1f905.png"
+    }
+   ],
+   "cover_crop_ref": "3114e8d68368447995ae59b86fca1bb2c528c5b5.crop-3377-4636.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "phoenix",
@@ -373,16 +2815,200 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
-    "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
-    "blue-and-white-qinghua-porcelain-plate",
-    "covered-box-decorated-with-phoenixes",
-    "kam-cheng",
-    "offering-dish",
-    "pending-2",
     "porcelain-plate-depicting-phoenix",
-    "tiga-negeri-cloth"
+    "pending-3",
+    "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+    "offering-dish",
+    "blue-and-white-qinghua-porcelain-plate",
+    "kam-cheng",
+    "tiga-negeri-cloth",
+    "covered-box-decorated-with-phoenixes"
    ],
-   "object_count": 8
+   "object_count": 8,
+   "title_on_trail_page": "Phoenix Trail",
+   "title_on_trail_page_raw": "Phoenix Trail",
+   "description": "In Chinese tradition, the fenghuang (phoenix) is a composite creature with the neck of a snake, the breast of a swallow, the back of a tortoise, the tail of a fish and five-coloured plumage; a mythical bird whose harmonious form no single species could embody alone.",
+   "cover_ref": "3a4e41536ae15ba4b024a4cde27f0f3a876f6719.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4915",
+   "trail_cover_node": "3377:4918",
+   "trail_title_node": "3377:4921",
+   "trail_description_node": "3377:4922",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1416.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     699.2,
+     221.0,
+     45.0
+    ],
+    "description": [
+     411.0,
+     687.2,
+     869.0,
+     69.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1320.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "a75844334120ed6cdbd9c86786970fb7021ea96e.png",
+     "tile_image_hover_ref": "fdb25d4387a9be0f7e137ed30548533ed83bb975.png",
+     "tile_node": "3377:4926",
+     "tile_hover_node": "3377:5758",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "porcelain-plate-depicting-phoenix",
+     "frame_id": "1170:3476"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "040949b280aff82dbddd0397fb719c2b2cc17117.png",
+     "tile_image_hover_ref": "4ed83a39693b23241f3090b1d1590baead38fb74.png",
+     "tile_node": "3377:4927",
+     "tile_hover_node": "3377:5761",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "pending-3",
+     "frame_id": "1170:3381"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "552d1b341b8ab53b9e6a5b0d436df623d7466a7a.png",
+     "tile_image_hover_ref": "55626b208efee95e92bb9dcd8f34812155014287.png",
+     "tile_node": "3377:4928",
+     "tile_hover_node": "3377:5764",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "rooster-headed-brass-charcoal-iron-adorned-with-dragon-and-phoenix-rel",
+     "frame_id": "1170:3571"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "14e6b18a260e4c48a507e10688fe1e1a505595c1.png",
+     "tile_image_hover_ref": "67cb401abb4b63a3214f60d5d4c6b9b071425dd2.png",
+     "tile_node": "3377:4929",
+     "tile_hover_node": "3377:5767",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "offering-dish",
+     "frame_id": "1170:3286"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "a2e15483e7d0071fbdfcc7f1e3a669f8dc30806a.png",
+     "tile_image_hover_ref": "fd231c38faef0c95026747c7cbaa6e58bc31a69b.png",
+     "tile_node": "3377:4930",
+     "tile_hover_node": "3377:5770",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "blue-and-white-qinghua-porcelain-plate",
+     "frame_id": "1170:2998"
+    },
+    {
+     "order": 6,
+     "tile_image_ref": "6b6735eb5bfe5bb4e811dafa66f90a13f4b45274.png",
+     "tile_image_hover_ref": "194d515194c409738c53b8fa1171c926da053649.png",
+     "tile_node": "3377:4932",
+     "tile_hover_node": "3377:5773",
+     "bbox": [
+      160.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "kam-cheng",
+     "frame_id": "1170:3195"
+    },
+    {
+     "order": 7,
+     "tile_image_ref": "6bf6674046a1f6f1a467e1b1ba856fa04f3f310c.png",
+     "tile_image_hover_ref": "5b8c7a279db5c2bd5f9a75e511998abf02346a05.png",
+     "tile_node": "3377:4933",
+     "tile_hover_node": "3377:5776",
+     "bbox": [
+      394.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "tiga-negeri-cloth",
+     "frame_id": "1172:3666"
+    },
+    {
+     "order": 8,
+     "tile_image_ref": "dd7d34c58dabdcdefc3f20023aa1f68c1373260a.png",
+     "tile_image_hover_ref": "c96e30802b0a40b044148a67b85cdebce7a1a514.png",
+     "tile_node": "3377:4934",
+     "tile_hover_node": "3377:5779",
+     "bbox": [
+      628.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "covered-box-decorated-with-phoenixes",
+     "frame_id": "1170:3100"
+    }
+   ],
+   "tile_bg_page_sampled": "#F1ADA0",
+   "tiles_total": 8,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4915",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "3a4e41536ae15ba4b024a4cde27f0f3a876f6719.crop-3377-4918.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "bird",
@@ -400,16 +3026,200 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
-    "batik-hokokai-long-cloth",
-    "betel-box-set-of-sultan-abdul-samad",
-    "garment-for-buddhist-prostration-featuring-garuda-and-peacock-motifs",
     "green-peafowl",
-    "kalakati",
-    "noken",
+    "quail-shaped-silver-casket",
+    "garment-for-buddhist-prostration-featuring-garuda-and-peacock-motifs",
     "pending-3",
-    "quail-shaped-silver-casket"
+    "batik-hokokai-long-cloth",
+    "kalakati",
+    "betel-box-set-of-sultan-abdul-samad",
+    "noken"
    ],
-   "object_count": 8
+   "object_count": 8,
+   "title_on_trail_page": "Bird Trail",
+   "title_on_trail_page_raw": "Bird Trail",
+   "description": "In Southeast Asia, birds feature as integral elements of the region's cultural heritage, serving as symbols of national identity and spirituality. Communities across the region view birds as protectors and companions and as representing the connections between nature, belief and everyday life.",
+   "cover_ref": "bb703f6e735a15e55d808edaa531f3fa4f945471.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4609",
+   "trail_cover_node": "3377:4612",
+   "trail_title_node": "3377:4615",
+   "trail_description_node": "3377:4616",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1416.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     699.2,
+     151.0,
+     45.0
+    ],
+    "description": [
+     341.0,
+     687.2,
+     939.0,
+     69.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1320.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "4c493fdc4a29e8f97679610b3f1cad52d5d08b9e.png",
+     "tile_image_hover_ref": "f8cdca6ed2122344a967c09723c63a2c6f630690.png",
+     "tile_node": "3377:4620",
+     "tile_hover_node": "3377:5516",
+     "bbox": [
+      160.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "green-peafowl",
+     "frame_id": "1096:4104"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "e8f86ca0a69e441375fc1d5ab74e313feda3545d.png",
+     "tile_image_hover_ref": "cfe56b765b0a84e3f7fca36aeebe99f5371752a4.png",
+     "tile_node": "3377:4621",
+     "tile_hover_node": "3377:5519",
+     "bbox": [
+      394.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "quail-shaped-silver-casket",
+     "frame_id": "1069:2433"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "ede17f66f8eceae230d49144785f1f5ab2840430.png",
+     "tile_image_hover_ref": "c5a6b8cbff61d03d83422eed01785a4bdf9ef882.png",
+     "tile_node": "3377:4622",
+     "tile_hover_node": "3377:5522",
+     "bbox": [
+      628.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "garment-for-buddhist-prostration-featuring-garuda-and-peacock-motifs",
+     "frame_id": "1091:3326"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "d8d6913ad0e60a61274ea08200343489c838b551.png",
+     "tile_image_hover_ref": "34af4c3773431093fc2747eedde9828f057e877e.png",
+     "tile_node": "3377:4623",
+     "tile_hover_node": "3377:5525",
+     "bbox": [
+      862.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "pending-3",
+     "frame_id": "1090:2840"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "811b911b46a6d70227fc4111c40b9219f80a1dc1.png",
+     "tile_image_hover_ref": "3de7ee185bb8b355576c3485ff3bd23da2062571.png",
+     "tile_node": "3377:4624",
+     "tile_hover_node": "3377:5528",
+     "bbox": [
+      1096.0,
+      829.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "batik-hokokai-long-cloth",
+     "frame_id": "1080:1959"
+    },
+    {
+     "order": 6,
+     "tile_image_ref": "410e483e3582c01a940bd8f329ed129eca356433.png",
+     "tile_image_hover_ref": "a1449d4d677257f37202640ee2b3342a46692651.png",
+     "tile_node": "3377:4626",
+     "tile_hover_node": "3377:5531",
+     "bbox": [
+      160.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "kalakati",
+     "frame_id": "1069:941"
+    },
+    {
+     "order": 7,
+     "tile_image_ref": "1949dc089bc2ffd3dc8fdbaca1143006df05400a.png",
+     "tile_image_hover_ref": "b00f7af8ed959c661dcabc0080b60487cb03df42.png",
+     "tile_node": "3377:4627",
+     "tile_hover_node": "3377:5534",
+     "bbox": [
+      394.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "betel-box-set-of-sultan-abdul-samad",
+     "frame_id": "1080:2358"
+    },
+    {
+     "order": 8,
+     "tile_image_ref": "12ddaf805b293df0d2ab738e48ecfdae0345e002.png",
+     "tile_image_hover_ref": "a89aa420ebd1cc2f47929a8b835c2d21a0b497a5.png",
+     "tile_node": "3377:4628",
+     "tile_hover_node": "3377:5537",
+     "bbox": [
+      628.0,
+      1063.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "noken",
+     "frame_id": "1069:1736"
+    }
+   ],
+   "tile_bg_page_sampled": "#7EB7A6",
+   "tiles_total": 8,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4609",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "bb703f6e735a15e55d808edaa531f3fa4f945471.crop-3377-4612.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "garuda",
@@ -427,13 +3237,152 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
-    "liturgical-pulpit-covers",
-    "embossed-brass-basin-with-mythical-animal-motifs",
+    "sandstone-garuda",
     "garment-for-buddhist-prostration-featuring-garuda-and-peacock-motifs",
+    "embossed-brass-basin-with-mythical-animal-motifs",
     "garuda-sculptures",
-    "sandstone-garuda"
+    "liturgical-pulpit-covers"
    ],
-   "object_count": 5
+   "object_count": 5,
+   "title_on_trail_page": "Garuda Trail",
+   "title_on_trail_page_raw": "Garuda Trail",
+   "description": "Garuda is a mythical bird-human creature inspired by close observation of real birds of prey. Its ancient rivalry with serpents echoes the relationship in nature in which large raptors prey upon snakes. Communities observing this relationship came to understand powerful birds as protectors against creatures that are sometimes associated with danger. Garuda, a great bird-like being and the mount of Vishnu, is one of Hindu mythology's most enduring figures; embodying strength, knowledge, courage and discipline.",
+   "cover_ref": "3eafff01bcad3d07ff7f9ef2513d6f5a26aa2061.png",
+   "cover_size": [
+    4096,
+    2304
+   ],
+   "trail_page_frame": "3377:4795",
+   "trail_cover_node": "3377:4798",
+   "trail_title_node": "3377:4801",
+   "trail_description_node": "3377:4802",
+   "trail_page_layout": {
+    "frame_size": [
+     1440.0,
+     1444.0
+    ],
+    "cover": [
+     160.0,
+     150.0,
+     1120.0,
+     490.0
+    ],
+    "cover_scale_mode": "STRETCH",
+    "title": [
+     160.0,
+     722.2,
+     206.0,
+     45.0
+    ],
+    "description": [
+     396.0,
+     687.2,
+     884.0,
+     115.0
+    ],
+    "description_font": {
+     "size": 18.0,
+     "lh": 22.5,
+     "align": "JUSTIFIED",
+     "color": "#212529"
+    },
+    "title_color": "#212529",
+    "back_button": [
+     160.0,
+     1348.0,
+     115.0,
+     50.0
+    ]
+   },
+   "tiles": [
+    {
+     "order": 1,
+     "tile_image_ref": "1827500b6a2c137b872269ee2ecf8b8b8b62124c.jpg",
+     "tile_image_hover_ref": "fb1658b6575e2e25bde1e5c05b58f49e931146ec.jpg",
+     "tile_node": "3377:4806",
+     "tile_hover_node": "3377:5663",
+     "bbox": [
+      160.0,
+      875.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "sandstone-garuda",
+     "frame_id": "1159:2099"
+    },
+    {
+     "order": 2,
+     "tile_image_ref": "354862ca83cf6da20a1bdac4c7bb6af0af9dd975.jpg",
+     "tile_image_hover_ref": "31071b459bc4c2e66cfc10525b0f8f6bae47f538.jpg",
+     "tile_node": "3377:4807",
+     "tile_hover_node": "3377:5666",
+     "bbox": [
+      394.0,
+      875.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "garment-for-buddhist-prostration-featuring-garuda-and-peacock-motifs",
+     "frame_id": "1153:1146"
+    },
+    {
+     "order": 3,
+     "tile_image_ref": "089647e64e38d7328d8f563f9da119bf554818e3.jpg",
+     "tile_image_hover_ref": "e1afa01e9af5ddd5c7055161320365a0f9f7cbd9.jpg",
+     "tile_node": "3377:4808",
+     "tile_hover_node": "3377:5669",
+     "bbox": [
+      628.0,
+      875.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "embossed-brass-basin-with-mythical-animal-motifs",
+     "frame_id": "1153:1051"
+    },
+    {
+     "order": 4,
+     "tile_image_ref": "8428e71bcc441ecea1da55185080518897c441fd.jpg",
+     "tile_image_hover_ref": "0e852035a30f543a9a2e79cd36a8198d9dd0cf37.jpg",
+     "tile_node": "3377:4809",
+     "tile_hover_node": "3377:5672",
+     "bbox": [
+      862.0,
+      875.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "garuda-sculptures",
+     "frame_id": "1153:1244"
+    },
+    {
+     "order": 5,
+     "tile_image_ref": "8e2fad27bc5dccecc95cd732189e8f665aaf4fc2.jpg",
+     "tile_image_hover_ref": "7b9e3263519c5d7701bd13d294165ace965118ab.jpg",
+     "tile_node": "3377:4810",
+     "tile_hover_node": "3377:5675",
+     "bbox": [
+      1096.0,
+      875.2,
+      184.0,
+      184.0
+     ],
+     "object_slug": "liturgical-pulpit-covers",
+     "frame_id": "1157:1961"
+    }
+   ],
+   "tile_bg_page_sampled": "#F1ADA0",
+   "tiles_total": 5,
+   "figma_2026_11_17": {
+    "lastModified": "2026-11-17T03:50:23Z",
+    "page_frame": "3377:4795",
+    "materials_section": "3377:5466"
+   },
+   "cover_crop_ref": "3eafff01bcad3d07ff7f9ef2513d6f5a26aa2061.crop-3377-4798.png",
+   "cover_crop_size": [
+    2240,
+    980
+   ]
   },
   {
    "slug": "elephant",
@@ -474,7 +3423,65 @@
    "description": "Elephants have lived alongside the peoples of South-East Asia for millennia, shaping forests and contributing to livelihoods, beliefs and artistic traditions. Across the region, communities have interpreted the elephant in various ways but have nevertheless created a shared heritage rooted in long-term relationships between people, animals and the environments they inhabit.",
    "trail_page_frame": "796:1795 (Desktop - 1501)",
    "trail_cover_node": "796:1799",
-   "timeline_page_frame": "670:1551 (Desktop - zone 4)"
+   "timeline_page_frame": "670:1551 (Desktop - zone 4)",
+   "figma_2026_11_17": {
+    "cover_crop_ref": "ed0e5ee93dd264f7f2bee4007437a5b16c92ad64.crop-3377-4720.png",
+    "cover_crop_size": [
+     1680,
+     735
+    ],
+    "title_on_trail_page": "Elephant Trail",
+    "title_on_trail_page_raw": "Elephant Trail",
+    "description": "Elephants have lived alongside the peoples of South-East Asia for millennia, shaping forests and contributing to livelihoods, beliefs and artistic traditions. Across the region, communities have interpreted the elephant in various ways but have nevertheless created a shared heritage rooted in long-term relationships between people, animals and the environments they inhabit.",
+    "cover_ref": "ed0e5ee93dd264f7f2bee4007437a5b16c92ad64.png",
+    "cover_size": [
+     1920,
+     1080
+    ],
+    "trail_page_frame": "3377:4717",
+    "trail_cover_node": "3377:4720",
+    "trail_page_layout": {
+     "frame_size": [
+      1440.0,
+      1632.0
+     ],
+     "cover": [
+      160.0,
+      150.0,
+      1120.0,
+      490.0
+     ],
+     "cover_scale_mode": "STRETCH",
+     "title": [
+      160.0,
+      710.7,
+      233.0,
+      45.0
+     ],
+     "description": [
+      423.0,
+      687.2,
+      857.0,
+      92.0
+     ],
+     "description_font": {
+      "size": 18.0,
+      "lh": 22.5,
+      "align": "JUSTIFIED",
+      "color": "#212529"
+     },
+     "title_color": "#212529",
+     "back_button": [
+      160.0,
+      1536.0,
+      115.0,
+      50.0
+     ]
+    },
+    "differs_from_current": [
+     "title_on_trail_page"
+    ]
+   }
   },
   {
    "slug": "etc",
