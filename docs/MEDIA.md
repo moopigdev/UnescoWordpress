@@ -88,3 +88,85 @@ FORCE=1 bash scripts/media/encode.sh    # ทำใหม่ทุกไฟล�
 - ffprobe/libvpx decode: VP9 · 1120×630 · 3.85s · 11 เฟรมจริง (เฟรมละ 0.35s) · 24,373 B · tag `alpha_mode=1` แต่ alpha plane **ทึบทุกเฟรม (alpha_min 255)** เหมือนตัวเดิม → ตามมาตรฐาน: copy WebM (≤3MB ไม่ re-encode) · **ไม่สร้าง HEVC-alpha** (ไม่มี alpha ให้เก็บ · fallback = poster) · ต้องวางบนพื้นขาว
 - poster = เฟรมที่ 35% (1.35s · เห็นรอยเท้าครบหลายแบบ) · 2,764 B · ไบต์เหมือนตัวเดิม (เฟรมนี้เหมือนกันทั้งสองไฟล์)
 - ภาพจบไฟล์: รอยเท้าจางลงเกือบหมด (ออกแบบให้ loop ต่อเนื่อง)
+
+
+---
+# media-1117 — วัตถุ 16 trail + ภาพ/GIF Intro (2026-11-17 · D49 · D50 · BACKLOG #29 #30)
+
+ต้นฉบับ (เจ้าของอนุมัติให้ดาวน์โหลด · อ่านอย่างเดียว): `Unesco/media/src/drive-2026-11-17/{animals-webm,introduction}` → ผล `Unesco/media/out/{objects-1117/<trail-slug>/,intro-1117/<chapter-slug>/}` (ไม่ commit) · manifest: เพิ่ม entry ท้าย `content/media-manifest.json` (16 entry เดิมไม่เปลี่ยนไบต์)
+
+## วิธีรัน
+```bash
+bash scripts/media/encode-1117.sh          # ทำทั้งชุด (วัตถุ 126 + Intro 18) แล้วเพิ่ม/แทน entry 1117 ใน manifest
+FORCE=1 bash scripts/media/encode-1117.sh  # ทำใหม่ทุกไฟล์ (HEVC-alpha ไม่ deterministic ระดับไบต์ — ชุดนี้ไม่มีไฟล์ alpha จึงไม่เกิด)
+```
+- `scripts/media/encode-1117.sh` → `objects_1117.py` · env: `LIMIT_BYTES` (3000000) `MAXW` (1440) `MAXFPS` (30) `POSTER_AT` (0.35) `INTRO_MAXW` (2880) `JOBS` (4) `MEDIA_SRC_1117`
+- รันซ้ำได้ผลเดิม: ข้ามไฟล์ที่ out ใหม่กว่า src · manifest ไม่มี timestamp (ทดสอบรัน 2 ครั้ง `cmp` ตรงกัน) · `encode.sh` เดิมรันซ้ำจะคง entry `drive-1117/` `intro-1117/` ไว้ (`manifest.py` เก็บให้ · ทดสอบแล้ว)
+- มาตรฐาน = เดียวกับชุดช้าง: src ≤ 3MB และกว้าง ≤ 1440 → copy ไม่ re-encode · ไม่งั้น VP9 2-pass `-an` ≤ 1440 กว้าง ≤ 30fps ≤ 3MB · poster เฟรม 35% WebP q80 กว้าง ≤ 640 · alpha จริง (decode libvpx-vp9 วัด alpha min < 250) → `.hevc.mov` (hevc_videotoolbox) · ทึบ → fallback = poster
+
+## key + ชื่อไฟล์
+- manifest `id` = `key` = `drive-1117/<โฟลเดอร์ trail>/<ชื่อไฟล์ต้นฉบับ>` ตรงตัวอักษร (รวม NBSP · ช่องว่างคู่ · Đ) = path ใต้ `animals-webm/` · เพิ่ม `key_normalized` (NFKC · NBSP/ช่องว่างซ้ำ → 1 ช่อง · ตัดช่องว่างก่อน `.webm`) สำหรับจับคู่แบบทน · Intro: `intro-1117/<โฟลเดอร์>/<ชื่อไฟล์>`
+- ชื่อ out = ASCII kebab-case · `Đ→d` · ตัด `'`/`’` (`Iban’s` → `ibans`) · อักษรไทยตัดทิ้ง (`tin ingots ไก่` → `tin-ingots`) · `พิมพ์เค้กม้า` ไม่มี ASCII → ตั้งเป็น `horse-cake-mold` (ตัดสินเอง)
+- **basename ไม่ซ้ำทั้ง media/out** (importer เดิมหาไฟล์จาก `media/out/<basename>` และใช้ `media:<basename>` เป็น import key): ชื่อที่ซ้ำข้าม trail หรือซ้ำไฟล์เดิม → ต่อท้าย `-<trail-slug>` ทุกตัวที่ซ้ำ (เช่น `lacquered-ceremonial-vessel-lion`) · Intro ชื่อซ้ำข้ามบท → ต่อท้าย `-1-2`/`-1-3`
+- trail-slug ตาม `content/seed/trails.json`: Chicken&Rooster→`rooster` · Serpent→`naga` · Waterbird→`water-bird` · ที่เหลือชื่อโฟลเดอร์ตัวเล็ก
+- entry วัตถุ: รูปแบบเดิม (`src out poster fallback bytes src_bytes poster_bytes duration_s width height fps frames effective_fps has_alpha alpha_tag alpha_min_src alpha_min_out src_* within_limit` — import ใช้อยู่) + `key key_normalized trail trail_slug source:"drive-2026-11-17" src_has_audio encode src_content_md5 src_sha256 dup_of` · `object_slug: null` (design-dev/core จับคู่ด้วย `key`) · `usage: "object-hero"`
+
+## ผล: วัตถุ 126 ไฟล์ (ตัวเลขจาก ffprobe/`ls`)
+- ต้นฉบับทั้งหมด: VP9 `yuv420p` · **ไม่มี tag `alpha_mode` และ alpha plane ทึบทั้ง 126 ไฟล์ (alpha_min = 255 ทุกไฟล์ วัดด้วย libvpx-vp9 ทุก 0.5s)** → ไม่มี HEVC-alpha · fallback ทุกไฟล์ = poster (type `poster-only`) · ต้องวางบนพื้นขาว/ใกล้ขาวเหมือนชุดช้างที่ทึบ · ไม่มีเสียง (src_has_audio = false ทุกไฟล์)
+- ขนาดเฟรม: 1440×810 เป็นส่วนใหญ่ · แปลก: 1440×808 ×2 · 1410×808 ×2 · 1440×792 ×2 · 1440×858 · 1440×958 · 1440×960 · 1440×966 · **456×810 ×1** · 1920×1080 ×3 (ย่อเป็น 1440×810) · fps container 1.25–20 (stepped animation เหมือนเดิม — ดู `frames`/`effective_fps`) · ความยาว 2.4–20.4s
+- ไฟล์ใหญ่สุด 1.14MB (Turtle/Koffo Cloth) → **ทุกไฟล์ ≤ 3MB ไม่มีเรื่องขนาด ไม่เปิด O-xx**
+- re-encode เฉพาะ 3 ไฟล์ที่ src กว้าง 1920: `Chicken&Rooster/Ayam-Ayam Bernaga` · `Dragon/Ayam-Ayam Bernaga` (0.280→0.241MB) · `Dragon/Cannon with dragon motif` (0.085→0.062MB) · เพดานบิตเรต = บิตเรตของ src (ไม่ให้ใหญ่กว่า src) · SSIM(All) vs src ย่อ 1440×810: 0.996 / 0.998 · ที่เหลือ 123 ไฟล์ copy
+- ถอดรหัสครบทุกไฟล์ out ด้วย libvpx-vp9 ไม่มี error · ไฟล์ซ้ำ (decode แล้วเฟรมเหมือนกัน · ต่างแค่ UID ของ mux): 6 คู่ — ดู `dup_of` ใน manifest (ไม่ตัดทิ้ง: แต่ละ trail ถือไฟล์ของตัวเอง) · ชื่อเดียวกันแต่เนื้อหาต่าง (คนละแอนิเมชัน): Turtle/Waterbird Dragon-head-tortoise · Chicken/Seashell Mother of Pearl · Phoenix/Bird Pending belt buckle · Lion/Serpent Embossed brass basin · Buffalo/Lion/Seashell Lacquered vessel · Garuda/Horse Liturgical pulpit covers · Phoenix vs Chicken/Dragon Rooster-headed brass · Đông Sơn drum (Waterbird/Seashell)
+
+| trail (โฟลเดอร์ → slug) | ไฟล์ | src (MB) | out (MB) | alpha จริง | fallback | poster (KB รวม) |
+|---|---|---|---|---|---|---|
+| Bird → `bird` | 8 | 2.42 | 2.42 | 0 | poster ×8 | 238 |
+| Buffalo → `buffalo` | 6 | 1.09 | 1.09 | 0 | poster ×6 | 60 |
+| Chicken&Rooster → `rooster` | 11 | 1.66 | 1.62 | 0 | poster ×11 | 94 |
+| Deer → `deer` | 4 | 0.20 | 0.20 | 0 | poster ×4 | 21 |
+| Dragon → `dragon` | 10 | 1.84 | 1.78 | 0 | poster ×10 | 109 |
+| Fish → `fish` | 8 | 1.06 | 1.06 | 0 | poster ×8 | 53 |
+| Garuda → `garuda` | 5 | 2.27 | 2.27 | 0 | poster ×5 | 183 |
+| Hornbill → `hornbill` | 7 | 0.87 | 0.87 | 0 | poster ×7 | 56 |
+| Horse → `horse` | 7 | 1.70 | 1.70 | 0 | poster ×7 | 180 |
+| Lion → `lion` | 6 | 1.56 | 1.56 | 0 | poster ×6 | 62 |
+| Makara → `makara` | 3 | 0.53 | 0.53 | 0 | poster ×3 | 31 |
+| Phoenix → `phoenix` | 8 | 1.67 | 1.67 | 0 | poster ×8 | 176 |
+| Seashell → `seashell` | 14 | 2.41 | 2.41 | 0 | poster ×14 | 204 |
+| Serpent → `naga` | 13 | 2.54 | 2.54 | 0 | poster ×13 | 187 |
+| Turtle → `turtle` | 5 | 1.47 | 1.47 | 0 | poster ×5 | 130 |
+| Waterbird → `water-bird` | 11 | 1.78 | 1.78 | 0 | poster ×11 | 123 |
+| **รวม** | **126** | **25.07** | **24.97** | **0** | poster ×126 | 1914 |
+
+รายไฟล์ทั้ง 126 (key · ขนาด · ความยาว · เฟรม · out) อ่านจาก `content/media-manifest.json` (`jq '.files[]|select(.id|startswith("drive-1117/"))'`) · ตัวอย่าง: `drive-1117/Turtle/Koffo Cloth.webm` → `media/out/objects-1117/turtle/koffo-cloth.webm` + `.poster.webp`
+
+## ผล: Intro (`media/out/intro-1117/<chapter>/`) — 18 ไฟล์ ต้นฉบับ 30.68 MB → 4.40 MB
+- **ภาพนิ่ง (PNG/JPG 11 ไฟล์ → WebP)**: กว้าง ≤ 2880 (= 2× 1440 · คงสัดส่วน · ไม่ขยาย) · lossy q82 `alpha_q` 95 (PNG มี alpha ทุกไฟล์ · JPG ไม่มี) · ทดลองแล้ว lossless 0.5–1.1MB/ไฟล์ vs lossy 0.28–0.46MB → lossy · แหล่งที่เป็น sRGB/ไม่ติด profile จึงไม่ต้องฝัง ICC · entry `kind:"still"` `out:null` `still:<path>` (รูปแบบเดียวกับ still ของ elephant-leg-bone)
+- **GIF 4 ไฟล์ → animated WebP** (`gif2webp -mixed -q 80 -m 6`) · `kind:"animation"` · `out` = `.webp` (ใช้ใน `<img>` เหมือน GIF ไม่ต้อง JS) · `poster` = เฟรมแรก (WebP กว้าง ≤ 1440) · เหตุผลที่ไม่ใช้วิดีโอ: GIF มีพื้นโปร่งใส (GCE transparency) → WebM alpha เล่น Safari ไม่ได้ · animated WebP รองรับ alpha และ Safari 14+/iOS 14+ · เล็กกว่า GIF 2.7–3.9× · จังหวะเฟรมคงเดิม (330ms/เฟรม · farmer 250ms) · วนไม่จบ (loop 0) · จำนวนเฟรมเท่าต้นฉบับ
+- ข้อจำกัด: Safari < 14 / iOS < 14 ไม่เล่น animated WebP → เห็น poster (ยอมรับ ระดับเดียวกับ WebM iOS < 17.4 ของชุดช้าง) · `Intro logo.png` อยู่ 2 บท + `1.1People and Place-01.png` เป็นไฟล์เดียวกัน (sha256 เท่ากัน) → out แยกต่อบท (93KB ต่อไฟล์)
+
+| key (หลัง `intro-1117/`) | ประเภท | src (KB) | out (KB) | ขนาด out | เฟรม |
+|---|---|---|---|---|---|
+| 1.1 People and Place/1.1People and Place-01.png | ภาพนิ่ง WebP | 218 | 93 | 2617×2486 | 1 |
+| 1.1 People and Place/1.1People and Place-02.png | ภาพนิ่ง WebP | 520 | 327 | 2880×2132 | 1 |
+| 1.1 People and Place/1.1People and Place-03.png | ภาพนิ่ง WebP | 264 | 110 | 2617×2486 | 1 |
+| 1.1 People and Place/Boat.gif | animated WebP | 154 | 56 | 1920×1080 | 6 |
+| 1.1 People and Place/Hae Nang Maew.gif | animated WebP | 856 | 232 | 1920×1080 | 6 |
+| 1.1 People and Place/map1.1 people place.gif | animated WebP | 2639 | 681 | 1920×1080 | 13 |
+| 1.2 Early Centres of Power/1.1People and Place-05.png | ภาพนิ่ง WebP | 886 | 249 | 2880×1116 | 1 |
+| 1.2 Early Centres of Power/1.1People and Place-06.png | ภาพนิ่ง WebP | 409 | 162 | 2880×1332 | 1 |
+| 1.2 Early Centres of Power/1.1People and Place-07.png | ภาพนิ่ง WebP | 88 | 69 | 2777×3372 | 1 |
+| 1.2 Early Centres of Power/1.2 power.png | ภาพนิ่ง WebP | 3372 | 279 | 2880×1620 | 1 |
+| 1.2 Early Centres of Power/Intro logo.png | ภาพนิ่ง WebP | 218 | 93 | 2617×2486 | 1 |
+| 1.3 Rice and Spice_ Platforms of Interconnection/1.3 Rice and Spice-farmer.gif | animated WebP | 1291 | 364 | 1920×1080 | 7 |
+| 1.3 Rice and Spice_ Platforms of Interconnection/Chicken1.3.png | ภาพนิ่ง WebP | 937 | 461 | 2880×1112 | 1 |
+| 1.3 Rice and Spice_ Platforms of Interconnection/Intro logo.png | ภาพนิ่ง WebP | 218 | 93 | 2617×2486 | 1 |
+| 1.3 Rice and Spice_ Platforms of Interconnection/Map 1.3 Environment.jpg | ภาพนิ่ง WebP | 7847 | 281 | 2880×1620 | 1 |
+| 1.3 Rice and Spice_ Platforms of Interconnection/PAWANG.png | ภาพนิ่ง WebP | 234 | 302 | 2617×3108 | 1 |
+| 1.4 Animals, Folklore, and Ecological Stewardship/1.1Animals.png | ภาพนิ่ง WebP | 3413 | 288 | 2880×1008 | 1 |
+| 1.4 Animals, Folklore, and Ecological Stewardship/map1.4.jpg | ภาพนิ่ง WebP | 7106 | 245 | 2880×1620 | 1 |
+
+## ข้อควรระวังสำหรับผู้ใช้ manifest (core-1117)
+- **importer เดิมหาไฟล์จาก `media/out/<basename ของ out/poster/still>` (แบนโฟลเดอร์)** แต่ชุดนี้อยู่ใต้ `objects-1117/<trail>/` · `intro-1117/<บท>/` ตามที่สั่ง → ต้องให้ importer ใช้ path จาก manifest (`media/out/...` ต่อจาก `Unesco/`) หรือเปิด P-303 ในไฟล์ PENDING · basename ทุกไฟล์ไม่ซ้ำกันทั้ง `media/out` แล้ว (ตรวจแล้ว) จึงแบนโฟลเดอร์ได้ถ้าเลือกทางนั้น
+- `kind:"animation"` เป็นค่าใหม่ (importer เดิมรู้แค่ `video`/`still`) · ใช้ `out` + `poster` ได้เหมือน video แต่ไม่มี HEVC · แสดงด้วย `<img src=out>` ไม่ใช่ `<video>`
+- ยังไม่ได้ทดสอบเล่นในเบราว์เซอร์จริง (Chrome/Safari) — ตรวจด้วย ffmpeg decode ทั้ง 126 ไฟล์ + webpmux (เฟรม/ดีเลย์/loop) + ดู poster/ภาพ Intro ด้วยตา
