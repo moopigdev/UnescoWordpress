@@ -320,3 +320,5 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - 2026-11-17 [wp-dev rooster-1117] ปุ่ม Back ของ detail mother-of-pearl ที่เข้าจาก /trail/rooster/ กลับ rooster ด้วย JS (Chrome ตรวจแล้ว) · href ตอน no-JS = /trail/seashell/ (primary) ตามแบบ 8 ชื่อเดิม
 - 2026-11-17 [wp-dev rooster-1117] refresh step เพิ่ม term rooster ให้ object แบบ append เสมอเมื่อยังไม่มี (ไม่เคยมีบน prod → แยก "admin เอาออก" ไม่ได้) · term อื่นไม่ถูกลบ · `pending` (draft) ไม่แตะ ยังมี term rooster
 - 2026-11-17 [orchestrator] สีแผง/hero/ภาพข้างต่อ trail ของวัตถุหลาย trail (P-361 · บรรทัด design-dev rooster-1117 ด้านบน) → **ตัดสินแล้ว D55: ใช้แบบ trail หลัก** ไม่ต้องทำ
+- 2026-11-17 [reviewer hover-1117 r1] refresh-2026-11-17.php:516 step 2026-11-17-hover สร้าง attachment ใหม่ก่อนเช็คค่าปัจจุบัน → กรณี kept_admin เหลือ attachment ไม่ถูกใช้ในคลังสื่อ prod (ไม่กระทบหน้า)
+- 2026-11-17 [reviewer hover-1117 r1] refresh-2026-11-17.php:516 สาขา static tile (ช่องไม่มีหน้า) ไม่ส่ง alt label แบบ importer — ยังไม่เกิดกับ seed ปัจจุบัน
