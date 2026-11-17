@@ -1,13 +1,14 @@
 # CONTENT-MODEL — สัญญาข้อมูล (CPT · taxonomy · meta)
 
 **เจ้าของไฟล์:** wp-dev (งาน `core-contract`) · หน้าทุกหน้าอ่านจากที่นี่ ⛔ ห้ามหน้าใดตั้งฟิลด์เอง · ต้องการฟิลด์ใหม่ → `docs/PENDING-DECISIONS.md`
-**ที่มา:** DESIGN-SPEC §5 (ฟิลด์ที่หน้าใช้) + `content/seed/*.json` + `content/media-manifest.json` · ขอบเขต import = D7 (trail ช้าง)
+**ที่มา:** DESIGN-SPEC §5 (ฟิลด์ที่หน้าใช้) + §8.4 + §9.6 (รอบ 2026-11-17) + `content/seed/*.json` + `content/media-manifest.json` · ขอบเขต import = **วัตถุทุก trail** (D49 แทน D7 · ตั้งแต่ core-1117)
 **โค้ด:** mu-plugin `wp-content/mu-plugins/sharedheritage-core/` — ตารางในไฟล์นี้ = `inc/fields.php` 1:1 ตรวจด้วย `python3 scripts/import/check-contract.py` (เทียบ key · ชนิด · REST ต่อ group)
 
 ## 0. หลักการ / วิธี register (D1 · O-7)
 - ข้อมูลอยู่ใน **mu-plugin** ไม่ใช่ theme · meta key ขึ้นต้น `sh_` · ทุกฟิลด์แก้ได้จากหน้า edit มาตรฐาน (post/term/page edit · Settings › Shared Heritage)
 - นิยามฟิลด์ที่เดียว `inc/fields.php` → (1) `register_post_meta` / `register_term_meta` / `register_setting` (ชนิด · sanitize · auth = `edit_post`/`edit_term`/`manage_options` · REST) (2) ACF ฟรี `acf_add_local_field_group` (UI · version อยู่ใน git ไม่อยู่ใน DB)
 - **ACF ไม่ active → ไม่ fatal:** admin notice + ข้อมูลยังอ่านได้ด้วย `get_post_meta`/API §11 + REST (meta ลงทะเบียนกับ WP เอง) · ACF ฟรีไม่มี repeater/gallery/options page → รายการหลายค่าใช้ฟิลด์เลขลำดับ (`sh_extra_image_1..6`) · options ใช้ Settings API
+- **textarea `format`:** `json` = ต้องเป็น JSON object (`sh_layout` `sh_trail_layout` `sh_intro_*_layout`) · `inline_html` = ข้อความหลายบรรทัดที่มี `<strong>` `<b>` `<em>` `<i>` `<br>` ได้ (ไม่มี attribute · tag อื่นถูกตัด) → อ่านด้วย `sh_rich_paragraphs()` (`sh_guide_body` · `sh_intro_ch<n>_text_<k>`)
 - **ชนิด → เก็บเป็น:** text/textarea/color_picker → string · number/image/file/post_object/taxonomy → integer (id) · true_false → boolean · relationship → array&lt;int&gt; · textarea ไม่แปลงบรรทัด (`new_lines` ว่าง) — หน้าแยกย่อหน้าด้วยบรรทัดว่าง (`sh_paragraphs()`)
 - **"ต้องมีค่า"** = เนื้อหาต้องมีเพื่อให้หน้าตรงดีไซน์ · ACF **ไม่บังคับ** ฟิลด์ใด (`required=0` ให้บันทึกร่างได้) · หน้าต้องรับมือค่าว่าง (DOD B6)
 - **REST** ✔ = `show_in_rest` → ค่าอยู่ใน `meta.sh_*` ของ `/wp/v2/object` · `/wp/v2/timeline_item` · `/wp/v2/trail` · `/wp/v2/zone` · `/wp/v2/pages` · `/wp/v2/settings` (ต้อง login) · ACF ไม่เปิด REST ของตัวเอง (`show_in_rest=0`)
@@ -21,9 +22,9 @@
 | Zone 1–3 (1472–1474 · ใหม่ `3117:3684/3713/3742` §4.3b) | `taxonomy-zone.php` | zone | taxonomy `zone` term `zone-<n>` §5 · กริด = `sh_trails('zone_grid')` · ข้อความ `sh_intro` → Read more `sh_intro_full` | `/zone/zone-1/` `/zone/zone-2/` `/zone/zone-3/` |
 | **Zone 4 หน้าคั่นเลือกสัตว์** (1513 `3117:3946` · D37 · §4.10) | `taxonomy-zone.php` (WP เลือก `taxonomy-zone-zone-4.php` ก่อนถ้า theme มี → asset slug = ชื่อไฟล์) | zone (หรือชื่อไฟล์) | term `zone-4` §5 (`sh_cover_image` = พื้นเส้นประ · `sh_banner_image` = แถบ ZONE (Zone 4 active)) · สัตว์ = `sh_trails('home')` ที่มี `sh_chooser_image` §4 · ลิงก์ = `sh_timeline_page` ของ trail (มี = ลิงก์ · ไม่มี = ไม่ลิงก์ D37/D40) · ตำแหน่ง/ขนาดต่อตัว = ค่าคงที่ใน theme (§4.10 · seed `zone4-chooser.json`) | `/zone/zone-4/` |
 | **Zone 5 หน้าหลัก** (1514 `3117:3955` · D40 · §4.11) | `taxonomy-zone.php` (หรือ `taxonomy-zone-zone-5.php`) | zone (หรือชื่อไฟล์) | term `zone-5` §5 (`sh_has_page` · `sh_cover_image` · `sh_intro` · `sh_banner_image` · tab "Zone page cards") | `/zone/zone-5/` |
-| Trail ช้าง 1501 | `taxonomy-trail.php` | trail | taxonomy `trail` term `elephant` §4 · วัตถุ = `sh_trail_objects()` | `/trail/elephant/` |
+| Trail ทั้ง 17 (ช้าง 1501 · 16 trail `3377:4608` D49) | `taxonomy-trail.php` | trail | taxonomy `trail` §4 · ช่องกริด = `sh_trail_tiles()` (วัตถุ + ช่องไม่มีหน้า · ภาพช่องของ trail นั้น) · เดิม `sh_trail_objects()` | `/trail/elephant/` `/trail/bird/` … (ครบใน `docs/smoke-urls`) |
 | Timeline (Zone 4) | `page-timeline.php` | timeline | Page slug **`timeline`** · group `timeline` §8 · การ์ด = CPT `timeline_item` §3 | `/timeline/` |
-| Detail วัตถุ 15 ชิ้น | `single-object.php` | detail | CPT `object` §2 | `/object/ganesha/` (ครบ 15 ใน `docs/smoke-urls`) |
+| Detail วัตถุทุก trail (ช้าง 15 + 16 trail 101 publish · D49) | `single-object.php` | detail | CPT `object` §2 (16 trail = `sh_layout` generic §8.3) | `/object/ganesha/` `/object/domestic-chicken/` (ช้าง 15 + 1 ชิ้นต่อ trail ใน `docs/smoke-urls`) |
 Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ของตัวเอง `/zone/zone-4/`** — `sh_link_page` ของ `zone-4` = ว่าง (การ์ดหน้าแรกจึงลิงก์ term link · `/timeline/` ไม่เปลี่ยน · ช้างในหน้าคั่นลิงก์ไป `/timeline/` ผ่าน `sh_timeline_page` ของ trail elephant) · เดิม (ก่อน D37) `sh_link_page` = หน้า Timeline → refresh `2026-11-11-chooser` ล้างค่านี้บน site เดิม · Zone 5 `sh_has_page` = ตาม seed (D40: true เมื่อ seed มีหน้า — P-172) · แยก layout ต่อ zone = template hierarchy `taxonomy-zone-zone-<n>.php` (ไม่มีฟิลด์ "ชนิดหน้า")
 
 ## Entity (ภาพรวม)
@@ -31,7 +32,7 @@ Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ข�
 |---|---|---|---|---|
 | `object` | CPT (`title` · `custom-fields` · `revisions` · ไม่มี editor) | `object` | `/object/<slug>/` | title = ชื่อวัตถุ (seed `figma_2026_11.title` → `title` · D40) · slug = seed `slug` (**ไม่เปลี่ยนตามชื่อ** — ลิงก์เดิมใช้ได้) · บล็อกใต้หัวข้อ (§4.8.2): `sh_period` → `sh_place_of_production` → `sh_material` → `sh_dimensions` → `sh_collection` → `sh_object_biography` (ป้าย "Other information / Object biography:") ข้ามค่าว่าง · trails = taxonomy `trail` (หลายค่า, checkbox) |
 | `timeline_item` | CPT ไม่ public (admin + REST เท่านั้น) | `timeline_item` | — | title = หัวการ์ด (seed `items[].title`) · `menu_order` = card_order |
-| `trail` | taxonomy (บน `object` · hierarchical เพื่อ checkbox · ไม่ใช้ parent) | `trail` | `/trail/<slug>/` | 17 term (seed `etc` ไม่ใช่ trail → ไม่ import) · name = seed `name` ตามตัว (เช่น "Elephan" "Phonix" — ชื่อแสดงผลยังไม่ออกแบบ P-2xx) · description = คำอธิบายหน้า trail (seed `description`, มีเฉพาะ elephant) |
+| `trail` | taxonomy (บน `object` · hierarchical เพื่อ checkbox · ไม่ใช้ parent) | `trail` | `/trail/<slug>/` | 17 term (seed `etc` ไม่ใช่ trail → ไม่ import) · name = seed `name` ตามตัว (เช่น "Elephan" "Phonix" — ชื่อแสดงผลยังไม่ออกแบบ P-2xx) · description = คำอธิบายหน้า trail (seed `description` · ครบ 17 ตั้งแต่ core-1117) · **การ์ดสัตว์หน้าแรก (D48) = ฟิลด์ `sh_guide_*` บน term ของ trail นั้น** (17 การ์ด ↔ 17 trail · seed `guides.json cards[].trail_slug`) |
 | `zone` | taxonomy (บน `object` · ยังไม่ผูกวัตถุ/trail — P-212) | `zone` | `/zone/zone-<n>/` | 5 term · name = seed `name` · term ว่างก็ได้ 200 |
 | page Home / Intro / Timeline | Page มาตรฐาน | `pages` | `/` `/intro/` `/timeline/` | ฟิลด์ผูกกับหน้า: Home = front page · Intro/Timeline = หน้า slug `intro`/`timeline` |
 | site | options (Settings › Shared Heritage) + เมนู WP | `settings` | — | §9 |
@@ -42,7 +43,8 @@ Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ข�
 | (post_title) | title | ✔ | title 36/800 `670:2797` → **2026-11-11 = `3083:813`… (§4.8.2 · D40)** | "Ganesha" · "Hand-carved opium pipe" (seed `figma_2026_11.title` ถ้ามี · ไม่มี = `title`) | detail · trail tile alt · timeline link | ✔ (`title`) |
 | (taxonomy `trail`) | term[] | ✔ | section Page 2.1 / กริดช้าง | Ganesha `[elephant]` · Embossed Brass Basin `[elephant, garuda, lion, naga]` | trail · detail | ✔ (`trail`) |
 | `sh_title_raw` | `textarea` → string | — (3/15) | title node (ตัวแบ่งบรรทัดดิบ) | Leg Bone: "Elephant Leg Bone\n(Elephas maximus indicus)" · ว่าง = ใช้ post_title | detail | ✔ |
-| `sh_collection` | `text` → string | ✔ (14/15) | `Collection:` ใน metadata `670:2798` | "National Museum Bangkok" | detail | ✔ |
+| `sh_collection` | `textarea` → string | ✔ (14/15) | `Collection:` ใน metadata `670:2798` | "National Museum Bangkok" · **หลายตัวอย่าง = บรรทัดละค่า** (Giant Clams 2 บรรทัด · core-1117 เปลี่ยนจาก `text` ที่ตัด `\n`) | detail (`\n` = ขึ้นบรรทัดในแถวเดียว) | ✔ |
+| `sh_scientific_name` | `textarea` → string | — (13 วัตถุ) | แถว `Scientific name / Taxonomy:` ใน meta node ของ frame detail (§8.3 · §8.4) | Domestic Chicken: "Gallus gallus domesticus (Linnaeus, 1758); Galliformes: Phasianidae" · Giant Clams 2 บรรทัด | detail (แถว "Scientific name / Taxonomy:" · ลำดับแถวเป็นของหน้า D42 · ข้อเสนอ §8.3 = ก่อน Period) | ✔ |
 | `sh_thematic_section` | `text` → string | ✔ | `Section : …` `670:2798` (หายจาก Figma 2026-11-11 §4.8.2) | "Cosmology Religion & Spirituality" | — (เก็บไว้ · หน้า detail ไม่แสดงตั้งแต่ §4.8.2) | ✔ |
 | `sh_period` | `text` → string | — (10/15) | `Period:` | "10th–11th century" | detail | ✔ |
 | `sh_place_of_production` | `text` → string | — (11/15) | `Place of Production / Findspot:` | "Candi Singhasari, East Java, Indonesia" | detail | ✔ |
@@ -64,6 +66,18 @@ Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ข�
 | `sh_extra_image_4` | `image` → integer | — | 〃 | Bas-relief `670:2858` | detail panel | ✔ |
 | `sh_extra_image_5` | `image` → integer | — | 〃 | Bas-relief `670:2859` | detail panel | ✔ |
 | `sh_extra_image_6` | `image` → integer | — | 〃 | Bas-relief `670:2860` | detail panel | ✔ |
+| `sh_trail_tile_1_trail` | `taxonomy` → integer (term id) | — | trail อื่นของวัตถุที่อยู่หลาย trail (seed `tiles_by_trail` ที่ไม่ใช่ trail หลัก · §8.2) | Monk’s alms bowl: lion | trail grid (`sh_trail_tiles()`) | ✔ |
+| `sh_trail_tile_1_image` | `image` → integer | — | ภาพช่องของ trail นั้น (Materials · พื้นสีของ trail ฝังในภาพ) | `9250a1ef…` (lion) | trail grid ของ trail ใน `sh_trail_tile_1_trail` · ว่าง = ใช้ `sh_tile_image` | ✔ |
+| `sh_trail_tile_1_image_hover` | `image` → integer | — | ภาพ hover ของ trail นั้น | | trail grid hover | ✔ |
+| `sh_trail_tile_2_trail` | `taxonomy` → integer (term id) | — | trail อื่นของวัตถุที่อยู่หลาย trail (seed `tiles_by_trail` ที่ไม่ใช่ trail หลัก · §8.2) | Monk’s alms bowl: seashell | trail grid (`sh_trail_tiles()`) | ✔ |
+| `sh_trail_tile_2_image` | `image` → integer | — | ภาพช่องของ trail นั้น (Materials · พื้นสีของ trail ฝังในภาพ) | `9250a1ef…` (lion) | trail grid ของ trail ใน `sh_trail_tile_2_trail` · ว่าง = ใช้ `sh_tile_image` | ✔ |
+| `sh_trail_tile_2_image_hover` | `image` → integer | — | ภาพ hover ของ trail นั้น | | trail grid hover | ✔ |
+| `sh_trail_tile_3_trail` | `taxonomy` → integer (term id) | — | trail อื่นของวัตถุที่อยู่หลาย trail (seed `tiles_by_trail` ที่ไม่ใช่ trail หลัก · §8.2) | Monk’s alms bowl: ว่าง | trail grid (`sh_trail_tiles()`) | ✔ |
+| `sh_trail_tile_3_image` | `image` → integer | — | ภาพช่องของ trail นั้น (Materials · พื้นสีของ trail ฝังในภาพ) | `9250a1ef…` (lion) | trail grid ของ trail ใน `sh_trail_tile_3_trail` · ว่าง = ใช้ `sh_tile_image` | ✔ |
+| `sh_trail_tile_3_image_hover` | `image` → integer | — | ภาพ hover ของ trail นั้น | | trail grid hover | ✔ |
+| `sh_trail_tile_4_trail` | `taxonomy` → integer (term id) | — | trail อื่นของวัตถุที่อยู่หลาย trail (seed `tiles_by_trail` ที่ไม่ใช่ trail หลัก · §8.2) | Monk’s alms bowl: ว่าง | trail grid (`sh_trail_tiles()`) | ✔ |
+| `sh_trail_tile_4_image` | `image` → integer | — | ภาพช่องของ trail นั้น (Materials · พื้นสีของ trail ฝังในภาพ) | `9250a1ef…` (lion) | trail grid ของ trail ใน `sh_trail_tile_4_trail` · ว่าง = ใช้ `sh_tile_image` | ✔ |
+| `sh_trail_tile_4_image_hover` | `image` → integer | — | ภาพ hover ของ trail นั้น | | trail grid hover | ✔ |
 | `sh_panel_bg` | `color_picker` → string | — (ว่าง = ไม่มี fill) | fill แผง `670:2796` | `#B2BBAA` · Patola = ว่าง | detail | ✔ |
 | `sh_title_color` | `color_picker` → string | ✔ | fill title | `#D75F47` | detail | ✔ |
 | `sh_text_color` | `color_picker` → string | ✔ (14/15) | fill caption | `#212529` | detail | ✔ |
@@ -71,6 +85,7 @@ Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ข�
 | `sh_collection_color` | `color_picker` → string | — (ว่าง = text) | fill `Collection:` | Leg Bone `#F8F9FA` | detail | ✔ |
 | `sh_layout` | `textarea` → string (JSON object · ตรวจตอนบันทึก) | ✔ (ตรง 100%) | ตาราง DESIGN-SPEC §4.8 (`figma[Final].style`) | Ganesha `{"frame_id":"670:2786","panel_y":1000,"panel_h":1005,"panel_padding_top_bottom":[60,80],"hero":[{"bbox":[0,150,1440,810]…}],"back_button":[160,1887,115,50],…}` | detail (geometry) | ✔ |
 `sh_layout` keys: `frame_id frame_name frame_size hero[] back_button panel_padding_top_bottom panel_children[] panel_gap panel_node panel_bg panel_has_fill panel_y panel_h title_color collection_color caption_color meta_color` (bbox = `[x,y,w,h]` เทียบ frame 1440) · อ่านด้วย `sh_object_layout()`
+- **วัตถุ 16 trail (core-1117 · §8.3 โหมด generic):** `sh_layout` = `figma[]` ของ frame หลัก (`is_primary` · ไม่มี = `primary_frame` · ไม่มี = ตัวแรก) → คีย์ generic `frame_size hero back_button panel_* title_color caption_color meta_color text_col image_col images[]` (ไม่มี `text_blocks`) · `images[].crop_ref` → attachment id (กฎ `*_ref`) และ **ภาพเดียวกันใส่ `sh_extra_image_<n>` ตามลำดับ** (admin เปลี่ยนภาพได้ D10) · ภาพช่อง = `tile_image_ref`/`tile_image_hover_ref` (trail หลัก) → `sh_tile_image(_hover)` · trail อื่น = `sh_trail_tile_<n>_*` · hero = manifest key `drive-1117/<hero_video_src>` · status มี `hold_*` (`pending` · `sumatran-serow`) = **draft** (ไม่ publish · admin เปิดเองเมื่อข้อมูลครบ)
 - import ส่ง seed `figma[Final].style` **ทั้งก้อน** (คีย์ที่ไม่รู้จักผ่านไปด้วย — DESIGN-SPEC §4.8 เป็นที่นิยามคีย์) · **คีย์ใดก็ได้ (ทุกระดับ) ที่ลงท้าย `_ref`** และค่าเป็นชื่อไฟล์ใน `design/assets` (มี/ไม่มีนามสกุล เช่น ภาพครอปของ design-dev `<ref>.crop-<node>.png`) หรือ imageRef ใน `image-map.json` → ค่าใน `sh_layout` กลายเป็น **attachment id (integer)** · ไม่มีไฟล์ → คงข้อความเดิม + คำเตือนใน import report (ไม่ fatal) · หน้าอ่าน: `is_int( $v )` → `wp_get_attachment_image( $v, … )`
 
 ## 3. `timeline_item` — group: timeline_item
@@ -93,7 +108,7 @@ Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ข�
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `trails.json`) | ใช้ในหน้า | REST |
 |---|---|---|---|---|---|---|
 | (name / slug / description) | term | ✔ / ✔ / — | component set `670:9643` · คำอธิบาย `797:1881` | "Elephan" / `elephant` / "Elephants have lived alongside…" | trail · alt | ✔ |
-| `sh_title_on_trail_page` | `text` → string | — (elephant) | `797:1880` | "Elephant’s Trail" | trail | ✔ |
+| `sh_title_on_trail_page` | `text` → string | ✔ (17/17 ตั้งแต่ core-1117) | `797:1880` · 16 trail ใหม่ = H1 ใน `3377:4608` (seed `title_on_trail_page`) | "Elephant’s Trail" · "Bird Trail" | trail | ✔ |
 | `sh_order_home_icons` | `number` → integer | ✔ | ลำดับใน `Frame 12796` `670:9724` | rooster 1 … elephant 17 | home | ✔ |
 | `sh_icon_home` | `image` → integer | ✔ | set `icon_tile_component_set` default (`670:9575`) | Rooster `5f216ed1…` 165² | home | ✔ |
 | `sh_icon_home_hover` | `image` → integer | ✔ | 〃 hover (`670:9574`) | Rooster `17bbb16a…` 185² | home | ✔ |
@@ -106,9 +121,27 @@ Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ข�
 | `sh_icon_timeline` | `image` → integer | ✔ | ไอคอน 35×35 ใน `797:2110` (15 ตัวใช้ภาพ hover ของ home · fish/seashell ภาพของตัวเอง) | elephant `c7504b4f…` | timeline | ✔ |
 | `sh_icon_group_color` | `color_picker` → string | — | DESIGN-SPEC §2.1/§4.5 กลุ่ม green/red/mustard/purple | elephant `#C3BC85` | timeline | ✔ |
 | `sh_chooser_image` | `image` → integer | — (17/17) | Section 54 `3140:1398` ไฟล์แยกต่อตัว (§4.10 · seed `zone4-chooser.json animals[].asset` ตาม `trail_slug`) | elephant `zone4-animals/elephant.png` 1504×1052 (PNG โปร่ง) | zone 4 หน้าคั่น (ว่าง = ไม่แสดงตัวนั้น) · คลิก → `sh_timeline_page` ของ trail ถ้ามี | ✔ |
-| `sh_cover_image` | `image` → integer | — (elephant) | `796:1799` | `ed0e5ee9…` 1120×497 | trail | ✔ |
+| `sh_cover_image` | `image` → integer | ✔ (17/17 ตั้งแต่ core-1117) | `796:1799` · 16 trail ใหม่ = seed `cover_crop_ref` (ครอป 2240×980 แล้ว §8.1) | `ed0e5ee9…` 1120×497 · bird `….crop-3377-….png` | trail | ✔ |
 | `sh_timeline_page` | `post_object` → integer (page) | — (ว่าง = ไม่มี timeline) | frame `670:1551` | elephant → หน้า Timeline | trail · timeline | ✔ |
 | `sh_object_order` | `relationship` → array&lt;int&gt; | ✔ | ลำดับ tile `Ele 2…` §4.8 (seed `trail_order`) | elephant: Leg Bone, Singhasari Ganesha, Ganesha, … Bas-relief (15) | trail (ลาก-วางเรียงใน admin) | ✔ |
+| `sh_trail_layout` | `textarea` → string (JSON object · ตรวจตอนบันทึก) | — (16 trail ใหม่ · elephant ว่าง) | seed `trails.json[].trail_page_layout` (§8.1 ตาราง) | bird `{"frame_size":[1440,1416],"cover":[160,150,1120,490],"title":[160,699.2,151,45],"description":[341,676,939,69],"description_font":{…},"title_color":"#212529","back_button":[160,1320,115,50]}` | trail (geometry · กว้าง H1 = ตัดบรรทัด Seashell) | ✔ |
+| `sh_static_tile_1_position` | `number` → integer | — (makara 1 · rooster 11) | ช่องที่ไม่มีหน้า detail (§8.2: Makara ช่อง 1/3 · Rooster #11 `pending` hold_*) | makara 1 | trail grid (`sh_trail_tiles()` · ช่องแสดง ไม่ลิงก์) · 0 = ไม่แสดง | ✔ |
+| `sh_static_tile_1_image` | `image` → integer | — | seed `trails.json tiles[]` ที่ `object_slug` = null / ชี้ record hold_* | makara `77d84c86…` | trail grid | ✔ |
+| `sh_static_tile_1_image_hover` | `image` → integer | — | 〃 hover | makara `9a4ee322…` | trail grid hover | ✔ |
+| `sh_static_tile_1_label` | `text` → string | — | `tiles[].title_note` | "Skull of Saltwater Crocodile" | trail grid (alt ของภาพ) | ✔ |
+| `sh_static_tile_2_position` | `number` → integer | — | 〃 | makara 3 | trail grid | ✔ |
+| `sh_static_tile_2_image` | `image` → integer | — | 〃 | | trail grid | ✔ |
+| `sh_static_tile_2_image_hover` | `image` → integer | — | 〃 | | trail grid hover | ✔ |
+| `sh_static_tile_2_label` | `text` → string | — | 〃 | "Sungai Mas Makara" | trail grid | ✔ |
+| `sh_static_tile_3_position` | `number` → integer | — | เผื่อ 1 ช่อง (seed สูงสุด 2) | | trail grid | ✔ |
+| `sh_static_tile_3_image` | `image` → integer | — | 〃 | | trail grid | ✔ |
+| `sh_static_tile_3_image_hover` | `image` → integer | — | 〃 | | trail grid hover | ✔ |
+| `sh_static_tile_3_label` | `text` → string | — | 〃 | | trail grid | ✔ |
+| `sh_guide_name` | `text` → string | ✔ (17/17) | การ์ด `3339:5488` ชื่อ (เช่น `3339:5505`) · §9.3 | "The Chicken & Rooster" | home การ์ดสัตว์ (D48) | ✔ |
+| `sh_guide_words` | `text` → string | ✔ | คำ 3 คำ (`3339:5506`) | "Renewal · Homeliness · Abundance" | home การ์ดสัตว์ | ✔ |
+| `sh_guide_body` | `textarea` → string (inline HTML: `<strong>` `<em>` · `\n\n` ย่อหน้า · `\n` = `<br>`) | ✔ | ข้อความเต็ม (`3339:5510`) · seed `body_html` (ตัวเอียง dragon) | ไก่ 5 ย่อหน้า | home การ์ดสัตว์ (Read more) · อ่านด้วย `sh_rich_paragraphs()` | ✔ |
+| `sh_guide_follow` | `text` → string | ✔ | `3339:5512` (D53 สะกด INVERTEBRATES) | "→ FOLLOW THE CHICKEN & ROOSTER TRAIL" | home (ลิงก์ → trail นี้) | ✔ |
+| `sh_guide_card` | `image` → integer | ✔ | ภาพการ์ด 1469×2392 (`design/assets/pages-1117/guides/<slug>.png` · ย่อ 460×726) | rooster `f8162319…` | home (การ์ดเล็ก 120×190 + ใหญ่ 230×363) · ว่าง = สัตว์นี้ไม่อยู่ในการสุ่ม | ✔ |
 
 ## 5. `zone` (term) — group: zone
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `zones.json`) | ใช้ในหน้า | REST |
@@ -165,7 +198,14 @@ Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ข�
 | `sh_home_trails_paragraph_2` | `textarea` → string | ✔ | `I886:1787;886:1767` | "Forget rigid physical galleries!…" | home (หลัง Read more) | ✔ |
 | `sh_home_trails_video_webm` | `file` → integer | — | AAMM -01 `[160,1913 1120×630]` รอยเท้า (§6.2) = manifest รายการ `usage: home-trails` (`walking`) | `walking.webm` 1120×630 | home | ✔ |
 | `sh_home_trails_video_poster` | `image` → integer | — | manifest `walking.poster` | `walking.poster.webp` | home | ✔ |
-Zone cards 1–5 บนหน้าแรก = term `zone` (§5) · ไอคอน trail 17 = `sh_trails('home')` · navigator 4 จุด = พฤติกรรมหน้า (ไม่ใช่ข้อมูล)
+| `sh_home_guide_title` | `text` → string | ✔ | `3339:5267` (§9.3) | "Your animal guide is..." | home การ์ดสัตว์ (D48) | ✔ |
+| `sh_home_guide_opening` | `textarea` → string | ✔ | `3339:5270` | "An animal has crossed your path... Can you figure out where it went?" (seed ฟิลด์ปกติ · ไม่ใช่ `*_raw`) | home | ✔ |
+| `sh_home_guide_heritage` | `textarea` → string | ✔ | `3339:5271` | "For centuries, animals have inspired artists…" | home | ✔ |
+| `sh_home_guide_question` | `textarea` → string | ✔ | `3339:5272` | "Which animal will guide you?" | home | ✔ |
+| `sh_home_guide_instructions` | `textarea` → string | ✔ | `3339:5273` | "Pick a card to meet your animal guide…" | home | ✔ |
+| `sh_home_guide_cta` | `text` → string | ✔ | `3339:5274` | "CHOOSE A CARD" | home (ปุ่มสุ่ม) | ✔ |
+| `sh_home_guide_card_back` | `image` → integer | ✔ | การ์ด "?" `3339:5275` (`c632e52f` ครอป .016/.017/.968/.971 ตอน import · 240×380) | `_card-back.png` | home (การ์ดเริ่ม) | ✔ |
+Zone cards 1–5 บนหน้าแรก = term `zone` (§5) · ไอคอน trail 17 = `sh_trails('home')` · navigator 4 จุด = พฤติกรรมหน้า (ไม่ใช่ข้อมูล) · **การ์ดสัตว์ 17 ใบ = `sh_guide_cards()`** (trail ที่มี `sh_guide_card` · §4) · ป้าย Read more/Hide = `sh_label_read_more`/`sh_label_hide` (§9)
 
 ## 7. Intro (page `intro`) — group: intro
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `articles.json`) | ใช้ในหน้า | REST |
@@ -190,6 +230,104 @@ Zone cards 1–5 บนหน้าแรก = term `zone` (§5) · ไอคอ
 | `sh_intro_map_slide_3_body` | `textarea` → string | ✔ | `670:1525–1527` | "Rice and spices have long shaped…" | intro map + popup | ✔ |
 | `sh_intro_map_slide_4_title` | `text` → string | ✔ | `670:1547` | ": Animals and Ecosystems" | intro map | ✔ |
 | `sh_intro_map_slide_4_body` | `textarea` → string | ✔ | `670:1548` `670:1549` | "Southeast Asia spans mainland river basins…" | intro map + popup | ✔ |
+| `sh_intro_head_emblem` | `image` → integer | ✔ | `3339:6123` (§9.4 B) · manifest still `intro-1117/1.2 Early Centres of Power/Intro logo.png` | `intro-logo….webp` 2617×2486 | intro ใหม่ (D50) | ✔ |
+| `sh_intro_head_title` | `textarea` → string | ✔ | `3339:6124` (`\n` = ขึ้นบรรทัดตามต้นฉบับ) | "Across Southeast Asia, creatures travel\nwhere borders cannot…" | intro ใหม่ | ✔ |
+| `sh_intro_head_paragraph_1` | `textarea` → string | ✔ | `3339:6126` | seed `header.paragraphs[0]` | intro ใหม่ (`sh_intro_head()`) | ✔ |
+| `sh_intro_head_paragraph_2` | `textarea` → string | ✔ | `3339:6127` | seed `header.paragraphs[1]` | intro ใหม่ (`sh_intro_head()`) | ✔ |
+| `sh_intro_head_paragraph_3` | `textarea` → string | ✔ | `3339:6128` | seed `header.paragraphs[2]` | intro ใหม่ (`sh_intro_head()`) | ✔ |
+| `sh_intro_head_paragraph_4` | `textarea` → string | ✔ | `3339:6129` | seed `header.paragraphs[3]` | intro ใหม่ (`sh_intro_head()`) | ✔ |
+| `sh_intro_head_paragraph_5` | `textarea` → string | — | เผื่อ 1 (seed 4) | ว่าง | intro ใหม่ (`sh_intro_head()`) | ✔ |
+| `sh_intro_head_credit` | `textarea` → string | ✔ | `3339:6130` | "Presented by the UNESCO Regional Office in Bangkok…" | intro ใหม่ | ✔ |
+| `sh_intro_env_heading` | `textarea` → string | ✔ | `3339:6135` | "Southeast Asians and the Environment:\nRelationships Between People, Places, and Landscapes" | intro ใหม่ (หัวข้อเหนือแผนที่ · ทุกตอน) | ✔ |
+| `sh_intro_head_layout` | `textarea` → string (JSON object) | — | seed `header` (rel/box/font/crop · `decor[*].image_ref` → attachment id) + `environment_heading.font` + `map_ui` + `url` | `{"header":{"bg":"#DD7F6A",…},"environment_heading":{…},"map_ui":{…}}` | intro ใหม่ (geometry/สี · ไม่ใช่เนื้อหา) | ✔ |
+| `sh_intro_ch1_title` | `text` → string | ✔ | seed `chapters[0].title` | "People and Places" | intro ปุ่ม/ตอน 1 | ✔ |
+| `sh_intro_ch1_accent` | `color_picker` → string | ✔ | `chapters[0].accent_color` | `#D85A40` | intro ตอน 1 | ✔ |
+| `sh_intro_ch1_map_image` | `image` → integer | ✔ | แผนที่ตอน 1 (manifest `intro-1117/<map.drive_file>`: still → ภาพ · animation → poster) | | intro ตอน 1 | ✔ |
+| `sh_intro_ch1_map_animation` | `image` → integer (WebP เคลื่อนไหว) | — (ตอน 1) | manifest `kind: animation` `out` | `map1-1-people-place.webp` | intro ตอน 1 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch1_text_1` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 1 ของตอน 1 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 1 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 1) | ✔ |
+| `sh_intro_ch1_text_2` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 2 ของตอน 1 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 1 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 2) | ✔ |
+| `sh_intro_ch1_text_3` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 3 ของตอน 1 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 1 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 3) | ✔ |
+| `sh_intro_ch1_text_4` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 4 ของตอน 1 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 1 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 4) | ✔ |
+| `sh_intro_ch1_text_5` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 5 ของตอน 1 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 1 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 5) | ✔ |
+| `sh_intro_ch1_text_6` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 6 ของตอน 1 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 1 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 6) | ✔ |
+| `sh_intro_ch1_text_7` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 7 ของตอน 1 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 1 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 7) | ✔ |
+| `sh_intro_ch1_image_1` | `image` → integer | — | ช่องภาพที่ 1 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 1 | ✔ |
+| `sh_intro_ch1_image_1_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 1 | | intro ตอน 1 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch1_image_2` | `image` → integer | — | ช่องภาพที่ 2 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 1 | ✔ |
+| `sh_intro_ch1_image_2_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 2 | | intro ตอน 1 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch1_image_3` | `image` → integer | — | ช่องภาพที่ 3 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 1 | ✔ |
+| `sh_intro_ch1_image_3_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 3 | | intro ตอน 1 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch1_image_4` | `image` → integer | — | ช่องภาพที่ 4 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 1 | ✔ |
+| `sh_intro_ch1_image_4_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 4 | | intro ตอน 1 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch1_image_5` | `image` → integer | — | ช่องภาพที่ 5 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 1 | ✔ |
+| `sh_intro_ch1_image_5_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 5 | | intro ตอน 1 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch1_layout` | `textarea` → string (JSON object) | ✔ | seed `chapters[0]` ยกเว้นข้อความ/ไฟล์: `frame_h map{rel,box,crop,fill_mode} map_buttons arrows sections[{name,bg,rel,blocks[]}]` · block = `{kind:"text",slot,role,font,box,rel}` · `{kind:"image",slot,box,rel,crop,fill_mode}` · `{kind:"decor",image_ref(→id),box,rel}` | | intro ตอน 1 (geometry) | ✔ |
+| `sh_intro_ch2_title` | `text` → string | ✔ | seed `chapters[1].title` | "Early Centres of Power" | intro ปุ่ม/ตอน 2 | ✔ |
+| `sh_intro_ch2_accent` | `color_picker` → string | ✔ | `chapters[1].accent_color` | `#43695D` | intro ตอน 2 | ✔ |
+| `sh_intro_ch2_map_image` | `image` → integer | ✔ | แผนที่ตอน 2 (manifest `intro-1117/<map.drive_file>`: still → ภาพ · animation → poster) | | intro ตอน 2 | ✔ |
+| `sh_intro_ch2_map_animation` | `image` → integer (WebP เคลื่อนไหว) | —  | manifest `kind: animation` `out` | ว่าง | intro ตอน 2 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch2_text_1` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 1 ของตอน 2 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 2 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 1) | ✔ |
+| `sh_intro_ch2_text_2` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 2 ของตอน 2 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 2 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 2) | ✔ |
+| `sh_intro_ch2_text_3` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 3 ของตอน 2 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 2 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 3) | ✔ |
+| `sh_intro_ch2_text_4` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 4 ของตอน 2 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 2 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 4) | ✔ |
+| `sh_intro_ch2_text_5` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 5 ของตอน 2 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 2 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 5) | ✔ |
+| `sh_intro_ch2_text_6` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 6 ของตอน 2 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 2 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 6) | ✔ |
+| `sh_intro_ch2_text_7` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 7 ของตอน 2 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 2 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 7) | ✔ |
+| `sh_intro_ch2_image_1` | `image` → integer | — | ช่องภาพที่ 1 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 2 | ✔ |
+| `sh_intro_ch2_image_1_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 1 | | intro ตอน 2 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch2_image_2` | `image` → integer | — | ช่องภาพที่ 2 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 2 | ✔ |
+| `sh_intro_ch2_image_2_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 2 | | intro ตอน 2 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch2_image_3` | `image` → integer | — | ช่องภาพที่ 3 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 2 | ✔ |
+| `sh_intro_ch2_image_3_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 3 | | intro ตอน 2 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch2_image_4` | `image` → integer | — | ช่องภาพที่ 4 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 2 | ✔ |
+| `sh_intro_ch2_image_4_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 4 | | intro ตอน 2 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch2_image_5` | `image` → integer | — | ช่องภาพที่ 5 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 2 | ✔ |
+| `sh_intro_ch2_image_5_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 5 | | intro ตอน 2 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch2_layout` | `textarea` → string (JSON object) | ✔ | seed `chapters[1]` ยกเว้นข้อความ/ไฟล์: `frame_h map{rel,box,crop,fill_mode} map_buttons arrows sections[{name,bg,rel,blocks[]}]` · block = `{kind:"text",slot,role,font,box,rel}` · `{kind:"image",slot,box,rel,crop,fill_mode}` · `{kind:"decor",image_ref(→id),box,rel}` | | intro ตอน 2 (geometry) | ✔ |
+| `sh_intro_ch3_title` | `text` → string | ✔ | seed `chapters[2].title` | "Rice and Spice: Platforms of Interconnection" | intro ปุ่ม/ตอน 3 | ✔ |
+| `sh_intro_ch3_accent` | `color_picker` → string | ✔ | `chapters[2].accent_color` | `#887A61` | intro ตอน 3 | ✔ |
+| `sh_intro_ch3_map_image` | `image` → integer | ✔ | แผนที่ตอน 3 (manifest `intro-1117/<map.drive_file>`: still → ภาพ · animation → poster) | | intro ตอน 3 | ✔ |
+| `sh_intro_ch3_map_animation` | `image` → integer (WebP เคลื่อนไหว) | —  | manifest `kind: animation` `out` | ว่าง | intro ตอน 3 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch3_text_1` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 1 ของตอน 3 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 3 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 1) | ✔ |
+| `sh_intro_ch3_text_2` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 2 ของตอน 3 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 3 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 2) | ✔ |
+| `sh_intro_ch3_text_3` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 3 ของตอน 3 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 3 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 3) | ✔ |
+| `sh_intro_ch3_text_4` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 4 ของตอน 3 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 3 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 4) | ✔ |
+| `sh_intro_ch3_text_5` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 5 ของตอน 3 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 3 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 5) | ✔ |
+| `sh_intro_ch3_text_6` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 6 ของตอน 3 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 3 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 6) | ✔ |
+| `sh_intro_ch3_text_7` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 7 ของตอน 3 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 3 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 7) | ✔ |
+| `sh_intro_ch3_image_1` | `image` → integer | — | ช่องภาพที่ 1 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 3 | ✔ |
+| `sh_intro_ch3_image_1_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 1 | | intro ตอน 3 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch3_image_2` | `image` → integer | — | ช่องภาพที่ 2 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 3 | ✔ |
+| `sh_intro_ch3_image_2_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 2 | | intro ตอน 3 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch3_image_3` | `image` → integer | — | ช่องภาพที่ 3 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 3 | ✔ |
+| `sh_intro_ch3_image_3_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 3 | | intro ตอน 3 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch3_image_4` | `image` → integer | — | ช่องภาพที่ 4 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 3 | ✔ |
+| `sh_intro_ch3_image_4_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 4 | | intro ตอน 3 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch3_image_5` | `image` → integer | — | ช่องภาพที่ 5 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 3 | ✔ |
+| `sh_intro_ch3_image_5_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 5 | | intro ตอน 3 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch3_layout` | `textarea` → string (JSON object) | ✔ | seed `chapters[2]` ยกเว้นข้อความ/ไฟล์: `frame_h map{rel,box,crop,fill_mode} map_buttons arrows sections[{name,bg,rel,blocks[]}]` · block = `{kind:"text",slot,role,font,box,rel}` · `{kind:"image",slot,box,rel,crop,fill_mode}` · `{kind:"decor",image_ref(→id),box,rel}` | | intro ตอน 3 (geometry) | ✔ |
+| `sh_intro_ch4_title` | `text` → string | ✔ | seed `chapters[3].title` | "Animals, Folklore, and Ecological Stewardship" | intro ปุ่ม/ตอน 4 | ✔ |
+| `sh_intro_ch4_accent` | `color_picker` → string | ✔ | `chapters[3].accent_color` | `#3F4036` | intro ตอน 4 | ✔ |
+| `sh_intro_ch4_map_image` | `image` → integer | ✔ | แผนที่ตอน 4 (manifest `intro-1117/<map.drive_file>`: still → ภาพ · animation → poster) | | intro ตอน 4 | ✔ |
+| `sh_intro_ch4_map_animation` | `image` → integer (WebP เคลื่อนไหว) | —  | manifest `kind: animation` `out` | ว่าง | intro ตอน 4 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch4_text_1` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 1 ของตอน 4 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 4 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 1) | ✔ |
+| `sh_intro_ch4_text_2` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 2 ของตอน 4 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 4 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 2) | ✔ |
+| `sh_intro_ch4_text_3` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 3 ของตอน 4 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 4 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 3) | ✔ |
+| `sh_intro_ch4_text_4` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 4 ของตอน 4 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 4 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 4) | ✔ |
+| `sh_intro_ch4_text_5` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 5 ของตอน 4 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 4 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 5) | ✔ |
+| `sh_intro_ch4_text_6` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 6 ของตอน 4 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 4 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 6) | ✔ |
+| `sh_intro_ch4_text_7` | `textarea` → string (inline HTML: `<strong>` `<em>`) | — | ช่องข้อความที่ 7 ของตอน 4 (block `kind:text` ตามลำดับใน `sections[].blocks[]` · seed `html` → `\n\n`/`\n`) · 7 ช่อง = seed สูงสุด 6 + 1 | | intro ตอน 4 (`sh_intro_chapters()` · ตำแหน่ง = `layout` slot 7) | ✔ |
+| `sh_intro_ch4_image_1` | `image` → integer | — | ช่องภาพที่ 1 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 4 | ✔ |
+| `sh_intro_ch4_image_1_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 1 | | intro ตอน 4 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch4_image_2` | `image` → integer | — | ช่องภาพที่ 2 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 4 | ✔ |
+| `sh_intro_ch4_image_2_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 2 | | intro ตอน 4 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch4_image_3` | `image` → integer | — | ช่องภาพที่ 3 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 4 | ✔ |
+| `sh_intro_ch4_image_3_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 3 | | intro ตอน 4 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch4_image_4` | `image` → integer | — | ช่องภาพที่ 4 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 4 | ✔ |
+| `sh_intro_ch4_image_4_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 4 | | intro ตอน 4 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch4_image_5` | `image` → integer | — | ช่องภาพที่ 5 (block `kind:image` ไม่นับ decor · manifest `intro-1117/<drive_file>` still · animation → poster · ไม่มีใน manifest = `figma_fill_file` ย่อ 2×) · 5 ช่อง = seed สูงสุด 4 + 1 | | intro ตอน 4 | ✔ |
+| `sh_intro_ch4_image_5_animation` | `image` → integer (WebP เคลื่อนไหว) | — | manifest `kind: animation` `out` ของช่องภาพ 5 | | intro ตอน 4 (`<img>` แทนภาพนิ่ง) | ✔ |
+| `sh_intro_ch4_layout` | `textarea` → string (JSON object) | ✔ | seed `chapters[3]` ยกเว้นข้อความ/ไฟล์: `frame_h map{rel,box,crop,fill_mode} map_buttons arrows sections[{name,bg,rel,blocks[]}]` · block = `{kind:"text",slot,role,font,box,rel}` · `{kind:"image",slot,box,rel,crop,fill_mode}` · `{kind:"decor",image_ref(→id),box,rel}` | | intro ตอน 4 (geometry) | ✔ |
 
 ## 8. Timeline (page `timeline`) — group: timeline
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `timeline-elephant.json`) | ใช้ในหน้า | REST |
@@ -208,9 +346,13 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
 | `sh_label_coming_soon` | `text` → string (default "Coming soon") | — | D40 ("เร็ว ๆ นี้" · ไม่มีใน Figma — P-173) | "Coming soon" | zone 5 การ์ดที่ `sh_page_card_<n>_soon` | ✔ |
 | `sh_label_back` | `text` → string (default "Back") | ✔ | Button Back `670:1810` | "Back" | ทุกหน้า | ✔ |
 | `sh_label_zone_prefix` | `text` → string (default "ZONE") | — | ป้าย zone | "ZONE" | home · zone | ✔ |
-| `sh_header_image` | `image` → integer | ✔ | ภาพพื้น Header #1 `670:9386` (โลโก้ในภาพ) | `709572bf…` | header ทุกหน้า | ✔ |
-**เมนู** = เมนู WP (Appearance › Menus) ไม่ใช่ฟิลด์: `Primary` (seed `nav_primary` 5 รายการ · ผูก location `primary`) · `Utility` (seed `nav_utility` 6 · ผูก location `utility` เมื่อ theme register) · "Main Page" → หน้าแรก · ที่เหลือ custom link `#` (ปลายทางยังไม่กำหนด P-211)
-**โลโก้ UNESCO (SVG)** = asset ของ theme ไม่ใช่ฟิลด์ (WP ไม่อนุญาตอัปโหลด SVG · เปิดต้องมี D เพราะเป็นชั้นพิเศษ upload)
+| `sh_header_image` | `image` → integer | — (ไม่ใช้ตั้งแต่ D47) | ภาพพื้น Header #1 `670:9386` (โลโก้ในภาพ) | `709572bf…` | — (header เดิมก่อน D47 · เก็บค่าไว้) | ✔ |
+| `sh_logo_header` | `image` → integer | ✔ | โลโก้ SH `I3339:5285;3307:1972` (§9.1 · D47) · `pages-1117/fills/877fd074….png` ครอป x .0738 y .1013 w .8768 h .8987 ตอน import → 440×154 | | header ทุกหน้า (ว่าง = ชื่อเว็บเป็นข้อความ) | ✔ |
+| `sh_logo_unesco_footer` | `image` → integer | — (0 = SVG ของ theme) | `3339:5249` SVG 283.1×60 (WP ไม่รับอัปโหลด SVG → theme `assets/img/common/unesco-footer-logo.svg`) | 0 | footer ทุกหน้า | ✔ |
+| `sh_logo_temasek` | `image` → integer | ✔ | `3339:5256` `8bffcba6….png` 3886×1124 → 416×120 | | footer ทุกหน้า | ✔ |
+| `sh_footer_support_text` | `text` → string (default "With the Support of") | ✔ | `3339:5255` | "With the Support of" | footer ทุกหน้า | ✔ |
+**เมนู** = เมนู WP (Appearance › Menus) ไม่ใช่ฟิลด์: `Primary` (seed `nav_primary` **6 รายการ** · ผูก location `primary`) · `Utility` (seed `nav_utility` 6 · ผูก location `utility` เมื่อ theme register · ไม่แสดงตั้งแต่ D47) · "Main Page" → หน้าแรก · **"About the Project" (D47) = custom link `site.json nav_primary_links` URL · "Open link in a new tab" (target `_blank`) · Link Relationship `noopener noreferrer`** — URL แก้ที่เมนู (ไม่มี option `sh_about_url` แยก · ที่เดียวกันกับเมนูอื่น) · header ใส่ `rel="noopener noreferrer"` + aria-label "(opens in a new tab)" ให้ทุกรายการที่เปิด new tab เอง · ที่เหลือ custom link `#` (ปลายทางยังไม่กำหนด P-211)
+**โลโก้ UNESCO (SVG)** = asset ของ theme (WP ไม่อนุญาตอัปโหลด SVG · เปิดต้องมี D เพราะเป็นชั้นพิเศษ upload) · footer (D47) ใช้ `assets/img/common/unesco-footer-logo.svg` เมื่อ `sh_logo_unesco_footer` = 0 (admin แทนด้วยภาพ PNG ได้)
 
 ## 10. ไม่อยู่ในสัญญา (เหตุผล)
 - DESIGN-SPEC §5.1 `timeline_card_image` + `timeline.*` ของวัตถุ → อยู่ที่ `timeline_item` (§3) เพราะหัว/ข้อความการ์ดต่างจากหน้า detail · `title_raw` → `sh_title_raw` · `detail_style.*` → `sh_panel_bg` … `sh_collection_color` · `layout` → `sh_layout`
@@ -231,6 +373,13 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
 | `sh_timeline_items( $trail )` | `WP_Post[]` การ์ด publish ของ trail ตาม `sh_card_order` |
 | `sh_object_hero( $id )` | `{webm, hevc, poster (URL), image_id, has_alpha}` |
 | `sh_object_extra_images( $id )` · `sh_object_layout( $id )` · `sh_paragraphs( $text )` | id ภาพแผง · layout array · ย่อหน้า string[] |
+| `sh_rich_paragraphs( $text )` | ย่อหน้า HTML ที่ปลอดภัยแล้ว (`<strong>` `<em>` `<br>` เท่านั้น) ของฟิลด์ inline HTML (`sh_guide_body` · `sh_intro_ch<n>_text_<k>`) — echo ได้เลย |
+| `sh_trail_tiles( $trail )` | ช่องกริดหน้า trail ตามลำดับ: `{object (WP_Post\|null), url ('' = ไม่ลิงก์), label, image, hover}` = วัตถุ publish (ภาพช่องของ trail นั้น) + ช่องไม่มีหน้า `sh_static_tile_<n>_*` ที่ตำแหน่งของมัน |
+| `sh_object_trail_tile( $id, $trail )` | `{image, hover}` ของวัตถุใน trail นั้น (`sh_trail_tile_<n>_*` ?: `sh_tile_image(_hover)`) |
+| `sh_guide_cards()` | การ์ดสัตว์หน้าแรก: `{trail, name, words, body (string[] HTML), follow, card, url}` ของ trail ที่มี `sh_guide_card` (ลำดับ home icons) |
+| `sh_intro_head( $page_id = 0 )` | `{emblem, title, paragraphs[], credit, env_heading, layout}` |
+| `sh_intro_chapters( $page_id = 0 )` | `[1..4 => {n, title, accent, map_image, map_animation, texts[slot] (string[] HTML), images[slot] {id, animation}, layout}]` |
+| `sh_json_value( $value )` | JSON ที่เก็บใน meta → array (`sh_trail_layout` ฯลฯ) |
 
 ## 12. Import (`scripts/import/`)
 - `import.php` (+ `lib.php` `refs.php` `icc.php` `media.php` `entities.php` `objects.php` `content-2026-11.php` `refresh.php` `refresh-2026-11.php` · ข้อมูล `image-map.json` `legacy-values.json`) รันใน WP: local อัตโนมัติใน `scripts/local.sh` · server `SH_IMPORT_ASSETS_DIR=… SH_IMPORT_MEDIA_DIR=… wp eval-file scripts/import/import.php`
@@ -249,5 +398,13 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
   - `image-map.json` (build 2026-11-11): ส่วน objects อ่าน `design/figma-file.json` ใหม่ (P-245: Brass Basin `3190:4671` · ภาพแผงใหม่ Ganesha/Singhasari/Molar/Patola/Bas-relief 3) · ส่วนอื่นอ่าน `design/figma-file.2026-10-27.json` ก่อน (`--figma-fallback` · หน้าอื่นยังไม่ได้ spec กับไฟล์ใหม่ §1.1b — ไฟล์ใหม่เปลี่ยน hero หน้าแรก/zone cover ที่ยังไม่มีใครสั่ง) · `_meta.nodes_from_older_dump`
   - **refresh (site ที่ import ก่อนรอบนี้ = production):** ค่าเดิมแทน **เฉพาะเมื่อยังเท่าค่าที่ import รุ่นก่อนเขียน** — `scripts/import/legacy-values.json` (สร้างด้วย `python3 scripts/import/build-legacy-values.py [base=f818837]` จากประวัติ git ของ seed/image-map ด้วยสูตรเดียวกับ importer · ข้อความเทียบตรง/หลัง sanitize/หลัง decode entity · `sh_layout` เทียบ fingerprint `refs.php sh_import_layout_fingerprint()` (ลำดับ key · รูปแบบตัวเลข · `*_ref` เป็นไฟล์หรือ attachment id ของ import = เท่ากัน) · ภาพแผง 1..6 เทียบรายการ key ทั้งชุด · `EXTRA` = ค่าที่ทีมแก้บน prod ตามคำสั่งเจ้าของ (Pod Duang `sh_title_raw` 2026-10-28)) · ฟิลด์ใหม่เติมเมื่อว่าง (true/false เมื่อยังไม่เคยบันทึก) · step: `2026-11-11-zones` (zone 1–3) · `-objects` (title · title_raw · caption · แถวข้อมูล · สี 5 · `sh_layout` · `sh_extra_image_1..6` · ไม่แตะ slug) · `-chooser` (zone 4 `sh_link_page` = หน้า Timeline → ว่าง · พื้น/แถบ · trail `sh_chooser_image`) · `-zone5` (รอ seed P-172: ไม่บันทึกว่าเสร็จ · ไม่เตือน) · `-media-replace` (ไฟล์ media/out เปลี่ยนแต่ชื่อเดิม: เขียนทับไฟล์ของ attachment ที่ import สร้างเมื่อ sha256 = ไฟล์รุ่นเก่า (`legacy-values.json` `media`) · id/URL เดิม · metadata ใหม่ · admin เปลี่ยนไฟล์ = ไม่ทับ) · ไฟล์ขาด = ไม่บันทึกว่าเสร็จ · ค่าที่ admin แก้ = นับใน report `skipped.kept_admin_value` / `kept_admin_file`
   - ผลตรวจ (local 2026-11-11 · core-hzd): ดูรายงาน core-hzd (`orchestrator/evidence/core-hzd/`)
+- **รอบ 2026-11-17 (core-1117 · D47–D53 · `refs-2026-11-17.php` + `content-2026-11-17.php` + `refresh-2026-11-17.php` + `web-image.php`):**
+  - seed ที่อ่านเพิ่ม: `guides.json` (การ์ดสัตว์ → trail term `sh_guide_*` ตาม `trail_slug` · `section` → Home `sh_home_guide_*`) · `intro-2026-11.json` (Intro 4 ตอน §7) · `site.json` `brand.header_logo` / `brand.footer.temasek` / `nav_primary_links` · `objects.json` + `trails.json` ของ 16 trail (D49)
+  - **ขอบเขตวัตถุ = `sh_import_all_objects()`**: มีตำแหน่งใน trail จริง (`trail_order` ไม่นับ `etc`) หรือ status `hold_*` → 117 วัตถุ (ช้าง 15 + generic 102) + hold 2 (`pending` · `sumatran-serow` = **draft**) · ช้าง 15 ยัง import ด้วย `sh_import_objects()` เดิม (`sh_import_scope_objects()` = D7 ใช้กับ step เก่าเท่านั้น) · `sh_object_order` ทุก trail = วัตถุ publish เรียงตาม `trail_order` (hold ไม่อยู่ในลำดับ — ช่องของมันเป็น `sh_static_tile_*`)
+  - **ไฟล์สื่อ = path จาก manifest (P-303):** `out`/`poster`/`still`/`fallback.file` → `media/out/<path>` (`sh_import_media_rel()` · ≤ 2 ชั้น ไม่มี `..`/dot) · import key `media:<path>` (ไฟล์ชั้นบนเดิม = basename เหมือนเดิม → attachment เดิมถูกใช้ซ้ำ) · hero วัตถุ generic = manifest key `drive-1117/<hero_video_src>` (ไม่มี `object_slug`) · Intro = key `intro-1117/<drive_file>`: still → ภาพ · `kind: animation` → `<n>_animation` = WebP เคลื่อนไหว + ภาพ = poster
+  - **ภาพ design/assets ใหม่:** ค่า `*_ref` ชื่อเดี่ยว → หาที่ราก แล้ว `objects-1117/` (`sh_import_ref_file()`) · ค่าใน seed หน้า (`guides/…` `fills/…` `intro-icons/…`) → `pages-1117/<sub>/` · sub-folder ที่อนุญาต (`sh_import_asset_subdirs()`): `objects-1117` `pages-1117/fills` `pages-1117/guides` `pages-1117/intro-icons` (+ ของเดิม) · key `asset:<sub>/<ชื่อไม่มีนามสกุล>`
+  - **ย่อภาพไม่เกิน 2× ขนาดแสดงผล (web spec · `refs-2026-11-17.php`):** ช่อง 184 → 368² · hover 210 → 420² · ปก trail 2240×980 (ครอปมาแล้ว) · การ์ดสัตว์ 460×726 · หลังการ์ด ครอป .016/.017/.968/.971 → 240×380 · โลโก้ header ครอปตาม seed → 440×154 · Temasek 416×120 · ภาพ Intro ที่ไม่มีใน manifest = 2× กล่อง · ครอปภาพแผง `crop_ref` (2× อยู่แล้ว) = คัดลอกตรง · import ย่อ/ครอปตอนคัดลอก (`sh_imp_attachment()` + GD · ไม่มี GD = คัดลอกตรง · นับใน report `updated.resized_2x`) · `deploy.sh` ย่อ bundle ก่อนส่ง (กล่องก่อนครอป · ครอปทำครั้งเดียวตอน import) · ภาพของ image-map/ชุดช้างเดิม = ไม่ย่อ (เหมือน prod)
+  - **refresh step (site ที่ import ก่อนรอบนี้ = production · `SH_IMPORT_ONLY=refresh` ได้):** `2026-11-17-objects` สร้างวัตถุที่ยังไม่มี (hold = draft · วัตถุที่ admin สร้างเองด้วย slug เดียวกัน = รับเป็นของ import แต่ไม่ทับ) · วัตถุที่มีแล้ว = เติมเฉพาะฟิลด์ว่าง (`sh_scientific_name` · `sh_trail_tile_*`) ไม่แตะชื่อ/ข้อความ · `2026-11-17-trails` description/H1/cover/layout/ช่องไม่มีหน้า/การ์ดสัตว์ = เติมเมื่อว่าง · `sh_object_order` แทนเฉพาะเมื่อยังเป็นรายการที่ import รุ่นก่อนเขียนพอดี (วัตถุช้างของ trail นั้นตามลำดับ seed) · `2026-11-17-pages` Home การ์ดสัตว์ + Intro 4 ตอน = เติมเมื่อว่าง · `2026-11-17-site` option โลโก้/ข้อความ footer = เมื่อยังไม่เคยตั้ง · เมนู Primary เพิ่ม "About the Project" ท้ายเมนูเมื่อไม่มีรายการชื่อ/URL เดียวกัน (ไม่ลบ/ไม่เรียง/ไม่เปลี่ยนชื่อรายการเดิม) · **ค่าที่ไม่แตะเพราะ admin แก้ = report `kept_admin[]` (อะไร + ค่าที่ site) + `skipped.kept_admin_value`** · มีคำเตือน (ไฟล์ขาด) ระหว่าง step = ยังไม่บันทึกว่าเสร็จ
+  - ผลตรวจ (local 2026-11-17 · core-1117): fresh `SH_IMPORT_RUNS=2` → object publish 116 · draft 2 · trail 17 · การ์ดสัตว์ 17 · Intro ตอน 1–4 ข้อความ 5/5/6/4 ช่อง ภาพ 4/3/3/1 · attachment 908 · ย่อ 274 · คำเตือน 0 · รอบ 2 สร้าง/แก้ 0 · ช่องกริด 16 trail ตรง `trails.json tiles[]` ทุกช่อง (ภาพ+วัตถุ) · จำลอง prod (import ด้วย 9fc08ce → admin แก้ 3 จุด → refresh-only ×2) = ค่าเดียวกับ fresh · `kept_admin` 3 รายการ · รอบ 2 แก้ 0 (`orchestrator/evidence/core-1117/`)
 - ผลนับ (local 2026-10-27 · core-import-refresh): object 15 · timeline_item 15 · trail 17 · zone 5 · page 3 · attachment 205 · menu 2 · ICC→sRGB 67 ไฟล์ · คำเตือน 0 · รอบที่ 2 สร้างใหม่ 0 / แก้ 0 · import เก่า→ใหม่บน site เดียวกัน: วิดีโอ 7→14 · HEVC 4→6 · แผนที่ → 39907d2c · ICC 68 · ภาพ hero ที่ admin ตั้งเองคงเดิม
 - ภาพนำเข้าโดยไม่สร้าง sub-size (ต้นฉบับใหญ่ · playground ช้า) · server ใช้ `SH_IMPORT_SUBSIZES=1`

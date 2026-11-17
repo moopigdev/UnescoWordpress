@@ -57,10 +57,41 @@ function sh_core_sanitize( array $field, $value ) {
 			if ( isset( $field['format'] ) && 'json' === $field['format'] ) {
 				return sh_core_sanitize_json( $value );
 			}
+			if ( isset( $field['format'] ) && 'inline_html' === $field['format'] ) {
+				return sh_core_sanitize_inline_html( $value );
+			}
 			return sanitize_textarea_field( is_scalar( $value ) ? (string) $value : '' );
 		default:
 			return sanitize_text_field( is_scalar( $value ) ? (string) $value : '' );
 	}
+}
+
+/**
+ * Inline tags allowed in format=inline_html textareas (bold / italic / line break · no attributes).
+ *
+ * @return array<string, array<string, bool>>
+ */
+function sh_core_inline_tags(): array {
+	return array(
+		'strong' => array(),
+		'b'      => array(),
+		'em'     => array(),
+		'i'      => array(),
+		'br'     => array(),
+	);
+}
+
+/**
+ * Multi-line text that may hold <strong>/<em>/<br> (format=inline_html): other tags and every attribute removed,
+ * line breaks kept (like sanitize_textarea_field()).
+ *
+ * @param mixed $value Raw value.
+ */
+function sh_core_sanitize_inline_html( $value ): string {
+	$text = is_scalar( $value ) ? (string) $value : '';
+	$text = wp_check_invalid_utf8( $text );
+	$text = str_replace( array( "\r\n", "\r" ), "\n", $text );
+	return trim( wp_kses( $text, sh_core_inline_tags() ) );
 }
 
 /**
@@ -234,7 +265,19 @@ function sh_core_validate_json( $valid, $value ) {
 	$ok = '' !== sh_core_sanitize_json( $value ) || ( is_string( $value ) && '' !== sh_core_sanitize_json( wp_unslash( $value ) ) );
 	return $ok ? $valid : 'Must be a JSON object, e.g. {"panel_y": 960}.';
 }
-add_filter( 'acf/validate_value/name=sh_layout', 'sh_core_validate_json', 10, 2 );
+/**
+ * Hook the JSON check on every format=json field.
+ */
+function sh_core_register_json_validation(): void {
+	foreach ( array_keys( sh_core_field_groups() ) as $group ) {
+		foreach ( sh_core_group_fields( $group ) as $field ) {
+			if ( isset( $field['format'] ) && 'json' === $field['format'] ) {
+				add_filter( 'acf/validate_value/name=' . $field['name'], 'sh_core_validate_json', 10, 2 );
+			}
+		}
+	}
+}
+add_action( 'acf/init', 'sh_core_register_json_validation' );
 
 /**
  * ACF missing → tell admins (data stays readable by templates and REST; editing needs ACF).
