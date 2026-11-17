@@ -48,7 +48,7 @@ function sh_import_refresh_steps_2026_11_17(): array {
 		// fb-1117 (BACKLOG #36 · D58): belt buckle title as in Figma, every character.
 		'2026-11-17-belt-title' => 'object pending-3 title (+ title_raw): "Pending (Traditional Belt Buckle)" → "Pending (traditional belt buckle)" only while the site still has the value the importer wrote (slug unchanged · an admin edit stays: kept_admin)',
 		// multitrail-1117 (BACKLOG #41 · D59): an object in several trails opens in the look of the trail it was clicked from.
-		'2026-11-17-multitrail' => 'trail versions of the 19 multi-trail objects (sh_variant_<n>_*: hero video · colours · side images · layout · text that differs) added only where empty (an admin value stays: kept_admin) · zone grid tile trail (sh_zone_tile_<n>_trail) set only where empty and the tile still holds the seed object · nothing removed',
+		'2026-11-17-multitrail' => 'trail versions of the multi-trail objects (sh_variant_<n>_*: hero video · colours · side images · layout · text that differs) added only where empty (an admin value stays: kept_admin) · zone grid tile trail (sh_zone_tile_<n>_trail) set only where empty and the tile still holds the seed object · D60: Đông Sơn drum of Seashell = its own object (new object created · seashell term off the old one · trail order · zone 3 tile → new object, only while still the importer\'s values) · nothing deleted',
 	);
 }
 
@@ -813,11 +813,106 @@ function sh_import_fill_or_keep( int $id, array $meta, array $defs, string $labe
 	}
 }
 
+/** Đông Sơn drum (D60): one object per trail — the water-bird one keeps its slug, the seashell one is a new object. */
+const SH_IMPORT_DRUM_1117 = array(
+	'old'       => 'ng-s-n-drum',
+	'new'       => 'dong-son-drum-thung-yang',
+	'trail'     => 'seashell',
+	'was_trails' => array( 'water-bird', 'seashell' ),
+);
+
+/**
+ * Part of step 2026-11-17-multitrail (D60): the Đông Sơn drum of the Seashell trail (Thung Yang · National Museum
+ * Bangkok) is its own object. A site imported before has ONE object (ng-s-n-drum) in water-bird + seashell:
+ *   new object     dong-son-drum-thung-yang created when missing (the usual object import · hero · tiles · layout)
+ *   old object     the seashell term taken off only while its trails are exactly the two the import gave it (an admin
+ *                  who changed them: kept_admin) · its seashell tile fields stay (harmless · nothing deleted)
+ *   seashell trail sh_object_order gets the new object in the old one's place only while it is still the old import list
+ *   zone grid      the Zone 1–3 tile that still holds the old object while the seed says the new one → the new object
+ *                  (+ its trail); a tile holding another object stays (kept_admin) · images are the seashell tile's already
+ *
+ * @param array<string, mixed> $seed     Seed files.
+ * @param array<string, mixed> $map      image-map.json.
+ * @param array<string, mixed> $manifest Manifest.
+ */
+function sh_import_refresh_drum_split_1117( array $seed, array $map, array $manifest ): void {
+	$c    = SH_IMPORT_DRUM_1117;
+	$term = get_term_by( 'slug', $c['trail'], 'trail' );
+	if ( ! $term instanceof WP_Term ) {
+		return;
+	}
+	$in_seed = false;
+	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		$in_seed = $in_seed || (string) $o['slug'] === $c['new'];
+	}
+	if ( ! $in_seed ) {
+		return;
+	}
+	if ( ! sh_imp_find_post( 'object', 'object:' . $c['new'] ) ) {
+		sh_import_objects_1117( $seed, $map, $manifest, true, array( $c['new'] ) );
+	}
+	$new_id = sh_imp_find_post( 'object', 'object:' . $c['new'] );
+	$old_id = sh_imp_find_post( 'object', 'object:' . $c['old'] );
+	if ( ! $new_id || ! $old_id ) {
+		return;
+	}
+	if ( has_term( $term->term_id, 'trail', $old_id ) ) {
+		$slugs = wp_get_object_terms( $old_id, 'trail', array( 'fields' => 'slugs' ) );
+		if ( is_array( $slugs ) && ! array_diff( $slugs, $c['was_trails'] ) ) {
+			wp_remove_object_terms( $old_id, (int) $term->term_id, 'trail' );
+			sh_imp_count( 'updated', 'object_trail_term_removed' );
+		} else {
+			sh_imp_keep( "object:{$c['old']} trails (admin changed them · seashell term not taken off)" );
+		}
+	}
+	// sh_object_order of the trail: the new object in the old one's place (old import list only).
+	$new = array();
+	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		$oid = sh_imp_find_post( 'object', 'object:' . $o['slug'] );
+		if ( $oid && 'publish' === get_post_status( $oid ) && isset( $o['trail_order'][ $term->slug ] ) ) {
+			$new[ $oid ] = (int) $o['trail_order'][ $term->slug ];
+		}
+	}
+	asort( $new );
+	$old = array();
+	foreach ( array_keys( $new ) as $oid ) {
+		$old[] = $oid === $new_id ? $old_id : $oid;
+	}
+	$cur = get_term_meta( $term->term_id, 'sh_object_order', true );
+	$cur = is_array( $cur ) ? array_values( array_map( 'intval', $cur ) ) : array();
+	if ( array_keys( $new ) !== $cur ) {
+		if ( ! $cur || $old === $cur ) {
+			sh_imp_meta( 'term', $term->term_id, array( 'sh_object_order' => array_keys( $new ) ) );
+			sh_imp_count( 'updated', 'trail_object_order' );
+		} else {
+			sh_imp_keep( "trail:{$c['trail']} sh_object_order (admin order kept · the new drum comes after it, A–Z)" );
+		}
+	}
+	// Zone grid tiles of the new object.
+	foreach ( sh_import_zone_grid_tiles( $seed ) as $zn => $slots ) {
+		$zone = get_term_by( 'slug', 'zone-' . $zn, 'zone' );
+		foreach ( $slots as $slot => $t ) {
+			if ( ! $zone instanceof WP_Term || $t['object_slug'] !== $c['new'] ) {
+				continue;
+			}
+			$key = "sh_zone_tile_{$slot}_object";
+			$cur = absint( get_term_meta( $zone->term_id, $key, true ) );
+			if ( $cur === $old_id ) {
+				sh_imp_meta( 'term', $zone->term_id, array( $key => $new_id ) );
+				sh_imp_count( 'updated', 'zone_tile_object' );
+			} elseif ( $cur && $cur !== $new_id ) {
+				sh_imp_keep( "zone:$zn $key (admin value $cur · seed object {$c['new']} not set)" );
+			}
+		}
+	}
+}
+
 /**
  * Step 2026-11-17-multitrail (BACKLOG #41 · D59): (1) every seed object that sits in several trails gets one trail version
  * (sh_variant_<n>_*, CONTENT-MODEL §2b) per trail other than its main one — the slot where that trail already is, else the
  * first free slot; fields are filled only while empty (sh_import_fill_or_keep()) · an object not on the site, a trail that is
- * not a term of the site or one the object was taken out of, is skipped · nothing is removed. (2) the Zone 1–3 grid tile
+ * not a term of the site or one the object was taken out of, is skipped · nothing is removed (D60 drum split: see
+ * sh_import_refresh_drum_split_1117()). (2) the Zone 1–3 grid tile
  * gets its trail (sh_zone_tile_<n>_trail) only while empty and while the tile still holds the seed's object.
  *
  * @param array<string, mixed> $seed     Seed files.
@@ -825,6 +920,7 @@ function sh_import_fill_or_keep( int $id, array $meta, array $defs, string $labe
  * @param array<string, mixed> $manifest Manifest.
  */
 function sh_import_refresh_multitrail_1117( array $seed, array $map, array $manifest ): void {
+	sh_import_refresh_drum_split_1117( $seed, $map, $manifest ); // D60 first: the zone tile / trail the rest reads.
 	$trail_ids = sh_imp_trail_ids();
 	$defs      = array();
 	foreach ( sh_core_group_fields( 'object_variant' ) as $f ) {
