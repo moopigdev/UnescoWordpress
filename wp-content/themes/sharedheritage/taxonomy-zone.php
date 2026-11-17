@@ -3,8 +3,8 @@
  * Zone page — taxonomy `zone` (Zone 1–3: DESIGN-SPEC §4.3 + §4.3b · frames 3117:3684 / 3713 / 3742).
  *
  * One layout for every zone: cover (1120×410) · zone banner (1120×166) · text block (heading · sh_intro · Read more ↔
- * Hide) · trail grid (3×5 tiles 184×184) · Back.
- * Everything shown comes from the zone term (docs/CONTENT-MODEL §5) and `sh_trails( 'zone_grid' )` (§4).
+ * Hide) · object grid (D57 · 5 columns of 184×184 tiles) · Back.
+ * Everything shown comes from the zone term (docs/CONTENT-MODEL §5) and `sh_zone_grid()` (§5b).
  * Zone 4 has no zone page of its own (its term points at the Timeline page via sh_link_page → redirect);
  * Zone 5 has no content (sh_has_page = false) → heading + Back only, never an error.
  *

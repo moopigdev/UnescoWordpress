@@ -1,8 +1,8 @@
 <?php
 /**
- * Zone page, closing part: trail grid (§4.3 `Frame 114472` · 3 rows × 5 tiles 184×184, gap 50) and the Back button.
- * Tiles = sh_trails( 'zone_grid' ) (CONTENT-MODEL §4 · sorted by sh_zone_grid_order). Zones without a page
- * (sh_has_page = false, Zone 5) show no grid.
+ * Zone page, closing part: object grid (D57 · DESIGN-SPEC §10.3 · 5 columns of 184×184 tiles, gap 50 · 15 / 42 / 83
+ * tiles) and the Back button (grid bottom + 74). Tiles = sh_zone_grid() (CONTENT-MODEL §5b · slot order). Zones without
+ * a page (sh_has_page = false, Zone 5) show no grid.
  *
  * Args: zone (WP_Term).
  *
@@ -17,13 +17,20 @@ if ( ! $sh_zone ) {
 	return;
 }
 
-$sh_trails = (bool) sh_get_term( 'sh_has_page', $sh_zone ) ? sh_trails( 'zone_grid' ) : array();
+$sh_tiles = (bool) sh_get_term( 'sh_has_page', $sh_zone ) ? sh_zone_grid( $sh_zone ) : array();
 ?>
-<?php if ( $sh_trails ) : ?>
+<?php if ( $sh_tiles ) : ?>
 	<ul class="sh-zone__grid">
 		<?php
-		foreach ( $sh_trails as $sh_trail ) {
-			get_template_part( 'template-parts/zone/tile', null, array( 'trail' => $sh_trail ) );
+		foreach ( $sh_tiles as $sh_tile ) {
+			get_template_part(
+				'template-parts/zone/tile',
+				null,
+				array(
+					'tile' => $sh_tile,
+					'zone' => $sh_zone,
+				)
+			);
 		}
 		?>
 	</ul>
