@@ -4,7 +4,7 @@
  * Every moving value comes from custom properties written by assets/js/timeline.js:
  *   --c      continuous index of the object at the centre (load: 1 = first object, D30)
  *   --k      stage scale · --pitch distance between objects · --line-l/--line-r time line insets
- *   --tr/--mr  text enlargement so title ≥ 14px and metadata ≥ 12px on screen when k < 1
+ *   --tr/--mr  text enlargement so title ≥ 14px and metadata (18px · D51) ≥ 14px on screen when k < 1
  *   per object: --p (0 rest → 1 centre) · --ta title alpha · per info: --pa photo alpha · --ma metadata alpha
  *   D35/D36 "before" image of the photo: --lpw width (contain 320×265 · px at 1440) · --lar file ratio · --la α ·
  *   --lbs (D39 card 5: 0.62) = its box is this × the photo, kept on tablet/mobile
@@ -26,6 +26,10 @@
 	--mfw: 195px;
 	--tl-cream: #edebda;
 	--tl-mini-line: #dfdfdf;
+	--mft: 8px;        /* mini-map frame y_rel 14.5 → 64.5 (the cream bar = the mini-map's own height · D51: trail tiles use it) */
+	--mfh: 50px;
+	--ms: 0.8;         /* D52 desktop: mini-map drawn ×0.8 (frame 50 → 40) so the 17 tiles (40) fit left of its frame · tablet/mobile 1 */
+	--mfhs: calc(var(--mfh) * var(--ms)); /* mini-map frame height as drawn */
 	--tl-hit: max(44px, calc(44px / var(--k)));
 	position: relative;
 	container-type: inline-size;
@@ -72,27 +76,46 @@
 	inset: 0;
 }
 
-/* ---- Trail icons ×17 · x 19.2 · y_rel 27 → 54 · 25.3×26.3 · pitch 28.3 (no enlarged icon) ---- */
+/*
+ * ---- Trail tiles ×17 (D51 · D52) · as tall as the mini-map bar as drawn (--mfhs = its cream frame · desktop 40), square, same y centre
+ * (frame centre y_rel 39.5) · x 19.2 → 8 before the frame's leftmost position (c = 1: 1413 + (19 − 97.5 − 774)·ms) ·
+ * gap 3 → 1 first, then the tile shrinks · hover/focus = the tile grows (transform only) ----
+ */
 .sh-tl__trails {
+	--tarea: calc(1413px + (19px - 97.5px - 774px) * var(--ms) - 19.2px - 8px);
+	--tgap: clamp(1px, calc((var(--tarea) - 17 * var(--mfhs)) / 16), 3px);
+	--tile: min(var(--mfhs), calc((var(--tarea) - 16 * var(--tgap)) / 17));
 	position: absolute;
-	top: 27px;
+	top: calc(39.5px - var(--tile) / 2);
 	left: 19.2px;
 	z-index: 6;
 	display: flex;
-	gap: 3px;
+	gap: var(--tgap);
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
 .sh-tl__trail {
+	position: relative;
 	flex: none;
+}
+
+.sh-tl__trail:hover,
+.sh-tl__trail:focus-within {
+	z-index: 2; /* above the neighbours while it is grown */
+}
+
+.sh-tl__trails:hover,
+.sh-tl__trails:focus-within {
+	z-index: 7; /* a grown tile may touch the mini-map box (tablet) → above it */
 }
 
 .sh-tl__trail-link {
 	display: block;
-	width: 25.3px;
-	height: 26.3px;
+	width: var(--tile);
+	height: var(--tile);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .sh-tl__trail-img {
@@ -102,22 +125,34 @@
 	object-fit: cover;
 }
 
+.sh-tl__trail-link:hover,
+a.sh-tl__trail-link:focus-visible {
+	transform: scale(1.5);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 .sh-tl__trail-link:focus-visible {
 	outline: 2px solid var(--sh-color-neutral-800);
 	outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sh-tl__trail-link {
+		transition: none;
+	}
 }
 
 /* ---- Mini-map · x 639 → 1413 · y_rel 6.5 → 71.5 · slot pitch 51.6 · frame 195×50 at 14.5 ---- */
 .sh-tl__mini {
 	--mbase: 50.5px;   /* object base y_rel 57 */
 	--mline: 52px;     /* thin line + dots centre y_rel 58.5 */
-	--mft: 8px;        /* frame y_rel 14.5 → 64.5 */
-	--mfh: 50px;
 	position: absolute;
 	top: 6.5px;
 	left: 639px;
 	z-index: 6;
 	width: 774px;
+	transform: scale(var(--ms)); /* D52: ×0.8 about (right end x 1413 · frame centre) → the frame keeps its centre y 39.5 */
+	transform-origin: 774px 33px;
 	height: 65px;
 }
 
@@ -436,14 +471,18 @@ html:not(.sh-js) .sh-tl__arrow {
 	position: absolute;
 	top: 496px;
 	left: 907px;
-	width: calc(442px * var(--mr));
+	width: min(calc(505px * var(--mr)), 525px); /* D51 [P]: to the time-line's right end (x 1412) so 18px text wraps late */
 	margin: 0;
 	font-family: var(--sh-font-komet);
-	font-size: calc(14px * var(--mr));
+	font-size: calc(18px * var(--mr)); /* D51: 18px (token --sh-type-body · line-height 24 = its) */
 	font-weight: var(--sh-fw-komet-medium);
-	line-height: calc(18.6px * var(--mr));
+	line-height: calc(24px * var(--mr));
 	color: var(--sh-color-neutral-900);
 	opacity: var(--ma);
+}
+
+.sh-tl__meta-h {
+	font-weight: var(--sh-fw-komet-bold); /* D51: heading up to ":" */
 }
 
 .sh-tl__info.is-center .sh-tl__photo,
@@ -522,14 +561,14 @@ html:not(.sh-js) .sh-tl__arrow {
 
 .sh-tl__refl-body {
 	font-family: var(--sh-font-komet);
-	font-size: calc(14px * var(--mr)); /* floor 12px on screen, as the metadata */
+	font-size: calc(14px * max(1, 12 / (14 * var(--k)))); /* floor 12px on screen (§4.5c.5) — own multiplier, not the metadata --mr (D51: 18px) */
 	font-weight: var(--sh-fw-komet-medium);
-	line-height: calc(17.5px * var(--mr));
+	line-height: calc(17.5px * max(1, 12 / (14 * var(--k))));
 	letter-spacing: 0;
 }
 
 .sh-tl__refl-body p {
-	margin: 0 0 calc(17.5px * var(--mr));
+	margin: 0 0 calc(17.5px * max(1, 12 / (14 * var(--k))));
 }
 
 .sh-tl__refl-body p:last-child {
@@ -572,6 +611,7 @@ html:not(.sh-js) .sh-tl__arrow {
 @media (max-width: 1279.98px) {
 	.sh-tl {
 		--k: 1;
+		--ms: 1;
 		--pitch: 26.15cqw;
 		--line-y: 464px;     /* default; timeline.js measures the tallest title + 19 + active object */
 		--line-l: 0px;
@@ -597,7 +637,14 @@ html:not(.sh-js) .sh-tl__arrow {
 		height: calc(var(--line-y) + 9px);
 	}
 
+	/* D51/D52: the tile row is the full width here (mini-map sits under it) → gap 3 → 1 · tile = mini-map frame height, shrinks only when 17 do not fit. */
+	.sh-tl__trails {
+		--tarea: calc(100cqw - 38.4px);
+		top: 10px;
+	}
+
 	.sh-tl__mini {
+		transform: none;
 		top: 66px;
 		right: 24px;
 		left: 24px;
@@ -658,8 +705,8 @@ html:not(.sh-js) .sh-tl__arrow {
 		top: auto;
 		left: auto;
 		width: min(560px, 100%);
-		font-size: 14px;
-		line-height: 18.6px;
+		font-size: 18px;
+		line-height: 24px;
 	}
 
 	/* D34: the stacked area grows to the Reflection text height (--refl-h, timeline.js) with its progress --rp. */
@@ -706,9 +753,14 @@ html:not(.sh-js) .sh-tl__arrow {
 	.sh-tl {
 		--pitch: 62cqw;
 		--line-y: 400px;
+		--mft: 6px;
+		--mfh: 37px;
 	}
 
+	/* D51: one scrolling row (as before) · tile = mini-map bar height 37 · no grow on touch (the row clips). */
 	.sh-tl__trails {
+		--tgap: 3px;
+		--tile: var(--mfh);
 		top: 12px;
 		right: 0;
 		left: 0;
@@ -717,11 +769,15 @@ html:not(.sh-js) .sh-tl__arrow {
 		scrollbar-width: none;
 	}
 
+	.sh-tl__trail-link:hover,
+	a.sh-tl__trail-link:focus-visible {
+		transform: none;
+		box-shadow: none;
+	}
+
 	.sh-tl__mini {
 		--mbase: 37px;
 		--mline: 38px;
-		--mft: 6px;
-		--mfh: 37px;
 		top: 56px;
 		right: 20px;
 		left: 20px;
@@ -766,7 +822,6 @@ html:not(.sh-js) .sh-tl__arrow {
 
 	.sh-tl__meta {
 		width: 100%;
-		line-height: 20px;
 	}
 
 	.sh-tl__refl {

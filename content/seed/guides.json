@@ -1,0 +1,689 @@
+{
+ "_meta": {
+  "_source": {
+   "figma_file_key": "EhcqSXTMEArlrfSGUQVCwl",
+   "lastModified": "2026-11-17T03:50:23Z",
+   "page": "3117:3314",
+   "sections": "3339:5227 Home (3339:5265 section) · 3339:5488 การ์ด 17 ใบ · 3339:6016 ตัวอย่างการสุ่ม",
+   "by": "design-pages-1117 (D48)"
+  },
+  "rules": [
+   "ข้อความคัดลอกตรง (ตัวอักษร/เว้นวรรค/เครื่องหมาย) · ชื่อไฟล์ trail ใช้ slug ตาม trails.json · ลำดับ = ลำดับ frame ใน Figma",
+   "การ์ดในหน้าแรก: ภาพการ์ดใบเดียวกันใช้ทั้งขนาดเล็ก 120×190 (ใต้หัวข้อ) และใหญ่ 230×363 (ตอนขยาย) — fill mode FILL (cover) กล่อง 120×190 / 230×363",
+   "body: \\n\\n = ย่อหน้า · \\n เดี่ยว = ขึ้นบรรทัดที่นักออกแบบตั้งใจ (<br>) · body_html: ตัวเอียง = <em> (เฉพาะ dragon: \"long\")",
+   "follow_text คัดลอกตรงจาก Figma ยกเว้น แก้ INVERTABRATES→INVERTEBRATES ตาม D53 (Figma 3333:4594/3339:5912 ยังผิด)"
+  ],
+  "count": 17
+ },
+ "section": {
+  "node": "3339:5265",
+  "title": "Your animal guide is...",
+  "title_node": "3339:5267",
+  "opening": "An animal has crossed your path... Can you figure out where it went?",
+  "opening_raw": "An animal has crossed your path... Can you figure out where\nit went?",
+  "opening_node": "3339:5270",
+  "heritage": "For centuries, animals have inspired artists, craftspeople, families and spiritual seekers, who brought them to life in art you can still see today.",
+  "heritage_raw": "For centuries, animals have inspired artists, craftspeople,\nfamilies and spiritual seekers, who brought them to life in\nart you can still see today.",
+  "heritage_node": "3339:5271",
+  "question": "Which animal will guide you?",
+  "question_node": "3339:5272",
+  "instructions": "Pick a card to meet your animal guide, then follow its tracks through the heritage Southeast Asia shares.",
+  "instructions_raw": "Pick a card to meet your animal guide, then follow its tracks\nthrough the heritage Southeast Asia shares.",
+  "instructions_node": "3339:5273",
+  "cta": "CHOOSE A CARD",
+  "cta_node": "3339:5274",
+  "raw_note": "`*_raw` = ตรงตัวอักษรใน Figma (มี \\n ที่นักออกแบบตัดบรรทัดเองให้พอดีกว้าง 570) · ฟิลด์ปกติ = ยุบ \\n เป็นช่องว่าง (ให้ธีม reflow เอง) — ตัดสินเองตาม §9.3",
+  "card_back": {
+   "ref": "c632e52fe8bbc4d7dc9d8d2c44cc3545b05bd9e1",
+   "file": "guides/_card-back.png",
+   "node": "3339:5275",
+   "size": [
+    120,
+    190
+   ],
+   "node_px_source": [
+    120,
+    190
+   ],
+   "alt": "?"
+  }
+ },
+ "labels": {
+  "read_more": "Read more >>",
+  "hide": "Hide >>",
+  "follow_arrow": "→",
+  "follow_template": "→ FOLLOW THE {NAME} TRAIL",
+  "note": "ป้ายอ่านตรงจาก Figma `3339:5513` (Hide) · `3339:6074` (Read more) · คงตาม §3.4"
+ },
+ "cards": [
+  {
+   "key": "rooster",
+   "trail_slug": "rooster",
+   "order": 1,
+   "name": "The Chicken & Rooster",
+   "name_node": "3339:5505",
+   "words": [
+    "Renewal",
+    "Homeliness",
+    "Abundance"
+   ],
+   "words_text": "Renewal · Homeliness · Abundance",
+   "words_node": "3339:5506",
+   "body": "Your animal guide has been living alongside people for thousands of years.\nThe domestic chicken traces its ancestry to Southeast Asia’s red junglefowl. As chickens became part of settlements, farms, and households, this familiar animal also acquired powerful meanings. The rooster’s call at dawn came to evoke vigilance, courage, and new beginnings, while hens and chicks could represent nurture, continuity, and abundance.\n\nAcross Southeast Asia, chickens also entered ceremonial and spiritual life. In Bali, tabuh rah, a ritual cockfight, forms part of Hindu purification rituals intended to restore cosmic balance. Among Iban communities in Borneo, cockfighting (nyabong) is rooted in mythology and ceremonial traditions and has also been used to settle disputes.\n\nSomething new is about to hatch. Like the rooster greeting the dawn, your Chicken signals a fresh start. Look close to home: something you have been quietly nurturing may soon start to grow.\n\nBut there’s much more to your Chicken’s story.\n\nFollow the Chicken Trail to discover how chickens travelled from forests to farms and into ceremonies, weapons, tools, vessels, and everyday life across Southeast Asia.",
+   "body_html": "<p>Your animal guide has been living alongside people for thousands of years.<br>The domestic chicken traces its ancestry to Southeast Asia’s red junglefowl. As chickens became part of settlements, farms, and households, this familiar animal also acquired powerful meanings. The rooster’s call at dawn came to evoke vigilance, courage, and new beginnings, while hens and chicks could represent nurture, continuity, and abundance.</p><p>Across Southeast Asia, chickens also entered ceremonial and spiritual life. In Bali, tabuh rah, a ritual cockfight, forms part of Hindu purification rituals intended to restore cosmic balance. Among Iban communities in Borneo, cockfighting (nyabong) is rooted in mythology and ceremonial traditions and has also been used to settle disputes.</p><p>Something new is about to hatch. Like the rooster greeting the dawn, your Chicken signals a fresh start. Look close to home: something you have been quietly nurturing may soon start to grow.</p><p>But there’s much more to your Chicken’s story.</p><p>Follow the Chicken Trail to discover how chickens travelled from forests to farms and into ceremonies, weapons, tools, vessels, and everyday life across Southeast Asia.</p>",
+   "body_node": "3339:5510",
+   "follow_text": "→ FOLLOW THE CHICKEN & ROOSTER TRAIL",
+   "follow_node": "3339:5512",
+   "card_image": {
+    "ref": "f8162319395e12437d44b99bc90b68fabd6bbb20",
+    "file": "guides/rooster.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5503",
+    "node_big": "3339:5509"
+   },
+   "card_color": "#428B75",
+   "tile_group": "green",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5489",
+   "figma_frame_name": "The chicken",
+   "expanded_block_h": 666.0,
+   "italic_runs": false
+  },
+  {
+   "key": "bird",
+   "trail_slug": "bird",
+   "order": 2,
+   "name": "The Bird",
+   "name_node": "3339:5530",
+   "words": [
+    "Protection",
+    "Courage",
+    "Renewal"
+   ],
+   "words_text": "Protection · Courage · Renewal",
+   "words_node": "3339:5531",
+   "body": "A tiny Quail has appeared as your guide today.\nThis is a good omen. Whatever fires are burning around you, take heart: even the smallest wings can hold great power.\n\nIn the Buddhist Vattaka Jātaka, the Buddha is reborn as a young quail. When a forest fire races towards his nest, he cannot escape—his wings are still too small to fly.\n\nInstead, the little bird makes an Act of Truth, calling upon the power of his virtue. The flames retreat, and the forest is spared.\n\nIn southern Thailand, the quail became associated with protection from fire and misfortune. Its story carries a powerful message: protection does not always come from strength or size.\n\nA difficulty that feels overwhelming may be closer to passing than you think. Like the little quail, trust in what you already carry within you. Your guide brings protection through adversity and the promise of renewal after danger.\n\nBut don’t lose sight of your bird just yet.\n\nFollow its flight across Southeast Asia and you’ll find birds appearing on jewellery, ceremonial objects, sacred images and everyday tools.\n\nYour Quail has taken flight. Where will it land next?",
+   "body_html": "<p>A tiny Quail has appeared as your guide today.<br>This is a good omen. Whatever fires are burning around you, take heart: even the smallest wings can hold great power.</p><p>In the Buddhist Vattaka Jātaka, the Buddha is reborn as a young quail. When a forest fire races towards his nest, he cannot escape—his wings are still too small to fly.</p><p>Instead, the little bird makes an Act of Truth, calling upon the power of his virtue. The flames retreat, and the forest is spared.</p><p>In southern Thailand, the quail became associated with protection from fire and misfortune. Its story carries a powerful message: protection does not always come from strength or size.</p><p>A difficulty that feels overwhelming may be closer to passing than you think. Like the little quail, trust in what you already carry within you. Your guide brings protection through adversity and the promise of renewal after danger.</p><p>But don’t lose sight of your bird just yet.</p><p>Follow its flight across Southeast Asia and you’ll find birds appearing on jewellery, ceremonial objects, sacred images and everyday tools.</p><p>Your Quail has taken flight. Where will it land next?</p>",
+   "body_node": "3339:5535",
+   "follow_text": "→ FOLLOW THE BIRD TRAIL",
+   "follow_node": "3339:5537",
+   "card_image": {
+    "ref": "2a452b87338f08155671f9c329ac1ee5b412aa5e",
+    "file": "guides/bird.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5528",
+    "node_big": "3339:5534"
+   },
+   "card_color": "#428B75",
+   "tile_group": "green",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5514",
+   "figma_frame_name": "The Bird",
+   "expanded_block_h": 735.0,
+   "italic_runs": false
+  },
+  {
+   "key": "hornbill",
+   "trail_slug": "hornbill",
+   "order": 3,
+   "name": "The Hornbill",
+   "name_node": "3339:5555",
+   "words": [
+    "Call of Life",
+    "Forest",
+    "Community"
+   ],
+   "words_text": "Call of Life · Forest · Community",
+   "words_node": "3339:5556",
+   "body": "The Hornbill has appeared as your guide today.\n\nKeep looking up. Your guide prefers life in the canopy.\n\nYour trail begins in northwest Borneo, along beaches and through rugged, dense rainforests.\n\nHere, the Iban see the hornbill as the most sacred of messengers, a bird linked to good fortune and to connections between people and the spirit world.\nDuring the festival of Gawai Burong, large carved hornbill figures called kenyalang are raised on tall poles. Adorned with jewellery and food offerings, they form part of ceremonies seeking protection, health, and prosperity for the community.\n\nFollow your guide and you’ll find hornbills in ancient art, ceremonial hats, carvings, vessels, weapons, and tools.\n\nYour Hornbill has flown ahead. Look for its tracks and follow them into the forest. A message from the spirit world might be waiting for you.",
+   "body_html": "<p>The Hornbill has appeared as your guide today.</p><p>Keep looking up. Your guide prefers life in the canopy.</p><p>Your trail begins in northwest Borneo, along beaches and through rugged, dense rainforests.</p><p>Here, the Iban see the hornbill as the most sacred of messengers, a bird linked to good fortune and to connections between people and the spirit world.<br>During the festival of Gawai Burong, large carved hornbill figures called kenyalang are raised on tall poles. Adorned with jewellery and food offerings, they form part of ceremonies seeking protection, health, and prosperity for the community.</p><p>Follow your guide and you’ll find hornbills in ancient art, ceremonial hats, carvings, vessels, weapons, and tools.</p><p>Your Hornbill has flown ahead. Look for its tracks and follow them into the forest. A message from the spirit world might be waiting for you.</p>",
+   "body_node": "3339:5560",
+   "follow_text": "→ FOLLOW THE HORNBILL TRAIL",
+   "follow_node": "3339:5562",
+   "card_image": {
+    "ref": "f6d136b4bc5df26204b545a36841d53ef5db18e9",
+    "file": "guides/hornbill.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5553",
+    "node_big": "3339:5559"
+   },
+   "card_color": "#428B75",
+   "tile_group": "green",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5539",
+   "figma_frame_name": "Frame 114524",
+   "expanded_block_h": 597.0,
+   "italic_runs": false
+  },
+  {
+   "key": "water-bird",
+   "trail_slug": "water-bird",
+   "order": 4,
+   "name": "The Hamsa & Water Birds",
+   "name_node": "3339:5580",
+   "words": [
+    "Wisdom",
+    "Discernment",
+    "Harmony"
+   ],
+   "words_text": "Wisdom · Discernment · Harmony",
+   "words_node": "3339:5581",
+   "body": "The Hamsa has appeared as your guide today.\n\nYour trail begins where land meets water. The hamsa (or hintha), imagined as a swan or goose, is celebrated for its legendary ability to separate milk from water—a symbol of wisdom and discernment. As the vahana (mount) of Brahma and Saraswati, it travelled with Hindu and Buddhist traditions across Southeast Asia.\nThe answer will become clear.\n\nYour Hamsa brings the gift of discernment. If you are faced with uncertainty, look beyond first appearances and separate what matters from what does not.\nTrust your judgement. You may already know which path is right—you simply need to recognise it.\n\nFollow the bird to Mon communities, where the hintha became an emblem of prosperity and identity. According to tradition, the Buddha once saw two hintha resting together on a single rock rising from the sea and foretold that a great city—Bago, or Hanthawaddy—would one day stand there.\n\nBut the Hamsa Trail soon crosses paths with other waterbirds. Along rivers, wetlands and coasts, you will encounter protective storks, vigilant kingfishers, elegant cranes and graceful egrets—appearing on boats, bronze drums, ceramics, jewellery and ritual vessels.\n\nYour guide has taken to the water. Follow its traces to see where they lead.",
+   "body_html": "<p>The Hamsa has appeared as your guide today.</p><p>Your trail begins where land meets water. The hamsa (or hintha), imagined as a swan or goose, is celebrated for its legendary ability to separate milk from water—a symbol of wisdom and discernment. As the vahana (mount) of Brahma and Saraswati, it travelled with Hindu and Buddhist traditions across Southeast Asia.<br>The answer will become clear.</p><p>Your Hamsa brings the gift of discernment. If you are faced with uncertainty, look beyond first appearances and separate what matters from what does not.<br>Trust your judgement. You may already know which path is right—you simply need to recognise it.</p><p>Follow the bird to Mon communities, where the hintha became an emblem of prosperity and identity. According to tradition, the Buddha once saw two hintha resting together on a single rock rising from the sea and foretold that a great city—Bago, or Hanthawaddy—would one day stand there.</p><p>But the Hamsa Trail soon crosses paths with other waterbirds. Along rivers, wetlands and coasts, you will encounter protective storks, vigilant kingfishers, elegant cranes and graceful egrets—appearing on boats, bronze drums, ceramics, jewellery and ritual vessels.</p><p>Your guide has taken to the water. Follow its traces to see where they lead.</p>",
+   "body_node": "3339:5585",
+   "follow_text": "→ FOLLOW THE HAMSA & WATER BIRDS TRAIL",
+   "follow_node": "3339:5587",
+   "card_image": {
+    "ref": "023898efc8e07d06f02b77edc621ceaa9748ef19",
+    "file": "guides/water-bird.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5578",
+    "node_big": "3339:5584"
+   },
+   "card_color": "#428B75",
+   "tile_group": "green",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5564",
+   "figma_frame_name": "Frame 114525",
+   "expanded_block_h": 712.0,
+   "italic_runs": false
+  },
+  {
+   "key": "garuda",
+   "trail_slug": "garuda",
+   "order": 5,
+   "name": "The Garuda",
+   "name_node": "3339:5605",
+   "words": [
+    "Strength",
+    "Protection",
+    "Courage"
+   ],
+   "words_text": "Strength · Protection · Courage",
+   "words_node": "3339:5606",
+   "body": "Your animal guide is no ordinary bird. This is a powerful omen.\n\nInspired by great birds of prey, Garuda is a mythical bird-like being and the mount of the Hindu god Vishnu. His legendary rivalry with serpents echoes something people could observe in nature: large raptors hunting snakes.\n\nIn the Ramayana, Garuda comes to the rescue of Rama and his brother, freeing them from magical serpent-arrows. As the epic travelled across Southeast Asia, Garuda travelled with it. You are being guided by a protective figure of victory over harmful forces.\n\nToday, you might encounter Garuda in unexpected places. He guards sacred spaces in Java and Bali, appears on ritual objects and textiles, and has become a national emblem of both Indonesia and Thailand. You may even have spotted him on a passport, a government building—or even the tail of an aeroplane.\n\nFollow the Garuda Trail to discover how communities across Southeast Asia transformed this mythical bird into a symbol of protection, authority, devotion, and identity.",
+   "body_html": "<p>Your animal guide is no ordinary bird. This is a powerful omen.</p><p>Inspired by great birds of prey, Garuda is a mythical bird-like being and the mount of the Hindu god Vishnu. His legendary rivalry with serpents echoes something people could observe in nature: large raptors hunting snakes.</p><p>In the Ramayana, Garuda comes to the rescue of Rama and his brother, freeing them from magical serpent-arrows. As the epic travelled across Southeast Asia, Garuda travelled with it. You are being guided by a protective figure of victory over harmful forces.</p><p>Today, you might encounter Garuda in unexpected places. He guards sacred spaces in Java and Bali, appears on ritual objects and textiles, and has become a national emblem of both Indonesia and Thailand. You may even have spotted him on a passport, a government building—or even the tail of an aeroplane.</p><p>Follow the Garuda Trail to discover how communities across Southeast Asia transformed this mythical bird into a symbol of protection, authority, devotion, and identity.</p>",
+   "body_node": "3339:5610",
+   "follow_text": "→ FOLLOW THE GARUDA TRAIL",
+   "follow_node": "3339:5612",
+   "card_image": {
+    "ref": "8dfa885ad7246dc88ddfa1b40e1db62ebe6e7088",
+    "file": "guides/garuda.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5603",
+    "node_big": "3339:5609"
+   },
+   "card_color": "#E6553D",
+   "tile_group": "red",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5589",
+   "figma_frame_name": "Frame 114526",
+   "expanded_block_h": 597.0,
+   "italic_runs": false
+  },
+  {
+   "key": "phoenix",
+   "trail_slug": "phoenix",
+   "order": 6,
+   "name": "The Phoenix",
+   "name_node": "3339:5630",
+   "words": [
+    "Harmony",
+    "Grace",
+    "Prosperity"
+   ],
+   "words_text": "Harmony · Grace · Prosperity",
+   "words_node": "3339:5631",
+   "body": "The Phoenix is an omen of warmth, joy, and feminine power.\n\nFor centuries, it has stood for harmony, grace, prosperity, and balance. Associated with the empress and feminine virtue, it also came to express hopes for happy marriages and prosperous households.\n\nBut look closely: your guide is not quite one animal. In Chinese tradition, the Phoenix brings together features of many creatures—the neck of a snake, breast of a swallow, back of a tortoise, tail of a fish, and brilliant five-coloured plumage. Its many parts come together as one harmonious whole.\n\nDifferent pieces are falling into place.\n\nYour Phoenix brings an auspicious sign of harmony. Something that once seemed difficult to reconcile may begin to find its balance. Welcome unexpected combinations today: what appears different may belong together beautifully.\n\nGood fortune grows where you create harmony without losing what makes each part distinct.\n\nYour guide is a traveller. As Chinese communities settled across Southeast Asia, the Phoenix travelled with them, appearing in Peranakan homes, Javanese batik, Vietnamese ceramics, and many other forms.\n\nWhere will your guide take you today?\n\nFollow the Phoenix through Southeast Asia and discover how communities made this mythical creature their own.",
+   "body_html": "<p>The Phoenix is an omen of warmth, joy, and feminine power.</p><p>For centuries, it has stood for harmony, grace, prosperity, and balance. Associated with the empress and feminine virtue, it also came to express hopes for happy marriages and prosperous households.</p><p>But look closely: your guide is not quite one animal. In Chinese tradition, the Phoenix brings together features of many creatures—the neck of a snake, breast of a swallow, back of a tortoise, tail of a fish, and brilliant five-coloured plumage. Its many parts come together as one harmonious whole.</p><p>Different pieces are falling into place.</p><p>Your Phoenix brings an auspicious sign of harmony. Something that once seemed difficult to reconcile may begin to find its balance. Welcome unexpected combinations today: what appears different may belong together beautifully.</p><p>Good fortune grows where you create harmony without losing what makes each part distinct.</p><p>Your guide is a traveller. As Chinese communities settled across Southeast Asia, the Phoenix travelled with them, appearing in Peranakan homes, Javanese batik, Vietnamese ceramics, and many other forms.</p><p>Where will your guide take you today?</p><p>Follow the Phoenix through Southeast Asia and discover how communities made this mythical creature their own.</p>",
+   "body_node": "3339:5635",
+   "follow_text": "→ FOLLOW THE PHOENIX TRAIL",
+   "follow_node": "3339:5637",
+   "card_image": {
+    "ref": "80e583d08f103694cf49fb4cbd4b7dd83b089963",
+    "file": "guides/phoenix.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5628",
+    "node_big": "3339:5634"
+   },
+   "card_color": "#E6553D",
+   "tile_group": "red",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5614",
+   "figma_frame_name": "Frame 114527",
+   "expanded_block_h": 804.0,
+   "italic_runs": false
+  },
+  {
+   "key": "dragon",
+   "trail_slug": "dragon",
+   "order": 7,
+   "name": "The Dragon",
+   "name_node": "3339:5655",
+   "words": [
+    "Power",
+    "Rainfall",
+    "Transformation"
+   ],
+   "words_text": "Power · Rainfall · Transformation",
+   "words_node": "3339:5656",
+   "body": "No guide is as powerful as the Dragon. Take its appearance as a very auspicious omen.\n\nYour trail begins with a creature that has no single animal ancestor and no single form. The Chinese long, or dragon, travelled into Southeast Asia through centuries of trade, migration, and cultural exchange, carrying associations with water, rainfall, heavenly power, and authority.\n\nThe rain is coming.\n\nYour Dragon signals movement after stillness and abundance after waiting. Something that has felt blocked may finally begin to shift.\n\nLike rain falling on dry earth, what arrives next may transform more than you expect. Today, trust your strength—but remember that the Dragon’s greatest power is not simply force. It is the power to bring change.\n\nFollow its trail to Viet Nam, where an origin story traces the Vietnamese people to the dragon lord Lạc Long Quân and the mountain fairy Âu Cơ—bringing together water and land.\n\nThen follow the Dragon along Southeast Asia’s maritime routes. Here, it encountered another powerful water being: the Naga. Although the long and the Naga emerged from different traditions, communities recognised familiar qualities in both—water, rainfall, protection, and spiritual power. Their traditions came to coexist and interact in new cultural settings.\n\nAlong the way, look for dragons on royal gongs, weapons, ceramics, temples, and everyday objects—each revealing how communities made this travelling creature their own.\n\nYour Dragon has left a trail across cultures and seas. Follow its traces to discover where it leads.",
+   "body_html": "<p>No guide is as powerful as the Dragon. Take its appearance as a very auspicious omen.</p><p>Your trail begins with a creature that has no single animal ancestor and no single form. The Chinese <em>long</em>, or dragon, travelled into Southeast Asia through centuries of trade, migration, and cultural exchange, carrying associations with water, rainfall, heavenly power, and authority.</p><p>The rain is coming.</p><p>Your Dragon signals movement after stillness and abundance after waiting. Something that has felt blocked may finally begin to shift.</p><p>Like rain falling on dry earth, what arrives next may transform more than you expect. Today, trust your strength—but remember that the Dragon’s greatest power is not simply force. It is the power to bring change.</p><p>Follow its trail to Viet Nam, where an origin story traces the Vietnamese people to the dragon lord Lạc Long Quân and the mountain fairy Âu Cơ—bringing together water and land.</p><p>Then follow the Dragon along Southeast Asia’s maritime routes. Here, it encountered another powerful water being: the Naga. Although the <em>long</em> and the Naga emerged from different traditions, communities recognised familiar qualities in both—water, rainfall, protection, and spiritual power. Their traditions came to coexist and interact in new cultural settings.</p><p>Along the way, look for dragons on royal gongs, weapons, ceramics, temples, and everyday objects—each revealing how communities made this travelling creature their own.</p><p>Your Dragon has left a trail across cultures and seas. Follow its traces to discover where it leads.</p>",
+   "body_node": "3339:5660",
+   "follow_text": "→ FOLLOW THE DRAGON TRAIL",
+   "follow_node": "3339:5662",
+   "card_image": {
+    "ref": "2a72602eda5f50a5b33863ba7e3511eacf10bf9d",
+    "file": "guides/dragon.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5653",
+    "node_big": "3339:5659"
+   },
+   "card_color": "#E6553D",
+   "tile_group": "red",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5639",
+   "figma_frame_name": "Frame 114528",
+   "expanded_block_h": 919.0,
+   "italic_runs": true
+  },
+  {
+   "key": "naga",
+   "trail_slug": "naga",
+   "order": 8,
+   "name": "The Naga & Snake",
+   "name_node": "3339:5680",
+   "words": [
+    "Water",
+    "Protection",
+    "Transformation"
+   ],
+   "words_text": "Water · Protection · Transformation",
+   "words_node": "3339:5681",
+   "body": "The Naga has appeared as your guide today.\n\nA giant serpent is leading you towards the water. Sensible advice would be to turn back. We suggest you follow it.\n\nIt is time to shed an old skin.\n\nYour Naga brings a sign of transformation. Something you have outgrown may be ready to fall away, making space for what comes next.\n\nFollow the current rather than fighting it. Change may carry you somewhere you could not reach by staying still.\n\nYour trail begins with the snakes of Southeast Asia, creatures that have inhabited the region for millions of years. Moving between land and water and shedding their skin, serpents came to embody renewal, fertility, and the forces of the natural world.\n\nFollow their trail through ancient beliefs and Hindu-Buddhist traditions, and you will encounter the Naga—the Great Serpent. Naga princesses appear in Khmer and Malay origin stories, giant serpents are said to have shaped the Mekong River, and the Naga king Mucalinda shelters the meditating Buddha from a storm.\n\nYour guide also moves through everyday life. Look for it on boats, temples, ritual objects, and Songkran water pavilions, where its ancient connection with water continues.\n\nYour Naga has slipped into the water. Follow its winding trail and see where it surfaces next.",
+   "body_html": "<p>The Naga has appeared as your guide today.</p><p>A giant serpent is leading you towards the water. Sensible advice would be to turn back. We suggest you follow it.</p><p>It is time to shed an old skin.</p><p>Your Naga brings a sign of transformation. Something you have outgrown may be ready to fall away, making space for what comes next.</p><p>Follow the current rather than fighting it. Change may carry you somewhere you could not reach by staying still.</p><p>Your trail begins with the snakes of Southeast Asia, creatures that have inhabited the region for millions of years. Moving between land and water and shedding their skin, serpents came to embody renewal, fertility, and the forces of the natural world.</p><p>Follow their trail through ancient beliefs and Hindu-Buddhist traditions, and you will encounter the Naga—the Great Serpent. Naga princesses appear in Khmer and Malay origin stories, giant serpents are said to have shaped the Mekong River, and the Naga king Mucalinda shelters the meditating Buddha from a storm.</p><p>Your guide also moves through everyday life. Look for it on boats, temples, ritual objects, and Songkran water pavilions, where its ancient connection with water continues.</p><p>Your Naga has slipped into the water. Follow its winding trail and see where it surfaces next.</p>",
+   "body_node": "3339:5685",
+   "follow_text": "→ FOLLOW THE NAGA & SNAKE TRAIL",
+   "follow_node": "3339:5687",
+   "card_image": {
+    "ref": "ffbae1cbaf528206119a99b7a29ab56215e3f754",
+    "file": "guides/naga.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5678",
+    "node_big": "3339:5684"
+   },
+   "card_color": "#E6553D",
+   "tile_group": "red",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5664",
+   "figma_frame_name": "Frame 114529",
+   "expanded_block_h": 850.0,
+   "italic_runs": false
+  },
+  {
+   "key": "buffalo",
+   "trail_slug": "buffalo",
+   "order": 9,
+   "name": "The Buffalo",
+   "name_node": "3339:5705",
+   "words": [
+    "Strength",
+    "Patience",
+    "Abundance"
+   ],
+   "words_text": "Strength · Patience · Abundance",
+   "words_node": "3339:5706",
+   "body": "The Buffalo has appeared as your guide today.\n\nYour trail begins in the fields and wetlands of Southeast Asia. Powerful yet patient, water buffaloes became indispensable companions in farming, helping shape the rice-growing landscapes and village economies of the region.\n\nGood things are growing slowly.\n\nYour Buffalo brings a sign of steady progress and abundance to come. Something you have been working towards may require patience—but that does not mean you are standing still.\n\nLike the buffalo moving steadily through the rice field, trust what you are building one step at a time. The harvest comes after the work.\n\nFollow the Buffalo beyond the fields and you will find it in stories, beliefs, and ceremonies. In Malay-Indonesian folklore, its great strength meets the cleverness of the tiny mouse deer, or kancil. Hindu-Buddhist traditions turned the buffalo into figures with deep moral and spiritual meanings. Among Toraja communities of Sulawesi, buffaloes remain central to burial ceremonies, connecting family, ancestors, social life, and memory.\n\nThe Buffalo Trail also leads to some unexpected places. Look for your guide in betel-nut containers, medicine horns, agricultural rituals—and even shadow puppets, traditionally made from buffalo hide.\n\nYour Buffalo has left its tracks across fields, stories, ceremonies, and objects. Follow them to see where they lead.",
+   "body_html": "<p>The Buffalo has appeared as your guide today.</p><p>Your trail begins in the fields and wetlands of Southeast Asia. Powerful yet patient, water buffaloes became indispensable companions in farming, helping shape the rice-growing landscapes and village economies of the region.</p><p>Good things are growing slowly.</p><p>Your Buffalo brings a sign of steady progress and abundance to come. Something you have been working towards may require patience—but that does not mean you are standing still.</p><p>Like the buffalo moving steadily through the rice field, trust what you are building one step at a time. The harvest comes after the work.</p><p>Follow the Buffalo beyond the fields and you will find it in stories, beliefs, and ceremonies. In Malay-Indonesian folklore, its great strength meets the cleverness of the tiny mouse deer, or kancil. Hindu-Buddhist traditions turned the buffalo into figures with deep moral and spiritual meanings. Among Toraja communities of Sulawesi, buffaloes remain central to burial ceremonies, connecting family, ancestors, social life, and memory.</p><p>The Buffalo Trail also leads to some unexpected places. Look for your guide in betel-nut containers, medicine horns, agricultural rituals—and even shadow puppets, traditionally made from buffalo hide.</p><p>Your Buffalo has left its tracks across fields, stories, ceremonies, and objects. Follow them to see where they lead.</p>",
+   "body_node": "3339:5710",
+   "follow_text": "→ FOLLOW THE BUFFALO TRAIL",
+   "follow_node": "3339:5712",
+   "card_image": {
+    "ref": "c8f66d5b965d5feed06005cee4f3e6c31e484bd6",
+    "file": "guides/buffalo.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5703",
+    "node_big": "3339:5709"
+   },
+   "card_color": "#C2BB83",
+   "tile_group": "mustard",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5689",
+   "figma_frame_name": "Frame 114530",
+   "expanded_block_h": 804.0,
+   "italic_runs": false
+  },
+  {
+   "key": "elephant",
+   "trail_slug": "elephant",
+   "order": 10,
+   "name": "The Elephant",
+   "name_node": "3339:5730",
+   "words": [
+    "Strength",
+    "Wisdom",
+    "Good Fortune"
+   ],
+   "words_text": "Strength · Wisdom · Good Fortune",
+   "words_node": "3339:5731",
+   "body": "Good news: your guide is a remover of obstacles.\n\nYour trail begins in the forests of Southeast Asia. As they move, elephants open paths through dense vegetation, disperse seeds, and create habitats for other species. Their paths have also long crossed human ones—through transport, labour, warfare, ceremony, and ritual.\n\nThe path ahead is opening.\n\nAn obstacle that has been standing in your way may soon become easier to cross. Your Elephant brings strength—but also the wisdom to know that not every obstacle needs to be pushed aside.\n\nMove steadily. Make your own path. Good fortune may be waiting on the other side.\n\nFollow the Elephant into the region’s sacred traditions. In Buddhist stories, Queen Maya dreams of a white elephant before the Buddha’s birth, making it a sign of auspicious beginnings. In Hindu traditions, the elephant-headed Ganesha brings wisdom and resourceful solutions.\n\nYour trail will take you from forests to temples and households, where elephants appear in sculpture, textiles, relic containers, and unexpected everyday objects made from bone and tusk.\n\nYour Elephant has opened a path. Tread carefully—and follow those enormous footprints.",
+   "body_html": "<p>Good news: your guide is a remover of obstacles.</p><p>Your trail begins in the forests of Southeast Asia. As they move, elephants open paths through dense vegetation, disperse seeds, and create habitats for other species. Their paths have also long crossed human ones—through transport, labour, warfare, ceremony, and ritual.</p><p>The path ahead is opening.</p><p>An obstacle that has been standing in your way may soon become easier to cross. Your Elephant brings strength—but also the wisdom to know that not every obstacle needs to be pushed aside.</p><p>Move steadily. Make your own path. Good fortune may be waiting on the other side.</p><p>Follow the Elephant into the region’s sacred traditions. In Buddhist stories, Queen Maya dreams of a white elephant before the Buddha’s birth, making it a sign of auspicious beginnings. In Hindu traditions, the elephant-headed Ganesha brings wisdom and resourceful solutions.</p><p>Your trail will take you from forests to temples and households, where elephants appear in sculpture, textiles, relic containers, and unexpected everyday objects made from bone and tusk.</p><p>Your Elephant has opened a path. Tread carefully—and follow those enormous footprints.</p>",
+   "body_node": "3339:5735",
+   "follow_text": "→ FOLLOW THE ELEPHANT TRAIL",
+   "follow_node": "3339:5737",
+   "card_image": {
+    "ref": "0d2476492444c60c37a6731ea7e39a041e047dd2",
+    "file": "guides/elephant.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5728",
+    "node_big": "3339:5734"
+   },
+   "card_color": "#C2BB83",
+   "tile_group": "mustard",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5714",
+   "figma_frame_name": "Frame 114531",
+   "expanded_block_h": 781.0,
+   "italic_runs": false
+  },
+  {
+   "key": "horse",
+   "trail_slug": "horse",
+   "order": 11,
+   "name": "The Horse",
+   "name_node": "3339:5755",
+   "words": [
+    "Movement",
+    "Endurance",
+    "Adventure"
+   ],
+   "words_text": "Movement · Endurance · Adventure",
+   "words_node": "3339:5756",
+   "body": "The Horse has appeared as your guide today.\n\nHold on tight. Your guide has travelled across continents and carried princes and warriors—and has absolutely no intention of standing still.\n\nYour trail begins far beyond Southeast Asia. Horses are not native to the region: they arrived through trade, travel, warfare, and migration, moving along networks connecting Southeast Asia with India, China, Mongolia, and West Asia.\nIt is time to move.\n\nYour Horse brings momentum. A journey, change, or new direction may be approaching—and staying exactly where you are may no longer be the answer.\n\nFollow what pulls you forward. The road may take you somewhere unexpected.\n\nFollow the Horse, and its trail soon moves between the everyday and the extraordinary. In Buddhist tradition, Kanthaka carries Prince Siddhartha away from palace life on the night of his renunciation. In Islamic tradition, the winged Buraq carries the Prophet Muhammad on the Night Journey.\n\nAcross Southeast Asia, communities made the horse their own. You will encounter it in temple reliefs, textiles, shadow theatre, fishing communities, and spectacular living traditions such as Java’s kuda lumping and Sumba’s pasola.\n\nFrom roads and royal courts to villages and ritual performances, this is an animal whose story is always on the move.\n\nYour Horse is already galloping ahead. Follow its tracks before you lose it.",
+   "body_html": "<p>The Horse has appeared as your guide today.</p><p>Hold on tight. Your guide has travelled across continents and carried princes and warriors—and has absolutely no intention of standing still.</p><p>Your trail begins far beyond Southeast Asia. Horses are not native to the region: they arrived through trade, travel, warfare, and migration, moving along networks connecting Southeast Asia with India, China, Mongolia, and West Asia.<br>It is time to move.</p><p>Your Horse brings momentum. A journey, change, or new direction may be approaching—and staying exactly where you are may no longer be the answer.</p><p>Follow what pulls you forward. The road may take you somewhere unexpected.</p><p>Follow the Horse, and its trail soon moves between the everyday and the extraordinary. In Buddhist tradition, Kanthaka carries Prince Siddhartha away from palace life on the night of his renunciation. In Islamic tradition, the winged Buraq carries the Prophet Muhammad on the Night Journey.</p><p>Across Southeast Asia, communities made the horse their own. You will encounter it in temple reliefs, textiles, shadow theatre, fishing communities, and spectacular living traditions such as Java’s kuda lumping and Sumba’s pasola.</p><p>From roads and royal courts to villages and ritual performances, this is an animal whose story is always on the move.</p><p>Your Horse is already galloping ahead. Follow its tracks before you lose it.</p>",
+   "body_node": "3339:5760",
+   "follow_text": "→ FOLLOW THE HORSE TRAIL",
+   "follow_node": "3339:5762",
+   "card_image": {
+    "ref": "ca3cea5a5eecee7d774e6ea70d2551249b2092d7",
+    "file": "guides/horse.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5753",
+    "node_big": "3339:5759"
+   },
+   "card_color": "#C2BB83",
+   "tile_group": "mustard",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5739",
+   "figma_frame_name": "Frame 114532",
+   "expanded_block_h": 804.0,
+   "italic_runs": false
+  },
+  {
+   "key": "deer",
+   "trail_slug": "deer",
+   "order": 12,
+   "name": "The Deer",
+   "name_node": "3339:5780",
+   "words": [
+    "Grace",
+    "Vigilance",
+    "Cleverness"
+   ],
+   "words_text": "Grace · Vigilance · Cleverness",
+   "words_node": "3339:5781",
+   "body": "The Deer has appeared as your guide today.\n\nA beautiful deer is leading you into the forest.\n\nYour trail begins in Southeast Asia’s forests and woodlands, home to sambar deer, Javan deer, muntjacs, and many other species. Their speed, alertness, and graceful movement have captured human attention for generations.\n\nBut follow the Deer carefully. In the Ramayana, the demon Marica transforms himself into a deer of extraordinary beauty to lure Rama away from Sita—with dramatic consequences. In Buddhist tradition, the Deer Park at Sarnath marks the place where the Buddha gave his first sermon, connecting the deer with peace, learning, and Buddhist teaching.\n\nAnd then there is the tiny mouse deer. Across Southeast Asian storytelling traditions, this unlikely trickster repeatedly escapes trouble by using its wits rather than strength.\n\nAlong your trail, deer appear in stories, performance, Buddhist art, and even coins exchanged between Kelantan and Pattani.\n\nYour Deer has disappeared between the trees. Stay alert—and follow its tracks.",
+   "body_html": "<p>The Deer has appeared as your guide today.</p><p>A beautiful deer is leading you into the forest.</p><p>Your trail begins in Southeast Asia’s forests and woodlands, home to sambar deer, Javan deer, muntjacs, and many other species. Their speed, alertness, and graceful movement have captured human attention for generations.</p><p>But follow the Deer carefully. In the Ramayana, the demon Marica transforms himself into a deer of extraordinary beauty to lure Rama away from Sita—with dramatic consequences. In Buddhist tradition, the Deer Park at Sarnath marks the place where the Buddha gave his first sermon, connecting the deer with peace, learning, and Buddhist teaching.</p><p>And then there is the tiny mouse deer. Across Southeast Asian storytelling traditions, this unlikely trickster repeatedly escapes trouble by using its wits rather than strength.</p><p>Along your trail, deer appear in stories, performance, Buddhist art, and even coins exchanged between Kelantan and Pattani.</p><p>Your Deer has disappeared between the trees. Stay alert—and follow its tracks.</p>",
+   "body_node": "3339:5785",
+   "follow_text": "→ FOLLOW THE DEER TRAIL",
+   "follow_node": "3339:5787",
+   "card_image": {
+    "ref": "04a2721fc149ecf4dadbf53621eedd360710cea0",
+    "file": "guides/deer.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5778",
+    "node_big": "3339:5784"
+   },
+   "card_color": "#C2BB83",
+   "tile_group": "mustard",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5764",
+   "figma_frame_name": "Frame 114533",
+   "expanded_block_h": 666.0,
+   "italic_runs": false
+  },
+  {
+   "key": "lion",
+   "trail_slug": "lion",
+   "order": 13,
+   "name": "The Lion",
+   "name_node": "3339:5805",
+   "words": [
+    "Strength",
+    "Protection",
+    "Imagination"
+   ],
+   "words_text": "Strength · Protection · Imagination",
+   "words_node": "3339:5806",
+   "body": "The Lion has appeared as your guide today.\n\nThere’s just one problem: your guide has never actually lived in Southeast Asia. So how did it leave such a big trail?\n\nYour presence travels further than you think.\n\nYour Lion is a sign of quiet influence. You do not need to be everywhere—or even see the full extent of your impact—to leave a mark.\n\nLet your imagination travel where you cannot. Something you set in motion may take on a life of its own.\n\nFollow the Lion, and you’ll discover an animal that travelled through stories, beliefs, art, and imagination rather than through forests. Communities who may never have seen a living lion transformed it into extraordinary new forms.\nIn Hindu-Buddhist traditions, singa (lions) guard sacred places such as Borobudur, Prambanan, and Angkor. Among Batak communities, the singa became something else entirely: a protective figure combining features of humans, water buffaloes, and crocodiles. And according to the Malay Annals, an encounter with a mysterious lion inspired Prince Sang Nila Utama to name a place Singapura—“Lion City.”\n\nAlong the way, your guide appears on temples, houses, manuscripts, amulets, ceramics, and everyday objects, changing form wherever it goes.\nYour Lion has left tracks without ever setting paw here. Follow them to discover how.",
+   "body_html": "<p>The Lion has appeared as your guide today.</p><p>There’s just one problem: your guide has never actually lived in Southeast Asia. So how did it leave such a big trail?</p><p>Your presence travels further than you think.</p><p>Your Lion is a sign of quiet influence. You do not need to be everywhere—or even see the full extent of your impact—to leave a mark.</p><p>Let your imagination travel where you cannot. Something you set in motion may take on a life of its own.</p><p>Follow the Lion, and you’ll discover an animal that travelled through stories, beliefs, art, and imagination rather than through forests. Communities who may never have seen a living lion transformed it into extraordinary new forms.<br>In Hindu-Buddhist traditions, singa (lions) guard sacred places such as Borobudur, Prambanan, and Angkor. Among Batak communities, the singa became something else entirely: a protective figure combining features of humans, water buffaloes, and crocodiles. And according to the Malay Annals, an encounter with a mysterious lion inspired Prince Sang Nila Utama to name a place Singapura—“Lion City.”</p><p>Along the way, your guide appears on temples, houses, manuscripts, amulets, ceramics, and everyday objects, changing form wherever it goes.<br>Your Lion has left tracks without ever setting paw here. Follow them to discover how.</p>",
+   "body_node": "3339:5810",
+   "follow_text": "→ FOLLOW THE LION TRAIL",
+   "follow_node": "3339:5812",
+   "card_image": {
+    "ref": "2f611c7a02ec1c9b9278278f2ab481dee69395b2",
+    "file": "guides/lion.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5803",
+    "node_big": "3339:5809"
+   },
+   "card_color": "#C2BB83",
+   "tile_group": "mustard",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5789",
+   "figma_frame_name": "Frame 114534",
+   "expanded_block_h": 781.0,
+   "italic_runs": false
+  },
+  {
+   "key": "makara",
+   "trail_slug": "makara",
+   "order": 14,
+   "name": "The Makara",
+   "name_node": "3339:5830",
+   "words": [
+    "Thresholds",
+    "Protection",
+    "Possibility"
+   ],
+   "words_text": "Thresholds · Protection · Possibility",
+   "words_node": "3339:5831",
+   "body": "The Makara has appeared as your guide today.\n\nCrocodile jaws. Fish body. Goat horns. Elephant trunk. Your guide seems to have ignored the rule that you’re supposed to choose just one animal.\n\nYou are approaching a threshold.\n\nYour Makara guards the space between one world and another. A new possibility may be opening—but you may need to leave familiar categories behind to recognise it.\n\nYour unusual guide has another message: you do not always have to choose. Things that seem incompatible may create something extraordinary when brought together.\n\nYour trail begins in Southeast Asia’s rivers, estuaries, and coasts, where crocodiles have long inspired both respect and caution. Across the region, communities told stories of crocodiles as ancestors, omens, sacred beings—and even creators of islands.\n\nBut follow the crocodile’s trail, and something stranger emerges: the Makara, a mythical creature combining animals of land and water. Associated with the life-giving power of water, the Makara also became a powerful guardian of thresholds, watching over passages between the everyday and the sacred.\n\nAlong your trail, you will encounter the Makara at Borobudur and on ancient gold plaques, ceramics, and even a palanquin used in processions in Pattani. Each community imagined this impossible creature a little differently.\n\nYour Makara has disappeared beneath the water. Follow its rather unusual tracks to see what emerges.",
+   "body_html": "<p>The Makara has appeared as your guide today.</p><p>Crocodile jaws. Fish body. Goat horns. Elephant trunk. Your guide seems to have ignored the rule that you’re supposed to choose just one animal.</p><p>You are approaching a threshold.</p><p>Your Makara guards the space between one world and another. A new possibility may be opening—but you may need to leave familiar categories behind to recognise it.</p><p>Your unusual guide has another message: you do not always have to choose. Things that seem incompatible may create something extraordinary when brought together.</p><p>Your trail begins in Southeast Asia’s rivers, estuaries, and coasts, where crocodiles have long inspired both respect and caution. Across the region, communities told stories of crocodiles as ancestors, omens, sacred beings—and even creators of islands.</p><p>But follow the crocodile’s trail, and something stranger emerges: the Makara, a mythical creature combining animals of land and water. Associated with the life-giving power of water, the Makara also became a powerful guardian of thresholds, watching over passages between the everyday and the sacred.</p><p>Along your trail, you will encounter the Makara at Borobudur and on ancient gold plaques, ceramics, and even a palanquin used in processions in Pattani. Each community imagined this impossible creature a little differently.</p><p>Your Makara has disappeared beneath the water. Follow its rather unusual tracks to see what emerges.</p>",
+   "body_node": "3339:5835",
+   "follow_text": "→ FOLLOW THE MAKARA TRAIL",
+   "follow_node": "3339:5837",
+   "card_image": {
+    "ref": "a5654cbe6c93fe19159fb70dfc95f7a694ad5c3f",
+    "file": "guides/makara.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5828",
+    "node_big": "3339:5834"
+   },
+   "card_color": "#B37092",
+   "tile_group": "purple",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5814",
+   "figma_frame_name": "Frame 114535",
+   "expanded_block_h": 873.0,
+   "italic_runs": false
+  },
+  {
+   "key": "turtle",
+   "trail_slug": "turtle",
+   "order": 15,
+   "name": "The Turtle",
+   "name_node": "3339:5855",
+   "words": [
+    "Longevity",
+    "Protection",
+    "Stability"
+   ],
+   "words_text": "Longevity · Protection · Stability",
+   "words_node": "3339:5856",
+   "body": "The Turtle has appeared as your guide today.\n\nYour guide may not be in a hurry. Then again, when you’ve been around this long, why rush?\n\nTake your time.\n\nYour Turtle brings stability. Something worth building may take longer than you hoped—but strong foundations are forming beneath you.\n\nMove at your own pace. Protect what matters, carry only what you need, and trust what is built to last.\n\nYour trail begins between land and water, in Southeast Asia’s rivers, wetlands, mangroves, and seas. Moving between these worlds and carrying their protection on their backs, turtles came to embody endurance, continuity, and balance.\nFollow the Turtle into Hindu tradition, and you’ll meet Kurma, the giant turtle and incarnation of Vishnu who supports the cosmic mountain during the Churning of the Ocean of Milk. Yes—your guide once helped hold up the universe.\n\nAcross Southeast Asia, turtles continued to carry ideas of protection and long life. Look for them beneath Khmer temples, in household objects and Peranakan ornaments, and on boxes carried by southern Thai fishing communities on their boats, where they accompany traditions of safe journeys and return.\n\nYour Turtle is heading towards the water. Slowly. Follow its tracks—you should have no trouble catching up.",
+   "body_html": "<p>The Turtle has appeared as your guide today.</p><p>Your guide may not be in a hurry. Then again, when you’ve been around this long, why rush?</p><p>Take your time.</p><p>Your Turtle brings stability. Something worth building may take longer than you hoped—but strong foundations are forming beneath you.</p><p>Move at your own pace. Protect what matters, carry only what you need, and trust what is built to last.</p><p>Your trail begins between land and water, in Southeast Asia’s rivers, wetlands, mangroves, and seas. Moving between these worlds and carrying their protection on their backs, turtles came to embody endurance, continuity, and balance.<br>Follow the Turtle into Hindu tradition, and you’ll meet Kurma, the giant turtle and incarnation of Vishnu who supports the cosmic mountain during the Churning of the Ocean of Milk. Yes—your guide once helped hold up the universe.</p><p>Across Southeast Asia, turtles continued to carry ideas of protection and long life. Look for them beneath Khmer temples, in household objects and Peranakan ornaments, and on boxes carried by southern Thai fishing communities on their boats, where they accompany traditions of safe journeys and return.</p><p>Your Turtle is heading towards the water. Slowly. Follow its tracks—you should have no trouble catching up.</p>",
+   "body_node": "3339:5860",
+   "follow_text": "→ FOLLOW THE TURTLE TRAIL",
+   "follow_node": "3339:5862",
+   "card_image": {
+    "ref": "572a6a15f66502933412c3f70e844777c955d434",
+    "file": "guides/turtle.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5853",
+    "node_big": "3339:5859"
+   },
+   "card_color": "#B37092",
+   "tile_group": "purple",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5839",
+   "figma_frame_name": "Frame 114536",
+   "expanded_block_h": 804.0,
+   "italic_runs": false
+  },
+  {
+   "key": "fish",
+   "trail_slug": "fish",
+   "order": 16,
+   "name": "The Fish & Aquatic Mammals",
+   "name_node": "3339:5880",
+   "words": [
+    "Abundance",
+    "Transformation",
+    "Protection"
+   ],
+   "words_text": "Abundance · Transformation · Protection",
+   "words_node": "3339:5881",
+   "body": "The Fish has appeared as your guide today.\n\nTake a deep breath. Your trail is heading underwater—and not everything swimming down there is as friendly as it looks.\n\nSomething good is stirring in the depths.\n\nYour Fish brings an omen of abundance. What you need may already be growing in places you cannot yet see.\n\nGo with the flow, but look beneath the surface. Hidden opportunities may appear where you least expect them.\n\nYour trail begins in Southeast Asia’s rivers, seas, mangroves, and wetlands, where aquatic life has sustained communities for thousands of years. Fish came to embody the life-giving qualities of water: fertility, abundance, and continuity.\nBut follow the Fish, and stranger creatures soon swim into view. Stingray spines were valued for their protective power, sawfish became guardians in Thai and Malay traditions, and whales were revered along the coast of Viet Nam.\n\nMythical waters are just as crowded. Matsya, the fish incarnation of Vishnu, saves the seeds of life from a cosmic flood, while Suvannamaccha, the golden fish, swims through Southeast Asian retellings of the Ramayana.\n\nAlong the way, look for fish on ceramics, talismans, tools, and sacred objects—and perhaps even the skeleton of a whale.\n\nYour Fish has vanished beneath the surface. Dive in and follow its trail.",
+   "body_html": "<p>The Fish has appeared as your guide today.</p><p>Take a deep breath. Your trail is heading underwater—and not everything swimming down there is as friendly as it looks.</p><p>Something good is stirring in the depths.</p><p>Your Fish brings an omen of abundance. What you need may already be growing in places you cannot yet see.</p><p>Go with the flow, but look beneath the surface. Hidden opportunities may appear where you least expect them.</p><p>Your trail begins in Southeast Asia’s rivers, seas, mangroves, and wetlands, where aquatic life has sustained communities for thousands of years. Fish came to embody the life-giving qualities of water: fertility, abundance, and continuity.<br>But follow the Fish, and stranger creatures soon swim into view. Stingray spines were valued for their protective power, sawfish became guardians in Thai and Malay traditions, and whales were revered along the coast of Viet Nam.</p><p>Mythical waters are just as crowded. Matsya, the fish incarnation of Vishnu, saves the seeds of life from a cosmic flood, while Suvannamaccha, the golden fish, swims through Southeast Asian retellings of the Ramayana.</p><p>Along the way, look for fish on ceramics, talismans, tools, and sacred objects—and perhaps even the skeleton of a whale.</p><p>Your Fish has vanished beneath the surface. Dive in and follow its trail.</p>",
+   "body_node": "3339:5885",
+   "follow_text": "→ FOLLOW THE FISH & AQUATIC MAMMALS TRAIL",
+   "follow_node": "3339:5887",
+   "card_image": {
+    "ref": "33c4a476be2f23c6ea8fd0430ed670cffad2a5e5",
+    "file": "guides/fish.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5878",
+    "node_big": "3339:5884"
+   },
+   "card_color": "#B37092",
+   "tile_group": "purple",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5864",
+   "figma_frame_name": "Frame 114537",
+   "expanded_block_h": 804.0,
+   "italic_runs": false
+  },
+  {
+   "key": "seashell",
+   "trail_slug": "seashell",
+   "order": 17,
+   "name": "The Seashell & Marine Invertebrates",
+   "name_node": "3339:5905",
+   "words": [
+    "Journey",
+    "Prosperity",
+    "Connection"
+   ],
+   "words_text": "Journey · Prosperity · Connection",
+   "words_node": "3339:5906",
+   "body": "The Seashell has appeared as your guide today.\n\nYour guide has no legs, wings, or fins. Somehow, it has travelled remarkably far.\nSomething valuable is making its way towards you.\n\nYour Seashell brings an omen of connection across distance. A person, idea, or opportunity from somewhere unexpected may soon enter your world.\n\nStay open to what washes ashore. Some of the things we treasure most begin their journeys far from us.\n\nYour trail begins on Southeast Asia’s shores and seabeds—but it certainly doesn’t stay there. For thousands of years, people carried shells along rivers, roads, and trade routes, transforming them into jewellery, currency, ritual objects, and symbols of prestige far from the sea.\n\nFollow the Seashell inland, and its story keeps changing. Cowries became money and sacred offerings. Dayak communities in Borneo fashioned shells into ornaments that showed a person’s status. The shankha, or conch shell, became one of the objects Vishnu holds, a ceremonial instrument, and one of Buddhism’s Eight Auspicious Symbols.\n\nAlong the way, you will also encounter other marine creatures, from sponges to crabs, and discover how communities transformed the forms and materials of the sea into objects of beauty, belief, and everyday life.\n\nYour Seashell has washed ashore—and its journey is only beginning. Follow its trail inland.",
+   "body_html": "<p>The Seashell has appeared as your guide today.</p><p>Your guide has no legs, wings, or fins. Somehow, it has travelled remarkably far.<br>Something valuable is making its way towards you.</p><p>Your Seashell brings an omen of connection across distance. A person, idea, or opportunity from somewhere unexpected may soon enter your world.</p><p>Stay open to what washes ashore. Some of the things we treasure most begin their journeys far from us.</p><p>Your trail begins on Southeast Asia’s shores and seabeds—but it certainly doesn’t stay there. For thousands of years, people carried shells along rivers, roads, and trade routes, transforming them into jewellery, currency, ritual objects, and symbols of prestige far from the sea.</p><p>Follow the Seashell inland, and its story keeps changing. Cowries became money and sacred offerings. Dayak communities in Borneo fashioned shells into ornaments that showed a person’s status. The shankha, or conch shell, became one of the objects Vishnu holds, a ceremonial instrument, and one of Buddhism’s Eight Auspicious Symbols.</p><p>Along the way, you will also encounter other marine creatures, from sponges to crabs, and discover how communities transformed the forms and materials of the sea into objects of beauty, belief, and everyday life.</p><p>Your Seashell has washed ashore—and its journey is only beginning. Follow its trail inland.</p>",
+   "body_node": "3339:5910",
+   "follow_text": "→ FOLLOW THE SEASHELL & MARINE INVERTEBRATES TRAIL",
+   "follow_node": "3339:5912",
+   "card_image": {
+    "ref": "83bcefd7507190d47683ed97b73918cd4f97d7f1",
+    "file": "guides/seashell.png",
+    "px": [
+     1469,
+     2392
+    ],
+    "fill_mode": "FILL",
+    "node_small": "3339:5903",
+    "node_big": "3339:5909"
+   },
+   "card_color": "#B37092",
+   "tile_group": "purple",
+   "tile_group_note": "จากสีป้ายกำกับของนักออกแบบนอก frame (Komet 60px) · สีการ์ดจริง (card_color) ตรงกลุ่มนี้ทุกใบ",
+   "figma_frame": "3339:5889",
+   "figma_frame_name": "Frame 114538",
+   "expanded_block_h": 804.0,
+   "italic_runs": false
+  }
+ ]
+}
