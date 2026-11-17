@@ -37,6 +37,8 @@ function sh_import_refresh_steps_2026_11_17(): array {
 		'2026-11-17-trail-grid' => 'trail sh_trail_layout + grid box (only while empty or still the layout the core-1117 import wrote)',
 		// makara-1117 (BACKLOG #33): Makara tiles 1 / 3 get a page — sites imported before show them as "tiles without a page".
 		'2026-11-17-makara'     => 'Makara: objects saltwater-crocodile-skull + sungai-mas-makara created when missing · their old tile-without-a-page removed (only the one the import wrote) · trail order (only while the old list)',
+		// rooster-1117 (BACKLOG #34): Rooster #11 = the multi-trail object mother-of-pearl-furniture-depicting-animals.
+		'2026-11-17-rooster'    => 'Rooster #11 links to mother-of-pearl-furniture-depicting-animals: rooster term + its rooster tile added to the object (only where missing) · the old tile-without-a-page removed (only the one the import wrote) · trail order (only while the old list)',
 	);
 }
 
@@ -258,6 +260,139 @@ function sh_import_refresh_makara_1117( array $seed, array $map, array $manifest
 	}
 }
 
+/** Rooster #11 (rooster-1117): the object that is now the multi-trail object of the trail's last tile. */
+const SH_IMPORT_ROOSTER_1117 = array(
+	'slug'     => 'mother-of-pearl-furniture-depicting-animals',
+	'trail'    => 'rooster',
+	'position' => 11,
+);
+
+/**
+ * Step 2026-11-17-rooster (BACKLOG #34 · P-360): Rooster tile #11 used to be a tile without a page (the record
+ * "pending" held back as a draft) — it is now a link to the object mother-of-pearl-furniture-depicting-animals
+ * (primary trail Seashell). Refresh-only, nothing of an admin overwritten, nothing created or deleted:
+ *   object   the rooster term is added when missing (existing terms kept) · its rooster tile (sh_trail_tile_n) filled
+ *            only into a slot that is that trail's or empty · every other field of the object left alone (an object
+ *            not on the site — never imported / trashed — is not created)
+ *   trail    the old tile without a page at position 11 removed only while position + label + both images are
+ *            exactly what the import wrote (else kept_admin) · sh_object_order gets the object only while it is
+ *            still the old list of the other 10 (else the object comes after the admin order, A–Z)
+ *   "pending" stays a draft (not touched)
+ *
+ * @param array<string, mixed> $seed     Seed files.
+ * @param array<string, mixed> $map      image-map.json.
+ * @param array<string, mixed> $manifest Manifest.
+ */
+function sh_import_refresh_rooster_1117( array $seed, array $map, array $manifest ): void {
+	unset( $map, $manifest );
+	$slug = SH_IMPORT_ROOSTER_1117['slug'];
+	$pos  = SH_IMPORT_ROOSTER_1117['position'];
+	$term = get_term_by( 'slug', SH_IMPORT_ROOSTER_1117['trail'], 'trail' );
+	$id   = sh_imp_find_post( 'object', 'object:' . $slug );
+	$seed_o = null;
+	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		if ( $slug === (string) $o['slug'] ) {
+			$seed_o = $o;
+		}
+	}
+	if ( ! $term instanceof WP_Term || ! $id || ! is_array( $seed_o ) ) {
+		return; // No Rooster trail / no such object on this site: the refresh creates neither.
+	}
+
+	// Object: rooster term + rooster tile (slot of that trail, else the first empty one of 4).
+	if ( ! has_term( $term->term_id, 'trail', $id ) ) {
+		wp_set_object_terms( $id, array( (int) $term->term_id ), 'trail', true );
+		sh_imp_count( 'updated', 'object_trail_term' );
+	}
+	$tile  = sh_import_object_tiles( $seed_o )[ $term->slug ] ?? null;
+	$title = sh_import_object_text_2026_11( $seed_o )['post_title'];
+	$img   = null;
+	$hover = null;
+	if ( is_array( $tile ) ) {
+		$img   = sh_imp_1117_image( $tile['image'], SH_IMPORT_OBJECTS_1117, sh_import_spec_tile(), "$title tile ({$term->slug})" );
+		$hover = sh_imp_1117_image( $tile['hover'], SH_IMPORT_OBJECTS_1117, sh_import_spec_tile_hover(), "$title tile hover ({$term->slug})" );
+		$slot  = 0;
+		for ( $n = 1; $n <= 4 && ! $slot; $n++ ) {
+			if ( (int) get_post_meta( $id, "sh_trail_tile_{$n}_trail", true ) === (int) $term->term_id ) {
+				$slot = $n;
+			}
+		}
+		for ( $n = 1; $n <= 4 && ! $slot; $n++ ) {
+			if ( '' === (string) get_post_meta( $id, "sh_trail_tile_{$n}_trail", true ) && '' === (string) get_post_meta( $id, "sh_trail_tile_{$n}_image", true ) && '' === (string) get_post_meta( $id, "sh_trail_tile_{$n}_image_hover", true ) ) {
+				$slot = $n;
+			}
+		}
+		if ( $slot ) {
+			sh_imp_fill_empty(
+				'post',
+				$id,
+				array(
+					"sh_trail_tile_{$slot}_trail"       => (int) $term->term_id,
+					"sh_trail_tile_{$slot}_image"       => $img,
+					"sh_trail_tile_{$slot}_image_hover" => $hover,
+				),
+				'object_trail_tile'
+			);
+		} else {
+			sh_imp_keep( "object:$slug rooster tile (4 trail-tile slots used by the admin — none added)" );
+		}
+	}
+
+	// Trail: the old tile without a page of position 11 (sh_static_tile_1..3).
+	if ( 'publish' === get_post_status( $id ) ) {
+		for ( $n = 1; $n <= 3; $n++ ) {
+			if ( (int) get_term_meta( $term->term_id, "sh_static_tile_{$n}_position", true ) !== $pos ) {
+				continue;
+			}
+			$label = (string) get_term_meta( $term->term_id, "sh_static_tile_{$n}_label", true );
+			$cur_i = (int) get_term_meta( $term->term_id, "sh_static_tile_{$n}_image", true );
+			$cur_h = (int) get_term_meta( $term->term_id, "sh_static_tile_{$n}_image_hover", true );
+			if ( '' === trim( $label ) && $img && $cur_i === $img && ( ! $hover || $cur_h === $hover ) ) {
+				sh_imp_meta(
+					'term',
+					$term->term_id,
+					array(
+						"sh_static_tile_{$n}_position"    => '',
+						"sh_static_tile_{$n}_image"       => '',
+						"sh_static_tile_{$n}_image_hover" => '',
+						"sh_static_tile_{$n}_label"       => '',
+					)
+				);
+				sh_imp_count( 'updated', 'trail_static_tile_removed' );
+			} else {
+				sh_imp_keep( "trail:rooster tile without a page $n (admin edited · position $pos \"$label\")" );
+			}
+		}
+	}
+
+	// sh_object_order: the object joins the old list of the other tiles.
+	$new = array();
+	$old = array();
+	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		$oid = sh_imp_find_post( 'object', 'object:' . $o['slug'] );
+		if ( ! $oid || 'publish' !== get_post_status( $oid ) || ! isset( $o['trail_order'][ $term->slug ] ) ) {
+			continue;
+		}
+		$new[ $oid ] = (int) $o['trail_order'][ $term->slug ];
+		if ( $slug !== (string) $o['slug'] ) {
+			$old[ $oid ] = (int) $o['trail_order'][ $term->slug ];
+		}
+	}
+	asort( $new );
+	asort( $old );
+	$cur = get_term_meta( $term->term_id, 'sh_object_order', true );
+	$cur = is_array( $cur ) ? array_values( array_map( 'intval', $cur ) ) : array();
+	if ( array_keys( $new ) === $cur ) {
+		return;
+	}
+	if ( ! $cur || array_keys( $old ) === $cur ) {
+		sh_imp_meta( 'term', $term->term_id, array( 'sh_object_order' => array_keys( $new ) ) );
+		sh_imp_count( 'updated', 'trail_object_order' );
+	} else {
+		sh_imp_keep( 'trail:rooster sh_object_order (admin order kept · the object comes after it, A–Z)' );
+	}
+}
+
 /**
  * Run one step of this file. Returns true when done (false = a file was missing: run again on the next import).
  *
@@ -287,6 +422,9 @@ function sh_import_refresh_2026_11_17( string $step, array $seed, array $map, ar
 			break;
 		case '2026-11-17-makara':
 			sh_import_refresh_makara_1117( $seed, $map, $manifest );
+			break;
+		case '2026-11-17-rooster':
+			sh_import_refresh_rooster_1117( $seed, $map, $manifest );
 			break;
 	}
 	return count( sh_imp_state()['warnings'] ) === $before;
