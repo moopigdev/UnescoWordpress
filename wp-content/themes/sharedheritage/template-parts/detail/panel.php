@@ -120,7 +120,7 @@ $sh_panel_cls = 'sh-detail__panel'
 
 // Back: history back (base.js) when the visitor came from this site — i.e. from the trail they clicked, also for an
 // object that sits in several trails; fallback href = the object's main trail (the one that is not listed in its
-// other-trail tile fields sh_trail_tile_<n>_trail · D49), else home.
+// other-trail tile fields sh_trail_tile_<n>_trail · D49), else home — or the zone page it came from (below).
 $sh_back_url = home_url( '/' );
 $sh_trails   = get_the_terms( $sh_id, 'trail' );
 if ( is_array( $sh_trails ) && $sh_trails ) {
@@ -139,6 +139,18 @@ if ( is_array( $sh_trails ) && $sh_trails ) {
 	$sh_link = get_term_link( $sh_main );
 	if ( is_string( $sh_link ) ) {
 		$sh_back_url = $sh_link;
+	}
+}
+// D57: the visitor came from a tile of a Zone 1–3 grid (?from=zone-<n> · template-parts/zone/tile.php) → the fallback Back
+// goes to that zone page (history back still wins when it is on this site). Only an existing zone 1–3 page counts.
+$sh_from = isset( $_GET['from'] ) ? sanitize_key( wp_unslash( $_GET['from'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display choice only, checked against the zone terms.
+if ( '' !== $sh_from ) {
+	$sh_from_zone = get_term_by( 'slug', $sh_from, 'zone' );
+	if ( $sh_from_zone instanceof WP_Term && (bool) sh_get_term( 'sh_has_page', $sh_from_zone ) && in_array( (int) sh_get_term( 'sh_number', $sh_from_zone ), array( 1, 2, 3 ), true ) ) {
+		$sh_from_link = get_term_link( $sh_from_zone );
+		if ( is_string( $sh_from_link ) ) {
+			$sh_back_url = $sh_from_link;
+		}
 	}
 }
 ?>
