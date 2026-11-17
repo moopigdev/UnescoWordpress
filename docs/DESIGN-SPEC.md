@@ -1155,6 +1155,16 @@ frame `1440 × (ตามตาราง)` พื้น `#FFFFFF` · layout grid
 **ฟิลด์ที่หน้าใช้:** ไม่เพิ่มฟิลด์ใหม่ (ใช้ `trails`/`trail_order`/`tiles_by_trail`/`hero_video_by_trail`/`figma[].style` ที่มีใน §8.4) · hero `Chicken&Rooster/Mother of Pearl.webm` อยู่ใน manifest (`drive-1117/…` · verify ผ่าน)
 **พฤติกรรม:** กดช่อง #11 ใน `/trail/rooster/` → detail ของ `mother-of-pearl-furniture-depicting-animals` (URL เดียวกับที่มาจาก `/trail/seashell/`) · ข้อความเหมือนกัน · ภาพ/สีแผง/hero ตาม primary (seashell) จนกว่า core รองรับค่าต่อ trail (P-361)
 
+### 8.8 ภาพ hover ช่อง trail — ตรวจใหม่ 127 ช่อง · เปลี่ยน 2 (hover-1117 · BACKLOG #35 · ต่อ P-306 ข้อ 9 · Figma `lastModified 2026-11-17T11:28:55Z`)
+**ที่มา:** `GET /v1/files/:key/nodes?depth=1` 1 คำขอ (376 id = hover 127 + tile 127 + materials_set 122 ไม่ซ้ำ · `design/tools/fetch-hover-1117.py` · มี `--help`/`--no-write`) + `GET /files/:key/images` 1 คำขอ (เอา URL fill ใหม่) · hover = COMPONENT 210×210 มี image fill เดียว (`children:[]`) → เทียบ `fills[IMAGE].imageRef` กับ seed
+**ผล:** id ทุกตัวยังอยู่ · tile ปกติ 127 ช่อง ref ไม่เปลี่ยน · hover เปลี่ยน **2 ช่อง (Seashell)** — seed เก็บ ref เดิมใน `tile_image_hover_ref_prev`:
+| trail #ช่อง | slug | hover node | ข้อความบนภาพ เดิม → ใหม่ | ref ใหม่ (`design/assets/objects-1117/`) |
+|---|---|---|---|---|
+| seashell #12 | `dragon-shaped-mother-of-pearl-inlaid-incense-tray` | `3377:5816` | "Kalung" (รูปมังกร) → "Dragon-Shaped Mother-of-Pearl Inlaid Incense Tray" (รูปมังกร + ไอคอนแปรง/ตรามังกร) | `dc3709eae792995bc8a3d3fabb0bffb5bfc1d81b.png` |
+| seashell #13 | `kalung` | `3377:5819` | "Dragon-Shaped Mother-of-Pearl Inlaid Incense Tray" (รูปสร้อย) → "Wangpar" (สร้อยเปลือกหอย + ไอคอนสาน/แจกัน) | `5e9b806b1fad49f0a6068899156debd15ff602b8.png` |
+**ฟิลด์ที่หน้าใช้:** ไม่เพิ่มฟิลด์ที่หน้าใช้ · `tile_image_hover_ref_prev` = ฟิลด์ตรวจสอบสำหรับ importer/wp-dev เท่านั้น (บอกว่า prod เดิมเป็นค่าที่ importer ใส่ → ปลอดภัยที่จะอัปเดต ไม่ทับที่ admin แก้) · ตำแหน่ง: `objects.json[].tiles_by_trail.seashell` ของ 2 record + `objects.json[kalung].tile_image_hover_ref(_prev)` (ระดับ record · primary trail) + `trails.json seashell.tiles[12,13]`
+**ยังผิดใน Figma (ไม่แก้):** P-306 (9)③⑤⑥⑦ → P-370 · **พฤติกรรม:** hover แสดงภาพใหม่ในช่อง seashell #12/#13 (เดิม 2 ช่องนี้ชื่อสลับกัน) · ช่อง Dragon trail #9 (`3377:5631` `384a62be…`) ชื่อ/ภาพตรงอยู่แล้ว ไม่เปลี่ยน
+
 ---
 
 ## 9. รอบ 2026-11-17 — header/footer ใหม่ · Home ใหม่ + การ์ดสัตว์ · Intro 4 ตอน · Zone 4 (D47 D48 D50 D51 · BACKLOG #25–#27 #29 #31 #32 · task `design-pages-1117`)
