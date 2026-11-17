@@ -267,3 +267,7 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - [tl-1117] [2026-11-17] meta ยาวสุด (ชิ้น 13 cake moulds) ที่ 18px สูง 360 → stage-h ~880 ที่ 1440 (หน้าเลื่อนลง · กลไกเดิม) · `.sh-tl__trail-link` hover `scale(1.5)` + เงา · ปิดบน mobile (<768 แถวเลื่อน clip)
 - [tl-1117 r2] [2026-11-17] D52 ใช้กับ layout desktop (≥1280 — แถบกับ mini-map แถวเดียวกัน) · 1025–1279 เป็น layout tablet (แถบอยู่เหนือ mini-map เต็มความกว้าง = 50 เท่ากรอบ ที่ 1024; 768 = 41) ไม่ใช้ ×0.8 · mini-map ย่อด้วย `transform: scale(--ms)` รอบ (ขวาสุด x1413 · กลางกรอบ y 39.5)
 - 2026-11-17 [reviewer tl-1117 r2] เลขใน DEFERRED ของ dev "768 = 41" วัดจริง 42 (แค่เลขในเอกสาร) · ตอน Reflection บน desktop กรอบครีม mini-map เลยขอบขวาจอ (clip · ไม่ล้น · มีมาก่อน D52 · 0.8 ทำให้น้อยลง) · tablet c=1 ขอบซ้ายกรอบออกนอกจอ (layout เดิม)
+- 2026-11-17 [reviewer design-objects-1117] `design/tools/verify-objects-1117.py` ค่าเริ่มต้น `--base HEAD` ให้ fail ปลอมหลัง commit (docstring พูดถึง `--base-ref/--repo` แต่ argparse มีแค่ `--base`) → ใช้ `--base main`
+- 2026-11-17 [reviewer design-objects-1117] `sumatran-serow` มี `hero_video_src: Buffalo/Sumatran Serow.webm` แต่ §8/P-306 ว่าจับคู่ไม่ได้ (record hold — หน้าไม่กระทบ)
+- 2026-11-17 [reviewer design-objects-1117] §8.1 แถว Cover เขียน "fill FILL · centre crop" ที่จริง node เป็น STRETCH + imageTransform (`cover_crop_ref` ครอปถูกแล้ว แก้แค่ถ้อยคำ)
+- 2026-11-17 [reviewer design-objects-1117] giant-clams 2 ตัวอย่างรวมเป็นฟิลด์เดียว → Dimensions/Biography ไม่บอกว่าของตัวอย่างไหน (P-306(7))
