@@ -106,7 +106,20 @@
     "1096:9698",
     "1096:8731"
    ],
-   "note": "elephant = variant ที่ hero_video_src=null (ใช้ hero เดิมของ record ช้าง) · trail etc ไม่มี frame = ไม่มี variant"
+   "note": "elephant = variant ที่ hero_video_src=null (ใช้ hero เดิมของ record ช้าง) · trail etc ไม่มี frame = ไม่มี variant",
+   "superseded_in_part_by": "figma_2026_11_18_d60 (ng-s-n-drum แยกเป็น 2 record → 18 record / 41 variant / text_override 3)"
+  },
+  "figma_2026_11_18_d60": {
+   "by": "design-dev multitrail-1117 ส่วน A2",
+   "decision": "D60",
+   "what": "แยก Đông Sơn drum เป็น 2 วัตถุตาม Figma: ng-s-n-drum = Water bird 1223:3409 (trails [water-bird]) · dong-son-drum-thung-yang = Seashell 1194:2376 (trails [seashell] · Thung Yang, Uttaradit · National Museum Bangkok)",
+   "object_records": 124,
+   "multi_trail_records": 18,
+   "variant_count": 41,
+   "text_override_count": 3,
+   "new_slugs": [
+    "dong-son-drum-thung-yang"
+   ]
   }
  },
  "objects": [
@@ -17889,8 +17902,7 @@
    "title": "Đông Sơn drum",
    "title_raw": "Đông Sơn drum",
    "trails": [
-    "water-bird",
-    "seashell"
+    "water-bird"
    ],
    "collection": "Folklore Museum, The Institute for Southern Thai Studies",
    "place_of_production": "Nakhon Si Thammarat Province, Thailand",
@@ -17908,8 +17920,7 @@
     }
    ],
    "trail_order": {
-    "water-bird": 2,
-    "seashell": 7
+    "water-bird": 2
    },
    "detail_style": {
     "panel_bg": "#6BB9A5",
@@ -17923,8 +17934,7 @@
    "primary_frame": "1223:3409",
    "hero_video_src": "Waterbird/Đông Sơn Drum.webm",
    "hero_video_by_trail": {
-    "water-bird": "Waterbird/Đông Sơn Drum.webm",
-    "seashell": "Seashell/Đông Sơn drum.webm"
+    "water-bird": "Waterbird/Đông Sơn Drum.webm"
    },
    "tile_image_ref": "498f2430e6b410f9fffd62e9be0fab760910aa92.png",
    "tile_image_hover_ref": "2d07e11f2753322cfd756146a07890f217952b6f.png",
@@ -17936,14 +17946,6 @@
      "tile_node": "3377:5035",
      "tile_hover_node": "3377:5885",
      "materials_set": "3377:5883"
-    },
-    "seashell": {
-     "order": 7,
-     "tile_image_ref": "5a7acb777270f4925e7726b4aecebe5e6b19ce28.png",
-     "tile_image_hover_ref": "0646a3e0980336119f1b6576ea33bf3644250a5d.png",
-     "tile_node": "3377:4957",
-     "tile_hover_node": "3377:5801",
-     "materials_set": "3377:5799"
     }
    },
    "figma": [
@@ -18065,13 +18067,100 @@
        }
       ]
      }
+    }
+   ],
+   "status": [],
+   "_moved_to": {
+    "to": "dong-son-drum-thung-yang",
+    "decision": "D60",
+    "frame": "1194:2376",
+    "fields": [
+     "trails.seashell",
+     "trail_order.seashell",
+     "hero_video_by_trail.seashell",
+     "tiles_by_trail.seashell",
+     "variants_by_trail.seashell (+text_override caption/info_rows)",
+     "figma[1194:2376]"
+    ],
+    "evidence": "ค่าเดิมครบอยู่ใน git 932b5a1 · ค่าใหม่อยู่ใน record dong-son-drum-thung-yang"
+   }
+  },
+  {
+   "slug": "dong-son-drum-thung-yang",
+   "title": "Đông Sơn drum",
+   "title_raw": "Đông Sơn drum",
+   "trails": [
+    "seashell"
+   ],
+   "collection": "National Museum Bangkok, Thailand",
+   "period": "Prehistoric",
+   "place_of_production": "Thung Yang District, Uttaradit Province",
+   "dimensions": "Height 53 cm, diameter 65 cm",
+   "object_biography": "Discovered in Thung Yang District, Uttaradit Province. Donated by Mr Hueng Mongkol in 1927.",
+   "caption": "This bronze drum (Heger Type I drum) was made in sections using the lost-wax casting method and topped with a bronze tympanum. At the centre of the tympanum is a starburst motif, circumscribed by concentric bands. These registers contain geometric designs as well as human figures engaging in daily life and rituals, birds, animals and architecture. At the rim of the tympanum are four small high-relief figurines of sea snail shells, evenly spaced, as if they are circumambulating the drum's edge.\n\nĐông Sơn drums are known to feature small three-dimensional animal figures – most commonly frogs – placed at the rim in groups of four. This recurring configuration has been associated with seasonal cycles, rain-calling rituals and the agricultural calendar. The shells on this drum are likely to reflect a related symbolic framework. Their placement at the perimeter evokes the importance of water to the communities that produced and used these objects.\n\nTheir likely use spanned ritual, social and symbolic purposes, including rain-making ceremonies, agricultural rites and ancestral worship, suggesting they played a significant role in Bronze Age life across Southeast Asia. Their sound was believed to call for fertility, protect the community and gather people. The drums also symbolized the power and status of community leaders.\n\nThe earliest examples of such drums date from the late fourth century BCE in present-day northern Viet Nam, where they were used for burial and funerary rites. Their subsequent distribution across the region reflects the Đông Sơn culture’s participation in extensive exchange networks. Such drums have been discovered along major river systems, including the Mekong and the Red River in northern Viet Nam, from Yunnan through Lao PDR to Cambodia, as well as across maritime routes extending as far as Timor-Leste.\n\nIn the contemporaneous Dian culture of Yunnan’s lacustrine basins – a culture that likely shared reciprocal influences with Đông Sơn and imported its bronze drums – similar drums were repurposed as containers for storing cowries or marine shells that may have functioned as a form of currency in the region. This reuse suggests that shells held layered significance across early Southeast Asia: not only as auspicious markers of spiritual beliefs, but also as part of the networks of exchange and influence linking coastal and inland worlds.",
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "Prehistoric"
     },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Thung Yang District, Uttaradit Province"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Height 53 cm, diameter 65 cm"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "National Museum Bangkok, Thailand"
+    },
+    {
+     "label": "Other information / Object biography",
+     "key": "object_biography",
+     "value": "Discovered in Thung Yang District, Uttaradit Province. Donated by Mr Hueng Mongkol in 1927."
+    }
+   ],
+   "trail_order": {
+    "seashell": 7
+   },
+   "detail_style": {
+    "panel_bg": "#CFA5BA",
+    "title_color": "#212529",
+    "text_color": "#343A40",
+    "collection_color": "#343A40",
+    "meta_color": "#343A40",
+    "source_frame": "1194:2376"
+   },
+   "detail_style_mode": "generic",
+   "primary_frame": "1194:2376",
+   "hero_video_src": "Seashell/Đông Sơn drum.webm",
+   "hero_video_by_trail": {
+    "seashell": "Seashell/Đông Sơn drum.webm"
+   },
+   "tile_image_ref": "5a7acb777270f4925e7726b4aecebe5e6b19ce28.png",
+   "tile_image_hover_ref": "0646a3e0980336119f1b6576ea33bf3644250a5d.png",
+   "tiles_by_trail": {
+    "seashell": {
+     "order": 7,
+     "tile_image_ref": "5a7acb777270f4925e7726b4aecebe5e6b19ce28.png",
+     "tile_image_hover_ref": "0646a3e0980336119f1b6576ea33bf3644250a5d.png",
+     "tile_node": "3377:4957",
+     "tile_hover_node": "3377:5801",
+     "materials_set": "3377:5799"
+    }
+   },
+   "figma": [
     {
      "page": "Page 2.1 ALL Animal content (998:952)",
      "frame_id": "1194:2376",
      "frame_name": "Desktop - 1588",
      "trail": "seashell",
-     "is_primary": false,
+     "is_primary": true,
      "section_name_in_figma": "Seashell",
      "title_node": "1194:2392",
      "caption_node": "1194:2416",
@@ -18183,127 +18272,15 @@
         "crop_scale": 2.0
        }
       ]
-     },
-     "text_differs_from_primary": [
-      "caption",
-      "meta"
-     ]
+     }
     }
    ],
    "status": [],
-   "variants_by_trail": {
-    "water-bird": {
-     "figma_frame": "1223:3409",
-     "figma_frame_name": "Desktop - 1624",
-     "is_primary": true,
-     "hero_video_src": "Waterbird/Đông Sơn Drum.webm",
-     "panel_bg": "#6BB9A5",
-     "title_color": "#212529",
-     "collection_color": "#343A40",
-     "caption_color": "#343A40",
-     "meta_color": "#343A40",
-     "side_image_ref": "39d5c14128c68966828268ea711871bc7fdc1379.crop-1223-3462.png",
-     "side_images": [
-      {
-       "order": 1,
-       "node": "1223:3462",
-       "crop_ref": "39d5c14128c68966828268ea711871bc7fdc1379.crop-1223-3462.png",
-       "crop_size": [
-        718,
-        866
-       ],
-       "bbox": [
-        921.0,
-        1090.0,
-        359.0,
-        433.0
-       ],
-       "scale_mode": "FIT",
-       "radius": 0
-      }
-     ],
-     "image_col_bbox": [
-      921.0,
-      1020.0,
-      359.0,
-      503.0
-     ],
-     "frame_size": [
-      1440.0,
-      1956.0
-     ]
-    },
-    "seashell": {
-     "figma_frame": "1194:2376",
-     "figma_frame_name": "Desktop - 1588",
-     "is_primary": false,
-     "hero_video_src": "Seashell/Đông Sơn drum.webm",
-     "panel_bg": "#CFA5BA",
-     "title_color": "#212529",
-     "collection_color": "#343A40",
-     "caption_color": "#343A40",
-     "meta_color": "#343A40",
-     "side_image_ref": "eed819fa95d5dc4f88a2de07a58f8f421482180a.crop-1194-2429.png",
-     "side_images": [
-      {
-       "order": 1,
-       "node": "1194:2429",
-       "crop_ref": "eed819fa95d5dc4f88a2de07a58f8f421482180a.crop-1194-2429.png",
-       "crop_size": [
-        718,
-        540
-       ],
-       "bbox": [
-        921.0,
-        1090.0,
-        359.0,
-        270.0
-       ],
-       "scale_mode": "FIT",
-       "radius": 0
-      }
-     ],
-     "image_col_bbox": [
-      921.0,
-      1020.0,
-      359.0,
-      340.0
-     ],
-     "frame_size": [
-      1440.0,
-      2260.0
-     ],
-     "text_override": {
-      "caption": "This bronze drum (Heger Type I drum) was made in sections using the lost-wax casting method and topped with a bronze tympanum. At the centre of the tympanum is a starburst motif, circumscribed by concentric bands. These registers contain geometric designs as well as human figures engaging in daily life and rituals, birds, animals and architecture. At the rim of the tympanum are four small high-relief figurines of sea snail shells, evenly spaced, as if they are circumambulating the drum's edge.\n\nĐông Sơn drums are known to feature small three-dimensional animal figures – most commonly frogs – placed at the rim in groups of four. This recurring configuration has been associated with seasonal cycles, rain-calling rituals and the agricultural calendar. The shells on this drum are likely to reflect a related symbolic framework. Their placement at the perimeter evokes the importance of water to the communities that produced and used these objects.\n\nTheir likely use spanned ritual, social and symbolic purposes, including rain-making ceremonies, agricultural rites and ancestral worship, suggesting they played a significant role in Bronze Age life across Southeast Asia. Their sound was believed to call for fertility, protect the community and gather people. The drums also symbolized the power and status of community leaders.\n\nThe earliest examples of such drums date from the late fourth century BCE in present-day northern Viet Nam, where they were used for burial and funerary rites. Their subsequent distribution across the region reflects the Đông Sơn culture’s participation in extensive exchange networks. Such drums have been discovered along major river systems, including the Mekong and the Red River in northern Viet Nam, from Yunnan through Lao PDR to Cambodia, as well as across maritime routes extending as far as Timor-Leste.\n\nIn the contemporaneous Dian culture of Yunnan’s lacustrine basins – a culture that likely shared reciprocal influences with Đông Sơn and imported its bronze drums – similar drums were repurposed as containers for storing cowries or marine shells that may have functioned as a form of currency in the region. This reuse suggests that shells held layered significance across early Southeast Asia: not only as auspicious markers of spiritual beliefs, but also as part of the networks of exchange and influence linking coastal and inland worlds.",
-      "info_rows": [
-       {
-        "label": "Period",
-        "key": "period",
-        "value": "Prehistoric"
-       },
-       {
-        "label": "Place of production / Findspot",
-        "key": "place_of_production",
-        "value": "Thung Yang District, Uttaradit Province"
-       },
-       {
-        "label": "Dimensions",
-        "key": "dimensions",
-        "value": "Height 53 cm, diameter 65 cm"
-       },
-       {
-        "label": "Collection",
-        "key": "collection",
-        "value": "National Museum Bangkok, Thailand"
-       },
-       {
-        "label": "Other information / Object biography",
-        "key": "object_biography",
-        "value": "Discovered in Thung Yang District, Uttaradit Province. Donated by Mr Hueng Mongkol in 1927."
-       }
-      ]
-     }
-    }
+   "figma_2026_11_18_d60": {
+    "by": "design-dev multitrail-1117 ส่วน A2",
+    "decision": "D60",
+    "what": "แยกจาก ng-s-n-drum (Đông Sơn drum ใบ Seashell · Thung Yang, Uttaradit · National Museum Bangkok) · ข้อความเดิมของ variants_by_trail.seashell.text_override ย้ายมาเป็นฟิลด์หลักของ record นี้",
+    "moved_from": "ng-s-n-drum"
    }
   },
   {

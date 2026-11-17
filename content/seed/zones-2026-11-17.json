@@ -13,7 +13,8 @@
    "click_chain": "ref ช่องตรง ON_CLICK ในหน้า trail → frame วัตถุ → objects.json"
   },
   "revision": "A2 2026-11-17 (D57 · D58): ดึงซ้ำที่ Figma lastModified 2026-11-17T13:20:38Z · zone 2 เหลือ 42 ช่อง (ลบ orders 35–38 เดิมที่ซ้ำ) · ช่อง embossed-brass-basin ใส่ object_slug แล้ว",
-  "revision_multitrail_1117": "multitrail-1117: ทุกช่องที่มี object_slug ใส่ \"trail\" (วัตถุ trail เดียว = trail นั้น · หลาย trail = จับคู่ tile_ref/hover_ref กับ objects.json tiles_by_trail → trail_basis) · ช่องช้างของ cake molds (zone 3 #47) · embossed-brass-basin (zone 2 #38) = elephant (match_basis เดิม elephant_trail_tile5_live / click_chain · ยืนยันจาก live trail/click_chain)"
+  "revision_multitrail_1117": "multitrail-1117: ทุกช่องที่มี object_slug ใส่ \"trail\" (วัตถุ trail เดียว = trail นั้น · หลาย trail = จับคู่ tile_ref/hover_ref กับ objects.json tiles_by_trail → trail_basis) · ช่องช้างของ cake molds (zone 3 #47) · embossed-brass-basin (zone 2 #38) = elephant (match_basis เดิม elephant_trail_tile5_live / click_chain · ยืนยันจาก live trail/click_chain)",
+  "revision_d60": "D60 (2026-11-18): ช่อง zone 3 #8 (Ele 20 · seashell) object_slug ng-s-n-drum → dong-son-drum-thung-yang · ช่อง zone 2 #5 (water-bird) คง ng-s-n-drum · ทั้งสองเป็นวัตถุ trail เดียวแล้ว → ไม่มี trail_basis"
  },
  "zones": [
   {
@@ -446,8 +447,7 @@
       184.0,
       184.0
      ],
-     "trail": "water-bird",
-     "trail_basis": "tile+hover"
+     "trail": "water-bird"
     },
     {
      "order": 6,
@@ -1368,7 +1368,7 @@
      "order": 8,
      "row": 2,
      "col": 3,
-     "object_slug": "ng-s-n-drum",
+     "object_slug": "dong-son-drum-thung-yang",
      "match_basis": "tile+hover",
      "tile_name": "Ele 20",
      "tile_ref": "5a7acb777270f4925e7726b4aecebe5e6b19ce28",
@@ -1382,8 +1382,7 @@
       184.0,
       184.0
      ],
-     "trail": "seashell",
-     "trail_basis": "tile+hover"
+     "trail": "seashell"
     },
     {
      "order": 9,
