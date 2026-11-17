@@ -61,6 +61,16 @@
     ]
    },
    "note": "ข้อความคัดลอกตรง (NBSP→ช่องว่าง · U+2028→\\n · ตัด \"Caption:\" · \\n เดี่ยวในคำบรรยาย→\\n\\n เหมือน P-246) · hero_video_src = path ใต้ animals-webm/ ตรงตัวอักษรกับ key ใน media-manifest (drive-1117/<path>) · ภาพ *_ref = ชื่อไฟล์ใน design/assets/objects-1117/"
+  },
+  "figma_2026_11_17_makara": {
+   "by": "makara-1117",
+   "lastModified": "2026-11-17T08:33:07Z",
+   "what": "เพิ่ม 2 record Makara จาก frame ใหม่ 3449:3862 (Saltwater crocodile skull) · 3449:3951 (Sungai Mas makara) · hero = ภาพนิ่งลายเส้น (ไม่มี WebM) · ภาพแผงด้านข้างว่าง (นักออกแบบจะเพิ่มทีหลัง · คงช่อง side_image_slot)",
+   "object_records": 123,
+   "new_slugs": [
+    "saltwater-crocodile-skull",
+    "sungai-mas-makara"
+   ]
   }
  },
  "objects": [
@@ -36305,6 +36315,430 @@
     }
    ],
    "status": []
+  },
+  {
+   "slug": "saltwater-crocodile-skull",
+   "title": "Saltwater crocodile skull",
+   "title_raw": "Saltwater crocodile skull",
+   "trails": [
+    "makara"
+   ],
+   "collection": "Lee Kong Chian Natural History Museum, Singapore",
+   "period": "1887",
+   "place_of_production": "Indonesia, Java",
+   "scientific_name": "Crocodylus porosus (Schneider, 1801)",
+   "caption": "The saltwater crocodile, with a broad, armoured body, a powerful tail and conical teeth, is the world's largest living reptile. Adult males commonly reach between 4 and 5 metres in length, with exceptional individuals exceeding 6 metres. Females are smaller. The crocodile is a patient predator that relies on stealth – a \"sit-and-wait\" strategy for ambush predation – and explosive power. Its diet includes fish, crustaceans, birds and mammals. Adult crocodiles are strong enough to take large prey at the water's edge.\n\nWithin Southeast Asia, the saltwater crocodile historically ranged from Myanmar through Thailand, Cambodia, Viet Nam, Malaysia, Singapore, Brunei, Indonesia and the Philippines. The species inhabits coastal and estuarine environments, including tidal rivers, mangroves, mudflats, lagoons and nearshore marine waters, and can also be found further upriver. Mangrove forests and deltas are especially important, providing sheltered nesting sites, nursery habitat for hatchlings and places to bask.\n\nThe crocodile (buaya) occupies an emotional space in the regional imagination. It inspires awe for its power and antiquity but also evokes fear from the real danger it can pose. Folklore across Southeast Asian communities features crocodiles as gatekeepers of rivers, as embodiments of taboo and as moral arbiters in traditional tales. In everyday speech in Malay and Indonesian languages, buaya can signify cunning or predation; in some vernaculars, it metaphorically labels a playboy suitor.\n\nIn Singapore, crocodiles straddle the boundary between physical ecosystems and mythic narratives, stirring human imagination while merging respect, fear and cautious coexistence. These conflicting views of the creature – reverence and revulsion – help explain the enduring presence of buaya in local art, media and memory.\n\nCrocodile populations in Southeast Asia have contracted over the past two centuries and are today highly fragmented. Intensive hunting in some parts of the region, including Singapore, led to local extinction by the mid-twentieth century. A key threat to crocodiles today is coastal development, particularly when it involves mangrove destruction and river modification as this results in habitat loss. Another threat is human-wildlife conflict in fishing areas, which often leads to the illegal killing of crocodiles.\n\nToday, saltwater crocodiles are legally protected in Singapore, in recognition of their important role in maintaining ecosystem health. Conservation tools range from habitat restoration to species protection and community education. Management focuses on safeguarding mangrove and estuarine habitats while also emphasizing public safety. The challenge – and opportunity – lies in balancing human use of coasts and rivers with ensuring the continued ecological role of an apex predator that has shaped Southeast Asian waters for millennia.",
+   "info_rows": [
+    {
+     "label": "Scientific name / Taxonomy",
+     "key": "scientific_name",
+     "value": "Crocodylus porosus (Schneider, 1801)"
+    },
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "1887"
+    },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Indonesia, Java"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "Lee Kong Chian Natural History Museum, Singapore"
+    }
+   ],
+   "trail_order": {
+    "makara": 1
+   },
+   "detail_style": {
+    "panel_bg": "#CFA5BA",
+    "title_color": "#212529",
+    "text_color": "#413B2F",
+    "collection_color": "#413B2F",
+    "meta_color": "#413B2F",
+    "source_frame": "3449:3862"
+   },
+   "detail_style_mode": "generic",
+   "primary_frame": "3449:3862",
+   "hero_video_src": null,
+   "hero_video_by_trail": {},
+   "hero_still_ref": "d059fb72e82cb13dd546c51b8cb40b2708c824ff.png",
+   "side_image_slot": {
+    "state": "empty_awaiting_designer",
+    "frame_node": "3449:3871",
+    "bbox": [
+     921.0,
+     1090.0,
+     359.0,
+     489.0
+    ],
+    "scale_mode": "FILL",
+    "column_bbox": [
+     921.0,
+     1020.0,
+     359.0,
+     559.0
+    ],
+    "column_node": "3449:3870"
+   },
+   "tile_image_ref": "77d84c86e681408da172e84a8e60c68e68c001bd.png",
+   "tile_image_hover_ref": "9a4ee322ba8d0d32314b67f00ee019ea9aaea41b.png",
+   "tiles_by_trail": {
+    "makara": {
+     "order": 1,
+     "tile_image_ref": "77d84c86e681408da172e84a8e60c68e68c001bd.png",
+     "tile_image_hover_ref": "9a4ee322ba8d0d32314b67f00ee019ea9aaea41b.png",
+     "tile_node": "3377:4902",
+     "tile_hover_node": "3377:5742",
+     "materials_set": "3377:5740"
+    }
+   },
+   "figma": [
+    {
+     "page": "Page 2.1 ALL Animal content (998:952)",
+     "frame_id": "3449:3862",
+     "frame_name": "Desktop - 1644",
+     "trail": "makara",
+     "is_primary": true,
+     "section_name_in_figma": "Makara",
+     "title_node": "3449:3867",
+     "caption_node": "3449:3869",
+     "collection_node": null,
+     "meta_node": "3449:3868",
+     "hero_video_src": null,
+     "hero_gif_nodes": [
+      "3449:3875"
+     ],
+     "hero_still_ref": "d059fb72e82cb13dd546c51b8cb40b2708c824ff.png",
+     "hero_still_size": [
+      1440,
+      810
+     ],
+     "lastModified": "2026-11-17T08:33:07Z",
+     "style": {
+      "frame_size": [
+       1440.0,
+       2377.0
+      ],
+      "hero": [
+       {
+        "node": "3449:3874",
+        "name": "Frame 114481",
+        "bbox": [
+         0.0,
+         150.0,
+         1440.0,
+         810.0
+        ]
+       }
+      ],
+      "back_button": [
+       160.0,
+       2278.0,
+       115.0,
+       50.0
+      ],
+      "panel_padding_top_bottom": [
+       60.0,
+       60.0
+      ],
+      "panel_children": [
+       {
+        "node": "3449:3866",
+        "name": "Frame 12683",
+        "bbox": [
+         160.0,
+         1020.0,
+         739.0,
+         1203.0
+        ]
+       },
+       {
+        "node": "3449:3870",
+        "name": "Frame 12760",
+        "bbox": [
+         921.0,
+         1020.0,
+         359.0,
+         559.0
+        ]
+       }
+      ],
+      "panel_gap": 22.0,
+      "panel_node": "3449:3865",
+      "panel_bg": "#CFA5BA",
+      "panel_has_fill": true,
+      "panel_y": 960.0,
+      "panel_h": 1417.0,
+      "title_color": "#212529",
+      "collection_color": "#413B2F",
+      "caption_color": "#413B2F",
+      "meta_color": "#413B2F",
+      "text_col": {
+       "node": "3449:3866",
+       "name": "Frame 12683",
+       "bbox": [
+        160.0,
+        1020.0,
+        739.0,
+        1203.0
+       ],
+       "padding_top": 0
+      },
+      "image_col": {
+       "node": "3449:3870",
+       "name": "Frame 12760",
+       "bbox": [
+        921.0,
+        1020.0,
+        359.0,
+        559.0
+       ]
+      },
+      "images": [],
+      "image_slot_empty": {
+       "node": "3449:3871",
+       "name": "ex 3",
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        489.0
+       ],
+       "scale_mode": "FILL",
+       "radius": 0,
+       "state": "empty_awaiting_designer",
+       "figma_fill_opacity": 0,
+       "note": "นักออกแบบเว้นช่อง (rect fill opacity 0 · ภาพที่ฝังอยู่ = ภาพแผงของ Makara palanquin ornament ตกค้าง ไม่ใช่ภาพของวัตถุนี้ → ไม่ใช้) · ว่างจนกว่า admin ใส่ภาพ · ภาพที่ใส่ลงตำแหน่ง bbox นี้"
+      }
+     }
+    }
+   ],
+   "status": [
+    "hero_still_only_no_webm",
+    "side_image_empty_slot_awaiting_designer"
+   ]
+  },
+  {
+   "slug": "sungai-mas-makara",
+   "title": "Sungai Mas makara",
+   "title_raw": "Sungai Mas makara",
+   "trails": [
+    "makara"
+   ],
+   "collection": "National Museum, Kuala Lumpur, Malaysia",
+   "period": "Seventh century CE",
+   "place_of_production": "Kampung Sungai Mas, Kuala Muda, Kedah",
+   "material": "Granite",
+   "dimensions": "Height 90 cm, width 29 cm, length 120 cm",
+   "object_biography": "This example was discovered at the archaeological site of Sungai Mas (Gold River) in Kedah.",
+   "caption": "Across Southeast Asia, makara, mythical creatures that are a combination of various animals, were commonly placed in pairs at the entrances of temples (candi) and other sacred buildings, where they served as guardians of thresholds between the everyday and the sacred to ward off evil forces or spiritual danger before a person stepped inside.\n\nThis makara combines the features of an elephant and a fish, bringing together the qualities of powerful animals of both land and water. It was discovered at Sungai Mas (Gold River) in Kedah, one of the earliest centres of maritime trade and religious exchange on the Malay Peninsula. Dating to the seventh century CE, this granite sculpture of a makara reflects the ways communities drew on the symbolism of animals associated with protection so as to harness that power.",
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "Seventh century CE"
+    },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Kampung Sungai Mas, Kuala Muda, Kedah"
+    },
+    {
+     "label": "Material",
+     "key": "material",
+     "value": "Granite"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Height 90 cm, width 29 cm, length 120 cm"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "National Museum, Kuala Lumpur, Malaysia"
+    },
+    {
+     "label": "Other information / Object biography",
+     "key": "object_biography",
+     "value": "This example was discovered at the archaeological site of Sungai Mas (Gold River) in Kedah."
+    }
+   ],
+   "trail_order": {
+    "makara": 3
+   },
+   "detail_style": {
+    "panel_bg": "#CFA5BA",
+    "title_color": "#212529",
+    "text_color": "#413B2F",
+    "collection_color": "#413B2F",
+    "meta_color": "#413B2F",
+    "source_frame": "3449:3951"
+   },
+   "detail_style_mode": "generic",
+   "primary_frame": "3449:3951",
+   "hero_video_src": null,
+   "hero_video_by_trail": {},
+   "hero_still_ref": "1fa109361092e6be7b192998e04b960154de4663.png",
+   "side_image_slot": {
+    "state": "empty_awaiting_designer",
+    "frame_node": "3449:3960",
+    "bbox": [
+     921.0,
+     1090.0,
+     359.0,
+     489.0
+    ],
+    "scale_mode": "FILL",
+    "column_bbox": [
+     921.0,
+     1020.0,
+     359.0,
+     559.0
+    ],
+    "column_node": "3449:3959"
+   },
+   "tile_image_ref": "e7f33e8789619ca1ee06fbde6b8e589b8d5b0631.png",
+   "tile_image_hover_ref": "a7610fef452528f0aae4578c9e417b24176710e3.png",
+   "tiles_by_trail": {
+    "makara": {
+     "order": 3,
+     "tile_image_ref": "e7f33e8789619ca1ee06fbde6b8e589b8d5b0631.png",
+     "tile_image_hover_ref": "a7610fef452528f0aae4578c9e417b24176710e3.png",
+     "tile_node": "3377:4904",
+     "tile_hover_node": "3377:5748",
+     "materials_set": "3377:5746"
+    }
+   },
+   "figma": [
+    {
+     "page": "Page 2.1 ALL Animal content (998:952)",
+     "frame_id": "3449:3951",
+     "frame_name": "Desktop - 1645",
+     "trail": "makara",
+     "is_primary": true,
+     "section_name_in_figma": "Makara",
+     "title_node": "3449:3956",
+     "caption_node": "3449:3958",
+     "collection_node": null,
+     "meta_node": "3449:3957",
+     "hero_video_src": null,
+     "hero_gif_nodes": [
+      "3449:3964"
+     ],
+     "hero_still_ref": "1fa109361092e6be7b192998e04b960154de4663.png",
+     "hero_still_size": [
+      1440,
+      811
+     ],
+     "lastModified": "2026-11-17T08:33:07Z",
+     "style": {
+      "frame_size": [
+       1440.0,
+       1757.0
+      ],
+      "hero": [
+       {
+        "node": "3449:3963",
+        "name": "Frame 114481",
+        "bbox": [
+         0.0,
+         150.0,
+         1440.0,
+         810.0
+        ]
+       }
+      ],
+      "back_button": [
+       160.0,
+       1658.0,
+       115.0,
+       50.0
+      ],
+      "panel_padding_top_bottom": [
+       60.0,
+       60.0
+      ],
+      "panel_children": [
+       {
+        "node": "3449:3955",
+        "name": "Frame 12683",
+        "bbox": [
+         160.0,
+         1020.0,
+         739.0,
+         558.0
+        ]
+       },
+       {
+        "node": "3449:3959",
+        "name": "Frame 12760",
+        "bbox": [
+         921.0,
+         1020.0,
+         359.0,
+         559.0
+        ]
+       }
+      ],
+      "panel_gap": 22.0,
+      "panel_node": "3449:3954",
+      "panel_bg": "#CFA5BA",
+      "panel_has_fill": true,
+      "panel_y": 960.0,
+      "panel_h": 797.0,
+      "title_color": "#212529",
+      "collection_color": "#413B2F",
+      "caption_color": "#413B2F",
+      "meta_color": "#413B2F",
+      "text_col": {
+       "node": "3449:3955",
+       "name": "Frame 12683",
+       "bbox": [
+        160.0,
+        1020.0,
+        739.0,
+        558.0
+       ],
+       "padding_top": 0
+      },
+      "image_col": {
+       "node": "3449:3959",
+       "name": "Frame 12760",
+       "bbox": [
+        921.0,
+        1020.0,
+        359.0,
+        559.0
+       ]
+      },
+      "images": [],
+      "image_slot_empty": {
+       "node": "3449:3960",
+       "name": "ex 3",
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        489.0
+       ],
+       "scale_mode": "FILL",
+       "radius": 0,
+       "state": "empty_awaiting_designer",
+       "figma_fill_opacity": 0,
+       "note": "นักออกแบบเว้นช่อง (rect fill opacity 0 · ภาพที่ฝังอยู่ = ภาพแผงของ Makara palanquin ornament ตกค้าง ไม่ใช่ภาพของวัตถุนี้ → ไม่ใช้) · ว่างจนกว่า admin ใส่ภาพ · ภาพที่ใส่ลงตำแหน่ง bbox นี้"
+      }
+     }
+    }
+   ],
+   "status": [
+    "hero_still_only_no_webm",
+    "side_image_empty_slot_awaiting_designer"
+   ]
   }
  ]
 }
