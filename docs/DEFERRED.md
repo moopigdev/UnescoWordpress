@@ -282,3 +282,6 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - 2026-11-17 [intro-1117] "continue down" (P-273 ค่าเริ่มต้น) = แท็บส้ม 42.4×30.6 + chevron SVG ขาว (ไม่ใช้ภาพครอป) เลื่อนไปหัวข้อ environment · วงกลม 3 วง/แท่งขวา/แท่งเทา ไม่แสดง (ตาม brief) · ฟิลด์ `sh_intro_head_layout.decor.*` กับ block `kind: decor` ไม่ถูกอ่าน
 - 2026-11-17 [intro-1117] ที่ <1280 ทุกตอนเรียงซ้อนคอลัมน์เดียวตามลำดับใน layout (ข้อความ/ภาพคู่ข้างกันของตอน 1 "People and Places" ตอน 3 "Pawangs" ซ้อนกัน) · ภาพบนจอ 768 กว้างเต็มคอลัมน์ (ภาพ "Many cultures" ใหญ่ ~720px) — ถ้าอยากจำกัด ใส่ max-width ต่อภาพ
 - 2026-11-17 [intro-1117] น้ำหนักตัวอักษรใช้ตามชื่อ PostScript (tokens: Figma 500→Regular · 600→Medium) · frame Figma ดูบางกว่า Chrome macOS เล็กน้อย (anti-aliasing) · จบแถวไม่ตรง 1 คำที่ตอน 2 ย่อหน้า 1 ("Power" ขึ้นบรรทัดต่างกัน) ต่างจาก frame ที่ความกว้าง 1120 — ไม่ใช่ layout
+- 2026-11-17 [reviewer intro-1117] ≥1280 block วาง absolute ตาม y Figma + section สูงคงที่ → admin แก้ข้อความยาวขึ้น (หัวข้อ 2 บรรทัด/ย่อหน้า +2 บรรทัด) ทับ block ถัดไป (ยืนยันแล้วตอน 1) → แก้ใน intro-1117b (flow + margin จาก Figma)
+- 2026-11-17 [reviewer intro-1117] ลิงก์ no-JS `#chapter-n` เปิดในเบราว์เซอร์ที่มี JS ได้ตอน 1 (JS อ่านแค่ #1–#4) → intro-1117b
+- 2026-11-17 [reviewer intro-1117] DESIGN-SPEC §9.4 E.1 เขียน `/introduction/` แต่ slug จริง `intro` · `/introduction/` 301 ไป attachment `introduction.png` (core/import)
