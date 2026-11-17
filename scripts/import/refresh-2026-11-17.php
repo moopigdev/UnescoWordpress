@@ -41,6 +41,8 @@ function sh_import_refresh_steps_2026_11_17(): array {
 		'2026-11-17-rooster'    => 'Rooster #11 links to mother-of-pearl-furniture-depicting-animals: rooster term + its rooster tile added to the object (only where missing) · the old tile-without-a-page removed (only the one the import wrote) · trail order (only while the old list)',
 		// fb-1117 (BACKLOG #37): the designer put the side image into the two Makara frames (the slot was empty).
 		'2026-11-17-makara-side' => 'Makara 2: side panel image (sh_extra_image_1) + its layout box filled only while no panel image is set — an image an admin put there stays (kept_admin)',
+		// hover-1117 (BACKLOG #35): the designer fixed the names inside two hover images (seashell #12 / #13).
+		'2026-11-17-hover'      => 'trail tile hover image replaced where the seed has a new one (tile_image_hover_ref_prev) · only while the field is still the attachment the importer made from the old image',
 	);
 }
 
@@ -463,6 +465,151 @@ function sh_import_refresh_makara_side_1117( array $seed, array $map ): void {
 }
 
 /**
+ * Hover swaps of the seed (hover-1117 · BACKLOG #35): every tile whose seed carries tile_image_hover_ref_prev (the
+ * ref an older import used) next to the new tile_image_hover_ref. Generic — nothing is listed by slug. Where the
+ * image lives follows the import (content-2026-11-17.php):
+ *   object main trail   post meta sh_tile_image_hover (record-level hover · generic objects only)
+ *   object other trail  post meta sh_trail_tile_<n>_image_hover of the slot whose sh_trail_tile_<n>_trail is that trail
+ *   tile without a page term meta sh_static_tile_<n>_image_hover of the slot at that position (trails.json tiles)
+ *
+ * @param array<string, mixed> $seed Seed files.
+ * @return array<int, array{type:string,find:array<string,mixed>,prev:string,new:string,title:string,what:string}>
+ */
+function sh_import_hover_swaps_1117( array $seed ): array {
+	$out = array();
+	foreach ( sh_import_all_objects( $seed ) as $o ) {
+		$slug  = (string) $o['slug'];
+		$title = sh_import_object_text_2026_11( $o )['post_title'];
+		$main  = sh_import_object_main_trail( $o );
+		if ( sh_import_object_generic( $o ) && ! empty( $o['tile_image_hover_ref_prev'] ) && ! empty( $o['tile_image_hover_ref'] ) ) {
+			$out[] = array(
+				'type'  => 'post',
+				'find'  => array(
+					'object' => $slug,
+					'key'    => 'sh_tile_image_hover',
+				),
+				'prev'  => (string) $o['tile_image_hover_ref_prev'],
+				'new'   => (string) $o['tile_image_hover_ref'],
+				'title' => $title . ' tile hover',
+				'what'  => "object:$slug sh_tile_image_hover",
+			);
+		}
+		foreach ( (array) ( isset( $o['tiles_by_trail'] ) ? $o['tiles_by_trail'] : array() ) as $t => $v ) {
+			if ( ! is_array( $v ) || empty( $v['tile_image_hover_ref_prev'] ) || empty( $v['tile_image_hover_ref'] ) ) {
+				continue;
+			}
+			if ( (string) $t === $main ) {
+				continue; // The main tile is the record-level one above (not a sh_trail_tile slot).
+			}
+			$out[] = array(
+				'type'  => 'post',
+				'find'  => array(
+					'object' => $slug,
+					'trail'  => (string) $t,
+				),
+				'prev'  => (string) $v['tile_image_hover_ref_prev'],
+				'new'   => (string) $v['tile_image_hover_ref'],
+				'title' => "$title tile hover ($t)",
+				'what'  => "object:$slug tile of trail $t",
+			);
+		}
+	}
+	foreach ( (array) ( isset( $seed['trails']['trails'] ) ? $seed['trails']['trails'] : array() ) as $t ) {
+		if ( ! is_array( $t ) || ! empty( $t['not_a_trail'] ) || 'elephant' === $t['slug'] ) {
+			continue;
+		}
+		$static = array();
+		foreach ( sh_import_trail_static_tiles( $seed, $t ) as $st ) {
+			$static[ (int) $st['position'] ] = $st; // Only tiles without a page (not a link).
+		}
+		foreach ( (array) ( isset( $t['tiles'] ) ? $t['tiles'] : array() ) as $tile ) {
+			$pos = isset( $tile['order'] ) ? (int) $tile['order'] : 0;
+			if ( empty( $tile['tile_image_hover_ref_prev'] ) || empty( $tile['tile_image_hover_ref'] ) || ! isset( $static[ $pos ] ) ) {
+				continue;
+			}
+			$out[] = array(
+				'type'  => 'term',
+				'find'  => array(
+					'trail'    => (string) $t['slug'],
+					'position' => $pos,
+				),
+				'prev'  => (string) $tile['tile_image_hover_ref_prev'],
+				'new'   => (string) $tile['tile_image_hover_ref'],
+				'title' => ( isset( $t['name'] ) ? (string) $t['name'] : (string) $t['slug'] ) . " tile $pos hover",
+				'what'  => "trail:{$t['slug']} tile without a page $pos",
+			);
+		}
+	}
+	return $out;
+}
+
+/**
+ * Step 2026-11-17-hover (BACKLOG #35): the hover image of a tile becomes the new attachment only while the field is
+ * still exactly the attachment the importer made from the seed's previous ref (tile_image_hover_ref_prev). Anything
+ * else — an image an admin picked, a cleared field — is kept (kept_admin). Old attachments are never deleted. A tile
+ * that is not on this site (object / term / slot missing) is skipped; the new file missing = warning (step retried).
+ *
+ * @param array<string, mixed> $seed Seed files.
+ */
+function sh_import_refresh_hover_1117( array $seed ): void {
+	$trail_ids = sh_imp_trail_ids();
+	foreach ( sh_import_hover_swaps_1117( $seed ) as $sw ) {
+		$id   = 0;
+		$key  = '';
+		$find = $sw['find'];
+		if ( 'post' === $sw['type'] ) {
+			$id = sh_imp_find_post( 'object', 'object:' . $find['object'] );
+			if ( $id && isset( $find['key'] ) ) {
+				$key = (string) $find['key'];
+			} elseif ( $id && isset( $trail_ids[ $find['trail'] ] ) ) {
+				for ( $n = 1; $n <= 4 && '' === $key; $n++ ) {
+					if ( (int) get_post_meta( $id, "sh_trail_tile_{$n}_trail", true ) === $trail_ids[ $find['trail'] ] ) {
+						$key = "sh_trail_tile_{$n}_image_hover";
+					}
+				}
+			}
+		} else {
+			$term = get_term_by( 'slug', $find['trail'], 'trail' );
+			if ( $term instanceof WP_Term ) {
+				$id = (int) $term->term_id;
+				for ( $n = 1; $n <= 3 && '' === $key; $n++ ) {
+					if ( (int) get_term_meta( $id, "sh_static_tile_{$n}_position", true ) === (int) $find['position'] ) {
+						$key = "sh_static_tile_{$n}_image_hover";
+					}
+				}
+			}
+		}
+		if ( ! $id || '' === $key ) {
+			continue; // Not on this site (or no slot for that trail): nothing to swap.
+		}
+		$new = sh_imp_1117_image( $sw['new'], SH_IMPORT_OBJECTS_1117, sh_import_spec_tile_hover(), $sw['title'] );
+		if ( ! $new ) {
+			continue; // File missing (warning raised) — the step runs again next time.
+		}
+		$cur = (int) ( 'post' === $sw['type'] ? get_post_meta( $id, $key, true ) : get_term_meta( $id, $key, true ) );
+		if ( $cur === $new ) {
+			continue; // Already the new image (fresh import / done before).
+		}
+		// The importer's key of the old image: "asset:<file without extension>" — file relative to design/assets, as
+		// sh_imp_1117_image() wrote it (objects-1117/<ref> · or the bare ref of an older rule). The old file need not be
+		// on this machine (the deploy bundle lists only what the seed uses now), so both spellings are tried.
+		$name = (string) pathinfo( basename( (string) preg_replace( '/\s.*$/s', '', trim( $sw['prev'] ) ) ), PATHINFO_FILENAME );
+		$prev = array_filter(
+			array(
+				sh_imp_find_attachment( 'asset:' . SH_IMPORT_OBJECTS_1117 . '/' . $name ),
+				sh_imp_find_attachment( 'asset:' . $name ),
+			)
+		);
+		if ( in_array( $cur, $prev, true ) ) {
+			sh_imp_meta( $sw['type'], $id, array( $key => $new ) ); // The old attachment stays in the media library.
+			sh_imp_count( 'updated', 'tile_hover_swapped' );
+		} else {
+			sh_imp_keep( "{$sw['what']} hover (site attachment $cur is not the one the import made · new seed image not applied)" );
+		}
+	}
+}
+
+/**
  * Run one step of this file. Returns true when done (false = a file was missing: run again on the next import).
  *
  * @param string                                  $step     Step id.
@@ -497,6 +644,9 @@ function sh_import_refresh_2026_11_17( string $step, array $seed, array $map, ar
 			break;
 		case '2026-11-17-makara-side':
 			sh_import_refresh_makara_side_1117( $seed, $map );
+			break;
+		case '2026-11-17-hover':
+			sh_import_refresh_hover_1117( $seed );
 			break;
 	}
 	return count( sh_imp_state()['warnings'] ) === $before;
