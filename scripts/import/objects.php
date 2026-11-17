@@ -9,6 +9,7 @@
 defined( 'ABSPATH' ) || exit;
 
 require_once __DIR__ . '/refs.php';
+require_once __DIR__ . '/refs-2026-11-17.php';
 
 /**
  * Detail layout JSON from the Final frame style — the whole style object (unknown keys pass through), layer names
@@ -148,7 +149,10 @@ function sh_import_trail_order( array $seed, array $trails, array $objects ): vo
 			continue;
 		}
 		$ranked = array();
-		foreach ( sh_import_scope_objects( $seed ) as $o ) {
+		foreach ( sh_import_all_objects( $seed ) as $o ) { // D49: every trail (refs-2026-11-17.php).
+			if ( sh_import_object_hold( $o ) ) {
+				continue; // Draft (P-306): its tile is a "tile without a page" of the trail.
+			}
 			if ( isset( $o['trail_order'][ $slug ], $objects[ $o['slug'] ] ) ) {
 				$ranked[ $objects[ $o['slug'] ] ] = (int) $o['trail_order'][ $slug ];
 			}

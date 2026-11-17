@@ -66,6 +66,7 @@ function &sh_imp_state(): array {
 		'updated'  => array(),
 		'skipped'  => array(),
 		'warnings' => array(),
+		'kept'     => array(),
 		'att'      => null,
 	);
 	return $state;
@@ -189,5 +190,19 @@ function sh_imp_meta( string $type, int $id, array $meta ): void {
 		}
 		$value = is_string( $value ) ? wp_slash( $value ) : $value; // update_metadata() unslashes.
 		'term' === $type ? update_term_meta( $id, $key, $value ) : update_post_meta( $id, $key, $value );
+	}
+}
+
+/**
+ * A value the import left alone because an admin changed it (or made the entity): counted in skipped
+ * kept_admin_value and listed in the report "kept_admin" (what + why) — never a warning.
+ *
+ * @param string $what Entity / field and the two values.
+ */
+function sh_imp_keep( string $what ): void {
+	$s = &sh_imp_state();
+	if ( ! in_array( $what, $s['kept'], true ) ) {
+		$s['kept'][] = $what;
+		sh_imp_count( 'skipped', 'kept_admin_value' );
 	}
 }
