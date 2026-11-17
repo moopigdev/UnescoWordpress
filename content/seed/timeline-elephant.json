@@ -7,7 +7,8 @@
    "pages": "Page 2 Version #Final 01092026 (elephant detail frames) + Page 2.1 ALL GIF trails (all trails)"
   },
   "note": "ลำดับ card_order = ซ้ายไปขวาในแถวการ์ดข้อมูล (ตรงกับลำดับกริดของ Elephant’s Trail) · illustration_order = ลำดับจุดบนภาพ timeline (อ่านจากภาพ raster zone4.png) — สองลำดับไม่ตรงกัน ดู P-2xx",
-  "d39": "2026-11-11 D39: Section 51 (Figma 3101:609 · figma-file.json lastModified 2026-11-11T08:23:07Z) เทียบ 15 ชิ้น → เปลี่ยน/เพิ่ม: ชิ้น 1 below_ref · ชิ้น 5 thumbnail_nodes · ชิ้น 7 thumbnail_nodes+below_ref · ชิ้น 9 below_ref · `below_ref` = ไฟล์ใน design/assets (ชื่อเต็ม imageRef.png) ใช้เป็น sh_below_image (ไม่บังคับ · ว่าง = sh_thumbnail) · ต้องรัน build-image-map.py ใหม่ (thumbnail_nodes ชิ้น 5/7 เปลี่ยน) · ⚠ figma-file.json ใหม่ (08:23Z) ไม่มี node 1232:*/670:2810 แล้ว (build-image-map.py ล้ม KeyError) และ node ใหม่ 3103:*/3160:* ไม่มีในไฟล์ 10-27 → ชิ้น 5/7 ให้ patch image-map.json timeline_items.5/.7 .all ตรง ๆ จาก `thumbnail_refs` (ภาพอยู่ใน design/assets แล้ว · sh_imp_image ต่อ .png ให้เอง)"
+  "d39": "2026-11-11 D39: Section 51 (Figma 3101:609 · figma-file.json lastModified 2026-11-11T08:23:07Z) เทียบ 15 ชิ้น → เปลี่ยน/เพิ่ม: ชิ้น 1 below_ref · ชิ้น 5 thumbnail_nodes · ชิ้น 7 thumbnail_nodes+below_ref · ชิ้น 9 below_ref · `below_ref` = ไฟล์ใน design/assets (ชื่อเต็ม imageRef.png) ใช้เป็น sh_below_image (ไม่บังคับ · ว่าง = sh_thumbnail) · ต้องรัน build-image-map.py ใหม่ (thumbnail_nodes ชิ้น 5/7 เปลี่ยน) · ⚠ figma-file.json ใหม่ (08:23Z) ไม่มี node 1232:*/670:2810 แล้ว (build-image-map.py ล้ม KeyError) และ node ใหม่ 3103:*/3160:* ไม่มีในไฟล์ 10-27 → ชิ้น 5/7 ให้ patch image-map.json timeline_items.5/.7 .all ตรง ๆ จาก `thumbnail_refs` (ภาพอยู่ใน design/assets แล้ว · sh_imp_image ต่อ .png ให้เอง)",
+  "d61_2026_11_18": "การ์ดที่ Figma Section 51 (3102:1028 · lastModified 2026-11-17T13:20:38Z) เขียนชื่อต่างจากที่ seed ถือ → ตาม Figma การ์ด · ค่าเดิมที่ items[].title_prev · title_node_2026_11_17 = node ชื่อการ์ดจริง · การ์ดไม่ได้ตามชื่อ detail เสมอ (Fire piston / Patola cloth / Elephant and mahout kendi เขียนต่างจาก detail ตามที่ Figma การ์ดเขียน)"
  },
  "frame": "670:1551 (Desktop - zone 4) / copy 1232:632 (Desktop - zone 6)",
  "timeline_illustration_node": "1232:1711 (ROOM4 ele 2, 11000x791, raster)",
@@ -38,7 +39,8 @@
    "illustration_order": 14,
    "illustration_era_label_raster": "20th–21st century",
    "d39": "D39(3): รูปใต้เส้น (Figma 500×281) = โครงกระดูกช้าง+คนลายเส้น `bbc1e161` ≠ ภาพบนเส้น `4953122e` (บนเส้นตรง) · ขัด P-224/D27 default (ไม่มีโครงกระดูก) → ลบ below_ref บรรทัดนี้ได้ถ้าเจ้าของไม่เอา",
-   "d45": "D45 สลับบน/ใต้เส้น: บนเส้น+mini-map = โครงกระดูกช้างลายเส้น+คน `bbc1e161` (3103:1037) · ใต้เส้น = กระดูกขาสี `4953122e` (3102:1031) · ตรง image-map.json timeline_items.1 (all/below) · ทับ d39(3)"
+   "d45": "D45 สลับบน/ใต้เส้น: บนเส้น+mini-map = โครงกระดูกช้างลายเส้น+คน `bbc1e161` (3103:1037) · ใต้เส้น = กระดูกขาสี `4953122e` (3102:1031) · ตรง image-map.json timeline_items.1 (all/below) · ทับ d39(3)",
+   "title_node_2026_11_17": "3102:1033"
   },
   {
    "card_order": 2,
@@ -61,7 +63,8 @@
    "read_more_label": "Read more >>",
    "illustration_order": 3,
    "illustration_era_label_raster": "13th century",
-   "line_art_ref": "02-singhasari-ganesha.png"
+   "line_art_ref": "02-singhasari-ganesha.png",
+   "title_node_2026_11_17": "3103:1050"
   },
   {
    "card_order": 3,
@@ -84,7 +87,8 @@
    "read_more_label": "Read more >>",
    "illustration_order": 1,
    "illustration_era_label_raster": "10th–11th century",
-   "line_art_ref": "03-ganesha.png"
+   "line_art_ref": "03-ganesha.png",
+   "title_node_2026_11_17": "3103:1077"
   },
   {
    "card_order": 4,
@@ -105,7 +109,8 @@
    "read_more_label": "Read more >>",
    "illustration_order": 8,
    "illustration_era_label_raster": "19th century CE",
-   "line_art_ref": "04-elephant-molar.png"
+   "line_art_ref": "04-elephant-molar.png",
+   "title_node_2026_11_17": "3246:3906"
   },
   {
    "card_order": 5,
@@ -130,7 +135,8 @@
    "illustration_order": 7,
    "illustration_era_label_raster": null,
    "line_art_ref": "05-embossed-brass-basin.png",
-   "d39": "D39(1): บนเส้น+ใต้เส้น = `cba74a7d` (Figma 3160:1508 ขวาของ ▶ · เดิม 1232:1738 `5d9931b4`) · ไม่ใส่ below_ref (ใต้เส้น = บนเส้น) · ภาพก่อน `line_art_ref` คงเดิม แต่เล็กลง before_scale 0.62 (ค่าคงที่ธีม · DESIGN-SPEC §4.5c.3d)"
+   "d39": "D39(1): บนเส้น+ใต้เส้น = `cba74a7d` (Figma 3160:1508 ขวาของ ▶ · เดิม 1232:1738 `5d9931b4`) · ไม่ใส่ below_ref (ใต้เส้น = บนเส้น) · ภาพก่อน `line_art_ref` คงเดิม แต่เล็กลง before_scale 0.62 (ค่าคงที่ธีม · DESIGN-SPEC §4.5c.3d)",
+   "title_node_2026_11_17": "3103:1109"
   },
   {
    "card_order": 6,
@@ -151,12 +157,13 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 13,
-   "illustration_era_label_raster": null
+   "illustration_era_label_raster": null,
+   "title_node_2026_11_17": "3103:1129"
   },
   {
    "card_order": 7,
    "key": "elephant and mahout",
-   "title": "Elephant and Mahout Kendi",
+   "title": "Elephant and mahout kendi",
    "card_frame": "1232:1751",
    "title_node": "1232:1754",
    "meta_node": "1232:1755",
@@ -177,12 +184,14 @@
    "illustration_order": 4,
    "illustration_era_label_raster": "15th–early 16th century CE",
    "d39": "D39(2): บนเส้น = `621646b5` (Figma 3103:1181 · เดิม 1232:1752 `867b2833`) · ใต้เส้น = kendi+คนลายเส้น `555d365b` (3103:1187)",
-   "d45": "D45 สลับบน/ใต้เส้น: บนเส้น+mini-map = kendi+คนลายเส้น `555d365b` (3103:1187) · ใต้เส้น = kendi เล็กมีน้ำ `621646b5` (3103:1181) · ตรง image-map.json timeline_items.7 · ทับ d39(2)"
+   "d45": "D45 สลับบน/ใต้เส้น: บนเส้น+mini-map = kendi+คนลายเส้น `555d365b` (3103:1187) · ใต้เส้น = kendi เล็กมีน้ำ `621646b5` (3103:1181) · ตรง image-map.json timeline_items.7 · ทับ d39(2)",
+   "title_prev": "Elephant and Mahout Kendi",
+   "title_node_2026_11_17": "3103:1183"
   },
   {
    "card_order": 8,
    "key": "patola",
-   "title": "Patola Cloth",
+   "title": "Patola cloth",
    "card_frame": "1232:1757",
    "title_node": "1232:1760",
    "meta_node": "1232:1761",
@@ -198,7 +207,9 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 12,
-   "illustration_era_label_raster": null
+   "illustration_era_label_raster": null,
+   "title_prev": "Patola Cloth",
+   "title_node_2026_11_17": "3103:1215"
   },
   {
    "card_order": 9,
@@ -229,7 +240,8 @@
    "illustration_order": 6,
    "illustration_era_label_raster": null,
    "d39": "D39(3): รูปใต้เส้น (Figma 500×281) = ภาพรวม 2 ชิ้นมีเส้นขอบ `1c0fc05b` ≠ กลุ่มบนเส้น `b1ba8a8a`+`1c3aa3a1` (บนเส้นตรง)",
-   "d45": "D45 สลับบน/ใต้เส้น: บนเส้น+mini-map = 2 ชิ้นมีเส้นขอบ `1c0fc05b` (3103:1220) · ใต้เส้น = กลุ่ม 2 ภาพเดิม `b1ba8a8a` (below_ref · 3103:1233) + `1c3aa3a1` (below_ref_2 · 3103:1234) · ตรง image-map.json timeline_items.9 (below = 2 ภาพ) · ทับ d39(3)"
+   "d45": "D45 สลับบน/ใต้เส้น: บนเส้น+mini-map = 2 ชิ้นมีเส้นขอบ `1c0fc05b` (3103:1220) · ใต้เส้น = กลุ่ม 2 ภาพเดิม `b1ba8a8a` (below_ref · 3103:1233) + `1c3aa3a1` (below_ref_2 · 3103:1234) · ตรง image-map.json timeline_items.9 (below = 2 ภาพ) · ทับ d39(3)",
+   "title_node_2026_11_17": "3103:1236"
   },
   {
    "card_order": 10,
@@ -251,7 +263,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 11,
-   "illustration_era_label_raster": null
+   "illustration_era_label_raster": null,
+   "title_node_2026_11_17": "3103:1257"
   },
   {
    "card_order": 11,
@@ -271,7 +284,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 10,
-   "illustration_era_label_raster": null
+   "illustration_era_label_raster": null,
+   "title_node_2026_11_17": "3103:1276"
   },
   {
    "card_order": 12,
@@ -292,7 +306,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 5,
-   "illustration_era_label_raster": null
+   "illustration_era_label_raster": null,
+   "title_node_2026_11_17": "3103:1296"
   },
   {
    "card_order": 13,
@@ -313,7 +328,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 9,
-   "illustration_era_label_raster": null
+   "illustration_era_label_raster": null,
+   "title_node_2026_11_17": "3103:1315"
   },
   {
    "card_order": 14,
@@ -333,7 +349,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 15,
-   "illustration_era_label_raster": null
+   "illustration_era_label_raster": null,
+   "title_node_2026_11_17": "3103:1334"
   },
   {
    "card_order": 15,
@@ -355,7 +372,8 @@
    ],
    "read_more_label": "Read more >>",
    "illustration_order": 2,
-   "illustration_era_label_raster": null
+   "illustration_era_label_raster": null,
+   "title_node_2026_11_17": "3103:1355"
   }
  ],
  "reflection": {
