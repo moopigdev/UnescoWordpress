@@ -308,3 +308,4 @@ dev/reviewer จดที่นี่แทนการทำเพิ่มห�
 - 2026-11-17 [intro-1117b] JS รับ `#chapter-n` เหมือน `#n` · ที่ <1280 ลำดับ block ตอนซ้อนเปลี่ยนเล็กน้อย (เรียงตาม y แล้ว x: หัวข้อ→ย่อหน้า→ภาพข้างกัน) ต่างจากลำดับ layout เดิม
 - 2026-11-17 [reviewer intro-1117b] คำยาวไม่มีจุดตัด (URL ~100 ตัว) ในย่อหน้า intro ล้นขวา 110px ที่ 390 (ถูก clip · scrollWidth ไม่โต · มีตั้งแต่ก่อน) → overflow-wrap: anywhere บน .sh-intro__h / .sh-intro__p
 - 2026-11-17 [reviewer intro-1117b] (พฤติกรรม) ระยะแนวตั้งวัดจาก block ที่ยังอยู่ → ลบภาพข้างข้อความ (ตอน 1 ช่อง 1) ช่องว่างถัดไปโต ~65px · ไม่ทับ ไม่พัง
+- 2026-11-17 [reviewer trails-1117 r2] Caption ของ detail generic ต่าง Figma ±25px บางชิ้น (11 ชิ้น: 9 ตรง · cowrie-shells +25 แถวข้อมูล 250 vs 225 · rostrum-of-the-largetooth-sawfish −25 150 vs 175) — ค่าในแถวขึ้นบรรทัดต่าง Figma (Komet wrap) · ระยะ 25 ถูก · ไม่แก้ (ชุดเดียวกับรายการ Back)
