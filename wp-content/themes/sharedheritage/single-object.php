@@ -133,6 +133,13 @@ while ( have_posts() ) :
 				$sh_img_bottom = null === $sh_img_bottom ? $sh_im_box[1] + $sh_im_box[3] : max( $sh_img_bottom, $sh_im_box[1] + $sh_im_box[3] );
 			}
 		}
+		/*
+		 * Generic mode (D49 · no text_blocks): the first info row sits one title line (45) + gap under the column top
+		 * (Figma 1087 = 1020 + 45 + 22) — same D43 rule, so the media column does not carry the Figma slack above the first image.
+		 */
+		if ( null === $sh_info_y && $sh_text_col && empty( $sh_layout['text_blocks'] ) ) {
+			$sh_info_y = $sh_text_col[1] + $sh_text_pad + 45.0 + $sh_gap;
+		}
 		if ( null !== $sh_info_y ) {
 			$sh_media_bottom = null !== $sh_img_top ? $sh_info_y + ( $sh_img_bottom - $sh_img_top ) : $sh_media_col[1] + $sh_media_col[3];
 			$sh_media_col    = array( $sh_media_col[0], $sh_info_y, $sh_media_col[2], max( 1.0, $sh_media_bottom - $sh_info_y ) );

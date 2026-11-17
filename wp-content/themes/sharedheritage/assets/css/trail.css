@@ -136,18 +136,18 @@
 }
 
 /* (210 − 184) / 2 / 184 = 7.0652% */
-.sh-trail-tile:hover,
-.sh-trail-tile:focus-visible {
+.sh-trail-tile:not(.sh-trail-tile--static):hover,
+.sh-trail-tile:not(.sh-trail-tile--static):focus-visible {
 	z-index: 2;
 }
 
-.sh-trail-tile:hover .sh-trail-tile__box,
-.sh-trail-tile:focus-visible .sh-trail-tile__box {
+.sh-trail-tile:not(.sh-trail-tile--static):hover .sh-trail-tile__box,
+.sh-trail-tile:not(.sh-trail-tile--static):focus-visible .sh-trail-tile__box {
 	inset: -7.0652%;
 }
 
-.sh-trail-tile:hover .sh-trail-tile__img--hover,
-.sh-trail-tile:focus-visible .sh-trail-tile__img--hover {
+.sh-trail-tile:not(.sh-trail-tile--static):hover .sh-trail-tile__img--hover,
+.sh-trail-tile:not(.sh-trail-tile--static):focus-visible .sh-trail-tile__img--hover {
 	opacity: 1;
 }
 
