@@ -181,6 +181,7 @@ while ( have_posts() ) :
 		'media_col'    => $sh_media_col,
 		'img_top'      => $sh_img_top,
 		'back_gap'     => $sh_back_gap,
+		'generic'      => empty( $sh_layout['text_blocks'] ), // D49 mode: solid (non-alpha) hero video.
 		'container_x'  => 160.0, // §2.3 / §4.8: panel padding left/right 160 → container 1120 at x=160.
 		'container_w'  => 1120.0,
 	);

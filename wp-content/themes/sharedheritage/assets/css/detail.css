@@ -34,6 +34,11 @@
 	object-fit: contain;
 }
 
+/* Solid hero (generic D49 objects): poster 253 / video 255 white → both 255 on the white page. mix-blend-mode: multiply cannot lighten, so a 0.8% brightness lift is used; colours move ≤ 2 levels. */
+.sh-detail__hero--solid .sh-detail__hero-media {
+	filter: brightness(1.008);
+}
+
 /* ---- Panel: y (gap under the hero) · height · fill · padding top/bottom ---- */
 .sh-detail__panel {
 	min-height: calc(var(--sh-d-panel-h, 0) * var(--sh-d-u));
