@@ -253,6 +253,11 @@
 	padding: 40px var(--intro-margin);
 }
 
+.sh-intro__row,
+.sh-intro__col {
+	display: contents; /* <1280: blocks stack in order (rows / columns only matter at ≥1280) */
+}
+
 .sh-intro__block {
 	position: relative;
 	width: 100%;
@@ -396,44 +401,62 @@
 	}
 }
 
-/* ≥1280: place every block at its Figma x / y / width inside the section (scaled by the frame width / 1440) */
+/* ≥1280: rows / columns / blocks with the Figma gaps as margins (design px; widths and x offsets scale by frame width / 1440) */
 @media (min-width: 1280px) {
 	.sh-intro__head-in,
-	.sh-intro__env,
-	.sh-intro__sec-in {
-		padding-inline: 0;
-	}
-
-	.sh-intro__head-in {
-		max-width: 1440px;
-		min-height: 1098px;
-		margin-inline: auto;
-		padding-inline: calc(160 / 1440 * 100%);
-	}
-
 	.sh-intro__env {
 		max-width: 1440px;
 		margin-inline: auto;
 		padding-inline: calc(160 / 1440 * 100%);
 	}
 
-	.sh-intro__sec-in {
-		display: block;
-		height: calc(var(--h) * 1px);
-		padding: 0;
+	.sh-intro__head-in {
+		min-height: 1098px;
 	}
 
-	.sh-intro__block {
-		position: absolute;
-		top: calc(var(--y) * 1px);
-		left: calc(var(--x) / 1440 * 100%);
-		width: calc(var(--bw) / 1440 * 100%);
+	.sh-intro__sec-in {
+		display: block;
+		padding: calc(var(--pt, 0) * 1px) 0 calc(var(--pb, 0) * 1px);
+	}
+
+	.sh-intro__row {
+		display: flex;
+		align-items: flex-start;
+		margin-top: calc(var(--mt, 0) * 1px);
+	}
+
+	.sh-intro__col {
+		display: block;
+		flex: none;
+		margin-left: calc(var(--ml, 0) / 1440 * 100%);
+		width: calc(var(--cw) / 1440 * 100%);
+	}
+
+	/* block widths / x offsets are fractions of its column */
+	.sh-intro__col .sh-intro__block {
+		margin-top: calc(var(--mt, 0) * 1px);
+		margin-left: calc(var(--ox, 0) / var(--cw) * 100%);
+		width: calc(var(--bw) / var(--cw) * 100%);
+	}
+
+	/* Figma box height = the least height of a text block (longer text grows it) */
+	.sh-intro__h,
+	.sh-intro__p {
+		min-height: calc(var(--bh) * 1px);
 	}
 
 	.sh-intro__h {
 		font-size: var(--fs, 38px);
 		line-height: var(--lh, 56px);
 		text-align: var(--ta, left);
+	}
+
+	/* Figma overhang (a picture that starts above its section, e.g. the boat): absolute */
+	.sh-intro__sec-in > .sh-intro__block {
+		position: absolute;
+		top: calc(var(--y) * 1px);
+		left: calc(var(--x) / 1440 * 100%);
+		width: calc(var(--bw) / 1440 * 100%);
 	}
 }
 

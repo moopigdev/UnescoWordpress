@@ -136,3 +136,153 @@ if ( ! function_exists( 'sh_intro_crop_style' ) ) {
 		);
 	}
 }
+
+if ( ! function_exists( 'sh_intro_group_rows' ) ) {
+	/**
+	 * Figma geometry of one section → flow structure (so longer admin text pushes the rest down instead of overlapping).
+	 * Blocks that overlap vertically form a row; blocks of a row that overlap horizontally form a column (stacked).
+	 * Every distance is the Figma gap (design coordinates), so with the original texts the result equals the frame.
+	 * A block that starts above its section (Figma overhang, e.g. the boat) is returned in 'over' (absolute, picture only).
+	 *
+	 * @param array<int, array<string, mixed>> $items  Blocks: x · y · w · h (design px, y in frame) + render data.
+	 * @param float                            $sec_y  Section top (frame y).
+	 * @param float                            $sec_h  Section height.
+	 * @return array{over:array<int,array<string,mixed>>,pt:float,pb:float,rows:array<int,array<string,mixed>>}
+	 */
+	function sh_intro_group_rows( array $items, float $sec_y, float $sec_h ): array {
+		$over = array();
+		$flow = array();
+		foreach ( $items as $it ) {
+			if ( $it['y'] < $sec_y - 0.5 ) {
+				$over[] = $it;
+			} else {
+				$flow[] = $it;
+			}
+		}
+		usort(
+			$flow,
+			static function ( $a, $b ) {
+				return array( $a['y'], $a['x'] ) <=> array( $b['y'], $b['x'] );
+			}
+		);
+
+		$raw = array();
+		foreach ( $flow as $it ) {
+			$last = count( $raw ) - 1;
+			if ( $last >= 0 && $it['y'] < $raw[ $last ]['bottom'] - 0.5 ) {
+				$raw[ $last ]['items'][] = $it;
+				$raw[ $last ]['bottom']  = max( $raw[ $last ]['bottom'], $it['y'] + $it['h'] );
+			} else {
+				$raw[] = array(
+					'top'    => $it['y'],
+					'bottom' => $it['y'] + $it['h'],
+					'items'  => array( $it ),
+				);
+			}
+		}
+
+		$rows       = array();
+		$prev_bot   = $sec_y;
+		$pt         = 0.0;
+		foreach ( $raw as $i => $row ) {
+			$its = $row['items'];
+			usort(
+				$its,
+				static function ( $a, $b ) {
+					return array( $a['x'], $a['y'] ) <=> array( $b['x'], $b['y'] );
+				}
+			);
+			$cols = array();
+			foreach ( $its as $it ) {
+				$placed = false;
+				foreach ( $cols as $ci => $col ) {
+					if ( $it['x'] < $col['right'] - 0.5 && $it['x'] + $it['w'] > $col['x'] + 0.5 ) {
+						$cols[ $ci ]['items'][] = $it;
+						$cols[ $ci ]['x']       = min( $col['x'], $it['x'] );
+						$cols[ $ci ]['right']   = max( $col['right'], $it['x'] + $it['w'] );
+						$placed                 = true;
+						break;
+					}
+				}
+				if ( ! $placed ) {
+					$cols[] = array(
+						'x'     => $it['x'],
+						'right' => $it['x'] + $it['w'],
+						'items' => array( $it ),
+					);
+				}
+			}
+
+			$out_cols  = array();
+			$prev_right = 0.0;
+			foreach ( $cols as $col ) {
+				$col_items = $col['items'];
+				usort(
+					$col_items,
+					static function ( $a, $b ) {
+						return $a['y'] <=> $b['y'];
+					}
+				);
+				$blocks = array();
+				$bottom = $row['top'];
+				foreach ( $col_items as $k => $it ) {
+					$blocks[] = array(
+						'mt'   => 0 === $k ? max( 0.0, $it['y'] - $row['top'] ) : max( 0.0, $it['y'] - $bottom ),
+						'ox'   => $it['x'] - $col['x'],
+						'item' => $it,
+					);
+					$bottom = $it['y'] + $it['h'];
+				}
+				$out_cols[] = array(
+					'ml'     => $col['x'] - $prev_right,
+					'w'      => $col['right'] - $col['x'],
+					'blocks' => $blocks,
+				);
+				$prev_right = $col['right'];
+			}
+
+			if ( 0 === $i ) {
+				$pt = max( 0.0, $row['top'] - $sec_y );
+			}
+			$rows[]   = array(
+				'mt'   => 0 === $i ? 0.0 : max( 0.0, $row['top'] - $prev_bot ),
+				'cols' => $out_cols,
+			);
+			$prev_bot = $row['bottom'];
+		}
+
+		return array(
+			'over' => $over,
+			'pt'   => $pt,
+			'pb'   => max( 0.0, $sec_y + $sec_h - $prev_bot ),
+			'rows' => $rows,
+		);
+	}
+}
+
+if ( ! function_exists( 'sh_intro_block_markup' ) ) {
+	/**
+	 * Markup of one text/picture block (safe: texts are sh_rich_paragraphs() HTML, <img> from wp_get_attachment_image()).
+	 *
+	 * @param array<string, mixed>  $it    Block from sh_intro_group_rows() ('kind' text|image · 'heading' · 'paras' · 'img' · 'fit' · 'font').
+	 * @param array<string, string> $extra Extra custom properties (mt · ox · y · x).
+	 */
+	function sh_intro_block_markup( array $it, array $extra = array() ): string {
+		$vars = $extra + array(
+			'bw' => sh_intro_num( $it['w'] ),
+			'bh' => sh_intro_num( $it['h'] ),
+		);
+		if ( 'text' === $it['kind'] ) {
+			$style = esc_attr( sh_intro_vars( $vars + (array) $it['font'] ) );
+			if ( ! empty( $it['heading'] ) ) {
+				return '<h3 class="sh-intro__block sh-intro__h" style="' . $style . '">' . wp_kses_post( implode( ' ', (array) $it['paras'] ) ) . '</h3>';
+			}
+			$html = '';
+			foreach ( (array) $it['paras'] as $para ) {
+				$html .= '<p>' . wp_kses_post( (string) $para ) . '</p>';
+			}
+			return '<div class="sh-intro__block sh-intro__p" style="' . $style . '">' . $html . '</div>';
+		}
+		return '<div class="sh-intro__block sh-intro__fig' . ( ! empty( $it['fit'] ) ? ' sh-intro__fig--fit' : '' ) . '" style="' . esc_attr( sh_intro_vars( $vars ) ) . '">' . $it['img'] . '</div>'; // $it['img'] = wp_get_attachment_image() output (escaped).
+	}
+}
