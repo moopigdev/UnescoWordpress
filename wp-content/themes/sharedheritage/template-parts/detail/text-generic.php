@@ -8,7 +8,10 @@
  * Collection → Other information / Object biography (label Komet-Bold · value Komet-Regular 20/25, colour sh_meta_color).
  * A value with line breaks (Giant Clams: two specimens) shows one line per entry inside its row.
  *
- * Args: post_id (int).
+ * Trail version (D59): variant (sh_object_variant() | null) — its title / caption replace the object's when filled · its info rows replace
+ * the whole set when any is filled (sh_object_info_value()).
+ *
+ * Args: post_id (int) · variant (array|null).
  *
  * @package sharedheritage
  */
@@ -18,23 +21,31 @@ defined( 'ABSPATH' ) || exit;
 $sh_args = ( isset( $args ) && is_array( $args ) ) ? $args : array();
 $sh_id   = isset( $sh_args['post_id'] ) ? (int) $sh_args['post_id'] : (int) get_the_ID();
 
+$sh_var        = isset( $sh_args['variant'] ) && is_array( $sh_args['variant'] ) ? $sh_args['variant'] : null;
 $sh_title_raw  = trim( (string) sh_get( 'sh_title_raw', $sh_id ) );
 $sh_title      = '' !== $sh_title_raw ? $sh_title_raw : get_the_title( $sh_id );
-$sh_paragraphs = sh_paragraphs( (string) sh_get( 'sh_caption', $sh_id ) );
+$sh_caption    = (string) sh_get( 'sh_caption', $sh_id );
+if ( $sh_var && '' !== $sh_var['title'] ) {
+	$sh_title = $sh_var['title'];
+}
+if ( $sh_var && '' !== $sh_var['caption'] ) {
+	$sh_caption = $sh_var['caption'];
+}
+$sh_paragraphs = sh_paragraphs( $sh_caption );
 $sh_meta_rows  = array(
-	array( __( 'Scientific name / Taxonomy:', 'sharedheritage' ), 'sh_scientific_name' ),
-	array( __( 'Period:', 'sharedheritage' ), 'sh_period' ),
-	array( __( 'Place of production / Findspot:', 'sharedheritage' ), 'sh_place_of_production' ),
-	array( __( 'Material:', 'sharedheritage' ), 'sh_material' ),
-	array( __( 'Dimensions:', 'sharedheritage' ), 'sh_dimensions' ),
-	array( __( 'Local Name:', 'sharedheritage' ), 'sh_local_name' ),
-	array( __( 'Collection:', 'sharedheritage' ), 'sh_collection' ),
-	array( __( 'Other information / Object biography:', 'sharedheritage' ), 'sh_object_biography' ),
+	array( __( 'Scientific name / Taxonomy:', 'sharedheritage' ), 'scientific_name' ),
+	array( __( 'Period:', 'sharedheritage' ), 'period' ),
+	array( __( 'Place of production / Findspot:', 'sharedheritage' ), 'place_of_production' ),
+	array( __( 'Material:', 'sharedheritage' ), 'material' ),
+	array( __( 'Dimensions:', 'sharedheritage' ), 'dimensions' ),
+	array( __( 'Local Name:', 'sharedheritage' ), 'local_name' ),
+	array( __( 'Collection:', 'sharedheritage' ), 'collection' ),
+	array( __( 'Other information / Object biography:', 'sharedheritage' ), 'object_biography' ),
 );
 $sh_meta_rows = array_values(
 	array_filter(
 		array_map(
-			static fn( array $row ): array => array( $row[0], trim( (string) sh_get( $row[1], $sh_id ) ) ),
+			static fn( array $row ): array => array( $row[0], sh_object_info_value( $sh_id, $row[1], $sh_var ) ),
 			$sh_meta_rows
 		),
 		static fn( array $row ): bool => '' !== $row[1]

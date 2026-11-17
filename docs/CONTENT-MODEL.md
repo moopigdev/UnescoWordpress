@@ -88,6 +88,109 @@ Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ข�
 - **วัตถุ 16 trail (core-1117 · §8.3 โหมด generic):** `sh_layout` = `figma[]` ของ frame หลัก (`is_primary` · ไม่มี = `primary_frame` · ไม่มี = ตัวแรก) → คีย์ generic `frame_size hero back_button panel_* title_color caption_color meta_color text_col image_col images[]` (ไม่มี `text_blocks`) · `images[].crop_ref` → attachment id (กฎ `*_ref`) และ **ภาพเดียวกันใส่ `sh_extra_image_<n>` ตามลำดับ** (admin เปลี่ยนภาพได้ D10) · ภาพช่อง = `tile_image_ref`/`tile_image_hover_ref` (trail หลัก) → `sh_tile_image(_hover)` · trail อื่น = `sh_trail_tile_<n>_*` · hero = manifest key `drive-1117/<hero_video_src>` · status มี `hold_*` (`pending` · `sumatran-serow`) = **draft** (ไม่ publish · admin เปิดเองเมื่อข้อมูลครบ)
 - import ส่ง seed `figma[Final].style` **ทั้งก้อน** (คีย์ที่ไม่รู้จักผ่านไปด้วย — DESIGN-SPEC §4.8 เป็นที่นิยามคีย์) · **คีย์ใดก็ได้ (ทุกระดับ) ที่ลงท้าย `_ref`** และค่าเป็นชื่อไฟล์ใน `design/assets` (มี/ไม่มีนามสกุล เช่น ภาพครอปของ design-dev `<ref>.crop-<node>.png`) หรือ imageRef ใน `image-map.json` → ค่าใน `sh_layout` กลายเป็น **attachment id (integer)** · ไม่มีไฟล์ → คงข้อความเดิม + คำเตือนใน import report (ไม่ fatal) · หน้าอ่าน: `is_int( $v )` → `wp_get_attachment_image( $v, … )`
 
+## 2b. `object` — เวอร์ชันต่อ trail (D59 · multitrail-1117 · BACKLOG #41) — group: object_variant
+วัตถุที่อยู่หลาย trail (18 ชิ้น) แสดงหน้า detail ตาม trail ที่ผู้ชมกดมา: **animation (WebM ของ trail นั้น) · สีแผง + สีตัวอักษร · ภาพแผงข้าง** ของ trail นั้น และ**ข้อความของ trail นั้นเฉพาะที่ Figma ต่าง** (ที่เหลือใช้ข้อความชุดเดียวของวัตถุ) · เข้าตรง/ไม่รู้ trail/trail ที่ไม่ใช่ของวัตถุ/trail ที่ไม่มีเวอร์ชัน = วัตถุตามปกติ (trail หลัก) · URL ของวัตถุเดียว (canonical ไม่เปลี่ยน)
+- **โครงข้อมูล = ช่อง slot เลขลำดับ** (แบบเดียวกับ `sh_trail_tile_<n>_*` · ACF ฟรีไม่มี repeater): **ค่าของ trail หลัก = ฟิลด์ของวัตถุเอง** (`sh_hero_*` · `sh_panel_bg` · `sh_layout` · `sh_extra_image_*` · ข้อความ — ไม่เปลี่ยนเลย) · **trail อื่นแต่ละ trail = 1 slot** `sh_variant_<n>_*` (n = 1..`SH_VARIANT_SLOTS` = 4 · วัตถุอยู่ได้ถึง 5 trail) · slot ที่ `sh_variant_<n>_trail` ว่าง = ไม่ใช้ · แท็บละ 1 slot ในกล่อง "Trail versions" ของหน้าแก้วัตถุ
+- **ช่องว่าง = ใช้ของวัตถุ:** hero (ไม่มีวิดีโอ = hero เดิมของวัตถุ) · สี 5 ตัว · ภาพข้าง · layout · title · caption — ทีละฟิลด์ · **ข้อยกเว้น: แถวข้อมูล 8 ช่อง** (`sh_variant_<n>_scientific_name … _object_biography`) = มีช่องใดช่องหนึ่งมีค่า → แสดง**เฉพาะแถวที่มีค่า แทนทั้งชุดของวัตถุ** (Figma: dragon-shaped tray ใน seashell เหลือแถว Collection แถวเดียว) · ว่างหมด = แถวของวัตถุ
+- **ภาพข้าง:** `sh_variant_<n>_image_<k>` แทนภาพลำดับ k ของ layout ของ version (ตำแหน่ง/ขนาดมาจาก `…_layout` `images[]`) · ว่าง = ภาพใน layout (`crop_ref` → attachment id)
+- **เลือก version:** `single-object.php` อ่าน query `?sh_trail=<trail slug>` (ไม่ใช้ `?trail=` — เป็น query var ของ taxonomy trail ใน WP: ค่าปลอมทำให้ 404) → `sh_object_variant( $id, $slug )` (whitelist: trail ต้องเป็น term ของวัตถุนั้น และมี slot) · ลิงก์ที่ใส่ `?sh_trail=`: ช่องกริดหน้า trail (`sh_trail_tiles()` · trail ของหน้านั้น) · ช่องกริด Zone 1–3 (`sh_zone_grid()` · `sh_zone_tile_<n>_trail` ใน §5b) · เฉพาะเมื่อวัตถุมี slot ของ trail นั้น (วัตถุ trail เดียว/trail หลัก = ลิงก์เดิม ไม่เติม query) · ปุ่ม Back: เดิมกลับ trail หลัก → ตอนนี้กลับ trail ของ version (ยังกลับ zone เดิมเมื่อมาจาก `?from=zone-<n>` · history back ยังมาก่อน)
+- **ที่มา seed:** `objects.json[].variants_by_trail.<trail>` (DESIGN-SPEC §8.7.1) · import = refresh step `2026-11-17-multitrail` (§12 · รันตอน fresh import ด้วย) → ตัวอย่าง: Holy water vessel (trail หลัก dragon) → slot 1 = naga (hero `Serpent/Blackened Brass Ritual Holy Water Vessel.webm` · แผง `#F1ADA0` · ภาพข้าง `946674fb…`) · dragon tray (หลัก dragon) → slot 1 = seashell (title · caption · แถว Collection แถวเดียว) · cake molds (หลัก elephant) → slot 1 = horse (title · caption) · slot 2 = rooster (title) · basin (หลัก elephant) → slot 1–3 = garuda · lion · naga
+- **นับ:** 18 วัตถุหลาย trail · variant ใน seed 41 = trail หลัก 18 (= ฟิลด์ของวัตถุ) + **slot 23** (D60: Đông Sơn drum แยกเป็น 2 วัตถุ — `ng-s-n-drum` water-bird · `dong-son-drum-thung-yang` seashell — ไม่ใช่ version)
+| ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน seed | ตัวอย่าง | ใช้ในหน้า | REST |
+|---|---|---|---|---|---|---|
+| `sh_variant_1_trail` | `taxonomy` → integer | — (ว่าง = slot ไม่ใช้) | `variants_by_trail.<trail>` ของ trail ที่ไม่ใช่ trail หลัก (`is_primary:false`) | naga (Blackened brass holy water vessel · trail หลัก = dragon) | detail: เลือก version จาก `?sh_trail=<slug>` | ✔ |
+| `sh_variant_1_hero_video_webm` | `file` → integer | — | `variants_by_trail.<trail>.hero_video_src` → manifest key `drive-1117/<path>` `out` | `Serpent/Blackened Brass Ritual Holy Water Vessel.webm` | detail hero (ว่าง = hero ของวัตถุ) | ✔ |
+| `sh_variant_1_hero_video_hevc` | `file` → integer | — | manifest `fallback.file` เฉพาะ `hevc-alpha-mov` (ทึบ = ไม่มี) |  | detail hero `<source>` แรกสำหรับ Safari | ✔ |
+| `sh_variant_1_hero_video_has_alpha` | `true_false` → boolean | — | manifest `has_alpha` | false | detail hero | ✔ |
+| `sh_variant_1_hero_poster` | `image` → integer | — | manifest `poster` |  | detail hero `poster=` | ✔ |
+| `sh_variant_1_panel_bg` | `color_picker` → string | — | `variants_by_trail.<trail>.panel_bg` | `#F1ADA0` | detail (ว่าง = สีของวัตถุ) | ✔ |
+| `sh_variant_1_title_color` | `color_picker` → string | — | `…title_color` | `#212529` | detail | ✔ |
+| `sh_variant_1_text_color` | `color_picker` → string | — | `…caption_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_1_meta_color` | `color_picker` → string | — | `…meta_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_1_collection_color` | `color_picker` → string | — | `…collection_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_1_image_1` | `image` → integer | — | `variants_by_trail.<trail>.side_images[0].crop_ref` (design/assets/objects-1117) | `8e4037fc…crop-3191-3184.jpg` | detail แผงข้าง (แทนภาพลำดับที่ 1 ของ layout) | ✔ |
+| `sh_variant_1_image_2` | `image` → integer | — | `…side_images[1].crop_ref` |  | detail แผงข้าง (ลำดับที่ 2) | ✔ |
+| `sh_variant_1_layout` | `textarea` → string | — | `figma[frame_id = variant.figma_frame].style` (รูปเดียวกับ `sh_layout` generic · `*_ref` → attachment id) | `{"frame_id":"1203:4085","panel_y":960,…}` | detail (geometry ของ trail นั้น · ว่าง = `sh_layout` ของวัตถุ) | ✔ |
+| `sh_variant_1_title` | `textarea` → string | — | `…text_override.title_raw` (ไม่มี = `title`) เฉพาะ frame ที่ Figma ต่าง | dragon-shaped tray (seashell): "Dragon-Shaped Mother-of-Pearl Inlaid Incense Tray" | detail h1 (ว่าง = ชื่อวัตถุ) | ✔ |
+| `sh_variant_1_caption` | `textarea` → string | — | `…text_override.caption` |  | detail caption (ว่าง = caption ของวัตถุ) | ✔ |
+| `sh_variant_1_scientific_name` | `textarea` → string | — | `…text_override.info_rows[key=scientific_name]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_1_period` | `text` → string | — | `…text_override.info_rows[key=period]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_1_place_of_production` | `text` → string | — | `…text_override.info_rows[key=place_of_production]` | Đông Sơn drum (seashell) place: "Thung Yang District, Uttaradit Province" | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_1_material` | `text` → string | — | `…text_override.info_rows[key=material]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_1_dimensions` | `text` → string | — | `…text_override.info_rows[key=dimensions]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_1_local_name` | `text` → string | — | `…text_override.info_rows[key=local_name]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_1_collection` | `textarea` → string | — | `…text_override.info_rows[key=collection]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_1_object_biography` | `textarea` → string | — | `…text_override.info_rows[key=object_biography]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_2_trail` | `taxonomy` → integer | — (ว่าง = slot ไม่ใช้) | `variants_by_trail.<trail>` ของ trail ที่ไม่ใช่ trail หลัก (`is_primary:false`) | naga (Blackened brass holy water vessel · trail หลัก = dragon) | detail: เลือก version จาก `?sh_trail=<slug>` | ✔ |
+| `sh_variant_2_hero_video_webm` | `file` → integer | — | `variants_by_trail.<trail>.hero_video_src` → manifest key `drive-1117/<path>` `out` | `Serpent/Blackened Brass Ritual Holy Water Vessel.webm` | detail hero (ว่าง = hero ของวัตถุ) | ✔ |
+| `sh_variant_2_hero_video_hevc` | `file` → integer | — | manifest `fallback.file` เฉพาะ `hevc-alpha-mov` (ทึบ = ไม่มี) |  | detail hero `<source>` แรกสำหรับ Safari | ✔ |
+| `sh_variant_2_hero_video_has_alpha` | `true_false` → boolean | — | manifest `has_alpha` | false | detail hero | ✔ |
+| `sh_variant_2_hero_poster` | `image` → integer | — | manifest `poster` |  | detail hero `poster=` | ✔ |
+| `sh_variant_2_panel_bg` | `color_picker` → string | — | `variants_by_trail.<trail>.panel_bg` | `#F1ADA0` | detail (ว่าง = สีของวัตถุ) | ✔ |
+| `sh_variant_2_title_color` | `color_picker` → string | — | `…title_color` | `#212529` | detail | ✔ |
+| `sh_variant_2_text_color` | `color_picker` → string | — | `…caption_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_2_meta_color` | `color_picker` → string | — | `…meta_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_2_collection_color` | `color_picker` → string | — | `…collection_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_2_image_1` | `image` → integer | — | `variants_by_trail.<trail>.side_images[0].crop_ref` (design/assets/objects-1117) | `8e4037fc…crop-3191-3184.jpg` | detail แผงข้าง (แทนภาพลำดับที่ 1 ของ layout) | ✔ |
+| `sh_variant_2_image_2` | `image` → integer | — | `…side_images[1].crop_ref` |  | detail แผงข้าง (ลำดับที่ 2) | ✔ |
+| `sh_variant_2_layout` | `textarea` → string | — | `figma[frame_id = variant.figma_frame].style` (รูปเดียวกับ `sh_layout` generic · `*_ref` → attachment id) | `{"frame_id":"1203:4085","panel_y":960,…}` | detail (geometry ของ trail นั้น · ว่าง = `sh_layout` ของวัตถุ) | ✔ |
+| `sh_variant_2_title` | `textarea` → string | — | `…text_override.title_raw` (ไม่มี = `title`) เฉพาะ frame ที่ Figma ต่าง | dragon-shaped tray (seashell): "Dragon-Shaped Mother-of-Pearl Inlaid Incense Tray" | detail h1 (ว่าง = ชื่อวัตถุ) | ✔ |
+| `sh_variant_2_caption` | `textarea` → string | — | `…text_override.caption` |  | detail caption (ว่าง = caption ของวัตถุ) | ✔ |
+| `sh_variant_2_scientific_name` | `textarea` → string | — | `…text_override.info_rows[key=scientific_name]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_2_period` | `text` → string | — | `…text_override.info_rows[key=period]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_2_place_of_production` | `text` → string | — | `…text_override.info_rows[key=place_of_production]` | Đông Sơn drum (seashell) place: "Thung Yang District, Uttaradit Province" | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_2_material` | `text` → string | — | `…text_override.info_rows[key=material]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_2_dimensions` | `text` → string | — | `…text_override.info_rows[key=dimensions]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_2_local_name` | `text` → string | — | `…text_override.info_rows[key=local_name]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_2_collection` | `textarea` → string | — | `…text_override.info_rows[key=collection]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_2_object_biography` | `textarea` → string | — | `…text_override.info_rows[key=object_biography]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_3_trail` | `taxonomy` → integer | — (ว่าง = slot ไม่ใช้) | `variants_by_trail.<trail>` ของ trail ที่ไม่ใช่ trail หลัก (`is_primary:false`) | naga (Blackened brass holy water vessel · trail หลัก = dragon) | detail: เลือก version จาก `?sh_trail=<slug>` | ✔ |
+| `sh_variant_3_hero_video_webm` | `file` → integer | — | `variants_by_trail.<trail>.hero_video_src` → manifest key `drive-1117/<path>` `out` | `Serpent/Blackened Brass Ritual Holy Water Vessel.webm` | detail hero (ว่าง = hero ของวัตถุ) | ✔ |
+| `sh_variant_3_hero_video_hevc` | `file` → integer | — | manifest `fallback.file` เฉพาะ `hevc-alpha-mov` (ทึบ = ไม่มี) |  | detail hero `<source>` แรกสำหรับ Safari | ✔ |
+| `sh_variant_3_hero_video_has_alpha` | `true_false` → boolean | — | manifest `has_alpha` | false | detail hero | ✔ |
+| `sh_variant_3_hero_poster` | `image` → integer | — | manifest `poster` |  | detail hero `poster=` | ✔ |
+| `sh_variant_3_panel_bg` | `color_picker` → string | — | `variants_by_trail.<trail>.panel_bg` | `#F1ADA0` | detail (ว่าง = สีของวัตถุ) | ✔ |
+| `sh_variant_3_title_color` | `color_picker` → string | — | `…title_color` | `#212529` | detail | ✔ |
+| `sh_variant_3_text_color` | `color_picker` → string | — | `…caption_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_3_meta_color` | `color_picker` → string | — | `…meta_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_3_collection_color` | `color_picker` → string | — | `…collection_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_3_image_1` | `image` → integer | — | `variants_by_trail.<trail>.side_images[0].crop_ref` (design/assets/objects-1117) | `8e4037fc…crop-3191-3184.jpg` | detail แผงข้าง (แทนภาพลำดับที่ 1 ของ layout) | ✔ |
+| `sh_variant_3_image_2` | `image` → integer | — | `…side_images[1].crop_ref` |  | detail แผงข้าง (ลำดับที่ 2) | ✔ |
+| `sh_variant_3_layout` | `textarea` → string | — | `figma[frame_id = variant.figma_frame].style` (รูปเดียวกับ `sh_layout` generic · `*_ref` → attachment id) | `{"frame_id":"1203:4085","panel_y":960,…}` | detail (geometry ของ trail นั้น · ว่าง = `sh_layout` ของวัตถุ) | ✔ |
+| `sh_variant_3_title` | `textarea` → string | — | `…text_override.title_raw` (ไม่มี = `title`) เฉพาะ frame ที่ Figma ต่าง | dragon-shaped tray (seashell): "Dragon-Shaped Mother-of-Pearl Inlaid Incense Tray" | detail h1 (ว่าง = ชื่อวัตถุ) | ✔ |
+| `sh_variant_3_caption` | `textarea` → string | — | `…text_override.caption` |  | detail caption (ว่าง = caption ของวัตถุ) | ✔ |
+| `sh_variant_3_scientific_name` | `textarea` → string | — | `…text_override.info_rows[key=scientific_name]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_3_period` | `text` → string | — | `…text_override.info_rows[key=period]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_3_place_of_production` | `text` → string | — | `…text_override.info_rows[key=place_of_production]` | Đông Sơn drum (seashell) place: "Thung Yang District, Uttaradit Province" | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_3_material` | `text` → string | — | `…text_override.info_rows[key=material]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_3_dimensions` | `text` → string | — | `…text_override.info_rows[key=dimensions]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_3_local_name` | `text` → string | — | `…text_override.info_rows[key=local_name]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_3_collection` | `textarea` → string | — | `…text_override.info_rows[key=collection]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_3_object_biography` | `textarea` → string | — | `…text_override.info_rows[key=object_biography]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_4_trail` | `taxonomy` → integer | — (ว่าง = slot ไม่ใช้) | `variants_by_trail.<trail>` ของ trail ที่ไม่ใช่ trail หลัก (`is_primary:false`) | naga (Blackened brass holy water vessel · trail หลัก = dragon) | detail: เลือก version จาก `?sh_trail=<slug>` | ✔ |
+| `sh_variant_4_hero_video_webm` | `file` → integer | — | `variants_by_trail.<trail>.hero_video_src` → manifest key `drive-1117/<path>` `out` | `Serpent/Blackened Brass Ritual Holy Water Vessel.webm` | detail hero (ว่าง = hero ของวัตถุ) | ✔ |
+| `sh_variant_4_hero_video_hevc` | `file` → integer | — | manifest `fallback.file` เฉพาะ `hevc-alpha-mov` (ทึบ = ไม่มี) |  | detail hero `<source>` แรกสำหรับ Safari | ✔ |
+| `sh_variant_4_hero_video_has_alpha` | `true_false` → boolean | — | manifest `has_alpha` | false | detail hero | ✔ |
+| `sh_variant_4_hero_poster` | `image` → integer | — | manifest `poster` |  | detail hero `poster=` | ✔ |
+| `sh_variant_4_panel_bg` | `color_picker` → string | — | `variants_by_trail.<trail>.panel_bg` | `#F1ADA0` | detail (ว่าง = สีของวัตถุ) | ✔ |
+| `sh_variant_4_title_color` | `color_picker` → string | — | `…title_color` | `#212529` | detail | ✔ |
+| `sh_variant_4_text_color` | `color_picker` → string | — | `…caption_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_4_meta_color` | `color_picker` → string | — | `…meta_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_4_collection_color` | `color_picker` → string | — | `…collection_color` | `#413B2F` | detail | ✔ |
+| `sh_variant_4_image_1` | `image` → integer | — | `variants_by_trail.<trail>.side_images[0].crop_ref` (design/assets/objects-1117) | `8e4037fc…crop-3191-3184.jpg` | detail แผงข้าง (แทนภาพลำดับที่ 1 ของ layout) | ✔ |
+| `sh_variant_4_image_2` | `image` → integer | — | `…side_images[1].crop_ref` |  | detail แผงข้าง (ลำดับที่ 2) | ✔ |
+| `sh_variant_4_layout` | `textarea` → string | — | `figma[frame_id = variant.figma_frame].style` (รูปเดียวกับ `sh_layout` generic · `*_ref` → attachment id) | `{"frame_id":"1203:4085","panel_y":960,…}` | detail (geometry ของ trail นั้น · ว่าง = `sh_layout` ของวัตถุ) | ✔ |
+| `sh_variant_4_title` | `textarea` → string | — | `…text_override.title_raw` (ไม่มี = `title`) เฉพาะ frame ที่ Figma ต่าง | dragon-shaped tray (seashell): "Dragon-Shaped Mother-of-Pearl Inlaid Incense Tray" | detail h1 (ว่าง = ชื่อวัตถุ) | ✔ |
+| `sh_variant_4_caption` | `textarea` → string | — | `…text_override.caption` |  | detail caption (ว่าง = caption ของวัตถุ) | ✔ |
+| `sh_variant_4_scientific_name` | `textarea` → string | — | `…text_override.info_rows[key=scientific_name]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_4_period` | `text` → string | — | `…text_override.info_rows[key=period]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_4_place_of_production` | `text` → string | — | `…text_override.info_rows[key=place_of_production]` | Đông Sơn drum (seashell) place: "Thung Yang District, Uttaradit Province" | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_4_material` | `text` → string | — | `…text_override.info_rows[key=material]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_4_dimensions` | `text` → string | — | `…text_override.info_rows[key=dimensions]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_4_local_name` | `text` → string | — | `…text_override.info_rows[key=local_name]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_4_collection` | `textarea` → string | — | `…text_override.info_rows[key=collection]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+| `sh_variant_4_object_biography` | `textarea` → string | — | `…text_override.info_rows[key=object_biography]` |  | detail แถวข้อมูล (มีช่องใดช่องหนึ่ง = แสดงเฉพาะแถวที่มีค่า แทนแถวของวัตถุทั้งชุด · ว่างหมด = แถวของวัตถุ) | ✔ |
+
 ## 3. `timeline_item` — group: timeline_item
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `timeline-elephant.json`) | ใช้ในหน้า | REST |
 |---|---|---|---|---|---|---|
@@ -187,6 +290,7 @@ Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ข�
 - `sh_zone_tile_<n>_object` = วัตถุ (post type `object`) · **publish เท่านั้นที่ลิงก์** ไปหน้า detail · ว่าง/ไม่ publish = **ภาพไม่ลิงก์** (ต้องมี `_image` · ไม่มีภาพ = ไม่แสดงช่อง) · ช่องที่ว่างทั้ง object และ image = ข้าม (ช่องถัดไปเลื่อนขึ้น)
 - `sh_zone_tile_<n>_image` / `_image_hover` = ภาพช่อง 184² / hover 210² (attachment เดียวกับภาพช่องของวัตถุใน trail นั้น — importer ใช้ attachment เดิมถ้ามี `_sh_import_key` ตรง ไม่อัปโหลดซ้ำ) · **ว่าง = ภาพช่อง/hover ของวัตถุเอง** (`sh_object_trail_tile( $id, 0 )` = `sh_tile_image` / `sh_tile_image_hover`)
 - ภาพช่อง = เวอร์ชันของ trail ที่ Figma ใช้ในกริด zone (วัตถุหลาย trail มีภาพคนละพื้นสี → ช่องซ้ำของวัตถุเดียวกันได้คนละภาพ เช่น `pending-3` เขียว/ชมพู) → **เก็บภาพต่อช่อง** ไม่ดึงจากวัตถุเสมอ
+- `sh_zone_tile_<n>_trail` = trail ที่ช่องนี้เป็นของ (multitrail-1117 · D59 · วัตถุหลาย trail มีช่องซ้ำคนละ trail เช่น zone 2 ช่อง 6 dragon / ช่อง 7 naga) → ลิงก์ช่องส่ง `?sh_trail=<slug>` (§2b) ให้หน้า detail เปิดตาม trail นั้น · ว่าง = trail หลักของวัตถุ · ตั้งโดย refresh step `2026-11-17-multitrail` เฉพาะเมื่อว่างและช่องยังถือวัตถุของ seed
 - ฟิลด์กริด trail เดิม (`sh_show_in_zone_grid` · `sh_zone_grid_order` · `sh_tile_zone_grid` · `sh_tile_zone_grid_hover` ในกลุ่ม trail §4) **ไม่ลบ** แต่หน้า zone 1–3 ไม่ใช้แล้ว
 - เติมโดย importer fresh + refresh step `2026-11-17-zone-grid` (§12) · API `sh_zone_grid( $zone )` (§11)
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `zones-2026-11-17.json`) | ใช้ในหน้า | REST |
@@ -194,273 +298,363 @@ Zone 4 (D37 · 2026-11-11): **หน้าคั่น = หน้า zone ข�
 | `sh_zone_tile_1_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | `Frame zone1/2/3` instance ช่อง 1 · `tiles[].object_slug` | zone 1 ช่อง 1: `green-peafowl` | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_1_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) | `4c493fdc…` (Bird 2 · 184²) | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_1_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) | `f8cdca6e…` (210²) | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_1_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) | zone 2 ช่อง 6: dragon · ช่อง 7: naga (Holy water vessel) | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_2_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_2_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_2_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_2_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_3_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_3_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_3_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_3_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_4_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_4_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_4_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_4_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_5_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_5_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_5_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_5_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_6_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_6_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_6_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_6_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_7_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_7_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_7_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_7_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_8_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_8_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_8_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_8_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_9_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_9_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_9_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_9_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_10_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_10_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_10_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_10_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_11_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_11_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_11_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_11_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_12_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_12_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_12_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_12_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_13_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_13_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_13_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_13_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_14_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_14_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_14_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_14_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_15_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_15_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_15_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_15_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_16_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_16_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_16_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_16_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_17_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_17_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_17_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_17_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_18_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_18_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_18_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_18_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_19_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_19_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_19_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_19_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_20_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_20_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_20_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_20_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_21_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_21_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_21_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_21_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_22_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_22_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_22_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_22_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_23_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_23_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_23_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_23_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_24_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_24_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_24_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_24_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_25_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_25_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_25_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_25_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_26_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_26_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_26_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_26_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_27_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_27_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_27_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_27_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_28_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_28_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_28_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_28_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_29_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_29_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_29_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_29_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_30_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_30_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_30_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_30_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_31_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_31_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_31_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_31_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_32_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_32_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_32_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_32_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_33_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_33_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_33_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_33_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_34_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_34_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_34_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_34_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_35_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_35_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_35_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_35_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_36_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_36_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_36_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_36_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_37_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_37_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_37_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_37_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_38_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_38_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_38_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_38_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_39_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_39_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_39_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_39_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_40_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_40_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_40_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_40_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_41_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_41_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_41_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_41_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_42_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_42_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_42_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_42_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_43_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_43_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_43_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_43_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_44_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_44_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_44_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_44_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_45_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_45_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_45_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_45_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_46_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_46_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_46_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_46_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_47_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_47_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_47_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_47_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_48_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_48_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_48_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_48_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_49_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_49_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_49_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_49_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_50_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_50_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_50_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_50_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_51_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_51_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_51_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_51_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_52_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_52_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_52_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_52_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_53_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_53_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_53_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_53_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_54_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_54_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_54_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_54_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_55_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_55_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_55_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_55_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_56_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_56_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_56_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_56_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_57_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_57_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_57_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_57_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_58_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_58_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_58_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_58_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_59_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_59_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_59_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_59_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_60_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_60_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_60_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_60_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_61_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_61_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_61_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_61_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_62_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_62_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_62_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_62_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_63_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_63_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_63_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_63_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_64_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_64_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_64_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_64_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_65_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_65_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_65_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_65_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_66_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_66_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_66_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_66_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_67_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_67_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_67_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_67_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_68_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_68_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_68_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_68_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_69_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_69_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_69_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_69_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_70_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_70_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_70_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_70_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_71_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_71_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_71_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_71_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_72_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_72_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_72_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_72_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_73_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_73_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_73_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_73_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_74_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_74_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_74_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_74_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_75_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_75_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_75_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_75_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_76_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_76_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_76_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_76_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_77_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_77_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_77_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_77_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_78_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_78_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_78_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_78_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_79_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_79_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_79_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_79_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_80_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_80_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_80_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_80_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_81_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_81_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_81_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_81_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_82_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_82_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_82_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_82_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_83_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_83_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_83_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_83_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_84_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_84_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_84_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_84_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_85_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_85_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_85_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_85_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_86_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_86_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_86_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_86_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_87_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_87_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_87_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_87_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_88_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_88_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_88_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_88_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_89_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_89_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_89_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_89_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 | `sh_zone_tile_90_object` | `post_object` → integer | — (zone 1: 15 · zone 2: 42 · zone 3: 83) | 〃 · `tiles[].object_slug` |  | zone 1–3 กริด (ลิงก์) | ✔ |
 | `sh_zone_tile_90_image` | `image` → integer | — | 〃 `tiles[].tile_ref` (instance default 184²) |  | zone 1–3 กริด | ✔ |
 | `sh_zone_tile_90_image_hover` | `image` → integer | — | 〃 `tiles[].hover_ref` (variant hover 210² · ON_HOVER 0.3s) |  | zone 1–3 กริด hover | ✔ |
+| `sh_zone_tile_90_trail` | `taxonomy` → integer | — | `tiles[].trail` (จับคู่จากภาพช่อง/hover ↔ `objects.json tiles_by_trail` · D59) |  | zone 1–3 กริด: ลิงก์ช่องนี้ใส่ `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (§2b) | ✔ |
 
 ## 6. Home (front page) — group: home
 | ฟิลด์ (meta key) | ชนิด (ACF → meta) | ต้องมีค่า | ที่มาใน Figma (node) | ตัวอย่าง (seed `site.json` home) | ใช้ในหน้า | REST |
@@ -651,7 +845,10 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
 | `sh_zones()` | `WP_Term[]` เรียงตาม `sh_number` |
 | `sh_trail_objects( $trail )` | `WP_Post[]` วัตถุ publish ของ trail ตาม `sh_object_order` (ที่ไม่อยู่ในลำดับต่อท้าย A–Z) |
 | `sh_timeline_items( $trail )` | `WP_Post[]` การ์ด publish ของ trail ตาม `sh_card_order` |
-| `sh_object_hero( $id )` | `{webm, hevc, poster (URL), image_id, has_alpha}` |
+| `sh_object_hero( $id, $slot = 0 )` | `{webm, hevc, poster (URL), image_id, has_alpha}` · `$slot` > 0 = hero ของ trail version n (`sh_variant_<n>_hero_*` · ไม่มีภาพนิ่ง) |
+| `sh_object_variant( $id, $trail_slug )` | version ของ trail ที่กดมา หรือ `null` (ไม่รู้/ปลอม/ไม่ใช่ trail ของวัตถุ/ไม่มี slot = วัตถุตามปกติ): `{slot, trail (WP_Term), hero (เหมือน sh_object_hero · ไม่มีวิดีโอ = hero ของวัตถุ), layout, colors {sh_panel_bg…}, images {k => id}, title, caption, info {key => ค่า}}` (§2b) |
+| `sh_object_variant_slots( $id )` · `sh_object_info_value( $id, $key, $variant )` | slot n => term id ของ trail ที่ตั้งไว้ · ค่าแถวข้อมูลที่หน้าแสดง (ของ version ถ้ามีช่องใดมีค่า มิฉะนั้นของวัตถุ) |
+| `sh_object_trail_url( $post, $trail )` | permalink ของวัตถุ + `?sh_trail=<slug>` เมื่อวัตถุมี version ของ trail นั้น (ไม่มี = permalink เดิม) |
 | `sh_object_extra_images( $id )` · `sh_object_layout( $id )` · `sh_paragraphs( $text )` | id ภาพแผง · layout array · ย่อหน้า string[] |
 | `sh_rich_paragraphs( $text )` | ย่อหน้า HTML ที่ปลอดภัยแล้ว (`<strong>` `<em>` `<br>` เท่านั้น) ของฟิลด์ inline HTML (`sh_guide_body` · `sh_intro_ch<n>_text_<k>`) — echo ได้เลย |
 | `sh_trail_tiles( $trail )` | ช่องกริดหน้า trail ตามลำดับ: `{object (WP_Post\|null), url ('' = ไม่ลิงก์), label, image, hover}` = วัตถุ publish (ภาพช่องของ trail นั้น) + ช่องไม่มีหน้า `sh_static_tile_<n>_*` ที่ตำแหน่งของมัน |
@@ -689,5 +886,6 @@ page title = ชื่อ zone 4 "Animal Trails: Reflections & Interpretation"
   - **refresh step (site ที่ import ก่อนรอบนี้ = production · `SH_IMPORT_ONLY=refresh` ได้):** `2026-11-17-objects` สร้างวัตถุที่ยังไม่มี (hold = draft · วัตถุที่ admin สร้างเองด้วย slug เดียวกัน = รับเป็นของ import แต่ไม่ทับ) · วัตถุที่มีแล้ว = เติมเฉพาะฟิลด์ว่าง (`sh_scientific_name` · `sh_trail_tile_*`) ไม่แตะชื่อ/ข้อความ · `2026-11-17-trails` description/H1/cover/layout/ช่องไม่มีหน้า/การ์ดสัตว์ = เติมเมื่อว่าง · `sh_object_order` แทนเฉพาะเมื่อยังเป็นรายการที่ import รุ่นก่อนเขียนพอดี (วัตถุช้างของ trail นั้นตามลำดับ seed) · `2026-11-17-pages` Home การ์ดสัตว์ + Intro 4 ตอน = เติมเมื่อว่าง · `2026-11-17-trail-grid` (core-1117b · P-340) `sh_trail_layout` + `grid` เฉพาะเมื่อว่างหรือยังเท่า layout ที่ core-1117 เขียน (fingerprint) · `2026-11-17-site` option โลโก้/ข้อความ footer = เมื่อยังไม่เคยตั้ง · เมนู Primary เพิ่ม "About the Project" ท้ายเมนู (ลำดับ = max(menu_order ที่เก็บจริง)+1) เมื่อไม่มีรายการชื่อ/URL เดียวกัน (ไม่ลบ/ไม่เรียง/ไม่เปลี่ยนชื่อรายการเดิม) · **ค่าที่ไม่แตะเพราะ admin แก้ = report `kept_admin[]` (อะไร + ค่าที่ site) + `skipped.kept_admin_value`** · มีคำเตือน (ไฟล์ขาด) ระหว่าง step = ยังไม่บันทึกว่าเสร็จ
   - ผลตรวจ (local 2026-11-17 · core-1117): fresh `SH_IMPORT_RUNS=2` → object publish 116 · draft 2 · trail 17 · การ์ดสัตว์ 17 · Intro ตอน 1–4 ข้อความ 5/5/6/4 ช่อง ภาพ 4/3/3/1 · attachment 908 · ย่อ 274 · คำเตือน 0 · รอบ 2 สร้าง/แก้ 0 · ช่องกริด 16 trail ตรง `trails.json tiles[]` ทุกช่อง (ภาพ+วัตถุ) · จำลอง prod (import ด้วย 9fc08ce → admin แก้ 3 จุด → refresh-only ×2) = ค่าเดียวกับ fresh · `kept_admin` 3 รายการ · รอบ 2 แก้ 0 (`orchestrator/evidence/core-1117/`)
   - **กริดวัตถุ Zone 1–3 (fb-1117 · D57 · §5b):** step `2026-11-17-zone-grid` (รันตอน fresh import ท้ายรอบด้วย + บน prod `SH_IMPORT_ONLY=refresh`) เติม `sh_zone_tile_<n>_object/_image/_image_hover` ของ term `zone-1..3` จาก seed `zones-2026-11-17.json` (`zones[].tiles[]` · `order` = ช่อง `n`) **เฉพาะช่องที่ว่าง** · ค่าที่ไม่ว่างและต่างจาก seed (admin แก้) = คงไว้ **และไม่เติมฟิลด์อื่นของช่องนั้น** (ภาพของ seed ข้างวัตถุของ admin จะไม่ตรงกัน) + `kept_admin` (1 บรรทัดต่อฟิลด์) · วัตถุ = `_sh_import_key object:<slug>` (ไม่มีบนไซต์ = ช่องเป็นภาพไม่ลิงก์) · ภาพ = attachment ที่วัตถุมีอยู่แล้ว (หาด้วย import key `asset:<ไฟล์ไม่มีนามสกุล>` ของไฟล์ `objects-1117/<ref>.png` หรือไฟล์ราก/image-map · ไม่อัปโหลดซ้ำ) · มีเฉพาะภาพที่ไม่มีวัตถุไหนถือ (zone 1 ช่อง 8 Buffalo 6 · ไม่ลิงก์) ที่สร้างใหม่จาก bundle (+2 ไฟล์ · นับ `resized_2x`) · hover ที่ Figma ฝั่ง zone ยังเป็นภาพรุ่นเก่า (`tile_image_hover_ref_prev` ของ hover-1117 · kalung · dragon-shaped…tray) แมปเป็นภาพใหม่ · ช่อง `tile_ref` ไม่มีไฟล์ใน `design/assets` (zone 3 ช่อง 21 `elephant-and-mahout-kendi` `1afa6a7f…`) = `_image` ว่าง → ใช้ภาพช่องของวัตถุ (นับ `skipped.zone_tile_no_file` · ไม่ใช่คำเตือน · P-395) · bundle-files: label `zone grid …` ไม่มีไฟล์ = ไม่ error · ผลตรวจ fresh `SH_IMPORT_RUNS=2`: 140 ช่อง (15/42/83) · รอบ 2 แก้ 0 · คำเตือน 0
+- **เวอร์ชันต่อ trail (multitrail-1117 · D59 · §2b):** step `2026-11-17-multitrail` (รันตอน fresh import ท้ายรอบ + บน prod `SH_IMPORT_ONLY=refresh`) · (1) วัตถุ seed ที่มี `variants_by_trail` → ต่อ trail ที่**ไม่ใช่ trail หลัก** (`sh_import_object_variants()` · `is_primary:false` · ลำดับตาม `trails` ของวัตถุ) หา slot ที่ถือ trail นั้นอยู่แล้ว ไม่มี = slot ว่างแรก → `sh_import_variant_meta()` เติม `sh_variant_<n>_*` **เฉพาะฟิลด์ที่ว่าง** (`sh_import_fill_or_keep()`) · ค่าที่ไม่ว่างและต่างจาก seed (admin แก้) = คงไว้ + `kept_admin` · ไม่ลบอะไร · วัตถุที่ไม่มีบน site / trail ที่ไม่ใช่ term / วัตถุถูกถอดออกจาก trail นั้น = ข้าม · hero = manifest key `drive-1117/<hero_video_src>` (WebM + poster + HEVC เฉพาะ alpha · key `media:objects-1117/<trail>/…` ต่อ trail) · ภาพข้าง = `figma[].style.images[].crop_ref` (attachment เดียวกับใน layout) · layout = `sh_import_layout()` ของ frame นั้น · ข้อความ = `text_override` (title_raw ก่อน title · caption · info_rows → ช่องแถวข้อมูล) · (1b) **D60 drum:** สร้างวัตถุ `dong-son-drum-thung-yang` เมื่อยังไม่มี · ถอด term seashell จาก `ng-s-n-drum` เฉพาะเมื่อ trail ของมัน = water-bird+seashell ที่ importer ให้ (admin แก้ = `kept_admin`) · `sh_object_order` ของ seashell ใส่วัตถุใหม่แทนที่เดิมเฉพาะเมื่อยังเป็นลิสต์ของ importer · ช่องกริด Zone 3 ที่ยังถือ `ng-s-n-drum` → วัตถุใหม่ (ถือวัตถุอื่น = `kept_admin`) · ไม่ลบโพสต์/ไฟล์ · (2) กริด Zone 1–3: `sh_zone_tile_<n>_trail` จาก `tiles[].trail` เฉพาะเมื่อว่างและช่องยังถือวัตถุของ seed (วัตถุอื่น = `kept_admin`) · bundle-files: ครอปภาพข้างของ version ใส่ใน bundle ด้วย (`sh_import_1117_asset_values()`) · WebM/poster ของทุก version อยู่ใน manifest เดิม (`media/out/objects-1117/<trail>/`)
 - ผลนับ (local 2026-10-27 · core-import-refresh): object 15 · timeline_item 15 · trail 17 · zone 5 · page 3 · attachment 205 · menu 2 · ICC→sRGB 67 ไฟล์ · คำเตือน 0 · รอบที่ 2 สร้างใหม่ 0 / แก้ 0 · import เก่า→ใหม่บน site เดียวกัน: วิดีโอ 7→14 · HEVC 4→6 · แผนที่ → 39907d2c · ICC 68 · ภาพ hero ที่ admin ตั้งเองคงเดิม
 - ภาพนำเข้าโดยไม่สร้าง sub-size (ต้นฉบับใหญ่ · playground ช้า) · server ใช้ `SH_IMPORT_SUBSIZES=1`

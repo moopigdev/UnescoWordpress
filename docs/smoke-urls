@@ -67,3 +67,17 @@
 /trail/garuda/
 /object/sandstone-garuda/
 /object/mother-of-pearl-furniture-depicting-animals/
+# multitrail-1117 (D59): detail of an object in several trails as shown from another trail (?sh_trail=<slug>) · forged value = the main version
+/object/blackened-brass-ritual-holy-water-vessel/?sh_trail=naga
+/object/blackened-brass-ritual-holy-water-vessel/?sh_trail=dragon
+/object/blackened-brass-ritual-holy-water-vessel/?sh_trail=bogus
+/object/blackened-brass-ritual-holy-water-vessel/?trail=bogus
+/object/dong-son-drum-thung-yang/
+/object/ng-s-n-drum/
+/object/dragon-shaped-mother-of-pearl-inlaid-incense-tray/?sh_trail=seashell
+/object/the-dragon-head-tortoise-and-crane-ornament/?sh_trail=turtle
+/object/wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs/?sh_trail=horse
+/object/wooden-cold-press-cake-molds-with-elephant-horse-and-fowl-motifs/?sh_trail=rooster
+/object/embossed-brass-basin-with-mythical-animal-motifs/?sh_trail=naga
+/object/monk-s-alms-bowl/?sh_trail=seashell
+/object/liturgical-pulpit-covers/?sh_trail=garuda

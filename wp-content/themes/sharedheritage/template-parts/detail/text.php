@@ -14,7 +14,10 @@
  * Without them (objects outside the 15 Final frames): title → metadata block (sh_meta_color set) or
  * Collection line → "Caption:" + paragraphs (generic rules, §2.2 levels).
  *
- * Args: post_id (int) · layout (sh_object_layout()).
+ * Trail version (D59): variant (sh_object_variant()) title / caption replace the object's when filled; its info rows replace the whole
+ * set when any is filled (sh_object_info_value()).
+ *
+ * Args: post_id (int) · layout (sh_object_layout()) · variant (array|null).
  *
  * @package sharedheritage
  */
@@ -25,9 +28,16 @@ $sh_args   = ( isset( $args ) && is_array( $args ) ) ? $args : array();
 $sh_id     = isset( $sh_args['post_id'] ) ? (int) $sh_args['post_id'] : (int) get_the_ID();
 $sh_layout = isset( $sh_args['layout'] ) && is_array( $sh_args['layout'] ) ? $sh_args['layout'] : array();
 
+$sh_var       = isset( $sh_args['variant'] ) && is_array( $sh_args['variant'] ) ? $sh_args['variant'] : null;
 $sh_title_raw = trim( (string) sh_get( 'sh_title_raw', $sh_id ) );
 $sh_title     = '' !== $sh_title_raw ? $sh_title_raw : get_the_title( $sh_id );
 $sh_caption   = trim( (string) sh_get( 'sh_caption', $sh_id ) );
+if ( $sh_var && '' !== $sh_var['title'] ) {
+	$sh_title = $sh_var['title'];
+}
+if ( $sh_var && '' !== $sh_var['caption'] ) {
+	$sh_caption = $sh_var['caption'];
+}
 $sh_blocks    = array_values( array_filter( (array) ( $sh_layout['text_blocks'] ?? array() ), 'is_array' ) );
 usort( $sh_blocks, static fn( $a, $b ) => (int) ( $a['order'] ?? 0 ) <=> (int) ( $b['order'] ?? 0 ) );
 
@@ -81,7 +91,7 @@ $sh_info_rows = array(
 );
 
 if ( ! $sh_blocks ) {
-	get_template_part( 'template-parts/detail/text-generic', null, array( 'post_id' => $sh_id ) );
+	get_template_part( 'template-parts/detail/text-generic', null, array( 'post_id' => $sh_id, 'variant' => $sh_var ) );
 	return;
 }
 ?>
@@ -157,7 +167,7 @@ if ( ! $sh_blocks ) {
 			);
 			$sh_out = '';
 			foreach ( $sh_info_rows as $sh_field => $sh_label ) {
-				$sh_value = trim( (string) sh_get( 'sh_' . $sh_field, $sh_id ) );
+				$sh_value = sh_object_info_value( $sh_id, $sh_field, $sh_var );
 				if ( '' === $sh_value ) {
 					continue;
 				}

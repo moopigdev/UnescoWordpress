@@ -23,6 +23,17 @@ while ( have_posts() ) :
 	$sh_layout = sh_object_layout( $sh_id );
 
 	/*
+	 * D59 (multitrail-1117): an object in several trails opens in the look of the trail the visitor came from
+	 * (?sh_trail=<slug> added to the link by the trail grid / zone grid · sh_object_trail_url()). Unknown, forged or
+	 * main-trail value = no version = the object as before. The URL stays the object's own (canonical).
+	 */
+	$sh_trail_asked = isset( $_GET['sh_trail'] ) ? sanitize_key( wp_unslash( $_GET['sh_trail'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display choice only, checked against the object's trails.
+	$sh_variant     = sh_object_variant( $sh_id, $sh_trail_asked );
+	if ( $sh_variant && $sh_variant['layout'] ) {
+		$sh_layout = $sh_variant['layout'];
+	}
+
+	/*
 	 * Number from the layout JSON (finite float) or the default.
 	 * The values only become CSS numbers, never markup.
 	 */
@@ -197,6 +208,7 @@ while ( have_posts() ) :
 			array(
 				'post_id'  => $sh_id,
 				'geometry' => $sh_geometry,
+				'variant'  => $sh_variant,
 			)
 		);
 		get_template_part(
@@ -206,6 +218,7 @@ while ( have_posts() ) :
 				'post_id'  => $sh_id,
 				'geometry' => $sh_geometry,
 				'layout'   => $sh_layout,
+				'variant'  => $sh_variant,
 			)
 		);
 		?>

@@ -86,6 +86,40 @@
    "by": "fb-1117",
    "lastModified": "2026-11-17T11:28:55Z",
    "what": "pending-3 หัวข้อ+เรขาคณิต · Makara 2 ภาพแผงด้านข้าง (ดู record.figma_2026_11_17_fb) · zones-2026-11-17.json (หลักฐานช่อง zone 1–3 · ยังไม่มีใครใช้)"
+  },
+  "figma_2026_11_17_multitrail": {
+   "by": "design-dev multitrail-1117 (ส่วน A)",
+   "lastModified": "2026-11-17T13:20:38Z",
+   "decision": "D59",
+   "what": "variants_by_trail ต่อ record ที่ trails>1 (19 record): figma_frame · hero_video_src · panel_bg · สีตัวอักษร · side_image_ref/side_images[] (crop_ref+bbox) · text_override (เฉพาะ frame ที่ Figma ต่าง: cake molds horse title+caption · rooster title · dragon-shaped incense tray seashell title+caption+info_rows · Đông Sơn drum seashell caption+info_rows) · ไม่มี text_override = ใช้ข้อความหลักของ record · ฟิลด์เดิม (hero_video_by_trail · tiles_by_trail · figma[] · figma_2026_11_17_frames) คงไว้",
+   "variant_count": 43,
+   "text_override_count": 4,
+   "figma_style_rebuilt": [
+    "1153:1051",
+    "1161:3543",
+    "1168:2307",
+    "1179:5042",
+    "1203:4085"
+   ],
+   "figma_style_rebuilt_why": "figma[].style ของ 5 frame (cake horse/rooster · basin garuda/lion/naga) เป็นค่าก่อนนักออกแบบแก้สี/ภาพ (4 frame panel_bg ไม่ตรง Figma · basin lion ไม่มี images) -> สร้างใหม่จาก Figma lastModified 2026-11-17T13:20:38Z",
+   "frames_gone_from_figma": [
+    "1096:9698",
+    "1096:8731"
+   ],
+   "note": "elephant = variant ที่ hero_video_src=null (ใช้ hero เดิมของ record ช้าง) · trail etc ไม่มี frame = ไม่มี variant",
+   "superseded_in_part_by": "figma_2026_11_18_d60 (ng-s-n-drum แยกเป็น 2 record → 18 record / 41 variant / text_override 3)"
+  },
+  "figma_2026_11_18_d60": {
+   "by": "design-dev multitrail-1117 ส่วน A2",
+   "decision": "D60",
+   "what": "แยก Đông Sơn drum เป็น 2 วัตถุตาม Figma: ng-s-n-drum = Water bird 1223:3409 (trails [water-bird]) · dong-son-drum-thung-yang = Seashell 1194:2376 (trails [seashell] · Thung Yang, Uttaradit · National Museum Bangkok)",
+   "object_records": 124,
+   "multi_trail_records": 18,
+   "variant_count": 41,
+   "text_override_count": 3,
+   "new_slugs": [
+    "dong-son-drum-thung-yang"
+   ]
   }
  },
  "objects": [
@@ -434,7 +468,91 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "rooster": {
+     "figma_frame": "1179:3861",
+     "figma_frame_name": "Desktop - 1579",
+     "is_primary": true,
+     "hero_video_src": "Chicken&Rooster/Ayam-Ayam Bernaga.webm",
+     "panel_bg": "#6BB9A5",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "f4af80acd1e0106fb8dc24110a0b423b23e5e11f.crop-1179-4148.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1179:4148",
+       "crop_ref": "f4af80acd1e0106fb8dc24110a0b423b23e5e11f.crop-1179-4148.png",
+       "crop_size": [
+        718,
+        515
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        257.7
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      407.7
+     ],
+     "frame_size": [
+      1440.0,
+      1895.0
+     ]
+    },
+    "dragon": {
+     "figma_frame": "1111:1430",
+     "figma_frame_name": "Desktop - 1527",
+     "is_primary": false,
+     "hero_video_src": "Dragon/Ayam-Ayam Bernaga.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "f4af80acd1e0106fb8dc24110a0b423b23e5e11f.crop-3179-3542.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3179:3542",
+       "crop_ref": "f4af80acd1e0106fb8dc24110a0b423b23e5e11f.crop-3179-3542.png",
+       "crop_size": [
+        718,
+        515
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        257.7
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      407.7
+     ],
+     "frame_size": [
+      1440.0,
+      1895.0
+     ]
+    }
+   }
   },
   {
    "slug": "bronze-cock-standing-on-the-coop",
@@ -1692,7 +1810,132 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "phoenix": {
+     "figma_frame": "1170:3571",
+     "figma_frame_name": "Desktop - 1576",
+     "is_primary": true,
+     "hero_video_src": "Phoenix/Rooster-headed brass charcoal iron.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#212529",
+     "caption_color": "#343A40",
+     "meta_color": "#212529",
+     "side_image_ref": "73fc1f09f896c67be4947279f5f6a9ce0d57fa0e.crop-1170-3580.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1170:3580",
+       "crop_ref": "73fc1f09f896c67be4947279f5f6a9ce0d57fa0e.crop-1170-3580.png",
+       "crop_size": [
+        718,
+        694
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        347.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      497.0
+     ],
+     "frame_size": [
+      1440.0,
+      2274.0
+     ]
+    },
+    "rooster": {
+     "figma_frame": "1179:4723",
+     "figma_frame_name": "Desktop - 1584",
+     "is_primary": false,
+     "hero_video_src": "Chicken&Rooster/Rooster-headed brass charcoal iron.webm",
+     "panel_bg": "#6BB9A5",
+     "title_color": "#212529",
+     "collection_color": "#212529",
+     "caption_color": "#343A40",
+     "meta_color": "#212529",
+     "side_image_ref": "73fc1f09f896c67be4947279f5f6a9ce0d57fa0e.crop-1179-4837.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1179:4837",
+       "crop_ref": "73fc1f09f896c67be4947279f5f6a9ce0d57fa0e.crop-1179-4837.png",
+       "crop_size": [
+        718,
+        694
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        347.0
+       ],
+       "scale_mode": "FILL",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      417.0
+     ],
+     "frame_size": [
+      1440.0,
+      2303.0
+     ]
+    },
+    "dragon": {
+     "figma_frame": "3212:4589",
+     "figma_frame_name": "Desktop - 1642",
+     "is_primary": false,
+     "hero_video_src": "Dragon/Rooster-headed brass charcoal iron.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#212529",
+     "caption_color": "#343A40",
+     "meta_color": "#212529",
+     "side_image_ref": "73fc1f09f896c67be4947279f5f6a9ce0d57fa0e.crop-3212-4642.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3212:4642",
+       "crop_ref": "73fc1f09f896c67be4947279f5f6a9ce0d57fa0e.crop-3212-4642.png",
+       "crop_size": [
+        718,
+        694
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        347.0
+       ],
+       "scale_mode": "FILL",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      417.0
+     ],
+     "frame_size": [
+      1440.0,
+      2303.0
+     ]
+    }
+   }
   },
   {
    "slug": "sulang",
@@ -2039,7 +2282,91 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "hornbill": {
+     "figma_frame": "1161:2808",
+     "figma_frame_name": "Desktop - 1553",
+     "is_primary": true,
+     "hero_video_src": "Hornbill/Sulang.webm",
+     "panel_bg": "#6BB9A5",
+     "title_color": "#212529",
+     "collection_color": "#212529",
+     "caption_color": "#343A40",
+     "meta_color": "#212529",
+     "side_image_ref": "91bad596cd2f450646528df77a1c47167eebd073.crop-1161-2817.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1161:2817",
+       "crop_ref": "91bad596cd2f450646528df77a1c47167eebd073.crop-1161-2817.png",
+       "crop_size": [
+        718,
+        654
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        327.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      397.0
+     ],
+     "frame_size": [
+      1440.0,
+      1880.0
+     ]
+    },
+    "rooster": {
+     "figma_frame": "1179:4264",
+     "figma_frame_name": "Desktop - 1581",
+     "is_primary": false,
+     "hero_video_src": "Chicken&Rooster/Sulang.webm",
+     "panel_bg": "#6BB9A5",
+     "title_color": "#212529",
+     "collection_color": "#212529",
+     "caption_color": "#343A40",
+     "meta_color": "#212529",
+     "side_image_ref": "91bad596cd2f450646528df77a1c47167eebd073.crop-3190-3519.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3190:3519",
+       "crop_ref": "91bad596cd2f450646528df77a1c47167eebd073.crop-3190-3519.png",
+       "crop_size": [
+        718,
+        654
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        327.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      397.0
+     ],
+     "frame_size": [
+      1440.0,
+      2087.0
+     ]
+    }
+   }
   },
   {
    "slug": "tempayan-large-earthen-storage-jars",
@@ -3078,8 +3405,8 @@
      ],
      "style": {
       "frame_size": [
-       1440,
-       2271
+       1440.0,
+       2535.0
       ],
       "hero": [
        {
@@ -3095,7 +3422,7 @@
       ],
       "back_button": [
        160.0,
-       2172.0,
+       2436.0,
        115.0,
        50.0
       ],
@@ -3111,7 +3438,7 @@
          160.0,
          1020.0,
          739.0,
-         1125.0
+         1375.0
         ]
        },
        {
@@ -3121,20 +3448,75 @@
          921.0,
          1020.0,
          359.0,
-         555.0
+         475.0
         ]
        }
       ],
       "panel_gap": 22.0,
       "panel_node": "1161:3546",
-      "panel_bg": "#705F4D",
+      "panel_bg": "#DEDCC3",
       "panel_has_fill": true,
-      "panel_y": 960,
-      "panel_h": 1311,
-      "title_color": "#FFFFFF",
-      "collection_color": "#FFFFFF",
-      "caption_color": "#F8F9FA",
-      "meta_color": null
+      "panel_y": 960.0,
+      "panel_h": 1575.0,
+      "title_color": "#212529",
+      "collection_color": "#343A40",
+      "caption_color": "#343A40",
+      "meta_color": "#343A40",
+      "text_col": {
+       "node": "1161:3547",
+       "name": "Frame 12683",
+       "bbox": [
+        160.0,
+        1020.0,
+        739.0,
+        1375.0
+       ],
+       "padding_top": 0
+      },
+      "image_col": {
+       "node": "1161:3551",
+       "name": "Frame 12760",
+       "bbox": [
+        921.0,
+        1020.0,
+        359.0,
+        475.0
+       ]
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "1161:3552",
+        "name": "ex 3",
+        "bbox": [
+         921.0,
+         1090.0,
+         359.0,
+         405.0
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "source_image": "cc4e001f8047164c724b38fc1a73ce32a9f33ebf",
+        "crop_ref": "cc4e001f8047164c724b38fc1a73ce32a9f33ebf.crop-1161-3552.png",
+        "crop_size": [
+         538,
+         608
+        ],
+        "image_transform": [
+         [
+          0.496026,
+          -0.803718,
+          0.671785
+         ],
+         [
+          2.563873,
+          2.013808,
+          -1.928851
+         ]
+        ],
+        "crop_scale": 1.5
+       }
+      ]
      }
     },
     {
@@ -3188,8 +3570,8 @@
      ],
      "style": {
       "frame_size": [
-       1440,
-       2281
+       1440.0,
+       2281.0
       ],
       "hero": [
        {
@@ -3205,7 +3587,7 @@
       ],
       "back_button": [
        160.0,
-       2182.0,
+       2378.0,
        115.0,
        50.0
       ],
@@ -3221,7 +3603,7 @@
          160.0,
          1020.0,
          739.0,
-         1125.0
+         1327.0
         ]
        },
        {
@@ -3237,14 +3619,69 @@
       ],
       "panel_gap": 22.0,
       "panel_node": "1179:5045",
-      "panel_bg": "#EEDFB4",
+      "panel_bg": "#6BB9A5",
       "panel_has_fill": true,
-      "panel_y": 960,
-      "panel_h": 1321,
-      "title_color": "#534741",
+      "panel_y": 960.0,
+      "panel_h": 1517.0,
+      "title_color": "#212529",
       "collection_color": "#212529",
       "caption_color": "#343A40",
-      "meta_color": null
+      "meta_color": "#212529",
+      "text_col": {
+       "node": "1179:5046",
+       "name": "Frame 12683",
+       "bbox": [
+        160.0,
+        1020.0,
+        739.0,
+        1327.0
+       ],
+       "padding_top": 0
+      },
+      "image_col": {
+       "node": "1179:5050",
+       "name": "Frame 12761",
+       "bbox": [
+        921.0,
+        1020.0,
+        359.0,
+        522.0
+       ]
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "1179:5051",
+        "name": "ex 3",
+        "bbox": [
+         921.0,
+         1170.0,
+         359.0,
+         372.0
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "source_image": "81ff45de2fb3304c58b133cbb4a291793824f968",
+        "crop_ref": "81ff45de2fb3304c58b133cbb4a291793824f968.crop-1179-5051.png",
+        "crop_size": [
+         449,
+         465
+        ],
+        "image_transform": [
+         [
+          0.666271,
+          -0.612422,
+          0.471007
+         ],
+         [
+          2.074218,
+          2.422987,
+          -1.751167
+         ]
+        ],
+        "crop_scale": 1.25
+       }
+      ]
      }
     },
     {
@@ -3426,7 +3863,8 @@
       "collection_color": "#343A40",
       "caption_color": "#343A40",
       "meta_color": null
-     }
+     },
+     "gone_from_figma_2026_11_17": true
     }
    ],
    "detail_style": {
@@ -3532,7 +3970,142 @@
       "title"
      ]
     }
-   ]
+   ],
+   "variants_by_trail": {
+    "elephant": {
+     "figma_frame": "1041:866",
+     "figma_frame_name": "Desktop - 1509",
+     "is_primary": true,
+     "hero_video_src": null,
+     "hero_source": "elephant_record",
+     "panel_bg": "#DEDCC3",
+     "title_color": "#495057",
+     "collection_color": null,
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "60b979fd2cd2e862c94bcaf9ba2beff0ceb1c5f3.crop-1041-890.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1041:890",
+       "crop_ref": "60b979fd2cd2e862c94bcaf9ba2beff0ceb1c5f3.crop-1041-890.png",
+       "crop_size": [
+        360,
+        589
+       ],
+       "bbox": [
+        921,
+        1120,
+        360,
+        589
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921,
+      1020,
+      360,
+      689
+     ],
+     "frame_size": [
+      1440,
+      2445
+     ]
+    },
+    "horse": {
+     "figma_frame": "1161:3543",
+     "figma_frame_name": "Desktop - 1560",
+     "is_primary": false,
+     "hero_video_src": "Horse/พิมพ์เค้กม้า.webm",
+     "panel_bg": "#DEDCC3",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "cc4e001f8047164c724b38fc1a73ce32a9f33ebf.crop-1161-3552.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1161:3552",
+       "crop_ref": "cc4e001f8047164c724b38fc1a73ce32a9f33ebf.crop-1161-3552.png",
+       "crop_size": [
+        538,
+        608
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        405.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      475.0
+     ],
+     "frame_size": [
+      1440.0,
+      2535.0
+     ],
+     "text_override": {
+      "title": "Wooden Cold-Press Cake Molds with Elephant, Horse, and Fowl Motifs",
+      "title_raw": "Wooden Cold-Press Cake Molds with\nElephant, Horse, and Fowl Motifs",
+      "caption": "This phim yen (literally \"cold mold\") is a wooden pastry mold used to make Khanom Putu, a traditional pastry. Such molds are carved from durable local hardwoods such as jackfruit or velvet tamarind wood, with hollow cavities roughly 1 to 2 inches deep chiselled into detailed, recessed designs. This collection contains motifs of elephants, horses, and poultry, traditionally popular for Khanom Putu. The \"cold-press\" method gives the mold its name: the dough is shaped entirely inside the wooden matrix without baking or heat, then extracted with a sharp tap against a wooden table, releasing the pastry with sharp, embossed reliefs.\n\nThis heritage pastry has held an essential position within the daily life, rites of passage, and religious rituals of both Chinese and Malay-Javanese communities in Southern Thailand for centuries. It is used at births, cradle ceremonies, engagements, weddings, and circumcision rituals. During Songkran, younger generations arrange these pastries inside fine betel nut caddies or lacquerware to offer to elders in exchange for ancestral blessings. Within the Sathing Phra Peninsula, this pastry holds a profound allegorical connection to matrimony: its name sounds identical to the Thai word meaning \"to hold fast\" or \"to intertwine,\" making the cake an edible prayer for marital fidelity.\n\nCarving specific fauna onto the phim yen allowed families to embed unspoken blessings directly into the food served to guests. The Elephant (Chang) denotes absolute authority, spiritual merit, and structural prosperity — pastries stamped with this form are reserved for grand auspicious celebrations or offered to high-ranking Buddhist monks and Muslim leaders. The Horse (Ma) represents rapid progress and career advancement, standardly served at housewarmings or gifted to young adults. The Chicken (Kai), which awakens at dawn to forage, signifies industriousness, material abundance, and financial luck and is served more widely.\n\nThe phim yen tradition illustrates trans-regional interactions. Diasporic Chinese Hokkien and Baba-Peranakan communities introduced the technology of hand-carved wooden blocks for compressed pastries. They substituted Chinese mythological creatures with animals familiar to local agrarian life and folk belief: the elephant, the horse, and the chicken. Meanwhile, Malay-Javanese and Islamic traditions contributed to the pastry’s recipe.\n\nThis mold, encoding Chinese technological knowledge, Malay culinary tradition, and the symbolic vocabularies of the elephant, the horse, and the chicken, speaks to a layered process of exchange, adaptation, and sharing that shaped the Southern Thai-Malay Peninsula over centuries."
+     }
+    },
+    "rooster": {
+     "figma_frame": "1179:5042",
+     "figma_frame_name": "Desktop - 1587",
+     "is_primary": false,
+     "hero_video_src": "Chicken&Rooster/Wooden Cold-Press Cake.webm",
+     "panel_bg": "#6BB9A5",
+     "title_color": "#212529",
+     "collection_color": "#212529",
+     "caption_color": "#343A40",
+     "meta_color": "#212529",
+     "side_image_ref": "81ff45de2fb3304c58b133cbb4a291793824f968.crop-1179-5051.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1179:5051",
+       "crop_ref": "81ff45de2fb3304c58b133cbb4a291793824f968.crop-1179-5051.png",
+       "crop_size": [
+        449,
+        465
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        372.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      522.0
+     ],
+     "frame_size": [
+      1440.0,
+      2281.0
+     ],
+     "text_override": {
+      "title": "Wooden Cold-Press Cake Molds with Elephant, Horse, and Fowl Motifs",
+      "title_raw": "Wooden Cold-Press Cake Molds with\nElephant, Horse, and Fowl Motifs"
+     }
+    }
+   }
   },
   {
    "slug": "koffo-cloth",
@@ -4220,7 +4793,132 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "water-bird": {
+     "figma_frame": "1223:3867",
+     "figma_frame_name": "Desktop - 1629",
+     "is_primary": true,
+     "hero_video_src": "Waterbird/The Dragon Head Tortoise and Crane Ornament.webm",
+     "panel_bg": "#6BB9A5",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "d8e8089d341c480d2342c54fe8bc8e09093b3a80.crop-1223-3876.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1223:3876",
+       "crop_ref": "d8e8089d341c480d2342c54fe8bc8e09093b3a80.crop-1223-3876.png",
+       "crop_size": [
+        718,
+        1078
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        539.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      609.0
+     ],
+     "frame_size": [
+      1440.0,
+      2032.0
+     ]
+    },
+    "turtle": {
+     "figma_frame": "1220:2663",
+     "figma_frame_name": "Desktop - 1616",
+     "is_primary": false,
+     "hero_video_src": "Turtle/The Dragon Head Tortoise and Crane Ornament.webm",
+     "panel_bg": "#CFA5BA",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "d8e8089d341c480d2342c54fe8bc8e09093b3a80.crop-3168-3403.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3168:3403",
+       "crop_ref": "d8e8089d341c480d2342c54fe8bc8e09093b3a80.crop-3168-3403.png",
+       "crop_size": [
+        718,
+        1078
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        539.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      689.0
+     ],
+     "frame_size": [
+      1440.0,
+      2032.0
+     ]
+    },
+    "dragon": {
+     "figma_frame": "1131:1329",
+     "figma_frame_name": "Desktop - 1534",
+     "is_primary": false,
+     "hero_video_src": "Dragon/Dragon-head tortoise and crane ornaments.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "d8e8089d341c480d2342c54fe8bc8e09093b3a80.crop-3168-3473.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3168:3473",
+       "crop_ref": "d8e8089d341c480d2342c54fe8bc8e09093b3a80.crop-3168-3473.png",
+       "crop_size": [
+        718,
+        1078
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        539.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      689.0
+     ],
+     "frame_size": [
+      1440.0,
+      2032.0
+     ]
+    }
+   }
   },
   {
    "slug": "traditional-maritime-boxes-in-horse-and-turtle-design",
@@ -5883,7 +6581,91 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "dragon": {
+     "figma_frame": "1115:1466",
+     "figma_frame_name": "Desktop - 1529",
+     "is_primary": true,
+     "hero_video_src": "Dragon/Holy water vessel.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "946674fbccd99b7f9b434678b4bceb93e3df5f6b.crop-1115-1481.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1115:1481",
+       "crop_ref": "946674fbccd99b7f9b434678b4bceb93e3df5f6b.crop-1115-1481.png",
+       "crop_size": [
+        718,
+        788
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        394.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      544.0
+     ],
+     "frame_size": [
+      1440.0,
+      2492.0
+     ]
+    },
+    "naga": {
+     "figma_frame": "1203:3994",
+     "figma_frame_name": "Desktop - 1605",
+     "is_primary": false,
+     "hero_video_src": "Serpent/Blackened Brass Ritual Holy Water Vessel.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "946674fbccd99b7f9b434678b4bceb93e3df5f6b.crop-3191-3465.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3191:3465",
+       "crop_ref": "946674fbccd99b7f9b434678b4bceb93e3df5f6b.crop-3191-3465.png",
+       "crop_size": [
+        718,
+        788
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        394.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      544.0
+     ],
+     "frame_size": [
+      1440.0,
+      2404.0
+     ]
+    }
+   }
   },
   {
    "slug": "canang",
@@ -6446,7 +7228,103 @@
      ]
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "dragon": {
+     "figma_frame": "1120:2138",
+     "figma_frame_name": "Desktop - 1489",
+     "is_primary": true,
+     "hero_video_src": "Dragon/Dragon-shaped incense tray.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#413B2F",
+     "caption_color": "#413B2F",
+     "meta_color": "#413B2F",
+     "side_image_ref": "e77030efaac4104909a66f69a65c1a512b19923c.crop-3190-2787.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3190:2787",
+       "crop_ref": "e77030efaac4104909a66f69a65c1a512b19923c.crop-3190-2787.png",
+       "crop_size": [
+        718,
+        910
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        455.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      525.0
+     ],
+     "frame_size": [
+      1440.0,
+      2296.0
+     ]
+    },
+    "seashell": {
+     "figma_frame": "1200:2747",
+     "figma_frame_name": "Desktop - 1592",
+     "is_primary": false,
+     "hero_video_src": "Seashell/Dragon-shaped.webm",
+     "panel_bg": "#CFA5BA",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "e77030efaac4104909a66f69a65c1a512b19923c.crop-1200-2756.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1200:2756",
+       "crop_ref": "e77030efaac4104909a66f69a65c1a512b19923c.crop-1200-2756.png",
+       "crop_size": [
+        718,
+        910
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        455.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      525.0
+     ],
+     "frame_size": [
+      1440.0,
+      2207.0
+     ],
+     "text_override": {
+      "title": "Dragon-Shaped Mother-of-Pearl Inlaid Incense Tray",
+      "title_raw": "Dragon-Shaped Mother-of-Pearl Inlaid Incense Tray",
+      "caption": "This decorative incense tray features a dragon with its head held high, gazing upward with wide, bulging eyes, a short snout, and an open mouth. The body is straight, featuring a central rectangular compartment coated in red cinnabar lacquer (chat). The piece is supported by a rectangular base carved into dragon legs and claws, tapering off into a dragon's tail at the end.\n\nIt is hypothesized that this dragon-shaped tray was either a component of, or inspired by, the \"Incense Clock\" (Xiangpan), a traditional timekeeping device in Chinese culture. In such devices, incense was laid along a track — often referred to as a \"Dragon Boat\" — with metal weights suspended from threads at specific intervals. A metal tray was placed underneath. As the incense burned steadily to a thread, the weight would drop into the tray below, creating an audible chime to mark the time. These served as early \"alarm clocks.\" Historical records from the 19th century (24th Buddhist Century) also indicate that Cantonese communities used these dragon incense trays as lighting stations for tobacco after evening meals.\n\nThe dragon form transformed this practical object into a statement of prestige. Across East and Southeast Asia, the dragon was associated with authority, prosperity, and command over cosmic forces, making it a powerful symbol of rulership and auspicious power. Its depiction on elite objects signalled refinement and status: here, the dragon’s raised head, powerful claws, and commanding posture elevate an everyday ritual object into one associated with cultivated taste and social distinction.\n\nThis prestige was further reinforced through its mother-of-pearl inlay, a highly skilled decorative technique historically associated with luxury craftsmanship. Developed in China over centuries and later adopted across mainland Southeast Asia, mother-of-pearl inlay travelled alongside artisans, trade networks, and communities, where it was adapted into local artistic traditions. The pairing of the dragon motif with this elite craft technique reflects the movement of both material knowledge and symbolic language across interconnected societies.\n\nThe significance of the dragon on this incense tray lies precisely in its ability to remain recognisable across borders. Whether appearing in Chinese courts or Southeast Asian elite households, the dragon continued to communicate power, prosperity, and auspicious protection. This object therefore represents the circulation of a shared visual language through which communities across and beyond Southeast Asia expressed status, aspiration, and connection to forces beyond the human world.",
+      "info_rows": [
+       {
+        "label": "Collection",
+        "key": "collection",
+        "value": "National Museum Bangkok"
+       }
+      ]
+     }
+    }
+   }
   },
   {
    "slug": "flintlock-firearm",
@@ -6799,7 +7677,91 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "dragon": {
+     "figma_frame": "1120:1918",
+     "figma_frame_name": "Desktop - 1531",
+     "is_primary": true,
+     "hero_video_src": "Dragon/Flintlock Firearm.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "c5643e230e7d3bd68b3b1a4d3e9b0af49d7b1b64.crop-1120-1933.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1120:1933",
+       "crop_ref": "c5643e230e7d3bd68b3b1a4d3e9b0af49d7b1b64.crop-1120-1933.png",
+       "crop_size": [
+        718,
+        515
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        257.7
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      407.7
+     ],
+     "frame_size": [
+      1440.0,
+      2086.0
+     ]
+    },
+    "naga": {
+     "figma_frame": "1205:4177",
+     "figma_frame_name": "Desktop - 1607",
+     "is_primary": false,
+     "hero_video_src": "Serpent/Flintlock Firearm.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "c5643e230e7d3bd68b3b1a4d3e9b0af49d7b1b64.crop-3191-3325.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3191:3325",
+       "crop_ref": "c5643e230e7d3bd68b3b1a4d3e9b0af49d7b1b64.crop-3191-3325.png",
+       "crop_size": [
+        718,
+        515
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        257.7
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      407.7
+     ],
+     "frame_size": [
+      1440.0,
+      2188.0
+     ]
+    }
+   }
   },
   {
    "slug": "large-tile-with-dragons",
@@ -7530,7 +8492,91 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "fish": {
+     "figma_frame": "1051:3381",
+     "figma_frame_name": "Desktop - 1458",
+     "is_primary": true,
+     "hero_video_src": "Fish/Jar decorated with fish and a beast .webm",
+     "panel_bg": "#CFA5BA",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "1566c278721d896b9ae2b6752ca75cb1bacae87e.crop-3190-6059.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3190:6059",
+       "crop_ref": "1566c278721d896b9ae2b6752ca75cb1bacae87e.crop-3190-6059.png",
+       "crop_size": [
+        718,
+        1000
+       ],
+       "bbox": [
+        921.0,
+        1106.0,
+        359.0,
+        500.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1036.0,
+      359.0,
+      570.0
+     ],
+     "frame_size": [
+      1440.0,
+      1969.0
+     ]
+    },
+    "makara": {
+     "figma_frame": "1170:2791",
+     "figma_frame_name": "Desktop - 1568",
+     "is_primary": false,
+     "hero_video_src": "Makara/Jar decorated with fish and a beast .webm",
+     "panel_bg": "#CFA5BA",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "1566c278721d896b9ae2b6752ca75cb1bacae87e.crop-1170-2800.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1170:2800",
+       "crop_ref": "1566c278721d896b9ae2b6752ca75cb1bacae87e.crop-1170-2800.png",
+       "crop_size": [
+        718,
+        1014
+       ],
+       "bbox": [
+        921.0,
+        1106.0,
+        359.0,
+        507.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1036.0,
+      359.0,
+      577.0
+     ],
+     "frame_size": [
+      1440.0,
+      1982.0
+     ]
+    }
+   }
   },
   {
    "slug": "rostrum-of-the-largetooth-sawfish",
@@ -9089,7 +10135,91 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "fish": {
+     "figma_frame": "1145:1368",
+     "figma_frame_name": "Desktop - 1541",
+     "is_primary": true,
+     "hero_video_src": "Fish/Wooden chalk-line reels.webm",
+     "panel_bg": "#CFA5BA",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "61b5533e60f6db7b7aa54d0822fab8581ed552de.crop-1145-1377.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1145:1377",
+       "crop_ref": "61b5533e60f6db7b7aa54d0822fab8581ed552de.crop-1145-1377.png",
+       "crop_size": [
+        718,
+        600
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        300.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      370.0
+     ],
+     "frame_size": [
+      1440.0,
+      2167.0
+     ]
+    },
+    "naga": {
+     "figma_frame": "1218:2469",
+     "figma_frame_name": "Desktop - 1614",
+     "is_primary": false,
+     "hero_video_src": "Serpent/Wooden Chalk-Line Reels (Marking Gauges).webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "889555dfc8efc7171aab192a502c5914f3f7ce44.crop-3191-3009.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3191:3009",
+       "crop_ref": "889555dfc8efc7171aab192a502c5914f3f7ce44.crop-3191-3009.png",
+       "crop_size": [
+        538,
+        364
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        243.0
+       ],
+       "scale_mode": "FIT",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      393.0
+     ],
+     "frame_size": [
+      1440.0,
+      2341.0
+     ]
+    }
+   }
   },
   {
    "slug": "badau",
@@ -10675,7 +11805,50 @@
      }
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "horse": {
+     "figma_frame": "1161:3056",
+     "figma_frame_name": "Desktop - 1555",
+     "is_primary": true,
+     "hero_video_src": "Horse/Dastar with horse motif.webm",
+     "panel_bg": "#DEDCC3",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "c34dee3e947ef49c30a87b991e6daf5f47ece720.crop-1161-3065.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1161:3065",
+       "crop_ref": "c34dee3e947ef49c30a87b991e6daf5f47ece720.crop-1161-3065.png",
+       "crop_size": [
+        718,
+        860
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        430.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      500.0
+     ],
+     "frame_size": [
+      1440.0,
+      1797.0
+     ]
+    }
+   }
   },
   {
    "slug": "liturgical-pulpit-covers",
@@ -11046,7 +12219,125 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "horse": {
+     "figma_frame": "1161:3157",
+     "figma_frame_name": "Desktop - 1556",
+     "is_primary": true,
+     "hero_video_src": "Horse/Liturgical pulpit covers.webm",
+     "panel_bg": "#DEDCC3",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "c6bb8717a4c6c3229cf6d32bc567a67c17ffaff7.crop-1161-3210.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1161:3210",
+       "crop_ref": "c6bb8717a4c6c3229cf6d32bc567a67c17ffaff7.crop-1161-3210.png",
+       "crop_size": [
+        718,
+        400
+       ],
+       "bbox": [
+        921.0,
+        1073.0,
+        359.0,
+        200.0
+       ],
+       "scale_mode": "FILL",
+       "radius": 0
+      },
+      {
+       "order": 2,
+       "node": "1161:3222",
+       "crop_ref": "9a79cbc67e807ef964cd0c112072fb2cd2da5a3b.crop-1161-3222.png",
+       "crop_size": [
+        718,
+        405
+       ],
+       "bbox": [
+        921.0,
+        1303.0,
+        359.0,
+        202.4
+       ],
+       "scale_mode": "FILL",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1003.0,
+      359.0,
+      502.4
+     ],
+     "frame_size": [
+      1440.0,
+      2444.0
+     ]
+    },
+    "garuda": {
+     "figma_frame": "1157:1961",
+     "figma_frame_name": "Desktop - 1545",
+     "is_primary": false,
+     "hero_video_src": "Garuda/Liturgical pulpit covers.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "c6bb8717a4c6c3229cf6d32bc567a67c17ffaff7.crop-1157-1970.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1157:1970",
+       "crop_ref": "c6bb8717a4c6c3229cf6d32bc567a67c17ffaff7.crop-1157-1970.png",
+       "crop_size": [
+        718,
+        400
+       ],
+       "bbox": [
+        921.0,
+        1073.0,
+        359.0,
+        200.0
+       ],
+       "scale_mode": "FILL",
+       "radius": 0
+      },
+      {
+       "order": 2,
+       "node": "1157:1971",
+       "crop_ref": "9a79cbc67e807ef964cd0c112072fb2cd2da5a3b.crop-1157-1971.png",
+       "crop_size": [
+        718,
+        405
+       ],
+       "bbox": [
+        921.0,
+        1303.0,
+        359.0,
+        202.4
+       ],
+       "scale_mode": "FILL",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1003.0,
+      359.0,
+      502.4
+     ],
+     "frame_size": [
+      1440.0,
+      2169.0
+     ]
+    }
+   }
   },
   {
    "slug": "nang-talung-puppetry-horse",
@@ -11609,7 +12900,91 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "horse": {
+     "figma_frame": "1161:3352",
+     "figma_frame_name": "Desktop - 1558",
+     "is_primary": true,
+     "hero_video_src": "Horse/Oracle Bone.webm",
+     "panel_bg": "#DEDCC3",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "4c7db83dd4b12e55aaa43dda402f81249d8fb4b5.crop-1161-3361.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1161:3361",
+       "crop_ref": "4c7db83dd4b12e55aaa43dda402f81249d8fb4b5.crop-1161-3361.png",
+       "crop_size": [
+        718,
+        454
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        227.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      297.0
+     ],
+     "frame_size": [
+      1440.0,
+      1846.0
+     ]
+    },
+    "buffalo": {
+     "figma_frame": "3218:3649",
+     "figma_frame_name": "Desktop - 1643",
+     "is_primary": false,
+     "hero_video_src": "Buffalo/Oracle bone.webm",
+     "panel_bg": "#DEDCC3",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "4c7db83dd4b12e55aaa43dda402f81249d8fb4b5.crop-3218-3702.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3218:3702",
+       "crop_ref": "4c7db83dd4b12e55aaa43dda402f81249d8fb4b5.crop-3218-3702.png",
+       "crop_size": [
+        718,
+        454
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        227.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      297.0
+     ],
+     "frame_size": [
+      1440.0,
+      1846.0
+     ]
+    }
+   }
   },
   {
    "slug": "traditional-maritime-boxes-in-horse-design",
@@ -13212,7 +14587,8 @@
       "collection_color": "#343A40",
       "caption_color": "#343A40",
       "meta_color": null
-     }
+     },
+     "gone_from_figma_2026_11_17": true
     },
     {
      "page": "Page 2.1 ALL GIF trails",
@@ -13265,8 +14641,8 @@
      ],
      "style": {
       "frame_size": [
-       1440,
-       2662
+       1440.0,
+       2415.0
       ],
       "hero": [
        {
@@ -13282,7 +14658,7 @@
       ],
       "back_button": [
        160.0,
-       2563.0,
+       2316.0,
        115.0,
        50.0
       ],
@@ -13297,31 +14673,86 @@
         "bbox": [
          160.0,
          1020.0,
-         550.0,
-         1513.0
+         739.0,
+         1277.0
         ]
        },
        {
         "node": "1153:1092",
         "name": "Frame 12760",
         "bbox": [
-         732.0,
+         921.0,
          1020.0,
-         548.0,
-         550.0
+         359.0,
+         420.0
         ]
        }
       ],
       "panel_gap": 22.0,
       "panel_node": "1153:1054",
-      "panel_bg": "#F0ADA0",
+      "panel_bg": "#F1ADA0",
       "panel_has_fill": true,
-      "panel_y": 960,
-      "panel_h": 1702,
-      "title_color": "#534741",
+      "panel_y": 960.0,
+      "panel_h": 1455.0,
+      "title_color": "#495057",
       "collection_color": "#212529",
       "caption_color": "#343A40",
-      "meta_color": null
+      "meta_color": "#212529",
+      "text_col": {
+       "node": "1153:1055",
+       "name": "Frame 12683",
+       "bbox": [
+        160.0,
+        1020.0,
+        739.0,
+        1277.0
+       ],
+       "padding_top": 0
+      },
+      "image_col": {
+       "node": "1153:1092",
+       "name": "Frame 12760",
+       "bbox": [
+        921.0,
+        1020.0,
+        359.0,
+        420.0
+       ]
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "1153:1104",
+        "name": "ex 3",
+        "bbox": [
+         921.0,
+         1170.0,
+         359.0,
+         270.0
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "source_image": "3cdcf5ba1c98ed773a6360bef63aad9bf778205e",
+        "crop_ref": "3cdcf5ba1c98ed773a6360bef63aad9bf778205e.crop-1153-1104.jpg",
+        "crop_size": [
+         718,
+         540
+        ],
+        "image_transform": [
+         [
+          1.0,
+          0.0,
+          0.0
+         ],
+         [
+          0.0,
+          1.001807,
+          -0.000904
+         ]
+        ],
+        "crop_scale": 2.0
+       }
+      ]
      }
     },
     {
@@ -13375,8 +14806,8 @@
      ],
      "style": {
       "frame_size": [
-       1440,
-       2654
+       1440.0,
+       2435.0
       ],
       "hero": [
        {
@@ -13392,7 +14823,7 @@
       ],
       "back_button": [
        160.0,
-       2555.0,
+       2336.0,
        115.0,
        50.0
       ],
@@ -13407,18 +14838,18 @@
         "bbox": [
          160.0,
          1020.0,
-         549.0,
-         1513.0
+         740.0,
+         1277.0
         ]
        },
        {
         "node": "1168:2315",
         "name": "Frame 12760",
         "bbox": [
-         731.0,
+         922.0,
          1020.0,
-         549.0,
-         546.0
+         358.0,
+         419.0
         ]
        }
       ],
@@ -13426,12 +14857,67 @@
       "panel_node": "1168:2310",
       "panel_bg": "#DEDCC3",
       "panel_has_fill": true,
-      "panel_y": 960,
-      "panel_h": 1694,
-      "title_color": "#413B2F",
+      "panel_y": 960.0,
+      "panel_h": 1475.0,
+      "title_color": "#495057",
       "collection_color": "#413B2F",
       "caption_color": "#413B2F",
-      "meta_color": null
+      "meta_color": "#413B2F",
+      "text_col": {
+       "node": "1168:2311",
+       "name": "Frame 12683",
+       "bbox": [
+        160.0,
+        1020.0,
+        740.0,
+        1277.0
+       ],
+       "padding_top": 0
+      },
+      "image_col": {
+       "node": "1168:2315",
+       "name": "Frame 12760",
+       "bbox": [
+        922.0,
+        1020.0,
+        358.0,
+        419.0
+       ]
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "1168:2316",
+        "name": "ex 3",
+        "bbox": [
+         922.0,
+         1170.0,
+         358.0,
+         269.0
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "source_image": "087a6be925d578d4e7661c8d851295aa878de232",
+        "crop_ref": "087a6be925d578d4e7661c8d851295aa878de232.crop-1168-2316.jpg",
+        "crop_size": [
+         716,
+         538
+        ],
+        "image_transform": [
+         [
+          0.901586,
+          0.0,
+          0.05031
+         ],
+         [
+          0.0,
+          0.902384,
+          0.040954
+         ]
+        ],
+        "crop_scale": 2.0
+       }
+      ]
      }
     },
     {
@@ -13485,8 +14971,8 @@
      ],
      "style": {
       "frame_size": [
-       1440,
-       2277
+       1440.0,
+       2277.0
       ],
       "hero": [
        {
@@ -13502,7 +14988,7 @@
       ],
       "back_button": [
        160.0,
-       2178.0,
+       2336.0,
        115.0,
        50.0
       ],
@@ -13512,18 +14998,18 @@
       ],
       "panel_children": [
        {
-        "node": "1203:4089",
+        "node": "3191:3135",
         "name": "Frame 12683",
         "bbox": [
          160.0,
          1020.0,
          739.0,
-         1128.0
+         1277.0
         ]
        },
        {
-        "node": "1203:4093",
-        "name": "Frame 12760",
+        "node": "3191:3172",
+        "name": "Frame 12761",
         "bbox": [
          921.0,
          1020.0,
@@ -13533,15 +15019,70 @@
        }
       ],
       "panel_gap": 22.0,
-      "panel_node": "1203:4088",
-      "panel_bg": "#E2B3A7",
+      "panel_node": "3191:3134",
+      "panel_bg": "#F1ADA0",
       "panel_has_fill": true,
-      "panel_y": 960,
-      "panel_h": 1317,
-      "title_color": "#413B2F",
+      "panel_y": 960.0,
+      "panel_h": 1475.0,
+      "title_color": "#212529",
       "collection_color": "#413B2F",
       "caption_color": "#413B2F",
-      "meta_color": null
+      "meta_color": "#413B2F",
+      "text_col": {
+       "node": "3191:3135",
+       "name": "Frame 12683",
+       "bbox": [
+        160.0,
+        1020.0,
+        739.0,
+        1277.0
+       ],
+       "padding_top": 0
+      },
+      "image_col": {
+       "node": "3191:3172",
+       "name": "Frame 12761",
+       "bbox": [
+        921.0,
+        1020.0,
+        359.0,
+        415.0
+       ]
+      },
+      "images": [
+       {
+        "order": 1,
+        "node": "3191:3184",
+        "name": "ex 3",
+        "bbox": [
+         921.0,
+         1170.0,
+         359.0,
+         265.0
+        ],
+        "radius": 0,
+        "scale_mode": "STRETCH",
+        "source_image": "8e4037fc5f14296c6b0a87d8eeb2881379e6457c",
+        "crop_ref": "8e4037fc5f14296c6b0a87d8eeb2881379e6457c.crop-3191-3184.jpg",
+        "crop_size": [
+         718,
+         530
+        ],
+        "image_transform": [
+         [
+          0.848056,
+          0.0,
+          0.067664
+         ],
+         [
+          0.0,
+          0.833856,
+          0.145441
+         ]
+        ],
+        "crop_scale": 2.0
+       }
+      ]
      }
     }
    ],
@@ -13655,7 +15196,191 @@
      "meta_node": "3191:3159",
      "text_differs_from_elephant_record": []
     }
-   ]
+   ],
+   "variants_by_trail": {
+    "elephant": {
+     "figma_frame": "3190:4671",
+     "figma_frame_name": "Desktop - 1633",
+     "is_primary": true,
+     "hero_video_src": null,
+     "hero_source": "elephant_record",
+     "panel_bg": "#DEDCC3",
+     "title_color": "#495057",
+     "collection_color": null,
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "d12242d44121fd7f93180fe99cb227f848f6467d.crop-3190-4984.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3190:4984",
+       "crop_ref": "d12242d44121fd7f93180fe99cb227f848f6467d.crop-3190-4984.png",
+       "crop_size": [
+        718,
+        538
+       ],
+       "bbox": [
+        921,
+        1100,
+        359,
+        269
+       ],
+       "scale_mode": "FIT",
+       "radius": 0
+      },
+      {
+       "order": 2,
+       "node": "3190:4993",
+       "crop_ref": "fe9f4e8f0bf9d5ddf52ad5b39359330be8c0bb28.crop-3190-4993.png",
+       "crop_size": [
+        718,
+        542
+       ],
+       "bbox": [
+        921,
+        1399,
+        359,
+        271
+       ],
+       "scale_mode": "FIT",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921,
+      1020,
+      359,
+      650
+     ],
+     "frame_size": [
+      1440,
+      2434
+     ]
+    },
+    "garuda": {
+     "figma_frame": "1153:1051",
+     "figma_frame_name": "Desktop - 1542",
+     "is_primary": false,
+     "hero_video_src": "Garuda/Embossed brass basin with mythical animal motifs (Garuda).webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#495057",
+     "collection_color": "#212529",
+     "caption_color": "#343A40",
+     "meta_color": "#212529",
+     "side_image_ref": "3cdcf5ba1c98ed773a6360bef63aad9bf778205e.crop-1153-1104.jpg",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1153:1104",
+       "crop_ref": "3cdcf5ba1c98ed773a6360bef63aad9bf778205e.crop-1153-1104.jpg",
+       "crop_size": [
+        718,
+        540
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        270.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      420.0
+     ],
+     "frame_size": [
+      1440.0,
+      2415.0
+     ]
+    },
+    "lion": {
+     "figma_frame": "1168:2307",
+     "figma_frame_name": "Desktop - 1563",
+     "is_primary": false,
+     "hero_video_src": "Lion/Embossed brass basin with mythical animal motifs.webm",
+     "panel_bg": "#DEDCC3",
+     "title_color": "#495057",
+     "collection_color": "#413B2F",
+     "caption_color": "#413B2F",
+     "meta_color": "#413B2F",
+     "side_image_ref": "087a6be925d578d4e7661c8d851295aa878de232.crop-1168-2316.jpg",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1168:2316",
+       "crop_ref": "087a6be925d578d4e7661c8d851295aa878de232.crop-1168-2316.jpg",
+       "crop_size": [
+        716,
+        538
+       ],
+       "bbox": [
+        922.0,
+        1170.0,
+        358.0,
+        269.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      922.0,
+      1020.0,
+      358.0,
+      419.0
+     ],
+     "frame_size": [
+      1440.0,
+      2435.0
+     ]
+    },
+    "naga": {
+     "figma_frame": "1203:4085",
+     "figma_frame_name": "Desktop - 1606",
+     "is_primary": false,
+     "hero_video_src": "Serpent/Embossed brass basin with mythical animal motifs.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#413B2F",
+     "caption_color": "#413B2F",
+     "meta_color": "#413B2F",
+     "side_image_ref": "8e4037fc5f14296c6b0a87d8eeb2881379e6457c.crop-3191-3184.jpg",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3191:3184",
+       "crop_ref": "8e4037fc5f14296c6b0a87d8eeb2881379e6457c.crop-3191-3184.jpg",
+       "crop_size": [
+        718,
+        530
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        265.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      415.0
+     ],
+     "frame_size": [
+      1440.0,
+      2277.0
+     ]
+    }
+   }
   },
   {
    "slug": "langguai-with-frog-and-snake-motifs",
@@ -16177,8 +17902,7 @@
    "title": "Đông Sơn drum",
    "title_raw": "Đông Sơn drum",
    "trails": [
-    "water-bird",
-    "seashell"
+    "water-bird"
    ],
    "collection": "Folklore Museum, The Institute for Southern Thai Studies",
    "place_of_production": "Nakhon Si Thammarat Province, Thailand",
@@ -16196,8 +17920,7 @@
     }
    ],
    "trail_order": {
-    "water-bird": 2,
-    "seashell": 7
+    "water-bird": 2
    },
    "detail_style": {
     "panel_bg": "#6BB9A5",
@@ -16211,8 +17934,7 @@
    "primary_frame": "1223:3409",
    "hero_video_src": "Waterbird/Đông Sơn Drum.webm",
    "hero_video_by_trail": {
-    "water-bird": "Waterbird/Đông Sơn Drum.webm",
-    "seashell": "Seashell/Đông Sơn drum.webm"
+    "water-bird": "Waterbird/Đông Sơn Drum.webm"
    },
    "tile_image_ref": "498f2430e6b410f9fffd62e9be0fab760910aa92.png",
    "tile_image_hover_ref": "2d07e11f2753322cfd756146a07890f217952b6f.png",
@@ -16224,14 +17946,6 @@
      "tile_node": "3377:5035",
      "tile_hover_node": "3377:5885",
      "materials_set": "3377:5883"
-    },
-    "seashell": {
-     "order": 7,
-     "tile_image_ref": "5a7acb777270f4925e7726b4aecebe5e6b19ce28.png",
-     "tile_image_hover_ref": "0646a3e0980336119f1b6576ea33bf3644250a5d.png",
-     "tile_node": "3377:4957",
-     "tile_hover_node": "3377:5801",
-     "materials_set": "3377:5799"
     }
    },
    "figma": [
@@ -16353,13 +18067,100 @@
        }
       ]
      }
+    }
+   ],
+   "status": [],
+   "_moved_to": {
+    "to": "dong-son-drum-thung-yang",
+    "decision": "D60",
+    "frame": "1194:2376",
+    "fields": [
+     "trails.seashell",
+     "trail_order.seashell",
+     "hero_video_by_trail.seashell",
+     "tiles_by_trail.seashell",
+     "variants_by_trail.seashell (+text_override caption/info_rows)",
+     "figma[1194:2376]"
+    ],
+    "evidence": "ค่าเดิมครบอยู่ใน git 932b5a1 · ค่าใหม่อยู่ใน record dong-son-drum-thung-yang"
+   }
+  },
+  {
+   "slug": "dong-son-drum-thung-yang",
+   "title": "Đông Sơn drum",
+   "title_raw": "Đông Sơn drum",
+   "trails": [
+    "seashell"
+   ],
+   "collection": "National Museum Bangkok, Thailand",
+   "period": "Prehistoric",
+   "place_of_production": "Thung Yang District, Uttaradit Province",
+   "dimensions": "Height 53 cm, diameter 65 cm",
+   "object_biography": "Discovered in Thung Yang District, Uttaradit Province. Donated by Mr Hueng Mongkol in 1927.",
+   "caption": "This bronze drum (Heger Type I drum) was made in sections using the lost-wax casting method and topped with a bronze tympanum. At the centre of the tympanum is a starburst motif, circumscribed by concentric bands. These registers contain geometric designs as well as human figures engaging in daily life and rituals, birds, animals and architecture. At the rim of the tympanum are four small high-relief figurines of sea snail shells, evenly spaced, as if they are circumambulating the drum's edge.\n\nĐông Sơn drums are known to feature small three-dimensional animal figures – most commonly frogs – placed at the rim in groups of four. This recurring configuration has been associated with seasonal cycles, rain-calling rituals and the agricultural calendar. The shells on this drum are likely to reflect a related symbolic framework. Their placement at the perimeter evokes the importance of water to the communities that produced and used these objects.\n\nTheir likely use spanned ritual, social and symbolic purposes, including rain-making ceremonies, agricultural rites and ancestral worship, suggesting they played a significant role in Bronze Age life across Southeast Asia. Their sound was believed to call for fertility, protect the community and gather people. The drums also symbolized the power and status of community leaders.\n\nThe earliest examples of such drums date from the late fourth century BCE in present-day northern Viet Nam, where they were used for burial and funerary rites. Their subsequent distribution across the region reflects the Đông Sơn culture’s participation in extensive exchange networks. Such drums have been discovered along major river systems, including the Mekong and the Red River in northern Viet Nam, from Yunnan through Lao PDR to Cambodia, as well as across maritime routes extending as far as Timor-Leste.\n\nIn the contemporaneous Dian culture of Yunnan’s lacustrine basins – a culture that likely shared reciprocal influences with Đông Sơn and imported its bronze drums – similar drums were repurposed as containers for storing cowries or marine shells that may have functioned as a form of currency in the region. This reuse suggests that shells held layered significance across early Southeast Asia: not only as auspicious markers of spiritual beliefs, but also as part of the networks of exchange and influence linking coastal and inland worlds.",
+   "info_rows": [
+    {
+     "label": "Period",
+     "key": "period",
+     "value": "Prehistoric"
     },
+    {
+     "label": "Place of production / Findspot",
+     "key": "place_of_production",
+     "value": "Thung Yang District, Uttaradit Province"
+    },
+    {
+     "label": "Dimensions",
+     "key": "dimensions",
+     "value": "Height 53 cm, diameter 65 cm"
+    },
+    {
+     "label": "Collection",
+     "key": "collection",
+     "value": "National Museum Bangkok, Thailand"
+    },
+    {
+     "label": "Other information / Object biography",
+     "key": "object_biography",
+     "value": "Discovered in Thung Yang District, Uttaradit Province. Donated by Mr Hueng Mongkol in 1927."
+    }
+   ],
+   "trail_order": {
+    "seashell": 7
+   },
+   "detail_style": {
+    "panel_bg": "#CFA5BA",
+    "title_color": "#212529",
+    "text_color": "#343A40",
+    "collection_color": "#343A40",
+    "meta_color": "#343A40",
+    "source_frame": "1194:2376"
+   },
+   "detail_style_mode": "generic",
+   "primary_frame": "1194:2376",
+   "hero_video_src": "Seashell/Đông Sơn drum.webm",
+   "hero_video_by_trail": {
+    "seashell": "Seashell/Đông Sơn drum.webm"
+   },
+   "tile_image_ref": "5a7acb777270f4925e7726b4aecebe5e6b19ce28.png",
+   "tile_image_hover_ref": "0646a3e0980336119f1b6576ea33bf3644250a5d.png",
+   "tiles_by_trail": {
+    "seashell": {
+     "order": 7,
+     "tile_image_ref": "5a7acb777270f4925e7726b4aecebe5e6b19ce28.png",
+     "tile_image_hover_ref": "0646a3e0980336119f1b6576ea33bf3644250a5d.png",
+     "tile_node": "3377:4957",
+     "tile_hover_node": "3377:5801",
+     "materials_set": "3377:5799"
+    }
+   },
+   "figma": [
     {
      "page": "Page 2.1 ALL Animal content (998:952)",
      "frame_id": "1194:2376",
      "frame_name": "Desktop - 1588",
      "trail": "seashell",
-     "is_primary": false,
+     "is_primary": true,
      "section_name_in_figma": "Seashell",
      "title_node": "1194:2392",
      "caption_node": "1194:2416",
@@ -16471,14 +18272,16 @@
         "crop_scale": 2.0
        }
       ]
-     },
-     "text_differs_from_primary": [
-      "caption",
-      "meta"
-     ]
+     }
     }
    ],
-   "status": []
+   "status": [],
+   "figma_2026_11_18_d60": {
+    "by": "design-dev multitrail-1117 ส่วน A2",
+    "decision": "D60",
+    "what": "แยกจาก ng-s-n-drum (Đông Sơn drum ใบ Seashell · Thung Yang, Uttaradit · National Museum Bangkok) · ข้อความเดิมของ variants_by_trail.seashell.text_override ย้ายมาเป็นฟิลด์หลักของ record นี้",
+    "moved_from": "ng-s-n-drum"
+   }
   },
   {
    "slug": "estuarine-crocodile",
@@ -18015,7 +19818,183 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "buffalo": {
+     "figma_frame": "1075:1164",
+     "figma_frame_name": "Desktop - 1487",
+     "is_primary": true,
+     "hero_video_src": "Buffalo/Lacquered ceremonial vessel.webm",
+     "panel_bg": "#DEDCC3",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "c4c27743de98476bd76e82856bad84c80073c915.crop-1075-1448.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1075:1448",
+       "crop_ref": "c4c27743de98476bd76e82856bad84c80073c915.crop-1075-1448.png",
+       "crop_size": [
+        718,
+        429
+       ],
+       "bbox": [
+        921.0,
+        1050.0,
+        359.0,
+        214.5
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      },
+      {
+       "order": 2,
+       "node": "1075:1460",
+       "crop_ref": "c4c27743de98476bd76e82856bad84c80073c915.crop-1075-1460.png",
+       "crop_size": [
+        718,
+        405
+       ],
+       "bbox": [
+        921.0,
+        1294.5,
+        359.0,
+        202.4
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      476.8
+     ],
+     "frame_size": [
+      1440.0,
+      2025.0
+     ]
+    },
+    "lion": {
+     "figma_frame": "1170:2497",
+     "figma_frame_name": "Desktop - 1565",
+     "is_primary": false,
+     "hero_video_src": "Lion/Lacquered ceremonial vessel.webm",
+     "panel_bg": "#DEDCC3",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#413B2F",
+     "meta_color": "#343A40",
+     "side_image_ref": "630cb20137b6a5a3ee6aeb37c75bf732ed450654.crop-1170-2506.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1170:2506",
+       "crop_ref": "630cb20137b6a5a3ee6aeb37c75bf732ed450654.crop-1170-2506.png",
+       "crop_size": [
+        718,
+        602
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        301.0
+       ],
+       "scale_mode": "FILL",
+       "radius": 0
+      },
+      {
+       "order": 2,
+       "node": "1170:2507",
+       "crop_ref": "529469f31a23b91395aed72fcb8f13819fd38875.crop-1170-2507.png",
+       "crop_size": [
+        718,
+        558
+       ],
+       "bbox": [
+        921.0,
+        1421.0,
+        359.0,
+        279.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      680.0
+     ],
+     "frame_size": [
+      1440.0,
+      1858.0
+     ]
+    },
+    "seashell": {
+     "figma_frame": "1200:3021",
+     "figma_frame_name": "Desktop - 1595",
+     "is_primary": false,
+     "hero_video_src": "Seashell/Lacquered ceremonial vessel.webm",
+     "panel_bg": "#CFA5BA",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#413B2F",
+     "meta_color": "#343A40",
+     "side_image_ref": "630cb20137b6a5a3ee6aeb37c75bf732ed450654.crop-1200-3030.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1200:3030",
+       "crop_ref": "630cb20137b6a5a3ee6aeb37c75bf732ed450654.crop-1200-3030.png",
+       "crop_size": [
+        718,
+        512
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        256.0
+       ],
+       "scale_mode": "FIT",
+       "radius": 0
+      },
+      {
+       "order": 2,
+       "node": "1200:3031",
+       "crop_ref": "aac0debb9808298c3715b7db08a6a9c694da6c88.crop-1200-3031.png",
+       "crop_size": [
+        718,
+        558
+       ],
+       "bbox": [
+        921.0,
+        1376.0,
+        359.0,
+        279.0
+       ],
+       "scale_mode": "FIT",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      635.0
+     ],
+     "frame_size": [
+      1440.0,
+      2015.0
+     ]
+    }
+   }
   },
   {
    "slug": "singabarong-cloth",
@@ -19529,7 +21508,91 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "seashell": {
+     "figma_frame": "1200:3112",
+     "figma_frame_name": "Desktop - 1596",
+     "is_primary": true,
+     "hero_video_src": "Seashell/Mother of Pearl.webm",
+     "panel_bg": "#CFA5BA",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "0ba79979c814cf5a64f672737dd5a0dffd7b3fb9.crop-1200-3121.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1200:3121",
+       "crop_ref": "0ba79979c814cf5a64f672737dd5a0dffd7b3fb9.crop-1200-3121.png",
+       "crop_size": [
+        718,
+        494
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        247.0
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      317.0
+     ],
+     "frame_size": [
+      1440.0,
+      2234.0
+     ]
+    },
+    "rooster": {
+     "figma_frame": "1179:4624",
+     "figma_frame_name": "Desktop - 1583",
+     "is_primary": false,
+     "hero_video_src": "Chicken&Rooster/Mother of Pearl.webm",
+     "panel_bg": "#6BB9A5",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "7c2cbeddb789fe1df197d0df530779873bc14543.crop-1179-4633.jpg",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1179:4633",
+       "crop_ref": "7c2cbeddb789fe1df197d0df530779873bc14543.crop-1179-4633.jpg",
+       "crop_size": [
+        628,
+        924
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        528.0
+       ],
+       "scale_mode": "FILL",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      678.0
+     ],
+     "frame_size": [
+      1440.0,
+      2192.0
+     ]
+    }
+   }
   },
   {
    "slug": "neptune-cup-sponge",
@@ -23297,7 +25360,91 @@
      "text_differs_from_primary": []
     }
    ],
-   "status": []
+   "status": [],
+   "variants_by_trail": {
+    "bird": {
+     "figma_frame": "1091:3326",
+     "figma_frame_name": "Desktop - 1510",
+     "is_primary": true,
+     "hero_video_src": "Bird/Cloth for Buddhist prostration.webm",
+     "panel_bg": "#6BB9A5",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "74d1002259ce666e97365ca0605221a43664eef4.crop-1091-3343.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1091:3343",
+       "crop_ref": "74d1002259ce666e97365ca0605221a43664eef4.crop-1091-3343.png",
+       "crop_size": [
+        718,
+        515
+       ],
+       "bbox": [
+        921.0,
+        1120.0,
+        359.0,
+        257.7
+       ],
+       "scale_mode": "FIT",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1050.0,
+      359.0,
+      327.7
+     ],
+     "frame_size": [
+      1440.0,
+      2202.0
+     ]
+    },
+    "garuda": {
+     "figma_frame": "1153:1146",
+     "figma_frame_name": "Desktop - 1543",
+     "is_primary": false,
+     "hero_video_src": "Garuda/Cloth for Buddhist prostration, featuring Garuda and peacock motifs.webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "74d1002259ce666e97365ca0605221a43664eef4.crop-3190-2954.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "3190:2954",
+       "crop_ref": "74d1002259ce666e97365ca0605221a43664eef4.crop-3190-2954.png",
+       "crop_size": [
+        718,
+        515
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        257.7
+       ],
+       "scale_mode": "FIT",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      327.7
+     ],
+     "frame_size": [
+      1440.0,
+      2172.0
+     ]
+    }
+   }
   },
   {
    "slug": "green-peafowl",
@@ -24064,10 +26211,10 @@
       "panel_has_fill": true,
       "panel_y": 960.0,
       "panel_h": 963.0,
-      "title_color": "#534741",
-      "collection_color": "#413B2F",
+      "title_color": "#212529",
+      "collection_color": "#343A40",
       "caption_color": "#413B2F",
-      "meta_color": "#413B2F",
+      "meta_color": "#343A40",
       "text_col": {
        "node": "1170:3385",
        "name": "Frame 12683",
@@ -24295,6 +26442,124 @@
     "lastModified": "2026-11-17T11:28:55Z",
     "what": "นักออกแบบเติมข้อความ Phoenix 1574 (เดิม \"Pending (รอไฟล์)\") → ข้อความ 2 frame (1509 · 1574) เท่ากันทุกตัวอักษร (หัวข้อ · 2 แถว meta · caption) = ชิ้นเดียวกัน · หัวข้อเปลี่ยนจาก \"Pending (Traditional Belt Buckle)\" เป็น \"Pending (traditional belt buckle)\" (ตัวเล็ก · ตรง Figma) · caption/meta ไม่เปลี่ยน · ไม่มี Period/Material/Dimensions/Other information ใน Figma · ภาพ hero/ภาพแผง (ex 3/ex 5) ไม่เปลี่ยน · slug pending-3 คงเดิม (URL live)",
     "slug_proposal": "pending-traditional-belt-buckle (ยังไม่ใช้ · P-381)"
+   },
+   "variants_by_trail": {
+    "bird": {
+     "figma_frame": "1090:2840",
+     "figma_frame_name": "Desktop - 1509",
+     "is_primary": true,
+     "hero_video_src": "Bird/Pending (Traditional Belt Buckle).webm",
+     "panel_bg": "#6BB9A5",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#343A40",
+     "meta_color": "#343A40",
+     "side_image_ref": "27791d458325dd25a52fad737cb1b1bdade7b0ad.crop-1090-2860.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1090:2860",
+       "crop_ref": "27791d458325dd25a52fad737cb1b1bdade7b0ad.crop-1090-2860.png",
+       "crop_size": [
+        718,
+        515
+       ],
+       "bbox": [
+        921.0,
+        1090.0,
+        359.0,
+        257.7
+       ],
+       "scale_mode": "FIT",
+       "radius": 0
+      },
+      {
+       "order": 2,
+       "node": "1090:2861",
+       "crop_ref": "45d300e6c0e8f8620c4b8ecbb0cd8c7a4be11916.crop-1090-2861.png",
+       "crop_size": [
+        718,
+        405
+       ],
+       "bbox": [
+        921.0,
+        1377.7,
+        359.0,
+        202.4
+       ],
+       "scale_mode": "STRETCH",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      560.0872802734375
+     ],
+     "frame_size": [
+      1440.0,
+      1865.0
+     ]
+    },
+    "phoenix": {
+     "figma_frame": "1170:3381",
+     "figma_frame_name": "Desktop - 1574",
+     "is_primary": false,
+     "hero_video_src": "Phoenix/Pending (Traditional Belt Buckle).webm",
+     "panel_bg": "#F1ADA0",
+     "title_color": "#212529",
+     "collection_color": "#343A40",
+     "caption_color": "#413B2F",
+     "meta_color": "#343A40",
+     "side_image_ref": "27791d458325dd25a52fad737cb1b1bdade7b0ad.crop-1170-3390.png",
+     "side_images": [
+      {
+       "order": 1,
+       "node": "1170:3390",
+       "crop_ref": "27791d458325dd25a52fad737cb1b1bdade7b0ad.crop-1170-3390.png",
+       "crop_size": [
+        718,
+        410
+       ],
+       "bbox": [
+        921.0,
+        1170.0,
+        359.0,
+        205.0
+       ],
+       "scale_mode": "FIT",
+       "radius": 0
+      },
+      {
+       "order": 2,
+       "node": "1170:3391",
+       "crop_ref": "45d300e6c0e8f8620c4b8ecbb0cd8c7a4be11916.crop-1170-3391.png",
+       "crop_size": [
+        718,
+        410
+       ],
+       "bbox": [
+        921.0,
+        1405.0,
+        359.0,
+        205.0
+       ],
+       "scale_mode": "FIT",
+       "radius": 0
+      }
+     ],
+     "image_col_bbox": [
+      921.0,
+      1020.0,
+      359.0,
+      590.0
+     ],
+     "frame_size": [
+      1440.0,
+      1923.0
+     ]
+    }
    }
   },
   {

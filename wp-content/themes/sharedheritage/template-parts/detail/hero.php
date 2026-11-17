@@ -10,7 +10,8 @@
  * Solid video (generic D49 objects: no alpha, white ground · P-304): `--solid` brightens the media 0.8% so the poster (a
  * 253 white after WebP encoding) and the video (255) both melt into the white page — no visible frame around e.g. the Shiva hero.
  *
- * Args: post_id (int) · geometry (array from single-object.php).
+ * Args: post_id (int) · geometry (array from single-object.php) · variant (sh_object_variant() | null: the hero of the trail the
+ * visitor came from · D59).
  *
  * @package sharedheritage
  */
@@ -20,7 +21,8 @@ defined( 'ABSPATH' ) || exit;
 $sh_args = ( isset( $args ) && is_array( $args ) ) ? $args : array();
 $sh_id   = isset( $sh_args['post_id'] ) ? (int) $sh_args['post_id'] : (int) get_the_ID();
 $sh_geo  = isset( $sh_args['geometry'] ) && is_array( $sh_args['geometry'] ) ? $sh_args['geometry'] : array();
-$sh_hero = sh_object_hero( $sh_id );
+$sh_var  = isset( $sh_args['variant'] ) && is_array( $sh_args['variant'] ) ? $sh_args['variant'] : null;
+$sh_hero = $sh_var ? $sh_var['hero'] : sh_object_hero( $sh_id );
 
 $sh_has_video = '' !== $sh_hero['webm'] || '' !== $sh_hero['hevc'];
 $sh_image_id  = (int) $sh_hero['image_id'];

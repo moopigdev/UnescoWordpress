@@ -12,7 +12,9 @@
    "hover": "เฉพาะ ref hover",
    "click_chain": "ref ช่องตรง ON_CLICK ในหน้า trail → frame วัตถุ → objects.json"
   },
-  "revision": "A2 2026-11-17 (D57 · D58): ดึงซ้ำที่ Figma lastModified 2026-11-17T13:20:38Z · zone 2 เหลือ 42 ช่อง (ลบ orders 35–38 เดิมที่ซ้ำ) · ช่อง embossed-brass-basin ใส่ object_slug แล้ว"
+  "revision": "A2 2026-11-17 (D57 · D58): ดึงซ้ำที่ Figma lastModified 2026-11-17T13:20:38Z · zone 2 เหลือ 42 ช่อง (ลบ orders 35–38 เดิมที่ซ้ำ) · ช่อง embossed-brass-basin ใส่ object_slug แล้ว",
+  "revision_multitrail_1117": "multitrail-1117: ทุกช่องที่มี object_slug ใส่ \"trail\" (วัตถุ trail เดียว = trail นั้น · หลาย trail = จับคู่ tile_ref/hover_ref กับ objects.json tiles_by_trail → trail_basis) · ช่องช้างของ cake molds (zone 3 #47) · embossed-brass-basin (zone 2 #38) = elephant (match_basis เดิม elephant_trail_tile5_live / click_chain · ยืนยันจาก live trail/click_chain)",
+  "revision_d60": "D60 (2026-11-18): ช่อง zone 3 #8 (Ele 20 · seashell) object_slug ng-s-n-drum → dong-son-drum-thung-yang · ช่อง zone 2 #5 (water-bird) คง ng-s-n-drum · ทั้งสองเป็นวัตถุ trail เดียวแล้ว → ไม่มี trail_basis"
  },
  "zones": [
   {
@@ -47,7 +49,8 @@
       1079.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "bird"
     },
     {
      "order": 2,
@@ -66,7 +69,8 @@
       1079.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "water-bird"
     },
     {
      "order": 3,
@@ -85,7 +89,8 @@
       1079.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "hornbill"
     },
     {
      "order": 4,
@@ -104,7 +109,8 @@
       1079.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "deer"
     },
     {
      "order": 5,
@@ -123,7 +129,8 @@
       1079.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "rooster"
     },
     {
      "order": 6,
@@ -142,7 +149,8 @@
       1313.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "dragon"
     },
     {
      "order": 7,
@@ -161,7 +169,8 @@
       1313.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "deer"
     },
     {
      "order": 8,
@@ -201,7 +210,8 @@
       1313.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 10,
@@ -220,7 +230,8 @@
       1313.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "fish"
     },
     {
      "order": 11,
@@ -239,7 +250,8 @@
       1547.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "makara"
     },
     {
      "order": 12,
@@ -258,7 +270,8 @@
       1547.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "makara"
     },
     {
      "order": 13,
@@ -277,7 +290,8 @@
       1547.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "fish"
     },
     {
      "order": 14,
@@ -296,7 +310,8 @@
       1547.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell"
     },
     {
      "order": 15,
@@ -315,7 +330,8 @@
       1547.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell"
     }
    ]
   },
@@ -349,7 +365,8 @@
       1035.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "buffalo"
     },
     {
      "order": 2,
@@ -368,7 +385,8 @@
       1035.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "bird"
     },
     {
      "order": 3,
@@ -387,7 +405,9 @@
       1035.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "horse",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 4,
@@ -406,7 +426,8 @@
       1035.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "garuda"
     },
     {
      "order": 5,
@@ -425,7 +446,8 @@
       1035.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "water-bird"
     },
     {
      "order": 6,
@@ -444,7 +466,9 @@
       1269.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "dragon",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 7,
@@ -463,7 +487,9 @@
       1269.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 8,
@@ -482,7 +508,8 @@
       1269.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell"
     },
     {
      "order": 9,
@@ -501,7 +528,8 @@
       1269.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell"
     },
     {
      "order": 10,
@@ -520,7 +548,8 @@
       1269.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "fish"
     },
     {
      "order": 11,
@@ -539,7 +568,9 @@
       1503.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "buffalo",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 12,
@@ -558,7 +589,9 @@
       1503.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "lion",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 13,
@@ -577,7 +610,8 @@
       1503.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 14,
@@ -596,7 +630,8 @@
       1503.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell"
     },
     {
      "order": 15,
@@ -615,7 +650,8 @@
       1503.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "rooster"
     },
     {
      "order": 16,
@@ -634,7 +670,8 @@
       1737.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "hornbill"
     },
     {
      "order": 17,
@@ -653,7 +690,8 @@
       1737.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 18,
@@ -672,7 +710,8 @@
       1737.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "garuda"
     },
     {
      "order": 19,
@@ -691,7 +730,8 @@
       1737.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "makara"
     },
     {
      "order": 20,
@@ -710,7 +750,9 @@
       1737.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "garuda",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 21,
@@ -729,7 +771,9 @@
       1971.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "bird",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 22,
@@ -748,7 +792,8 @@
       1971.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "water-bird"
     },
     {
      "order": 23,
@@ -767,7 +812,8 @@
       1971.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "dragon"
     },
     {
      "order": 24,
@@ -786,7 +832,8 @@
       1971.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "phoenix"
     },
     {
      "order": 25,
@@ -805,7 +852,8 @@
       1971.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga"
     },
     {
      "order": 26,
@@ -824,7 +872,8 @@
       2205.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "lion"
     },
     {
      "order": 27,
@@ -843,7 +892,8 @@
       2205.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga"
     },
     {
      "order": 28,
@@ -862,7 +912,8 @@
       2205.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "buffalo"
     },
     {
      "order": 29,
@@ -881,7 +932,8 @@
       2205.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "horse"
     },
     {
      "order": 30,
@@ -900,7 +952,9 @@
       2205.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "phoenix",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 31,
@@ -919,7 +973,9 @@
       2439.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "dragon",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 32,
@@ -938,7 +994,9 @@
       2439.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "rooster",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 33,
@@ -957,7 +1015,9 @@
       2439.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "fish",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 34,
@@ -976,7 +1036,9 @@
       2439.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 35,
@@ -995,7 +1057,9 @@
       2439.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "garuda",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 36,
@@ -1014,7 +1078,9 @@
       2673.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "lion",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 37,
@@ -1033,7 +1099,9 @@
       2673.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 38,
@@ -1053,7 +1121,9 @@
       184.0,
       184.0
      ],
-     "note": "ref ช่อง = ช่องที่ 5 ของหน้า Elephant trail ใน Figma (Ele 19 · ไม่มี ON_CLICK ใน Figma) + live /trail/elephant/ ช่องที่ 5 ลิงก์ embossed-brass-basin (เจ้าของยืนยัน fb-1117 A2)"
+     "note": "ref ช่อง = ช่องที่ 5 ของหน้า Elephant trail ใน Figma (Ele 19 · ไม่มี ON_CLICK ใน Figma) + live /trail/elephant/ ช่องที่ 5 ลิงก์ embossed-brass-basin (เจ้าของยืนยัน fb-1117 A2)",
+     "trail": "elephant",
+     "trail_basis": "elephant_trail_tile5_live+no_ref_of_other_trails"
     },
     {
      "order": 39,
@@ -1072,7 +1142,8 @@
       2673.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga"
     },
     {
      "order": 40,
@@ -1091,7 +1162,9 @@
       2673.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "bird",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 41,
@@ -1110,7 +1183,9 @@
       2907.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "phoenix",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 42,
@@ -1129,7 +1204,8 @@
       2907.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     }
    ]
   },
@@ -1163,7 +1239,8 @@
       1079.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "turtle"
     },
     {
      "order": 2,
@@ -1182,7 +1259,8 @@
       1079.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "water-bird"
     },
     {
      "order": 3,
@@ -1201,7 +1279,8 @@
       1079.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 4,
@@ -1220,7 +1299,8 @@
       1079.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "hornbill"
     },
     {
      "order": 5,
@@ -1239,7 +1319,9 @@
       1079.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "dragon",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 6,
@@ -1258,7 +1340,9 @@
       1313.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "rooster",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 7,
@@ -1277,13 +1361,14 @@
       1313.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "rooster"
     },
     {
      "order": 8,
      "row": 2,
      "col": 3,
-     "object_slug": "ng-s-n-drum",
+     "object_slug": "dong-son-drum-thung-yang",
      "match_basis": "tile+hover",
      "tile_name": "Ele 20",
      "tile_ref": "5a7acb777270f4925e7726b4aecebe5e6b19ce28",
@@ -1296,7 +1381,8 @@
       1313.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell"
     },
     {
      "order": 9,
@@ -1315,7 +1401,8 @@
       1313.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "phoenix"
     },
     {
      "order": 10,
@@ -1334,7 +1421,8 @@
       1313.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell"
     },
     {
      "order": 11,
@@ -1353,7 +1441,8 @@
       1547.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "water-bird"
     },
     {
      "order": 12,
@@ -1372,7 +1461,8 @@
       1547.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "water-bird"
     },
     {
      "order": 13,
@@ -1391,7 +1481,8 @@
       1547.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga"
     },
     {
      "order": 14,
@@ -1410,7 +1501,8 @@
       1547.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell"
     },
     {
      "order": 15,
@@ -1429,7 +1521,8 @@
       1547.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 16,
@@ -1448,7 +1541,9 @@
       1781.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "horse",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 17,
@@ -1467,7 +1562,9 @@
       1781.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "horse",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 18,
@@ -1486,7 +1583,9 @@
       1781.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "garuda",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 19,
@@ -1505,7 +1604,8 @@
       1781.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "makara"
     },
     {
      "order": 20,
@@ -1524,7 +1624,8 @@
       1781.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 21,
@@ -1543,7 +1644,8 @@
       2015.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 22,
@@ -1562,7 +1664,8 @@
       2015.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "turtle"
     },
     {
      "order": 23,
@@ -1581,7 +1684,8 @@
       2015.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "horse"
     },
     {
      "order": 24,
@@ -1600,7 +1704,8 @@
       2015.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "turtle"
     },
     {
      "order": 25,
@@ -1619,7 +1724,8 @@
       2015.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 26,
@@ -1638,7 +1744,8 @@
       2249.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 27,
@@ -1657,7 +1764,8 @@
       2249.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "rooster"
     },
     {
      "order": 28,
@@ -1676,7 +1784,8 @@
       2249.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "water-bird"
     },
     {
      "order": 29,
@@ -1695,7 +1804,8 @@
       2249.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "fish"
     },
     {
      "order": 30,
@@ -1714,7 +1824,8 @@
       2249.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "phoenix"
     },
     {
      "order": 31,
@@ -1733,7 +1844,8 @@
       2483.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga"
     },
     {
      "order": 32,
@@ -1752,7 +1864,8 @@
       2483.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 33,
@@ -1771,7 +1884,9 @@
       2483.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "fish",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 34,
@@ -1790,7 +1905,9 @@
       2483.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "makara",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 35,
@@ -1809,7 +1926,8 @@
       2483.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell"
     },
     {
      "order": 36,
@@ -1828,7 +1946,8 @@
       2717.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "deer"
     },
     {
      "order": 37,
@@ -1847,7 +1966,8 @@
       2717.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "deer"
     },
     {
      "order": 38,
@@ -1866,7 +1986,8 @@
       2717.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "horse"
     },
     {
      "order": 39,
@@ -1885,7 +2006,8 @@
       2717.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "lion"
     },
     {
      "order": 40,
@@ -1904,7 +2026,8 @@
       2717.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "turtle"
     },
     {
      "order": 41,
@@ -1923,7 +2046,8 @@
       2951.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell"
     },
     {
      "order": 42,
@@ -1942,7 +2066,8 @@
       2951.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga"
     },
     {
      "order": 43,
@@ -1961,7 +2086,8 @@
       2951.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga"
     },
     {
      "order": 44,
@@ -1980,7 +2106,8 @@
       2951.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga"
     },
     {
      "order": 45,
@@ -1999,7 +2126,9 @@
       2951.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "rooster",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 46,
@@ -2018,7 +2147,9 @@
       3185.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "horse",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 47,
@@ -2037,7 +2168,9 @@
       3185.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant",
+     "trail_basis": "click_chain+no_ref_of_other_trails"
     },
     {
      "order": 48,
@@ -2056,7 +2189,8 @@
       3185.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "bird"
     },
     {
      "order": 49,
@@ -2075,7 +2209,8 @@
       3185.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "lion"
     },
     {
      "order": 50,
@@ -2094,7 +2229,8 @@
       3185.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "bird"
     },
     {
      "order": 51,
@@ -2113,7 +2249,8 @@
       3419.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "water-bird"
     },
     {
      "order": 52,
@@ -2132,7 +2269,8 @@
       3419.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "phoenix"
     },
     {
      "order": 53,
@@ -2151,7 +2289,8 @@
       3419.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "rooster"
     },
     {
      "order": 54,
@@ -2170,7 +2309,8 @@
       3419.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "fish"
     },
     {
      "order": 55,
@@ -2189,7 +2329,9 @@
       3419.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 56,
@@ -2208,7 +2350,9 @@
       3653.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "rooster",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 57,
@@ -2227,7 +2371,9 @@
       3653.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "rooster",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 58,
@@ -2246,7 +2392,9 @@
       3653.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "hornbill",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 59,
@@ -2265,7 +2413,8 @@
       3653.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "hornbill"
     },
     {
      "order": 60,
@@ -2284,7 +2433,8 @@
       3653.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "phoenix"
     },
     {
      "order": 61,
@@ -2303,7 +2453,8 @@
       3887.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "buffalo"
     },
     {
      "order": 62,
@@ -2322,7 +2473,8 @@
       3887.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "rooster"
     },
     {
      "order": 63,
@@ -2341,7 +2493,8 @@
       3887.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga"
     },
     {
      "order": 64,
@@ -2360,7 +2513,8 @@
       3887.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell"
     },
     {
      "order": 65,
@@ -2379,7 +2533,8 @@
       3887.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "fish"
     },
     {
      "order": 66,
@@ -2398,7 +2553,8 @@
       4121.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "lion"
     },
     {
      "order": 67,
@@ -2417,7 +2573,8 @@
       4121.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "dragon"
     },
     {
      "order": 68,
@@ -2436,7 +2593,9 @@
       4121.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "dragon",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 69,
@@ -2455,7 +2614,9 @@
       4121.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "naga",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 70,
@@ -2474,7 +2635,8 @@
       4121.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "bird"
     },
     {
      "order": 71,
@@ -2493,7 +2655,8 @@
       4355.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "phoenix"
     },
     {
      "order": 72,
@@ -2512,7 +2675,8 @@
       4355.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "dragon"
     },
     {
      "order": 73,
@@ -2531,7 +2695,9 @@
       4355.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "turtle",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 74,
@@ -2550,7 +2716,9 @@
       4355.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "dragon",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 75,
@@ -2569,7 +2737,9 @@
       4355.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "water-bird",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 76,
@@ -2588,7 +2758,9 @@
       4589.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "dragon",
+     "trail_basis": "tile+hover"
     },
     {
      "order": 77,
@@ -2607,7 +2779,9 @@
       4589.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "seashell",
+     "trail_basis": "tile|hover"
     },
     {
      "order": 78,
@@ -2626,7 +2800,8 @@
       4589.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "water-bird"
     },
     {
      "order": 79,
@@ -2645,7 +2820,8 @@
       4589.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "hornbill"
     },
     {
      "order": 80,
@@ -2664,7 +2840,8 @@
       4589.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "bird"
     },
     {
      "order": 81,
@@ -2683,7 +2860,8 @@
       4823.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 82,
@@ -2702,7 +2880,8 @@
       4823.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "elephant"
     },
     {
      "order": 83,
@@ -2721,7 +2900,8 @@
       4823.0,
       184.0,
       184.0
-     ]
+     ],
+     "trail": "hornbill"
     }
    ]
   }
