@@ -140,6 +140,20 @@ FORCE=1 bash scripts/media/encode-1117.sh  # ทำใหม่ทุกไฟ�
 
 รายไฟล์ทั้ง 126 (key · ขนาด · ความยาว · เฟรม · out) อ่านจาก `content/media-manifest.json` (`jq '.files[]|select(.id|startswith("drive-1117/"))'`) · ตัวอย่าง: `drive-1117/Turtle/Koffo Cloth.webm` → `media/out/objects-1117/turtle/koffo-cloth.webm` + `.poster.webp`
 
+## เพิ่มไฟล์ Makara 2 ไฟล์ (makarawebm-1117 · BACKLOG #33 · อัปโหลด Drive 15:21/15:26 · ดาวน์โหลด 16:13)
+ต้นฉบับ: `media/src/drive-2026-11-17/animals-webm/Makara/{Saltwater crocodile skull,Sungai Mas makara}.webm` (อ่านอย่างเดียว) → `media/out/objects-1117/makara/` · รัน: `ONLY="Makara/Saltwater crocodile skull.webm|Makara/Sungai Mas makara.webm" bash scripts/media/encode-1117.sh` (env `ONLY` ใหม่ — ทำเฉพาะไฟล์ที่ระบุ · ไม่แตะ Intro · entry อื่นคงไบต์เดิม · คำนวณ `dup_of` ใหม่ทั้งชุดด้วยกติกาเดิม · รันซ้ำได้ผลเดิม)
+- **สองไฟล์นี้ต่างจาก 126 ไฟล์ก่อนหน้า: มี alpha จริง** — ffprobe: VP9 `yuva420p` · tag `alpha_mode=1` · วัด alpha min = 0 ทั้งต้นฉบับและ out (libvpx-vp9 ทุก 0.5s) → เป็นไฟล์ alpha ชุดแรกของรอบ 2026-11-17 · ต้องมี fallback Safari/iOS (DOD C4) → `.hevc.mov` (HEVC-alpha `hevc_videotoolbox -alpha_quality 0.75 -tag:v hvc1` 10fps · คงความยาว 3.6s) + poster
+- ประวัติ: 1440×810 · 5/3 fps (6 เฟรม · เฟรมละ 0.6s = stepped เหมือนชุดอื่น) · 3.6s · ไม่มีเสียง · ≤ 3MB → copy ไม่ re-encode (ตามมาตรฐาน) · ไม่ซ้ำกับไฟล์อื่น (`dup_of: null`)
+- poster = เฟรม 35% WebP q80 กว้าง 640 (alpha_q 90 · เก็บพื้นโปร่ง) · ดูด้วยตาแล้ว ตัวละครชัด
+- HEVC-alpha: ffprobe เห็น codec `hevc` tag `hvc1` `yuv420p` 1440×810 10fps 3.6s (ffprobe ไม่แสดง alpha layer ของ HEVC — ตรวจทางอ้อมแทน: encode ตัวเดียวกันแบบไม่มี alpha ได้ 139,479 B เทียบกับ 218,571 B ที่ใส่ alpha → มี alpha layer จริง · ยังไม่ได้เล่นใน Safari จริง)
+
+| key (หลัง `drive-1117/Makara/`) | ก่อน (MB) | หลัง (MB) | alpha | fallback | poster (KB) | out |
+|---|---|---|---|---|---|---|
+| Saltwater crocodile skull.webm | 0.126 (125,722 B) | 0.126 (copy) | จริง (min 0) | `.hevc.mov` 192,120 B | 16.3 | `objects-1117/makara/saltwater-crocodile-skull.{webm,poster.webp,hevc.mov}` |
+| Sungai Mas makara.webm | 0.164 (164,397 B) | 0.164 (copy) | จริง (min 0) | `.hevc.mov` 218,571 B | 11.9 | `objects-1117/makara/sungai-mas-makara.{webm,poster.webp,hevc.mov}` |
+
+ตารางสรุป trail ด้านบนนับเฉพาะ 126 ไฟล์รอบแรก — รวมหลังเพิ่ม: 128 ไฟล์ · Makara 5 ไฟล์ (alpha จริง 2 · fallback HEVC 2 · poster ×3 + ×2)
+
 ## ผล: Intro (`media/out/intro-1117/<chapter>/`) — 18 ไฟล์ ต้นฉบับ 30.68 MB → 4.40 MB
 - **ภาพนิ่ง (PNG/JPG 11 ไฟล์ → WebP)**: กว้าง ≤ 2880 (= 2× 1440 · คงสัดส่วน · ไม่ขยาย) · lossy q82 `alpha_q` 95 (PNG มี alpha ทุกไฟล์ · JPG ไม่มี) · ทดลองแล้ว lossless 0.5–1.1MB/ไฟล์ vs lossy 0.28–0.46MB → lossy · แหล่งที่เป็น sRGB/ไม่ติด profile จึงไม่ต้องฝัง ICC · entry `kind:"still"` `out:null` `still:<path>` (รูปแบบเดียวกับ still ของ elephant-leg-bone)
 - **GIF 4 ไฟล์ → animated WebP** (`gif2webp -mixed -q 80 -m 6`) · `kind:"animation"` · `out` = `.webp` (ใช้ใน `<img>` เหมือน GIF ไม่ต้อง JS) · `poster` = เฟรมแรก (WebP กว้าง ≤ 1440) · เหตุผลที่ไม่ใช้วิดีโอ: GIF มีพื้นโปร่งใส (GCE transparency) → WebM alpha เล่น Safari ไม่ได้ · animated WebP รองรับ alpha และ Safari 14+/iOS 14+ · เล็กกว่า GIF 2.7–3.9× · จังหวะเฟรมคงเดิม (330ms/เฟรม · farmer 250ms) · วนไม่จบ (loop 0) · จำนวนเฟรมเท่าต้นฉบับ
