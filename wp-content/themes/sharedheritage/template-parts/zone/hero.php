@@ -1,7 +1,7 @@
 <?php
 /**
  * Zone page, opening part: cover (§4.3b [160,150 1120×410] · banner 2026-11 with the short zone name in the picture,
- * alt = that name from the attachment, D8) and the ZONE 1–5 strip ([160,580 1120×166] shadow 200).
+ * alt = that name from the attachment, D8) and the ZONE 1–5 strip ([160,580 1120×166] shadow 200 · clickable tabs, D56 · tabs.php).
  * The page <h1> is the visible heading of the text block (template-parts/zone/intro.php).
  *
  * Args: zone (WP_Term).
@@ -68,6 +68,7 @@ if ( $sh_banner ) {
 		<div class="sh-zone__banner-view" data-sh-zone-banner data-sh-label="<?php echo esc_attr__( 'Zones 1 to 5', 'sharedheritage' ); ?>">
 			<div class="sh-zone__banner-strip">
 				<?php echo $sh_banner_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() output. ?>
+				<?php get_template_part( 'template-parts/zone/tabs', null, array( 'current' => $sh_zone ) ); ?>
 			</div>
 		</div>
 	</figure>

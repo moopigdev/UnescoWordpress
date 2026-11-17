@@ -8,6 +8,8 @@
  * A 4096×965 export (Figma imageTransform x 2.556 %–97.46 % · y 14.10 %–73.80 %, the zone 1–3/5 bar source) is cropped
  * like the zone 1–3 banner; any other shape fills the box.
  *
+ * The hotspots come from template-parts/zone/tabs.php (shared with the zone 1–3 pages and Home · D56).
+ *
  * Args: zone (WP_Term, current zone) · links (bool, default false).
  *
  * @package sharedheritage
@@ -49,60 +51,16 @@ $sh_meta = wp_get_attachment_metadata( $sh_banner );
 $sh_w    = is_array( $sh_meta ) && ! empty( $sh_meta['width'] ) ? (float) $sh_meta['width'] : 0.0;
 $sh_h    = is_array( $sh_meta ) && ! empty( $sh_meta['height'] ) ? (float) $sh_meta['height'] : 0.0;
 $sh_crop = $sh_w > 0 && $sh_h > 0 && abs( ( $sh_w / $sh_h ) / ( 4096 / 965 ) - 1 ) < 0.01;
-
-$sh_tabs = array();
-if ( $sh_links ) {
-	foreach ( sh_zones() as $sh_z ) {
-		$sh_n = (int) sh_get_term( 'sh_number', $sh_z );
-		if ( $sh_n < 1 || $sh_n > 5 ) {
-			continue;
-		}
-		$sh_url  = '';
-		$sh_page = absint( sh_get_term( 'sh_link_page', $sh_z ) );
-		if ( $sh_z->term_id !== $sh_zone->term_id ) {
-			if ( $sh_page && 'publish' === get_post_status( $sh_page ) ) {
-				$sh_url = (string) get_permalink( $sh_page );
-			} else {
-				$sh_link = get_term_link( $sh_z );
-				$sh_url  = is_string( $sh_link ) ? $sh_link : '';
-			}
-		}
-		$sh_tabs[ $sh_n ] = array(
-			'name'    => $sh_z->name,
-			'url'     => $sh_url,
-			'current' => $sh_z->term_id === $sh_zone->term_id,
-		);
-	}
-	ksort( $sh_tabs );
-}
 ?>
 <figure class="sh-zbar<?php echo $sh_crop ? ' sh-zbar--crop' : ''; ?>">
 	<div class="sh-zbar__view" data-sh-zbar data-sh-zone="<?php echo esc_attr( (string) $sh_number ); ?>" data-sh-label="<?php echo esc_attr__( 'Zones 1 to 5', 'sharedheritage' ); ?>">
 		<div class="sh-zbar__strip">
 			<?php echo $sh_img; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() output. ?>
-			<?php if ( $sh_tabs ) : ?>
-				<nav class="sh-zbar__nav" aria-label="<?php echo esc_attr__( 'Zones', 'sharedheritage' ); ?>">
-					<ul class="sh-zbar__tabs">
-						<?php foreach ( $sh_tabs as $sh_n => $sh_tab ) : ?>
-							<?php
-							$sh_label = sprintf(
-								/* translators: 1: zone number, 2: zone name. */
-								__( 'Zone %1$d: %2$s', 'sharedheritage' ),
-								$sh_n,
-								wp_specialchars_decode( $sh_tab['name'], ENT_QUOTES )
-							);
-							?>
-							<li class="sh-zbar__tab" style="<?php echo esc_attr( '--sh-zbar-i:' . ( $sh_n - 1 ) ); ?>">
-								<?php if ( $sh_tab['current'] ) : ?>
-									<span class="sh-zbar__hit" aria-current="page"><span class="screen-reader-text"><?php echo esc_html( $sh_label ); ?></span></span>
-								<?php elseif ( '' !== $sh_tab['url'] ) : ?>
-									<a class="sh-zbar__hit sh-zbar__hit--link" href="<?php echo esc_url( $sh_tab['url'] ); ?>"><span class="screen-reader-text"><?php echo esc_html( $sh_label ); ?></span></a>
-								<?php endif; ?>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				</nav>
-			<?php endif; ?>
+			<?php
+			if ( $sh_links ) {
+				get_template_part( 'template-parts/zone/tabs', null, array( 'current' => $sh_zone ) );
+			}
+			?>
 		</div>
 	</div>
 </figure>
