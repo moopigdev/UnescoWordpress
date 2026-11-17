@@ -1,6 +1,6 @@
 /*
  * Base styles — every page. Uses tokens from tokens.css only.
- * Contents: reset · typography utilities (.sh-t-*) · container · header (§3.1/§3.2) · Back (§3.3) · Read more (§3.4).
+ * Contents: reset · typography utilities (.sh-t-*) · container · header (§9.1 D47 · §3.2) · footer (§9.1) · Back (§3.3) · Read more (§3.4).
  * Page-specific styles go in assets/css/<page>.css (auto-enqueued, see inc/enqueue.php).
  */
 
@@ -109,31 +109,46 @@ button {
 	z-index: 10;
 }
 
-/* Header #1: brand band = Figma image fill 709572bf (imageTransform → band 1164.2774×86 at x=143.92). */
+/* Header #1 (D47 §9.1): white · Drop Shadow/100 · Shared Heritage logo 220×77 at x=160 (container left), centred
+   vertically in 86 (y 4.5). Height = 86 at every width (content of every page still starts at 150). */
 .sh-header__top {
 	position: relative;
 	z-index: 2;
 	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-	padding-inline: var(--sh-tablet-margin);
+	align-items: center;
+	justify-content: flex-start;
+	height: var(--sh-header-top-height);
+	padding-inline: max(var(--sh-tablet-margin), calc((100% - var(--sh-container)) / 2));
 	background: var(--sh-color-white);
 	box-shadow: var(--sh-shadow-100);
 }
 
 .sh-header__brand {
 	display: block;
-	flex: 0 1 1164.2774px;
-	aspect-ratio: 1164.2774 / 86;
-	background: url("../img/common/header-brand-band.jpg") 0 0 / 100% 100% no-repeat;
-	transform: translateX(0.5205%); /* band centre is 6.06px right of the 1440 centre */
+	flex: 0 1 var(--sh-header-logo-width);
+	min-width: var(--sh-header-logo-min-width);
+	color: var(--sh-color-neutral-800);
+	text-decoration: none;
 }
 
-/* Full-size band fits (1164.2774 + 2 × 24): pin the Figma height exactly (aspect-ratio rounds to 85.98). */
-@media (min-width: 1213px) {
-	.sh-header__brand {
-		height: var(--sh-header-top-height);
-	}
+.sh-header__logo {
+	display: block;
+	width: 100%;
+	height: auto;
+	max-height: var(--sh-header-logo-height);
+	aspect-ratio: 220 / 77;
+	object-fit: contain;
+}
+
+.sh-header__name {
+	display: block;
+	font: var(--sh-type-card-title);
+	white-space: nowrap;
+}
+
+.sh-header__brand:focus-visible {
+	outline: 2px solid var(--sh-color-neutral-800);
+	outline-offset: 2px;
 }
 
 .sh-header--rule .sh-header__top::after {
@@ -194,48 +209,12 @@ button {
 	display: none;
 }
 
-/* Mobile (no Figma frame — D5 "responsive as appropriate"): collapsible menu once base.js has run. */
-@media (max-width: 767px) {
-	.sh-header__top {
-		padding-block: var(--sh-space-10);
-	}
-
-	/*
-	 * The full band would shrink the logos to ~12px tall, so on phones the same image is shown as two
-	 * windows at one shared scale: band x 0–400 (UNESCO + TEMASEK) and x 920–1164.2774 (SHARED HERITAGE).
-	 * Both cuts fall in the white gap between the logos (band-local coordinates).
-	 */
+/* < 1024 (no Figma frame — D5 "responsive as appropriate" · §9.1: 6 items = 843 wide no longer fit one row below
+   1024): collapsible menu once base.js has run. */
+@media (max-width: 1023px) {
+	/* Logo keeps 220×77 proportions; the row stays 86 tall (logo ≥ 120 wide · §9.1 responsive). */
 	.sh-header__brand {
-		display: flex;
-		flex: 1 1 auto;
-		align-items: center;
-		justify-content: space-between;
-		gap: var(--sh-space-10);
-		aspect-ratio: auto;
-		background: none;
-		transform: none;
-	}
-
-	.sh-header__brand::before,
-	.sh-header__brand::after {
-		content: "";
-		display: block;
-		background-image: url("../img/common/header-brand-band.jpg");
-		background-repeat: no-repeat;
-	}
-
-	.sh-header__brand::before {
-		flex: 400 1 0;
-		aspect-ratio: 400 / 86;
-		background-position: 0 0;
-		background-size: 291.0694% 100%;  /* 1164.2774 / 400 */
-	}
-
-	.sh-header__brand::after {
-		flex: 244.2774 1 0;
-		aspect-ratio: 244.2774 / 86;
-		background-position: 100% 0;
-		background-size: 476.6146% 100%;  /* 1164.2774 / 244.2774 */
+		flex-basis: min(var(--sh-header-logo-width), 50vw);
 	}
 
 	.sh-js .sh-nav-toggle {
@@ -389,4 +368,59 @@ button {
 .sh-read-more--home:hover,
 .sh-read-more--home:focus-visible {
 	font: var(--sh-type-read-more-home-hover);
+}
+
+/* ---- Footer (D47 · §9.1 Frame 114511 · every page) ---- */
+.sh-footer {
+	padding-top: var(--sh-footer-gap-top);
+	padding-bottom: var(--sh-footer-gap-bottom);
+	padding-inline: max(var(--sh-tablet-margin), calc((100% - var(--sh-container)) / 2));
+	background: var(--sh-color-white);
+}
+
+/* Row 1120 wide at x=160 · padding-left 267 (P-274: as Figma, not centred) · bottom-aligned · gap 20. */
+.sh-footer__row {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-start;
+	gap: var(--sh-footer-gap);
+	padding-block: var(--sh-footer-pad-block);
+	padding-inline-start: var(--sh-footer-pad-left);
+}
+
+.sh-footer__unesco {
+	flex: none;
+	width: var(--sh-footer-unesco-width);
+	height: var(--sh-footer-logo-height);
+	object-fit: contain;
+}
+
+.sh-footer__support {
+	display: flex;
+	flex: none;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--sh-footer-support-gap);
+}
+
+.sh-footer__support-text {
+	font: var(--sh-type-footer-support);
+	color: var(--sh-color-footer-support);
+	text-align: center;
+	white-space: nowrap;
+}
+
+.sh-footer__temasek {
+	width: var(--sh-footer-temasek-width);
+	height: var(--sh-footer-logo-height);
+	object-fit: contain;
+}
+
+/* Phones (no Figma frame · §9.1 [P]): logos stacked and centred, gap 20. */
+@media (max-width: 767px) {
+	.sh-footer__row {
+		flex-direction: column;
+		align-items: center;
+		padding-inline-start: 0;
+	}
 }
