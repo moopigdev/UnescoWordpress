@@ -121,6 +121,9 @@ function sh_import_generic_object_meta( array $o, array $map, array $manifest ):
 	);
 	if ( $video['still'] ) {
 		$meta['sh_hero_image'] = $video['still'];
+	} elseif ( null === sh_import_object_hero_entry( $manifest, $o ) && '' !== sh_import_object_hero_still_ref( $o ) ) {
+		// No WebM (makara-1117: Saltwater crocodile skull · Sungai Mas makara): hero = the line-art still of the seed.
+		$meta['sh_hero_image'] = sh_imp_1117_image( sh_import_object_hero_still_ref( $o ), SH_IMPORT_OBJECTS_1117, sh_import_spec_hero_still(), $title . ' hero', $title );
 	}
 	// Panel images = the design-dev crops of the frame (style.images[].crop_ref · same attachments as in sh_layout).
 	$images = isset( $frame['style']['images'] ) && is_array( $frame['style']['images'] ) ? array_values( $frame['style']['images'] ) : array();
@@ -181,13 +184,17 @@ function sh_import_object_term_ids( array $o, array $trail_ids ): array {
  * @param array<string, mixed> $map      image-map.json.
  * @param array<string, mixed> $manifest Media manifest.
  * @param bool                 $fill     true = refresh: existing objects only get empty fields filled.
+ * @param string[]|null        $only     Only these slugs (refresh step 2026-11-17-makara) · null = all.
  * @return array<string, int>
  */
-function sh_import_objects_1117( array $seed, array $map, array $manifest, bool $fill = false ): array {
+function sh_import_objects_1117( array $seed, array $map, array $manifest, bool $fill = false, ?array $only = null ): array {
 	$trail_ids = sh_imp_trail_ids();
 	$out       = array();
 	foreach ( sh_import_all_objects( $seed ) as $o ) {
 		$slug  = (string) $o['slug'];
+		if ( null !== $only && ! in_array( $slug, $only, true ) ) {
+			continue;
+		}
 		$title = sh_import_object_text_2026_11( $o )['post_title'];
 		$key   = 'object:' . $slug;
 		$id    = sh_imp_find_post( 'object', $key );

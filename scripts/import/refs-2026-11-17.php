@@ -266,6 +266,20 @@ function sh_import_spec_tile_hover(): array {
 	return sh_import_spec( 210, 210 );
 }
 
+/** Detail hero still 1440×810 → 2880×1620 (makara-1117: object without a WebM · DESIGN-SPEC §8.6). */
+function sh_import_spec_hero_still(): array {
+	return sh_import_spec( 1440, 810 );
+}
+
+/**
+ * Hero still ref of a seed object that has no hero video (hero_video_src null → hero = this still) · '' = none.
+ *
+ * @param array<string, mixed> $o Seed object.
+ */
+function sh_import_object_hero_still_ref( array $o ): string {
+	return ( empty( $o['hero_video_src'] ) && isset( $o['hero_still_ref'] ) && is_string( $o['hero_still_ref'] ) ) ? trim( $o['hero_still_ref'] ) : '';
+}
+
 /**
  * Trail cover 1120×490 (seed crop is already 2240×980) · on the white trail page (§8.1 fill #FFFFFF) — matte white:
  * the PNG crops are transparent only along the crop edge, so they become JPEG (4–5 MB → ≤ 0.5 MB · core-1117b).
@@ -302,6 +316,7 @@ function sh_import_1117_asset_values( array $seed ): array {
 		if ( sh_import_object_generic( $o ) ) {
 			$add( "object $slug tile", isset( $o['tile_image_ref'] ) ? $o['tile_image_ref'] : null, SH_IMPORT_OBJECTS_1117, sh_import_spec_tile() );
 			$add( "object $slug tile hover", isset( $o['tile_image_hover_ref'] ) ? $o['tile_image_hover_ref'] : null, SH_IMPORT_OBJECTS_1117, sh_import_spec_tile_hover() );
+			$add( "object $slug hero still", sh_import_object_hero_still_ref( $o ), SH_IMPORT_OBJECTS_1117, sh_import_spec_hero_still() );
 			foreach ( sh_import_style_refs( (array) sh_import_primary_frame( $o )['style'] ) as $ref ) {
 				$add( "object $slug " . implode( '.', $ref[0] ), $ref[1], SH_IMPORT_OBJECTS_1117, sh_import_spec_as_is() ); // Crops: already 2× (JPEG rule only).
 			}

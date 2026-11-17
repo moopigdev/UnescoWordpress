@@ -157,6 +157,12 @@
 	object-position: 50% 100%;
 }
 
+/* Kept image slot (makara-1117 · §8.6): an admin's image fills the slot box (Figma FILL = cover); empty slot = invisible. */
+.sh-detail__panel--cols .sh-detail__media--slot:not(.sh-detail__media--placed) .sh-detail__image {
+	object-fit: cover;
+	object-position: 50% 50%;
+}
+
 /* Layout images[]: pre-cropped to their bbox → drawn at the bbox (later ones on top). */
 .sh-detail__media--placed {
 	position: relative;
@@ -302,6 +308,17 @@
 
 	.sh-detail__panel--cols .sh-detail__image {
 		flex: none;
+	}
+
+	/* No frame to keep below 1024: an empty slot takes no room. */
+	.sh-detail__media--empty {
+		display: none;
+	}
+
+	.sh-detail__panel--cols .sh-detail__media--slot:not(.sh-detail__media--placed) .sh-detail__image {
+		flex: none;
+		height: auto;
+		object-fit: contain;
 	}
 
 	/* Placed crops stack at their own ratio (no frame to place them in). */

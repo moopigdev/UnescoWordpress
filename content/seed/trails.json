@@ -11,6 +11,11 @@
    "by": "design-objects-1117",
    "lastModified": "2026-11-17T03:50:23Z",
    "what": "หน้า trail 17 (3377:4608) + Materials (3377:5466): ข้อความ H1/คำอธิบาย · cover · ลำดับช่อง + ภาพช่องปกติ/hover · ช้างไม่แตะค่าเดิม (บล็อก figma_2026_11_17)"
+  },
+  "figma_2026_11_17_makara": {
+   "by": "makara-1117",
+   "lastModified": "2026-11-17T08:33:07Z",
+   "what": "makara.tiles ช่อง 1/3 ผูก object_slug (ลบ status no_detail_frame_in_figma)"
   }
  },
  "trails": [
@@ -1993,11 +1998,13 @@
    },
    "in_zone_grid_frame_1472_1474": true,
    "object_slugs": [
+    "saltwater-crocodile-skull",
     "estuarine-crocodile",
+    "sungai-mas-makara",
     "makara-palanquin-ornament",
     "jar-decorated-with-fish-and-a-beast"
    ],
-   "object_count": 3,
+   "object_count": 5,
    "title_on_trail_page": "Makara Trail",
    "title_on_trail_page_raw": "Makara Trail",
    "description": "What happens when communities combine the qualities of different animals into a single mythical being? Inspired by the crocodile and other creatures of land and water, the makara became one of Southeast Asia's enduring guardians. This trail follows how communities reimagined the makara through ritual, architecture and everyday life.",
@@ -2061,10 +2068,9 @@
       184.0,
       184.0
      ],
-     "object_slug": null,
-     "title_note": "Skull of Saltwater Crocodile",
-     "note_node": "1170:2981",
-     "status": "no_detail_frame_in_figma"
+     "object_slug": "saltwater-crocodile-skull",
+     "frame_id": "3449:3862",
+     "title_note_figma_label": "Skull of Saltwater Crocodile"
     },
     {
      "order": 2,
@@ -2093,10 +2099,9 @@
       184.0,
       184.0
      ],
-     "object_slug": null,
-     "title_note": "Sungai Mas Makara",
-     "note_node": "1170:2985",
-     "status": "no_detail_frame_in_figma"
+     "object_slug": "sungai-mas-makara",
+     "frame_id": "3449:3951",
+     "title_note_figma_label": "Sungai Mas Makara"
     },
     {
      "order": 4,
