@@ -244,6 +244,18 @@ function sh_import_trail_static_tiles( array $seed, array $t ): array {
 	return $out;
 }
 
+/**
+ * Size kept as it is (design-dev crops are already 2×) — only the PNG → JPEG rule of web-image.php applies.
+ *
+ * @return array{box: array{0:int,1:int}, crop: null}
+ */
+function sh_import_spec_as_is(): array {
+	return array(
+		'box'  => array( 0, 0 ),
+		'crop' => null,
+	);
+}
+
 /** Tile 184×184 → 368². */
 function sh_import_spec_tile(): array {
 	return sh_import_spec( 184, 184 );
@@ -254,9 +266,12 @@ function sh_import_spec_tile_hover(): array {
 	return sh_import_spec( 210, 210 );
 }
 
-/** Trail cover 1120×490 (seed crop is already 2240×980). */
+/**
+ * Trail cover 1120×490 (seed crop is already 2240×980) · on the white trail page (§8.1 fill #FFFFFF) — matte white:
+ * the PNG crops are transparent only along the crop edge, so they become JPEG (4–5 MB → ≤ 0.5 MB · core-1117b).
+ */
 function sh_import_spec_trail_cover(): array {
-	return sh_import_spec( 1120, 490 );
+	return sh_import_spec( 1120, 490 ) + array( 'matte' => '#FFFFFF' );
 }
 
 /** Guide card: big 230×363 (small 120×190 uses the same file). */
@@ -288,7 +303,7 @@ function sh_import_1117_asset_values( array $seed ): array {
 			$add( "object $slug tile", isset( $o['tile_image_ref'] ) ? $o['tile_image_ref'] : null, SH_IMPORT_OBJECTS_1117, sh_import_spec_tile() );
 			$add( "object $slug tile hover", isset( $o['tile_image_hover_ref'] ) ? $o['tile_image_hover_ref'] : null, SH_IMPORT_OBJECTS_1117, sh_import_spec_tile_hover() );
 			foreach ( sh_import_style_refs( (array) sh_import_primary_frame( $o )['style'] ) as $ref ) {
-				$add( "object $slug " . implode( '.', $ref[0] ), $ref[1], SH_IMPORT_OBJECTS_1117, null ); // Crops: already 2×.
+				$add( "object $slug " . implode( '.', $ref[0] ), $ref[1], SH_IMPORT_OBJECTS_1117, sh_import_spec_as_is() ); // Crops: already 2× (JPEG rule only).
 			}
 		}
 		foreach ( sh_import_object_tiles( $o ) as $t => $tile ) {
@@ -460,7 +475,8 @@ function sh_import_intro_images( array $intro ): array {
  * @param string               $dir      design/assets directory.
  * @param string               $mediadir media/out directory.
  * @return array{refs: array<string, string>, media: string[], missing: string[]}
- *         refs = file => "WxH" (fit box, '' = copy as is).
+ *         refs = file => "WxH[@RRGGBB]" (fit box · 0x0 = no size limit · @matte = flatten large PNGs onto it as JPEG ·
+ *         '' = copy as is).
  */
 function sh_import_bundle_1117_files( array $seed, string $dir, string $mediadir ): array {
 	$out = array(
@@ -475,8 +491,10 @@ function sh_import_bundle_1117_files( array $seed, string $dir, string $mediadir
 			$out['missing'][] = "1117 $label: $value";
 			continue;
 		}
-		$box = null === $spec ? '' : implode( 'x', sh_web_image_bundle_box( $spec ) );
-		if ( isset( $out['refs'][ $file ] ) && '' !== $out['refs'][ $file ] && '' !== $box ) {
+		$box = null === $spec ? '' : implode( 'x', sh_web_image_bundle_box( $spec ) ) . ( ! empty( $spec['matte'] ) ? '@' . ltrim( (string) $spec['matte'], '#' ) : '' );
+		if ( isset( $out['refs'][ $file ] ) && ( '0x0' === $out['refs'][ $file ] || '0x0' === $box ) ) {
+			$box = '0x0'; // One use keeps the full size: no shrink (JPEG rule only).
+		} elseif ( isset( $out['refs'][ $file ] ) && '' !== $out['refs'][ $file ] && '' !== $box ) {
 			$a   = explode( 'x', $out['refs'][ $file ] );
 			$b   = explode( 'x', $box );
 			$box = max( (int) $a[0], (int) $b[0] ) . 'x' . max( (int) $a[1], (int) $b[1] ); // Same file, two uses: larger.
