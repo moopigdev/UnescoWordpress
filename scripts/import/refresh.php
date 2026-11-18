@@ -18,6 +18,7 @@
  * the imported image of that card (before or after D45) · an admin's own image = card skipped + warning.
  * Steps 2026-11-17-* (refresh-2026-11-17.php): add only what is missing (new objects · empty fields · About menu item).
  * Step 2026-11-18-elephant-text (refresh-2026-11-18.php): elephant object title / caption + 2 timeline card names → new Figma text only while the importer's value.
+ * Step 2026-11-18-home-hero (refresh-2026-11-18.php): Home hero image → Figma 88d09cb8 only while the importer's attachment of the old image.
  * Re-run a step on purpose: SH_IMPORT_REFRESH=<id>[,<id>] (or "all").
  *
  * @package sharedheritage-core
@@ -456,8 +457,10 @@ function sh_import_refresh( array $seed, array $map, array $manifest, array $obj
 		}
 		if ( array_key_exists( $step, sh_import_refresh_steps_2026_11_18() ) ) {
 			$ran[] = $step;
-			if ( sh_import_refresh_2026_11_18( $step, $seed ) ) {
+			if ( sh_import_refresh_2026_11_18( $step, $seed, $map, $pages ) ) {
 				$done[ $step ] = gmdate( 'c' );
+			} else {
+				unset( $done[ $step ] ); // New file missing: try again on the next import.
 			}
 			continue;
 		}
