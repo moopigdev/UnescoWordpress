@@ -122,12 +122,52 @@ function sh_slides_route(): void {
 add_action( 'template_redirect', 'sh_slides_route', 5 );
 
 /**
- * WordPress' canonical redirect would send `/timeline/<slug>/` to `/timeline/` (the queried page's permalink).
+ * WordPress' canonical redirect would send `/timeline/<slug>/` to `/timeline/` (the queried page's permalink). For a slide URL
+ * only the missing trailing slash is fixed instead (`/timeline/bird` → 301 `/timeline/bird/` · query string kept), nothing else.
  *
- * @param string|false $redirect Target URL.
+ * @param string|false $redirect  Target URL.
+ * @param string       $requested Requested URL.
  * @return string|false
  */
-function sh_slides_no_canonical( $redirect ) {
-	return '' !== (string) get_query_var( 'sh_slide' ) ? false : $redirect;
+function sh_slides_no_canonical( $redirect, $requested = '' ) {
+	if ( '' === (string) get_query_var( 'sh_slide' ) ) {
+		return $redirect;
+	}
+	$term  = sh_slide_request_trail();
+	$parts = wp_parse_url( (string) $requested );
+	$path  = is_array( $parts ) && isset( $parts['path'] ) ? (string) $parts['path'] : '';
+	$url   = $term instanceof WP_Term ? sh_timeline_url( $term ) : '';
+	if ( '' === $url || '' === $path || '/' === substr( $path, -1 ) ) {
+		return false;
+	}
+	return esc_url_raw( $url . ( ! empty( $parts['query'] ) ? '?' . $parts['query'] : '' ) );
 }
-add_filter( 'redirect_canonical', 'sh_slides_no_canonical' );
+add_filter( 'redirect_canonical', 'sh_slides_no_canonical', 10, 2 );
+
+/**
+ * `<link rel="canonical">` of a slide page = its own URL (not the Timeline page's).
+ *
+ * @param string|false $canonical Canonical URL.
+ * @return string|false
+ */
+function sh_slides_canonical_url( $canonical ) {
+	$term = sh_slide_request_trail();
+	$url  = $term instanceof WP_Term ? sh_timeline_url( $term ) : '';
+	return '' !== $url ? $url : $canonical;
+}
+add_filter( 'get_canonical_url', 'sh_slides_canonical_url' );
+
+/**
+ * `<title>` of a slide page starts with the trail name (admin-editable term name) instead of the Timeline page title.
+ *
+ * @param array<string, string> $parts Title parts.
+ * @return array<string, string>
+ */
+function sh_slides_document_title( array $parts ): array {
+	$term = sh_slide_request_trail();
+	if ( $term instanceof WP_Term && '' !== $term->name ) {
+		$parts['title'] = $term->name;
+	}
+	return $parts;
+}
+add_filter( 'document_title_parts', 'sh_slides_document_title' );
