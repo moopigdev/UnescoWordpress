@@ -9,6 +9,8 @@
  * already has the new text is left as it is (the 2026-11-11 import already wrote the Figma text to objects: nothing to do).
  * Never touched: slug (post_name · live URLs) · anything missing on the site (nothing is created or deleted).
  * Works with SH_IMPORT_ONLY=refresh (deploy.sh --refresh-only) and on a fresh import (finds everything already set).
+ * Step 2026-11-18-home-hero (homehero-1118 · BACKLOG #43): the Home hero image becomes the one of the current Figma
+ * (88d09cb8 "Southeast Asia") only while the Home page still holds the attachment the importer made from the old ref.
  *
  * @package sharedheritage-core
  */
@@ -24,7 +26,46 @@ function sh_import_refresh_steps_2026_11_18(): array {
 	return array(
 		// elephanttext-1118 (BACKLOG #42 · D61): elephant object titles / captions + timeline card names follow the new Figma.
 		'2026-11-18-elephant-text' => 'elephant objects post_title · sh_title_raw · sh_caption + timeline card names → new Figma text, only while the site still has what the importer wrote (title_prev · title_raw_prev · caption_prev) · slug unchanged · an admin edit stays: kept_admin',
+		// homehero-1118 (BACKLOG #43): Home hero image = Figma 88d09cb8 (the text in the picture reads "Southeast Asia").
+		'2026-11-18-home-hero'     => 'Home page sh_home_hero_image 2e3fa9c4 (South-East Asia) → 88d09cb8 (Southeast Asia), only while the field is still the attachment the importer made from 2e3fa9c4 · an image an admin chose stays: kept_admin · the old attachment stays in the media library',
 	);
+}
+
+/** Figma imageRef the Home hero used before 2026-11-18 (image-map.json pages.home.hero until homehero-1118). */
+const SH_IMPORT_HOME_HERO_PREV_1118 = '2e3fa9c46cbd208659aa21cdcd503d65ff002aee';
+
+/**
+ * Step 2026-11-18-home-hero: pages.home.hero of image-map.json is the new image. The Home page's sh_home_hero_image
+ * is switched to it only while it is exactly the attachment the importer made from the old ref (import key
+ * asset:<old ref>). Anything else (an admin picked another image · the field was cleared) = kept_admin. The old
+ * attachment is never deleted (the Introduction cover still uses it). Page missing on this site = nothing to do.
+ * Returns false when the new file is missing (warning raised) — the step runs again on the next import.
+ *
+ * @param array<string, mixed>                    $map   image-map.json.
+ * @param array<string, array{id:int,write:bool}> $pages Pages.
+ */
+function sh_import_refresh_home_hero_1118( array $map, array $pages ): bool {
+	$page = isset( $pages['front']['id'] ) ? (int) $pages['front']['id'] : 0;
+	$ref  = isset( $map['pages']['home']['hero'] ) ? (string) $map['pages']['home']['hero'] : '';
+	if ( ! $page || '' === $ref || SH_IMPORT_HOME_HERO_PREV_1118 === $ref ) {
+		return true;
+	}
+	$new = sh_imp_image( $map, $ref, 'Home hero' );
+	if ( ! $new ) {
+		return false;
+	}
+	$cur = (int) get_post_meta( $page, 'sh_home_hero_image', true );
+	if ( $cur === $new ) {
+		return true; // Already the new image (fresh import / done before).
+	}
+	$prev = sh_imp_find_attachment( 'asset:' . SH_IMPORT_HOME_HERO_PREV_1118 );
+	if ( $cur && $prev && $cur === $prev ) {
+		sh_imp_meta( 'post', $page, array( 'sh_home_hero_image' => $new ) );
+		sh_imp_count( 'updated', 'home_hero_swapped' );
+	} else {
+		sh_imp_keep( "page:front sh_home_hero_image (site attachment $cur is not the one the import made from the old image · new Figma image not applied)" );
+	}
+	return true;
 }
 
 /**
@@ -170,12 +211,17 @@ function sh_import_refresh_elephant_text_1118( array $seed ): void {
 /**
  * Run one step of this file. Returns true when done.
  *
- * @param string               $step Step id.
- * @param array<string, mixed> $seed Seed files.
+ * @param string                                  $step  Step id.
+ * @param array<string, mixed>                    $seed  Seed files.
+ * @param array<string, mixed>                    $map   image-map.json.
+ * @param array<string, array{id:int,write:bool}> $pages Pages.
  */
-function sh_import_refresh_2026_11_18( string $step, array $seed ): bool {
+function sh_import_refresh_2026_11_18( string $step, array $seed, array $map, array $pages ): bool {
 	if ( '2026-11-18-elephant-text' === $step ) {
 		sh_import_refresh_elephant_text_1118( $seed );
+	}
+	if ( '2026-11-18-home-hero' === $step ) {
+		return sh_import_refresh_home_hero_1118( $map, $pages );
 	}
 	return true;
 }
