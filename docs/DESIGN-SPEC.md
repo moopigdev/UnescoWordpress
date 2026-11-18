@@ -568,6 +568,77 @@ frame 1440×1582 แต่เนื้อหาในแนวนอนกว้
 - **ไม่เป็นลิงก์** (ไม่มี `/object/<slug>/` · ไม่มี Read more · title/body = ข้อความล้วน) · ชิ้นกลาง "p≥0.5" ใช้กับ a11y live region อ่าน title ตอน settle · a11y: จุด 16 = `<button aria-label="Reflection">` ≥44×44 · กล่องข้อความ `<section aria-label="Reflection">` อยู่ในลำดับอ่านต่อจากชิ้น 15
 - **Responsive `[P]`:** 768–1279 → กล่องข้อความใต้เส้น **กึ่งกลาง** กว้าง min(780, W − 48) · top = ตำแหน่งเดียวกับ "ภาพใต้เส้น" ของแท็บเล็ต (ว่าง · ไม่มีภาพ) · title 20/25 · body 14/17.5 · <768 → ใต้แถบจุด กว้างเต็ม padding 20 · title **18/22** · body **14/20** (เท่า metadata มือถือ) · ไม่มีลูกศร · ไม่ย่อด้วย k (เลย์เอาต์เรียงซ้อน)
 
+### 4.5d Zone 4 slide ของ 16 สัตว์ (D62 · BACKLOG #44 · Figma `3101:609` › **Section 55** `3380:6109` · `lastModified 2026-11-18T10:16:00Z` · seed `content/seed/timeline-slides.json` · task `zone4slides-1118`) — ต่อจาก §4.5c · **ช้างคง §4.5c/`timeline-elephant*.json` เดิมทั้งหมด**
+**ที่มา:** `GET /v1/files/:key/nodes?ids=3380:6109,3374:4423` (HTTP 200 · `design/figma-zone4slides-1118-nodes.json`) · นับจากไฟล์: Section 55 มี **157 ลูกตรง = 125 frame slide + 16 กล่อง Reflection + 16 frame หัว "** Reflection"** · 16 สัตว์ (ไม่มีช้าง) · ภาพทุกใบเป็น image fill (ต้นฉบับใน `design/assets/` หรือ `design/assets/zone4-slides/` · seed `_meta.asset_files`) · ⚠ มี SECTION ชื่อ "Section 55" อีกอัน `3339:6000` (ตัวอย่างสุ่มไพ่ · ไม่เกี่ยว) · ภาพอ้างอิง `design/frames/2026-11-18/section55-{bird1,hornbill3,naga5,reflection-bird-box,reflection-bird-header}.png` (ภาพรวมทั้ง Section render ไม่ได้ — Figma ตอบ 400 "too large")
+**ตารางสัตว์ ↔ trail ↔ แถวใน Figma** (1 แถว = 1 สัตว์ · 1 frame = 1 ชิ้นใน timeline · เรียงซ้าย→ขวา = เลขท้ายชื่อ frame · จับคู่แถว↔trail ตามชื่อ frame/ชื่อสัตว์ · slug ตรงกับ `trails.json`)
+| trail slug | URL | ชื่อ frame ใน Figma | frame แรก | จำนวน slide | ชิ้นใน trails.json | แถวภาพล่าง/ชิ้น | ภาพใหญ่ (กว้าง×สูง) | Reflection (อักขระ) |
+|---|---|---|---|---|---|---|---|---|
+| bird | `/timeline/bird/` | Bird 1–8 | `3380:6119` | 8 | 8 | 3 ×7 · **0 ×1 (Bird 1)** | 500×281 ×7 · 533×300 (Bird 6) | ✅ 1842 `3449:3850` |
+| hornbill | `/timeline/hornbill/` | Hornbill 1–7 | `3383:6283` | 7 | 7 | 3 ×7 (Hornbill 1 ภาพ 2=3) | 500×281 | ✅ 2410 `3458:5857` |
+| water-bird | `/timeline/water-bird/` | Waterbird 1–11 | `3383:6479` | 11 | 11 | 3 ×11 | 226 · 305 ×2 · 352 ×3 · 376 ×4 · 501 × 282 | ✅ 2448 `3458:5865` |
+| rooster | `/timeline/rooster/` | Chicken 1–11 (⚠ layer 11 มาก่อน 10 · เรียงตามเลข) | `3385:39` | 11 | 11 | 3 ×11 | 305 ×8 · 564 · 500×281 · 225×281 | ✅ 1783 `3458:5873` |
+| garuda | `/timeline/garuda/` | Garuda 1–5 | `3385:4151` | 5 | 5 | 3 ×5 | 305×282 | ✅ 1538 `3458:5881` |
+| phoenix | `/timeline/phoenix/` | Phoenix 1–8 | `3433:39` | 8 | 8 | 3 ×8 | 305×282 | ✅ 1051 `3458:5889` |
+| dragon | `/timeline/dragon/` | Dragon 1–9 | `3468:4939` | **9** | 10 | 3 ×9 | 353×282 | ✅ 2027 `3468:5076` |
+| buffalo | `/timeline/buffalo/` | Buffalo 1–5 | `3468:5084` | 5 | 5 | 3 ×5 | 353×282 | ✅ 1747 `3468:5162` |
+| horse | `/timeline/horse/` | Horse 1–6 | `3470:5170` | **6** | 7 | 3 ×6 | 353×282 | ✅ 2123 `3470:5280` |
+| deer | `/timeline/deer/` | Deer 1–4 | `3472:39` | 4 | 4 | 3 ×4 | 353×282 | ✅ 1956 `3472:2977` |
+| lion | `/timeline/lion/` | Lion 1–6 | `3472:2985` | 6 | 6 | 3 ×6 (Lion 2 ภาพ 1=3) | 352/353×282 | ✅ 2035 `3472:3085` |
+| naga | `/timeline/naga/` | **Serpent & Naga** 1–13 | `3472:3093` | 13 | 13 | 3 ×13 | 352/353×282 | ✅ 2152 `3472:3361` |
+| makara | `/timeline/makara/` | Makara 1–5 | `3473:3369` | 5 | 5 | 3 ×5 | 353×282 | ✅ 2064 `3473:3455` |
+| turtle | `/timeline/turtle/` | Turtle 1–5 | `3473:3463` | 5 | 5 | 3 ×5 | 353×282 | ✅ 2335 `3473:3633` |
+| fish | `/timeline/fish/` | Fish 1–8 | `3473:3641` | 8 | 8 | 3 ×8 | 353×282 | ✅ 2261 `3473:3878` |
+| seashell | `/timeline/seashell/` | Seashell 1–14 | `3473:3886` | 14 | 14 | 3 ×14 (Seashell 9 ภาพ 1=3) | 353×282 | ✅ 2403 `3474:4287` |
+| **รวม** | | | | **125** | 125+(Dragon 1 · Horse 1) | 123 ชิ้นมี 3 ภาพต่างกัน · 1 ชิ้น 3 ภาพ (2 ต่างกันติดกัน) · 1 ชิ้นไม่มีแถว (Bird 1) | | **16/16** |
+- **ช้าง:** ไม่มีชุด "Elephant n" ใน Section 55 (ตรวจชื่อ frame ทั้ง 157 ลูก) → ช้างคง timeline เดิม `/timeline/` (D62) · **`Frame 114466` `3374:4423` = การ์ดช้าง "Leg Bone" ของ Section 51 (ไม่ใช่ใน Section 55):** กว้าง 1129×144 · ภาพ 200×112 `4953122e` (`กระดูกช้าง 1` `3374:4424`) + กล่องข้อความ 719×144 (`3374:4427` 20px · "Period: Prehistoric / Scientific name / Taxonomy: Elephas maximus indicus / …") · ชื่อ+"Read more >>" ซ่อน → ไม่ใช้กับงานนี้
+- **ชื่อ frame ↔ ชื่อสัตว์ในเว็บ:** "Chicken" = trail `rooster` · "Waterbird" = `water-bird` · "Serpent & Naga" = `naga` · "Garuda/Phoenix/Dragon/…" ตรงชื่อ
+**โครงของ 1 frame (geometry ภายในทุกชั้น · พิกัดเทียบมุมซ้ายบน frame · ค่าเดียวกันทั้ง 125 frame เว้นที่ระบุ)** — Figma px · 1 frame = ภาพ "ชิ้นกลางจอ" ของ stage (ปรับสเกลแบบช้าง §4.5c.5 · ตัวอักษร 20px ใน Figma = การ์ดช้าง `3374:4427` ก็ 20px → ใช้ตัวคูณเดียวกับช้าง ไม่ตั้งค่าใหม่)
+| ชั้น | node (ตัวอย่าง Bird 2 `3380:6138`) | geometry | หมายเหตุ |
+|---|---|---|---|
+| Frame | กว้าง **995–1772** (ตามเนื้อหา) × สูง **940** (607 Bird 1 · 938–1183 เมื่อชื่อ/ข้อความยาว) | พื้นไม่มีสี (โปร่ง) | ไม่ใช่ canvas 1440 — frame = กล่องเนื้อหาที่ยึดกึ่งกลางภาพ |
+| ชื่อ (TEXT `3380:6139`) | `[ (W−กว้าง)/2 , 30 ]` · กว้าง 110–489 (Bird/ส่วนใหญ่ 477) × สูง **25** (1 บรรทัด · 114 frame) / 50 (7) / 75 (4) | **Komet-Heavy 800 · 20px / 25 · ตรงกลาง (`CENTER`) · `#212529`** · ขึ้นบรรทัดมือด้วย `\n` ในชื่อยาว (seed `title_raw`) | กึ่งกลางตรงกับภาพบน (offset 0 ทั้ง 125) · ชื่อ ≠ ช้าง: การ์ดช้าง `3103:1355` ชิดซ้าย |
+| ภาพบน (RECTANGLE `3380:6140`) | `[ (W−250)/2 , 30+สูงชื่อ+50 ]` = y **105** (130 · 155 เมื่อชื่อ 2–3 บรรทัด) · **250×141** (16:9) | scaleMode FIT 89 · STRETCH+transform 29 · FILL 7 (seed `top_fit`) | = ภาพบนเส้น + mini-map (D62) · ช้าง 180–200 กว้างไม่คงที่ |
+| แถวภาพ+ข้อความ `Frame 114491` | y = ภาพบนล่าง **+50** = **296** (321 · 346) · สูง 281–282 (สูงขึ้นเมื่อข้อความสูงกว่าภาพ: 300 · 325 · 475 · 525) | กว้างตามเนื้อหา (ภาพใหญ่ + 30 + ข้อความ) | ซ่อนในแถว: "Elephant Leg Bone" + "Read more >>" (visible:false · ไม่ใช้ · D27) |
+| ภาพใหญ่ (RECTANGLE `3383:6385` ฯลฯ) | ซ้ายสุดของแถว (x 0–250 ตามความกว้าง frame) · **กว้างต่อ frame** × สูง 281/282 | scaleMode FIT 66 · FILL 23 · STRETCH 36 (22 ใช้ transform) → seed `large_fit` | กว้าง: Bird/Hornbill 500 · Waterbird 226–501 · Chicken 225–564 · Garuda/Phoenix 305 · Dragon–Seashell 352/353 (seed `large_size`) — **อัตราส่วนกล่องต่างต่อชิ้น** (ไม่ใช่ 320×265 คงที่แบบช้าง) |
+| ข้อความ (`Frame 12683` › TEXT `3380:6145`) | x = ขวาภาพใหญ่ **+30** (29–31) · y = **กึ่งกลางแนวตั้งของภาพใหญ่** (กล่องสูง h → y = (282−h)/2 ใต้ขอบบนภาพใหญ่) · กว้าง 425–1049 (hug) · สูง 50–525 (2–21 บรรทัด) | **Komet-Regular 500 · 20px / 25 · ชิดซ้าย · `#212529`** · ขึ้นบรรทัดด้วย `\n` | ยาวสุด Seashell 2 `3473:3924` สูง 525 (21 บรรทัด · frame สูง 1183) · Bird 4 `3383:6186` สูง 475 · บาง frame มี `Frame 12683` ซ้อน 2 ชั้น (Serpent & Naga 5–13 ฯลฯ) = ข้อความเดียว |
+| แถวภาพล่าง `Frame 114492` (Naga 12–13 · Fish 6–8 = `Frame 114493`) | y = แถวบนล่าง **+50** = **628** (627 · 653 · 678) · สูง 282 · กว้าง = 3 ภาพ + 2 ช่อง | — | ไม่มีใน Bird 1 |
+| ภาพล่าง ×3 (RECTANGLE) | ซ้าย→ขวา · **กว้างเท่าภาพใหญ่ของ frame นั้น** × 281–282 · **ช่องว่าง 40** | scaleMode เหมือนข้างบน (seed `steps_fit`) | เรียงตาม x · ภาพ 4 ที่ซ่อนใน Bird 3–8 (`0cea94` + ลูกศร 3) ไม่ใช้ (`visible:false`) · Bird 2 ภาพ 1 มี fill 2 ชั้น (ชั้นแรกซ่อน) ใช้ชั้นที่แสดง `85776a` |
+| ลูกศรแดง (REGULAR_POLYGON ×2) | 20×20 · หมุน 90° (ชี้ขวา) · **`#FF3B30`** · x = ขวาภาพ + 10 · y = บนแถว + 131 (กึ่งกลางความสูง) | | = สัญลักษณ์ลำดับใน Figma → บนเว็บเป็น animation ตาม D62 (ไม่วาดแถว/ลูกศร) |
+| ระยะรวม | ชื่อ 30 → ภาพบน → 50 → แถวใหญ่ → 50 → แถวล่าง → 30 ล่าง | | ตรวจ: 105+141+50 = 296 ✓ · 296+282+50 = 628 ✓ · 628+282+30 = 940 ✓ |
+**แผนที่ frame Section 55 → องค์ประกอบ timeline (D62)**
+| ใน Figma | บนเว็บ (หน้า `/timeline/<trail-slug>/`) |
+|---|---|
+| 1 frame (125) | 1 ชิ้น (timeline stop) · ลำดับ = เลขท้ายชื่อ frame (Chicken 10 ก่อน 11) · **ไม่ใช้ลำดับ `trails.json`** (Waterbird: Hamsa = 5 ใน Figma / 11 ใน trails.json) |
+| TEXT ชื่อ | ชื่อชิ้นบน slide (ตาม Figma · `title` · `title_raw` มีขึ้นบรรทัดมือ) · **หน้า detail คงชื่อ object** (P-417) |
+| ภาพบน 250×141 | **ภาพบนเส้น (inactive/active ตาม §4.5c.3) + ภาพ mini-map** (D62 "mini-map ใช้ภาพจาก slide") · seed `top_image_ref` |
+| `Frame 114491` ภาพใหญ่ | ภาพใต้เส้นตอนไม่มีแถวล่าง (Bird 1) · มีแถวล่าง = ภาพใหญ่ = ก้าวสุดท้าย (119/124) · ต่างกัน 5 frame → ใช้**ก้าวสุดท้ายของแถวล่าง** (P-414) |
+| `Frame 114492` แถวล่าง 3 ภาพ + ลูกศรแดง | **animation ภาพใต้เส้น** ก้าว 1→2→3 ค้างที่ก้าวสุดท้าย (D62) · ภาพซ้ำติดกัน (Hornbill 1: ก้าว 2=3) ข้าม · A,B,A (Lion 2 · Seashell 9) เล่นครบ · seed `steps` · จำนวนก้าว = `steps_count` (123 ชิ้น = 3 ต่างกัน) · เวลา/easing = ค่าเดียวกับ "ก่อน▶หลัง" ของช้าง §6.4c ต่อก้าว `[P]` · ไม่วาดลูกศรแดง |
+| TEXT metadata | บล็อกข้อความใต้เส้น (แถว label: value) · seed `meta[]` (ตัดบรรทัด `\n` ต่อเนื่อง = ตัดบรรทัดมือ → ต่อด้วยช่องว่างตอนแสดง) · วางกึ่งกลางแนวตั้งของภาพใต้เส้น (Figma) |
+| กล่องขาว "Reflection" + หัว "** Reflection" | จุดที่ **n+1 ท้ายเส้น** ของสัตว์นั้น (D34 แบบช้าง §4.5c.7 · ไม่มีภาพ) · ดูข้อ Reflection · หัว "** Reflection" + ลูกศรแดง = หมายเหตุนักออกแบบ **ไม่แสดง** (P-418) |
+| `object_slug` | คลิกชื่อ + ภาพใต้เส้นของชิ้นกลาง → `/object/<slug>/` (D27) · 125/125 จับ object ได้ · slug ผูกจากชื่อ+slug (P-417) |
+**ข้อความ/สีที่ต่างจากช้าง (§4.5c):** ชื่อชิ้น `CENTER` (ช้าง `LEFT`) · ภาพบนคงที่ 250×141 (ช้าง 180–200 ไม่คงที่) · ภาพใหญ่/ภาพล่างกว้างต่างต่อชิ้น (ช้าง 500×281 หรือ 320×180 ต่อคู่) · แถวล่าง **3 ภาพ** (ช้าง 2 ภาพ ก่อน▶หลัง) · สี `#212529` เท่าเดิม · ฟอนต์ Komet เท่าเดิม · ข้อความ metadata ยาวถึง 525px (Seashell 2 · 21 บรรทัด) และ 475px (Bird 4) · กฎ "metadata ยาว → stage สูงขึ้น" ของ Reflection (§4.5c.7 ข้อ 2e: H = max(723, y + h_ข้อความ + 24)) ใช้กับ**ทุกชิ้น**ของสัตว์เหล่านี้ด้วย `[P]`
+**Reflection (16 กล่อง · seed `<trail>.reflection`)** — กล่องขาว `Frame 12683` **780 กว้าง** (สูง 460–935 ตามความยาวข้อความ) padding 10 · gap 15 · title "Reflection" **Komet-Heavy 20/25 `#212529`** + body **Komet-Regular 20/25 `#212529` justified** กว้าง 760 · `characterStyleOverrides` ไม่มี · "Read more >>" ซ่อน · ย่อหน้าคั่นด้วย `\n` เดี่ยว (ไม่มีบรรทัดว่าง · ไม่มี `paragraphSpacing`) ต่างจากช้าง (`\n\n`) → แสดงตามต้นฉบับ (ขึ้นบรรทัดใหม่ ไม่เว้น) · มี U+00A0 ท้ายประโยคก่อน `\n` ในบางย่อหน้า (คงไว้) · ตำแหน่ง/ความกว้าง/เวลาเลื่อนเหมือนช้าง §4.5c.7 (x 560→1340 · 780) · ความสูงเนื้อหา H_ref = max(723, 468.5 + h_body + 24) (กล่อง Reflection สูงสุด 935 = Hornbill)
+**พฤติกรรม (D62 · เจ้าของ 2026-11-18):**
+1. หน้า `/timeline/<trail-slug>/` ของ 16 สัตว์ = หน้าตา/การเลื่อน/active/mini-map/Back/‹ › เหมือนช้าง §4.5c (เพดานชิ้น n+1 รวม Reflection · c ∈ [1, n+1])
+2. **แถบไอคอนสัตว์ในหน้า slide: กดสัตว์ใด = ไป `/timeline/<slug>/` ของสัตว์นั้น** (เดิมไปหน้า trail) · ช้างคง `/timeline/` · ไอคอน 17 ตัว = 16 + ช้าง
+3. **หน้าคั่นเลือกสัตว์ Zone 4 (§4.10 · D37/D38): ทุกสัตว์ลิงก์ไป slide ของสัตว์นั้น** (แทน "ไม่ลิงก์" ในตารางสัตว์ §4.10 ของ 16 ตัว) · ช้างคง `/timeline/`
+4. ชิ้นที่มีแถวภาพล่าง: เมื่อชิ้นเลื่อนมากลาง ภาพใต้เส้นเปลี่ยน ก้าว 1→…→n แล้วค้างที่ก้าวสุดท้าย (n = 1–3) · n = 1 → แสดงภาพนั้นนิ่ง · ไม่มีแถวล่าง (Bird 1) → ภาพใหญ่
+5. ข้อความที่ผิดชัดใน Figma (P-410–P-413) แสดงตามต้นฉบับ (D53 ไม่แก้เอง) · admin แก้ได้ (D1/D10)
+**ฟิลด์ที่หน้าใช้ — เสนอให้ core ยกใน CONTENT-MODEL (ต่อ §5.4 · ไม่ใช่ชื่อฟิลด์ที่ตัดสินแล้ว · core ตัดสินโครงเก็บ/ชื่อ)** · ต่อ 1 ชิ้นใน 125:
+| ข้อมูล | ชนิด | ที่มา node | ตัวอย่าง (Bird 2 `3380:6138`) |
+|---|---|---|---|
+| trail (สัตว์) | taxonomy `trail` (ผูกกับ trail 16 slug) | แถวใน Figma | `bird` |
+| ลำดับ | int ≥1 | เลขท้ายชื่อ frame | 2 |
+| ชื่อบน slide `title` / `title_raw` | text | TEXT `3380:6139` | "Quail-Shaped Silver Casket" |
+| ภาพบน (ภาพบนเส้น + mini-map) | image + fit | RECTANGLE `3380:6140` `1d2415…` | 250×141 FIT |
+| ภาพใหญ่ + กว้าง×สูงกล่อง | image + fit + int×int | `3383:6385` `0cea94…` | 500×281 |
+| ภาพล่าง 0–3 (ตามลำดับ) | repeater/gallery ของ image + fit | `3380:6148` `85776a…` · `3380:6153` `32e46f…` · `3380:6155` `bff5da…` | 3 ก้าว · กล่อง 500×282 |
+| metadata | repeater {label, value} (label null ได้) | TEXT `3380:6145` | Section: Cosmology Religion & Spirituality · Place of Production / Findspot: … · Material: … · Dimensions: … · Collection: … · Other Information / Object Biography: … |
+| object ที่ลิงก์ | relationship → `object` | จับจากชื่อ+slug | `quail-shaped-silver-casket` |
+| Reflection ต่อ trail | title + body (text · `\n` = ขึ้นย่อหน้า) | กล่อง `3449:3850` (title `3449:3851` · body `3449:3852`) | "Reflection" / "Southeast Asia is home to more than 1,200 bird species …" |
+**ภาพ:** ภาพต้นฉบับทั้งหมดอยู่ใน `design/assets/` (เดิม) หรือ `design/assets/zone4-slides/` (ใหม่ · `<imageRef>.<ext>` · PNG/JPG RGBA ใหญ่ 2.5–4K px) · seed `_meta.asset_files` = ref → ไฟล์ · ภาพย่อ/trim/แปลงทำที่ wp-dev (importer) · มีภาพซ้ำข้ามสัตว์ (ref เดียวกัน เช่น `d8e808` = Dragon Head Tortoise ใน Waterbird 11/Dragon 9/Turtle 5) → ใช้ attachment เดียวกัน
+**ประเด็นที่ค้าง:** P-410 (Bird 4 ข้อความรวม 2 ชิ้น) · P-411 (Chicken 10/Phoenix 2 ข้อความเป็นของไก่) · P-412 (บรรทัดแทรก/ซ้ำ) · P-413 (สะกด label Section) · P-414 (ภาพใหญ่ ≠ ก้าวสุดท้าย 5 frame) · P-415 (จำนวนภาพแถวล่างจริง) · P-416 (trail ≠ slide: Dragon/Horse/Chicken/Buffalo) · P-417 (ชื่อ slide ≠ ชื่อ object 58 frame) · P-418 (Reflection หัวหมายเหตุ · `\n`) · P-419 (ชิ้นเดียวกันหลายสัตว์ ข้อความต่าง 4 คู่)
+
 ### 4.6 รายการ trail 17 + "Etc."
 ดู `content/seed/trails.json` — rooster · turtle · deer · dragon · fish · hornbill · horse · naga (=Serpent ใน 2.1) · water-bird · makara · lion · seashell · buffalo · phoenix · bird · garuda · elephant (17) + `etc` (4 วัตถุที่ยังไม่จัด trail) · จำนวนวัตถุต่อ trail (นับ record ใน objects.json): elephant 16 (15 final + Gringsing) · seashell 14 · naga 13 · rooster 10 · water-bird 10 · dragon 9 · phoenix 8 · fish 8 · bird 8 · hornbill 7 · horse 7 · lion 6 · turtle 5 · garuda 5 · buffalo 5 · deer 3 · makara 5 (3 + 2 ใหม่ 2026-11-17 · §8.6) · etc 4
 
