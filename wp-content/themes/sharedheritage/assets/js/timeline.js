@@ -11,10 +11,11 @@
  * Input: ‹ › 600 ms · ● / mini-map / object click: min(900, 400 + 80·|Δ|) ms · cubic-bezier(.4,0,.2,1) ·
  * drag (1 pitch = 376.6·k px) → snap 400 ms ease-out · horizontal wheel → idle 150 ms → snap 300 ms ·
  * ← → Home End. Reduced motion: no tween/settle (jumps, centre object full at once). Stage fit k: §4.5c.5.
- * D62 (§4.5d · animal slide pages): a stop with data-sh-tl-steps = n step images (.sh-tl__step, opacity --so) under the line:
- *   moving in = step 1 at the photo α (0.40p) · settle (as above) → step 1 full, then step k − 1 → k cross-fades 400 ms (EASE_XF)
- *   after a 700 ms hold each, and the LAST step stays · moving away before the end = the last step at once (like the colour photo
- *   of D35/D36) · back to step 1 only when the stop is out of the window (p = 0) · load = stop 1 plays from step 1 (no settle fade) ·
+ * D62/D63 (§4.5d · animal slide pages): a stop with data-sh-tl-steps = n step images (.sh-tl__step, opacity --so) under the line,
+ *   the same pattern as the elephant before → colour: moving in = step 1 at the photo α (0.40p) · settle (as above) → step 1 (0.40)
+ *   cross-fades straight to step 2 in 400 ms (EASE_XF; the group α = 1, no full step 1, no hold first) · only with 3 steps: a 600 ms
+ *   hold on step 2, then step 2 → 3 in 400 ms · the LAST step stays · moving again = the last step at α 0.40p (leaving fades it) ·
+ *   back to step 1 only when the stop is out of the window (p = 0) · load = stop 1 shows its last step at once (D30 · no animation) ·
  *   reduced motion = the last step at once. .is-near (±2.5 stops of the centre / the jump target ±1.5) marks the stops whose images load.
  * D34 (§4.5c.7): when the page has a Reflection text it is one more stop NS = N + 1 (● only, no image) — c ∈ [1, NS] ·
  *   text α = metadata formula 0.47p → settle 1 · the stage grows by (H_ref − stage)·p (desktop) / --refl-h·p (stacked).
@@ -85,8 +86,8 @@
 	var EASE = bezier( 0.4, 0, 0.2, 1 );
 	var EASE_OUT = bezier( 0, 0, 0.58, 1 );
 	var EASE_XF = bezier( 0, 0, 0.2, 1 );   // D35/D36 before → colour cross-fade (§6.4c)
-	var STEP_XF = 400;                      // D62: step k − 1 → k cross-fade (ms)
-	var STEP_HOLD = 700;                    // D62: pause on a step before the next cross-fade (ms)
+	var STEP_XF = 400;                      // D63: step k − 1 → k cross-fade (ms) = the elephant before → colour (SETTLE_MS)
+	var STEP_HOLD = 600;                    // D63: pause on the MIDDLE step (3 images only) before the last cross-fade (ms)
 
 	function clamp( v, lo, hi ) {
 		return Math.min( hi, Math.max( lo, v ) );
@@ -107,6 +108,7 @@
 	var xfIdx = 0;               // object whose before → colour cross-fade belongs to the current settle
 	var seq = [];                // D62 per stop: { mode: 0 first step · 1 playing · 2 last step, t0 }
 	var seqBusy = false;
+	var loadHold = false;        // D63: stop 1 of a slide page keeps its photo / last step at α 1 from load until the first input (no load fade)
 	var tNow = 0;                // timestamp of the frame being drawn
 	var announced = 0;
 	var suppressUntil = 0;
@@ -225,35 +227,38 @@
 		return ( a + ( 1 - a ) * s ).toFixed( 4 );
 	}
 
-	// D62: opacity of each of n steps e ms after the settle began · done = the last cross-fade has ended.
+	// D63: opacity of each of n steps e ms after the settle began (the elephant before → colour pattern, §6.4c D35/D36) ·
+	// step 1 (0.40) → step 2 over the settle itself (EASE_XF), then (n = 3) a short hold and step 2 → 3 · done = the last cross-fade has ended.
+	// The photo group is at α 1 while this plays (--pa), so step 1 starts at its 0.40 and the cross-fade never passes a full step 1.
 	function stepAlphas( n, e ) {
 		var a = [];
 		var k;
 		for ( k = 0; k < n; k++ ) {
-			a.push( 0 === k ? 1 : 0 );
+			a.push( 0 );
 		}
+		a[ 0 ] = 0.4;
 		for ( k = 1; k < n; k++ ) {
-			var u = clamp( ( e - ( SETTLE_MS + STEP_HOLD + ( k - 1 ) * ( STEP_XF + STEP_HOLD ) ) ) / STEP_XF, 0, 1 );
-			if ( u > 0 ) {
+			var u = clamp( ( e - ( k - 1 ) * ( STEP_XF + STEP_HOLD ) ) / STEP_XF, 0, 1 );
+			if ( 1 === k || u > 0 ) {
 				var x = EASE_XF( u );
-				a[ k - 1 ] = 1 - x;
+				a[ k - 1 ] = 1 === k ? 0.4 * ( 1 - x ) : 1 - x;
 				a[ k ] = x;
 			}
 		}
-		return { a: a, done: e >= SETTLE_MS + STEP_HOLD + ( n - 2 ) * ( STEP_XF + STEP_HOLD ) + STEP_XF };
+		return { a: a, done: e >= ( n - 2 ) * ( STEP_XF + STEP_HOLD ) + STEP_XF };
 	}
 
-	function renderSteps( i, p, settling ) {
+	function renderSteps( i, p, s, settling ) {
 		var list = steps[ i ];
 		var sq = seq[ i ] || ( seq[ i ] = { mode: 0, t0: 0 } );
 		if ( 0 === p ) {
 			sq.mode = 0;                     // out of the window: comes in as step 1 next time
 		} else if ( 0 === sq.mode && ( MQ_REDUCE.matches ? true : settling ) ) {
-			sq.mode = MQ_REDUCE.matches ? 2 : 1;
+			sq.mode = MQ_REDUCE.matches || list.length < 2 ? 2 : 1;
 			sq.t0 = null !== settleAt ? settleAt : tNow;
 		}
 		if ( 1 === sq.mode && ! settling ) {
-			sq.mode = 2;                     // moved away before the end: the last step (never stuck on a middle one)
+			sq.mode = 2;                     // moved away before the end: the last step at 0.40p (never stuck on a middle one)
 		}
 		var res = 1 === sq.mode ? stepAlphas( list.length, tNow - sq.t0 ) : null;
 		if ( res && res.done ) {
@@ -261,6 +266,7 @@
 			res = null;
 		}
 		seqBusy = seqBusy || 1 === sq.mode;
+		set( infos[ i ], 'pa' + i, '--pa', res || ( loadHold && 0 === i ) ? '1' : mix( 0.4 * p, s ) );
 		for ( var k = 0; k < list.length; k++ ) {
 			var v = res ? res.a[ k ] : ( 2 === sq.mode ? ( k === list.length - 1 ? 1 : 0 ) : ( 0 === k ? 1 : 0 ) );
 			set( list[ k ], 'so' + i + '_' + k, '--so', v.toFixed( 3 ) );
@@ -317,11 +323,10 @@
 					set( infos[ i ], 'pa' + i, '--pa', pa.toFixed( 4 ) );
 					set( lines[ i ], 'la' + i, '--la', la.toFixed( 4 ) );
 					toggle( lines[ i ], 'lo' + i, 'is-on', la > 0 );
+				} else if ( steps[ i ] ) {
+					renderSteps( i, p, s, idx === settleIdx && settleU > 0 );   // sets --pa too (D63)
 				} else {
-					set( infos[ i ], 'pa' + i, '--pa', mix( 0.4 * p, s ) );
-				}
-				if ( steps[ i ] ) {
-					renderSteps( i, p, idx === settleIdx && settleU > 0 );
+					set( infos[ i ], 'pa' + i, '--pa', loadHold && 0 === i ? '1' : mix( 0.4 * p, s ) );
 				}
 				if ( slideInfo[ i ] ) {
 					toggle( infos[ i ], 'nr' + i, 'is-near', Math.abs( idx - c ) <= 2.5 || Math.abs( idx - tgt ) <= 1.5 );
@@ -400,6 +405,7 @@
 
 	// Any user movement: α goes back to the position functions immediately.
 	function touched() {
+		loadHold = false;
 		lastInput = performance.now();
 		settleAt = null;
 		settleS = 0;
@@ -629,8 +635,11 @@
 
 	layout();
 	tNow = performance.now();
-	if ( steps[ 0 ] ) {                      // D62: stop 1 plays its steps once on load (reduced motion: the last step at once)
-		seq[ 0 ] = { mode: MQ_REDUCE.matches ? 2 : 1, t0: tNow };
+	if ( slideInfo[ 0 ] ) {                  // D63: no animation on load — stop 1 shows its last step (or its photo) at α 1 at once (D30)
+		loadHold = true;
+		if ( steps[ 0 ] ) {
+			seq[ 0 ] = { mode: 2, t0: tNow };
+		}
 	}
 	render();
 	kick();
