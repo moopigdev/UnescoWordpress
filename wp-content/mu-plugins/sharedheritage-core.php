@@ -21,3 +21,4 @@ require_once SH_CORE_DIR . '/inc/fields.php';
 require_once SH_CORE_DIR . '/inc/register.php';
 require_once SH_CORE_DIR . '/inc/settings.php';
 require_once SH_CORE_DIR . '/inc/api.php';
+require_once SH_CORE_DIR . '/inc/slides.php';

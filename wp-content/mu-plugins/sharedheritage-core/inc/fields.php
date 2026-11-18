@@ -348,6 +348,9 @@ function sh_core_field_groups(): array {
 				$img( 'sh_below_image', 'Photo under the line (optional)', 'Timeline: the large photo under the line when this object is in the centre. If empty, the card image is used. The object on the line, the mini-map and the object page always use the card image.' ),
 				$img( 'sh_below_image_2', 'Photo under the line 2 (optional)', 'Timeline: a second photo shown beside the photo under the line (two pieces shown as one group). Used only together with "Photo under the line".' ),
 				$img( 'sh_line_art', 'Before image (optional)', 'Timeline: shown in the large photo under the line while this object moves to the centre, then it cross-fades to the card image. Often a line drawing (transparent PNG); any image works. If empty, the card image is shown as before.' ),
+				$img( 'sh_step_1', 'Step image 1 (animal slides)', 'Animal timelines other than the elephant (D62): the photo under the line plays step 1 → 2 → 3 when this object reaches the centre and stays on the last step filled. One image filled = it is shown still. All empty = "Photo under the line" / the card image. The card image is the small one on the line and in the mini-map.' ),
+				$img( 'sh_step_2', 'Step image 2 (animal slides)', 'Played after step 1. Leave empty if the object has fewer steps.' ),
+				$img( 'sh_step_3', 'Step image 3 (animal slides)', 'Played after step 2. The photo stays on the last step.' ),
 			),
 		),
 		'trail'         => array(
@@ -370,6 +373,8 @@ function sh_core_field_groups(): array {
 				$img( 'sh_chooser_image', 'Zone 4 "choose an animal" image', 'Transparent PNG of the animal on the Zone 4 page. It links to this trail\'s timeline page when one is set; otherwise it is not a link.' ),
 				$img( 'sh_cover_image', 'Trail page cover (1120×497)' ),
 				$page( 'sh_timeline_page', 'Timeline page', 'Empty = this trail has no timeline.' ),
+				$text( 'sh_slide_reflection_title', 'Timeline: Reflection title', 'Animal timeline (D62): the last stop of this trail\'s timeline. Empty = "Reflection". The elephant uses the Timeline page\'s own Reflection fields.' ),
+				$area( 'sh_slide_reflection_body', 'Timeline: Reflection text', 'Paragraphs separated by a blank line · a single line break starts a new line. Empty = no Reflection stop.', 10 ),
 				sh_f(
 					'sh_object_order',
 					'relationship',
