@@ -192,6 +192,11 @@ function sh_import_slides( array $slides ): bool {
 			$ok = false;
 			continue;
 		}
+		// Guard: the main timeline's trail (the elephant — items `timeline:elephant:<n>`) is never touched, whatever the seed holds.
+		if ( 'elephant' === $term->slug || ( function_exists( 'sh_timeline_page_trail_id' ) && (int) $term->term_id === sh_timeline_page_trail_id() ) ) {
+			sh_imp_warn( 'slides: trail "' . $slug . '" is the main timeline trail — skipped (its timeline items are never touched by the slides seed)' );
+			continue;
+		}
 		foreach ( (array) $row['items'] as $it ) {
 			$ok = sh_import_slide_item( $slides, $term, (array) $it ) && $ok;
 		}
