@@ -158,7 +158,7 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 										'decoding'  => 'async',
 										'draggable' => 'false',
 										'sizes'     => (int) ceil( (float) $sh_item['photo'][0] ) . 'px',
-										'style'     => '--so:' . ( 0 === $sh_s ? '1' : '0' ),
+										'style'     => '--so:' . ( ( 0 === $sh_i && $sh_n_steps > 1 ? $sh_n_steps - 1 === $sh_s : 0 === $sh_s ) ? '1' : '0' ), // D63: stop 1 (2+ images) is server-rendered on its LAST image — no step-1 flash before the JS runs.
 									)
 								);
 							}
