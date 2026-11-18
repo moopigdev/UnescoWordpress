@@ -11,6 +11,11 @@
  * Input: ‹ › 600 ms · ● / mini-map / object click: min(900, 400 + 80·|Δ|) ms · cubic-bezier(.4,0,.2,1) ·
  * drag (1 pitch = 376.6·k px) → snap 400 ms ease-out · horizontal wheel → idle 150 ms → snap 300 ms ·
  * ← → Home End. Reduced motion: no tween/settle (jumps, centre object full at once). Stage fit k: §4.5c.5.
+ * D62 (§4.5d · animal slide pages): a stop with data-sh-tl-steps = n step images (.sh-tl__step, opacity --so) under the line:
+ *   moving in = step 1 at the photo α (0.40p) · settle (as above) → step 1 full, then step k − 1 → k cross-fades 400 ms (EASE_XF)
+ *   after a 700 ms hold each, and the LAST step stays · moving away before the end = the last step at once (like the colour photo
+ *   of D35/D36) · back to step 1 only when the stop is out of the window (p = 0) · load = stop 1 plays from step 1 (no settle fade) ·
+ *   reduced motion = the last step at once. .is-near (±2.5 stops of the centre / the jump target ±1.5) marks the stops whose images load.
  * D34 (§4.5c.7): when the page has a Reflection text it is one more stop NS = N + 1 (● only, no image) — c ∈ [1, NS] ·
  *   text α = metadata formula 0.47p → settle 1 · the stage grows by (H_ref − stage)·p (desktop) / --refl-h·p (stacked).
  */
@@ -30,6 +35,12 @@
 	var infos = all( '[data-sh-tl-info]' );
 	var lines = infos.map( function ( info ) {
 		return info.querySelector( '.sh-tl__photo-line' );
+	} );
+	var steps = infos.map( function ( info ) {
+		return info.hasAttribute( 'data-sh-tl-steps' ) ? Array.prototype.slice.call( info.querySelectorAll( '.sh-tl__step' ) ) : null;
+	} );
+	var slideInfo = infos.map( function ( info ) {
+		return info.classList.contains( 'is-slide' );
 	} );
 	var dots = all( '[data-sh-tl-dot]' );
 	var prevBtn = root.querySelector( '[data-sh-tl-prev]' );
@@ -74,6 +85,8 @@
 	var EASE = bezier( 0.4, 0, 0.2, 1 );
 	var EASE_OUT = bezier( 0, 0, 0.58, 1 );
 	var EASE_XF = bezier( 0, 0, 0.2, 1 );   // D35/D36 before → colour cross-fade (§6.4c)
+	var STEP_XF = 400;                      // D62: step k − 1 → k cross-fade (ms)
+	var STEP_HOLD = 700;                    // D62: pause on a step before the next cross-fade (ms)
 
 	function clamp( v, lo, hi ) {
 		return Math.min( hi, Math.max( lo, v ) );
@@ -92,6 +105,9 @@
 	var settleU = 1;             // linear settle progress 0 → 1 (settleS = eased)
 	var colorIdx = 1;            // object whose photo is in phase "colour" (D35/D36) — D30: object 1 at load
 	var xfIdx = 0;               // object whose before → colour cross-fade belongs to the current settle
+	var seq = [];                // D62 per stop: { mode: 0 first step · 1 playing · 2 last step, t0 }
+	var seqBusy = false;
+	var tNow = 0;                // timestamp of the frame being drawn
 	var announced = 0;
 	var suppressUntil = 0;
 	var raf = 0;
@@ -209,7 +225,51 @@
 		return ( a + ( 1 - a ) * s ).toFixed( 4 );
 	}
 
+	// D62: opacity of each of n steps e ms after the settle began · done = the last cross-fade has ended.
+	function stepAlphas( n, e ) {
+		var a = [];
+		var k;
+		for ( k = 0; k < n; k++ ) {
+			a.push( 0 === k ? 1 : 0 );
+		}
+		for ( k = 1; k < n; k++ ) {
+			var u = clamp( ( e - ( SETTLE_MS + STEP_HOLD + ( k - 1 ) * ( STEP_XF + STEP_HOLD ) ) ) / STEP_XF, 0, 1 );
+			if ( u > 0 ) {
+				var x = EASE_XF( u );
+				a[ k - 1 ] = 1 - x;
+				a[ k ] = x;
+			}
+		}
+		return { a: a, done: e >= SETTLE_MS + STEP_HOLD + ( n - 2 ) * ( STEP_XF + STEP_HOLD ) + STEP_XF };
+	}
+
+	function renderSteps( i, p, settling ) {
+		var list = steps[ i ];
+		var sq = seq[ i ] || ( seq[ i ] = { mode: 0, t0: 0 } );
+		if ( 0 === p ) {
+			sq.mode = 0;                     // out of the window: comes in as step 1 next time
+		} else if ( 0 === sq.mode && ( MQ_REDUCE.matches ? true : settling ) ) {
+			sq.mode = MQ_REDUCE.matches ? 2 : 1;
+			sq.t0 = null !== settleAt ? settleAt : tNow;
+		}
+		if ( 1 === sq.mode && ! settling ) {
+			sq.mode = 2;                     // moved away before the end: the last step (never stuck on a middle one)
+		}
+		var res = 1 === sq.mode ? stepAlphas( list.length, tNow - sq.t0 ) : null;
+		if ( res && res.done ) {
+			sq.mode = 2;
+			res = null;
+		}
+		seqBusy = seqBusy || 1 === sq.mode;
+		for ( var k = 0; k < list.length; k++ ) {
+			var v = res ? res.a[ k ] : ( 2 === sq.mode ? ( k === list.length - 1 ? 1 : 0 ) : ( 0 === k ? 1 : 0 ) );
+			set( list[ k ], 'so' + i + '_' + k, '--so', v.toFixed( 3 ) );
+		}
+	}
+
 	function render() {
+		seqBusy = false;
+		var tgt = target();
 		root.style.setProperty( '--c', c.toFixed( 5 ) );
 		for ( var i = 0; i < NS; i++ ) {
 			var idx = i + 1;
@@ -259,6 +319,12 @@
 					toggle( lines[ i ], 'lo' + i, 'is-on', la > 0 );
 				} else {
 					set( infos[ i ], 'pa' + i, '--pa', mix( 0.4 * p, s ) );
+				}
+				if ( steps[ i ] ) {
+					renderSteps( i, p, idx === settleIdx && settleU > 0 );
+				}
+				if ( slideInfo[ i ] ) {
+					toggle( infos[ i ], 'nr' + i, 'is-near', Math.abs( idx - c ) <= 2.5 || Math.abs( idx - tgt ) <= 1.5 );
 				}
 				set( infos[ i ], 'ma' + i, '--ma', mix( 0.47 * p, s ) );
 				toggle( infos[ i ], 'iv' + i, 'is-vis', p > 0 );
@@ -350,6 +416,7 @@
 
 	function frame( now ) {
 		raf = 0;
+		tNow = now;
 		var more = false;
 		if ( tween ) {
 			var t = Math.min( 1, ( now - tween.start ) / tween.dur );
@@ -393,7 +460,7 @@
 			}
 		}
 		render();
-		if ( more ) {
+		if ( more || seqBusy ) {
 			kick();
 		}
 	}
@@ -561,7 +628,12 @@
 	} );
 
 	layout();
+	tNow = performance.now();
+	if ( steps[ 0 ] ) {                      // D62: stop 1 plays its steps once on load (reduced motion: the last step at once)
+		seq[ 0 ] = { mode: MQ_REDUCE.matches ? 2 : 1, t0: tNow };
+	}
 	render();
+	kick();
 	root.classList.add( 'is-ready' );
 	if ( document.fonts && document.fonts.ready ) {
 		document.fonts.ready.then( fitTitles );

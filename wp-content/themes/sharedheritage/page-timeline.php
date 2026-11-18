@@ -12,6 +12,9 @@
  * Content: sh_timeline_items() by sh_card_order (CONTENT-MODEL §3) · layout constants: template-parts/timeline/geometry.php.
  * Reflection = last stop N + 1 (D34 · §4.5c.7: ● only on the line · title + text under it) · Back §3.3 (D27) ·
  * no Read more (title + photo of the centre object link to the object).
+ * D62 (zone4slides-1118 · DESIGN-SPEC §4.5d): `/timeline/<trail-slug>/` = the same page for one of the 16 other animals (query var
+ * `sh_slide`, mu-plugin inc/slides.php) — cards = that trail's timeline_items (sh_tl_slide_item()), the photo under the line plays
+ * the step images 1 → n (sh_step_1..3), Reflection = the trail's sh_slide_reflection_* term meta, icons link to each animal's slide.
  *
  * @package sharedheritage
  */
@@ -27,8 +30,9 @@ $sh_api     = function_exists( 'sh_get' ) && function_exists( 'sh_timeline_items
 $sh_trail   = null;
 $sh_posts   = array();
 $sh_nav     = array();
+$sh_slide   = function_exists( 'sh_slide_request_trail' ) ? sh_slide_request_trail() : null; // D62: an animal other than the elephant.
 if ( $sh_api ) {
-	$sh_term  = get_term( absint( sh_get( 'sh_timeline_trail', $sh_page_id ) ), 'trail' );
+	$sh_term  = $sh_slide ? $sh_slide : get_term( absint( sh_get( 'sh_timeline_trail', $sh_page_id ) ), 'trail' );
 	$sh_trail = $sh_term instanceof WP_Term ? $sh_term : null;
 	$sh_posts = $sh_trail ? sh_timeline_items( $sh_trail ) : array();
 	$sh_nav   = sh_trails( 'timeline_nav' );
@@ -38,21 +42,22 @@ $sh_geo   = include __DIR__ . '/template-parts/timeline/geometry.php';
 $sh_geo   = is_array( $sh_geo ) ? $sh_geo : array();
 $sh_items = array();
 foreach ( $sh_posts as $sh_post ) {
-	$sh_data = sh_tl_item( $sh_post, $sh_geo );
+	$sh_data = $sh_slide ? sh_tl_slide_item( $sh_post, $sh_trail ) : sh_tl_item( $sh_post, $sh_geo );
 	if ( $sh_data ) {
 		$sh_items[] = $sh_data;
 	}
 }
 $sh_count = count( $sh_items );
 // D34 (§4.5c.7): Reflection = stop N + 1 after the last object · no image · empty body = no stop.
-$sh_refl_body  = $sh_api && $sh_count ? trim( (string) sh_get( 'sh_timeline_reflection_body', $sh_page_id ) ) : '';
-$sh_refl_title = '' !== $sh_refl_body ? trim( (string) sh_get( 'sh_timeline_reflection_title', $sh_page_id ) ) : '';
+// D62: an animal slide page reads the trail's own term meta (sh_slide_reflection_*), the elephant the Timeline page's fields.
+$sh_refl_body  = $sh_api && $sh_count ? trim( (string) ( $sh_slide ? sh_get_term( 'sh_slide_reflection_body', $sh_slide ) : sh_get( 'sh_timeline_reflection_body', $sh_page_id ) ) ) : '';
+$sh_refl_title = '' !== $sh_refl_body ? trim( (string) ( $sh_slide ? sh_get_term( 'sh_slide_reflection_title', $sh_slide ) : sh_get( 'sh_timeline_reflection_title', $sh_page_id ) ) ) : '';
 $sh_refl_title = '' !== $sh_refl_title ? $sh_refl_title : __( 'Reflection', 'sharedheritage' );
 $sh_refl_i     = '' !== $sh_refl_body ? $sh_count + 1 : 0;
 $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timeline', 'sharedheritage' ), $sh_trail->name ) : __( 'Timeline', 'sharedheritage' );
 ?>
-<section class="sh-tl" aria-roledescription="carousel" aria-label="<?php echo esc_attr( $sh_label ); ?>" data-sh-tl style="--n:<?php echo esc_attr( (string) $sh_count ); ?>">
-	<h1 class="screen-reader-text"><?php echo esc_html( get_the_title( $sh_page_id ) ); ?></h1>
+<section class="sh-tl<?php echo $sh_slide ? ' sh-tl--slides' : ''; ?>" aria-roledescription="carousel" aria-label="<?php echo esc_attr( $sh_label ); ?>" data-sh-tl style="--n:<?php echo esc_attr( (string) $sh_count ); ?>">
+	<h1 class="screen-reader-text"><?php echo esc_html( $sh_slide ? $sh_label : get_the_title( $sh_page_id ) ); ?></h1>
 	<div class="sh-tl__fit">
 		<div class="sh-tl__stage" tabindex="0" aria-label="<?php esc_attr_e( 'Use the left and right arrow keys to move along the timeline', 'sharedheritage' ); ?>" data-sh-tl-stage>
 			<div class="sh-tl__top">
@@ -63,7 +68,8 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 							$sh_icon = absint( sh_get_term( 'sh_icon_timeline', $sh_nav_term ) );
 							$sh_img  = $sh_icon ? wp_get_attachment_image( $sh_icon, 'full', false, array( 'class' => 'sh-tl__trail-img', 'alt' => $sh_nav_term->name, 'loading' => 'eager', 'decoding' => 'async', 'draggable' => 'false', 'sizes' => '50px' ) ) : '';
 							$sh_img  = '' !== $sh_img ? $sh_img : '<span class="sh-tl__trail-img screen-reader-text">' . esc_html( $sh_nav_term->name ) . '</span>';
-							$sh_link = sh_trail_objects( $sh_nav_term ) ? get_term_link( $sh_nav_term ) : '';
+							$sh_link = function_exists( 'sh_timeline_url' ) ? sh_timeline_url( $sh_nav_term ) : ''; // D62: each animal's slide page (elephant → /timeline/).
+							$sh_link = '' !== $sh_link ? $sh_link : ( sh_trail_objects( $sh_nav_term ) ? get_term_link( $sh_nav_term ) : '' ); // No slides: its trail page, as before.
 							$sh_cur  = $sh_trail && $sh_trail->term_id === $sh_nav_term->term_id;
 							?>
 							<li class="sh-tl__trail">
@@ -132,6 +138,44 @@ $sh_label = $sh_trail ? sprintf( /* translators: %s: trail name */ __( '%s timel
 			<div class="sh-tl__below">
 				<?php
 				foreach ( $sh_items as $sh_i => $sh_item ) :
+					if ( $sh_slide ) :
+						// D62: photo under the line = the step images stacked (timeline.js plays 1 → n, holds the last) · only the stops near the centre
+						// are displayed (.is-near) so lazy images of far stops are not fetched · the first three are near at load.
+						$sh_n_steps = count( $sh_item['steps'] );
+						?>
+						<div class="sh-tl__info is-slide<?php echo $sh_i < 3 ? ' is-near' : ''; ?><?php echo 0 === $sh_i ? ' is-vis is-center' : ''; ?>" style="<?php echo esc_attr( sh_tl_style( array( '--pw' => sh_tl_num( $sh_item['photo'][0] ), '--ar' => sh_tl_num( $sh_item['bratio'] ) ) + ( 0 === $sh_i ? array( '--pa' => '1', '--ma' => '1' ) : array() ) ) ); ?>" data-sh-tl-info data-title="<?php echo esc_attr( $sh_item['title'] ); ?>" data-period="<?php echo esc_attr( $sh_item['period'] ); ?>"<?php echo $sh_n_steps > 1 ? ' data-sh-tl-steps="' . esc_attr( (string) $sh_n_steps ) . '"' : ''; ?>>
+							<?php
+							$sh_pic = '<span class="sh-tl__steps">';
+							foreach ( $sh_item['steps'] as $sh_s => $sh_step_id ) {
+								$sh_pic .= wp_get_attachment_image(
+									(int) $sh_step_id,
+									'full',
+									false,
+									array(
+										'class'     => 'sh-tl__step',
+										'alt'       => 0 === $sh_s ? $sh_item['title'] : '',
+										'loading'   => 0 === $sh_i ? 'eager' : 'lazy',
+										'decoding'  => 'async',
+										'draggable' => 'false',
+										'sizes'     => (int) ceil( (float) $sh_item['photo'][0] ) . 'px',
+										'style'     => '--so:' . ( 0 === $sh_s ? '1' : '0' ),
+									)
+								);
+							}
+							$sh_pic .= '</span>';
+							if ( '' !== $sh_item['url'] ) {
+								echo '<a class="sh-tl__photo" href="' . esc_url( $sh_item['url'] ) . '" tabindex="-1" aria-hidden="true">' . $sh_pic . '</a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_get_attachment_image() output.
+							} else {
+								echo '<span class="sh-tl__photo">' . $sh_pic . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- as above.
+							}
+							?>
+							<?php if ( ! empty( $sh_item['lines'] ) ) : ?>
+								<p class="sh-tl__meta"><?php echo implode( '<br>', array_map( 'sh_tl_meta_row_html', $sh_item['lines'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- each row escaped in sh_tl_meta_row_html(). ?></p>
+							<?php endif; ?>
+						</div>
+						<?php
+						continue;
+					endif;
 					$sh_line = ! empty( $sh_item['line'] ) ? sh_tl_line_pic( $sh_item, 0 === $sh_i ? 'eager' : 'lazy' ) : ''; // D35.
 					$sh_u    = ! empty( $sh_item['below'] ) ? $sh_item['below'] : $sh_item; // D39/D41: sh_below_image ?: sh_thumbnail.
 					?>

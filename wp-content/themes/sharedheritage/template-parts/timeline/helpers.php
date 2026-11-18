@@ -400,3 +400,96 @@ function sh_tl_meta_row_html( $row ) {
 	}
 	return '<strong class="sh-tl__meta-h">' . esc_html( substr( $row, 0, $pos + 1 ) ) . '</strong>' . esc_html( substr( $row, $pos + 1 ) );
 }
+
+/**
+ * Metadata rows of a slide (D62 · §4.5d): same row rule as the elephant timeline (a row starts at a "Heading:" line, other
+ * lines continue the row above) but the "Section :" row IS shown (Figma Section 55 draws it) and a line right after it starts
+ * a new row (the Section row is one line).
+ *
+ * @param string $raw sh_card_meta.
+ * @return array{lines: string[], period: string}
+ */
+function sh_tl_slide_meta( string $raw ): array {
+	$rows = array();
+	$prev_section = false;
+	foreach ( preg_split( '/\R/u', $raw ) as $line ) {
+		$line = trim( $line );
+		if ( '' === $line ) {
+			continue;
+		}
+		if ( $rows && ! $prev_section && ! sh_tl_meta_is_row_start( $line ) ) {
+			$rows[ count( $rows ) - 1 ] .= ' ' . $line;
+		} else {
+			$rows[] = $line;
+		}
+		$prev_section = 1 === preg_match( '/^section\s*:/i', $line );
+	}
+	$period = '';
+	foreach ( $rows as $row ) {
+		if ( '' === $period && preg_match( '/^period\s*:\s*(.+)$/i', $row, $m ) ) {
+			$period = $m[1];
+		}
+	}
+	return array( 'lines' => $rows, 'period' => $period );
+}
+
+/**
+ * Everything one stop of an animal slide page needs (D62 · DESIGN-SPEC §4.5d · CONTENT-MODEL §3) — same keys as
+ * sh_tl_item() so the line / mini-map markup is shared, plus `steps` (attachment ids of the photo under the line, played 1 → n).
+ * Sizes come from the files, not from a design table (the slide images are baked by the importer at 2 px per design px):
+ *   on the line · active = the card image's pixels ÷ 2 (= its Figma size, ≤ 250×141) · rest = half of it (scale ×2) · mini ≤ 48×38.
+ *   under the line = the last step (or `sh_below_image`, or the card image) contained in 320×265, never larger than its pixels.
+ *
+ * @param WP_Post      $item  timeline_item.
+ * @param WP_Term|null $trail Trail the page shows (for the object link's ?sh_trail version, D59).
+ * @return array<string, mixed>|null null when the item has no card image.
+ */
+function sh_tl_slide_item( WP_Post $item, ?WP_Term $trail ): ?array {
+	$top = absint( sh_get( 'sh_thumbnail', $item->ID ) );
+	$src = ( $top && wp_attachment_is_image( $top ) ) ? wp_get_attachment_image_src( $top, 'full' ) : false;
+	if ( ! $src || empty( $src[1] ) || empty( $src[2] ) ) {
+		return null;
+	}
+	$fw    = (float) $src[1];
+	$fh    = (float) $src[2];
+	$ratio = $fw / $fh;
+	$act_w = min( sh_tl_contain( $ratio, 250, 141 )[0], $fw / 2 ); // Figma size (file px ÷ 2) · ≤ 250×141.
+	$act_h = $act_w / $ratio;
+
+	$steps = array();
+	foreach ( array( 'sh_step_1', 'sh_step_2', 'sh_step_3' ) as $field ) {
+		$id = absint( sh_get( $field, $item->ID ) );
+		if ( $id && wp_attachment_is_image( $id ) ) {
+			$steps[] = $id;
+		}
+	}
+	if ( ! $steps ) { // No step images: the photo under the line (sh_below_image) or the card image, still.
+		$below = absint( sh_get( 'sh_below_image', $item->ID ) );
+		$steps = array( ( $below && wp_attachment_is_image( $below ) ) ? $below : $top );
+	}
+	$last = wp_get_attachment_image_src( (int) end( $steps ), 'full' );
+	$bw   = $last && ! empty( $last[1] ) ? (float) $last[1] : $fw;
+	$bh   = $last && ! empty( $last[2] ) ? (float) $last[2] : $fh;
+	$br   = $bw / max( 1.0, $bh );
+	$pho  = sh_tl_contain( $br, 320, 265 );
+	if ( $pho[0] > $bw ) {
+		$pho = array( $bw, $bh ); // ⛔ never larger than the file's pixels (§4.5c.3).
+	}
+
+	$meta      = sh_tl_slide_meta( (string) sh_get( 'sh_card_meta', $item->ID ) );
+	$object_id = absint( sh_get( 'sh_object', $item->ID ) );
+	return array(
+		'photo'  => $pho,
+		'mini'   => sh_tl_contain( $ratio, 48, 38 ),
+		'ratio'  => $ratio,
+		'rest'   => array( $act_w / 2, $act_h / 2 ),
+		'scale'  => 2.0,
+		'images' => array( array( 'field' => 'sh_thumbnail', 'id' => $top, 'src' => array( (int) $fw, (int) $fh ), 'crop' => array( 0, 0, (int) $fw, (int) $fh ), 'box' => array( 0, 0, 1, 1 ) ) ),
+		'steps'  => $steps,
+		'bratio' => $br,
+		'title'  => get_the_title( $item ),
+		'url'    => ( $object_id && 'publish' === get_post_status( $object_id ) ) ? sh_object_trail_url( $object_id, $trail ? $trail : 0 ) : '',
+		'lines'  => $meta['lines'],
+		'period' => $meta['period'],
+	);
+}
