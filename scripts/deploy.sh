@@ -141,7 +141,7 @@ if [ "$IMPORT" != 0 ]; then
   # ตาม content/media-manifest.json) · ไฟล์ที่อ้างแต่ไม่มี / ชื่อไม่ปลอดภัย = php exit ≠ 0 → หยุดก่อนเชื่อมต่อ
   LIST="$("$PHP" "$REPO/scripts/import/bundle-files.php" "$ASSETS" "$REPO/content" "$REPO/scripts/import/image-map.json" "$MEDIA")" \
     || sh_die "ไฟล์ที่ import อ้าง (image-map / style *_ref / seed 2026-11-17 / media manifest) ไม่ครบ — ดูรายการด้านบน · ยังไม่ได้เชื่อมต่อ server"
-  NA=0; NR=0; NS=0; NM=0; FILES=""; MFILES=""; REFS=""
+  NA=0; NR=0; NS=0; NM=0; NB=0; FILES=""; MFILES=""; REFS=""; BAKES=""
   while IFS="$(printf '\t')" read -r kind f box; do
     [ -n "$f" ] || continue
     case "$kind" in
@@ -162,6 +162,18 @@ if [ "$IMPORT" != 0 ]; then
         [ -z "$box" ] || [ "${box%@*}" = 0x0 ] || NS=$((NS + 1))   # 0x0 = ขนาดเดิม (กฎ PNG → JPEG เท่านั้น)
         FILES="$FILES$f	$box
 " ;;
+      bake)
+        # D62 (zone4slides-1118): ภาพ slide 16 สัตว์ — $f = zone4-slides-web/<unit>.webp · $box = "<ต้นฉบับ>TAB<spec json>" → อบเป็น WebP เล็กใน bundle
+        # (ต้นฉบับ 4K ไม่ถูกส่ง) · ชื่อ/ที่มาตรวจเข้ม: ชั้นเดียวใต้ zone4-slides-web/ · ต้นฉบับ [zone4-slides/]<40 hex>.png|jpg|jpeg|webp
+        bsrc="${box%%$'\t'*}"
+        case "$f" in
+          .*|*/.*|*..*|zone4-slides-web/*/*) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
+          zone4-slides-web/?*.webp) ;;
+          *) sh_die "ชื่อไฟล์ไม่ปลอดภัย: $f" ;;
+        esac
+        [[ "$bsrc" =~ ^(zone4-slides/)?[0-9a-f]{40}\.(png|jpg|jpeg|webp)$ ]] || sh_die "ชื่อไฟล์ต้นฉบับไม่ปลอดภัย: $bsrc"
+        [ -f "$ASSETS/$bsrc" ] || sh_die "ไม่พบ $ASSETS/$bsrc"
+        NB=$((NB + 1)); BAKES="$BAKES$f"$'\t'"$box"$'\n' ;;
       media)
         # media/out: ไฟล์ชั้นบน (ชุดช้าง) · objects-1117/<trail>/<file> · intro-1117/<บท>/<file> (media-1117 · P-303)
         case "$f" in
@@ -176,7 +188,7 @@ if [ "$IMPORT" != 0 ]; then
       *) sh_die "bundle-files: ชนิดไม่รู้จัก ($kind)" ;;
     esac
   done <<< "$LIST"
-  sh_say "bundle import: scripts/import + content + ภาพ $((NA + NR)) ไฟล์ (image-map $NA + style *_ref/seed $NR · ย่อเหลือ 2× $NS) + media/out $NM ไฟล์"
+  sh_say "bundle import: scripts/import + content + ภาพ $((NA + NR)) ไฟล์ (image-map $NA + style *_ref/seed $NR · ย่อเหลือ 2× $NS) + ภาพ slide อบเป็น WebP $NB ไฟล์ + media/out $NM ไฟล์"
   if [ "$DRY" = 1 ]; then for f in $REFS; do sh_say "  *_ref: $f"; done; fi
   # สร้าง bundle ในเครื่องเสมอ (dry-run ก็สร้าง เพื่อรายงานขนาดจริง แล้วลบ · ยังไม่เชื่อมต่อ server)
   LB="$(mktemp -d "${TMPDIR:-/tmp}/sh-deploy-bundle.XXXXXX")"
@@ -197,6 +209,15 @@ if [ "$IMPORT" != 0 ]; then
       cp "$ASSETS/$f" "$LB/assets/$f"
     fi
   done <<< "$FILES"
+  # D62: ภาพ slide — อบจากต้นฉบับ (4K) เป็น WebP เล็กต่อหน่วย (กล่อง Figma × ความละเอียด · fit/trim ตาม seed) · PHP + GD (ไม่มี WebP = หยุด)
+  BAKED_FROM=0
+  while IFS="$(printf '\t')" read -r f bsrc bspec; do
+    [ -n "$f" ] || continue
+    mkdir -p "$(dirname "$LB/assets/$f")"
+    BAKED_FROM=$((BAKED_FROM + $(wc -c < "$ASSETS/$bsrc")))
+    "$PHP" "$REPO/scripts/import/slide-image.php" "$ASSETS/$bsrc" "$LB/assets/$f" "$bspec" > /dev/null \
+      || sh_die "อบภาพ slide ไม่สำเร็จ (หรือ PHP ในเครื่องไม่มี GD WebP): $bsrc"
+  done <<< "$BAKES"
   while IFS= read -r f; do
     [ -n "$f" ] || continue
     mkdir -p "$(dirname "$LB/media/$f")" && cp "$MEDIA/$f" "$LB/media/$f"
@@ -204,6 +225,7 @@ if [ "$IMPORT" != 0 ]; then
   kb() { du -sk "$1" | cut -f1; }
   sh_say "PNG > 1 MB → JPEG: $NJ ไฟล์"
   for f in $JPEGS; do sh_say "  jpeg: $f ($(( $(wc -c < "$ASSETS/$f") / 1024 )) KB → $(( $(wc -c < "$LB/assets/$f") / 1024 )) KB)"; done
+  [ "$NB" = 0 ] || sh_say "ภาพ slide: $NB ไฟล์ WebP $(( $(kb "$LB/assets/zone4-slides-web") / 1024 )) MB (ต้นฉบับที่อ่านรวม $(( BAKED_FROM / 1048576 )) MB ไม่ถูกส่ง)"
   sh_say "ขนาด bundle: assets $(( $(kb "$LB/assets") / 1024 )) MB (ต้นฉบับ $(( ORIG / 1048576 )) MB) · media $(( $(kb "$LB/media") / 1024 )) MB · scripts+content $(( ( $(kb "$LB/scripts") + $(kb "$LB/content") ) / 1024 )) MB · รวม $(( $(kb "$LB") / 1024 )) MB"
   if [ "$DRY" = 1 ]; then
     rm -rf "$LB"; LB=""

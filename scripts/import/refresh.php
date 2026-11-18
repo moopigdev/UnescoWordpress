@@ -19,6 +19,7 @@
  * Steps 2026-11-17-* (refresh-2026-11-17.php): add only what is missing (new objects · empty fields · About menu item).
  * Step 2026-11-18-elephant-text (refresh-2026-11-18.php): elephant object title / caption + 2 timeline card names → new Figma text only while the importer's value.
  * Step 2026-11-18-home-hero (refresh-2026-11-18.php): Home hero image → Figma 88d09cb8 only while the importer's attachment of the old image.
+ * Step 2026-11-18-zone4-slides (slides.php · D62): the 16 animals' slides (timeline_item key timeline:<trail>:<n>) + Reflection of each trail — creates what is missing, fills only empty fields, never touches the elephant.
  * Re-run a step on purpose: SH_IMPORT_REFRESH=<id>[,<id>] (or "all").
  *
  * @package sharedheritage-core
@@ -29,6 +30,7 @@ defined( 'ABSPATH' ) || exit;
 require_once __DIR__ . '/refresh-2026-11.php'; // Figma 2026-11-11 round (core-hzd): own rules, see that file.
 require_once __DIR__ . '/refresh-2026-11-17.php'; // 2026-11-17 round (core-1117): add what is missing, never overwrite.
 require_once __DIR__ . '/refresh-2026-11-18.php'; // 2026-11-18 round (elephanttext-1118 · D61): elephant text only while it is the importer's value.
+// slides.php (zone4slides-1118 · D62) is loaded by import.php: sh_import_refresh_steps_slides() · sh_import_refresh_slides().
 
 /**
  * Steps in order: id => what it fixes.
@@ -49,7 +51,7 @@ function sh_import_refresh_steps(): array {
 		'2026-11-11-timeline-images' => 'timeline_item sh_thumbnail cards 5/7 (only while still the old imported file) · sh_below_image from seed below_ref (only where empty)',
 		// timeline-swap 2026-11-11 (D45): cards 1·7·9 swap the image on the line (+ mini-map) and the one under the line.
 		'2026-11-11-timeline-swap'   => 'timeline_item cards 1·7·9 on/under the line swapped (only while every field is still the imported image of that card)',
-	) + sh_import_refresh_steps_2026_11_17() + sh_import_refresh_steps_2026_11_18();
+	) + sh_import_refresh_steps_2026_11_17() + sh_import_refresh_steps_2026_11_18() + sh_import_refresh_steps_slides();
 }
 
 /**
@@ -461,6 +463,15 @@ function sh_import_refresh( array $seed, array $map, array $manifest, array $obj
 				$done[ $step ] = gmdate( 'c' );
 			} else {
 				unset( $done[ $step ] ); // New file missing: try again on the next import.
+			}
+			continue;
+		}
+		if ( array_key_exists( $step, sh_import_refresh_steps_slides() ) ) {
+			$ran[] = $step;
+			if ( sh_import_refresh_slides( $step, $seed ) ) {
+				$done[ $step ] = gmdate( 'c' );
+			} else {
+				unset( $done[ $step ] ); // A file / trail / object was missing: try again on the next import.
 			}
 			continue;
 		}

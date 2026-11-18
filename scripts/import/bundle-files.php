@@ -9,7 +9,8 @@
  * seed assets "<sub>/<file>" for sh_import_asset_subdirs() — path relative to <assets-dir> · 2026-11-17 images with
  * the box deploy.sh shrinks them to before upload: 2× the display size, refs-2026-11-17.php) or "media<TAB><path>"
  * (every media/out file of content/media-manifest.json, path relative to <media-dir>, e.g. objects-1117/bird/x.webm ·
- * only when media-dir is given). stderr: summary.
+ * only when media-dir is given) or "bake<TAB><dest><TAB><src><TAB><spec json>" (D62 slide images: deploy.sh bakes the original
+ * `<src>` into `<dest>` (zone4-slides-web/<unit>.webp · slide-image.php) — the 4K originals are never bundled). stderr: summary.
  * Exit 1 = a referenced file is missing / unsafe (nothing printed
  * on stdout) · exit 2 = bad arguments / unreadable JSON.
  *
@@ -22,6 +23,7 @@ if ( 'cli' !== PHP_SAPI ) {
 define( 'SH_IMPORT_CLI', true );
 require __DIR__ . '/refs.php';
 require __DIR__ . '/refs-2026-11-17.php';
+require __DIR__ . '/slides.php';
 
 $sh_repo   = dirname( __DIR__, 2 );
 $sh_dir    = rtrim( isset( $argv[1] ) ? (string) $argv[1] : '', '/' );
@@ -74,6 +76,9 @@ $sh_1117 = sh_import_bundle_1117_files(
 	$sh_dir,
 	'' !== $sh_media ? $sh_media : $sh_dir
 );
+// D62 (zone4slides-1118): baked slide images of the 16 animals.
+$sh_slides = sh_slides_bundle_units( $sh_json( $sh_cont . '/seed/timeline-slides.json' ), $sh_dir );
+$sh_res['missing'] = array_merge( $sh_res['missing'], $sh_slides['missing'] );
 $sh_box = array();
 foreach ( $sh_1117['refs'] as $sh_f => $sh_b ) {
 	if ( in_array( $sh_f, $sh_res['map'], true ) ) {
@@ -102,9 +107,12 @@ foreach ( $sh_res['map'] as $sh_f ) {
 foreach ( $sh_res['refs'] as $sh_f ) {
 	echo "ref\t$sh_f" . ( ! empty( $sh_box[ $sh_f ] ) ? "\t" . $sh_box[ $sh_f ] : '' ) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI output.
 }
+foreach ( $sh_slides['units'] as $sh_n => $sh_u ) {
+	echo "bake\t" . SH_SLIDES_WEB_DIR . '/' . $sh_n . ".webp\t" . $sh_u[0] . "\t" . json_encode( $sh_u[1], JSON_UNESCAPED_SLASHES ) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped,WordPress.WP.AlternativeFunctions.json_encode_json_encode -- CLI output.
+}
 if ( '' !== $sh_media ) {
 	foreach ( $sh_1117['media'] as $sh_f ) {
 		echo "media\t$sh_f\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI output.
 	}
 }
-fwrite( $sh_stderr, 'bundle-files: image-map ' . count( $sh_res['map'] ) . ' · *_ref ' . count( $sh_res['refs'] ) . ' (shrink to 2× ' . count( array_filter( $sh_box ) ) . ') · total ' . ( count( $sh_res['map'] ) + count( $sh_res['refs'] ) ) . ( '' !== $sh_media ? ' · media/out ' . count( $sh_1117['media'] ) : '' ) . "\n" ); // phpcs:ignore
+fwrite( $sh_stderr, 'bundle-files: image-map ' . count( $sh_res['map'] ) . ' · *_ref ' . count( $sh_res['refs'] ) . ' (shrink to 2× ' . count( array_filter( $sh_box ) ) . ') · slide images to bake ' . count( $sh_slides['units'] ) . ' · total ' . ( count( $sh_res['map'] ) + count( $sh_res['refs'] ) ) . ( '' !== $sh_media ? ' · media/out ' . count( $sh_1117['media'] ) : '' ) . "\n" ); // phpcs:ignore
