@@ -158,7 +158,7 @@ function sh_slides_canonical_url( $canonical ) {
 add_filter( 'get_canonical_url', 'sh_slides_canonical_url' );
 
 /**
- * `<title>` of a slide page starts with the trail name (admin-editable term name) instead of the Timeline page title.
+ * `<title>` of a slide page = trail name (admin-editable term name) + the Timeline page title + site name.
  *
  * @param array<string, string> $parts Title parts.
  * @return array<string, string>
@@ -166,7 +166,8 @@ add_filter( 'get_canonical_url', 'sh_slides_canonical_url' );
 function sh_slides_document_title( array $parts ): array {
 	$term = sh_slide_request_trail();
 	if ( $term instanceof WP_Term && '' !== $term->name ) {
-		$parts['title'] = $term->name;
+		$sep            = (string) apply_filters( 'document_title_separator', '-' );
+		$parts['title'] = $term->name . ' ' . trim( $sep ) . ' ' . ( isset( $parts['title'] ) ? $parts['title'] : '' );
 	}
 	return $parts;
 }
