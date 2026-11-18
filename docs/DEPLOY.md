@@ -70,6 +70,14 @@ scripts/deploy.sh [staging|production] [--dry-run] [--discover] [--no-import | -
 - ⚠ prod ณ cf3b01a **หน้า detail แสดงข้อความ Figma ใหม่อยู่แล้ว** (importer รอบ D40 อ่าน `figma_2026_11` · ตรวจ 2026-11-18 ด้วย GET หน้าสาธารณะ 15 ชิ้น) → คาด `runs[-1].updated` = `timeline_card_title: 2` เท่านั้น · `refresh` = `["2026-11-18-elephant-text"]` · warnings [] · รันซ้ำ = แก้ 0
 - ลำดับ: `deploy.sh production --refresh-only --dry-run` → `--refresh-only` (ไม่ต้องส่งไฟล์ภาพเพิ่ม · ไม่มี theme เปลี่ยน)
 
+## รอบ 2026-11-18 (homehero-1118 · BACKLOG #43) — refresh step `2026-11-18-home-hero` (`scripts/import/refresh-2026-11-18.php`)
+- ภาพ hero หน้า Home → Figma `88d09cb8…` (ข้อความในภาพ "Creations that Bind **Southeast** Asia" · เดิม `2e3fa9c4…` "South-East Asia") · `image-map.json` `pages.home.hero` เปลี่ยน (fresh import ใช้ภาพใหม่เลย) · `pages.intro.cover` ยังเป็น `2e3fa9c4` (ไม่แตะ)
+- step: `sh_home_hero_image` ของหน้า Home → attachment ใหม่ (key `asset:88d09cb8…` · ไฟล์ `home-hero-1…jpg`) **เฉพาะเมื่อค่าบน site ยังเป็น attachment ที่ importer สร้างจาก `2e3fa9c4`** (key `asset:2e3fa9c4…`) · admin เลือกภาพอื่น/ล้างช่อง = ไม่ทับ (`kept_admin`) · attachment เดิมไม่ถูกลบ (ปก Introduction ยังใช้) · ไม่มีหน้า Home = ไม่ทำอะไร · ไฟล์ใหม่ไม่อยู่ใน bundle = warning + step ไม่ถูกบันทึกว่าเสร็จ (รันใหม่ได้)
+- ต้องส่งไฟล์ภาพ: bundle ของ `deploy.sh` อ่าน `image-map.json` `files` → `88d09cb8…jpg` เข้า bundle เอง (ไม่มี theme เปลี่ยน)
+- **คาด `runs[-1]` บน prod (5145a5b → รอบนี้):** `refresh` = `["2026-11-18-home-hero"]` · `updated` = `{"home_hero_swapped": 1}` · `kept_admin` [] · `warnings` [] · รันซ้ำ = `refresh` [] · แก้ 0 (ตรวจใน local จำลอง: import 5145a5b → refresh → hero id เปลี่ยน · รันบังคับซ้ำแก้ 0 · admin เลือกภาพเอง = `kept_admin` 1 · ล้างช่อง = `kept_admin` 1)
+- หลัง deploy: purge LiteSpeed (ขั้น 5 ทำอยู่แล้ว) · เปิด `/` เห็น "Creations that Bind Southeast Asia" (incognito)
+- ลำดับ: `deploy.sh production --refresh-only --dry-run` → `--refresh-only`
+
 ## ขั้นตอน staging (orchestrator)
 1. เจ้าของเปิด SSH + เพิ่ม public key (O-6) → `scripts/deploy.sh staging --discover` → ยืนยัน path ที่ siteurl = `https://staging.sharedheritage.net` → `cp scripts/deploy/hosts.env.example scripts/deploy/hosts.env` แล้วใส่ `SH_STAGING_WP_PATH` (+ `SH_PRODUCTION_WP_PATH` ถ้าเห็นในผล discover)
 2. `scripts/deploy.sh staging --dry-run` → อ่านแผน → `scripts/deploy.sh staging`
