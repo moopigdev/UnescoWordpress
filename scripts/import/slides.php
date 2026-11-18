@@ -12,7 +12,8 @@
  * into the bundle (zone4-slides-web/<unit>.webp — the 4K originals never leave the machine), a local import without that folder
  * bakes from design/assets itself. One unit = one attachment (key `asset:slide-<unit>`), shared between animals.
  * Rule (prod refresh step): create what does not exist · an existing slide only gets its EMPTY fields filled · nothing is deleted ·
- * an admin's value stays (Reflection differing from the seed = kept_admin).
+ * an admin's value stays (Reflection differing from the seed = kept_admin) · the photo under the line is one group: a slide that has any
+ * of it (steps / large image) is not given the rest again.
  *
  * @package sharedheritage-core
  */
@@ -246,10 +247,18 @@ function sh_import_slide_item( array $slides, WP_Term $term, array $it ): bool {
 		}
 	};
 	$img( 'sh_thumbnail', $units['top'], 'card' );
-	foreach ( $units['steps'] as $i => $unit ) {
-		$img( 'sh_step_' . ( $i + 1 ), $unit, 'step ' . ( $i + 1 ) );
+	// The photo under the line is one group (step 1..3 / the large image): an existing slide that has any of it keeps all of it
+	// (a step an admin cleared stays cleared) · only a slide with none of it gets the group.
+	$has_photo = false;
+	foreach ( array( 'sh_step_1', 'sh_step_2', 'sh_step_3', 'sh_below_image' ) as $field ) {
+		$has_photo = $has_photo || 0 !== absint( get_post_meta( $id, $field, true ) );
 	}
-	$img( 'sh_below_image', $units['below'], 'large' );
+	if ( $write || ! $has_photo ) {
+		foreach ( $units['steps'] as $i => $unit ) {
+			$img( 'sh_step_' . ( $i + 1 ), $unit, 'step ' . ( $i + 1 ) );
+		}
+		$img( 'sh_below_image', $units['below'], 'large' );
+	}
 
 	if ( $write ) {
 		sh_imp_meta( 'post', $id, $want );
