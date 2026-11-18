@@ -29,6 +29,7 @@ require_once __DIR__ . '/icc.php';
 require_once __DIR__ . '/media.php';
 require_once __DIR__ . '/entities.php';
 require_once __DIR__ . '/refresh.php';
+require_once __DIR__ . '/slides.php'; // D62: Zone 4 slides of the 16 animals (refresh step 2026-11-18-zone4-slides).
 
 /**
  * SH_IMPORT_ONLY=refresh: pages that exist (by import key) — nothing is created. id 0 = not on this site.
@@ -74,7 +75,7 @@ function sh_import_run(): array {
 	}
 	$cfg  = sh_imp_config();
 	$seed = array();
-	foreach ( array( 'objects', 'trails', 'zones', 'timeline-elephant', 'articles', 'site', 'zone4-chooser', 'guides', 'intro-2026-11', 'zones-2026-11-17' ) as $name ) {
+	foreach ( array( 'objects', 'trails', 'zones', 'timeline-elephant', 'articles', 'site', 'zone4-chooser', 'guides', 'intro-2026-11', 'zones-2026-11-17', 'timeline-slides' ) as $name ) {
 		$seed[ $name ] = sh_imp_json( $cfg['content'] . '/seed/' . $name . '.json' );
 	}
 	$manifest = sh_imp_json( $cfg['content'] . '/media-manifest.json' );

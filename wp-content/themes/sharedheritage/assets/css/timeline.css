@@ -842,3 +842,39 @@ html:not(.sh-js) .sh-tl__arrow {
 		margin-bottom: 20px;
 	}
 }
+
+/*
+ * ---- D62 animal slide pages (`/timeline/<trail-slug>/` · .sh-tl--slides · DESIGN-SPEC §4.5d) ----
+ * The photo under the line is a stack of the step images (sh_step_1..3): timeline.js plays 1 → n with --so (0…1) on each and
+ * holds the last · a stop far from the centre is not displayed (no .is-near) so its lazy images are not fetched.
+ */
+.sh-tl__steps {
+	position: absolute;
+	inset: 0;
+	display: block;
+}
+
+.sh-tl__step {
+	position: absolute;
+	inset: 0;
+	display: block;
+	width: 100%;
+	max-width: none;
+	height: 100%;
+	object-fit: contain;
+	opacity: var(--so, 1);
+	pointer-events: none;
+}
+
+.sh-tl__info.is-slide:not(.is-near) .sh-tl__steps {
+	display: none;
+}
+
+/* Reflection of the animals (Figma Section 55 · §4.5d): title + body Komet 20/25, body justified · lines of a paragraph break, no gap. */
+@media (min-width: 1280px) {
+	.sh-tl--slides .sh-tl__refl-body {
+		font-size: calc(20px * max(1, 12 / (20 * var(--k))));
+		line-height: calc(25px * max(1, 12 / (20 * var(--k))));
+		text-align: justify;
+	}
+}

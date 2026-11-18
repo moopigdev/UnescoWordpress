@@ -7,7 +7,8 @@
  * §4.10 / `animals[].box_in_cover_1120` (png drawn at 0.14 × its pixels; height follows the image). Data decides
  * what is shown: a trail without `sh_chooser_image` is skipped; a trail with an image but no position here is not
  * placed (add its box below when a new animal is designed).
- * Link = the trail's `sh_timeline_page` (published) → only the elephant today; the others are not links (D37/D40).
+ * Link (D62 · zone4slides-1118) = the animal's slide page `/timeline/<slug>/` (sh_timeline_url() · elephant → `/timeline/`); a trail
+ * without slides falls back to its `sh_timeline_page` (published) or is not a link (D37/D40).
  *
  * Args: zone (WP_Term).
  *
@@ -74,8 +75,10 @@ foreach ( $sh_boxes as $sh_slug => $sh_box ) {
 	if ( '' === $sh_html ) {
 		continue;
 	}
+	// D62: every animal with slides → its slide page (elephant → /timeline/) · none → the trail's own timeline page field as before.
+	$sh_url  = function_exists( 'sh_timeline_url' ) ? sh_timeline_url( $sh_trail ) : '';
 	$sh_page = absint( sh_get_term( 'sh_timeline_page', $sh_trail ) );
-	$sh_url  = $sh_page && 'publish' === get_post_status( $sh_page ) ? (string) get_permalink( $sh_page ) : '';
+	$sh_url  = '' !== $sh_url ? $sh_url : ( $sh_page && 'publish' === get_post_status( $sh_page ) ? (string) get_permalink( $sh_page ) : '' );
 
 	$sh_animals[] = array(
 		'slug'  => $sh_slug,

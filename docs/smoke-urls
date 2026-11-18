@@ -13,6 +13,23 @@
 /trail/elephant/
 # Timeline — page-timeline.php
 /timeline/
+# Zone 4 slide ของ 16 สัตว์ (D62) — page-timeline.php ผ่าน /timeline/<trail-slug>/
+/timeline/bird/
+/timeline/hornbill/
+/timeline/water-bird/
+/timeline/rooster/
+/timeline/garuda/
+/timeline/phoenix/
+/timeline/dragon/
+/timeline/buffalo/
+/timeline/horse/
+/timeline/deer/
+/timeline/lion/
+/timeline/naga/
+/timeline/makara/
+/timeline/turtle/
+/timeline/fish/
+/timeline/seashell/
 # Detail วัตถุ trail ช้าง 15 ชิ้น — single-object.php (ลำดับตาม trail_order)
 /object/elephant-leg-bone/
 /object/singhasari-ganesha/
