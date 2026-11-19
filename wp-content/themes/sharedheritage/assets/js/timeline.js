@@ -19,7 +19,11 @@
  *   load = stop 1 shows its last step at once (D30 · no animation) · reduced motion = the last step at once · 1 step = a plain
  *   elephant stop. .is-near (±2.5 stops of the centre / the jump target ±1.5) marks the stops whose images load.
  * D34 (§4.5c.7): when the page has a Reflection text it is one more stop NS = N + 1 (● only, no image) — c ∈ [1, NS] ·
- *   text α = metadata formula 0.47p → settle 1 · the stage grows by (H_ref − stage)·p (desktop) / --refl-h·p (stacked).
+ *   text α = metadata formula 0.47p → settle 1.
+ * D66 (footer fit): the lowest visible content of the stop at the centre (photo · "before" image · metadata · Back · Reflection) sits exactly
+ *   80 px (× k on desktop) above the footer logo row, for every stop. measureStops() reads each stop's own height from the DOM (layout ·
+ *   resize · fonts · load — nothing hard-coded per stop); fit() blends the two neighbouring stops by c, so the footer moves with the scroll
+ *   (never jumps) and rests on exactly 80 px · desktop: --stage-h (design px) · stacked: --below-h (px, the block under the line).
  */
 ( function () {
 	'use strict';
@@ -115,6 +119,8 @@
 	var suppressUntil = 0;
 	var raf = 0;
 	var last = [];
+	var kNow = 1;                // stage scale of the last layout()
+	var stopFit = [];            // D66 per stop: desktop = stage height (design px) · stacked = height of the block under the line (px)
 
 	function px( v ) {
 		return v.toFixed( 3 ) + 'px';
@@ -129,6 +135,7 @@
 			var headH = header ? header.getBoundingClientRect().height : 150;
 			var k = clamp( Math.min( W / 1440, ( window.innerHeight - headH - 24 ) / 723 ), 0.62, 1 );
 			var wide = W > 1440 * k + 0.5;
+			kNow = k;
 			var ext = wide ? ( W / k - 1440 ) / 2 : 0;
 			pitchPx = PITCH * k;
 			s.setProperty( '--k', k.toFixed( 5 ) );
@@ -143,6 +150,7 @@
 		} else {
 			var mobile = MQ_MOBILE.matches;
 			var pad = mobile ? 20 : 24;
+			kNow = 1;
 			var mp = ( W - 2 * pad ) / N;
 			pitchPx = ( mobile ? 0.62 : 0.2615 ) * W;
 			s.setProperty( '--k', '1' );
@@ -180,22 +188,8 @@
 					t.style.setProperty( '--tw', w + 'px' );
 				}
 			} );
-			// Metadata longer than the 7 lines the 723 stage was drawn for: the stage grows downwards (page scrolls).
-			var metaH = 0;
-			infos.forEach( function ( info ) {
-				var m = info.querySelector( '.sh-tl__meta' );
-				metaH = Math.max( metaH, m ? m.offsetHeight : 0 );
-			} );
-			var stageH = Math.max( 723, Math.ceil( 496 + metaH + 24 ) );
-			s.setProperty( '--stage-h', stageH + 'px' );
-			// D34 2e: H_ref = max(723, title top 428.5 + title + 15 + body + 24) → extra height grown in by p (CSS).
-			s.setProperty( '--stage-x', ( refl ? Math.max( 0, Math.ceil( 428.5 + refl.offsetHeight + 24 ) - stageH ) : 0 ) + 'px' );
-			s.removeProperty( '--refl-h' );
+			measureStops();
 			return;
-		}
-		s.removeProperty( '--stage-x' );
-		if ( refl ) {
-			s.setProperty( '--refl-h', refl.offsetHeight + 'px' );
 		}
 		var mini = root.querySelector( '[data-sh-tl-mini]' );
 		var top = mini ? mini.offsetTop + mini.offsetHeight + 12 : 140;
@@ -207,6 +201,71 @@
 			need = Math.max( need, h );
 		} );
 		s.setProperty( '--line-y', px( Math.ceil( top + need + 2 ) ) );
+		measureStops();
+	}
+
+	/*
+	 * D66: the height of each stop's own content, read from the DOM (not hard-coded) → stopFit[i]:
+	 *   desktop: stage height in design px = lowest content (photo / "before" image / metadata / Reflection — and Back, at 649·k + its own
+	 *            height) + 80 (the footer's 40 + 5 above the logo row is taken off in CSS) · stacked: height of the block under the line =
+	 *            .sh-tl__below padding + the stop's photo → metadata stack (or the Reflection text); Back follows it in the flow.
+	 */
+	function measureStops() {
+		var k = kNow;
+		var desktop = ! MQ_TABLET.matches;
+		var base = stage.getBoundingClientRect().top;
+		var rel = function ( el ) {
+			return ( el.getBoundingClientRect().bottom - base ) / k;
+		};
+		var back = root.querySelector( '.sh-tl__back' );
+		var backB = 649 + ( back ? back.offsetHeight : 50 ) / k;
+		var pad = parseFloat( window.getComputedStyle( root.querySelector( '.sh-tl__below' ) ).paddingTop ) || 0;
+		stopFit = [];
+		for ( var i = 0; i < NS; i++ ) {
+			var b = 0;
+			if ( i < N ) {
+				var photo = infos[ i ].querySelector( '.sh-tl__photo' );
+				var meta = infos[ i ].querySelector( '.sh-tl__meta' );
+				if ( desktop ) {
+					b = photo ? rel( photo ) : 0;
+					b = lines[ i ] ? Math.max( b, rel( lines[ i ] ) ) : b;
+					b = meta ? Math.max( b, rel( meta ) ) : b;
+				} else {
+					var lastEl = meta || photo;
+					b = lastEl ? pad + ( lastEl.getBoundingClientRect().bottom - infos[ i ].getBoundingClientRect().top ) : pad;
+				}
+			} else if ( desktop ) {
+				b = rel( refl );
+			} else {
+				b = pad + refl.getBoundingClientRect().height;
+			}
+			stopFit.push( desktop ? Math.max( b, backB ) + 80 : b );
+		}
+	}
+
+	// Fonts / images arrived late → re-measure (D66 · no layout shift beyond that).
+	function remeasure() {
+		fitTitles();
+		render();
+	}
+
+	// D66: the stop heights blended by c — between stop a and a + 1 linearly → exact at every stop, no jump in between.
+	function fit() {
+		if ( ! stopFit.length ) {
+			return;
+		}
+		var a = clamp( c, 1, NS );
+		var i = Math.min( Math.floor( a ), NS );
+		var v = stopFit[ i - 1 ] + ( stopFit[ Math.min( i, NS - 1 ) ] - stopFit[ i - 1 ] ) * ( a - i );
+		if ( MQ_TABLET.matches ) {
+			root.style.removeProperty( '--stage-h' );
+			last.fitd = null;
+			set( root, 'fitb', '--below-h', px( v ) );
+		} else {
+			root.style.removeProperty( '--below-h' );
+			last.fitb = null;
+			set( root, 'fitd', '--stage-h', px( v ) );
+		}
 	}
 
 	function set( el, key, name, value ) {
@@ -272,14 +331,14 @@
 		seqBusy = false;
 		var tgt = target();
 		root.style.setProperty( '--c', c.toFixed( 5 ) );
+		fit();
 		for ( var i = 0; i < NS; i++ ) {
 			var idx = i + 1;
 			var p = clamp( 1 - Math.abs( idx - c ) * PITCH / HALF, 0, 1 );
 			var s = idx === settleIdx ? settleS : 0;
 			var center = p >= 0.5;
 			if ( i >= N ) {
-				// D34 Reflection: one block (title + text) · α 0.47p → settle 1 · --rp grows the stage.
-				set( root, 'rp', '--rp', p.toFixed( 4 ) );
+				// D34 Reflection: one block (title + text) · α 0.47p → settle 1.
 				set( refl, 'ra', '--ra', mix( 0.47 * p, s ) );
 				toggle( refl, 'rv', 'is-vis', p > 0 );
 				toggle( refl, 'rc', 'is-center', center );
@@ -640,6 +699,7 @@
 	kick();
 	root.classList.add( 'is-ready' );
 	if ( document.fonts && document.fonts.ready ) {
-		document.fonts.ready.then( fitTitles );
+		document.fonts.ready.then( remeasure );
 	}
+	window.addEventListener( 'load', remeasure );
 }() );
