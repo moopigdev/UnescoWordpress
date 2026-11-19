@@ -86,6 +86,13 @@ scripts/deploy.sh [staging|production] [--dry-run] [--discover] [--no-import | -
 - เวลา: สร้าง 475 attachment + sub-size (SUBSIZES=1) บน host ≈ หลายนาที · ไม่มี timeout ใน wp-cli
 - rollback: ไม่ต้องย้อนข้อมูล — `timeline_item` ใหม่ (key `timeline:<trail ≠ elephant>:*`) ลบได้ทีละกลุ่มถ้าจำเป็น · ย้อนโค้ด = ใช้ backup ของ script (slide เป็นข้อมูลเฉยๆ ถ้าโค้ดเก่า ไม่แสดงอะไร)
 
+## รอบ 2026-11-19 (slidecard-1119 · BACKLOG #51 · D62) — ภาพการ์ด Badau (Hornbill 7) ว่าง · refresh step `2026-11-19-badau-card` (`scripts/import/refresh-2026-11-19.php`)
+- **สาเหตุ:** `slide-image.php` เดิมรองรับ imageTransform แค่ scale+translate · ภาพบนเส้นของ Badau มีหมุน/เอียง (`top_fit` hornbill order 7) → ครอปตกนอกภาพ → WebP ว่าง 360 ไบต์ที่ prod · แก้: baker รองรับ affine เต็ม (วาดทีละพิกเซลตามความหมาย Figma · ตรงกับ render Figma: ต่าง RGB เฉลี่ย 0.37% · IoU ของวัตถุ 0.998) · transform ที่ไม่หมุนใช้เส้นทางเดิม = **ไบต์เหมือนเดิมทุกไฟล์** (475 หน่วย: 474 เหมือนเดิม · เปลี่ยนเฉพาะ Badau)
+- หน่วยภาพที่หมุนได้ชื่อใหม่ (spec มี `"bake":2` → `84b02bb48f6f-b966f701` แทน `-516ccad5`) = attachment ใหม่ · attachment ว่างเดิมไม่ถูกลบ · bundle ยังอบ 475 ไฟล์ (ไฟล์ Badau ใหม่ 12.8 KB)
+- step: `timeline_item` hornbill:7 (`timeline:hornbill:7`) `sh_thumbnail` → attachment ใหม่ **เฉพาะเมื่อยังเป็น attachment ที่ importer สร้างด้วย baker เก่า** (key `asset:slide-84b02bb48f6f-516ccad5`) · ค่าอื่น (admin เลือกภาพเอง · ล้างช่อง) = `kept_admin` · ไม่แตะฟิลด์อื่น · **ไม่ต้องส่งโค้ด theme/mu-plugin** (แก้เฉพาะ `scripts/import`) → `--refresh-only` ครั้งเดียว
+- **คาด `runs[-1]` บน prod (main 577641d → รอบนี้ · ตรวจจำลองใน local):** `refresh` = `["2026-11-19-badau-card"]` · `created` = `{"attachment": 1}` · `updated` = `{"slide_card_redrawn": 1}` · `kept_admin` [] · `warnings` [] · รันซ้ำ = `refresh` [] · created/updated ว่าง · บังคับรันซ้ำ (`SH_IMPORT_REFRESH=2026-11-19-badau-card`) = แก้ 0 · admin เปลี่ยนภาพเอง = `updated` ว่าง · `skipped.kept_admin_value` 1 (`timeline_item:hornbill:7 sh_thumbnail …`) · fresh import (รัน 2 รอบ) = รอบ 2 แก้ 0 · warnings 0 (หลักฐาน `orchestrator/evidence/slidecard-1119/`)
+- หลังรัน: ล้าง cache (script ทำ) · เปิด `/timeline/hornbill/` ชิ้น 7 ต้องเห็นมีดบนเส้น + mini-map · rollback: ตั้ง `sh_thumbnail` ของชิ้นนั้นกลับเป็น attachment เดิมใน wp-admin (ไม่ถูกลบ) หรือใช้ backup ของ script
+
 ## ขั้นตอน staging (orchestrator)
 1. เจ้าของเปิด SSH + เพิ่ม public key (O-6) → `scripts/deploy.sh staging --discover` → ยืนยัน path ที่ siteurl = `https://staging.sharedheritage.net` → `cp scripts/deploy/hosts.env.example scripts/deploy/hosts.env` แล้วใส่ `SH_STAGING_WP_PATH` (+ `SH_PRODUCTION_WP_PATH` ถ้าเห็นในผล discover)
 2. `scripts/deploy.sh staging --dry-run` → อ่านแผน → `scripts/deploy.sh staging`
