@@ -26,6 +26,8 @@ require_once __DIR__ . '/slide-image.php';
 
 /** Folder (inside the assets dir / bundle) of the baked slide images. */
 const SH_SLIDES_WEB_DIR = 'zone4-slides-web';
+/** Spec marker of a unit drawn by the affine baker (rotation / skew · slidecard-1119): it changes the unit name (sh_slides_unit_name). */
+const SH_SLIDE_AFFINE_BAKE = 2;
 
 /**
  * The animals of the seed: trail slug => {items[], reflection}. (Keys starting with "_" and "animals" are not animals.)
@@ -53,14 +55,18 @@ function sh_slides_animals( array $slides ): array {
 function sh_slides_item_units( array $it ): array {
 	$unit = static function ( string $ref, array $box, array $fit, bool $trim ): array {
 		$res = $trim ? 2.0 : min( 2.0, 640 / max( 1, $box[0] ), 530 / max( 1, $box[1] ) ); // Shown ≤ 320×265 · 2× for retina.
+		$spec = array(
+			'box'  => array( (int) $box[0], (int) $box[1] ),
+			'res'  => round( $res, 3 ),
+			'fit'  => isset( $fit['transform'] ) ? array( 'mode' => (string) $fit['mode'], 'transform' => $fit['transform'] ) : array( 'mode' => isset( $fit['mode'] ) ? (string) $fit['mode'] : 'FIT' ),
+			'trim' => $trim,
+		);
+		if ( sh_slide_image_is_affine( $spec['fit'] ) ) {
+			$spec['bake'] = SH_SLIDE_AFFINE_BAKE; // Rotated / skewed fit: new unit name (a site that holds the blank bake of the old baker keeps it · slidecard-1119).
+		}
 		return array(
 			'ref'  => $ref,
-			'spec' => array(
-				'box'  => array( (int) $box[0], (int) $box[1] ),
-				'res'  => round( $res, 3 ),
-				'fit'  => isset( $fit['transform'] ) ? array( 'mode' => (string) $fit['mode'], 'transform' => $fit['transform'] ) : array( 'mode' => isset( $fit['mode'] ) ? (string) $fit['mode'] : 'FIT' ),
-				'trim' => $trim,
-			),
+			'spec' => $spec,
 		);
 	};
 	$out = array( 'top' => null, 'steps' => array(), 'below' => null );
