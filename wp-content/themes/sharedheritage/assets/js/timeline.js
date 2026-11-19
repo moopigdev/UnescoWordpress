@@ -11,12 +11,13 @@
  * Input: ‹ › 600 ms · ● / mini-map / object click: min(900, 400 + 80·|Δ|) ms · cubic-bezier(.4,0,.2,1) ·
  * drag (1 pitch = 376.6·k px) → snap 400 ms ease-out · horizontal wheel → idle 150 ms → snap 300 ms ·
  * ← → Home End. Reduced motion: no tween/settle (jumps, centre object full at once). Stage fit k: §4.5c.5.
- * D62/D63 (§4.5d · animal slide pages): a stop with data-sh-tl-steps = n step images (.sh-tl__step, opacity --so) under the line,
- *   the same pattern as the elephant before → colour: moving in = step 1 at the photo α (0.40p) · settle (as above) → step 1 (0.40)
- *   cross-fades straight to step 2 in 400 ms (EASE_XF; the group α = 1, no full step 1, no hold first) · only with 3 steps: a 600 ms
- *   hold on step 2, then step 2 → 3 in 400 ms · the LAST step stays · moving again = the last step at α 0.40p (leaving fades it) ·
- *   back to step 1 only when the stop is out of the window (p = 0) · load = stop 1 shows its last step at once (D30 · no animation) ·
- *   reduced motion = the last step at once. .is-near (±2.5 stops of the centre / the jump target ±1.5) marks the stops whose images load.
+ * D62/D64 (§4.5d · animal slide pages): a stop with data-sh-tl-steps = n step images (.sh-tl__step, opacity --so 1/0) under the line.
+ *   Fades only while the slide moves (like an elephant stop with no "before" image): moving in = step 1 at the photo α (0.40p) ·
+ *   settle (as above) → the group α 0.40p → 1 in 400 ms ease-out, still step 1 · at the END of the settle (400 ms) a hard CUT to
+ *   step 2 (no opacity tween between images) · only with 3 steps: step 2 holds 600 ms, then a hard cut to step 3 · the LAST step stays ·
+ *   moving again = the last step at α 0.40p (leaving fades it) · back to step 1 only when the stop is out of the window (p = 0) ·
+ *   load = stop 1 shows its last step at once (D30 · no animation) · reduced motion = the last step at once · 1 step = a plain
+ *   elephant stop. .is-near (±2.5 stops of the centre / the jump target ±1.5) marks the stops whose images load.
  * D34 (§4.5c.7): when the page has a Reflection text it is one more stop NS = N + 1 (● only, no image) — c ∈ [1, NS] ·
  *   text α = metadata formula 0.47p → settle 1 · the stage grows by (H_ref − stage)·p (desktop) / --refl-h·p (stacked).
  */
@@ -86,8 +87,8 @@
 	var EASE = bezier( 0.4, 0, 0.2, 1 );
 	var EASE_OUT = bezier( 0, 0, 0.58, 1 );
 	var EASE_XF = bezier( 0, 0, 0.2, 1 );   // D35/D36 before → colour cross-fade (§6.4c)
-	var STEP_XF = 400;                      // D63: step k − 1 → k cross-fade (ms) = the elephant before → colour (SETTLE_MS)
-	var STEP_HOLD = 600;                    // D63: pause on the MIDDLE step (3 images only) before the last cross-fade (ms)
+	var STEP_XF = 400;                      // D64: step 1 → 2 cut at the end of the settle (ms) = SETTLE_MS
+	var STEP_HOLD = 600;                    // D64: hold on step 2 (3 images only) before the cut to step 3 (ms)
 
 	function clamp( v, lo, hi ) {
 		return Math.min( hi, Math.max( lo, v ) );
@@ -227,25 +228,19 @@
 		return ( a + ( 1 - a ) * s ).toFixed( 4 );
 	}
 
-	// D63: opacity of each of n steps e ms after the settle began (the elephant before → colour pattern, §6.4c D35/D36) ·
-	// step 1 (0.40) → step 2 over the settle itself (EASE_XF), then (n = 3) a short hold and step 2 → 3 · done = the last cross-fade has ended.
-	// The photo group is at α 1 while this plays (--pa), so step 1 starts at its 0.40 and the cross-fade never passes a full step 1.
+	// D64: which of n steps is shown e ms after the settle began · NO tween between images (hard cut): step 1 through the settle
+	// itself (the group α --pa does the 0.40p → 1 fade, as for any elephant stop), step 2 from the end of the settle (STEP_XF),
+	// and (n = 3) step 3 after STEP_HOLD more · done = the last step is showing.
 	function stepAlphas( n, e ) {
+		var shown = e >= STEP_XF ? 1 : 0;
+		if ( n > 2 && e >= STEP_XF + STEP_HOLD ) {
+			shown = 2;
+		}
 		var a = [];
-		var k;
-		for ( k = 0; k < n; k++ ) {
-			a.push( 0 );
+		for ( var k = 0; k < n; k++ ) {
+			a.push( k === shown ? 1 : 0 );
 		}
-		a[ 0 ] = 0.4;
-		for ( k = 1; k < n; k++ ) {
-			var u = clamp( ( e - ( k - 1 ) * ( STEP_XF + STEP_HOLD ) ) / STEP_XF, 0, 1 );
-			if ( 1 === k || u > 0 ) {
-				var x = EASE_XF( u );
-				a[ k - 1 ] = 1 === k ? 0.4 * ( 1 - x ) : 1 - x;
-				a[ k ] = x;
-			}
-		}
-		return { a: a, done: e >= ( n - 2 ) * ( STEP_XF + STEP_HOLD ) + STEP_XF };
+		return { a: a, done: shown === n - 1 };
 	}
 
 	function renderSteps( i, p, s, settling ) {
@@ -266,7 +261,7 @@
 			res = null;
 		}
 		seqBusy = seqBusy || 1 === sq.mode;
-		set( infos[ i ], 'pa' + i, '--pa', res || ( loadHold && 0 === i ) ? '1' : mix( 0.4 * p, s ) );
+		set( infos[ i ], 'pa' + i, '--pa', loadHold && 0 === i ? '1' : mix( 0.4 * p, s ) );   // D64: the group α never jumps — 0.40p → 1 with the settle
 		for ( var k = 0; k < list.length; k++ ) {
 			var v = res ? res.a[ k ] : ( 2 === sq.mode ? ( k === list.length - 1 ? 1 : 0 ) : ( 0 === k ? 1 : 0 ) );
 			set( list[ k ], 'so' + i + '_' + k, '--so', v.toFixed( 3 ) );
