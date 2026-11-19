@@ -443,6 +443,8 @@ html:not(.sh-js) .sh-tl__arrow {
 	position: absolute;
 	inset: 0;
 	z-index: 4;
+	overflow: hidden; /* D66: the block is as tall as the centred stop → what hides below it (a taller neighbour, the hidden Reflection) must not add scroll height under the footer */
+	overflow: clip;
 	pointer-events: none;
 }
 
