@@ -378,7 +378,7 @@ button {
 	background: var(--sh-color-white);
 }
 
-/* Row 1120 wide at x=160 · padding-left 267 (P-274: as Figma, not centred) · bottom-aligned · gap 20. */
+/* Row 1120 wide at x=160 · padding-left 267 (P-274: as Figma, not centred) · bottom-aligned · gap 40 (D65; Figma had 20). */
 .sh-footer__row {
 	display: flex;
 	align-items: flex-end;
@@ -416,11 +416,12 @@ button {
 	object-fit: contain;
 }
 
-/* Phones (no Figma frame · §9.1 [P]): logos stacked and centred, gap 20. */
+/* Phones (no Figma frame · §9.1 [P]): logos stacked and centred, gap 30 (D65 amended). */
 @media (max-width: 767px) {
 	.sh-footer__row {
 		flex-direction: column;
 		align-items: center;
+		gap: var(--sh-footer-gap-stacked);
 		padding-inline-start: 0;
 	}
 }

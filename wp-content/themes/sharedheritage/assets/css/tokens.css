@@ -206,7 +206,8 @@
 	--sh-footer-gap-bottom: 135px;      /* §9.1 footer: 135 below the logo row (Home 3651 → 3786) */
 	--sh-footer-pad-left: 23.8393%;     /* §9.1 padding-left 267 of the 1120 row (P-274: not centred) */
 	--sh-footer-pad-block: 5px;
-	--sh-footer-gap: 20px;              /* UNESCO ↔ Temasek */
+	--sh-footer-gap: 40px;              /* UNESCO ↔ Temasek, row layout ≥768px (D65: was 20 in Figma) */
+	--sh-footer-gap-stacked: 30px;      /* UNESCO ↔ Temasek, stacked on phones <768px (D65 amended: 30) */
 	--sh-footer-logo-height: 60px;      /* UNESCO 283.1×60 · Temasek 208×60 */
 	--sh-footer-unesco-width: 283.1px;
 	--sh-footer-temasek-width: 208px;
