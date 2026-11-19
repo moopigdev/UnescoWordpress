@@ -3,7 +3,7 @@
  * Site footer — D47 · DESIGN-SPEC §9.1 Footer (Figma Frame 114511 3339:5248, drawn on Home, used on every page).
  * Closes <main> opened in header.php.
  *
- * One row [160,… 1120×95]: padding-left 267 (P-274: as in Figma, not centred) · padding top/bottom 5 · gap 20 ·
+ * One row [160,… 1120×95]: padding-left 267 (P-274: as in Figma, not centred) · padding top/bottom 5 · gap 40 (D65; 30 stacked on phones) ·
  * bottom-aligned: UNESCO logo 283.1×60 (option sh_logo_unesco_footer, 0 = the theme SVG) · Temasek group
  * ("With the Support of" 14/17.5 #49176D · gap 7 · logo 208×60, option sh_logo_temasek). 40 above · 135 below.
  *
